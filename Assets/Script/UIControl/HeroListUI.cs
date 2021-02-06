@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class HeroListUI : NormalUI
+{
+    Button nextBtn;
+    Button closeBtn;
+    protected override void OnInit()
+    {
+        this.name = UIName.HeroListUI;
+        this.resPath = UIName.HeroListUI;
+        this.type = UIType.Normal;
+    }
+
+    protected override void OnLoadFinish()
+    {
+        nextBtn = this.transform.Find("nextBtn").GetComponent<Button>();
+        nextBtn.onClick.AddListener(()=>
+        {
+            UIManager.Instance.OpenUI(UIName.ItemListUI);
+        });
+
+        closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
+        closeBtn.onClick.AddListener(() =>
+        {
+            this.CloseSelf();
+        });
+    }
+
+    protected override void OnOpen()
+    {
+        
+    }
+}

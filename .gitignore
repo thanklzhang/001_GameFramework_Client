@@ -1,0 +1,11 @@
+Library
+Logs
+obj
+Table
+Packages
+*.csproj
+*.sln
+*.meta
+.vs
+.vscode
+

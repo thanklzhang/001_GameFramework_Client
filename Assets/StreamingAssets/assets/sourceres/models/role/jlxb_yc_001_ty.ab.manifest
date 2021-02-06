@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 3519735839
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cbf34d2e93b16400a71ad7e829593c2c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f91f23ff0a5dc5d1238331e2e49d3a89
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 111
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/SourceRes/Models/Role/jlxb_yc_001_ty/jlxb_001_ty.tga
+- Assets/SourceRes/Models/Role/jlxb_yc_001_ty/Materials/jlxb_001_ty.mat
+- Assets/SourceRes/Models/Role/jlxb_yc_001_ty/jlxb_yc_001_ty.FBX
+- Assets/SourceRes/Models/Role/jlxb_yc_001_ty/jlxb_001_ty.mat
+Dependencies: []

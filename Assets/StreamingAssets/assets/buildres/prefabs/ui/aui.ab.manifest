@@ -26,4 +26,4 @@ ClassTypes:
 Assets:
 - Assets/BuildRes/Prefabs/UI/AUI.prefab
 Dependencies:
-- E:/KalGame/JekoClient/Assets/StreamingAssets/assets/buildres/prefabs/ui/cui.ab
+- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/cui.ab

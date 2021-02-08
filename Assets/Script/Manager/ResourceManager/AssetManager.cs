@@ -276,7 +276,7 @@ public class AssetManager : Singleton<AssetManager>
         }
     }
 
-    public void Relase(string path)
+    public void Release(string path)
     {
         Debug.Log("zxy : asset : Relase : start to release : " + path);
         if (this.assetCacheDic.ContainsKey(path))

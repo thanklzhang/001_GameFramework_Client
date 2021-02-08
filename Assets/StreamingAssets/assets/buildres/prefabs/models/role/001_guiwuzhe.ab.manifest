@@ -26,4 +26,4 @@ ClassTypes:
 Assets:
 - Assets/BuildRes/Prefabs/Models/Role/001_guiwuzhe.prefab
 Dependencies:
-- E:/KalGame/JekoClient/Assets/StreamingAssets/assets/sourceres/models/role/gui_wu_shi_001_ty.ab
+- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/sourceres/models/role/gui_wu_shi_001_ty.ab

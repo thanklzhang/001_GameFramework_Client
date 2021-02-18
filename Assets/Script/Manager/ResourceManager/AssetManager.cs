@@ -35,7 +35,7 @@ public class AssetRequest
 
     internal void Update(float deltaTime)
     {
-        
+
     }
 
     internal void StartLoad(UnityEngine.AssetBundleRequest createAsset)
@@ -72,7 +72,7 @@ public class AssetInfo
 
         set
         {
-            Debug.Log("zxy : asset : asset : change ref " + refCount + " -> " + value);
+            Logx.LogZxy("Asset", "change ref " + refCount + " -> " + value);
             refCount = value;
 
         }
@@ -81,7 +81,7 @@ public class AssetInfo
 
 public class AssetManager : Singleton<AssetManager>
 {
-    public Dictionary<string, WaitABRequest> waitABLoadingReqDic = new Dictionary<string, WaitABRequest>();
+    public List<WaitABRequest> waitABLoadingReqList = new List<WaitABRequest>();
 
     public List<AssetRequest> waitLoadingReqs = new List<AssetRequest>();
     public List<AssetRequest> onLoadingReqs = new List<AssetRequest>();
@@ -93,78 +93,174 @@ public class AssetManager : Singleton<AssetManager>
     public void Init()
     {
 
-        Debug.Log("zxy : asset : init");
+        Logx.LogZxy("Asset", "init");
         var assetFileStr = File.ReadAllText(Const.AppStreamingAssetPath + "/" + "AssetToAbFileData.json");
         this.assetToAbDic = JsonMapper.ToObject<Dictionary<string, string>>(assetFileStr);
 
     }
-
     public void Load(string assetPath, Action<AssetInfo> finishCallback, bool isSync)
     {
-        if (!this.assetCacheDic.ContainsKey(assetPath))
+        if (isSync)
         {
-            //没有 asset 开始尝试加载
-            Debug.Log("zxy : asset : no asset cache : " + assetPath);
-            //asset -> ab 对应表
-            if (this.assetToAbDic.ContainsKey(assetPath))
-            {
-               
-                var abPath = this.assetToAbDic[assetPath];
-                if (this.waitABLoadingReqDic.ContainsKey(assetPath))
-                {
-                    Debug.Log("zxy : asset : in loading ab , add to wait ab : " + assetPath);
-                    //正在处在加载相关 ab 中 
-                    var waitABReq = this.waitABLoadingReqDic[assetPath];
-                    waitABReq.DependWaitAbReq(finishCallback);
-                }
-                else
-                {
-                    Debug.Log("zxy : asset : no loading ab , start to load" + assetPath);
-                    //没有在加载相关 abB, 开始加载
-                    WaitABRequest waitABReq = new WaitABRequest();
-                    waitABReq.path = assetPath;
-                    waitABReq.DependWaitAbReq(finishCallback);
-                    this.waitABLoadingReqDic.Add(assetPath, waitABReq);
-                    AssetBundleManager.Instance.Load(abPath, (abInfo) =>
-                     {
-                         Debug.Log("zxy : asset : finish to load ab : " + assetPath);
-                         var callbacks = waitABReq.waitAbReqCallbacks;
-                         for (int i = 0; i < callbacks.Count; i++)
-                         {
-                             var currCallback = callbacks[i];
-                             this.OnLoadABFinish(abInfo,assetPath, currCallback);
-                         }
-                       
-                         this.waitABLoadingReqDic.Remove(assetPath);
-
-                     }, isSync);
-                }
-            }
-            else
-            {
-                Debug.LogError("zxy : asset : the asset doesnt exist in assetToAbDic : " + assetPath);
-            }
+            LoadSync(assetPath, finishCallback);
         }
         else
         {
-            Debug.Log("zxy : asset : asset exists : can use directly : " + assetPath);
+            LoadAsync(assetPath, finishCallback);
+        }
+    }
+    public void LoadSync(string assetPath, Action<AssetInfo> finishCallback)
+    {
+        if (!this.assetToAbDic.ContainsKey(assetPath))
+        {
+            Debug.LogError("the asset doesnt exist in assetToAbDic : " + assetPath);
+            return;
+        }
+
+
+
+        if (!this.assetCacheDic.ContainsKey(assetPath))
+        {
+            //没有 asset 开始尝试加载 ab
+            Logx.LogZxy("Asset", "no asset cache : " + assetPath);
+            var abPath = this.assetToAbDic[assetPath];
+            WaitABRequest waitABReq = new WaitABRequest();
+            waitABReq.path = assetPath;
+            waitABReq.DependWaitAbReq(finishCallback);
+            this.waitABLoadingReqList.Add(waitABReq);
+            AssetBundleManager.Instance.Load(abPath, (abInfo) =>
+            {
+                Logx.LogZxy("Asset", "finish to load ab : " + assetPath);
+                var callbacks = waitABReq.waitAbReqCallbacks;
+                for (int i = 0; i < callbacks.Count; i++)
+                {
+                    var currCallback = callbacks[i];
+                    this.OnLoadABFinishSync(abInfo, assetPath, currCallback);
+                }
+
+                this.waitABLoadingReqList.Remove(waitABReq);
+
+            }, true);
+        }
+        else
+        {
+            Logx.LogZxy("Asset", "asset exists : can use directly : " + assetPath);
             //已经有 asset 了 直接用
+            var assetInfo = assetCacheDic[assetPath];
             var req = new AssetRequest();
             req.path = assetPath;
             req.finishCallbacks.Add(finishCallback);
             req.sameRequestCount = 1;
-            this.OnLoadFinish(req);
+            this.OnLoadFinish(req, assetInfo.assetObj);
         }
-
     }
 
-    //-------------------------------------
-    public void OnLoadABFinish(AssetBundleInfo abInfo, string assetPath, Action<AssetInfo> finishCallback)
+    public void OnLoadABFinishSync(AssetBundleInfo abInfo, string assetPath, Action<AssetInfo> finishCallback)
     {
         var waitLoadingReq = this.waitLoadingReqs.Find((assetReq) => assetReq.path == assetPath);
         if (waitLoadingReq != null)
         {
-            Debug.Log("zxy : asset : in waitLoadingAsset queue : " + assetPath);
+            Logx.LogZxy("Asset", "OnLoadABFinishSync : async to sync : in waitLoadingAsset queue : " + assetPath);
+            //在 等待加载队列中
+            waitLoadingReq.DependReq(finishCallback);
+            this.waitLoadingReqs.Remove(waitLoadingReq);
+            TrueLoadSync(waitLoadingReq);
+
+        }
+        else
+        {
+            var onLoadingReq = this.onLoadingReqs.Find((assetReq) => assetReq.path == assetPath);
+            if (onLoadingReq != null)
+            {
+                Logx.LogZxy("Asset", "OnLoadABFinishSync : async to sync : in onLoadingAsset queue : " + assetPath);
+                //在 正在加载队列中
+                onLoadingReq.DependReq(finishCallback);
+                this.onLoadingReqs.Remove(onLoadingReq);
+                TrueLoadSync(onLoadingReq);
+            }
+            else
+            {
+                Logx.LogZxy("Asset", "OnLoadABFinishSync : dont have anyWhere , load directly: " + assetPath);
+                //哪都没有 放到等待加载队列中
+                var newReq = new AssetRequest();
+                newReq.path = assetPath;
+                newReq.sameRequestCount = 1;
+                newReq.DependReq(finishCallback);
+                newReq.assetBundleInfo = abInfo;
+
+                //waitLoadingReqs.Add(newReq);
+                TrueLoadSync(newReq);
+
+            }
+        }
+    }
+
+    void TrueLoadSync(AssetRequest req)
+    {
+        Logx.LogZxy("Asset", "TrueLoadSync : start to load " + req.path);
+        var ab = req.assetBundleInfo.assetBundle;
+        var asset = ab.LoadAsset(req.path);
+        this.OnLoadFinish(req, asset);
+
+        //req.StartLoad(createAsset);
+    }
+
+
+    //--------------------------------
+    public void LoadAsync(string assetPath, Action<AssetInfo> finishCallback)
+    {
+        if (!this.assetToAbDic.ContainsKey(assetPath))
+        {
+            Debug.LogError("LoadAsync : the asset doesnt exist in assetToAbDic : " + assetPath);
+            return;
+        }
+        if (!this.assetCacheDic.ContainsKey(assetPath))
+        {
+            //没有 asset 开始尝试加载 ab
+            Logx.LogZxy("Asset", "LoadAsync : no asset cache : " + assetPath);
+
+            //没有在加载相关 abB, 开始加载
+            var abPath = this.assetToAbDic[assetPath];
+            WaitABRequest waitABReq = new WaitABRequest();
+            waitABReq.path = assetPath;
+            waitABReq.DependWaitAbReq(finishCallback);
+            this.waitABLoadingReqList.Add(waitABReq);//assetPath,
+                                                     //这里回调可以优化 拆出去
+            AssetBundleManager.Instance.Load(abPath, (abInfo) =>
+            {
+                Logx.LogZxy("Asset", "finish to load ab : " + assetPath);
+                var callbacks = waitABReq.waitAbReqCallbacks;
+                for (int i = 0; i < callbacks.Count; i++)
+                {
+                    var currCallback = callbacks[i];
+                    this.OnLoadABFinishAsync(abInfo, assetPath, currCallback);
+                }
+
+                this.waitABLoadingReqList.Remove(waitABReq);//assetPath
+
+            }, false);
+            
+        }
+        else
+        {
+            Logx.LogZxy("Asset", "asset exists : can use directly : " + assetPath);
+            //已经有 asset 了 直接用
+            var assetInfo = assetCacheDic[assetPath];
+            var req = new AssetRequest();
+            req.path = assetPath;
+            req.finishCallbacks.Add(finishCallback);
+            req.sameRequestCount = 1;
+            this.OnLoadFinish(req, assetInfo.assetObj);
+        }
+    }
+
+    //-------------------------------------
+    public void OnLoadABFinishAsync(AssetBundleInfo abInfo, string assetPath, Action<AssetInfo> finishCallback)
+    {
+        var waitLoadingReq = this.waitLoadingReqs.Find((assetReq) => assetReq.path == assetPath);
+        if (waitLoadingReq != null)
+        {
+            Logx.LogZxy("Asset", "in waitLoadingAsset queue : " + assetPath);
             //在 等待加载队列中
             waitLoadingReq.DependReq(finishCallback);
         }
@@ -173,13 +269,13 @@ public class AssetManager : Singleton<AssetManager>
             var onLoadingReq = this.onLoadingReqs.Find((assetReq) => assetReq.path == assetPath);
             if (onLoadingReq != null)
             {
-                Debug.Log("zxy : asset : in onLoadingAsset queue : " + assetPath);
+                Logx.LogZxy("Asset", "in onLoadingAsset queue : " + assetPath);
                 //在 正在加载队列中
                 onLoadingReq.DependReq(finishCallback);
             }
             else
             {
-                Debug.Log("zxy : asset : dont have anyWhere , add to waitLoadingAsset queue : " + assetPath);
+                Logx.LogZxy("Asset", "dont have anyWhere , add to waitLoadingAsset queue : " + assetPath);
                 //哪都没有 放到等待加载队列中
                 var newReq = new AssetRequest();
                 newReq.path = assetPath;
@@ -191,7 +287,7 @@ public class AssetManager : Singleton<AssetManager>
             }
         }
     }
-    
+
     public void Update(float deltaTime)
     {
         //update
@@ -219,7 +315,7 @@ public class AssetManager : Singleton<AssetManager>
         for (int i = 0; i < finishReqs.Count; i++)
         {
             var finishReq = finishReqs[i];
-            this.OnLoadFinish(finishReq);
+            this.OnLoadFinish(finishReq, finishReq.finishProgress.asset);
         }
 
         //判断同时加载的任务 看是否有坑
@@ -233,41 +329,49 @@ public class AssetManager : Singleton<AssetManager>
             {
                 if (this.waitLoadingReqs.Count >= 1)
                 {
-                  
+
                     var waitTask = this.waitLoadingReqs[0];
-                    Debug.Log("zxy : asset : have work bench , add to onLoadingAsset queue : " + waitTask.path);
+                    Logx.LogZxy("Asset", "have work bench , add to onLoadingAsset queue : " + waitTask.path);
                     this.onLoadingReqs.Add(waitTask);
-                    TrueLoad(waitTask);
+                    TrueLoadAsync(waitTask);
                     this.waitLoadingReqs.RemoveAt(0);
                 }
                 else
                 {
                     break;
                 }
-
             }
         }
     }
-
-
-    void TrueLoad(AssetRequest req)
+    
+    void TrueLoadAsync(AssetRequest req)
     {
-        Debug.Log("zxy : asset : start to load asset : " + req.path);
+        Logx.LogZxy("Asset", "start to load " + req.path);
         var ab = req.assetBundleInfo.assetBundle;
-        var createAsset = ab.LoadAssetAsync(req.path); 
-      
+        var createAsset = ab.LoadAssetAsync(req.path);
+
         req.StartLoad(createAsset);
     }
-
-
-    public void OnLoadFinish(AssetRequest finishReq)
+    
+    public void OnLoadFinish(AssetRequest finishReq, object asset)
     {
-        Debug.Log("zxy : asset : OnLoad asset finish : " + finishReq.path);
-        var assetInfo = new AssetInfo();
-        assetInfo.path = finishReq.path;
+        Logx.LogZxy("Asset", "OnLoad asset finish : " + finishReq.path);
+        AssetInfo assetInfo = null;
+        if (this.assetCacheDic.ContainsKey(finishReq.path))
+        {
+            assetInfo = this.assetCacheDic[finishReq.path];
+        }
+        else
+        {
+            assetInfo = new AssetInfo();
+            assetInfo.path = finishReq.path;
+            assetInfo.assetObj = asset;
+            this.assetCacheDic.Add(assetInfo.path, assetInfo);
+        }
+
+
         assetInfo.RefCount += finishReq.sameRequestCount;
-        assetInfo.assetObj = finishReq.finishProgress.asset;
-        this.assetCacheDic.Add(assetInfo.path, assetInfo);
+        //assetInfo.assetObj = finishReq.finishProgress.asset;
         var callbacks = finishReq.finishCallbacks;
         for (int i = 0; i < callbacks.Count; i++)
         {
@@ -278,7 +382,7 @@ public class AssetManager : Singleton<AssetManager>
 
     public void Release(string path)
     {
-        Debug.Log("zxy : asset : Relase : start to release : " + path);
+        Logx.LogZxy("Asset", "Relase : start to release : " + path);
         if (this.assetCacheDic.ContainsKey(path))
         {
             var assetInfo = this.assetCacheDic[path];
@@ -296,19 +400,14 @@ public class AssetManager : Singleton<AssetManager>
                 }
                 else
                 {
-                    Debug.LogError("zxy : asset : Relase : the assetPath is not in assetToAbDic : " + path);
+                    Logx.LogZxyError("Asset", "Relase : the assetPath is not in assetToAbDic : " + path);
                 }
-               
-
-
-
             }
         }
         else
         {
-            Debug.LogWarning("zxy : asset : Relase : the path is not found : " + path);
+            Logx.LogZxyWarning("Asset", "Relase : the path is not found : " + path);
         }
     }
-
-
+    
 }

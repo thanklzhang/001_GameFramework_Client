@@ -128,17 +128,17 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     List<AssetBundleRequest> onLoadingABList = new List<AssetBundleRequest>();
     //已经加载好的 assetBundle 信息
     Dictionary<string, AssetBundleInfo> abCacheDic = new Dictionary<string, AssetBundleInfo>();
-    
+
     //正在等待依赖加载的 assetBundle 请求（本体 ab 这里方便之后储存验证一下 实际上不需要也可以)
     List<AssetBundleRequest> fromDependCacheList = new List<AssetBundleRequest>();
-    
+
     // AssetBundleManifest manifest;
     //Dictionary<string, AssetPakageInfo> assetPakageInfos;
     //同时加载的 ab 数量
     int maxLoadProcessCount = 3;
     private AssetBundleManifest manifest;
     //private string[] abdepends
-    
+
     public void Init()
     {
         Logx.LogZxy("AB", "abLog : init");
@@ -154,11 +154,14 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         // });
 
     }
-    
+
     public string[] GetDependPaths(string path)
     {
-        var deps = manifest.GetAllDependencies(path);
-
+        var deps = manifest.GetDirectDependencies(path);
+        deps.ToList().ForEach((str) =>
+        {
+            Logx.LogZxy("AB", "path : " + path + " dep : " + str);
+        } );
         return deps;
         //if (assetPakageInfos.ContainsKey(path))
         //{
@@ -171,7 +174,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         //}
 
     }
-    
+
     public void Load(string path, Action<AssetBundleInfo> finishCallback, bool isSync, bool isDepLoad = false)//, AssetBundleRequest fromRequest
     {
         if (isSync)
@@ -186,7 +189,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
 
     }
-    
+
     public AssetBundle TrueLoadSync(AssetBundleRequest req)
     {
         Logx.LogZxy("AB", "abLog : TrueLoadSync : " + req.path);
@@ -277,7 +280,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
                     //处理 ab 依赖
                     var deps = GetDependPaths(path);// + Const.ExtName);
-                                                        //Debug.Log("length of dep bundles : " + deps.Length);
+                                                    //Debug.Log("length of dep bundles : " + deps.Length);
                     if (deps != null && deps.Length > 0)
                     {
                         //有依赖
@@ -306,7 +309,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             }
         }
     }
-    
+
     void OnFinishLoadDependSync(string dependPath, AssetBundleRequest fromRequest)
     {
 
@@ -391,7 +394,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
                     //处理 ab 依赖
                     var deps = GetDependPaths(path);// + Const.ExtName);
-                                                        //Debug.Log("length of dep bundles : " + deps.Length);
+                                                    //Debug.Log("length of dep bundles : " + deps.Length);
                     if (deps != null && deps.Length > 0)
                     {
                         //有依赖
@@ -421,7 +424,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
 
     }
-    
+
     void OnFinishLoadDependAsync(string dependPath, AssetBundleRequest fromRequest)
     {
 
@@ -434,7 +437,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             this.fromDependCacheList.Remove(fromRequest);
         }
     }
-    
+
     void OnLoadFinish(AssetBundleRequest req, AssetBundle ab)
     {
         AssetBundleInfo abInfo = null;
@@ -560,7 +563,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             return;
         }
         //递归还是循环都行 自己看着办 这里用递归
-
+        Logx.LogZxy("AB", "ChangeRefCount : check " + abInfo.path);
         var preRefCount = abInfo.RefCount;
 
         abInfo.RefCount += value;
@@ -582,7 +585,9 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             {
                 //Logx.LogZxy("AB","abInfo ref : dep , start to change ref : " + abInfo.path + " 's dep : " + depPath);
                 depABInfo = this.abCacheDic[depPath];
+                Logx.LogZxy("AB", "will ChangeRefCount  " + depPath + " from " + abInfo.path);
                 this.ChangeRefCount(depABInfo, value);
+
             }
             else
             {
@@ -590,7 +595,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             }
         }
     }
-    
+
     public void Release(string path)
     {
         ReleaseAB(path);

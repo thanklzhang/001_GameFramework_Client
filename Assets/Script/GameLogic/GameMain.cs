@@ -50,46 +50,44 @@ public class GameMain : MonoBehaviour
 
         //},false);
 
-        //var path = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
+        var path = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
+
+
+
         //AssetManager.Instance.Load(path, (resInfo) =>
-        // {
-        //     Debug.Log("zxy : success to load asset : " + resInfo.path);
-        //     var obj = resInfo.assetObj as GameObject;
+        //{
+        //    Debug.Log("zxy : success to load asset : " + resInfo.path);
+        //    var obj = resInfo.assetObj as GameObject;
 
-        //     var newObj = GameObject.Instantiate(obj, UIManager.Instance.normalRoot, false);
+        //    var newObj = GameObject.Instantiate(obj, UIManager.Instance.normalRoot, false);
 
-        //     AssetManager.Instance.Relase(path);
-        // }, true);
+        //    AssetManager.Instance.Release(path);
+        //}, true);
+
+
+        AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+        {
+
+            Debug.Log("zxy : sync : load ab test finish1");
+
+            AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        }, false);
+        Debug.Log("zxy : ------------------");
+
+
+
+
 
         //AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
         //{
 
-        //    Debug.Log("zxy : async : load ab test finish1");
+        //    Debug.Log("zxy : async : load ab test finish2");
+        //    AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
 
 
         //}, false);
         //Debug.Log("zxy : ------------------");
 
-        //AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
-        //{
-
-        //    Debug.Log("zxy : sync : load ab test finish1");
-
-
-        //}, true);
-        //Debug.Log("zxy : ------------------");
-
-      
-        AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
-        {
-
-            Debug.Log("zxy : async : load ab test finish2");
-            AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-
-
-        }, false);
-        Debug.Log("zxy : ------------------");
-      
 
 
 

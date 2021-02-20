@@ -40,7 +40,7 @@ public class GameMain : MonoBehaviour
 
 
         AssetBundleManager.Instance.Init();
-        AssetManager.Instance.Init();
+        //AssetManager.Instance.Init();
         //// role 
         //var rolePath = "001_guiwuzhe";//Models/Role/
         //AssetResManager.Instance.Load(rolePath,(assetInfo)=>
@@ -65,14 +65,50 @@ public class GameMain : MonoBehaviour
         //}, true);
 
 
+        //AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+        //{
+
+        //    Debug.Log("zxy : sync : load ab test finish1");
+
+        //    //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        //}, fa lse);
+        //Debug.Log("zxy : ------------------");
+        //AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+        //{
+
+        //    Debug.Log("zxy : sync : load ab test finish1");
+
+        //    //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        //}, false);
+        //Debug.Log("zxy : ------------------");
         AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
         {
 
             Debug.Log("zxy : sync : load ab test finish1");
 
-            AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-        }, false);
+            //StartCoroutine(dd());
+            // AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        }, false, null);
         Debug.Log("zxy : ------------------");
+        AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+        {
+
+            Debug.Log("zxy : sync : load ab test finish2");
+
+            //StartCoroutine(dd());
+            // AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        }, false, null);
+        Debug.Log("zxy : ------------------");
+        AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+        {
+
+            Debug.Log("zxy : sync : load ab test finish3");
+
+            //StartCoroutine(dd());
+            // AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        }, false, null);
+        Debug.Log("zxy : ------------------");
+
 
 
 
@@ -94,13 +130,21 @@ public class GameMain : MonoBehaviour
 
     }
 
+    //IEnumerator dd()
+    //{
+    //    yield return null;
+
+    //    AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+    //    AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+    //    AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+    //}
 
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log("zxy : currFrame : " + Time.frameCount);
-        AssetManager.Instance.Update(Time.deltaTime);
+        //AssetManager.Instance.Update(Time.deltaTime);
         AssetBundleManager.Instance.Update(Time.deltaTime);
     }
 

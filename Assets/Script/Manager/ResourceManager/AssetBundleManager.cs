@@ -7,39 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using LitJson;
-public class AssetBundleInfo
-{
-    public string name = "";
-    public string path = "";
-
-    public AssetBundle assetBundle;
-
-    private int refCount = 0;
-    public int RefCount
-    {
-        get
-        {
-            return refCount;
-        }
-        set
-        {
-            Logx.LogZxy("AB", "change ref : " + path + " " + refCount + " -> " + value);
-            refCount = value;
-        }
-    }
-
-}
-
 public class AssetBundleRequest
 {
-
     public string name = "";
     public string path = "";
-    //public Action<AssetBundleInfo> finishCallbacks;
 
-    public int sameRequestCount = 0;
-
-    List<Action<AssetBundleInfo>> finishCallbacks = new List<Action<AssetBundleInfo>>();
+    List<Action<AssetBundleRequest>> finishCallbacks = new List<Action<AssetBundleRequest>>();
 
     public List<string> depends = new List<string>();
 
@@ -53,15 +26,8 @@ public class AssetBundleRequest
 
     }
 
-    public void DependRequest(Action<AssetBundleInfo> callback, bool isDepLoad)
+    public void DependFinishCallback(Action<AssetBundleRequest> callback)
     {
-        //Debug.Log("zxy : DependRequest : " + this.path);
-        if (!isDepLoad)
-        {
-            sameRequestCount += 1;
-        }
-
-        //Debug.Log("zxy : abInfo : change sameRequestCount : curr : " + this.path + " : " + sameRequestCount);
         if (callback != null)
         {
             finishCallbacks.Add(callback);
@@ -72,7 +38,17 @@ public class AssetBundleRequest
         }
     }
 
-    public List<Action<AssetBundleInfo>> GetAllFinishCallback()
+    public void DependRequests(List<Action<AssetBundleRequest>> callbacks, bool isDepLoad)
+    {
+        for (int i = 0; i < callbacks.Count; i++)
+        {
+            var callback = callbacks[i];
+            DependFinishCallback(callback);
+        }
+
+    }
+
+    public List<Action<AssetBundleRequest>> GetAllFinishCallback()
     {
         return finishCallbacks;
     }
@@ -82,7 +58,7 @@ public class AssetBundleRequest
         return 0 == depends.Count;
     }
 
-    public bool IsFinishLoad()
+    public bool CheckIsFinishLoad()
     {
         if (this.IsDependAllLoadFinish())
         {
@@ -99,7 +75,15 @@ public class AssetBundleRequest
 
         return false;
     }
-    public AssetBundleRequest fromRequest;
+    public List<AssetBundleRequest> fromRequests = new List<AssetBundleRequest>();
+
+    public void DependRequestFrom(AssetBundleRequest fromRequest)
+    {
+        if (fromRequest != null)
+        {
+            fromRequests.Add(fromRequest);
+        }
+    }
 
     public void FinishLoadDepend(string depend)
     {
@@ -113,31 +97,33 @@ public class AssetBundleRequest
         depends.Remove(depend);
     }
 
-
     public void AddLoadDepend(string[] deps)
     {
         depends = deps.ToList();
+    }
+    public bool isCanUseAB = false;
+
+    internal void FinishLoad()
+    {
+        isCanUseAB = true;
+        finishCallbacks.Clear();
     }
 }
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
 {
+    //assetBundle request 的缓存
+    Dictionary<string, AssetBundleRequest> abReqCacheDic = new Dictionary<string, AssetBundleRequest>();
+
+    //队列相关-------------
     //等待加载的 assetBundle 请求
     List<AssetBundleRequest> waitLoadABList = new List<AssetBundleRequest>();
     //正在加载中的 assetBundle 请求
     List<AssetBundleRequest> onLoadingABList = new List<AssetBundleRequest>();
-    //已经加载好的 assetBundle 信息
-    Dictionary<string, AssetBundleInfo> abCacheDic = new Dictionary<string, AssetBundleInfo>();
-
-    //正在等待依赖加载的 assetBundle 请求（本体 ab 这里方便之后储存验证一下 实际上不需要也可以)
-    List<AssetBundleRequest> fromDependCacheList = new List<AssetBundleRequest>();
-
-    // AssetBundleManifest manifest;
-    //Dictionary<string, AssetPakageInfo> assetPakageInfos;
+    
     //同时加载的 ab 数量
     int maxLoadProcessCount = 3;
     private AssetBundleManifest manifest;
-    //private string[] abdepends
 
     public void Init()
     {
@@ -145,332 +131,120 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         var manifestAB = AssetBundle.LoadFromFile(Const.AssetBundlePath + "/" + "StreamingAssets");
         manifest = manifestAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
 
-        //var assetFileStr = File.ReadAllText(Const.AppStreamingAssetPath + "/" + "AssetFileData.json");
-        //this.assetPakageInfos = JsonMapper.ToObject<Dictionary<string, AssetPakageInfo>>(assetFileStr);
-
-        // this.assetPakageInfos.ToList().ForEach(dd =>
-        // {
-        //     Debug.Log(dd.Key);
-        // });
-
     }
 
     public string[] GetDependPaths(string path)
     {
         var deps = manifest.GetDirectDependencies(path);
-        deps.ToList().ForEach((str) =>
-        {
-            Logx.LogZxy("AB", "path : " + path + " dep : " + str);
-        } );
         return deps;
-        //if (assetPakageInfos.ContainsKey(path))
-        //{
-        //    var assetPackageInfo = assetPakageInfos[path];
-        //    return assetPackageInfo.dependencies.ToArray();
-        //}
-        //else
-        //{
-        //    return new string[] { };
-        //}
 
     }
 
-    public void Load(string path, Action<AssetBundleInfo> finishCallback, bool isSync, bool isDepLoad = false)//, AssetBundleRequest fromRequest
+    public void Load(string path, Action<AssetBundleRequest> finishCallback, bool isSync, AssetBundleRequest fromRequest)//, AssetBundleRequest fromRequest
     {
         if (isSync)
         {
-            LoadSync(path, finishCallback, isDepLoad);
-
+            //LoadSync(path, finishCallback, isDepLoad);
         }
         else
         {
-            LoadAsync(path, finishCallback, isDepLoad);
+            LoadAsync(path, finishCallback, fromRequest);
         }
-
-
     }
-
-    public AssetBundle TrueLoadSync(AssetBundleRequest req)
+    
+    public void LoadAsync(string path, Action<AssetBundleRequest> finishCallback, AssetBundleRequest formRequest)
     {
-        Logx.LogZxy("AB", "abLog : TrueLoadSync : " + req.path);
-        var path = GetLoadPath(req.path);
-        var assetBundle = AssetBundle.LoadFromFile(path);
-        //req.StartLoad(bundleCreateReq);
-        return assetBundle;
-    }
 
-    public void LoadSync(string path, Action<AssetBundleInfo> finishCallback, bool isDepLoad = false)
-    {
-        if (this.abCacheDic.ContainsKey(path))
+        Logx.LogZxy("AB", "LoadAsync : start load : " + path);
+
+        //判断是否在 ab 请求 缓存中
+        if (this.abReqCacheDic.ContainsKey(path))
         {
-            Logx.LogZxy("AB", "LoadSync : have path : direct Load (perhaps about async to sync): " + path);
-            //已经有 ab 了 直接完成
-            var abCache = this.abCacheDic[path];
-            this.ChangeRefCount(abCache, 1);
-            finishCallback?.Invoke(abCache);
-        }
-        else
-        {
-            //是否在等待队列中
-            AssetBundleRequest waitReq = null;
-            for (int i = 0; i < waitLoadABList.Count; i++)
+            //Logx.LogZxy("AB", "LoadAsync : have path in ab req cache " + path);
+
+            var requestCache = this.abReqCacheDic[path];
+
+
+            if (requestCache.isCanUseAB)
             {
-                var abReq = waitLoadABList[i];
-                if (abReq.path == path)
-                {
-                    waitReq = abReq;
-
-                    break;
-                }
-            }
-            if (waitReq != null)
-            {
-                Logx.LogZxy("AB", " LoadSync : path in waitQueue and async to sync : " + path);
-                //在等待加载队列中
-                //异步转同步 直接完成
-                waitReq.DependRequest(finishCallback, isDepLoad);
-
-                this.waitLoadABList.Remove(waitReq);
-
-                var assetBundle = TrueLoadSync(waitReq);
-                this.OnLoadFinish(waitReq, assetBundle);
-
-
+                Logx.LogZxy("AB", "LoadAsync : the ab finish load , can use ");
+                finishCallback?.Invoke(requestCache);
             }
             else
             {
-                //是否在正在加载队列中
-                AssetBundleRequest loadingReq = null;
-                for (int i = 0; i < onLoadingABList.Count; i++)
-                {
-                    var abReq = onLoadingABList[i];
-                    if (abReq.path == path)
-                    {
-                        loadingReq = abReq;
-                        break;
-                    }
-                }
+                Logx.LogZxy("AB", "LoadAsync : the ab doesnt finish load , can not use ");
 
-                if (loadingReq != null)
-                {
-                    Logx.LogZxy("AB", "LoadSync : path in loadingQueue (didnt test!!!) : onLoadingReq async to sync : " + path);
-                    //在正在加载队列中
-                    //异步转同步 直接完成
-
-                    loadingReq.DependRequest(finishCallback, isDepLoad);
-
-                    this.onLoadingABList.Remove(loadingReq);
-
-                    loadingReq.createRequest.assetBundle.Unload(true);
-
-                    var assetBundle = TrueLoadSync(loadingReq);
-                    this.OnLoadFinish(waitReq, assetBundle);
-
-
-                }
-                else
-                {
-
-                    //加到依赖加载缓存中
-                    Logx.LogZxy("AB", "LoadSync : dont have any where , start new load : " + path);
-                    AssetBundleRequest request = new AssetBundleRequest();
-                    request.path = path;
-                    request.DependRequest(finishCallback, isDepLoad);
-                    this.fromDependCacheList.Add(request);
-
-                    //处理 ab 依赖
-                    var deps = GetDependPaths(path);// + Const.ExtName);
-                                                    //Debug.Log("length of dep bundles : " + deps.Length);
-                    if (deps != null && deps.Length > 0)
-                    {
-                        //有依赖
-                        request.AddLoadDepend(deps);
-                        for (int i = 0; i < deps.Length; ++i)
-                        {
-                            var dependPath = deps[i];
-                            //xxx.ab 取 xxx
-                            var depPath = deps[i];//.Substring(0, index);
-                            Logx.LogZxy("AB", "LoadSync : load dep : " + path + " : dep : " + depPath);
-                            Load(depPath, (abInfo) =>
-                            {
-                                this.OnFinishLoadDependSync(depPath, request);
-                            }, true, true);//, request
-                        }
-                    }
-                    else
-                    {
-                        //没有依赖 本身 ab 同步转异步完成
-                        Logx.LogZxy("AB", "LoadSync : dont have depends will load and async to sync : " + path);
-
-                        var assetBundle = TrueLoadSync(request);
-                        this.OnLoadFinish(request, assetBundle);
-                    }
-                }
+                requestCache.DependRequestFrom(formRequest);
+                requestCache.DependFinishCallback(finishCallback);
             }
-        }
-    }
-
-    void OnFinishLoadDependSync(string dependPath, AssetBundleRequest fromRequest)
-    {
-
-        fromRequest.FinishLoadDepend(dependPath);
-        if (fromRequest.IsDependAllLoadFinish())
-        {
-            //同步转异步 直接完成
-
-            Logx.LogZxy("AB", "OnFinishLoadDependSync : finish dep : async to sync : dependPath : " + dependPath + " , fromPath : " + fromRequest.path);
-
-            var assetBundle = TrueLoadSync(fromRequest);
-            this.OnLoadFinish(fromRequest, assetBundle);
-
-            this.fromDependCacheList.Remove(fromRequest);
-
-
-
-        }
-    }
-
-    public void LoadAsync(string path, Action<AssetBundleInfo> finishCallback, bool isDepLoad = false)
-    {
-        Logx.LogZxy("AB", "start a new Load request : " + path);
-        if (this.abCacheDic.ContainsKey(path))
-        {
-            Logx.LogZxy("AB", "Load : have path : direct Load : " + path);
-            //已经有 ab 了 直接完成
-            var abCache = this.abCacheDic[path];
-            this.ChangeRefCount(abCache, 1);
-            finishCallback?.Invoke(abCache);
         }
         else
         {
-            //是否在等待队列中
-            AssetBundleRequest waitReq = null;
-            for (int i = 0; i < waitLoadABList.Count; i++)
-            {
-                var abReq = waitLoadABList[i];
-                if (abReq.path == path)
-                {
-                    waitReq = abReq;
+            //哪都没有 开始一个新的加载请求
+            AssetBundleRequest request = null;
+            request = new AssetBundleRequest();
+            request.path = path;
+            request.DependFinishCallback(finishCallback);
+            request.DependRequestFrom(formRequest);
 
-                    break;
-                }
-            }
-            if (waitReq != null)
+
+            abReqCacheDic.Add(path, request);
+
+            //处理 ab 依赖
+            var deps = GetDependPaths(path);
+            if (deps != null && deps.Length > 0)
             {
-                Logx.LogZxy("AB", "Load : path in waitQueue : " + path);
-                //在等待加载队列中
-                waitReq.DependRequest(finishCallback, isDepLoad);
-                //waitReq.finishCallbacks += finishCallback;
+                //有依赖
+                request.AddLoadDepend(deps);
+                for (int i = 0; i < deps.Length; ++i)
+                {
+                    var dependPath = deps[i];
+                    //xxx.ab 取 xxx
+                    var depPath = deps[i];//.Substring(0, index);
+                    Logx.LogZxy("AB", "LoadAsync : load dep : " + path + " : dep : " + depPath);
+                    Load(depPath, OnFinishLoadDependAsync, false, request);
+                }
             }
             else
             {
-                //是否在正在加载队列中
-                AssetBundleRequest loadingReq = null;
-                for (int i = 0; i < onLoadingABList.Count; i++)
-                {
-                    var abReq = onLoadingABList[i];
-                    if (abReq.path == path)
-                    {
-                        loadingReq = abReq;
-                        break;
-                    }
-                }
-
-                if (loadingReq != null)
-                {
-                    Logx.LogZxy("AB", "Load : path in loadingQueue : " + path);
-                    //在正在加载队列中
-                    loadingReq.DependRequest(finishCallback, isDepLoad);
-
-                }
-                else
-                {
-                    //加到依赖加载缓存中
-                    AssetBundleRequest request = new AssetBundleRequest();
-                    request.path = path;
-                    request.DependRequest(finishCallback, isDepLoad);
-                    this.fromDependCacheList.Add(request);
-
-
-                    //处理 ab 依赖
-                    var deps = GetDependPaths(path);// + Const.ExtName);
-                                                    //Debug.Log("length of dep bundles : " + deps.Length);
-                    if (deps != null && deps.Length > 0)
-                    {
-                        //有依赖
-                        request.AddLoadDepend(deps);
-                        for (int i = 0; i < deps.Length; ++i)
-                        {
-                            var dependPath = deps[i];
-                            //xxx.ab 取 xxx
-                            var depPath = deps[i];//.Substring(0, index);
-                            Logx.LogZxy("AB", "Load : load dep : " + path + " : dep : " + depPath);
-                            Load(depPath, (abInfo) =>
-                            {
-                                this.OnFinishLoadDependAsync(depPath, request);
-                            }, false, true);//, request
-                        }
-                    }
-                    else
-                    {
-                        //没有依赖 本身 ab 进入待加载队列
-                        Logx.LogZxy("AB", "Load : dont have depends will load , add to waitQueue : " + path);
-                        this.waitLoadABList.Add(request);
-                    }
-
-                }
+                //没有依赖 本身 ab 进入待加载队列
+                Logx.LogZxy("AB", "LoadAsync : dont have depends will load , add to waitQueue : " + path);
+                this.waitLoadABList.Add(request);
             }
         }
-
-
     }
 
-    void OnFinishLoadDependAsync(string dependPath, AssetBundleRequest fromRequest)
+    void OnFinishLoadDependAsync(AssetBundleRequest abRequest)
     {
-
-        fromRequest.FinishLoadDepend(dependPath);
-        if (fromRequest.IsDependAllLoadFinish())
+        Logx.LogZxy("AB", "OnFinishLoadDepend : finish dep : dependPath : " + abRequest.path);
+        
+        //加载依赖完成 找到相应的 request 进而找到被谁依赖
+        var fromReqList = abRequest.fromRequests;
+        for (int i = 0; i < fromReqList.Count; i++)
         {
-            Logx.LogZxy("AB", "OnFinishLoadDepend : finish dep : dependPath : " + dependPath + " , fromPath : " + fromRequest.path);
-
-            this.waitLoadABList.Add(fromRequest);
-            this.fromDependCacheList.Remove(fromRequest);
+            var fromReq = fromReqList[i];
+            fromReq.FinishLoadDepend(abRequest.path);
+            if (fromReq.IsDependAllLoadFinish())
+            {
+                this.waitLoadABList.Add(fromReqList[i]);
+            }
         }
     }
 
-    void OnLoadFinish(AssetBundleRequest req, AssetBundle ab)
+    void OnLoadFinish(AssetBundleRequest req)//, AssetBundle ab
     {
-        AssetBundleInfo abInfo = null;
-        if (abCacheDic.ContainsKey(req.path))
-        {
-            abInfo = abCacheDic[req.path];
-            this.ChangeRefCount(abInfo, req.sameRequestCount);
-        }
-        else
-        {
-            abInfo = new AssetBundleInfo();
-            abInfo.name = req.name;
-            abInfo.path = req.path;
-            abInfo.assetBundle = ab;
-            abCacheDic.Add(abInfo.path, abInfo);
-            this.ChangeRefCount(abInfo, req.sameRequestCount);
-
-        }
-
-
         var callbackList = req.GetAllFinishCallback();
         for (int i = 0; i < callbackList.Count; i++)
         {
             var currCallback = callbackList[i];
-            currCallback?.Invoke(abInfo);
-
-
+            currCallback?.Invoke(req);
         }
+
+        req.FinishLoad();
     }
 
     public void Update(float timeDelta)
     {
-
         List<AssetBundleRequest> finishRequestList = new List<AssetBundleRequest>();
         //更新正常队列 先入队的先加载完成
         for (int i = 0; i < onLoadingABList.Count - 1; i++)
@@ -478,22 +252,16 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             var loadingABReq = onLoadingABList[i];
             loadingABReq.Update(timeDelta);
         }
-
-
+        
         for (int i = onLoadingABList.Count - 1; i >= 0; i--)
         {
             var loadingABReq = onLoadingABList[i];
-            if (loadingABReq.IsFinishLoad())
+            if (loadingABReq.CheckIsFinishLoad())
             {
                 var ab = loadingABReq.createRequest.assetBundle;
-                if (abCacheDic.ContainsKey(loadingABReq.path))
-                {
-                    Logx.LogZxyError("AB", "Update : have cache , but will load finish again : " + loadingABReq.name);
-                    return;
-                }
                 Logx.LogZxy("AB", "Update : finish load : path : " + loadingABReq.path);
 
-                this.OnLoadFinish(loadingABReq, ab);
+                this.OnLoadFinish(loadingABReq);
                 onLoadingABList.RemoveAt(i);
 
             }
@@ -538,85 +306,10 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
     void TrueLoadAsync(AssetBundleRequest req)
     {
-        //可能已经完成 在正常情况下可能是异步转同步导致
-        if (this.abCacheDic.ContainsKey(req.path))
-        {
-            Logx.LogZxy("AB", "TrueLoad : the ab already finished , direct to finish: " + req.path);
-            onLoadingABList.Remove(req);
-            var ab = this.abCacheDic[req.path];
-            this.OnLoadFinish(req, ab.assetBundle);
-            return;
-        }
-
-
         Logx.LogZxy("AB", "TrueLoad : start to load truly : " + req.path);
         var path = GetLoadPath(req.path);
         var bundleCreateReq = AssetBundle.LoadFromFileAsync(path);
         req.StartLoad(bundleCreateReq);
-    }
-
-    public void ChangeRefCount(AssetBundleInfo abInfo, int value)
-    {
-
-        if (!abCacheDic.ContainsKey(abInfo.path))
-        {
-            return;
-        }
-        //递归还是循环都行 自己看着办 这里用递归
-        Logx.LogZxy("AB", "ChangeRefCount : check " + abInfo.path);
-        var preRefCount = abInfo.RefCount;
-
-        abInfo.RefCount += value;
-
-        //引用减到 0 的时候释放 ab
-        if (preRefCount > 0 && 0 == abInfo.RefCount)
-        {
-            Logx.LogZxy("AB", "ChangeRefCount : refCount is 0 , unload :  : " + abInfo.path);
-            abInfo.assetBundle.Unload(true);
-            abCacheDic.Remove(abInfo.path);
-        }
-
-        var depends = this.GetDependPaths(abInfo.path);
-        for (int i = 0; i < depends.Length; i++)
-        {
-            var depPath = depends[i];
-            AssetBundleInfo depABInfo = null;
-            if (this.abCacheDic.ContainsKey(depPath))
-            {
-                //Logx.LogZxy("AB","abInfo ref : dep , start to change ref : " + abInfo.path + " 's dep : " + depPath);
-                depABInfo = this.abCacheDic[depPath];
-                Logx.LogZxy("AB", "will ChangeRefCount  " + depPath + " from " + abInfo.path);
-                this.ChangeRefCount(depABInfo, value);
-
-            }
-            else
-            {
-                Logx.LogZxyError("AB", "ChangeRefCount : the path is not found : fromDepPath : " + abInfo.path + " depPath : " + depPath);
-            }
-        }
-    }
-
-    public void Release(string path)
-    {
-        ReleaseAB(path);
-    }
-
-    void ReleaseAB(string path)
-    {
-        if (abCacheDic.ContainsKey(path))
-        {
-            var abInfo = abCacheDic[path];
-            ChangeRefCount(abInfo, -1);
-        }
-        else
-        {
-            Logx.LogZxyWarning("AB", "Release the ab is not found in abCacheDic : " + path);
-        }
-    }
-
-    public void ReleseAll()
-    {
-
     }
 
 

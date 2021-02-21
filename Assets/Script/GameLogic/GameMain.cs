@@ -87,10 +87,10 @@ public class GameMain : MonoBehaviour
             Debug.Log("zxy : sync : load ab test finish1");
 
             //StartCoroutine(dd());
-            // AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+            //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
         }, false, null);
         Debug.Log("zxy : ------------------");
-        AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+        AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI2" + ".ab", (info) =>
         {
 
             Debug.Log("zxy : sync : load ab test finish2");
@@ -110,7 +110,7 @@ public class GameMain : MonoBehaviour
         Debug.Log("zxy : ------------------");
 
 
-
+        StartCoroutine(dd());
 
 
 
@@ -130,14 +130,14 @@ public class GameMain : MonoBehaviour
 
     }
 
-    //IEnumerator dd()
-    //{
-    //    yield return null;
+    IEnumerator dd()
+    {
+        yield return new WaitForSeconds(1);
 
-    //    AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-    //    AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-    //    AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-    //}
+        AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI2" + ".ab");
+    }
 
 
     // Update is called once per frame

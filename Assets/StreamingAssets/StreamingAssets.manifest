@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2377099750
+CRC: 1127808083
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -22,17 +22,21 @@ AssetBundleManifest:
         Dependency_0: assets/buildres/prefabs/ui/aui.ab
         Dependency_1: assets/buildres/prefabs/ui/bui.ab
     Info_5:
+      Name: assets/buildres/prefabs/ui/equipmentlistui2.ab
+      Dependencies:
+        Dependency_0: assets/buildres/prefabs/ui/aui.ab
+    Info_6:
       Name: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
       Dependencies: {}
-    Info_6:
+    Info_7:
       Name: assets/sourceres/models/role/jing_ling_nan_001_ty.ab
       Dependencies: {}
-    Info_7:
+    Info_8:
       Name: assets/sourceres/models/role/jing_ling_zhu_jian_zhu_001.ab
       Dependencies: {}
-    Info_8:
+    Info_9:
       Name: assets/sourceres/models/role/jlxb_yc_001_ty.ab
       Dependencies: {}
-    Info_9:
+    Info_10:
       Name: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
       Dependencies: {}

@@ -7,135 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using LitJson;
-public class AssetBundleRequest
-{
-    public string path = "";
-
-    private int refCount;
-    public int RefCount
-    {
-        get => refCount;
-        set
-        {
-            Logx.LogZxy("AB", "change ref count : " + path + " : " + refCount + " => " + value);
-            refCount = value;
-        }
-    }
-    List<Action<AssetBundleRequest>> finishCallbacks = new List<Action<AssetBundleRequest>>();
-
-    public List<string> depends = new List<string>();
-
-    public AssetBundleCreateRequest createRequest;
-    public AssetBundle assetBundle;
-    public void StartLoad(AssetBundleCreateRequest createRequest)
-    {
-        this.createRequest = createRequest;
-    }
-    public void Update(float timeDelta)
-    {
-
-    }
-
-    public void DependFinishCallback(Action<AssetBundleRequest> callback)
-    {
-        finishCallbacks.Add(callback);
-    }
-
-    public void DependRequests(List<Action<AssetBundleRequest>> callbacks, bool isDepLoad)
-    {
-        for (int i = 0; i < callbacks.Count; i++)
-        {
-            var callback = callbacks[i];
-            DependFinishCallback(callback);
-        }
-
-    }
-
-    public List<Action<AssetBundleRequest>> GetAllFinishCallback()
-    {
-        return finishCallbacks;
-    }
-
-    public bool IsDependAllLoadFinish()
-    {
-        return 0 == depends.Count;
-    }
-
-    public bool CheckIsFinishLoad()
-    {
-        if (!this.IsDependAllLoadFinish())
-        {
-            Logx.LogZxyWarning("AB", "the ab doesnt finish load all deps");
-            return false;
-        }
-        if (null == this.createRequest)
-        {
-            Logx.LogZxyError("AB", "the createRequest is null : " + this.path);
-            return false;
-        }
-        if (this.createRequest.isDone)
-        {
-            return true;
-        }
-        return false;
-    }
-    public List<AssetBundleRequest> fromRequests = new List<AssetBundleRequest>();
-
-    public void DependRequestFrom(AssetBundleRequest fromRequest)
-    {
-        if (fromRequest != null)
-        {
-            fromRequests.Add(fromRequest);
-        }
-    }
-
-    public void FinishLoadDepend(string depend)
-    {
-        Logx.LogZxy("AB", "FinishLoadDepend : " + depend);
-        if (!depends.Contains(depend))
-        {
-            Logx.LogZxy("AB", "FinishLoadDepend : the depend doesnt exist ,perhaps has finish load : " + depend);
-            return;
-        }
-
-        depends.Remove(depend);
-    }
-
-    public void AddLoadDepend(string[] deps)
-    {
-        depends = deps.ToList();
-    }
-    public bool isCanUseAB = false;
-
-    internal void FinishLoad()
-    {
-        assetBundle = this.createRequest.assetBundle;
-        isCanUseAB = true;
-
-    }
-
-    public void ClearTempDataOnLoading()
-    {
-        finishCallbacks.Clear();
-        fromRequests.Clear();
-    }
-
-    //将在下一帧释放
-    public bool isWillRelease = false;
-    public void Dispose()
-    {
-        isWillRelease = true;
-    }
-
-
-
-    internal void UnloadAB()
-    {
-        //isWillRelease = true;
-        assetBundle.Unload(true);
-        assetBundle = null;
-    }
-}
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
 {
@@ -173,13 +44,14 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     {
         if (isSync)
         {
-            //LoadSync(path, finishCallback, isDepLoad);
+            LoadSync(path, finishCallback, fromRequest);
         }
         else
         {
             LoadAsync(path, finishCallback, fromRequest);
         }
     }
+
 
     public void LoadAsync(string path, Action<AssetBundleRequest> finishCallback, AssetBundleRequest formRequest)
     {
@@ -196,7 +68,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             {
                 Logx.LogZxy("AB", "LoadAsync : the ab finish load , can use ");
                 requestCache.DependFinishCallback(finishCallback);
-                this.OnLoadFinish(requestCache);
+                this.OnLoadFinish(requestCache, requestCache.assetBundle);
             }
             else
             {
@@ -242,9 +114,90 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         }
     }
 
+
+    public void LoadSync(string path, Action<AssetBundleRequest> finishCallback, AssetBundleRequest formRequest)
+    {
+        Logx.LogZxy("AB", "LoadSync : start load : " + path);
+
+        //判断是否在 ab 请求 缓存中
+        if (this.abReqCacheDic.ContainsKey(path))
+        {
+            var requestCache = this.abReqCacheDic[path];
+
+
+            if (requestCache.isCanUseAB)
+            {
+                //ab 已经加载好了
+                Logx.LogZxy("AB", "LoadSync : the ab finish load , can use : " + path);
+                requestCache.DependFinishCallback(finishCallback);
+                this.OnLoadFinish(requestCache, requestCache.assetBundle);
+            }
+            else
+            {
+                //ab 正在加载中
+                if (!requestCache.isSyncLoad)
+                {
+                    Logx.LogZxyWarning("AB", "async to sync !!! not implement :" + path);
+                    //异步转同步 此时要判断 等待加载队列 和 正在加载队列 和 正在等待依赖加载完的请求
+                    //如果在的话 需要终止 并开始同步的 ab 加载 而且还要判断依赖 ab 的加载情况、
+
+                    //没有意义 异步加载的时候为什么要同步加载？ 
+                    //所以建议 都是同步 或 都是异步 或 在独立的没有交叉的两个时间段上加载
+
+                    //如果真的有这种需求 自己弄吧
+                }
+                else
+                {
+                    //如果是同步 理论上就不会走到这里
+                    Logx.LogZxyWarning("AB", "cant run hero , because it is sync");
+                }
+            }
+        }
+        else
+        {
+            //哪都没有 开始一个新的加载请求
+            AssetBundleRequest request = null;
+            request = new AssetBundleRequest();
+            request.path = path;
+            request.DependFinishCallback(finishCallback);
+            request.DependRequestFrom(formRequest);
+
+
+            abReqCacheDic.Add(path, request);
+
+            //处理 ab 依赖
+            var deps = GetDependPaths(path);
+            if (deps != null && deps.Length > 0)
+            {
+                //有依赖
+                request.AddLoadDepend(deps);
+                for (int i = 0; i < deps.Length; ++i)
+                {
+                    var dependPath = deps[i];
+                    var depPath = deps[i];
+                    Logx.LogZxy("AB", "LoadSync : load dep : " + path + " : dep : " + depPath);
+                    Load(depPath, OnFinishLoadDependSync, true, request);
+                }
+            }
+            else
+            {
+                //没有依赖 直接加载本身 ab
+                Logx.LogZxy("AB", "LoadSync : dont have depends will load , direct load : " + path);
+                this.TrueLoadSync(request);
+            }
+        }
+    }
+
     void ChangeRef(AssetBundleRequest abRequest, int value)
     {
         var preValue = abRequest.RefCount;
+
+        if (abRequest.RefCount + value < 0)
+        {
+            Logx.LogZxyWarning("AB", "RefCount is will less than 0 : " + abRequest.path);
+            return;
+        }
+
         abRequest.RefCount += value;
         if (preValue > 0 && 0 == abRequest.RefCount)
         {
@@ -253,6 +206,8 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             abRequest.Dispose();
             Logx.LogZxy("AB", "will Release AB : " + abRequest.path);
         }
+
+
         var deps = this.GetDependPaths(abRequest.path);
         for (int i = 0; i < deps.Length; i++)
         {
@@ -264,6 +219,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             }
         }
     }
+
 
     void OnFinishLoadDependAsync(AssetBundleRequest abRequest)
     {
@@ -282,14 +238,32 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             }
         }
     }
-
-    void OnLoadFinish(AssetBundleRequest req)//, AssetBundle ab
+    
+    void OnFinishLoadDependSync(AssetBundleRequest abRequest)
     {
+        Logx.LogZxy("AB", "OnFinishLoadDepend : finish dep : dependPath : " + abRequest.path);
+
+        //加载依赖完成 找到相应的 request 进而找到被谁依赖
+        var fromReqList = abRequest.fromRequests;
+        for (int i = 0; i < fromReqList.Count; i++)
+        {
+            var fromReq = fromReqList[i];
+            var isPreFinishAllDeps = fromReq.IsDependAllLoadFinish();
+            fromReq.FinishLoadDepend(abRequest.path);
+
+            if (!isPreFinishAllDeps && fromReq.IsDependAllLoadFinish())
+            {
+                TrueLoadSync(fromReq);
+            }
+        }
+    }
 
 
+    void OnLoadFinish(AssetBundleRequest req, AssetBundle assetBundle)
+    {
         var callbackList = req.GetAllFinishCallback();
 
-        req.FinishLoad();
+        req.FinishLoad(assetBundle);
 
         //每一个 finishCallback 算是一个引用
         for (int i = 0; i < callbackList.Count; i++)
@@ -305,7 +279,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             }
             else
             {
-                Logx.LogZxyWarning("AB", "the assetBundle is null , perhaps has release : " + req.path);
+                Logx.LogZxyWarning("AB", "the assetBundle is null , perhaps has release in this frame : " + req.path);
             }
 
             currCallback?.Invoke(req);
@@ -326,12 +300,12 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         for (int i = onLoadingABList.Count - 1; i >= 0; i--)
         {
             var loadingABReq = onLoadingABList[i];
-            if (loadingABReq.CheckIsFinishLoad())
+            if (loadingABReq.CheckIsFinishLoadAsync())
             {
-                //var ab = loadingABReq.createRequest.assetBundle;
+                var ab = loadingABReq.createRequest.assetBundle;
                 Logx.LogZxy("AB", "Update : finish load : path : " + loadingABReq.path);
 
-                this.OnLoadFinish(loadingABReq);
+                this.OnLoadFinish(loadingABReq, ab);
                 onLoadingABList.RemoveAt(i);
 
             }
@@ -373,6 +347,32 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         willReleseABReq.Clear();
     }
 
+    string GetLoadPath(string path)
+    {
+        return Const.AssetBundlePath + "/" + path;// + Const.ExtName;
+    }
+    
+    void TrueLoadAsync(AssetBundleRequest req)
+    {
+        Logx.LogZxy("AB", "TrueLoadAsync : start to load truly : " + req.path);
+        var path = GetLoadPath(req.path);
+
+        var bundleCreateReq = AssetBundle.LoadFromFileAsync(path);
+        req.StartLoadAsync(bundleCreateReq);
+    }
+
+    void TrueLoadSync(AssetBundleRequest req)
+    {
+        Logx.LogZxy("AB", "TrueLoadSync : start to load truly : " + req.path);
+        var path = GetLoadPath(req.path);
+
+        req.SetSyncLoadState();
+        var assetBundle = AssetBundle.LoadFromFile(path);
+        //req.assetBundle = assetBundle;
+        OnLoadFinish(req, assetBundle);
+
+    }
+
     void CheckRelease()
     {
         for (int i = this.willReleseABReq.Count - 1; i >= 0; i--)
@@ -382,21 +382,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             this.abReqCacheDic.Remove(willReleaseABReq.path);
         }
     }
-
-    string GetLoadPath(string path)
-    {
-        return Const.AssetBundlePath + "/" + path;// + Const.ExtName;
-    }
-
-    void TrueLoadAsync(AssetBundleRequest req)
-    {
-        Logx.LogZxy("AB", "TrueLoad : start to load truly : " + req.path);
-        var path = GetLoadPath(req.path);
-
-        var bundleCreateReq = AssetBundle.LoadFromFileAsync(path);
-        req.StartLoad(bundleCreateReq);
-    }
-
+    
     public void Release(string path)
     {
         ReleaseAB(path);
@@ -411,7 +397,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         }
         else
         {
-            Logx.LogZxyError("AB", "ReleaseAB : then path is not found : " + path);
+            Logx.LogZxyWarning("AB", "ReleaseAB : the path is not found : " + path);
         }
     }
 }

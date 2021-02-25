@@ -24,6 +24,12 @@ public enum GameEvent
     ConnectLoginServerResult = 1000,
     VerifyTokenResult = 1001,
 
+
+    //AB 加载任务完成
+    LoadABTaskFinish,
+    //加载资源任务完成
+    LoadAssetTaskFinish,
+
     CombatStart,        //战斗开始 玩家此时可以开始行动了
     CombatRoundActionStart,//回合开始
     CombatRoundShowStart,//回合展示开始

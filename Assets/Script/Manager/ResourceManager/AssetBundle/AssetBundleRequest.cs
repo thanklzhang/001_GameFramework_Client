@@ -66,12 +66,12 @@ public class AssetBundleRequest
     {
         if (!this.IsDependAllLoadFinish())
         {
-            Logx.LogZxyWarning("AB", "the ab doesnt finish load all deps");
+            Logx.LogWarningZxy("AB", "the ab doesnt finish load all deps");
             return false;
         }
         if (!isSyncLoad && null == this.createRequest)
         {
-            Logx.LogZxyError("AB", "the createRequest is null : " + this.path);
+            Logx.LogErrorZxy("AB", "the createRequest is null : " + this.path);
             return false;
         }
         if (!isSyncLoad && this.createRequest.isDone)
@@ -130,7 +130,7 @@ public class AssetBundleRequest
 
     //将在下一帧释放
     public bool isWillRelease = false;
-    public void Dispose()
+    public void Release()
     {
         isWillRelease = true;
     }
@@ -148,5 +148,7 @@ public class AssetBundleRequest
     {
         this.isSyncLoad = true;
     }
+
+
 }
 

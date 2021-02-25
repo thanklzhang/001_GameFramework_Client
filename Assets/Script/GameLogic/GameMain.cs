@@ -39,8 +39,8 @@ public class GameMain : MonoBehaviour
         UIManager.Instance.Init(uiRoot);
 
 
-        AssetBundleManager.Instance.Init();
-        //AssetManager.Instance.Init();
+        AssetBundleManager.Instance.Load();
+        AssetManager.Instance.Load();
         //// role 
         //var rolePath = "001_guiwuzhe";//Models/Role/
         //AssetResManager.Instance.Load(rolePath,(assetInfo)=>
@@ -50,32 +50,65 @@ public class GameMain : MonoBehaviour
 
         //},false);
 
-       
-        AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+
+        //AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
+        //{
+
+        //    Debug.Log("zxy : sync : load ab test finish1");
+
+        //    //StartCoroutine(dd());
+        //    //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+
+        //    //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        //}, false, null);
+        //Debug.Log("zxy : ------------------");
+
+
+      
+
+        AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
+         {
+             Logx.LogZxy("GameMain","load finish");
+             var obj = assetReq.assetObj as GameObject;
+             GameObject.Instantiate(obj, uiRoot);
+
+             AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
+
+         }, false);
+
+        AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
         {
+            Logx.LogZxy("GameMain", "load finish");
+            var obj = assetReq.assetObj as GameObject;
+            GameObject.Instantiate(obj, uiRoot);
+            AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
 
-            Debug.Log("zxy : sync : load ab test finish1");
+        }, false);
 
-            //StartCoroutine(dd());
-            //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
+        {
+            Logx.LogZxy("GameMain", "load finish");
+            var obj = assetReq.assetObj as GameObject;
+            GameObject.Instantiate(obj, uiRoot);
+            AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
 
-            //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-        }, false, null);
-        Debug.Log("zxy : ------------------");
-
+        }, false);
 
         //StartCoroutine(dd());
-
-
     }
 
     IEnumerator dd()
     {
         yield return new WaitForSeconds(1);
 
-        AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
         //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-        AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI2" + ".ab");
+        ////AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI2" + ".ab");
+        AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
+        AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
+
+        AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
+
     }
 
 
@@ -83,7 +116,7 @@ public class GameMain : MonoBehaviour
     void Update()
     {
         //Debug.Log("zxy : currFrame : " + Time.frameCount);
-        //AssetManager.Instance.Update(Time.deltaTime);
+        AssetManager.Instance.Update(Time.deltaTime);
         AssetBundleManager.Instance.Update(Time.deltaTime);
     }
 

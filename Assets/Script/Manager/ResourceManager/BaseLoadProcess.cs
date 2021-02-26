@@ -27,70 +27,84 @@ public class BaseLoadProcess
 
     public void Init()
     {
-
+        preparingList = new List<BaseLoader>();
+        waitLoadQueue = new List<BaseLoader>();
+        loadingQueue = new List<BaseLoader>();
     }
 
     internal void SetFinishCallback(Action<BaseLoader> loadFinishCallback)
     {
         this.loadFinishCallback = loadFinishCallback;
     }
-    
+
     public void Update(float timeDelta)
     {
-        //正在加载队列
-        var finishLoadList = new List<BaseLoader>();
-        for (int i = 0; i < loadingQueue.Count; i++)
-        {
-            var loadingLoader = loadingQueue[i];
-
-            loadingLoader.Update(timeDelta);
-
-            if (loadingLoader.IsLoadFinish())
-            {
-                finishLoadList.Add(loadingLoader);
-            }
-        }
-
-        //移除已经加载完成的 loader
-        //finishList
-
-        //从准备中列表 中 挑出准备完毕的 loader 进入 等待加载队列
-        var finishPrepareList = new List<BaseLoader>();
-        for (int i = 0; i < preparingList.Count; i++)
-        {
-            var prepareLoader = preparingList[i];
-            
-            if (prepareLoader.IsPrepareFinish())
-            {
-                finishPrepareList.Add(prepareLoader);
-            }
-        }
-
-        //移除已经准备完成的 loader
-        //finishPrepareList
-
-
-        //检查正在加载队列有没有空闲位置 有的话从 等待加载队列 中取 loader 填满正在加载队列
-        
+        this.UpdateLoad(timeDelta);
     }
 
+    void UpdateLoad(float timeDelta)
+    {
+        //正在加载队列 并 移除已经加载完成的 loader
+        for (int i = loadingQueue.Count - 1; i >= 0; i--)
+        {
+            var loadingLoader = loadingQueue[i];
+            loadingLoader.Update(timeDelta);
+
+            //loader 判断状态也可以
+            if (loadingLoader.IsLoadFinish())
+            {
+                //OnLoadFinish(loadingLoader);
+                loadingLoader.LoadFinish();
+                this.OnLoadFinish(loadingLoader);
+                loadingQueue.RemoveAt(i);
+            }
+        }
+
+        //从准备中列表 中 挑出准备完毕的 loader 进入 等待加载队列
+        for (int i = preparingList.Count - 1; i >= 0; i--)
+        {
+            var prepareLoader = preparingList[i];
+
+            if (prepareLoader.IsPrepareFinish())
+            {
+                prepareLoader.PrepareFinish();
+                preparingList.RemoveAt(i);
+                waitLoadQueue.Add(prepareLoader);
+            }
+        }
+
+        //检查正在加载队列有没有空闲位置 有的话从 等待加载队列 中取 loader 填满正在加载队列
+        var surplusCount = maxLoadingCount - loadingQueue.Count;
+        if (surplusCount > 0)
+        {
+            for (int i = 0; i < surplusCount; i++)
+            {
+                if (waitLoadQueue.Count > 0)
+                {
+                    var waitLoader = waitLoadQueue[0];
+                    waitLoadQueue.RemoveAt(0);
+                    loadingQueue.Add(waitLoader);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+
+    //添加一个新的 loader 的时候
     public virtual void AddLoader(BaseLoader loader)
     {
         preparingList.Add(loader);
         loader.Start();
         //loaderCache.Add(loader);
     }
-
-    public virtual void OnPrepareFinish(BaseLoader loader)
-    {
-        loader.OnPrepareFinish();
-    }
-
+    
+    //当一个 loader 加载完成的时候
     public virtual void OnLoadFinish(BaseLoader loader)
     {
         this.loadFinishCallback?.Invoke(loader);
-
-        //loader.OnLoadFinish();
     }
 
 

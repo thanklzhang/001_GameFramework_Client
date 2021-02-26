@@ -23,7 +23,7 @@ public class AssetManager : Singleton<AssetManager>
     public Dictionary<string, AssetCache> assetCacheDic = new Dictionary<string, AssetCache>();
     public Dictionary<string, string> assetToAbDic = new Dictionary<string, string>();
 
-    public void Load()
+    public void Init()
     {
 
         Logx.LogZxy("Asset", "init");

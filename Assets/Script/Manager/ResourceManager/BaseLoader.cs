@@ -57,7 +57,7 @@ public class BaseLoader
 
     internal void Update(float timeDelta)
     {
-        throw new NotImplementedException();
+        
     }
 
     public virtual void OnStart()

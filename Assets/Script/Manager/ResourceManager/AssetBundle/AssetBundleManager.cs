@@ -13,6 +13,7 @@ public class AssetBundleCache
     public string path;
     internal Action<AssetBundleCache> finishLoadCallback;
     internal AssetBundle assetBundle;
+    public int refCount;
 }
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
@@ -22,7 +23,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
     private AssetBundleManifest manifest;
 
-    public void Load()
+    public void Init()
     {
         Logx.LogZxy("AB", "abLog : init");
         var manifestAB = AssetBundle.LoadFromFile(Const.AssetBundlePath + "/" + "StreamingAssets");
@@ -55,66 +56,76 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
         Logx.LogZxy("AB", "LoadAsync : start load : " + path);
 
-        //如果没有 判断是否在加载中(包括等待依赖 ab) 在的话 
-        //哪都没有 那么就开始加载 ab
-
-        if (this.IsExistCache())
+        var abCache = GetCacheByPath(path);
+        if (abCache != null)
         {
+            Logx.Logz("LoadAsync : have ab cache");
             //判断是否在 ab 缓存中 
             //有的话直接拿走
+            //this.OnLoadFinish(abCache);
+            abCache.refCount += 1;
+            finishCallback?.Invoke(abCache);
         }
-        //else if (this.IsLoadingDeps())
-        //{
-        //    //判断是否在等待所有依赖 ab 加载完) 有的话 附加 callback   
-        //}
-        //else if (this.IsLoadingSelf())
-        //{
-        //    //判断是否在加载自身 ab 中 有的话 附加 callback  
-        //}
         else
         {
-            //////////哪都没有 开始加载 自身 ab
-            //可以直接加载
+            Logx.Logz("LoadAsync : no ab cache");
+            //可能没在缓存中 可能正在加载中 也可能第一次加载
             LoadTrueAssetBundle(path, finishCallback);
         }
 
     }
 
-    public bool IsExistCache()
+    public AssetBundleCache GetCacheByPath(string path)
     {
-        return false;
+        AssetBundleCache abCache = null;
+        abCacheDic.TryGetValue(path, out abCache);
+        return abCache;
     }
 
-    public bool IsLoadingDeps()
-    {
-        return false;
-    }
 
-    public bool IsLoadingSelf()
-    {
-        return false;
-    }
 
     public void LoadTrueAssetBundle(string path, Action<AssetBundleCache> finishCallback)
     {
+
         var loader = new AssetBundleLoader();
         loader.path = path;
         loader.finishLoadCallback = finishCallback;
+        //loader.refCount = 1;//加载的时候就已经开始引用了
 
-        //...
+
+
+        //依赖
+        var deps = GetDependPaths(path).ToList();
+        for (int i = 0; i < deps.Count; i++)
+        {
+            var depPath = deps[i];
+            Load(depPath, null, false);
+        }
+
+        //加载任务交给加载管理器去执行
         LoadTaskManager.Instance.AddAssetBundleLoader(loader);
+        Logx.Logz("AssetBundleManager : LoadTrueAssetBundle : start LoadTrueAssetBundle : " + path);
+
     }
 
+    //有 AB 加载完成
     public void OnLoadFinish(AssetBundleCache ab)
     {
+        Logx.Logz("AssetBundleManager : OnLoadFinish : " + ab.path);
         //判断缓存中是否有 没有的话添加到缓存中
+        AssetBundleCache abCache = null;
+        if (!abCacheDic.TryGetValue(ab.path, out abCache))
+        {
+            abCacheDic.Add(ab.path, ab);
+            abCache = abCacheDic[ab.path];
+        }
 
-        //cache 中 ref += refCount
-        //这个回调是调用的时候传的回调
-        ab.finishLoadCallback?.Invoke(ab);
+        abCache.refCount += ab.refCount;
 
+        //这个回调是加载开始的时候的时候传的回调 可以认为是相对的业务层传来的回调
+        var finishCallback = abCache.finishLoadCallback;
+        finishCallback?.Invoke(abCache);
     }
-
 
     public void Release()
     {

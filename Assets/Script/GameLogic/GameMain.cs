@@ -39,8 +39,10 @@ public class GameMain : MonoBehaviour
         UIManager.Instance.Init(uiRoot);
 
 
-        AssetBundleManager.Instance.Load();
-        AssetManager.Instance.Load();
+        AssetBundleManager.Instance.Init();
+        AssetManager.Instance.Init();
+
+        LoadTaskManager.Instance.Init();
         //// role 
         //var rolePath = "001_guiwuzhe";//Models/Role/
         //AssetResManager.Instance.Load(rolePath,(assetInfo)=>
@@ -51,48 +53,25 @@ public class GameMain : MonoBehaviour
         //},false);
 
 
-        //AssetBundleManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab", (info) =>
-        //{
+        //AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
+        // {
+        //     Logx.LogZxy("GameMain","load finish");
+        //     var obj = assetReq.assetObj as GameObject;
+        //     GameObject.Instantiate(obj, uiRoot);
 
-        //    Debug.Log("zxy : sync : load ab test finish1");
+        //     AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
 
-        //    //StartCoroutine(dd());
-        //    //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
+        // }, false);
 
-        //    //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-        //}, false, null);
-        //Debug.Log("zxy : ------------------");
-
-
-      
-
-        AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
-         {
-             Logx.LogZxy("GameMain","load finish");
-             var obj = assetReq.assetObj as GameObject;
-             GameObject.Instantiate(obj, uiRoot);
-
-             AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
-
-         }, false);
-
-        AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
+        var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
+        var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
+        AssetBundleManager.Instance.Load(abPath, (assetCache) =>
         {
-            Logx.LogZxy("GameMain", "load finish");
-            var obj = assetReq.assetObj as GameObject;
-            GameObject.Instantiate(obj, uiRoot);
-            AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
-
+            Logx.Logz("gameMain : load finish");
+            var prefab = assetCache.assetBundle.LoadAsset<GameObject>(assetPath);
+            var newObj = GameObject.Instantiate(prefab, uiRoot);
         }, false);
 
-        AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
-        {
-            Logx.LogZxy("GameMain", "load finish");
-            var obj = assetReq.assetObj as GameObject;
-            GameObject.Instantiate(obj, uiRoot);
-            AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
-
-        }, false);
 
         //StartCoroutine(dd());
     }
@@ -100,14 +79,7 @@ public class GameMain : MonoBehaviour
     IEnumerator dd()
     {
         yield return new WaitForSeconds(1);
-
-        //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-        ////AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI" + ".ab");
-        //AssetBundleManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI2" + ".ab");
-        AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
-        AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
-
-        AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
+        //AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
 
     }
 
@@ -116,8 +88,9 @@ public class GameMain : MonoBehaviour
     void Update()
     {
         //Debug.Log("zxy : currFrame : " + Time.frameCount);
-        AssetManager.Instance.Update(Time.deltaTime);
-        AssetBundleManager.Instance.Update(Time.deltaTime);
+        //AssetManager.Instance.Update(Time.deltaTime);
+        //AssetBundleManager.Instance.Update(Time.deltaTime);
+        LoadTaskManager.Instance.Update(Time.deltaTime);
     }
 
     private void OnDestroy()

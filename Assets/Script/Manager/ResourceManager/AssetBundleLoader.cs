@@ -25,22 +25,32 @@ public class AssetBundleLoader : BaseLoader
 
     public override void OnStart()
     {
-        //填充 deps
-
+        Logx.Logz("AssetBundleLoader OnStart : " + this.path);
         refCount += 1;
+        //填充 deps
+        //这里应该抽出来
+        deps = AssetBundleManager.Instance.GetDependPaths(this.path).ToList();
+        //Logx.Logz("AssetBundleLoader OnStart : the count of deps : " + deps.Count);
     }
 
     public override void OnPrepareFinish()
     {
-
+        Logx.Logz("AssetBundleLoader OnPrepareFinish : " + this.path);
+        //准备好了 开始加载
+        var resultPath = GetABLoadPath(this.path);
+        abCreateReq = AssetBundle.LoadFromFileAsync(resultPath);
     }
 
     internal override void OnLoadFinish()
     {
+        
+        Logx.Logz("AssetBundleLoader OnLoadFinish : " + this.path);
         //ab 加载完成
         AssetBundleCache abCache = new AssetBundleCache();
         abCache.path = path;
         abCache.finishLoadCallback = finishLoadCallback;
+        abCache.refCount = this.refCount;
+        abCache.assetBundle = abCreateReq.assetBundle;
         //abCache.ab = ab
         //finishLoadCallback?.Invoke(abCache);
 
@@ -52,6 +62,11 @@ public class AssetBundleLoader : BaseLoader
     {
         //判断是否是当前 ab 所依赖的 ab
         //是的话 deps 移除该路径 相当于完成了一个加载依赖
+        if (deps.Contains(path))
+        {
+            deps.Remove(path);
+        }
+
     }
 
     public override bool IsPrepareFinish()
@@ -62,5 +77,10 @@ public class AssetBundleLoader : BaseLoader
     public override bool IsLoadFinish()
     {
         return abCreateReq.progress >= 1;
+    }
+
+    string GetABLoadPath(string path)
+    {
+        return Const.AssetBundlePath + "/" + path;// + Const.ExtName;
     }
 }

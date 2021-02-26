@@ -43,6 +43,10 @@ public class Logx
 
     //-------------
     //Custom
+    public static void Logz(string obj)
+    {
+        Log("zxy", obj);
+    }
     public static void LogZxy(string flag2, object obj)
     {
         Log("zxy", flag2, obj);

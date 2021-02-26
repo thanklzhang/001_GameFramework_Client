@@ -11,56 +11,68 @@ using LitJson;
 
 public class LoadTaskManager : Singleton<LoadTaskManager>
 {
-    public LoadTaskProcess assetLoadTask;
-    public LoadTaskProcess abLoadTask;
+    public BaseLoadProcess assetLoadTask;
+    public BaseLoadProcess abLoadTask;
 
     public void Init()
     {
-        assetLoadTask.SetFinishCallback(OnLoadABFinish);
-        abLoadTask.SetFinishCallback(OnLoadAssetFinish);
+        abLoadTask = new AssetBundleLoadProcess();
+        assetLoadTask = new AssetBundleLoadProcess();
+
+        abLoadTask.Init();
+        assetLoadTask.Init();
+
+        //监听加载流程中的加载情况
+        abLoadTask.SetFinishCallback(OnLoadABFinish);
+        assetLoadTask.SetFinishCallback(OnLoadAssetFinish);
 
     }
 
     public void Update(float timeDelta)
     {
-        assetLoadTask.Update(timeDelta);
         abLoadTask.Update(timeDelta);
-    }
-
-    public void OnLoadABFinish(BaseLoader loader)
-    {
-        AssetBundleLoader abLoader = (AssetBundleLoader)loader;
-
-        AssetBundleCache cache = new AssetBundleCache();
-        cache.path = abLoader.path;
-        cache.assetBundle = abLoader.assetBundle;
-        cache.finishLoadCallback = abLoader.finishLoadCallback;
-
-        EventManager.Broadcast((int)GameEvent.LoadABTaskFinish, cache);
-    }
-    public void OnLoadAssetFinish(BaseLoader loader)
-    {
-
-        AssetLoader assetLoader = (AssetLoader)loader;
-
-        AssetCache cache = new AssetCache();
-        cache.path = assetLoader.path;
-        cache.asset = assetLoader.asset;
-        cache.finishLoadCallback = assetLoader.finishLoadCallback;
-
-        EventManager.Broadcast((int)GameEvent.LoadAssetTaskFinish, cache);
-    }
-
-
-    public void AddAssetLoader(BaseLoader loader)
-    {
-        assetLoadTask.AddLoader(loader);
+        assetLoadTask.Update(timeDelta);
     }
 
     public void AddAssetBundleLoader(BaseLoader loader)
     {
         abLoadTask.AddLoader(loader);
     }
+
+    public void AddAssetLoader(BaseLoader loader)
+    {
+        assetLoadTask.AddLoader(loader);
+    }
+
+    //加载流程中有 ab 加载完毕
+    public void OnLoadABFinish(BaseLoader loader)
+    {
+        //AssetBundleLoader abLoader = (AssetBundleLoader)loader;
+
+        //AssetBundleCache cache = new AssetBundleCache();
+        //cache.path = abLoader.path;
+        //cache.assetBundle = abLoader.assetBundle;
+        //cache.finishLoadCallback = abLoader.finishLoadCallback;
+        //cache.refCount = abLoader.refCount;
+
+        //EventManager.Broadcast((int)GameEvent.LoadABTaskFinish, cache);
+    }
+
+    //加载流程中有 asset 加载完毕
+    public void OnLoadAssetFinish(BaseLoader loader)
+    {
+
+        //AssetLoader assetLoader = (AssetLoader)loader;
+
+        //AssetCache cache = new AssetCache();
+        //cache.path = assetLoader.path;
+        //cache.asset = assetLoader.asset;
+        //cache.finishLoadCallback = assetLoader.finishLoadCallback;
+
+        //EventManager.Broadcast((int)GameEvent.LoadAssetTaskFinish, cache);
+    }
+
+
 
 
 }

@@ -16,13 +16,39 @@ public class AssetLoader : BaseLoader
 
     public UnityEngine.Object asset;
 
+    public AssetBundleRequest assetRequest;
+
+    string abPath;
+
     //加载中相同 ab 的请求引用数量
     public int refCount;
+
+    AssetBundle assetBundle;
 
     public override void OnStart()
     {
         //加载 AB 
         refCount += 1;
+
+        abPath = AssetManager.Instance.GetABPathByAssetPath(path);
+    }
+
+    public override void OnPrepareFinish()
+    {
+        var assetBundleCache = AssetBundleManager.Instance.GetCacheByPath(abPath);
+        if (null == assetBundleCache)
+        {
+            Logx.LogErrorZxy("AssetLoader", "the assetBundleCache is null : " + abPath);
+            return;
+        }
+
+        if (null == assetBundleCache.assetBundle)
+        {
+            Logx.LogErrorZxy("AssetLoader", "the assetBundleCache.assetBundle is null : " + abPath);
+            return;
+        }
+        var ab = assetBundleCache.assetBundle;
+        assetRequest = ab.LoadAssetAsync(path);
     }
 
     internal override void OnLoadFinish()
@@ -31,10 +57,30 @@ public class AssetLoader : BaseLoader
         AssetCache assetCache = new AssetCache();
         assetCache.path = path;
         assetCache.finishLoadCallback = finishLoadCallback;
+        assetCache.refCount = refCount;
+        assetCache.asset = assetRequest.asset;
+
+        
         //abCache.ab = ab
         //finishLoadCallback?.Invoke(abCache);
 
         AssetManager.Instance.OnLoadAssetFinish(assetCache);
+
+    }
+
+    public override bool IsPrepareFinish()
+    {
+        var assetBundle = AssetBundleManager.Instance.GetCacheByPath(abPath);
+        return assetBundle != null;
+    }
+
+    public override bool IsLoadFinish()
+    {
+        if (null == assetRequest)
+        {
+            return false;
+        }
+        return assetRequest.progress >= 1;
 
     }
 }

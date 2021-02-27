@@ -43,35 +43,23 @@ public class GameMain : MonoBehaviour
         AssetManager.Instance.Init();
 
         LoadTaskManager.Instance.Init();
-        //// role 
-        //var rolePath = "001_guiwuzhe";//Models/Role/
-        //AssetResManager.Instance.Load(rolePath,(assetInfo)=>
+
+
+        //var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
+        //var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
+        //AssetBundleManager.Instance.Load(abPath, (assetCache) =>
         //{
-        //    var obj = assetInfo.assetObj as GameObject;
-        //    GameObject.Instantiate(obj);
-
-        //},false);
-
-
-        //AssetManager.Instance.Load("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab", (assetReq) =>
-        // {
-        //     Logx.LogZxy("GameMain","load finish");
-        //     var obj = assetReq.assetObj as GameObject;
-        //     GameObject.Instantiate(obj, uiRoot);
-
-        //     AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
-
-        // }, false);
+        //    Logx.Logz("gameMain : load finish");
+        //    var prefab = assetCache.assetBundle.LoadAsset<GameObject>(assetPath);
+        //    var newObj = GameObject.Instantiate(prefab, uiRoot);
+        //}, false);
 
         var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
         var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
-        AssetBundleManager.Instance.Load(abPath, (assetCache) =>
+        AssetManager.Instance.Load(assetPath, (assetCache) =>
         {
-            Logx.Logz("gameMain : load finish");
-            var prefab = assetCache.assetBundle.LoadAsset<GameObject>(assetPath);
-            var newObj = GameObject.Instantiate(prefab, uiRoot);
+            var newObj = GameObject.Instantiate(assetCache, uiRoot);
         }, false);
-
 
         //StartCoroutine(dd());
     }

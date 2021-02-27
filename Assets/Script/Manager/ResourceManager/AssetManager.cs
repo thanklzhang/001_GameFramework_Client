@@ -15,6 +15,7 @@ public class AssetCache
     public string path;
     internal Action<AssetCache> finishLoadCallback;
     internal UnityEngine.Object asset;
+    internal int refCount;
 }
 
 public class AssetManager : Singleton<AssetManager>
@@ -31,12 +32,21 @@ public class AssetManager : Singleton<AssetManager>
         //读取 asset 和 ab 对应关系表
         var assetFileStr = File.ReadAllText(Const.AppStreamingAssetPath + "/" + "AssetToAbFileData.json");
         this.assetToAbDic = JsonMapper.ToObject<Dictionary<string, string>>(assetFileStr);
-        
-        EventManager.AddListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
-        
+
+        //EventManager.AddListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
+
     }
 
-   
+
+    public string GetABPathByAssetPath(string assetPath)
+    {
+        string abPath = "";
+        if (!assetToAbDic.TryGetValue(assetPath, out abPath))
+        {
+            Logx.LogWarningZxy("AssetManager", "the abPath is not found by assetPath : " + assetPath);
+        }
+        return abPath;
+    }
 
     public void Load(string assetPath, Action<UnityEngine.Object> finishCallback, bool isSync)
     {
@@ -59,60 +69,62 @@ public class AssetManager : Singleton<AssetManager>
         }
 
         //判断缓存
-        if (IsExistCache())
+        AssetCache assetCache = null;
+        if (assetCacheDic.TryGetValue(assetPath, out assetCache))
         {
-            //如果有缓存 则直接拿走
+            assetCache.refCount += 1;
+            finishCallback?.Invoke(assetCache.asset);
         }
         else
         {
-            if (IsLoading())
+            var abPath = this.assetToAbDic[assetPath];
+            AssetBundleManager.Instance.Load(abPath, (abCache) =>
             {
-                //在加载中的话 则附加 callback 等待加载完成触发
-            }
-            else
-            {
-                //哪都没有 开始加载 AB 
-                LoadAssetBundle("", null, false);
-            }
+                //ab 加载完 需要检测下 asset 是否已经有了 因为有可能已经在别处先加载完
+                this.LoadAssetBundleFinish(abCache, assetPath, finishCallback);
+            }, false);
+
         }
 
     }
 
-    public bool IsExistCache()
+    public void LoadAssetBundleFinish(AssetBundleCache abCache, string assetPath, Action<UnityEngine.Object> finishCallback)
     {
-        return false;
+        AssetCache assetCache = null;
+        if (assetCacheDic.TryGetValue(assetPath, out assetCache))
+        {
+            finishCallback?.Invoke(assetCache.asset);
+        }
+        else
+        {
+            var loader = new AssetLoader();
+            loader.path = assetPath;
+            loader.finishLoadCallback = (backAssetCache) =>
+            {
+                //触发业务层回调
+                finishCallback?.Invoke(backAssetCache.asset);
+            };
+            LoadTaskManager.Instance.StartAssetLoader(loader);
+        }
     }
-
-    public bool IsLoading()
-    {
-        return false;
-    }
-
-    public void LoadAssetBundle(string path, Action<AssetBundleCache> finishCallback, bool isSync)
-    {
-
-        //调用 AssetBundle 加载
-        AssetBundleManager.Instance.Load(path, finishCallback, isSync);
-    }
-
     
-    //public void OnLoadAssetFinish()
-    //{
-    //    //加载完成 放到缓存中
-
-    //    //触发业务回调
-    //}
-
     internal void OnLoadAssetFinish(AssetCache assetCache)
     {
         //加载完成 放到缓存中
+        AssetCache currAssetCache = null;
+        if (!assetCacheDic.TryGetValue(assetCache.path, out currAssetCache))
+        {
+            assetCacheDic.Add(assetCache.path, assetCache);
+            currAssetCache = assetCacheDic[assetCache.path];
+        }
 
-        //触发业务回调
+        var callback = assetCache.finishLoadCallback;
+        callback?.Invoke(currAssetCache);
     }
 
     void Release()
     {
-        EventManager.RemoveListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
+        //EventManager.RemoveListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
     }
 
 

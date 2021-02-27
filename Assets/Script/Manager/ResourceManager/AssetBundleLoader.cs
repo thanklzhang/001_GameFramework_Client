@@ -25,7 +25,7 @@ public class AssetBundleLoader : BaseLoader
 
     public override void OnStart()
     {
-        Logx.Logz("AssetBundleLoader OnStart : " + this.path);
+        //Logx.Logz("AssetBundleLoader OnStart : " + this.path);
         refCount += 1;
         //填充 deps
         //这里应该抽出来
@@ -35,7 +35,7 @@ public class AssetBundleLoader : BaseLoader
 
     public override void OnPrepareFinish()
     {
-        Logx.Logz("AssetBundleLoader OnPrepareFinish : " + this.path);
+        //Logx.Logz("AssetBundleLoader OnPrepareFinish : " + this.path);
         //准备好了 开始加载
         var resultPath = GetABLoadPath(this.path);
         abCreateReq = AssetBundle.LoadFromFileAsync(resultPath);
@@ -44,7 +44,7 @@ public class AssetBundleLoader : BaseLoader
     internal override void OnLoadFinish()
     {
         
-        Logx.Logz("AssetBundleLoader OnLoadFinish : " + this.path);
+        //Logx.Logz("AssetBundleLoader OnLoadFinish : " + this.path);
         //ab 加载完成
         AssetBundleCache abCache = new AssetBundleCache();
         abCache.path = path;
@@ -76,6 +76,11 @@ public class AssetBundleLoader : BaseLoader
 
     public override bool IsLoadFinish()
     {
+        if (null == abCreateReq)
+        {
+            return false;
+
+        }
         return abCreateReq.progress >= 1;
     }
 

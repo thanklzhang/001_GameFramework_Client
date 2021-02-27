@@ -29,7 +29,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         var manifestAB = AssetBundle.LoadFromFile(Const.AssetBundlePath + "/" + "StreamingAssets");
         manifest = manifestAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
 
-        EventManager.AddListener<AssetBundleCache>((int)GameEvent.LoadABTaskFinish, this.OnLoadFinish);
+        //EventManager.AddListener<AssetBundleCache>((int)GameEvent.LoadABTaskFinish, this.OnLoadFinish);
     }
 
     public string[] GetDependPaths(string path)
@@ -37,6 +37,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         var deps = manifest.GetDirectDependencies(path);
         return deps;
     }
+
 
     public void Load(string path, Action<AssetBundleCache> finishCallback, bool isSync)
     {
@@ -59,16 +60,15 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         var abCache = GetCacheByPath(path);
         if (abCache != null)
         {
-            Logx.Logz("LoadAsync : have ab cache");
+            //Logx.Logz("LoadAsync : have ab cache");
             //判断是否在 ab 缓存中 
             //有的话直接拿走
-            //this.OnLoadFinish(abCache);
             abCache.refCount += 1;
             finishCallback?.Invoke(abCache);
         }
         else
         {
-            Logx.Logz("LoadAsync : no ab cache");
+            //Logx.Logz("LoadAsync : no ab cache");
             //可能没在缓存中 可能正在加载中 也可能第一次加载
             LoadTrueAssetBundle(path, finishCallback);
         }
@@ -81,19 +81,14 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         abCacheDic.TryGetValue(path, out abCache);
         return abCache;
     }
-
-
-
+    
     public void LoadTrueAssetBundle(string path, Action<AssetBundleCache> finishCallback)
     {
 
         var loader = new AssetBundleLoader();
         loader.path = path;
         loader.finishLoadCallback = finishCallback;
-        //loader.refCount = 1;//加载的时候就已经开始引用了
-
-
-
+        
         //依赖
         var deps = GetDependPaths(path).ToList();
         for (int i = 0; i < deps.Count; i++)
@@ -103,7 +98,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         }
 
         //加载任务交给加载管理器去执行
-        LoadTaskManager.Instance.AddAssetBundleLoader(loader);
+        LoadTaskManager.Instance.StartAssetBundleLoader(loader);
         Logx.Logz("AssetBundleManager : LoadTrueAssetBundle : start LoadTrueAssetBundle : " + path);
 
     }
@@ -129,6 +124,6 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
     public void Release()
     {
-        EventManager.RemoveListener<AssetBundleCache>((int)GameEvent.LoadABTaskFinish, this.OnLoadFinish);
+        //EventManager.RemoveListener<AssetBundleCache>((int)GameEvent.LoadABTaskFinish, this.OnLoadFinish);
     }
 }

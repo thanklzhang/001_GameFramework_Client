@@ -17,7 +17,7 @@ public class LoadTaskManager : Singleton<LoadTaskManager>
     public void Init()
     {
         abLoadTask = new AssetBundleLoadProcess();
-        assetLoadTask = new AssetBundleLoadProcess();
+        assetLoadTask = new AssetLoadProcess();
 
         abLoadTask.Init();
         assetLoadTask.Init();
@@ -34,12 +34,12 @@ public class LoadTaskManager : Singleton<LoadTaskManager>
         assetLoadTask.Update(timeDelta);
     }
 
-    public void AddAssetBundleLoader(BaseLoader loader)
+    public void StartAssetBundleLoader(BaseLoader loader)
     {
         abLoadTask.AddLoader(loader);
     }
 
-    public void AddAssetLoader(BaseLoader loader)
+    public void StartAssetLoader(BaseLoader loader)
     {
         assetLoadTask.AddLoader(loader);
     }

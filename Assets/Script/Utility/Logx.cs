@@ -30,7 +30,7 @@ public class Logx
 
     public static void Log(string flag, string flag2, object obj)
     {
-        Debug.Log(Time.frameCount + flag + ":" + flag2 + ":" + obj);
+        Debug.Log(flag + ":" + flag2 + ":" + obj);
     }
     public static void LogWarning(string flag, string flag2, object obj)
     {

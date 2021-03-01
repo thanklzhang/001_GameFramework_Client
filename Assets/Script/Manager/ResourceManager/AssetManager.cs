@@ -15,7 +15,18 @@ public class AssetCache
     public string path;
     internal Action<AssetCache> finishLoadCallback;
     internal UnityEngine.Object asset;
-    internal int refCount;
+    private int refCount;
+
+    internal int RefCount
+    {
+        get => refCount;
+        set
+        {
+            Logx.Logz("asset : change ref : " + path + " : " + refCount + " -> " + value);
+            refCount = value;
+        }
+
+    }
 }
 
 public class AssetManager : Singleton<AssetManager>
@@ -72,7 +83,10 @@ public class AssetManager : Singleton<AssetManager>
         AssetCache assetCache = null;
         if (assetCacheDic.TryGetValue(assetPath, out assetCache))
         {
-            assetCache.refCount += 1;
+            assetCache.RefCount += 1;
+
+            AddAssetBundleReferenceByAssetPath(assetPath);
+            
             finishCallback?.Invoke(assetCache.asset);
         }
         else
@@ -88,12 +102,24 @@ public class AssetManager : Singleton<AssetManager>
 
     }
 
+    public void AddAssetBundleReferenceByAssetPath(string assetPath)
+    {
+        string abPath = "";
+        if (!assetToAbDic.TryGetValue(assetPath, out abPath))
+        {
+            Logx.LogWarningZxy("Asset", "AddAssetBundleReferenceByAssetPath : the abPath is not found by assetPath : " + assetPath);
+            return;
+        }
+        AssetBundleManager.Instance.AddAssetBundleReference(abPath);
+    }
+
     public void LoadAssetBundleFinish(AssetBundleCache abCache, string assetPath, Action<UnityEngine.Object> finishCallback)
     {
         AssetCache assetCache = null;
         if (assetCacheDic.TryGetValue(assetPath, out assetCache))
         {
             finishCallback?.Invoke(assetCache.asset);
+            assetCache.RefCount += 1;
         }
         else
         {
@@ -107,7 +133,7 @@ public class AssetManager : Singleton<AssetManager>
             LoadTaskManager.Instance.StartAssetLoader(loader);
         }
     }
-    
+
     internal void OnLoadAssetFinish(AssetCache assetCache)
     {
         //加载完成 放到缓存中
@@ -115,17 +141,67 @@ public class AssetManager : Singleton<AssetManager>
         if (!assetCacheDic.TryGetValue(assetCache.path, out currAssetCache))
         {
             assetCacheDic.Add(assetCache.path, assetCache);
+            //新的 cache
             currAssetCache = assetCacheDic[assetCache.path];
+        }
+        else
+        {
+            currAssetCache.RefCount += assetCache.RefCount;
         }
 
         var callback = assetCache.finishLoadCallback;
+        //会触发 LoadAssetBundleFinish 中的业务回调
         callback?.Invoke(currAssetCache);
     }
 
-    void Release()
+    //才用如下计数方式：
+    //asset 计算自己的 并会改变 ab 计数
+    //也就是说 多个 asset 的总量 等于 对应的 ab 计数
+    //实际上只有 ab 计数也可以 但是为了之后 资源分析 等 在 asset 层也做一个计数
+    public void Release(string assetPath)
     {
-        //EventManager.RemoveListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
+        AssetCache cache = null;
+        if (!assetCacheDic.TryGetValue(assetPath, out cache))
+        {
+            Logx.LogWarningZxy("AssetManager", "Release : the cache doesnt exist : " + assetPath);
+            return;
+        }
+
+        if (cache.RefCount <= 0)
+        {
+            Logx.LogWarningZxy("AssetManager", "Release : the refCount of cache is 0 : " + assetPath);
+            return;
+        }
+
+        cache.RefCount -= 1;
+        //if (0 == cache.RefCount)
+        //{
+        //    string abPath = "";
+        //    if (!assetToAbDic.TryGetValue(assetPath, out abPath))
+        //    {
+        //        Logx.LogWarningZxy("AssetManager", "Release : the abPath is not found by assetPath : " + assetPath);
+        //        return;
+        //    }
+
+        //    AssetBundleManager.Instance.ReduceAssetBundleReference(abPath);
+        //}
+
+        string abPath = "";
+        if (!assetToAbDic.TryGetValue(assetPath, out abPath))
+        {
+            Logx.LogWarningZxy("AssetManager", "Release : the abPath is not found by assetPath : " + assetPath);
+            return;
+        }
+
+        AssetBundleManager.Instance.ReduceAssetBundleReference(abPath);
+
+
     }
+
+    //void Release()
+    //{
+    //    //EventManager.RemoveListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
+    //}
 
 
 }

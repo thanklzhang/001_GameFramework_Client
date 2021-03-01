@@ -49,7 +49,7 @@ public class AssetBundleLoader : BaseLoader
         AssetBundleCache abCache = new AssetBundleCache();
         abCache.path = path;
         abCache.finishLoadCallback = finishLoadCallback;
-        abCache.refCount = this.refCount;
+        abCache.RefCount = this.refCount;
         abCache.assetBundle = abCreateReq.assetBundle;
         //abCache.ab = ab
         //finishLoadCallback?.Invoke(abCache);

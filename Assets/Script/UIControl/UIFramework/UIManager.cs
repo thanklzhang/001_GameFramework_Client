@@ -15,7 +15,7 @@ public enum UIType
     Normal,//最底层的ui
     Title,//标题栏
     Pop,//弹窗的ui
-    Top//不受限制的弹窗ui
+    //Top//不受限制的弹窗ui
 }
 
 public class UIName
@@ -35,6 +35,11 @@ public class UIName
 
 public class UIManager : Singleton<UIManager>
 {
+
+    /// <summary>
+    /// ////// will delete
+    /// </summary>
+    /// <returns></returns>
     public static List<string> GetAllNameList()
     {
         return new List<string>()
@@ -47,7 +52,9 @@ public class UIManager : Singleton<UIManager>
         UIName.PopCUI,
     };
     }
-
+    /// <summary>
+    /// ///////////
+    /// </summary>
     public List<BaseUI> uiCacheList = new List<BaseUI>();
     private Transform uiRoot;
     public Transform normalRoot;
@@ -94,7 +101,7 @@ public class UIManager : Singleton<UIManager>
 
             newUI.Init();
             newUI.StartLoad();
-            //加载 UI 预设 这里采取先加载下一个 UI 然后再关闭上一个 UI 的方案
+            //加载 UI 预设 这里之后会采取先加载下一个 UI 然后再关闭上一个 UI 的方案
             //这样能保证不会有闪背景的情况出现
             LoadUI(newUI.resPath, (uiGameObject) =>
             {
@@ -116,9 +123,15 @@ public class UIManager : Singleton<UIManager>
 
     public void LoadUI(string path, Action<GameObject> action)
     {
-        var gameObject = Resources.Load<GameObject>(path);
-        GameObject obj = GameObject.Instantiate(gameObject);
-        action?.Invoke(obj);
+        AssetManager.Instance.Load(path, (asset) =>
+         {
+             var prefab = asset as GameObject;
+             var obj = GameObject.Instantiate(prefab);
+             action?.Invoke(obj);
+         }, false);
+        //var gameObject = Resources.Load<GameObject>(path);
+        //GameObject obj = GameObject.Instantiate(gameObject);
+        //action?.Invoke(obj);
     }
 
     void ActiveCacheUI(BaseUI ui)

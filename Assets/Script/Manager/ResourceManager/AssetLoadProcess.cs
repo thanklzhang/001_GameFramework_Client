@@ -22,6 +22,7 @@ public class AssetLoadProcess : BaseLoadProcess
         AssetLoader currAssetLoader = null;
         if (!assetLoaderDic.TryGetValue(assetLoader.path, out currAssetLoader))
         {
+            assetLoaderDic.Add(assetLoader.path, assetLoader);
             Logx.Logz("AssetLoadProcess AddLoader : no loader cache and start a new loader : " + assetLoader.path);
             base.AddLoader(loader);
         }
@@ -44,7 +45,8 @@ public class AssetLoadProcess : BaseLoadProcess
         //    var prepareLoader = (AssetLoader)this.preparingList[i];
         //    prepareLoader.OnLoadOtherABFinish(assetBundleLoader.path);
         //}
-        
+
+        assetLoaderDic.Remove(assetLoader.path);
         base.OnLoadFinish(loader);
     }
 }

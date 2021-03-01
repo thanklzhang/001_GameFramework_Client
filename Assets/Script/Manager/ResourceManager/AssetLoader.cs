@@ -57,7 +57,7 @@ public class AssetLoader : BaseLoader
         AssetCache assetCache = new AssetCache();
         assetCache.path = path;
         assetCache.finishLoadCallback = finishLoadCallback;
-        assetCache.refCount = refCount;
+        assetCache.RefCount = refCount;
         assetCache.asset = assetRequest.asset;
 
         

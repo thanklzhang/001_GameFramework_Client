@@ -11,7 +11,7 @@ public class EquipmentListUI : BaseUI
     protected override void OnInit()
     {
         this.name = UIName.EquipmentListUI;
-        this.resPath = UIName.EquipmentListUI;
+        this.resPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
         this.type = UIType.Normal;
     }
 

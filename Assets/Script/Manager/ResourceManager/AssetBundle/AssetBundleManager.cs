@@ -13,7 +13,18 @@ public class AssetBundleCache
     public string path;
     internal Action<AssetBundleCache> finishLoadCallback;
     internal AssetBundle assetBundle;
-    public int refCount;
+    private int refCount;
+
+    public int RefCount
+    {
+        get => refCount;
+        set
+        {
+            Logx.Logz("ab : refCount : " + path + " : " + refCount + " -> " + value);
+            refCount = value;
+        }
+
+    }
 }
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
@@ -63,7 +74,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             //Logx.Logz("LoadAsync : have ab cache");
             //判断是否在 ab 缓存中 
             //有的话直接拿走
-            abCache.refCount += 1;
+            abCache.RefCount += 1;
             finishCallback?.Invoke(abCache);
         }
         else
@@ -81,14 +92,14 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         abCacheDic.TryGetValue(path, out abCache);
         return abCache;
     }
-    
+
     public void LoadTrueAssetBundle(string path, Action<AssetBundleCache> finishCallback)
     {
 
         var loader = new AssetBundleLoader();
         loader.path = path;
         loader.finishLoadCallback = finishCallback;
-        
+
         //依赖
         var deps = GetDependPaths(path).ToList();
         for (int i = 0; i < deps.Count; i++)
@@ -98,8 +109,9 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         }
 
         //加载任务交给加载管理器去执行
-        LoadTaskManager.Instance.StartAssetBundleLoader(loader);
         Logx.Logz("AssetBundleManager : LoadTrueAssetBundle : start LoadTrueAssetBundle : " + path);
+        LoadTaskManager.Instance.StartAssetBundleLoader(loader);
+
 
     }
 
@@ -114,16 +126,67 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             abCacheDic.Add(ab.path, ab);
             abCache = abCacheDic[ab.path];
         }
-
-        abCache.refCount += ab.refCount;
+        else
+        {
+            abCache.RefCount += ab.RefCount;
+        }
 
         //这个回调是加载开始的时候的时候传的回调 可以认为是相对的业务层传来的回调
-        var finishCallback = abCache.finishLoadCallback;
+        var finishCallback = ab.finishLoadCallback;
         finishCallback?.Invoke(abCache);
     }
 
     public void Release()
     {
         //EventManager.RemoveListener<AssetBundleCache>((int)GameEvent.LoadABTaskFinish, this.OnLoadFinish);
+    }
+
+    public void AddAssetBundleReference(string abPath)
+    {
+        AssetBundleCache abCache = null;
+        if (abCacheDic.TryGetValue(abPath, out abCache))
+        {
+            abCache.RefCount += 1;
+        }
+        else
+        {
+            Logx.Logz("the abPath is not found : " + abPath);
+        }
+    }
+
+    internal void ReduceAssetBundleReference(string abPath)
+    {
+        AssetBundleCache abCache = null;
+        if (abCacheDic.TryGetValue(abPath, out abCache))
+        {
+            if (abCache.RefCount <= 0)
+            {
+                Logx.LogWarningZxy("AB", "the refCount of abCache is 0 : " + abPath);
+                return;
+            }
+            abCache.RefCount -= 1;
+        }
+        else
+        {
+            Logx.Logz("the abPath is not found : " + abPath);
+        }
+
+    }
+
+    public void TrueReleaseAB(string abPath)
+    {
+        AssetBundleCache abCache = null;
+        if (abCacheDic.TryGetValue(abPath, out abCache))
+        {
+            if (abCache.RefCount > 0)
+            {
+                Logx.LogWarningZxy("AB", "the refCount of abCache is using(refCount > 0) : " + abPath);
+                return;
+            }
+
+            var ab = abCache.assetBundle;
+            ab.Unload(true);
+            this.abCacheDic.Remove(abCache.path);
+        }
     }
 }

@@ -37,29 +37,29 @@ public class GameMain : MonoBehaviour
         }
 
         UIManager.Instance.Init(uiRoot);
-
-
+        
         AssetBundleManager.Instance.Init();
         AssetManager.Instance.Init();
-
         LoadTaskManager.Instance.Init();
 
 
+        UIManager.Instance.OpenUI(UIName.EquipmentListUI);
+
         //var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
         //var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
-        //AssetBundleManager.Instance.Load(abPath, (assetCache) =>
+        //AssetManager.Instance.Load(assetPath, (assetCache) =>
         //{
-        //    Logx.Logz("gameMain : load finish");
-        //    var prefab = assetCache.assetBundle.LoadAsset<GameObject>(assetPath);
-        //    var newObj = GameObject.Instantiate(prefab, uiRoot);
+        //    var newObj = GameObject.Instantiate(assetCache, uiRoot);
+        //    //AssetManager.Instance.Release(assetPath);
+
         //}, false);
 
-        var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
-        var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
-        AssetManager.Instance.Load(assetPath, (assetCache) =>
-        {
-            var newObj = GameObject.Instantiate(assetCache, uiRoot);
-        }, false);
+        //AssetManager.Instance.Load(assetPath, (assetCache) =>
+        //{
+        //    var newObj = GameObject.Instantiate(assetCache, uiRoot);
+        //    //AssetManager.Instance.Release(assetPath);
+
+        //}, false);
 
         //StartCoroutine(dd());
     }
@@ -67,7 +67,13 @@ public class GameMain : MonoBehaviour
     IEnumerator dd()
     {
         yield return new WaitForSeconds(1);
-        //AssetManager.Instance.Release("Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab");
+        var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
+        var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
+        AssetManager.Instance.Release(assetPath);
+        AssetManager.Instance.Release(assetPath);
+
+        //这里可以认为是 切场景的时候 所有引用为 0 的都会被释放掉 或者没隔多长时间的策略也可以
+        AssetBundleManager.Instance.TrueReleaseAB(abPath);
 
     }
 

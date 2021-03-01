@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3847963944
+CRC: 818160678
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 703a7cccc45ed1f065ea1ac22f9cdaba
+    Hash: bdd2be5aed1b5df6fe9e2e3983eb3ad4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 65119f005d5cebd443414130bd7671e5
@@ -34,7 +34,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab
-Dependencies:
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/aui.ab
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/bui.ab
+- Assets/BuildRes/Prefabs/UI/TitleUI.prefab
+Dependencies: []

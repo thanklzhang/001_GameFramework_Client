@@ -70,6 +70,11 @@ public abstract class BaseUI
     public string resPath;
     public UIType type;
 
+    //event
+    public Action loadFinishCallback;
+    public Action openCallback;
+    public Action activeCallback;
+
     internal void Init()
     {
         state = UIState.Init;
@@ -89,12 +94,14 @@ public abstract class BaseUI
         this.transform = this.gameObject.transform;
 
         this.OnLoadFinish();
+        loadFinishCallback?.Invoke();
     }
 
     public void Open()
     {
         state = UIState.Open;
         this.OnOpen();
+        openCallback?.Invoke();
     }
 
     public void Active()
@@ -105,6 +112,7 @@ public abstract class BaseUI
         
         this.OnActive();
 
+        activeCallback?.Invoke();
     }
 
     public void Refresh()

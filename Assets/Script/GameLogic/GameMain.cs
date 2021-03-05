@@ -36,14 +36,20 @@ public class GameMain : MonoBehaviour
             return;
         }
 
+        DataManager.Instance.Init();
+        NetHandlerManager.Instance.Init();
+
         UIManager.Instance.Init(uiRoot);
-        
+
         AssetBundleManager.Instance.Init();
         AssetManager.Instance.Init();
         LoadTaskManager.Instance.Init();
+        CtrlManager.Instance.Init();
 
 
-        UIManager.Instance.OpenUI(UIName.EquipmentListUI);
+        GameFunction.Instance.EnterHeroList();
+
+        //UIManager.Instance.OpenUI(UIName.EquipmentListUI);
 
         //var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
         //var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 322886674
+CRC: 898731398
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -22,9 +22,8 @@ AssetBundleManifest:
         Dependency_0: assets/buildres/prefabs/ui/aui.ab
         Dependency_1: assets/buildres/prefabs/ui/bui.ab
     Info_5:
-      Name: assets/buildres/prefabs/ui/equipmentlistui2.ab
-      Dependencies:
-        Dependency_0: assets/buildres/prefabs/ui/aui.ab
+      Name: assets/buildres/prefabs/ui/herolistui.ab
+      Dependencies: {}
     Info_6:
       Name: assets/buildres/prefabs/ui/titleui.ab
       Dependencies: {}

@@ -20,6 +20,7 @@ public class AssetBundleCache
         get => refCount;
         set
         {
+            Logx.Logz("Change Parent Node Refcount !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             Logx.Logz("ab : refCount : " + path + " : " + refCount + " -> " + value);
             refCount = value;
         }

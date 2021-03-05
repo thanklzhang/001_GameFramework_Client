@@ -71,8 +71,9 @@ public class UIManager : Singleton<UIManager>
         popRoot = this.uiRoot.Find("PopUIRoot");
     }
 
-    public void OpenUI(string uiName)
+    public BaseUI OpenUI(string uiName,Action loadFinishCallback = null)
     {
+        BaseUI currUI = null;
         //先寻找当前所有缓存的界面中 是否有将要打开的ui
         var findUI = FindCacheUI(uiName);
 
@@ -93,6 +94,7 @@ public class UIManager : Singleton<UIManager>
             AppendCacheUI(findUI);
             ActiveCacheUI(findUI);
 
+            currUI = findUI;
         }
         else
         {
@@ -117,8 +119,13 @@ public class UIManager : Singleton<UIManager>
                 {
                     SetNewPopUI(newUI, uiGameObject);
                 }
+
+                loadFinishCallback?.Invoke();
             });
+
+            currUI = newUI;
         }
+        return currUI;
     }
 
     public void LoadUI(string path, Action<GameObject> action)

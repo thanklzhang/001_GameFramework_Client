@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3715994653
+CRC: 4213206797
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0a54d414e3977532df6ebc92d063d6d7
+    Hash: 60c6af1896ca10e92a9af2891ff231d2
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 65119f005d5cebd443414130bd7671e5
+    Hash: 18bc05cddac8858101896420c0707424
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -23,6 +23,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -34,6 +36,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildRes/Prefabs/UI/EquipmentListUI2.prefab
-Dependencies:
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/aui.ab
+- Assets/BuildRes/Prefabs/UI/HeroListUI.prefab
+Dependencies: []

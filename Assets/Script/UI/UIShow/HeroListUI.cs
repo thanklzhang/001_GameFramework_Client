@@ -9,6 +9,10 @@ public class HeroListUI : NormalUI
     Transform heroRoot;
     GameObject heroObjPrefab;
     List<HeroShowItem> heroShowItems;
+   
+    public Action<int> onClickUpdateHeroBtnEvent;
+    public Action<int> onClickEnterHeroInfoBtnEvent;
+
     protected override void OnInit()
     {
         this.name = UIName.HeroListUI;
@@ -22,60 +26,46 @@ public class HeroListUI : NormalUI
         heroRoot = this.transform.Find("root");
         heroObjPrefab = this.transform.Find("root/HeroCard").gameObject;
         heroObjPrefab.SetActive(false);
+        
     }
 
     protected override void OnOpen()
     {
-        //var dataList = new List<Hero>();
-        //heroShowItems = new List<HeroShowItem>();
-        //for (int i = 0; i < dataList.Count; i++)
-        //{
-        //    var obj = GameObject.Instantiate(heroObjPrefab, heroRoot);
-        //    HeroShowItem showItem = new HeroShowItem();
-        //    showItem.Init(obj);
-        //    heroShowItems.Add(showItem);
-        //}
 
     }
 
     protected override void OnActive()
     {
-        //var dataList = new List<Hero>();
-        //for (int i = 0; i < dataList.Count; i++)
-        //{
-        //    //这里要判断是否多了或者少了进行显隐或者创建
-        //    HeroShowItem showItem = heroShowItems[i];
-        //    Hero heroData = dataList[i];
-        //    showItem.Refresh(heroData);
-        //}
+
     }
-
-    internal void CreateHeroList(List<Hero> heroDataList)
+    //提供给外部的接口--------------------------------
+    public void CreateHeroList(List<Hero> heroDataList)
     {
-
         heroShowItems = new List<HeroShowItem>();
         for (int i = 0; i < heroDataList.Count; i++)
         {
             var obj = GameObject.Instantiate(heroObjPrefab, heroRoot);
             HeroShowItem showItem = new HeroShowItem();
-            showItem.Init(obj);
+            showItem.Init(obj, this);
             showItem.Refresh(heroDataList[i]);
             showItem.Show();
             heroShowItems.Add(showItem);
         }
     }
 
-    internal void RefreshLevelText(int level)
+    public void RefreshLevelData(int heroId, int level)
     {
-
+        var hero = heroShowItems.Find((dataObj) =>
+        {
+            return dataObj.heroData.id == heroId;
+        });
+        hero.SetLevelText(level);
     }
-
+    //----------------------------------------------------
     protected override void OnClose()
     {
 
     }
-
-
 
 }
 
@@ -93,14 +83,23 @@ public class HeroShowItem
 
     public Text idText;
     public Text levelText;
+    Button enterInfoBtn;
+    public HeroListUI parent;
 
-    internal void Init(GameObject obj)
+    internal void Init(GameObject obj, HeroListUI parent)
     {
+        this.parent = parent;
+
         this.gameObject = obj;
         this.transform = this.gameObject.transform;
 
         this.idText = this.transform.Find("id").GetComponent<Text>();
         this.levelText = this.transform.Find("level").GetComponent<Text>();
+        enterInfoBtn = this.transform.Find("enterInfoBtn").GetComponent<Button>();
+        this.updateBtn = this.transform.Find("upgradeBtn").GetComponent<Button>();
+        this.updateBtn.onClick.AddListener(OnClickUpdateBtn);
+        this.enterInfoBtn.onClick.AddListener(OnClickEnterHeroInfoBtn);
+
     }
 
     internal void Refresh(Hero heroData)
@@ -111,9 +110,21 @@ public class HeroShowItem
         this.levelText.text = "Lv." + this.heroData.level;
     }
 
+    public void SetLevelText(int level)
+    {
+        this.levelText.text = "" + level;
+    }
+
+
+    private void OnClickEnterHeroInfoBtn()
+    {
+        this.parent.onClickEnterHeroInfoBtnEvent?.Invoke(this.heroData.id);
+    }
+
     public void OnClickUpdateBtn()
     {
         //升级
+        this.parent.onClickUpdateHeroBtnEvent?.Invoke(this.heroData.id);
     }
 
     internal void Show()

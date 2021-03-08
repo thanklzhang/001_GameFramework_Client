@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 898731398
+CRC: 3254575887
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -22,23 +22,26 @@ AssetBundleManifest:
         Dependency_0: assets/buildres/prefabs/ui/aui.ab
         Dependency_1: assets/buildres/prefabs/ui/bui.ab
     Info_5:
-      Name: assets/buildres/prefabs/ui/herolistui.ab
+      Name: assets/buildres/prefabs/ui/heroinfoui.ab
       Dependencies: {}
     Info_6:
-      Name: assets/buildres/prefabs/ui/titleui.ab
+      Name: assets/buildres/prefabs/ui/herolistui.ab
       Dependencies: {}
     Info_7:
-      Name: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
+      Name: assets/buildres/prefabs/ui/titleui.ab
       Dependencies: {}
     Info_8:
-      Name: assets/sourceres/models/role/jing_ling_nan_001_ty.ab
+      Name: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
       Dependencies: {}
     Info_9:
-      Name: assets/sourceres/models/role/jing_ling_zhu_jian_zhu_001.ab
+      Name: assets/sourceres/models/role/jing_ling_nan_001_ty.ab
       Dependencies: {}
     Info_10:
-      Name: assets/sourceres/models/role/jlxb_yc_001_ty.ab
+      Name: assets/sourceres/models/role/jing_ling_zhu_jian_zhu_001.ab
       Dependencies: {}
     Info_11:
+      Name: assets/sourceres/models/role/jlxb_yc_001_ty.ab
+      Dependencies: {}
+    Info_12:
       Name: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
       Dependencies: {}

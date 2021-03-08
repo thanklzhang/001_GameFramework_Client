@@ -21,6 +21,7 @@ public enum UIType
 public class UIName
 {
     public const string HeroListUI = "HeroListUI";
+    public const string HeroInfoUI = "HeroInfoUI";
     public const string ItemListUI = "ItemListUI";
     public const string EquipmentListUI = "EquipmentListUI";
 

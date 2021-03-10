@@ -25,11 +25,12 @@ public class UIName
     public const string ItemListUI = "ItemListUI";
     public const string EquipmentListUI = "EquipmentListUI";
 
-    public const string TitleUI = "TitleUI";
+    //public const string TitleUI = "TitleUI";
 
     public const string PopAUI = "PopAUI";
     public const string PopBUI = "PopBUI";
     public const string PopCUI = "PopCUI";
+    public const string TitleBarUI = "TitleBarUI";
 }
 
 
@@ -59,7 +60,7 @@ public class UIManager : Singleton<UIManager>
     public List<BaseUI> uiCacheList = new List<BaseUI>();
     private Transform uiRoot;
     public Transform normalRoot;
-    public Transform titleRoot;
+    //public Transform titleRoot;
     public Transform popRoot;
     public BaseUI currActiveNormalUI;
     public BaseUI titleUI;
@@ -68,7 +69,7 @@ public class UIManager : Singleton<UIManager>
         this.uiRoot = uiRoot;
 
         normalRoot = this.uiRoot.Find("NormalUIRoot");
-        titleRoot = this.uiRoot.Find("TitleUIRoot");
+        //titleRoot = this.uiRoot.Find("TitleUIRoot");
         popRoot = this.uiRoot.Find("PopUIRoot");
     }
 
@@ -90,7 +91,7 @@ public class UIManager : Singleton<UIManager>
                 //隐藏前面显示出来的所有 UI
                 InactiveAllUI();
                 currActiveNormalUI = findUI;
-                RefreshTitleUI();
+                //RefreshTitleUI();
             }
             AppendCacheUI(findUI);
             ActiveCacheUI(findUI);
@@ -172,8 +173,8 @@ public class UIManager : Singleton<UIManager>
         currActiveNormalUI = newUI;
         uiGameObject.transform.SetAsLastSibling();
         AppendCacheUI(newUI);
-        //注意顺序问题 这里是根据最上面 normal UI 配置信息来进行刷新标题栏的
-        RefreshTitleUI();
+        ////注意顺序问题 这里是根据最上面 normal UI 配置信息来进行刷新标题栏的
+        //RefreshTitleUI();
         newUI.Open();
         ActiveCacheUI(newUI);
 
@@ -189,29 +190,29 @@ public class UIManager : Singleton<UIManager>
     }
 
 
-    public void RefreshTitleUI()
-    {
-        if (null == titleUI)
-        {
-            string titleName = UIName.TitleUI.ToString();
-            var newUI = CreateUIClass(titleName);
-            newUI.Init();
-            newUI.StartLoad();
+    //public void RefreshTitleUI()
+    //{
+    //    if (null == titleUI)
+    //    {
+    //        string titleName = UIName.TitleUI.ToString();
+    //        var newUI = CreateUIClass(titleName);
+    //        newUI.Init();
+    //        newUI.StartLoad();
 
-            LoadUI(newUI.resPath, (uiGameObject) =>
-            {
-                titleUI = newUI;
-                uiGameObject.transform.SetParent(titleRoot, false);
-                newUI.LoadFinish(uiGameObject);
-                newUI.Open();
-                ActiveCacheUI(newUI);
-            });
-        }
-        else
-        {
-            ActiveCacheUI(titleUI);
-        }
-    }
+    //        LoadUI(newUI.resPath, (uiGameObject) =>
+    //        {
+    //            titleUI = newUI;
+    //            uiGameObject.transform.SetParent(titleRoot, false);
+    //            newUI.LoadFinish(uiGameObject);
+    //            newUI.Open();
+    //            ActiveCacheUI(newUI);
+    //        });
+    //    }
+    //    else
+    //    {
+    //        ActiveCacheUI(titleUI);
+    //    }
+    //}
 
 
 
@@ -219,12 +220,12 @@ public class UIManager : Singleton<UIManager>
     {
         if (ui != null)
         {
-            if (ui == titleUI)
-            {
-                //标题栏特殊关闭
-                CloseTitleUI();
-                return;
-            }
+            //if (ui == titleUI)
+            //{
+            //    //标题栏特殊关闭
+            //    CloseTitleUI();
+            //    return;
+            //}
 
             //正常流程 UI
             var name = ui.name;
@@ -278,7 +279,7 @@ public class UIManager : Singleton<UIManager>
                     if (currUI.type == UIType.Normal)
                     {
                         currActiveNormalUI = currUI;
-                        RefreshTitleUI();
+                        //RefreshTitleUI();
                         break;
                     }
                 }
@@ -292,13 +293,13 @@ public class UIManager : Singleton<UIManager>
             RemoveCacheUI(findUI);
         }
 
-        //如果一个 Normal 都没有了 那么关闭 titleUI 
-        //不过从设计上应该是至少一个 Normal 这点注意
-        var currTopNormalUI = GetTopNormalUI();
-        if (null == currTopNormalUI)
-        {
-            this.CloseTitleUI();
-        }
+        ////如果一个 Normal 都没有了 那么关闭 titleUI 
+        ////不过从设计上应该是至少一个 Normal 这点注意
+        //var currTopNormalUI = GetTopNormalUI();
+        //if (null == currTopNormalUI)
+        //{
+        //    this.CloseTitleUI();
+        //}
 
     }
 
@@ -308,20 +309,20 @@ public class UIManager : Singleton<UIManager>
         this.CloseUI(currActiveNormalUI);
     }
 
-    public void CloseTitleUI()
-    {
-        if (titleUI != null)
-        {
-            titleUI.Inactive();
-            titleUI.Close();
-            titleUI.Dispose();
-            titleUI = null;
-        }
-        else
-        {
-            Debug.Log("zxy : CloseUI : the titleUI is null");
-        }
-    }
+    //public void CloseTitleUI()
+    //{
+    //    if (titleUI != null)
+    //    {
+    //        titleUI.Inactive();
+    //        titleUI.Close();
+    //        titleUI.Dispose();
+    //        titleUI = null;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("zxy : CloseUI : the titleUI is null");
+    //    }
+    //}
 
 
     public void InactiveAllUI()

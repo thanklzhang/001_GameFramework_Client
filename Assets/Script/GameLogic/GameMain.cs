@@ -46,8 +46,9 @@ public class GameMain : MonoBehaviour
         LoadTaskManager.Instance.Init();
         CtrlManager.Instance.Init();
 
+        CtrlManager.Instance.Enter<HeroListCtrl>();
 
-        GameFunction.Instance.EnterHeroList();
+        //GameFunction.Instance.EnterHeroList();
 
         //UIManager.Instance.OpenUI(UIName.EquipmentListUI);
 

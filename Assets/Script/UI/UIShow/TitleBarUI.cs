@@ -1,18 +1,22 @@
 ﻿using GameModelData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitleUI : BaseUI
+public class TitleBarUI : BaseUI
 {
 
     Button closeBtn;
     Text titleNameText;
+
+    public Action onClickBackBtn;
+
     protected override void OnInit()
     {
-        this.name = UIName.TitleUI;
-        this.resPath = "Assets/BuildRes/Prefabs/UI/TitleUI.prefab";
+        this.name = UIName.TitleBarUI;
+        this.resPath = "Assets/BuildRes/Prefabs/UI/TitleBarUI.prefab";
         this.type = UIType.Title;
     }
 
@@ -20,11 +24,14 @@ public class TitleUI : BaseUI
     {
         //titleNameText = this.transform.Find("title").GetComponent<Text>();
 
-        //closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
-        //closeBtn.onClick.AddListener(() =>
-        //{
-        //    UIManager.Instance.CloseCurrNormalUI();
-        //});
+        closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
+        closeBtn.onClick.AddListener(() =>
+        {
+            //UIManager.Instance.CloseCurrNormalUI();
+            onClickBackBtn?.Invoke();
+        });
+
+
     }
 
     protected override void OnOpen()

@@ -36,7 +36,7 @@ public class PopAUI : BaseUI
         closeBtn = this.transform.Find("bg/closeBtn").GetComponent<Button>();
         closeBtn.onClick.AddListener(() =>
         {
-            this.CloseSelf();
+            this.ActiveClose();
         });
     }
 

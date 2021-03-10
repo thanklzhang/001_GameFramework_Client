@@ -47,6 +47,10 @@ public class Logx
     {
         Log("zxy", obj);
     }
+    public static void LogzError(string obj)
+    {
+        LogErrorZxy("zxy", obj);
+    }
     public static void LogZxy(string flag2, object obj)
     {
         Log("zxy", flag2, obj);

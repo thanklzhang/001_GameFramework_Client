@@ -128,7 +128,8 @@ public abstract class BaseUI
         Debug.Log("zxy : inactive : " + this.name);
         this.OnInactive();
     }
-
+    
+    //供外部使用 自己被动关闭
     public void Close()
     {
         state = UIState.Close;
@@ -161,8 +162,8 @@ public abstract class BaseUI
 
     protected virtual void OnDispose() { }
 
-
-    public void CloseSelf()
+    
+    public void ActiveClose()
     {
         UIManager.Instance.CloseUI(this.name);
     }

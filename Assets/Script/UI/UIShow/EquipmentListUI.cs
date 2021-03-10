@@ -26,7 +26,7 @@ public class EquipmentListUI : BaseUI
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         closeBtn.onClick.AddListener(() =>
         {
-            this.CloseSelf();
+            this.ActiveClose();
         });
     }
 

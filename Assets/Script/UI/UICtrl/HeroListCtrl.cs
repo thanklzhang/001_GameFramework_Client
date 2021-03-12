@@ -7,24 +7,42 @@ using UnityEngine.UI;
 //英雄列表 ctrl
 public class HeroListCtrl : BaseCtrl
 {
-    GameObject prefab;
+    HeroListUI ui;
     public override void OnInit()
     {
         this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        var assetPath = "Assets/BuildRes/Prefabs/UI/HeroListUI.prefab";
-        AssetManager.Instance.Load(assetPath, (prefab) =>
-         {
-             this.prefab = prefab as GameObject;
-             this.LoadFinish();
-         }, false);
+        UIManager.Instance.LoadUI<HeroListUI>((finishUI)=>
+        {
+            ui = finishUI;
+            this.LoadFinish();
+        });
+    }
+
+    public override void OnLoadFinish()
+    {
+        ui.onGoInfoUIBtnClickEvent += () =>
+        {
+            CtrlManager.Instance.Enter<HeroInfoCtrl>();
+        };
     }
 
     public override void OnEnter()
     {
-        var obj = GameObject.Instantiate(prefab, UIManager.Instance.normalRoot);
+        ui.Show();
     }
 
+    
+    public override void OnExit()
+    {
+        //UIManager.Instance.FreezeUI();
+        ui.Freeze();
+    }
+
+    public override void OnRelease()
+    {
+        ui.Release();
+    }
 }

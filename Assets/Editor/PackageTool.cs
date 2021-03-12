@@ -104,6 +104,12 @@ public class PackageTool
         var outPath = Const.AppStreamingAssetPath;
         var abManifest = BuildPipeline.BuildAssetBundles(outPath, bundleBuildList.ToArray(), BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
 
+        var deletePath = Const.AssetBundlePath;
+        FileTool.DeleteAllFile(deletePath);
+
+        var a = Path.GetFullPath(outPath);
+        var b = Path.GetFullPath(deletePath);
+        FileTool.CopyFolder(a, b);
         AssetDatabase.Refresh();
     }
 

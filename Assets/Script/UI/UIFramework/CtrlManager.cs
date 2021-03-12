@@ -10,16 +10,9 @@ public class CtrlManager : Singleton<CtrlManager>
     public BaseCtrl currMainCtrl;
     public void Init()
     {
-        //ctrlDic.Add(typeof(HeroListCtrl), new HeroListCtrl());
-        //ctrlDic.Add(typeof(HeroInfoCtrl), new HeroInfoCtrl());
+
     }
-
-    //public T GetUICtrl<T>() where T : BaseCtrl
-    //{
-    //    var type = typeof(T);
-    //    return (T)ctrlDic[type];
-    //}
-
+    
     public void Enter<T>(CtrlArgs args = null) where T : BaseCtrl, new()
     {
         var findCtrl = FindCtrl<T>();
@@ -34,7 +27,6 @@ public class CtrlManager : Singleton<CtrlManager>
             {
                 currMainCtrl = findCtrl;
             }
-
         }
         else
         {
@@ -65,42 +57,8 @@ public class CtrlManager : Singleton<CtrlManager>
                     }
                 }
             });
-
-         
-
         }
-
-        //打开后再关闭上一组 ctrl 之后由于异步问题可能在回调中再关闭上一组 ctrl 这样防止中间的空档
-        //
-        //exit 上一个 主 ctrl 和之间的 并行 ctrl
-        //先 exit 两个 主 ctrl 之间的 并行 ctrl
-
-        //for (int i = ctrlCacheList.Count - 2; i >= 0; i--)
-        //{
-        //    BaseCtrl currCtrl = ctrlCacheList[i];
-        //    currCtrl.Enter(null);
-        //    if (!currCtrl.isParallel)
-        //    {
-        //        currMainCtrl = currCtrl;
-        //    }
-        //}
-
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    BaseCtrl currCtrl = null;
-        //    if (currCtrl.isParallel)
-        //    {
-        //        currCtrl.Exit();
-        //    }
-        //}
-
-        //BaseCtrl lastMainCtrl = null;
-        //if (lastMainCtrl != null)
-        //{
-        //    lastMainCtrl.Exit();
-        //}
-
-
+        
     }
 
     public void Exit<T>() where T : BaseCtrl
@@ -161,16 +119,5 @@ public class CtrlManager : Singleton<CtrlManager>
         }
         return null;
     }
-
-    //public BaseCtrl GetCurrMainCtrl()
-    //{
-    //    //for (int i = 0; i < ctrlCacheList.Count; i++)
-    //    //{
-    //    //    var ctrl = ctrlCacheList[i];
-    //    //    if (ctrl.GetType() == typeof(T))
-    //    //    {
-    //    //        return ctrl;
-    //    //    }
-    //    //}
-    //}
+    
 }

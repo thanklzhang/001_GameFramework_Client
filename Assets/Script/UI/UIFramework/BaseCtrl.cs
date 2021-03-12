@@ -7,23 +7,23 @@ public class CtrlArgs
 {
 
 }
-//视图层
-public class BaseView
-{
-    //ui层
-    public BaseUI ui;
-    //场景层
-    //public BaseScene scene;
-    public void Show()
-    {
-        //ui 显示 并且提到最高层
-    }
+////视图层
+//public class BaseView
+//{
+//    //ui层
+//    public BaseUI ui;
+//    //场景层
+//    //public BaseScene scene;
+//    public void Show()
+//    {
+//        //ui 显示 并且提到最高层
+//    }
 
-    public void Hide()
-    {
+//    public void Hide()
+//    {
 
-    }
-}
+//    }
+//}
 
 public class BaseCtrl
 {
@@ -31,25 +31,61 @@ public class BaseCtrl
     public bool isParallel;
     Action finishCallback;
 
-    BaseView view;
+    //public BaseView view;
 
     public void Init()
     {
-        Logx.Logz("baseCtrl : init");
+        //Logx.Logz("baseCtrl : init");
         this.OnInit();
     }
-
-    public virtual void OnInit()
-    {
-        
-    }
-
+    //生命周期-------------------------------------------------------------------------
     //供 ctrlManager 调用
     public void StartLoad(Action finishCallback)
     {
-        Logx.Logz("baseCtrl : StartLoad");
+        //Logx.Logz("baseCtrl : StartLoad");
         this.finishCallback = finishCallback;
         this.OnStartLoad();
+    }
+
+    //供子类在加载完成时调用
+    public void LoadFinish()
+    {
+        //Logx.Logz("baseCtrl : LoadFinish");
+        this.finishCallback?.Invoke();
+        this.finishCallback = null;
+        this.OnLoadFinish();
+    }
+
+    public void Enter(CtrlArgs args)
+    {
+        //Logx.Logz("baseCtrl : Enter");
+        this.OnEnter();
+        //view.Show();
+    }
+
+    public void ReEnter(CtrlArgs args)
+    {
+        //Logx.Logz("baseCtrl : ReEnter");
+        this.OnReEnter();
+    }
+
+    public void Exit()
+    {
+        //Logx.Logz("baseCtrl : Exit");
+        this.OnExit();
+        //view.Hide();
+    }
+
+    public void Release()
+    {
+        //Logx.Logz("baseCtrl : Release");
+        this.OnRelease();
+    }
+
+    //可拓展-------------------------------------------------------------------------
+    public virtual void OnInit()
+    {
+
     }
 
     public virtual void OnStartLoad()
@@ -57,24 +93,9 @@ public class BaseCtrl
 
     }
 
-    //供子类在加载完成时调用
-    public void LoadFinish()
+    public virtual void OnLoadFinish()
     {
-        Logx.Logz("baseCtrl : LoadFinish");
-        this.finishCallback?.Invoke();
-        this.finishCallback = null;
-    }
 
-    public void ReEnter(CtrlArgs args)
-    {
-        
-    }
-
-    public void Enter(CtrlArgs args)
-    {
-        Logx.Logz("baseCtrl : Enter");
-        this.OnEnter();
-        //view.Show();
     }
 
     public virtual void OnEnter()
@@ -82,19 +103,19 @@ public class BaseCtrl
 
     }
 
-    public void Exit()
+    public virtual void OnReEnter()
     {
-        Logx.Logz("baseCtrl : Exit");
-        this.OnExit();
-        //view.Hide();
-    }
-    public virtual void OnExit()
-    {
-        
+
     }
 
-    public void Release()
+
+    public virtual void OnExit()
     {
-        Logx.Logz("baseCtrl : Release");
+
+    }
+
+    public virtual void OnRelease()
+    {
+
     }
 }

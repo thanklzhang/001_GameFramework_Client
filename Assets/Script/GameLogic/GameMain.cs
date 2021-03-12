@@ -44,6 +44,7 @@ public class GameMain : MonoBehaviour
         AssetBundleManager.Instance.Init();
         AssetManager.Instance.Init();
         LoadTaskManager.Instance.Init();
+
         CtrlManager.Instance.Init();
 
         CtrlManager.Instance.Enter<HeroListCtrl>();

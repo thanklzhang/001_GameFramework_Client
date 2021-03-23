@@ -47,7 +47,7 @@ public class GameMain : MonoBehaviour
 
         CtrlManager.Instance.Init();
 
-        CtrlManager.Instance.Enter<HeroListCtrl>();
+        CtrlManager.Instance.Enter<LobbyCtrl>();
 
         //GameFunction.Instance.EnterHeroList();
 

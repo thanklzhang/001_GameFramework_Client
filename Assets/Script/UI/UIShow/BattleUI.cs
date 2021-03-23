@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeroInfoUI : BaseUI
+public class BattleUI : BaseUI
 {
-    public Action onCloseClickEvent;
+    public Action onCloseBtnClick;
 
     Button closeBtn;
     protected override void OnInit()
@@ -15,8 +15,7 @@ public class HeroInfoUI : BaseUI
 
         closeBtn.onClick.AddListener(() =>
         {
-            onCloseClickEvent?.Invoke();
+            onCloseBtnClick?.Invoke();
         });
     }
 }
-

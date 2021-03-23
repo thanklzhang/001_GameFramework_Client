@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3975433785
+CRC: 3278670212
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: eb819bf2564760a91b8357d34a9c0da7
+    Hash: 0ae1f91a85f221b5a77091155927dc80
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2eec86df75eb56d5b24552c9fdc5aa44
+    Hash: 55370e987d2e8c8779f99fab55d65bb4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,8 +20,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -29,12 +27,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 128
   Script: {instanceID: 0}
-- Class: 213
-  Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildRes/Prefabs/UI/HeroListUI.prefab
+- Assets/BuildRes/Prefabs/UI/ConfirmUI.prefab
 Dependencies: []

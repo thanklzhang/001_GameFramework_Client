@@ -5,16 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //英雄列表 ctrl
-public class HeroListCtrl : BaseCtrl
+public class LobbyCtrl : BaseCtrl
 {
-    HeroListUI ui;
+    LobbyUI ui;
     public override void OnInit()
     {
         this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        UIManager.Instance.LoadUI<HeroListUI>((finishUI)=>
+        UIManager.Instance.LoadUI<LobbyUI>((finishUI)=>
         {
             ui = finishUI;
             this.LoadFinish();
@@ -23,14 +23,14 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-
-        ui.onCloseBtnClick += () =>
+        ui.onHeroListBtnClick += () =>
         {
-            CtrlManager.Instance.Exit<HeroListCtrl>();
+            CtrlManager.Instance.Enter<HeroListCtrl>();
         };
-        ui.onGoInfoUIBtnClick += () =>
+
+        ui.onBattleBtnClick += () =>
         {
-            CtrlManager.Instance.Enter<ConfirmCtrl>();
+            CtrlManager.Instance.Enter<BattleCtrl>();
         };
     }
 
@@ -49,7 +49,6 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnRelease()
     {
-        //ui.Release();
-        UIManager.Instance.ReleaseUI<HeroListUI>();
+        UIManager.Instance.ReleaseUI<LobbyUI>();
     }
 }

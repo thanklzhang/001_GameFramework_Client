@@ -92,6 +92,7 @@ public class CtrlManager : Singleton<CtrlManager>
                     if (!currCtrl.isParallel)
                     {
                         currMainCtrl = currCtrl;
+                        break;
                     }
                 }
 

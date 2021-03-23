@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1325364248
+CRC: 3151917562
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -44,4 +44,13 @@ AssetBundleManifest:
       Dependencies: {}
     Info_12:
       Name: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
+      Dependencies: {}
+    Info_13:
+      Name: assets/buildres/prefabs/ui/battleui.ab
+      Dependencies: {}
+    Info_14:
+      Name: assets/buildres/prefabs/ui/confirmui.ab
+      Dependencies: {}
+    Info_15:
+      Name: assets/buildres/prefabs/ui/lobbyui.ab
       Dependencies: {}

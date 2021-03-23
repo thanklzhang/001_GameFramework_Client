@@ -101,15 +101,19 @@ public class PackageTool
 
     public static void BuildAssetBundle()
     {
+        //开始 bundle 打包到 streamingAsset 路径中
         var outPath = Const.AppStreamingAssetPath;
         var abManifest = BuildPipeline.BuildAssetBundles(outPath, bundleBuildList.ToArray(), BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
 
-        var deletePath = Const.AssetBundlePath;
-        FileTool.DeleteAllFile(deletePath);
+        //var deletePath = Const.AssetBundlePath;
 
-        var a = Path.GetFullPath(outPath);
-        var b = Path.GetFullPath(deletePath);
-        FileTool.CopyFolder(a, b);
+        AssetDatabase.Refresh();
+        //拷贝 assetBundle 到 persistentDataPath 路径中
+        FileTool.DeleteAllFile(Const.AssetBundlePath);
+
+        var copySrcPath = Path.GetFullPath(outPath);
+        var copyDesPath = Path.GetFullPath(Const.AssetBundlePath);
+        FileTool.CopyFolder(copySrcPath, copyDesPath);
         AssetDatabase.Refresh();
     }
 

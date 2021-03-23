@@ -5,16 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //英雄列表 ctrl
-public class HeroListCtrl : BaseCtrl
+public class ConfirmCtrl : BaseCtrl
 {
-    HeroListUI ui;
+    ConfirmUI ui;
     public override void OnInit()
     {
         this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        UIManager.Instance.LoadUI<HeroListUI>((finishUI)=>
+        UIManager.Instance.LoadUI<ConfirmUI>((finishUI) =>
         {
             ui = finishUI;
             this.LoadFinish();
@@ -23,14 +23,17 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-
-        ui.onCloseBtnClick += () =>
+        ui.onCloseClickEvent += () =>
         {
-            CtrlManager.Instance.Exit<HeroListCtrl>();
+            CtrlManager.Instance.Exit<ConfirmCtrl>();
         };
-        ui.onGoInfoUIBtnClick += () =>
+        ui.onClickYesBtn += () =>
         {
-            CtrlManager.Instance.Enter<ConfirmCtrl>();
+            CtrlManager.Instance.Enter<HeroInfoCtrl>();
+        };
+        ui.onClickNoBtn += () =>
+        {
+            CtrlManager.Instance.Exit<ConfirmCtrl>();
         };
     }
 
@@ -39,7 +42,7 @@ public class HeroListCtrl : BaseCtrl
         ui.Show();
     }
 
-    
+
     public override void OnExit()
     {
         //UIManager.Instance.FreezeUI();
@@ -49,7 +52,6 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnRelease()
     {
-        //ui.Release();
-        UIManager.Instance.ReleaseUI<HeroListUI>();
+        UIManager.Instance.ReleaseUI<ConfirmUI>();
     }
 }

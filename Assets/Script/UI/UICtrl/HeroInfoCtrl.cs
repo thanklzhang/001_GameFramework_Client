@@ -23,7 +23,7 @@ public class HeroInfoCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-        ui.onBackClickEvent += () =>
+        ui.onCloseClickEvent += () =>
         {
             CtrlManager.Instance.Exit<HeroInfoCtrl>();
         };
@@ -38,7 +38,8 @@ public class HeroInfoCtrl : BaseCtrl
     public override void OnExit()
     {
         //UIManager.Instance.FreezeUI();
-        ui.Freeze();
+        //ui.Freeze();
+        ui.Hide();
     }
 
     public override void OnRelease()

@@ -29,7 +29,7 @@ public class BattleCtrl : BaseCtrl
         };
     }
 
-    public override void OnEnter()
+    public override void OnEnter(CtrlArgs args)
     {
         ui.Show();
     }
@@ -37,14 +37,7 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnExit()
     {
-        //UIManager.Instance.FreezeUI();
-        //ui.Freeze();
-        ui.Hide();
+        UIManager.Instance.ReleaseUI<BattleUI>();
     }
 
-    public override void OnRelease()
-    {
-        UIManager.Instance.ReleaseUI<BattleUI>();
-        //ui.Close();
-    }
 }

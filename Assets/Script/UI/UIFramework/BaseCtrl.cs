@@ -35,14 +35,12 @@ public class BaseCtrl
 
     public void Init()
     {
-        //Logx.Logz("baseCtrl : init");
         this.OnInit();
     }
     //生命周期-------------------------------------------------------------------------
     //供 ctrlManager 调用
     public void StartLoad(Action finishCallback)
     {
-        //Logx.Logz("baseCtrl : StartLoad");
         this.finishCallback = finishCallback;
         this.OnStartLoad();
     }
@@ -50,7 +48,6 @@ public class BaseCtrl
     //供子类在加载完成时调用
     public void LoadFinish()
     {
-        //Logx.Logz("baseCtrl : LoadFinish");
         this.finishCallback?.Invoke();
         this.finishCallback = null;
         this.OnLoadFinish();
@@ -58,29 +55,29 @@ public class BaseCtrl
 
     public void Enter(CtrlArgs args)
     {
-        //Logx.Logz("baseCtrl : Enter");
-        this.OnEnter();
-        //view.Show();
+        this.OnEnter(args);
     }
 
-    public void ReEnter(CtrlArgs args)
+
+    public void Active()
     {
-        //Logx.Logz("baseCtrl : ReEnter");
-        this.OnReEnter();
+        this.OnActive();
+    }
+
+    internal void Inactive()
+    {
+        this.OnInactive();
     }
 
     public void Exit()
     {
-        //Logx.Logz("baseCtrl : Exit");
         this.OnExit();
-        //view.Hide();
     }
 
-    public void Release()
-    {
-        //Logx.Logz("baseCtrl : Release");
-        this.OnRelease();
-    }
+    //public void Release()
+    //{
+    //    this.OnRelease();
+    //}
 
     //可拓展-------------------------------------------------------------------------
     public virtual void OnInit()
@@ -98,24 +95,30 @@ public class BaseCtrl
 
     }
 
-    public virtual void OnEnter()
+    public virtual void OnEnter(CtrlArgs args)
     {
 
     }
 
-    public virtual void OnReEnter()
+    public virtual void OnActive()
     {
 
     }
 
+    public virtual void OnInactive()
+    {
+
+    }
 
     public virtual void OnExit()
     {
 
     }
 
-    public virtual void OnRelease()
-    {
 
-    }
+
+    //public virtual void OnRelease()
+    //{
+
+    //}
 }

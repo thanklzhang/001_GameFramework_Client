@@ -30,11 +30,17 @@ public class HeroListCtrl : BaseCtrl
         };
         ui.onGoInfoUIBtnClick += () =>
         {
-            CtrlManager.Instance.Enter<ConfirmCtrl>();
+            ConfirmCtrlArgs args = new ConfirmCtrlArgs();
+            args.yesAction = () =>
+            {
+                CtrlManager.Instance.Enter<HeroInfoCtrl>();
+            };
+
+            CtrlManager.Instance.Enter<ConfirmCtrl>(args);
         };
     }
 
-    public override void OnEnter()
+    public override void OnEnter(CtrlArgs args)
     {
         ui.Show();
     }
@@ -42,14 +48,7 @@ public class HeroListCtrl : BaseCtrl
     
     public override void OnExit()
     {
-        //UIManager.Instance.FreezeUI();
-        //ui.Freeze();
-        ui.Hide();
-    }
-
-    public override void OnRelease()
-    {
-        //ui.Release();
         UIManager.Instance.ReleaseUI<HeroListUI>();
     }
+
 }

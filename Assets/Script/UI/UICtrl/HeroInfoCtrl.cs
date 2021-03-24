@@ -29,7 +29,7 @@ public class HeroInfoCtrl : BaseCtrl
         };
     }
 
-    public override void OnEnter()
+    public override void OnEnter(CtrlArgs args)
     {
         ui.Show();
     }
@@ -37,14 +37,7 @@ public class HeroInfoCtrl : BaseCtrl
 
     public override void OnExit()
     {
-        //UIManager.Instance.FreezeUI();
-        //ui.Freeze();
-        ui.Hide();
+        UIManager.Instance.ReleaseUI<HeroInfoUI>();
     }
 
-    public override void OnRelease()
-    {
-        UIManager.Instance.ReleaseUI<HeroInfoUI>();
-        //ui.Close();
-    }
 }

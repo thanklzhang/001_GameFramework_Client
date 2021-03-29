@@ -25,6 +25,17 @@ public class CtrlArgs
 //    }
 //}
 
+public enum CtrlState
+{
+    Null = 1,
+    Inited = 2,
+    Loading = 3,
+    Inactive = 4,
+    Active = 5,
+    Release = 6,
+
+}
+
 public class BaseCtrl
 {
     //是否并行 并行是指不影响其他的 ctrl
@@ -32,26 +43,41 @@ public class BaseCtrl
     Action finishCallback;
 
     //public BaseView view;
+    public CtrlState state = CtrlState.Null;
+
+    protected LoadObjectRequest loadRequest;
 
     public void Init()
     {
+        state = CtrlState.Inited;
         this.OnInit();
     }
     //生命周期-------------------------------------------------------------------------
     //供 ctrlManager 调用
     public void StartLoad(Action finishCallback)
     {
-        this.finishCallback = finishCallback;
+        //this.finishCallback = finishCallback;
+        state = CtrlState.Loading;
         this.OnStartLoad();
     }
 
-    //供子类在加载完成时调用
-    public void LoadFinish()
+    public virtual bool CheckLoadFinish()
     {
-        this.finishCallback?.Invoke();
-        this.finishCallback = null;
-        this.OnLoadFinish();
+        if (null == loadRequest)
+        {
+            return true;
+        }
+        return loadRequest.CheckFinish();
     }
+
+    ////供子类在加载完成时调用
+    //public void LoadFinish()
+    //{
+    //    state = CtrlState.Inactive;
+    //    this.finishCallback?.Invoke();
+    //    this.finishCallback = null;
+    //    this.OnLoadFinish();
+    //}
 
     public void Enter(CtrlArgs args)
     {
@@ -61,16 +87,24 @@ public class BaseCtrl
 
     public void Active()
     {
+        state = CtrlState.Active;
         this.OnActive();
+    }
+
+    public void Update(float deltaTime)
+    {
+        this.OnUpdate(deltaTime);
     }
 
     internal void Inactive()
     {
+        state = CtrlState.Inactive;
         this.OnInactive();
     }
 
     public void Exit()
     {
+        state = CtrlState.Release;
         this.OnExit();
     }
 
@@ -96,6 +130,11 @@ public class BaseCtrl
     }
 
     public virtual void OnEnter(CtrlArgs args)
+    {
+
+    }
+
+    private void OnUpdate(float deltaTime)
     {
 
     }

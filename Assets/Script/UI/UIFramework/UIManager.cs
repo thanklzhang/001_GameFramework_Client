@@ -15,7 +15,7 @@ public class UIManager : Singleton<UIManager>
     public Dictionary<Type, BaseUI> uiCacheDic = new Dictionary<Type, BaseUI>();
 
 
-    internal void LoadUI<T>(Action<T> finishCallback) where T : BaseUI, new()
+    internal void LoadUI<T>(Action<T> finishCallback = null) where T : BaseUI, new()
     {
         var type = typeof(T);
         if (uiCacheDic.ContainsKey(type))
@@ -25,21 +25,32 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            //Logx.LogzError("loadUI : the type is not found : " + type);
+            ////Logx.LogzError("loadUI : the type is not found : " + type);
             //return null;
 
             var uiConfigInfo = UIConfigInfoDic.GetInfo<T>();
             //这里之后改成 resourceManager 加载的 go
-            AssetManager.Instance.Load(uiConfigInfo.path, (prefab) =>
+            ResourceManager.Instance.GetObject<GameObject>(uiConfigInfo.path, (gameObject) =>
             {
-                GameObject obj = GameObject.Instantiate(prefab as GameObject);
-                obj.transform.SetParent(this.uiRoot, false);
+                gameObject.transform.SetParent(this.uiRoot, false);
                 T t = new T();
-                t.Init(obj, uiConfigInfo.path);
+                t.Init(gameObject, uiConfigInfo.path);
                 uiCacheDic.Add(t.GetType(), t);
                 finishCallback?.Invoke(t);
-            }, false);
+            });
         }
+    }
+
+    public T GetUICache<T>() where T : BaseUI
+    {
+        var type = typeof(T);
+        if (uiCacheDic.ContainsKey(type))
+        {
+            var ui = (T)uiCacheDic[type];
+            return ui;
+        }
+
+        return null;
     }
 
     public void ReleaseUI<T>()
@@ -50,10 +61,13 @@ public class UIManager : Singleton<UIManager>
             var ui = uiCacheDic[type];
             uiCacheDic.Remove(type);
             ui.Release();
+
+            var uiConfigInfo = UIConfigInfoDic.GetInfo<T>();
+            AssetManager.Instance.Release(uiConfigInfo.path);
         }
         else
         {
-            Logx.LogzWarning("the ui is not exist in cache dic : " + type);
+            //Logx.LogzWarning("the ui is not exist in cache dic : " + type);
         }
     }
 }

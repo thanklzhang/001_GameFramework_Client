@@ -22,7 +22,7 @@ public class AssetCache
         get => refCount;
         set
         {
-            Logx.Logz("asset : change ref : " + path + " : " + refCount + " -> " + value);
+            //Logx.Logz("asset : change ref : " + path + " : " + refCount + " -> " + value);
             refCount = value;
         }
 
@@ -38,7 +38,7 @@ public class AssetManager : Singleton<AssetManager>
     public void Init()
     {
 
-        Logx.LogZxy("Asset", "init");
+        //Logx.Logzxy("Asset", "init");
 
         //读取 asset 和 ab 对应关系表
         var assetFileStr = File.ReadAllText(Const.AppStreamingAssetPath + "/" + "AssetToAbFileData.json");
@@ -59,7 +59,7 @@ public class AssetManager : Singleton<AssetManager>
         return abPath;
     }
 
-    public void Load(string assetPath, Action<UnityEngine.Object> finishCallback, bool isSync)
+    public void Load(string assetPath, Action<UnityEngine.Object> finishCallback, bool isSync = false)
     {
         if (isSync)
         {
@@ -86,7 +86,7 @@ public class AssetManager : Singleton<AssetManager>
             assetCache.RefCount += 1;
 
             AddAssetBundleReferenceByAssetPath(assetPath);
-            
+
             finishCallback?.Invoke(assetCache.asset);
         }
         else
@@ -120,6 +120,7 @@ public class AssetManager : Singleton<AssetManager>
         {
             finishCallback?.Invoke(assetCache.asset);
             assetCache.RefCount += 1;
+            AddAssetBundleReferenceByAssetPath(assetPath);
         }
         else
         {
@@ -134,6 +135,7 @@ public class AssetManager : Singleton<AssetManager>
         }
     }
 
+    //外界加载完后会调用
     internal void OnLoadAssetFinish(AssetCache assetCache)
     {
         //加载完成 放到缓存中
@@ -147,6 +149,11 @@ public class AssetManager : Singleton<AssetManager>
         else
         {
             currAssetCache.RefCount += assetCache.RefCount;
+
+            for (int i = 0; i < assetCache.RefCount; i++)
+            {
+                AddAssetBundleReferenceByAssetPath(currAssetCache.path);
+            }
         }
 
         var callback = assetCache.finishLoadCallback;
@@ -154,7 +161,7 @@ public class AssetManager : Singleton<AssetManager>
         callback?.Invoke(currAssetCache);
     }
 
-    //才用如下计数方式：
+    //采用如下计数方式：
     //asset 计算自己的 并会改变 ab 计数
     //也就是说 多个 asset 的总量 等于 对应的 ab 计数
     //实际上只有 ab 计数也可以 但是为了之后 资源分析 等 在 asset 层也做一个计数

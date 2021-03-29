@@ -55,12 +55,16 @@ public class GameMain : MonoBehaviour
 
         //var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
         //var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
-        //AssetManager.Instance.Load(assetPath, (assetCache) =>
-        //{
-        //    var newObj = GameObject.Instantiate(assetCache, uiRoot);
-        //    //AssetManager.Instance.Release(assetPath);
+        ////AssetManager.Instance.Load(assetPath, (assetCache) =>
+        ////{
+        ////    var newObj = GameObject.Instantiate(assetCache, uiRoot);
+        ////    //AssetManager.Instance.Release(assetPath);
 
-        //}, false);
+        ////}, false);
+        //AssetBundleManager.Instance.Load(abPath,(ab)=>
+        //{
+
+        //},false);
 
         //AssetManager.Instance.Load(assetPath, (assetCache) =>
         //{
@@ -77,11 +81,13 @@ public class GameMain : MonoBehaviour
         yield return new WaitForSeconds(1);
         var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
         var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";
-        AssetManager.Instance.Release(assetPath);
-        AssetManager.Instance.Release(assetPath);
+        //AssetManager.Instance.Release(assetPath);
+        //AssetManager.Instance.Release(assetPath);
 
         //这里可以认为是 切场景的时候 所有引用为 0 的都会被释放掉 或者没隔多长时间的策略也可以
-        AssetBundleManager.Instance.TrueReleaseAB(abPath);
+        //AssetBundleManager.Instance.TrueReleaseAB(abPath);
+
+        AssetBundleManager.Instance.ReduceAssetBundleReference(abPath);
 
     }
 
@@ -92,7 +98,11 @@ public class GameMain : MonoBehaviour
         //Debug.Log("zxy : currFrame : " + Time.frameCount);
         //AssetManager.Instance.Update(Time.deltaTime);
         //AssetBundleManager.Instance.Update(Time.deltaTime);
+
         LoadTaskManager.Instance.Update(Time.deltaTime);
+        ResourceManager.Instance.Update(Time.deltaTime);
+        CtrlManager.Instance.Update(Time.deltaTime);
+       
     }
 
     private void OnDestroy()

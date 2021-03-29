@@ -30,7 +30,7 @@ public class UIConfigInfoDic
         }
         else
         {
-            Logx.LogzError("the ui is not found : type : " + type);
+            //Logx.LogzError("the ui is not found : type : " + type);
             return null;
         }
 

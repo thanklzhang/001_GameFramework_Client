@@ -8,21 +8,25 @@ using UnityEngine.UI;
 public class HeroListCtrl : BaseCtrl
 {
     HeroListUI ui;
+
+
     public override void OnInit()
     {
         this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        UIManager.Instance.LoadUI<HeroListUI>((finishUI)=>
+        loadRequest = ResourceManager.Instance.LoadObjects(new string[]
         {
-            ui = finishUI;
-            this.LoadFinish();
+            "Assets/BuildRes/Prefabs/UI/HeroListUI.prefab"
         });
+        //UIManager.Instance.LoadUI<HeroListUI>();
+
     }
 
     public override void OnLoadFinish()
     {
+        ui = UIManager.Instance.GetUICache<HeroListUI>();
 
         ui.onCloseBtnClick += () =>
         {
@@ -45,7 +49,7 @@ public class HeroListCtrl : BaseCtrl
         ui.Show();
     }
 
-    
+
     public override void OnExit()
     {
         UIManager.Instance.ReleaseUI<HeroListUI>();

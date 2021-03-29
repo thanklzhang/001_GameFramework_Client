@@ -5,9 +5,24 @@ using System;
 using System.Threading;
 using System.Linq;
 
+
+
 //过后抽象出来
 public class Logx
 {
+    public enum LogType
+    {
+        Normal = 1,
+        Error = 2,
+        Warning = 3,
+
+        Zxy = 100,
+        AB = 200,
+        Asset = 300,
+        Key = 400,//流程关键点
+
+    }
+
     public static void Log(object obj)
     {
         Debug.Log(obj);
@@ -43,21 +58,28 @@ public class Logx
 
     //-------------
     //Custom
+
+    public static void Error()
+    {
+        
+    }
+
+    //----------
     public static void Logz(string obj)
     {
-        Log("zxy", obj);
+        Log(LogType.Zxy.ToString(), obj);
     }
     public static void LogzWarning(string obj)
     {
-        LogWarningZxy("zxy", obj);
+        LogWarningZxy(LogType.Zxy.ToString(), obj);
     }
     public static void LogzError(string obj)
     {
-        LogErrorZxy("zxy", obj);
+        LogErrorZxy(LogType.Zxy.ToString(), obj);
     }
     public static void LogZxy(string flag2, object obj)
     {
-        Log("zxy", flag2, obj);
+        //Log("zxy", flag2, obj);
     }
     public static void LogWarningZxy(string flag2, object obj)
     {

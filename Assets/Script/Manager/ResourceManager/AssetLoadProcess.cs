@@ -23,12 +23,12 @@ public class AssetLoadProcess : BaseLoadProcess
         if (!assetLoaderDic.TryGetValue(assetLoader.path, out currAssetLoader))
         {
             assetLoaderDic.Add(assetLoader.path, assetLoader);
-            Logx.Logz("AssetLoadProcess AddLoader : no loader cache and start a new loader : " + assetLoader.path);
+            //Logx.Logz("AssetLoadProcess AddLoader : no loader cache and start a new loader : " + assetLoader.path);
             base.AddLoader(loader);
         }
         else
         {
-            Logx.Logz("AssetLoadProcess AddLoader : have loader cache " + assetLoader.path);
+            //Logx.Logz("AssetLoadProcess AddLoader : have loader cache " + assetLoader.path);
             currAssetLoader.finishLoadCallback += assetLoader.finishLoadCallback;
             currAssetLoader.refCount += 1;
         }
@@ -37,7 +37,7 @@ public class AssetLoadProcess : BaseLoadProcess
     public override void OnLoadFinish(BaseLoader loader)
     {
         var assetLoader = (AssetLoader)loader;
-        Logx.Logz("AssetLoadProcess OnLoadFinish : " + assetLoader.path);
+        //Logx.Logz("AssetLoadProcess OnLoadFinish : " + assetLoader.path);
 
         ////通知 正在准备的所有 loader 在这里指的是正在等依赖加载的 loader
         //for (int i = 0; i < this.preparingList.Count; i++)

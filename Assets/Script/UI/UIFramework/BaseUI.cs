@@ -21,11 +21,6 @@ public abstract class BaseUI
         gameObject.SetActive(true);
     }
 
-    public void Freeze()
-    {
-
-    }
-
     public void Hide()
     {
         gameObject.SetActive(false);
@@ -33,7 +28,8 @@ public abstract class BaseUI
 
     public void Release()
     {
-        GameObject.Destroy(this.gameObject);
+        //GameObject.Destroy(this.gameObject);
+        ResourceManager.Instance.ReturnGameObject(this.gameObject);
     }
 
     protected virtual void OnInit()

@@ -6,10 +6,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class LoadAssetObjRequest : LoadObjectRequest
+public class LoadGameObjectRequest : LoadObjectRequest
 {
     string[] pathList;
     HashSet<string> currNeedLoadSet = new HashSet<string>();
+    private string path;
+    private int count;
+
+    public LoadGameObjectRequest(int count)
+    {
+        this.count = count;
+    }
 
     public bool CheckFinish()
     {
@@ -18,6 +25,7 @@ public class LoadAssetObjRequest : LoadObjectRequest
 
     public void Start(string[] pathList)
     {
+        this.pathList = pathList;
         for (int i = 0; i < pathList.Length; i++)
         {
             var currPath = pathList[i];
@@ -47,6 +55,20 @@ public class LoadAssetObjRequest : LoadObjectRequest
     public void Finish()
     {
 
+    }
+
+    public void Release()
+    {
+        for (int i = this.pathList.Length - 1; i >= 0; i--)
+        {
+            var path = this.pathList[i];
+            AssetManager.Instance.Release(path);
+        }
+    }
+
+    public void Start()
+    {
+        throw new NotImplementedException();
     }
 }
 

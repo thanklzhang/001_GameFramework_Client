@@ -39,13 +39,13 @@ public enum CtrlState
 public class BaseCtrl
 {
     //是否并行 并行是指不影响其他的 ctrl
-    public bool isParallel;
+    //public bool isParallel;
     Action finishCallback;
 
     //public BaseView view;
     public CtrlState state = CtrlState.Null;
 
-    protected LoadObjectRequest loadRequest;
+    protected LoadResGroupRequest loadRequest;
 
     public void Init()
     {
@@ -56,7 +56,7 @@ public class BaseCtrl
     //供 ctrlManager 调用
     public void StartLoad(Action finishCallback)
     {
-        //this.finishCallback = finishCallback;
+        this.finishCallback = finishCallback;
         state = CtrlState.Loading;
         this.OnStartLoad();
     }
@@ -70,14 +70,13 @@ public class BaseCtrl
         return loadRequest.CheckFinish();
     }
 
-    ////供子类在加载完成时调用
-    //public void LoadFinish()
-    //{
-    //    state = CtrlState.Inactive;
-    //    this.finishCallback?.Invoke();
-    //    this.finishCallback = null;
-    //    this.OnLoadFinish();
-    //}
+    public void LoadFinish()
+    {
+        state = CtrlState.Inactive;
+        this.finishCallback?.Invoke();
+        //this.finishCallback = null;
+        this.OnLoadFinish();
+    }
 
     public void Enter(CtrlArgs args)
     {
@@ -104,6 +103,10 @@ public class BaseCtrl
 
     public void Exit()
     {
+        if (loadRequest != null)
+        {
+            loadRequest.Release();
+        }
         state = CtrlState.Release;
         this.OnExit();
     }

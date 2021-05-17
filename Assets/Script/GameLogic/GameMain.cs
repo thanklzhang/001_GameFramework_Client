@@ -49,6 +49,25 @@ public class GameMain : MonoBehaviour
 
         CtrlManager.Instance.Enter<LobbyCtrl>();
 
+
+        //var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
+        //ResourceManager.Instance.GetObject<GameObject>(assetPath, (gameObject) =>
+        //{
+        //    gameObject.transform.SetParent(uiRoot, false);
+        //    ResourceManager.Instance.ReturnObject(assetPath, gameObject);
+        //});
+        //ResourceManager.Instance.GetObject<GameObject>(assetPath, (gameObject) =>
+        //{
+        //    gameObject.transform.SetParent(uiRoot, false);
+        //    ResourceManager.Instance.ReturnObject(assetPath, gameObject);
+        //});
+        //ResourceManager.Instance.GetObject<GameObject>(assetPath, (gameObject) =>
+        //{
+        //    gameObject.transform.SetParent(uiRoot, false);
+        //    ResourceManager.Instance.ReturnObject(assetPath, gameObject);
+        //});
+
+
         //GameFunction.Instance.EnterHeroList();
 
         //UIManager.Instance.OpenUI(UIName.EquipmentListUI);
@@ -102,7 +121,7 @@ public class GameMain : MonoBehaviour
         LoadTaskManager.Instance.Update(Time.deltaTime);
         ResourceManager.Instance.Update(Time.deltaTime);
         CtrlManager.Instance.Update(Time.deltaTime);
-       
+
     }
 
     private void OnDestroy()

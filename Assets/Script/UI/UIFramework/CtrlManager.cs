@@ -77,7 +77,7 @@ public class CtrlManager : Singleton<CtrlManager>
         }
         else
         {
-            //Logx.LogzError("findCtrl == ctrl : " + typeof(T) + " != " + currMainCtrl?.GetType());
+            Logx.LogzError("findCtrl == ctrl : " + typeof(T) + " != " + currMainCtrl?.GetType());
             return;
         }
     }
@@ -99,6 +99,7 @@ public class CtrlManager : Singleton<CtrlManager>
                     ctrl.Update(deltaTime);
                 }
             }
+        }
     }
 
     //public void Enter<T>(CtrlArgs args = null) where T : BaseCtrl, new()

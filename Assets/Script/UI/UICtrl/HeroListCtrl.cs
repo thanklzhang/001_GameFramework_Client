@@ -12,36 +12,43 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnInit()
     {
-        this.isParallel = false;
+        //this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        loadRequest = ResourceManager.Instance.LoadObjects(new string[]
+        this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            "Assets/BuildRes/Prefabs/UI/HeroListUI.prefab"
+            new LoadUIRequest<HeroListUI>(){selfFinishCallback = OnUILoadFinish},
         });
         //UIManager.Instance.LoadUI<HeroListUI>();
 
     }
 
+    public void OnUILoadFinish(HeroListUI heroListUI)
+    {
+        this.ui = heroListUI;
+    }
+
     public override void OnLoadFinish()
     {
-        ui = UIManager.Instance.GetUICache<HeroListUI>();
+        ui.onCloseBtnClick += OnClickCloseBtn;
+        ui.onGoInfoUIBtnClick += OnClickGoInfoUIBtn;
+    }
 
-        ui.onCloseBtnClick += () =>
-        {
-            CtrlManager.Instance.Exit<HeroListCtrl>();
-        };
-        ui.onGoInfoUIBtnClick += () =>
-        {
-            ConfirmCtrlArgs args = new ConfirmCtrlArgs();
-            args.yesAction = () =>
-            {
-                CtrlManager.Instance.Enter<HeroInfoCtrl>();
-            };
+    public void OnClickCloseBtn()
+    {
+        CtrlManager.Instance.Exit<HeroListCtrl>();
+    }
 
-            CtrlManager.Instance.Enter<ConfirmCtrl>(args);
+    public void OnClickGoInfoUIBtn()
+    {
+        ConfirmCtrlArgs args = new ConfirmCtrlArgs();
+        args.yesAction = () =>
+        {
+            CtrlManager.Instance.Enter<HeroInfoCtrl>();
         };
+
+        CtrlManager.Instance.Enter<ConfirmCtrl>(args);
     }
 
     public override void OnEnter(CtrlArgs args)
@@ -52,6 +59,9 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnExit()
     {
+        ui.onCloseBtnClick -= OnClickCloseBtn;
+        ui.onGoInfoUIBtnClick -= OnClickGoInfoUIBtn;
+
         UIManager.Instance.ReleaseUI<HeroListUI>();
     }
 

@@ -10,28 +10,36 @@ public class LobbyCtrl : BaseCtrl
     LobbyUI ui;
     public override void OnInit()
     {
-        this.isParallel = false;
+        //this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        UIManager.Instance.LoadUI<LobbyUI>((finishUI)=>
+        this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            ui = finishUI;
-            this.LoadFinish();
+            new LoadUIRequest<LobbyUI>(){selfFinishCallback = OnUILoadFinish},
         });
+    }
+
+    public void OnUILoadFinish(LobbyUI lobbyUI)
+    {
+        this.ui = lobbyUI;
     }
 
     public override void OnLoadFinish()
     {
-        ui.onHeroListBtnClick += () =>
-        {
-            CtrlManager.Instance.Enter<HeroListCtrl>();
-        };
+        ui.onHeroListBtnClick += OnClickHeroListBtn;
 
-        ui.onBattleBtnClick += () =>
-        {
-            CtrlManager.Instance.Enter<BattleCtrl>();
-        };
+        ui.onBattleBtnClick += OnClickBattleBtn;
+    }
+
+    public void OnClickHeroListBtn()
+    {
+        CtrlManager.Instance.Enter<HeroListCtrl>();
+    }
+
+    public void OnClickBattleBtn()
+    {
+        CtrlManager.Instance.Enter<BattleCtrl>();
     }
 
     public override void OnEnter(CtrlArgs args)
@@ -39,9 +47,10 @@ public class LobbyCtrl : BaseCtrl
         ui.Show();
     }
 
-    
     public override void OnExit()
     {
+        ui.onHeroListBtnClick -= OnClickHeroListBtn;
+        ui.onBattleBtnClick -= OnClickBattleBtn;
         UIManager.Instance.ReleaseUI<LobbyUI>();
     }
 

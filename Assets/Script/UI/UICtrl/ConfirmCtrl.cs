@@ -18,35 +18,43 @@ public class ConfirmCtrl : BaseCtrl
     ConfirmCtrlArgs confirmArgs;
     public override void OnInit()
     {
-        this.isParallel = false;
+        //this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        UIManager.Instance.LoadUI<ConfirmUI>((finishUI) =>
+        this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            ui = finishUI;
-            this.LoadFinish();
+            new LoadUIRequest<ConfirmUI>(){selfFinishCallback = OnUILoadFinish},
         });
+
+     
+    }
+    public void OnUILoadFinish(ConfirmUI confirmUI)
+    {
+        this.ui = confirmUI;
     }
 
     public override void OnLoadFinish()
     {
-        ui.onCloseClickEvent += () =>
-        {
-            CtrlManager.Instance.Exit<ConfirmCtrl>();
-            confirmArgs?.closeAction?.Invoke();
-        };
-        ui.onClickYesBtn += () =>
-        {
-            CtrlManager.Instance.Exit<ConfirmCtrl>();
-            confirmArgs?.yesAction?.Invoke();
-        };
-        ui.onClickNoBtn += () =>
-        {
-            CtrlManager.Instance.Exit<ConfirmCtrl>();
-            confirmArgs?.noAction?.Invoke();
-            
-        };
+        ui.onCloseClickEvent += OnClickCloseBtn;
+        ui.onClickYesBtn += OnClickYesBtn;
+        ui.onClickNoBtn += OnClickNoBtn;
+    }
+
+    public void OnClickCloseBtn()
+    {
+        CtrlManager.Instance.Exit<ConfirmCtrl>();
+        confirmArgs?.closeAction?.Invoke();
+    }
+    public void OnClickYesBtn()
+    {
+        CtrlManager.Instance.Exit<ConfirmCtrl>();
+        confirmArgs?.yesAction?.Invoke();
+    }
+    public void OnClickNoBtn()
+    {
+        CtrlManager.Instance.Exit<ConfirmCtrl>();
+        confirmArgs?.noAction?.Invoke();
     }
 
     public override void OnEnter(CtrlArgs args)
@@ -59,6 +67,10 @@ public class ConfirmCtrl : BaseCtrl
 
     public override void OnExit()
     {
+        ui.onCloseClickEvent -= OnClickCloseBtn;
+        ui.onClickYesBtn -= OnClickYesBtn;
+        ui.onClickNoBtn -= OnClickNoBtn;
+
         UIManager.Instance.ReleaseUI<ConfirmUI>();
     }
 

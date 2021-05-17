@@ -9,41 +9,30 @@ using UnityEngine.UI;
 
 public class ResourceManager : Singleton<ResourceManager>
 {
-    List<LoadObjectRequest> requestList = new List<LoadObjectRequest>();
+    List<LoadResGroupRequest> requestList = new List<LoadResGroupRequest>();
 
-    //load single
-    public void LoadPrefab(string path, Action<GameObject> callback, bool isSync = false)
+    //batch load asset
+    public LoadResGroupRequest LoadObjects(List<LoadObjectRequest> requests)
     {
-        Action<UnityEngine.Object> finishCallback = (obj) =>
-        {
-            var gameObject = obj as GameObject;
-            callback?.Invoke(gameObject);
-        };
-        AssetManager.Instance.Load(path, finishCallback, isSync);
+        LoadResGroupRequest req = new LoadResGroupRequest();
+        req.Start(requests);
+        requestList.Add(req);
+        return req;
     }
 
     //Get Obj by pool (include : gameObject texture sprite material)
-    public void GetObject<T>(string path, Action<T> callback, bool isSync = false)
+    public void GetObject<T>(string path, Action<T> callback, bool isSync = false) where T : UnityEngine.Object
     {
         ObjectPoolManager.Instance.GetObject<T>(path, (obj) =>
         {
-            callback?.Invoke(obj);
+            var getObj = obj as T;
+            callback?.Invoke(getObj);
         });
     }
 
-    internal void ReturnObject<T>(string path, T obj)
+    internal void ReturnObject<T>(string path, T obj) where T : UnityEngine.Object
     {
         ObjectPoolManager.Instance.ReturnObject(path, obj);
-    }
-
-    //batch load asset
-    public LoadObjectRequest LoadObjects(string[] pathList)
-    {
-        LoadObjectRequest req = new LoadAssetObjRequest();
-        req.Start(pathList);
-        requestList.Add(req);
-
-        return req;
     }
 
     public void Update(float deltaTime)
@@ -51,6 +40,7 @@ public class ResourceManager : Singleton<ResourceManager>
         for (int i = requestList.Count - 1; i >= 0; i--)
         {
             var req = requestList[i];
+            req.Update(deltaTime);
             if (req.CheckFinish())
             {
                 req.Finish();
@@ -60,4 +50,3 @@ public class ResourceManager : Singleton<ResourceManager>
     }
 
 }
-

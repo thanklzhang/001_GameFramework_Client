@@ -26,4 +26,10 @@ public class HeroListUI : BaseUI
             onCloseBtnClick?.Invoke();
         });
     }
+
+    protected override void OnRelease()
+    {
+        onGoInfoUIBtnClick = null;
+        onCloseBtnClick = null;
+    }
 }

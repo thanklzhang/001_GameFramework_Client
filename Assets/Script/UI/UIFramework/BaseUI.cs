@@ -29,7 +29,13 @@ public abstract class BaseUI
     public void Release()
     {
         //GameObject.Destroy(this.gameObject);
-        ResourceManager.Instance.ReturnGameObject(this.gameObject);
+        //ResourceManager.Instance.ReturnGameObject(this.gameObject);
+        this.OnRelease();
+    }
+
+    protected virtual void OnRelease()
+    {
+        
     }
 
     protected virtual void OnInit()

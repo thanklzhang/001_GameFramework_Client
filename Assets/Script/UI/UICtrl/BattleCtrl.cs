@@ -10,15 +10,19 @@ public class BattleCtrl : BaseCtrl
     BattleUI ui;
     public override void OnInit()
     {
-        this.isParallel = false;
+        //this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        UIManager.Instance.LoadUI<BattleUI>((finishUI) =>
+        this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            ui = finishUI;
-            this.LoadFinish();
+            new LoadUIRequest<BattleUI>(){selfFinishCallback = OnUILoadFinish},
         });
+    }
+
+    public void OnUILoadFinish(BattleUI battleUI)
+    {
+        this.ui = battleUI;
     }
 
     public override void OnLoadFinish()

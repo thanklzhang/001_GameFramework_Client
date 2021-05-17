@@ -35,5 +35,11 @@ public class LobbyUI : BaseUI
             onBattleBtnClick?.Invoke();
         });
     }
+    protected override void OnRelease()
+    {
+        onCloseBtnClick = null;
+        onHeroListBtnClick = null;
+        onBattleBtnClick = null;
+    }
 }
 

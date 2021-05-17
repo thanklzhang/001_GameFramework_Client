@@ -10,16 +10,21 @@ public class HeroInfoCtrl : BaseCtrl
     HeroInfoUI ui;
     public override void OnInit()
     {
-        this.isParallel = false;
+        //this.isParallel = false;
     }
     public override void OnStartLoad()
     {
-        UIManager.Instance.LoadUI<HeroInfoUI>((finishUI) =>
+        this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            ui = finishUI;
-            this.LoadFinish();
+            new LoadUIRequest<HeroInfoUI>(){selfFinishCallback = OnUILoadFinish},
         });
     }
+
+    public void OnUILoadFinish(HeroInfoUI heroInfoUI)
+    {
+        this.ui = heroInfoUI;
+    }
+
 
     public override void OnLoadFinish()
     {

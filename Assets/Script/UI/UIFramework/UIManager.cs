@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class UIManager : Singleton<UIManager>
 {
     Transform uiRoot;
@@ -15,7 +14,7 @@ public class UIManager : Singleton<UIManager>
     public Dictionary<Type, BaseUI> uiCacheDic = new Dictionary<Type, BaseUI>();
 
 
-    internal void LoadUI<T>(Action<T> finishCallback = null) where T : BaseUI, new()
+    internal void GetUICache<T>(Action<T> finishCallback = null) where T : BaseUI, new()
     {
         var type = typeof(T);
         if (uiCacheDic.ContainsKey(type))
@@ -41,18 +40,6 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public T GetUICache<T>() where T : BaseUI
-    {
-        var type = typeof(T);
-        if (uiCacheDic.ContainsKey(type))
-        {
-            var ui = (T)uiCacheDic[type];
-            return ui;
-        }
-
-        return null;
-    }
-
     public void ReleaseUI<T>()
     {
         var type = typeof(T);
@@ -63,7 +50,8 @@ public class UIManager : Singleton<UIManager>
             ui.Release();
 
             var uiConfigInfo = UIConfigInfoDic.GetInfo<T>();
-            AssetManager.Instance.Release(uiConfigInfo.path);
+            ResourceManager.Instance.ReturnObject<GameObject>(uiConfigInfo.path, ui.gameObject);
+            //AssetManager.Instance.Release(uiConfigInfo.path);
         }
         else
         {

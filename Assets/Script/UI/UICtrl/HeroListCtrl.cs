@@ -56,6 +56,14 @@ public class HeroListCtrl : BaseCtrl
         ui.Show();
     }
 
+    public override void OnActive()
+    {
+        TableManager.Instance.Init();
+
+        TableManager.Instance.GetById<object>(111);
+
+        TableManager.Instance.GetAll<object>();
+    }
 
     public override void OnExit()
     {

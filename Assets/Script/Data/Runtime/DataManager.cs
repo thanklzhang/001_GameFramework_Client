@@ -1,17 +1,19 @@
-﻿using System;
+﻿using DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace GameData
 {
-    public class Hero
+    public class DataManager
     {
-        public int id;
-        public int level;
-        public Config.HeroInfo config;
+        
     }
+
 }
+
 
 

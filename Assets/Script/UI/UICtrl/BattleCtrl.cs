@@ -27,10 +27,12 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-        ui.onCloseBtnClick += () =>
-        {
-            CtrlManager.Instance.Exit<BattleCtrl>();
-        };
+        ui.onCloseBtnClick += OnClickCloseBtn;
+    }
+
+    void OnClickCloseBtn()
+    {
+        CtrlManager.Instance.Exit<BattleCtrl>();
     }
 
     public override void OnEnter(CtrlArgs args)
@@ -41,6 +43,7 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnExit()
     {
+        ui.onCloseBtnClick -= OnClickCloseBtn;
         UIManager.Instance.ReleaseUI<BattleUI>();
     }
 

@@ -18,4 +18,10 @@ public class BattleUI : BaseUI
             onCloseBtnClick?.Invoke();
         });
     }
+
+    protected override void OnRelease()
+    {
+        onCloseBtnClick = null;
+    }
+
 }

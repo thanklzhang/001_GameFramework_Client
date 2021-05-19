@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class HeroListCtrlArgs : CtrlArgs
+{
+    public Action yesAction;
+    public Action noAction;
+    public Action closeAction;
+}
+
 //英雄列表 ctrl
 public class HeroListCtrl : BaseCtrl
 {
@@ -58,11 +65,23 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnActive()
     {
+        //组装数据
         TableManager.Instance.Init();
+        var heroInfoTable = TableManager.Instance.Get<HeroInfoTable>();
+        var heroTableList = heroInfoTable.GetByType();
+        heroInfoTable.GetById<object>(111);
+        heroInfoTable.GetList<object>();
 
-        TableManager.Instance.GetById<object>(111);
+        //将组装后的数据传递给 UI 层数据
+        HeroListUIArgs uiArgs = ConvertToUIArgs();
+        ui.Refresh(uiArgs);
 
-        TableManager.Instance.GetAll<object>();
+    }
+
+    public HeroListUIArgs ConvertToUIArgs()
+    {
+        HeroListUIArgs uiArgs = null;
+        return uiArgs;
     }
 
     public override void OnExit()

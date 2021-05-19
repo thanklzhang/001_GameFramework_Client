@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class UIArgs
+{
+
+}
+
 public abstract class BaseUI
 {
     public GameObject gameObject;
@@ -19,6 +24,11 @@ public abstract class BaseUI
     public void Show()
     {
         gameObject.SetActive(true);
+    }
+
+    public virtual void Refresh(UIArgs args)
+    {
+        
     }
 
     public void Hide()

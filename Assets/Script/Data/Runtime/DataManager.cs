@@ -1,19 +1,61 @@
-﻿using DataModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GameData
+public class GameDataStore
 {
-    public class DataManager
+    public void Init()
     {
         
     }
-
 }
 
+public class HeroData
+{
+    public int id;
+    public int level;
+}
 
+public class HeroGameDataStore : GameDataStore
+{
+    //blic int flag;//待定
+    List<HeroData> heroList = new List<HeroData>();
+    Dictionary<int, HeroData> heroDic = new Dictionary<int, HeroData>();
 
+    public List<HeroData> HeroList { get => heroList; }
+    public Dictionary<int, HeroData> HeroDic { get => heroDic; }
+
+    public void SetDataList(List<HeroData> heroList)
+    {
+        //增删改查
+    }
+
+    void AddOneHero(HeroData heroData)
+    {
+    }
+
+    void UpdateOneHero(HeroData heroData)
+    {
+
+    }
+
+    public HeroData GetDataById(int id)
+    {
+        return HeroDic[id];
+    }
+}
+
+public class GameDataManager : Singleton<GameDataManager>
+{
+    HeroGameDataStore heroGameDataStore = new HeroGameDataStore();
+    public HeroGameDataStore HeroGameDataStore { get => heroGameDataStore; }
+
+    internal void Init()
+    {
+        HeroGameDataStore.Init();
+    }
+
+}

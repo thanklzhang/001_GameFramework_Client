@@ -7,19 +7,43 @@ using UnityEngine.UI;
 
 public class HeroListUIArgs : UIArgs
 {
-    public List<HeroCard> cardList;
+    public List<HeroCardUIData> cardList;
 }
 
-public class HeroCard
+public class HeroCardUIData
 {
     public int id;
     public int level;
-    public int isUnlock;
+    public bool isUnlock;
 
-    public void Refresh()
+}
+
+public class HeroCardShowObj
+{
+    GameObject gameObject;
+
+    Text levelText;
+    Text nameText;
+    GameObject unlockFlagObj;
+    Action clickCallback;
+
+    public HeroCardUIData uiData;
+
+    public void Init(GameObject obj, Action clickCallback)
     {
-        
+        this.gameObject = obj;
+        this.clickCallback = clickCallback;
+
     }
+
+    public void Refresh(HeroCardUIData uiData)
+    {
+        this.uiData = uiData;
+        levelText.text = "";
+        nameText.text = "";
+        unlockFlagObj.SetActive(this.uiData.isUnlock);
+    }
+
 }
 
 public class HeroListUI : BaseUI
@@ -30,7 +54,9 @@ public class HeroListUI : BaseUI
     Button goInfoUIBtn;
     Button closeBtn;
 
-    List<HeroCard> cardList = new List<HeroCard>();
+    List<HeroCardUIData> cardList = new List<HeroCardUIData>();
+
+    List<HeroCardShowObj> showObjList = new List<HeroCardShowObj>();
     protected override void OnInit()
     {
         goInfoUIBtn = this.transform.Find("root/HeroCard/enterInfoBtn").GetComponent<Button>();
@@ -52,15 +78,29 @@ public class HeroListUI : BaseUI
         HeroListUIArgs heroListArgs = (HeroListUIArgs)args;
 
         this.cardList = heroListArgs.cardList;
+
+        this.InitHeroList();
+
         this.RefreshHeroList();
+    }
+
+    void InitHeroList()
+    {
+        showObjList = new List<HeroCardShowObj>();
+        for (int i = 0; i < this.cardList.Count; i++)
+        {
+            var showObj = new HeroCardShowObj();
+            showObjList.Add(showObj);
+        }
     }
 
     void RefreshHeroList()
     {
-        for (int i = 0; i < this.cardList.Count; i++)
+        for (int i = 0; i < this.showObjList.Count; i++)
         {
+            var cardShow = this.showObjList[i];
             var card = this.cardList[i];
-            card.Refresh();
+            cardShow.Refresh(card);
         }
     }
 

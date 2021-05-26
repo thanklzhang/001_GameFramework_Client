@@ -30,13 +30,13 @@ public class LoginNetHandler : NetHandler
 
     public void LoginResult(byte[] bytes)
     {
-        var resp = GC2LS.respAskLogin.Parser.ParseFrom(bytes);
+        //var resp = GC2LS.respAskLogin.Parser.ParseFrom(bytes);
 
-        //refresh data
-        LoginData.Instance.SetData(resp);
-        UserData.Instance.SetAccount(resp.UserAccount, resp.Token);
-        this.loginResultAction?.Invoke(resp.IsSuccess);
-        this.loginResultAction = null;
+        ////refresh data
+        //LoginData.Instance.SetData(resp);
+        //UserData.Instance.SetAccount(resp.UserAccount, resp.Token);
+        //this.loginResultAction?.Invoke(resp.IsSuccess);
+        //this.loginResultAction = null;
 
     }
 }

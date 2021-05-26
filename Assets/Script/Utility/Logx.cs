@@ -23,6 +23,8 @@ public class Logx
 
     }
 
+   
+
     public static void Log(object obj)
     {
         Debug.Log(obj);
@@ -40,55 +42,26 @@ public class Logx
 
     public static void Log(string flag, object obj)
     {
-        Debug.Log(flag + ":" + obj);
+        Log(flag + ":" + obj);
+    }
+    public static void LogWarning(string flag, object obj)
+    {
+        LogWarning(flag + ":" + obj);
+    }
+    public static void LogError(string flag, object obj)
+    {
+        LogError(flag + ":" + obj);
     }
 
-    public static void Log(string flag, string flag2, object obj)
+    public static void Zxy(object obj)
     {
-        Debug.Log(flag + ":" + flag2 + ":" + obj);
-    }
-    public static void LogWarning(string flag, string flag2, object obj)
-    {
-        Debug.LogWarning(flag + ":" + flag2 + ":" + obj);
-    }
-    public static void LogError(string flag, string flag2, object obj)
-    {
-        Debug.LogError(flag + ":" + flag2 + ":" + obj);
+        Log(LogType.Zxy.ToString(), obj);
     }
 
     //-------------
     //Custom
 
-    public static void Error()
-    {
-        
-    }
 
-    //----------
-    public static void Logz(string obj)
-    {
-        Log(LogType.Zxy.ToString(), obj);
-    }
-    public static void LogzWarning(string obj)
-    {
-        LogWarningZxy(LogType.Zxy.ToString(), obj);
-    }
-    public static void LogzError(string obj)
-    {
-        LogErrorZxy(LogType.Zxy.ToString(), obj);
-    }
-    public static void LogZxy(string flag2, object obj)
-    {
-        //Log("zxy", flag2, obj);
-    }
-    public static void LogWarningZxy(string flag2, object obj)
-    {
-        LogWarning("zxy", flag2, obj);
-    }
-    public static void LogErrorZxy(string flag2, object obj)
-    {
-        LogError("zxy", flag2, obj);
-    }
 
     //[UnityEditor.Callbacks.OnOpenAssetAttribute(0)]
     //static bool OnOpenAsset(int instanceID, int line)

@@ -23,7 +23,7 @@ public class CombatEntity
 
     public GameObject gameObject;
     List<CombatSkill> skills;
-    public Config.HeroInfo config;
+    //public Config.HeroInfo config;
 
     internal void PlayAnimation(string animationName)
     {
@@ -42,7 +42,7 @@ public class CombatEntity
         combatHero.actionSpeed = serHero.FinalActionSpeed;
 
         combatHero.currHealth = combatHero.maxHealth;
-        combatHero.config = Config.ConfigManager.Instance.GetById<Config.HeroInfo>(combatHero.configId);
+        //combatHero.config = Config.ConfigManager.Instance.GetById<Config.HeroInfo>(combatHero.configId);
 
         return combatHero;
     }

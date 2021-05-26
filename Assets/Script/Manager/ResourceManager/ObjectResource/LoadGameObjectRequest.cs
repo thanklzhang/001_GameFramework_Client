@@ -18,7 +18,7 @@ public class LoadGameObjectRequest : LoadObjectRequest
         this.count = count;
     }
 
-    public bool CheckFinish()
+    public override bool CheckFinish()
     {
         return 0 == currNeedLoadSet.Count;
     }
@@ -46,18 +46,18 @@ public class LoadGameObjectRequest : LoadObjectRequest
         }
         else
         {
-            Logx.LogzError("the currPath is not correct : " + currPath);
+            Logx.LogError("the currPath is not correct : " + currPath);
         }
 
 
     }
 
-    public void Finish()
+    public override void Finish()
     {
 
     }
 
-    public void Release()
+    public override void Release()
     {
         for (int i = this.pathList.Length - 1; i >= 0; i--)
         {
@@ -66,7 +66,7 @@ public class LoadGameObjectRequest : LoadObjectRequest
         }
     }
 
-    public void Start()
+    public override void Start()
     {
         throw new NotImplementedException();
     }

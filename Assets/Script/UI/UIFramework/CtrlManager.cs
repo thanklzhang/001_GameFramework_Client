@@ -77,7 +77,7 @@ public class CtrlManager : Singleton<CtrlManager>
         }
         else
         {
-            Logx.LogzError("findCtrl == ctrl : " + typeof(T) + " != " + currMainCtrl?.GetType());
+            Logx.LogError("findCtrl == ctrl : " + typeof(T) + " != " + currMainCtrl?.GetType());
             return;
         }
     }
@@ -155,7 +155,7 @@ public class CtrlManager : Singleton<CtrlManager>
     //    var findCtrl = FindCtrl<T>();
     //    if (null == findCtrl)
     //    {
-    //        //Logx.LogzError("the findCtrl is null : " + typeof(T));
+    //        //Logx.LogError("the findCtrl is null : " + typeof(T));
     //        return;
     //    }
 
@@ -191,7 +191,7 @@ public class CtrlManager : Singleton<CtrlManager>
     //        }
     //        else
     //        {
-    //            //Logx.LogzError("findCtrl == ctrl : " + typeof(T) + " != " + currMainCtrl?.GetType());
+    //            //Logx.LogError("findCtrl == ctrl : " + typeof(T) + " != " + currMainCtrl?.GetType());
     //            return;
     //        }
     //    }

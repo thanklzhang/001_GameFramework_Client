@@ -1,6 +1,5 @@
 ﻿using Assets.Script.Combat;
 using FixedPointy;
-using GameModelData;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;

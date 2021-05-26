@@ -24,7 +24,7 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            ////Logx.LogzError("loadUI : the type is not found : " + type);
+            ////Logx.LogError("loadUI : the type is not found : " + type);
             //return null;
 
             var uiConfigInfo = UIConfigInfoDic.GetInfo<T>();
@@ -55,7 +55,7 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            //Logx.LogzWarning("the ui is not exist in cache dic : " + type);
+            //Logx.LogWarning("the ui is not exist in cache dic : " + type);
         }
     }
 }

@@ -38,13 +38,13 @@ public class AssetLoader : BaseLoader
         var assetBundleCache = AssetBundleManager.Instance.GetCacheByPath(abPath);
         if (null == assetBundleCache)
         {
-            Logx.LogErrorZxy("AssetLoader", "the assetBundleCache is null : " + abPath);
+            Logx.LogError("AssetLoader", "the assetBundleCache is null : " + abPath);
             return;
         }
 
         if (null == assetBundleCache.assetBundle)
         {
-            Logx.LogErrorZxy("AssetLoader", "the assetBundleCache.assetBundle is null : " + abPath);
+            Logx.LogError("AssetLoader", "the assetBundleCache.assetBundle is null : " + abPath);
             return;
         }
         var ab = assetBundleCache.assetBundle;

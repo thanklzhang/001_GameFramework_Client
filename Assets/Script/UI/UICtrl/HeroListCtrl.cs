@@ -65,22 +65,33 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnActive()
     {
-        //组装数据
-        TableManager.Instance.Init();
-        var heroInfoTable = TableManager.Instance.Get<HeroInfoTable>();
-        var heroTableList = heroInfoTable.GetByType();
-        heroInfoTable.GetById<object>(111);
-        heroInfoTable.GetList<object>();
-
-        //将组装后的数据传递给 UI 层数据
+        //组装数据并传递给 UI 层数据
         HeroListUIArgs uiArgs = ConvertToUIArgs();
         ui.Refresh(uiArgs);
-
     }
 
     public HeroListUIArgs ConvertToUIArgs()
     {
-        HeroListUIArgs uiArgs = null;
+        var heroTbStore = TableManager.Instance.HeroInfoStore;
+        var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
+        var heroList = heroTbStore.List;
+        HeroListUIArgs uiArgs = new HeroListUIArgs();
+        uiArgs.cardList = new List<HeroCardUIData>();
+        foreach (var item in heroList)
+        {
+            var hero = item;
+            var uiData = new HeroCardUIData();
+            uiData.id = hero.Id;
+            var serverHeroData = heroDataStore.GetDataById(hero.Id);
+            if (serverHeroData != null)
+            {
+                uiData.level = serverHeroData.level;
+                uiData.isUnlock = true;
+            }
+
+            uiArgs.cardList.Add(uiData);
+        }
+
         return uiArgs;
     }
 

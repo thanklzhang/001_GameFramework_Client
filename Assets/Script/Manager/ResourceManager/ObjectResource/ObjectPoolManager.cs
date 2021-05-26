@@ -206,7 +206,7 @@ public class ObjectPool
             }
             else
             {
-                Logx.LogzWarning("the insId is not found : " + insId);
+                Logx.LogWarning("the insId is not found : " + insId);
             }
         }
 
@@ -243,7 +243,7 @@ public class ObjectPoolGroup
         }
         else
         {
-            Logx.LogzWarning("ObjectPoolGroup : GetObject : the path is not found : " + path);
+            Logx.LogWarning("ObjectPoolGroup : GetObject : the path is not found : " + path);
         }
 
 
@@ -283,7 +283,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
         else
         {
-            Logx.LogzWarning("the type is not found : " + type.ToString());
+            Logx.LogWarning("the type is not found : " + type.ToString());
         }
     }
 

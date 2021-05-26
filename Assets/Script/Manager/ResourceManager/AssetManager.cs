@@ -54,7 +54,7 @@ public class AssetManager : Singleton<AssetManager>
         string abPath = "";
         if (!assetToAbDic.TryGetValue(assetPath, out abPath))
         {
-            Logx.LogWarningZxy("AssetManager", "the abPath is not found by assetPath : " + assetPath);
+            Logx.LogWarning("AssetManager", "the abPath is not found by assetPath : " + assetPath);
         }
         return abPath;
     }
@@ -75,7 +75,7 @@ public class AssetManager : Singleton<AssetManager>
     {
         if (!this.assetToAbDic.ContainsKey(assetPath))
         {
-            Logx.LogErrorZxy("Asset", "LoadAsync : the asset doesnt exist in assetToAbDic : " + assetPath);
+            Logx.LogError("Asset", "LoadAsync : the asset doesnt exist in assetToAbDic : " + assetPath);
             return;
         }
 
@@ -107,7 +107,7 @@ public class AssetManager : Singleton<AssetManager>
         string abPath = "";
         if (!assetToAbDic.TryGetValue(assetPath, out abPath))
         {
-            Logx.LogWarningZxy("Asset", "AddAssetBundleReferenceByAssetPath : the abPath is not found by assetPath : " + assetPath);
+            Logx.LogWarning("Asset", "AddAssetBundleReferenceByAssetPath : the abPath is not found by assetPath : " + assetPath);
             return;
         }
         AssetBundleManager.Instance.AddAssetBundleReference(abPath);
@@ -170,13 +170,13 @@ public class AssetManager : Singleton<AssetManager>
         AssetCache cache = null;
         if (!assetCacheDic.TryGetValue(assetPath, out cache))
         {
-            Logx.LogWarningZxy("AssetManager", "Release : the cache doesnt exist : " + assetPath);
+            Logx.LogWarning("AssetManager", "Release : the cache doesnt exist : " + assetPath);
             return;
         }
 
         if (cache.RefCount <= 0)
         {
-            Logx.LogWarningZxy("AssetManager", "Release : the refCount of cache is 0 : " + assetPath);
+            Logx.LogWarning("AssetManager", "Release : the refCount of cache is 0 : " + assetPath);
             return;
         }
 
@@ -186,7 +186,7 @@ public class AssetManager : Singleton<AssetManager>
         //    string abPath = "";
         //    if (!assetToAbDic.TryGetValue(assetPath, out abPath))
         //    {
-        //        Logx.LogWarningZxy("AssetManager", "Release : the abPath is not found by assetPath : " + assetPath);
+        //        Logx.LogWarning("AssetManager", "Release : the abPath is not found by assetPath : " + assetPath);
         //        return;
         //    }
 
@@ -196,7 +196,7 @@ public class AssetManager : Singleton<AssetManager>
         string abPath = "";
         if (!assetToAbDic.TryGetValue(assetPath, out abPath))
         {
-            Logx.LogWarningZxy("AssetManager", "Release : the abPath is not found by assetPath : " + assetPath);
+            Logx.LogWarning("AssetManager", "Release : the abPath is not found by assetPath : " + assetPath);
             return;
         }
 

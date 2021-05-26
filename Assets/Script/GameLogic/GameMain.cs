@@ -28,27 +28,53 @@ public class GameMain : MonoBehaviour
     {
         Debug.Log("game startup ... ");
 
+
+
+        NetHandlerManager.Instance.Init();
+
+        //TODO 此时热更完成
+
         //游戏中不依赖下载资源的初始化
         var uiRoot = transform.Find("Canvas");
         if (null == uiRoot)
         {
             Debug.LogError("the uiRoot with 'Canvas' name is null");
-            return;
         }
-
-        DataManager.Instance.Init();
-        NetHandlerManager.Instance.Init();
-
         UIManager.Instance.Init(uiRoot);
+        CtrlManager.Instance.Init();
+
+        //读取表数据 这里可能换成异步操作
+        TableManager.Instance.Init();
+        TableManager.Instance.LoadAllTableData();
+        //
 
         AssetBundleManager.Instance.Init();
         AssetManager.Instance.Init();
         LoadTaskManager.Instance.Init();
 
-        CtrlManager.Instance.Init();
+        GameDataManager.Instance.Init();
 
+        //TODO 进入登录状态
+        //CtrlManager.Instance.Enter<LoginCtrl>();
+
+
+        //登录后 模拟服务端推游戏数据
+        List<HeroData> heroList = new List<HeroData>()
+        {
+            new HeroData(){  id = 1, level = 12},
+            new HeroData(){  id = 2, level = 11},
+            new HeroData(){  id = 4, level = 27},
+        };
+        var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
+        heroDataStore.SetDataList(heroList);
+
+        //数据发送成功后 进入大厅
         CtrlManager.Instance.Enter<LobbyCtrl>();
 
+    }
+
+    IEnumerator dd()
+    {
 
         //var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
         //ResourceManager.Instance.GetObject<GameObject>(assetPath, (gameObject) =>
@@ -93,10 +119,8 @@ public class GameMain : MonoBehaviour
         //}, false);
 
         //StartCoroutine(dd());
-    }
 
-    IEnumerator dd()
-    {
+
         yield return new WaitForSeconds(1);
         var assetPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab";
         var abPath = "Assets/BuildRes/Prefabs/UI/EquipmentListUI.ab";

@@ -25,16 +25,16 @@ public class HeroListNetHandler : NetHandler
 
     public void RespServerHeroList(byte[] data)
     {
-        GC2CS.respHeroList resp = GC2CS.respHeroList.Parser.ParseFrom(data);
-        var list = resp.HeroList.ToList();
-        DataManager.Instance.heroData.RefreshHeroList(list);
+        //GC2CS.respHeroList resp = GC2CS.respHeroList.Parser.ParseFrom(data);
+        //var list = resp.HeroList.ToList();
+        //DataManager.Instance.heroData.RefreshHeroList(list);
 
-        //callback 在最后置空 防止回调行为改变 callback
-        var action = heroListAction;
-        heroListAction = null;
-        action?.Invoke();
-        //heroListAction?.Invoke();
+        ////callback 在最后置空 防止回调行为改变 callback
+        //var action = heroListAction;
         //heroListAction = null;
+        //action?.Invoke();
+        ////heroListAction?.Invoke();
+        ////heroListAction = null;
     }
     
 }

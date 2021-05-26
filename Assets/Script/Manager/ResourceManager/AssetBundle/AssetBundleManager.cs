@@ -167,7 +167,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         {
             if (abCache.RefCount <= 0)
             {
-                Logx.LogWarningZxy("AB", "the refCount of abCache is 0 : " + abPath);
+                Logx.LogWarning("AB", "the refCount of abCache is 0 : " + abPath);
                 return;
             }
             //abCache.RefCount -= 1;
@@ -206,7 +206,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         {
             if (abCache.RefCount > 0)
             {
-                Logx.LogWarningZxy("AB", "the refCount of abCache is using(refCount > 0) : " + abPath);
+                Logx.LogWarning("AB", "the refCount of abCache is using(refCount > 0) : " + abPath);
                 return;
             }
 

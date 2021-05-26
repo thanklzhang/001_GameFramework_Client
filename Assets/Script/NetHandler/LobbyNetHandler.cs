@@ -20,14 +20,14 @@ public class LobbyNetHandler : NetHandler
    
     public void AskEnterGameServer(Action<bool> action)
     {
-        //send message
-        GC2CS.reqEnterGameService req = new GC2CS.reqEnterGameService();
-        req.Account = UserData.Instance.userAccount;
-        req.Token = UserData.Instance.token;
+        ////send message
+        //GC2CS.reqEnterGameService req = new GC2CS.reqEnterGameService();
+        //req.Account = UserData.Instance.userAccount;
+        //req.Token = UserData.Instance.token;
 
-        this.askEnterGameAction = action;
+        //this.askEnterGameAction = action;
 
-        this.SendMsgToCS(ProtoMsgIds.GC2CS_EnterGameService, req);
+        //this.SendMsgToCS(ProtoMsgIds.GC2CS_EnterGameService, req);
 
     }
 

@@ -9,7 +9,7 @@ public class GameDataStore
 {
     public void Init()
     {
-        
+
     }
 }
 
@@ -25,12 +25,14 @@ public class HeroGameDataStore : GameDataStore
     List<HeroData> heroList = new List<HeroData>();
     Dictionary<int, HeroData> heroDic = new Dictionary<int, HeroData>();
 
-    public List<HeroData> HeroList { get => heroList; }
+    public List<HeroData> HeroList { get => heroList; set => heroList = value; }
     public Dictionary<int, HeroData> HeroDic { get => heroDic; }
 
     public void SetDataList(List<HeroData> heroList)
     {
         //增删改查
+        this.heroList = heroList;
+        this.heroDic = this.heroList.ToDictionary(hero => hero.id);
     }
 
     void AddOneHero(HeroData heroData)
@@ -44,7 +46,15 @@ public class HeroGameDataStore : GameDataStore
 
     public HeroData GetDataById(int id)
     {
-        return HeroDic[id];
+        if (HeroDic.ContainsKey(id))
+        {
+            return HeroDic[id];
+        }
+        else
+        {
+            return null;
+        }
+
     }
 }
 

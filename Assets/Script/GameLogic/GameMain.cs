@@ -62,8 +62,7 @@ public class GameMain : MonoBehaviour
         List<HeroData> heroList = new List<HeroData>()
         {
             new HeroData(){  id = 1, level = 12},
-            new HeroData(){  id = 2, level = 11},
-            new HeroData(){  id = 4, level = 27},
+            new HeroData(){  id = 3, level = 27},
         };
         var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
         heroDataStore.SetDataList(heroList);

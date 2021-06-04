@@ -72,12 +72,11 @@ public class HeroListCtrl : BaseCtrl
 
     public HeroListUIArgs ConvertToUIArgs()
     {
-        var heroTbStore = TableManager.Instance.HeroInfoStore;
         var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
-        var heroList = heroTbStore.List;
+        var heroTbList = TableManager.Instance.GetList<Table.HeroInfo>();
         HeroListUIArgs uiArgs = new HeroListUIArgs();
         uiArgs.cardList = new List<HeroCardUIData>();
-        foreach (var item in heroList)
+        foreach (var item in heroTbList)
         {
             var hero = item;
             var uiData = new HeroCardUIData();

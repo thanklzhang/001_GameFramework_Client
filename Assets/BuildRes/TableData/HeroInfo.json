@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1000001,
+        "name": "\u4e0a\u5b98\u7fce",
+        "describe": "\u523a\u5ba2 \u539f\u662f\u5d06\u5cd2\u6d3e\u5f1f\u5b50",
+        "modelId": 15011001
+    },
+    {
+        "id": 1000002,
+        "name": "\u51e4\u7d2b\u5915",
+        "describe": "\u523a\u5ba2 \u9526\u8863\u536b\u526f\u5343\u6237",
+        "modelId": 15011002
+    },
+    {
+        "id": 1000003,
+        "name": "\u5510\u4f9d",
+        "describe": "\u5f13\u7bad\u624b + \u6218\u58eb \u5ce8\u7709\u5f1f\u5b50",
+        "modelId": 15011001
+    },
+    {
+        "id": 1000004,
+        "name": "\u591c\u9b42",
+        "describe": "\u6218\u58eb \u5f20\u65e0\u5fcc\u540e\u4ee3",
+        "modelId": 15011002
+    },
+    {
+        "id": 1000005,
+        "name": "\u8427\u7389",
+        "describe": "\u6218\u58eb \u5ce8\u7709\u638c\u95e8",
+        "modelId": 15011001
+    },
+    {
+        "id": 1000006,
+        "name": "\u6797\u6e05\u8fdc",
+        "describe": "\u6218\u58eb \u6b66\u5f53\u638c\u95e8",
+        "modelId": 15011002
+    }
+]

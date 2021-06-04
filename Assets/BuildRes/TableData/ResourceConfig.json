@@ -1,0 +1,122 @@
+[
+    {
+        "id": 15000001,
+        "name": "LoginUI",
+        "path": "Prefabs/UI/LoginUI",
+        "ext": "prefab",
+        "type": 1,
+        "tag": ""
+    },
+    {
+        "id": 15000002,
+        "name": "LobbyUI",
+        "path": "Prefabs/UI/LobbyUI",
+        "ext": "prefab",
+        "type": 1,
+        "tag": ""
+    },
+    {
+        "id": 15000003,
+        "name": "HeroListUI",
+        "path": "Prefabs/UI/HeroListUI",
+        "ext": "prefab",
+        "type": 1,
+        "tag": ""
+    },
+    {
+        "id": 15000004,
+        "name": "MateMainUI",
+        "path": "Prefabs/UI/MateUI",
+        "ext": "prefab",
+        "type": 1,
+        "tag": ""
+    },
+    {
+        "id": 15000005,
+        "name": "CombatUI",
+        "path": "Prefabs/UI/CombatUI",
+        "ext": "prefab",
+        "type": 1,
+        "tag": ""
+    },
+    {
+        "id": 15000006,
+        "name": "LoadingUI",
+        "path": "Prefabs/UI/LoadingUI",
+        "ext": "prefab",
+        "type": 1,
+        "tag": ""
+    },
+    {
+        "id": 15001001,
+        "name": "hero_100",
+        "path": "Textures/HeroBodyPic",
+        "ext": "png",
+        "type": 2,
+        "tag": ""
+    },
+    {
+        "id": 15006001,
+        "name": "click",
+        "path": "Audio",
+        "ext": "mp3",
+        "type": 3,
+        "tag": ""
+    },
+    {
+        "id": 15008001,
+        "name": "eft_select_entity_01",
+        "path": "Prefabs/Effects",
+        "ext": "prefab",
+        "type": 4,
+        "tag": ""
+    },
+    {
+        "id": 15008002,
+        "name": "BuffEffect",
+        "path": "Prefabs/Effects",
+        "ext": "prefab",
+        "type": 4,
+        "tag": ""
+    },
+    {
+        "id": 15010001,
+        "name": "lobby_scene_001",
+        "path": "Scenes",
+        "ext": "unity",
+        "type": 5,
+        "tag": ""
+    },
+    {
+        "id": 15011001,
+        "name": "Hero_101",
+        "path": "Prefabs/Characters",
+        "ext": "prefab",
+        "type": 6,
+        "tag": ""
+    },
+    {
+        "id": 15011002,
+        "name": "Hero_102",
+        "path": "Prefabs/Characters",
+        "ext": "prefab",
+        "type": 6,
+        "tag": ""
+    },
+    {
+        "id": 15011003,
+        "name": "Hero_103",
+        "path": "Prefabs/Characters",
+        "ext": "prefab",
+        "type": 6,
+        "tag": ""
+    },
+    {
+        "id": 15011004,
+        "name": "Hero_104",
+        "path": "Prefabs/Characters",
+        "ext": "prefab",
+        "type": 6,
+        "tag": ""
+    }
+]

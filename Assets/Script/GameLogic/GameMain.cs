@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Assets.Script.Combat;
+using LitJson;
 
 public class GameMain : MonoBehaviour
 {
@@ -28,8 +29,6 @@ public class GameMain : MonoBehaviour
     {
         Debug.Log("game startup ... ");
 
-
-
         NetHandlerManager.Instance.Init();
 
         //TODO 此时热更完成
@@ -46,6 +45,8 @@ public class GameMain : MonoBehaviour
         //读取表数据 这里可能换成异步操作
         TableManager.Instance.Init();
         TableManager.Instance.LoadAllTableData();
+        //var heroTb = TableManager.Instance.GetById<Table.HeroInfo>(1000002);
+        //Logx.Log("hero : " + heroTb.Name);
         //
 
         AssetBundleManager.Instance.Init();
@@ -61,8 +62,8 @@ public class GameMain : MonoBehaviour
         //登录后 模拟服务端推游戏数据
         List<HeroData> heroList = new List<HeroData>()
         {
-            new HeroData(){  id = 1, level = 12},
-            new HeroData(){  id = 3, level = 27},
+            new HeroData(){  id = 1000002, level = 12},
+            new HeroData(){  id = 1000003, level = 27},
         };
         var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
         heroDataStore.SetDataList(heroList);

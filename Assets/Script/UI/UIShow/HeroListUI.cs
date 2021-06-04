@@ -47,7 +47,7 @@ public class HeroCardShowObj
         this.uiData = uiData;
 
         var id = this.uiData.id;
-        var heroInfoTable = TableManager.Instance.HeroInfoStore.GetById(id);
+        var heroInfoTable = TableManager.Instance.GetById<Table.HeroInfo>(id);
         levelText.text = "" + this.uiData.level;
         nameText.text = "" + heroInfoTable.Name;
         unlockFlagObj.SetActive(!this.uiData.isUnlock);

@@ -26,20 +26,30 @@ public class HeroCardShowObj
     Text levelText;
     Text nameText;
     GameObject unlockFlagObj;
-    Action clickCallback;
+
+    Button upgradeLevelBtn;
+
+    Action<int> clickUpgradeLevelCallback;
 
     public HeroCardUIData uiData;
 
-    public void Init(GameObject obj, Action clickCallback)
+    public void Init(GameObject obj, Action<int> clickUpgradeLevelCallback)
     {
         this.gameObject = obj;
         this.transform = this.gameObject.transform;
 
-        this.clickCallback = clickCallback;
+        this.clickUpgradeLevelCallback = clickUpgradeLevelCallback;
 
         levelText = this.transform.Find("level").GetComponent<Text>();
         nameText = this.transform.Find("name").GetComponent<Text>();
         unlockFlagObj = this.transform.Find("lockFlag").gameObject;
+        upgradeLevelBtn = this.transform.Find("upgradeLevelBtn").GetComponent<Button>();
+
+
+        upgradeLevelBtn.onClick.AddListener(() =>
+        {
+            clickUpgradeLevelCallback?.Invoke(this.uiData.id);
+        });
     }
 
     public void Refresh(HeroCardUIData uiData)
@@ -51,6 +61,13 @@ public class HeroCardShowObj
         levelText.text = "" + this.uiData.level;
         nameText.text = "" + heroInfoTable.Name;
         unlockFlagObj.SetActive(!this.uiData.isUnlock);
+        upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
+    }
+
+    public void Release()
+    {
+        clickUpgradeLevelCallback = null;
+        upgradeLevelBtn.onClick.RemoveAllListeners();
     }
 
 }
@@ -59,6 +76,8 @@ public class HeroListUI : BaseUI
 {
     public Action onGoInfoUIBtnClick;
     public Action onCloseBtnClick;
+
+    public Action<int> onClickOneHeroUpgradeLevelBtn;
 
     Button goInfoUIBtn;
     Button closeBtn;
@@ -83,6 +102,18 @@ public class HeroListUI : BaseUI
         {
             onCloseBtnClick?.Invoke();
         });
+    }
+
+    internal void RefreshOneHero(HeroCardUIData nowHeroData)
+    {
+        foreach (var item in showDataObjList)
+        {
+            if (item.uiData.id == nowHeroData.id)
+            {
+                item.Refresh(nowHeroData);
+                break;
+            }
+        }
     }
 
     public override void Refresh(UIArgs args)
@@ -120,7 +151,7 @@ public class HeroListUI : BaseUI
             {
                 showObj = new HeroCardShowObj();
                 showDataObjList.Add(showObj);
-                showObj.Init(go, null);
+                showObj.Init(go, onClickOneHeroUpgradeLevelBtn);
             }
 
             go.SetActive(true);
@@ -138,5 +169,14 @@ public class HeroListUI : BaseUI
     {
         onGoInfoUIBtnClick = null;
         onCloseBtnClick = null;
+
+        foreach (var item in showDataObjList)
+        {
+            item.Release();
+        }
+
+        showDataObjList = null;
+        cardDataList = null;
+
     }
 }

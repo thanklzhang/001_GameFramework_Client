@@ -7,6 +7,18 @@ using UnityEngine;
 
 public class NetworkManager : Singleton<NetworkManager>
 {
+    /// <summary>
+    /// 发送同步包
+    /// </summary>
+    /// <param name="msgId"></param>
+    /// <param name="msgData"></param>
+    /// <param name="callback"></param>
+    public void SendMsg(int msgId,byte[] msgData)
+    {
+        
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////
     ClientConnect client;
 
     public void ConnectLoginServer()

@@ -30,16 +30,14 @@ public class TableDataLoader:Singleton<TableDataLoader>
         List<TableInfo> infoList = new List<TableInfo>();
         files.ToList().ForEach(file =>
         {
-
-            // 从文件中读取并显示每行
-            string line = FileOperate.GetTextFromFile(file);
+            string jsonStr = FileOperate.GetTextFromFile(file);
 
             TableInfo info = new TableInfo();
             var ext = Path.GetExtension(file);
             if (ext == ".json")
             {
                 info.name = Path.GetFileNameWithoutExtension(file);
-                info.json = line;
+                info.json = jsonStr;
                 infoList.Add(info);
             }
            

@@ -38,8 +38,7 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-        ui.onCloseBtnClick += OnClickCloseBtn;
-        ui.onGoInfoUIBtnClick += OnClickGoInfoUIBtn;
+        
     }
 
     public void OnClickCloseBtn()
@@ -58,6 +57,11 @@ public class HeroListCtrl : BaseCtrl
         CtrlManager.Instance.Enter<ConfirmCtrl>(args);
     }
 
+    public void OnClickOneHeroUpgradeLevelBtn(int heroId)
+    {
+        ServiceManager.Instance.heroService.UpgradeHeroLevel(heroId);
+    }
+
     public override void OnEnter(CtrlArgs args)
     {
         ui.Show();
@@ -65,9 +69,48 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnActive()
     {
+        ui.onCloseBtnClick += OnClickCloseBtn;
+        ui.onGoInfoUIBtnClick += OnClickGoInfoUIBtn;
+        ui.onClickOneHeroUpgradeLevelBtn += OnClickOneHeroUpgradeLevelBtn;
+
+        EventDispatcher.AddListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+
+
         //组装数据并传递给 UI 层数据
         HeroListUIArgs uiArgs = ConvertToUIArgs();
         ui.Refresh(uiArgs);
+    }
+
+    public override void OnInactive()
+    {
+        ui.onCloseBtnClick -= OnClickCloseBtn;
+        ui.onGoInfoUIBtnClick -= OnClickGoInfoUIBtn;
+        ui.onClickOneHeroUpgradeLevelBtn -= OnClickOneHeroUpgradeLevelBtn;
+
+        EventDispatcher.RemoveListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+    }
+
+
+    public void OnUpgradeHeroLevel(HeroData heroData)
+    {
+        //目前不用传来的 直接取值即可
+        var nowHeroData = GameDataManager.Instance.HeroGameDataStore.GetDataById(heroData.id);
+        ui.RefreshOneHero(ConvertToUIHeroData(nowHeroData));
+
+    }
+
+    public HeroCardUIData ConvertToUIHeroData(HeroData heroData)
+    {
+        HeroCardUIData uiData = new HeroCardUIData();
+        uiData.id = heroData.id;
+        uiData.level = heroData.level;
+        var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
+        var serverHeroData = heroDataStore.GetDataById(heroData.id);
+        if (serverHeroData != null)
+        {
+            uiData.isUnlock = true;
+        }
+        return uiData;
     }
 
     public HeroListUIArgs ConvertToUIArgs()
@@ -96,8 +139,7 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnExit()
     {
-        ui.onCloseBtnClick -= OnClickCloseBtn;
-        ui.onGoInfoUIBtnClick -= OnClickGoInfoUIBtn;
+     
 
         UIManager.Instance.ReleaseUI<HeroListUI>();
     }

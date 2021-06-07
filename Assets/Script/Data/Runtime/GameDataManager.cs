@@ -28,7 +28,7 @@ public class HeroGameDataStore : GameDataStore
     public List<HeroData> HeroList { get => heroList; set => heroList = value; }
     public Dictionary<int, HeroData> HeroDic { get => heroDic; }
 
-    public void SetDataList(List<HeroData> heroList)
+    public void SetHeroDataList(List<HeroData> heroList)
     {
         //增删改查
         this.heroList = heroList;
@@ -37,11 +37,18 @@ public class HeroGameDataStore : GameDataStore
 
     void AddOneHero(HeroData heroData)
     {
+        
     }
 
-    void UpdateOneHero(HeroData heroData)
+    public void UpdateOneHero(HeroData heroData)
     {
-
+        //update
+        var findData = GetDataById(heroData.id);
+        if (findData != null)
+        {
+            findData.level = heroData.level;
+            //idUnlock
+        }
     }
 
     public HeroData GetDataById(int id)

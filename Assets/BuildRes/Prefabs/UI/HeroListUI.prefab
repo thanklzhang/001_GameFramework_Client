@@ -680,12 +680,12 @@ GameObject:
   - component: {fileID: 7870245562350087357}
   - component: {fileID: 658705637130535485}
   m_Layer: 0
-  m_Name: upgradeBtn
+  m_Name: upgradeLevelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2013025215357964385
 RectTransform:
   m_ObjectHideFlags: 0
@@ -703,7 +703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.1, y: -91.6}
+  m_AnchoredPosition: {x: 5, y: -91.6}
   m_SizeDelta: {x: 140.18854, y: 54.062317}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7954264049954277777
@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+  m_Color: {r: 0.11409152, g: 0.990566, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1037,7 +1037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &278550906598784329
 RectTransform:
   m_ObjectHideFlags: 0

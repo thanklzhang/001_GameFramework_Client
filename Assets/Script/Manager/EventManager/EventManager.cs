@@ -105,7 +105,7 @@ static internal class EventManager
     #endregion
 
     #region AddListener
-    //No parameters
+
     static public void AddListener(int eventType, Callback handler)
     {
         OnListenerAdding(eventType, handler);
@@ -136,7 +136,8 @@ static internal class EventManager
 
     #region RemoveListener
     //No parameters
-    
+
+   
     static public void RemoveListener(int eventType, Callback handler)
     {
         OnListenerRemoving(eventType, handler);
@@ -173,6 +174,7 @@ static internal class EventManager
     #region Broadcast
 
     //No parameters
+    
     static public void Broadcast(int eventType)
     {
         OnBroadcasting(eventType);
@@ -188,12 +190,14 @@ static internal class EventManager
             }
             else
             {
-                throw CreateBroadcastSignatureException(eventType);
+                //throw CreateBroadcastSignatureException(eventType);
+                Logx.LogWarning("the event hasnt listener : " + eventType);
             }
         }
     }
-    
+
     //Single parameter
+   
     static public void Broadcast<T>(int eventType, T arg1)
     {
 #if LOG_ALL_MESSAGES || LOG_BROADCAST_MESSAGE

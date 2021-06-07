@@ -55,9 +55,16 @@ public class GameMain : MonoBehaviour
 
         GameDataManager.Instance.Init();
 
+        ServiceManager.Instance.Init();
+
         //TODO 进入登录状态
         //CtrlManager.Instance.Enter<LoginCtrl>();
 
+
+        //net test :
+
+
+       
 
         //登录后 模拟服务端推游戏数据
         List<HeroData> heroList = new List<HeroData>()
@@ -66,10 +73,12 @@ public class GameMain : MonoBehaviour
             new HeroData(){  id = 1000003, level = 27},
         };
         var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
-        heroDataStore.SetDataList(heroList);
+        heroDataStore.SetHeroDataList(heroList);
 
         //数据发送成功后 进入大厅
         CtrlManager.Instance.Enter<LobbyCtrl>();
+
+        
 
     }
 

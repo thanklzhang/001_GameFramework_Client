@@ -22,22 +22,22 @@ public class NetHandler
         EventManager.AddListener<byte[]>((int)eventType, action);
     }
 
-    public void SendMsgToLS(ProtoMsgIds eventType, IMessage data)
-    {
-        Debug.Log("send msg to LS server: " + eventType.ToString() + " (" + (int)eventType + ")");
-        NetworkManager.Instance.SendMsgToLS((int)eventType, data.ToByteArray());
-    }
+    //public void SendMsgToLS(ProtoMsgIds eventType, IMessage data)
+    //{
+    //    Debug.Log("send msg to LS server: " + eventType.ToString() + " (" + (int)eventType + ")");
+    //    NetworkManager.Instance.SendMsgToLS((int)eventType, data.ToByteArray());
+    //}
 
-    public void SendMsgToCS(ProtoMsgIds eventType, IMessage data)//, Callback<byte[]> callback = null
-    {
-        Debug.Log("send msg to CS server: " + eventType.ToString() + " (" + (int)eventType + ")");
-        NetworkManager.Instance.SendMsgToCS((int)eventType, data.ToByteArray());
-    }
+    //public void SendMsgToCS(ProtoMsgIds eventType, IMessage data)//, Callback<byte[]> callback = null
+    //{
+    //    Debug.Log("send msg to CS server: " + eventType.ToString() + " (" + (int)eventType + ")");
+    //    NetworkManager.Instance.SendMsgToCS((int)eventType, data.ToByteArray());
+    //}
 
-    public void SendMsgToSS(ProtoMsgIds eventType, IMessage data)//, Callback<byte[]> callback = null
-    {
-        Debug.Log("send msg to SS server: " + eventType.ToString() + " (" + (int)eventType + ")");
-        NetworkManager.Instance.SendMsgToSS((int)eventType, data.ToByteArray());
-    }
+    //public void SendMsgToSS(ProtoMsgIds eventType, IMessage data)//, Callback<byte[]> callback = null
+    //{
+    //    Debug.Log("send msg to SS server: " + eventType.ToString() + " (" + (int)eventType + ")");
+    //    NetworkManager.Instance.SendMsgToSS((int)eventType, data.ToByteArray());
+    //}
 }
 

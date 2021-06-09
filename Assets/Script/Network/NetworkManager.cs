@@ -5,148 +5,56 @@ using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 
+public enum ServerType
+{
+    Login = 1,
+    Gate = 2,
+}
+
 public class NetworkManager : Singleton<NetworkManager>
 {
-    /// <summary>
-    /// 发送同步包
-    /// </summary>
-    /// <param name="msgId"></param>
-    /// <param name="msgData"></param>
-    /// <param name="callback"></param>
-    public void SendMsg(int msgId,byte[] msgData)
+    TcpNetClient tcpNetClient;
+
+    public void Init()
     {
         
     }
-    
-    ///////////////////////////////////////////////////////////////////////////////
-    ClientConnect client;
 
-    public void ConnectLoginServer()
+    public void ConnectToLoginServer()
     {
-        client = new ClientConnect();
-        client.connectAction += ConnectLoginServerResult;
-        //连接登录服务器
-        client.Connect("127.0.0.1", 2345);
-        Debug.Log("connecting login server ...");
-
+        tcpNetClient = new TcpNetClient();
+        tcpNetClient.connectAction += this.OnConnectToLoginServerFinish;
+        tcpNetClient.Connect("127.0.0.1", 5151);
     }
 
-    public void ConnectLoginServerResult(bool isSuccess)
+    public void OnConnectToLoginServerFinish(bool isSuccess)
     {
-        Loom.QueueOnMainThread(() =>
-        {
-            Debug.Log("success to connect the login server");
-            if (isSuccess)
-            {
-                EventManager.Broadcast((int)GameEvent.ConnectLoginServerResult, true);
-                Debug.Log("success to connect the login server");
-            }
-            else
-            {
-                EventManager.Broadcast((int)GameEvent.ConnectLoginServerResult, false);
-                Debug.Log("cant connect the login server");
-            }
-        });
+        Logx.Log("net", "NetworkManager : OnConnectToLoginServerFinish : " + isSuccess);
     }
 
-    public void Close()
+    public void SendMsg()
     {
-        client?.ChangeToCloseState();
+        //clientNet.SendMsg();
     }
 
-    public void Update(float timeDelta)
+    public void Update()
     {
-        client?.Update(timeDelta);
+        this.tcpNetClient.Update();
     }
 
-    public void ConnectGateServer(string ip, int port)
-    {
-        client.CloseConnect();
-
-        client = new ClientConnect();
-        client.connectAction += ConnectGateServerResult;
-        client.Connect(ip, port);
-        Console.WriteLine("connecting gate server ...");
-
-    }
-
-    public void ConnectGateServerResult(bool isSuccess)
-    {
-        Loom.QueueOnMainThread(() =>
-        {
-            if (isSuccess)
-            {
-                EventManager.Broadcast((int)GameEvent.ConnectGateServerResult, true);
-                Debug.Log("success to connect the gate server");
-
-
-                //LoginController.Instance.AskEnterGameServer();
-
-            }
-            else
-            {
-                EventManager.Broadcast((int)GameEvent.ConnectGateServerResult, false);
-                Debug.Log("cant connect the gate server");
-            }
-        });
-    }
-
-    ///////////////////////
-
-
-    public void SendMsgToLS(int msg, byte[] data)//, Callback<byte[]> callback
-    {
-        client.Send(msg, data);
-    }
-
-    public void SendMsgToCS(int msg, byte[] data)//, Callback<byte[]> callback
-    {
-        client.Send(msg, data);
-    }
-
-    //这里和 CS 一样 网关服务器(GS)会根据消息转发到 SS
-    public void SendMsgToSS(int msg, byte[] data)//, Callback<byte[]> callback
-    {
-        client.Send(msg, data);
-    }
-
-
-
-    //需要直接回调用这个 但是注意调用顺序
-    //public void SendMsgToLS(int msg, byte[] data, Callback<byte[]> callback)
+    //public void ConnectToGateServer()
     //{
-    //    Callback<byte[]> action = null;
-    //    action = (bytes) =>
-    //    {
-    //        callback?.Invoke(bytes);
-    //        EventManager.RemoveListener(msg, action);
-    //    };
-    //    EventManager.AddListener(msg, action);
-
-    //    client.Send(msg, data);
+    //    clientNet = new ClientNet();
+    //    clientNet.connectFinishAction += this.OnConnectToLoginServerFinish;
+    //    clientNet.Connect("", 0);
     //}
 
-    //public void SendMsgToCS(int msg,byte[] data, Callback<byte[]> callback)
+    //public void OnConnect(bool isSuccess)
     //{
-    //    Callback<byte[]> action = null;
-    //    action = (bytes) =>
-    //    {
-    //        callback?.Invoke(bytes);
-    //        EventManager.RemoveListener(msg, action);
-    //    };
-    //    EventManager.AddListener(msg, action);
 
-    //    client.Send(msg, data);
     //}
 
 
-    public void SendMsgToCombatServer()
-    {
-        //同 center
-    }
 
-    public void SendMsgTo(int serverType,string msg)
-    {
 
-    }
 }

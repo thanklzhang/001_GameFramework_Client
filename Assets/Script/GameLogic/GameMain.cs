@@ -29,7 +29,9 @@ public class GameMain : MonoBehaviour
     {
         Debug.Log("game startup ... ");
 
-        NetHandlerManager.Instance.Init();
+        NetworkManager.Instance.Init();
+
+
 
         //TODO 此时热更完成
 
@@ -61,24 +63,26 @@ public class GameMain : MonoBehaviour
         //CtrlManager.Instance.Enter<LoginCtrl>();
 
 
+        NetworkManager.Instance.ConnectToLoginServer();
+
         //net test :
 
 
-       
 
-        //登录后 模拟服务端推游戏数据
-        List<HeroData> heroList = new List<HeroData>()
-        {
-            new HeroData(){  id = 1000002, level = 12},
-            new HeroData(){  id = 1000003, level = 27},
-        };
-        var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
-        heroDataStore.SetHeroDataList(heroList);
 
-        //数据发送成功后 进入大厅
-        CtrlManager.Instance.Enter<LobbyCtrl>();
+        ////登录后 模拟服务端推游戏数据
+        //List<HeroData> heroList = new List<HeroData>()
+        //{
+        //    new HeroData(){  id = 1000002, level = 12},
+        //    new HeroData(){  id = 1000003, level = 27},
+        //};
+        //var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
+        //heroDataStore.SetHeroDataList(heroList);
 
-        
+        ////数据发送成功后 进入大厅
+        //CtrlManager.Instance.Enter<LobbyCtrl>();
+
+
 
     }
 
@@ -147,14 +151,10 @@ public class GameMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("zxy : currFrame : " + Time.frameCount);
-        //AssetManager.Instance.Update(Time.deltaTime);
-        //AssetBundleManager.Instance.Update(Time.deltaTime);
-
         LoadTaskManager.Instance.Update(Time.deltaTime);
         ResourceManager.Instance.Update(Time.deltaTime);
         CtrlManager.Instance.Update(Time.deltaTime);
-
+        NetworkManager.Instance.Update();
     }
 
     private void OnDestroy()

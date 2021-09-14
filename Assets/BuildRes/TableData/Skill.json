@@ -1,0 +1,16 @@
+[
+    {
+        "id": 2001001,
+        "name": "\"\u4e0a\u5b98\u7fce\u6280\u80fd1\"",
+        "describe": "\"\u4e0a\u5b98\u7fce\u6280\u80fd1\u4ecb\u7ecd\"",
+        "skillReleaseTargeType": 1,
+        "effectList": "\"15011001\""
+    },
+    {
+        "id": 2001002,
+        "name": "\"\u4e0a\u5b98\u7fce\u6280\u80fd2\"",
+        "describe": "\"\u4e0a\u5b98\u7fce\u6280\u80fd2\u4ecb\u7ecd\"",
+        "skillReleaseTargeType": 1,
+        "effectList": "\"15011002\""
+    }
+]

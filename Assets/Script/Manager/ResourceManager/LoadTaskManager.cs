@@ -30,8 +30,8 @@ public class LoadTaskManager : Singleton<LoadTaskManager>
 
     public void Update(float timeDelta)
     {
-        abLoadTask.Update(timeDelta);
-        assetLoadTask.Update(timeDelta);
+        abLoadTask?.Update(timeDelta);
+        assetLoadTask?.Update(timeDelta);
     }
 
     public void StartAssetBundleLoader(BaseLoader loader)

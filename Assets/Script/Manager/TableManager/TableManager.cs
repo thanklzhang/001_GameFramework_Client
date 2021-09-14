@@ -1,6 +1,3 @@
-/*
- * generate by tool
-*/
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,80 +5,82 @@ using LitJson;
 using FixedPointy;
 using System;
 using System.IO;
-
-public class TableManager : Singleton<TableManager>
+namespace Table
 {
-    Dictionary<Type, IList> typeToListConfigDic = new Dictionary<Type, IList>();
-    Dictionary<Type, Dictionary<int, Table.BaseTable>> typeToDicConfigDic = new Dictionary<Type, Dictionary<int, Table.BaseTable>>();
-
-    internal void Init()
+    public class TableManager : Singleton<TableManager>
     {
-        //HeroInfoStore.Init();
-    }
+        Dictionary<Type, IList> typeToListConfigDic = new Dictionary<Type, IList>();
+        Dictionary<Type, Dictionary<int, Table.BaseTable>> typeToDicConfigDic = new Dictionary<Type, Dictionary<int, Table.BaseTable>>();
 
-    public void LoadAllTableData()
-    {
-        typeToListConfigDic = TableDataLoader.Instance.LoadFromFile();
-
-        foreach (var configKV in typeToListConfigDic)
+        internal void Init()
         {
-            var iDic = new Dictionary<int, Table.BaseTable>();
-            foreach (var tableData in configKV.Value)
-            {
-                Table.BaseTable convertTableData = tableData as Table.BaseTable;
-                iDic.Add(convertTableData.Id, convertTableData);
-            }
-
-            typeToDicConfigDic.Add(configKV.Key, iDic);
+            //HeroInfoStore.Init();
         }
 
-    }
-
-
-    public T GetById<T>(int id) where T : Table.BaseTable
-    {
-        var type = typeof(T);
-        if (typeToDicConfigDic.ContainsKey(type))
+        public void LoadAllTableData()
         {
-            var dataDic = typeToDicConfigDic[type];
-            if (dataDic.ContainsKey(id))
+            typeToListConfigDic = TableDataLoader.Instance.LoadFromFile();
+
+            foreach (var configKV in typeToListConfigDic)
             {
-                var data = dataDic[id];
-                return data as T;
+                var iDic = new Dictionary<int, Table.BaseTable>();
+                foreach (var tableData in configKV.Value)
+                {
+                    Table.BaseTable convertTableData = tableData as Table.BaseTable;
+                    iDic.Add(convertTableData.Id, convertTableData);
+                }
+
+                typeToDicConfigDic.Add(configKV.Key, iDic);
+            }
+
+        }
+
+
+        public T GetById<T>(int id) where T : Table.BaseTable
+        {
+            var type = typeof(T);
+            if (typeToDicConfigDic.ContainsKey(type))
+            {
+                var dataDic = typeToDicConfigDic[type];
+                if (dataDic.ContainsKey(id))
+                {
+                    var data = dataDic[id];
+                    return data as T;
+                }
+                else
+                {
+                    Logx.LogError("Table", "the id is not found : " + id);
+                }
             }
             else
             {
-                Logx.LogError("Table", "the id is not found : " + id);
+                Logx.LogError("Table", "the type is not found : " + type);
             }
+            return null;
         }
-        else
+
+
+        public List<T> GetList<T>() where T : Table.BaseTable
         {
-            Logx.LogError("Table", "the type is not found : " + type);
+            var data = (typeToListConfigDic[typeof(T)]);
+            return data.Cast<T>().ToList();//Select(d => (T)d).ToList();
         }
-        return null;
-    }
 
-
-    public List<T> GetList<T>() where T : Table.BaseTable
-    {
-        var data = (typeToListConfigDic[typeof(T)]);
-        return data.Cast<T>().ToList();//Select(d => (T)d).ToList();
-    }
-
-    public Dictionary<int, T> GetDic<T>() where T : Table.BaseTable
-    {
-        var type = typeof(T);
-        if (typeToDicConfigDic.ContainsKey(type))
+        public Dictionary<int, T> GetDic<T>() where T : Table.BaseTable
         {
-            var configDic = typeToDicConfigDic[type];
-            return configDic.ToDictionary(kv =>
+            var type = typeof(T);
+            if (typeToDicConfigDic.ContainsKey(type))
             {
-                return kv.Key;
-            }, (kv) =>
-            {
-                return kv as T;
-            });
+                var configDic = typeToDicConfigDic[type];
+                return configDic.ToDictionary(kv =>
+                {
+                    return kv.Key;
+                }, (kv) =>
+                {
+                    return kv.Value as T;
+                });
+            }
+            return null;
         }
-        return null;
     }
 }

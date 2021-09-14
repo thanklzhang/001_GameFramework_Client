@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Assets.Script.Combat;
 using LitJson;
+using Table;
 
 public class GameMain : MonoBehaviour
 {
@@ -51,19 +52,27 @@ public class GameMain : MonoBehaviour
         //Logx.Log("hero : " + heroTb.Name);
         //
 
-        AssetBundleManager.Instance.Init();
-        AssetManager.Instance.Init();
-        LoadTaskManager.Instance.Init();
+       
+        ////table test
+        //var ss = TableManager.Instance.GetList<Table.CalculateEffect>();
+        //for (int i = 0; i < ss.Count; i++)
+        //{
+        //    Logx.Log(ss[i].Describe);
+        //}
 
-        GameDataManager.Instance.Init();
+        //AssetBundleManager.Instance.Init();
+        //AssetManager.Instance.Init();
+        //LoadTaskManager.Instance.Init();
 
-        ServiceManager.Instance.Init();
+        //GameDataManager.Instance.Init();
 
-        //TODO 进入登录状态
-        //CtrlManager.Instance.Enter<LoginCtrl>();
+        //ServiceManager.Instance.Init();
+
+        ////TODO 进入登录状态
+        ////CtrlManager.Instance.Enter<LoginCtrl>();
 
 
-        NetworkManager.Instance.ConnectToLoginServer();
+        //NetworkManager.Instance.ConnectToLoginServer();
 
         //net test :
 
@@ -151,10 +160,10 @@ public class GameMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LoadTaskManager.Instance.Update(Time.deltaTime);
-        ResourceManager.Instance.Update(Time.deltaTime);
-        CtrlManager.Instance.Update(Time.deltaTime);
-        NetworkManager.Instance.Update();
+        //LoadTaskManager.Instance.Update(Time.deltaTime);
+        //ResourceManager.Instance.Update(Time.deltaTime);
+        //CtrlManager.Instance.Update(Time.deltaTime);
+        //NetworkManager.Instance.Update();
     }
 
     private void OnDestroy()

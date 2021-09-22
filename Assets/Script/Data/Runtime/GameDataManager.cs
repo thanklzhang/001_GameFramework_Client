@@ -21,7 +21,7 @@ public class HeroData
 
 public class HeroGameDataStore : GameDataStore
 {
-    //blic int flag;//待定
+    //public int flag;//待定
     List<HeroData> heroList = new List<HeroData>();
     Dictionary<int, HeroData> heroDic = new Dictionary<int, HeroData>();
 

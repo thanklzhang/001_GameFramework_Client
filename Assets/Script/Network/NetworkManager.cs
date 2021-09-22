@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetProto;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -14,27 +15,61 @@ public enum ServerType
 public class NetworkManager : Singleton<NetworkManager>
 {
     TcpNetClient tcpNetClient;
-
+    Action<bool> connectCallback;
     public void Init()
     {
-        
+        tcpNetClient = new TcpNetClient();
     }
 
-    public void ConnectToLoginServer()
+    public void ConnectToLoginServer(Action<bool> connectCallback)
     {
-        tcpNetClient = new TcpNetClient();
+        this.connectCallback = connectCallback;
+        //tcpNetClient = new TcpNetClient();
         tcpNetClient.connectAction += this.OnConnectToLoginServerFinish;
-        tcpNetClient.Connect("127.0.0.1", 5151);
+        tcpNetClient.Connect("127.0.0.1", 5556);
+        tcpNetClient.ReceiveMsgAction += this.OnReceveMsg;
     }
+
+
 
     public void OnConnectToLoginServerFinish(bool isSuccess)
     {
         Logx.Log("net", "NetworkManager : OnConnectToLoginServerFinish : " + isSuccess);
+        this.connectCallback?.Invoke(isSuccess);
+
+      
+
     }
 
-    public void SendMsg()
+    public void ConnectToGateServer(string ip, int port, Action<bool> connectCallback)
     {
-        //clientNet.SendMsg();
+        tcpNetClient?.Close();
+
+        this.connectCallback = connectCallback;
+        tcpNetClient = new TcpNetClient();
+        tcpNetClient.connectAction += this.OnConnectToGateServerFinish;
+        Logx.Log("connect to gate : " + ip + " " + port);
+        tcpNetClient.Connect(ip, port);
+        tcpNetClient.ReceiveMsgAction += this.OnReceveMsg;
+    }
+
+    public void OnConnectToGateServerFinish(bool isSuccess)
+    {
+        Logx.Log("net", "NetworkManager : OnConnectToGateServerFinish : " + isSuccess);
+        this.connectCallback?.Invoke(isSuccess);
+        
+    }
+
+
+    private void OnReceveMsg(TcpNetClient netClient, MsgPack msg)
+    {
+        NetMsgManager.Instance.OnReceiveMsg(msg);
+
+    }
+
+    public void SendMsg(ProtoIDs cmd, byte[] data)
+    {
+        tcpNetClient.Send((int)cmd, data);
     }
 
     public void Update()

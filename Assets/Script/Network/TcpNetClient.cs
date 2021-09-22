@@ -11,13 +11,13 @@ using UnityEngine;
 
 public class MsgPack
 {
-    public int msgId;
+    public int cmdId;
     //public int clientId;//转发消息的时候需要
     public byte[] data;
-    public static MsgPack Create(int msgId, byte[] data)
+    public static MsgPack Create(int cmdId, byte[] data)
     {
         var p = new MsgPack();
-        p.msgId = msgId;
+        p.cmdId = cmdId;
         //p.clientId = clientId;
         p.data = data;
         return p;
@@ -46,7 +46,7 @@ public class TcpNetClient
 
     public NetState netState;
 
-    int MSG_HEAD_LEN = 18;//len 4 , msgId 2 , timeStamp 4 , uid 8
+    int MSG_HEAD_LEN = 22;//len 4 , msgId 2 , seq 4 , timeStamp 4 , uid 8
     int MAX_MSG_SIZE = 1024;
 
     //接受消息封装包的缓存队列
@@ -79,7 +79,7 @@ public class TcpNetClient
     {
         try
         {
-            Logx.Log("net", "start connect ...");
+            Logx.Log("net", "start to connect ...");
             IPAddress mIp = IPAddress.Parse(ip);
             IPEndPoint ip_end_point = new IPEndPoint(mIp, port);
             netSocket.BeginConnect(ip_end_point, OnConnectCallback, netSocket);
@@ -98,9 +98,11 @@ public class TcpNetClient
         Logx.Log("net", "OnConnectCallback : on connect : " + s.Connected);
         if (s.Connected)
         {
+            buffer = new byte[MAX_MSG_SIZE];
+
             netState = NetState.Connect;
             s.EndConnect(ar);
-           
+
             s.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(OnReceiveCallback), s);
         }
         else
@@ -123,6 +125,7 @@ public class TcpNetClient
             return;
         }
 
+        //Logx.Log("floor net : receive msg : " + length);
         //dataBuffer 加上这段数据
         if (dataBuffer == null)
         {
@@ -138,23 +141,24 @@ public class TcpNetClient
 
         while (dataBuffer.Length >= MSG_HEAD_LEN)
         {
-            //第一位是 len 读出来
-            int bodyLength = BitConverter.ToInt32(dataBuffer, 0);
+            //第一位是 total len 读出来(head + body)
+            int totalPackLen = BitConverter.ToInt32(dataBuffer, 0);
 
-            if (bodyLength + MSG_HEAD_LEN <= dataBuffer.Length)
+            if (totalPackLen <= dataBuffer.Length)
             {
                 //达到了消息整包大小
-                byte[] currData = new byte[bodyLength + MSG_HEAD_LEN];
-
-                Array.Copy(dataBuffer, 0, currData, 0, bodyLength + MSG_HEAD_LEN);
+                byte[] currData = new byte[totalPackLen];
+                
+                Array.Copy(dataBuffer, 0, currData, 0, totalPackLen);
 
                 //解析消息
                 var msgPack = ParseFromMsg(currData);
+                //Logx.Log("floor net : add msg to queue ");
                 //加入队列
                 AddMsgToReceiveQueue(msgPack);
 
-                byte[] nextData = new byte[dataBuffer.Length - MSG_HEAD_LEN - bodyLength];
-                Array.Copy(dataBuffer, MSG_HEAD_LEN + bodyLength, nextData, 0, dataBuffer.Length - MSG_HEAD_LEN - bodyLength);
+                byte[] nextData = new byte[dataBuffer.Length - totalPackLen];
+                Array.Copy(dataBuffer, totalPackLen, nextData, 0, dataBuffer.Length - totalPackLen);
                 dataBuffer = nextData;
             }
             else
@@ -173,7 +177,7 @@ public class TcpNetClient
 
     public void Send(MsgPack msg)
     {
-        Send(msg.msgId, msg.data);
+        Send(msg.cmdId, msg.data);
     }
 
     public void Send(int msgId, byte[] data)
@@ -207,25 +211,35 @@ public class TcpNetClient
     /// <param name="msg"></param>
     public virtual byte[] BuildData(int msgId, byte[] dataContent)
     {
-        byte[] data = null;
-        MemoryStream ms = null;
-        using (ms = new MemoryStream())
+        ClientProtoHead head = new ClientProtoHead()
         {
-            BinaryWriter writer = new BinaryWriter(ms);
+            cmd = (ushort)msgId,
+            seq = 1,
+            timeStamp = 1,
+            //uid = (ulong)myUid
+        };
+        var bytes = ProtoMsgUtil.MakeClientMsgBytes(dataContent, head);
 
-            writer.Write(dataContent.Length);
-            writer.Write(msgId);
-            writer.Write(dataContent);
-            //TODO:
-            //writer.Write(timeStemp);//时间戳
-            //writer.Write(clientId);//用户唯一 id  登录之后即可拥有
 
-            writer.Flush();
-            data = ms.ToArray();
-            writer.Close();
-        }
+        //byte[] data = null;
+        //MemoryStream ms = null;
+        //using (ms = new MemoryStream())
+        //{
+        //    BinaryWriter writer = new BinaryWriter(ms);
 
-        return data;
+        //    writer.Write(dataContent.Length);
+        //    writer.Write(msgId);
+        //    writer.Write(dataContent);
+        //    //TODO:
+        //    //writer.Write(timeStemp);//时间戳
+        //    //writer.Write(clientId);//用户唯一 id  登录之后即可拥有
+
+        //    writer.Flush();
+        //    data = ms.ToArray();
+        //    writer.Close();
+        //}
+
+        return bytes;
 
     }
 
@@ -236,19 +250,26 @@ public class TcpNetClient
     /// <param name="msg"></param>
     public MsgPack ParseFromMsg(byte[] msg)
     {
-        MemoryStream ms = null;
-        using (ms = new MemoryStream(msg))
-        {
-            BinaryReader reader = new BinaryReader(ms);
-            int len = reader.ReadInt32();
-            int msgId = reader.ReadInt32();
-            //int clientId = reader.ReadInt32();
-            byte[] data = reader.ReadBytes(len);
-            var msgPack = MsgPack.Create(msgId, data);
-            reader.Close();
+        var clientMsg = ProtoMsgUtil.GetClientMsg(msg);
 
-            return msgPack;
-        }
+        var msgPack = MsgPack.Create(clientMsg.head.cmd, clientMsg.data);
+
+
+        //MemoryStream ms = null;
+        //using (ms = new MemoryStream(msg))
+        //{
+        //    BinaryReader reader = new BinaryReader(ms);
+        //    int len = reader.ReadInt32();
+        //    int msgId = reader.ReadInt32();
+        //    //int clientId = reader.ReadInt32();
+        //    byte[] data = reader.ReadBytes(len);
+        //    var msgPack = MsgPack.Create(msgId, data);
+        //    reader.Close();
+
+        //    return msgPack;
+        //}
+
+        return msgPack;
 
     }
 
@@ -271,6 +292,8 @@ public class TcpNetClient
             var msgPack = receiveMsgQueue[i];
             this.ReceiveMsgAction?.Invoke(this, msgPack);
         }
+
+        receiveMsgQueue.Clear();
     }
 
 
@@ -281,17 +304,14 @@ public class TcpNetClient
 
     public void Close()
     {
-        //closeAction?.Invoke(this.clientId);
-        //netSocket?.Close();
-        ////Debug.Log("close ..");
-        //buffer = null;
-        //dataBuffer = null;
-        //connectAction = null;
-        ////if (heartBeatService != null)
-        ////{
-        ////    heartBeatService.Stop();
-        ////}
+        receiveMsgQueue.Clear();
+        connectAction = null;
+        closeAction = null;
+        ReceiveMsgAction = null;
+        netSocket?.Close();
+        buffer = null;
+        dataBuffer = null;
+
     }
 
 }
-

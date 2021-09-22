@@ -5,9 +5,9 @@ using UnityEngine;
 static internal class EventManager
 {
     #region Internal variables
-    
+
     //static private MessengerHelper messengerHelper = (new GameObject("MessengerHelper")).AddComponent<MessengerHelper>();
-    
+
     static public Dictionary<int, Delegate> eventTable = new Dictionary<int, Delegate>();
 
     static public void Cleanup()
@@ -111,7 +111,7 @@ static internal class EventManager
         OnListenerAdding(eventType, handler);
         eventTable[eventType] = (Callback)eventTable[eventType] + handler;
     }
-    
+
     static public void AddListener<T>(int eventType, Callback<T> handler)
     {
         //Debug.Log("add evenType : " + eventType);
@@ -137,7 +137,7 @@ static internal class EventManager
     #region RemoveListener
     //No parameters
 
-   
+
     static public void RemoveListener(int eventType, Callback handler)
     {
         OnListenerRemoving(eventType, handler);
@@ -174,7 +174,7 @@ static internal class EventManager
     #region Broadcast
 
     //No parameters
-    
+
     static public void Broadcast(int eventType)
     {
         OnBroadcasting(eventType);
@@ -197,7 +197,7 @@ static internal class EventManager
     }
 
     //Single parameter
-   
+
     static public void Broadcast<T>(int eventType, T arg1)
     {
 #if LOG_ALL_MESSAGES || LOG_BROADCAST_MESSAGE
@@ -216,9 +216,17 @@ static internal class EventManager
             }
             else
             {
-                throw CreateBroadcastSignatureException(eventType);
+
+                //throw CreateBroadcastSignatureException(eventType);
+                LogNoEventWarning(eventType);
             }
         }
+    }
+
+    static public void LogNoEventWarning(int eventType)
+    {
+        Debug.LogWarning(string.Format("Broadcasting message \"{0}\" but listeners have a different signature than the broadcaster.", eventType));
+
     }
 
     //Two parameters
@@ -240,7 +248,8 @@ static internal class EventManager
             }
             else
             {
-                throw CreateBroadcastSignatureException(eventType);
+                //throw CreateBroadcastSignatureException(eventType);
+                LogNoEventWarning(eventType);
             }
         }
     }
@@ -264,7 +273,8 @@ static internal class EventManager
             }
             else
             {
-                throw CreateBroadcastSignatureException(eventType);
+                //throw CreateBroadcastSignatureException(eventType);
+                LogNoEventWarning(eventType);
             }
         }
     }

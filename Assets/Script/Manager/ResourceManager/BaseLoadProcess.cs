@@ -54,9 +54,19 @@ public class BaseLoadProcess
             if (loadingLoader.IsLoadFinish())
             {
                 //OnLoadFinish(loadingLoader);
-                loadingLoader.LoadFinish();
-                this.OnLoadFinish(loadingLoader);
-                loadingQueue.RemoveAt(i);
+
+                try
+                {
+                    loadingLoader.LoadFinish();
+                }
+                catch (Exception e)
+                {
+                    Logx.LogError("UpdateLoad error : " + e.Message);
+                }
+                finally
+                {
+                    loadingQueue.RemoveAt(i);
+                }
             }
         }
 

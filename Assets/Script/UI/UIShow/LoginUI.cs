@@ -6,69 +6,40 @@ using UnityEngine.UI;
 
 public class LoginUI : BaseUI
 {
-    //public override void Init()
-    //{
-    //    this.resId = UIResIds.LoginUI;
-    //}
+    public Action<string, string> onLoginBtnClick;
 
-    //public override void LoadFinish(UIContext context)
-    //{
-    //    base.LoadFinish(context);
+    Button loginBtn;
+    InputField accountInput;
+    InputField passwordInput;
+    Text stateText;
 
-    //    loginBtn = root.Find("loginBtn").GetComponent<Button>();
-    //    loginBtn.onClick.AddListener(() =>
-    //    {
-    //        //登录
-    //        loginBtn.gameObject.SetActive(false);
-    //        var loginNet = NetHandlerManager.Instance.GetHandler<LoginNetHandler>();
-    //        var rand = UnityEngine.Random.Range(1, 10000000.0f);
-    //        loginNet.AskLogin(rand.ToString(), "425", (isSuccess) =>
-    //         {
-    //             if (isSuccess)
-    //             {
-    //                 Debug.Log("login success , start to connect gate server ...");
-    //                 GameStateManager.Instance.ChangeState(GameState.Lobby);
-    //             }
-    //             else
-    //             {
-    //                 Debug.Log("login fail ... ");
-    //                 loginBtn.gameObject.SetActive(true);
-    //             }
-    //         });
+    protected override void OnInit()
+    {
+        loginBtn = this.transform.Find("loginBtn").GetComponent<Button>();
+        accountInput = this.transform.Find("accountInput").GetComponent<InputField>();
+        passwordInput = this.transform.Find("passwordInput").GetComponent<InputField>();
+        stateText = this.transform.Find("stateText").GetComponent<Text>();
 
-    //    });
-    //    loginBtn.gameObject.SetActive(false);
+        loginBtn.onClick.AddListener(() =>
+        {
+            var account = accountInput.text;
+            var password = passwordInput.text;
+            onLoginBtnClick?.Invoke(account, password);
+        });
+    }
 
-    //}
+    public void SetStateText(string stateStr)
+    {
+        Loom.QueueOnMainThread(()=>
+        {
+            stateText.text = stateStr;
+        });
+       
+    }
 
-    //public override void Show()
-    //{
-    //    base.Show();
-    //    EventManager.AddListener<bool>((int)GameEvent.ConnectLoginServerResult, ConnectLoginServerResult);
-    //}
-
-    //public override void Hide()
-    //{
-    //    base.Hide();
-    //    EventManager.RemoveListener<bool>((int)GameEvent.ConnectLoginServerResult, ConnectLoginServerResult);
-    //}
-
-    //private void ConnectLoginServerResult(bool isSuccess)
-    //{
-    //    if (isSuccess)
-    //    {
-    //        Debug.Log("show login success ui");
-    //        loginBtn.gameObject.SetActive(true);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("show login fail ui");
-    //    }
-    //}
-
-
-    //Button goToLobbyBtn;
-    //Button closeBtn;
-    //Button loginBtn;
-
+    protected override void OnRelease()
+    {
+        onLoginBtnClick = null;
+    }
 }
+

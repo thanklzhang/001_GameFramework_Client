@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2303146092
+CRC: 506020188
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -53,4 +53,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_15:
       Name: assets/buildres/prefabs/ui/lobbyui.ab
+      Dependencies: {}
+    Info_16:
+      Name: assets/buildres/prefabs/ui/loginui.ab
       Dependencies: {}

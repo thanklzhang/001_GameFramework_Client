@@ -9,11 +9,11 @@ public class Const
 {
     public static Dictionary<int, Color> colorDic = new Dictionary<int, Color>()
     {
-        {(int)EnumColor.White,Color.white },
-         {(int)EnumColor.Green,Color.green },
-         {(int)EnumColor.Blue,Color.blue },
-         {(int)EnumColor.Purple,new Color(0.55f,0,0.775f) },
-         {(int)EnumColor.Orange,new Color(1,0.47f,0.071f)},
+        //{(int)EnumColor.White,Color.white },
+        // {(int)EnumColor.Green,Color.green },
+        // {(int)EnumColor.Blue,Color.blue },
+        // {(int)EnumColor.Purple,new Color(0.55f,0,0.775f) },
+        // {(int)EnumColor.Orange,new Color(1,0.47f,0.071f)},
     };
 
     public static Color GetColor(int index)

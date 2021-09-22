@@ -61,15 +61,17 @@ namespace Table
             infos.ForEach(info =>
             {
                 string typeName = "Table." + info.name;
-                Type type = Type.GetType(typeName, true);
-                Type listType = typeof(List<>).MakeGenericType(type);
+                try
+                {
+                    Type type = Type.GetType(typeName, true);
+                    Type listType = typeof(List<>).MakeGenericType(type);
 
 
-                //建造每一个对象
-                object list = Activator.CreateInstance(listType);
-                List<JsonData> objs = JsonMapper.ToObject<List<JsonData>>(info.json);//{}
+                    //建造每一个对象
+                    object list = Activator.CreateInstance(listType);
+                    List<JsonData> objs = JsonMapper.ToObject<List<JsonData>>(info.json);//{}
 
-                objs.ForEach(obj =>
+                    objs.ForEach(obj =>
                     {
 
                         //定义 对象
@@ -105,7 +107,17 @@ namespace Table
                         addMethod.Invoke(list, new object[] { currObject });
                     });
 
-                configDic.Add(type, list as IList);
+                    configDic.Add(type, list as IList);
+                }
+                catch (TypeLoadException e)
+                {
+                    Logx.LogError("the type is not found : " + typeName);
+                }
+                finally
+                {
+
+                }
+              
 
             });
 

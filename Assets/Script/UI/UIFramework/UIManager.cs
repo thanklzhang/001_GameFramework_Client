@@ -28,7 +28,11 @@ public class UIManager : Singleton<UIManager>
             //return null;
 
             var uiConfigInfo = UIConfigInfoDic.GetInfo<T>();
-            //这里之后改成 resourceManager 加载的 go
+            if (null == uiConfigInfo)
+            {
+                Logx.LogError("GetUICache : the type is not found : " + typeof(T));
+                return;
+            }
             ResourceManager.Instance.GetObject<GameObject>(uiConfigInfo.path, (gameObject) =>
             {
                 gameObject.transform.SetParent(this.uiRoot, false);

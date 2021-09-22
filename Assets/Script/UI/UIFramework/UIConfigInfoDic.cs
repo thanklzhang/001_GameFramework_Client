@@ -13,6 +13,7 @@ public class UIConfigInfoDic
 {
     public static Dictionary<Type, UIConfigInfo> configDic = new Dictionary<Type, UIConfigInfo>()
     {
+         {typeof(LoginUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/LoginUI.prefab" }},
          {typeof(LobbyUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/LobbyUI.prefab" }},
         {typeof(HeroListUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/HeroListUI.prefab" }},
         {typeof(HeroInfoUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/HeroInfoUI.prefab" }},

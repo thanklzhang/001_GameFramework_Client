@@ -35,9 +35,9 @@ public class CombatShow : Singleton<CombatShow>
         showObjs = new List<SelectShowObj>();
         //targetsShowObj = new List<SelectShowObj>();
 
-        EventManager.AddListener<int>((int)GameEvent.SelectEntity, OnSelectReleaserEntity);
-        EventManager.AddListener<int>((int)GameEvent.CancelSelectEntity, OnCancelSelectReleaserEntity);
-        EventManager.AddListener<TimelineSequence>((int)GameEvent.CombatRoundShowStart, OnSyncTimelineSequenceStart);
+        //EventManager.AddListener<int>((int)GameEvent.SelectEntity, OnSelectReleaserEntity);
+        //EventManager.AddListener<int>((int)GameEvent.CancelSelectEntity, OnCancelSelectReleaserEntity);
+        //EventManager.AddListener<TimelineSequence>((int)GameEvent.CombatRoundShowStart, OnSyncTimelineSequenceStart);
 
 
 
@@ -47,9 +47,9 @@ public class CombatShow : Singleton<CombatShow>
     public void Release()
     {
         root = null;
-        EventManager.RemoveListener<int>((int)GameEvent.SelectEntity, OnSelectReleaserEntity);
-        EventManager.RemoveListener<int>((int)GameEvent.CancelSelectEntity, OnCancelSelectReleaserEntity);
-        EventManager.RemoveListener<TimelineSequence>((int)GameEvent.CombatRoundShowStart, OnSyncTimelineSequenceStart);
+        //EventManager.RemoveListener<int>((int)GameEvent.SelectEntity, OnSelectReleaserEntity);
+        //EventManager.RemoveListener<int>((int)GameEvent.CancelSelectEntity, OnCancelSelectReleaserEntity);
+        //EventManager.RemoveListener<TimelineSequence>((int)GameEvent.CombatRoundShowStart, OnSyncTimelineSequenceStart);
     }
 
 

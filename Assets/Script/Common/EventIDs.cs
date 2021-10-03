@@ -15,4 +15,7 @@ public enum EventIDs
     //自定义事件
     OnUpgradeHeroLevel = 100001,
     
+    //battle
+    OnCreateBattle = 101001,
+    
 }

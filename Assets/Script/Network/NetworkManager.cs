@@ -34,11 +34,13 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public void OnConnectToLoginServerFinish(bool isSuccess)
     {
-        Logx.Log("net", "NetworkManager : OnConnectToLoginServerFinish : " + isSuccess);
-        this.connectCallback?.Invoke(isSuccess);
+        //注意这里 要保证 loom 在 gameScene 中有实例 因为 loom 中的自动实例创建是需要在主线程的 这里不是
+        Loom.QueueOnMainThread(() =>
+        {
+            Logx.Log("curr OnConnectToLoginServerFinish : " + System.Threading.Thread.CurrentThread.ManagedThreadId);
+            this.connectCallback?.Invoke(isSuccess);
 
-      
-
+        });
     }
 
     public void ConnectToGateServer(string ip, int port, Action<bool> connectCallback)
@@ -55,11 +57,12 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public void OnConnectToGateServerFinish(bool isSuccess)
     {
-        Logx.Log("net", "NetworkManager : OnConnectToGateServerFinish : " + isSuccess);
-        this.connectCallback?.Invoke(isSuccess);
-        
+        Loom.QueueOnMainThread(() =>
+        {
+            Logx.Log("net", "NetworkManager : OnConnectToGateServerFinish : " + isSuccess);
+            this.connectCallback?.Invoke(isSuccess);
+        });
     }
-
 
     private void OnReceveMsg(TcpNetClient netClient, MsgPack msg)
     {

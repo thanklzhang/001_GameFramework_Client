@@ -108,13 +108,12 @@ public class GameMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-            LoadTaskManager.Instance.Update(Time.deltaTime);
-            ResourceManager.Instance.Update(Time.deltaTime);
-            CtrlManager.Instance.Update(Time.deltaTime);
-            NetworkManager.Instance.Update();
+        LoadTaskManager.Instance.Update(Time.deltaTime);
+        ResourceManager.Instance.Update(Time.deltaTime);
+        CtrlManager.Instance.Update(Time.deltaTime);
+        NetworkManager.Instance.Update();
 
-       
+
 
     }
 

@@ -30,11 +30,7 @@ public class LoginUI : BaseUI
 
     public void SetStateText(string stateStr)
     {
-        Loom.QueueOnMainThread(()=>
-        {
-            stateText.text = stateStr;
-        });
-       
+        stateText.text = stateStr;
     }
 
     protected override void OnRelease()

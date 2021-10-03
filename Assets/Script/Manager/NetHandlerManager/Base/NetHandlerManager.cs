@@ -11,12 +11,9 @@ public class NetHandlerManager : Singleton<NetHandlerManager>
     public void Init()
     {
         AddNetHandler(typeof(LoginNetHandler), new LoginNetHandler());
-        //AddNetHandler(typeof(LobbyNetHandler), new LobbyNetHandler());
-        //AddNetHandler(typeof(HeroListNetHandler), new HeroListNetHandler());
-        //AddNetHandler(typeof(MateNetHandler), new MateNetHandler());
-        //AddNetHandler(typeof(CombatNetHandler), new CombatNetHandler());
-        //AddNetHandler(typeof(LoginNetHandler), new NetHandler());
-        //...
+        AddNetHandler(typeof(BattleNetHandler), new BattleNetHandler());
+        AddNetHandler(typeof(BattleEntranceHandler), new BattleEntranceHandler());
+
     }
 
     void AddNetHandler(Type type, NetHandler netHandler)

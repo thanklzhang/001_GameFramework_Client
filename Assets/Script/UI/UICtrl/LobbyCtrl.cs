@@ -27,6 +27,8 @@ public class LobbyCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
+      
+
         ui.onHeroListBtnClick += OnClickHeroListBtn;
 
         ui.onBattleBtnClick += OnClickBattleBtn;
@@ -39,8 +41,26 @@ public class LobbyCtrl : BaseCtrl
 
     public void OnClickBattleBtn()
     {
-        CtrlManager.Instance.Enter<BattleCtrl>();
+
+        //开始一场战斗
+        var battleEntranceNet = NetHandlerManager.Instance.GetHandler<BattleEntranceHandler>();
+
+        battleEntranceNet.SendApplyHeroExamBattle((xxx) =>
+        {
+            //center 房间创建好了 等待战斗开始
+
+            //this.OnStartBattle();
+        });
+
     }
+
+    //void OnCreateBattle()
+    //{
+    //    //收到创建战斗消息
+    //    CtrlManager.Instance.Enter<BattleCtrl>();
+    //}
+
+   
 
     public override void OnEnter(CtrlArgs args)
     {

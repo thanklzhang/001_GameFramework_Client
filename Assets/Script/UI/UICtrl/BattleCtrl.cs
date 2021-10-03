@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//英雄列表 ctrl
+//战斗 ctrl
 public class BattleCtrl : BaseCtrl
 {
     BattleUI ui;
@@ -38,8 +38,27 @@ public class BattleCtrl : BaseCtrl
     public override void OnEnter(CtrlArgs args)
     {
         ui.Show();
+
+        //假设加载好了
+        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+        battleNet.SendPlayerLoadProgress(() =>
+        {
+
+        });
+
+
     }
 
+    void OnAllPlayerLoadFinish()
+    {
+        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+        battleNet.SendBattleReadyFinish(null);
+    }
+
+    void OnBattleProcessStart()
+    {
+
+    }
 
     public override void OnExit()
     {

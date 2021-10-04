@@ -63,12 +63,12 @@ public class TcpNetClient
         netSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         Init();
     }
-    public TcpNetClient(Socket s)
-    {
+    //public TcpNetClient(Socket s)
+    //{
 
-        this.netSocket = s;
-        Init();
-    }
+    //    this.netSocket = s;
+    //    Init();
+    //}
 
     void Init()
     {
@@ -82,11 +82,11 @@ public class TcpNetClient
             Logx.Log("net", "start to connect ...");
             IPAddress mIp = IPAddress.Parse(ip);
             IPEndPoint ip_end_point = new IPEndPoint(mIp, port);
-            netSocket.BeginConnect(ip_end_point, OnConnectCallback, netSocket);
+            netSocket.BeginConnect(ip_end_point, new AsyncCallback(OnConnectCallback), netSocket);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Logx.LogError(e);
             //ChangeToCloseState();
         }
 
@@ -94,6 +94,12 @@ public class TcpNetClient
 
     void OnConnectCallback(IAsyncResult ar)
     {
+        //Loom.QueueOnMainThread(()=>
+        //{
+          
+
+        //});
+
         var s = (Socket)ar.AsyncState;
         Logx.Log("net", "OnConnectCallback : on connect : " + s.Connected);
         if (s.Connected)
@@ -103,7 +109,7 @@ public class TcpNetClient
             netState = NetState.Connect;
             s.EndConnect(ar);
 
-            s.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(OnReceiveCallback), s);
+            s.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(HandleReceiveCallback), s);
         }
         else
         {
@@ -112,18 +118,44 @@ public class TcpNetClient
         //heartBeatService.Start();
         bool isSuccessConnect = netSocket.Connected;
         connectAction?.Invoke(isSuccessConnect);
+
+
+    }
+
+    void HandleReceiveCallback(IAsyncResult ar)
+    {
+        try
+        {
+            this.OnReceiveCallback(ar);
+        }
+        catch (Exception e)
+        {
+            Logx.LogError(e);
+        }
+
     }
 
     void OnReceiveCallback(IAsyncResult ar)
     {
         var socket = (Socket)ar.AsyncState;
         //Debug.Log(socket.Connected);
-        var length = socket.EndReceive(ar);
-        if (length == 0)
+
+        if (!socket.Connected)
         {
-            Console.WriteLine(socket.RemoteEndPoint + " : disconnect");
+            Logx.Log("OnReceiveCallback : connect : false");
             return;
         }
+
+        int length = socket.EndReceive(ar);
+
+      
+
+        if (length == 0)
+        {
+            Logx.Log(socket.RemoteEndPoint + " : disconnect");
+            return;
+        }
+
 
         //Logx.Log("floor net : receive msg : " + length);
         //dataBuffer 加上这段数据
@@ -148,7 +180,7 @@ public class TcpNetClient
             {
                 //达到了消息整包大小
                 byte[] currData = new byte[totalPackLen];
-                
+
                 Array.Copy(dataBuffer, 0, currData, 0, totalPackLen);
 
                 //解析消息
@@ -170,9 +202,11 @@ public class TcpNetClient
 
         if (socket.Connected)
         {
-            socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(OnReceiveCallback), null);
+            socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(HandleReceiveCallback), socket);
 
         }
+
+
     }
 
     public void Send(MsgPack msg)
@@ -189,7 +223,7 @@ public class TcpNetClient
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Logx.LogError(e);
             //ChangeToCloseState();
         }
 
@@ -250,6 +284,9 @@ public class TcpNetClient
     /// <param name="msg"></param>
     public MsgPack ParseFromMsg(byte[] msg)
     {
+
+        Logx.Log("receive ParseFromMsg ");
+
         var clientMsg = ProtoMsgUtil.GetClientMsg(msg);
 
         var msgPack = MsgPack.Create(clientMsg.head.cmd, clientMsg.data);
@@ -308,7 +345,8 @@ public class TcpNetClient
         connectAction = null;
         closeAction = null;
         ReceiveMsgAction = null;
-        netSocket?.Close();
+        //netSocket?.Disconnect(false);
+        netSocket.Dispose();
         buffer = null;
         dataBuffer = null;
 

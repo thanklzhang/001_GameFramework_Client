@@ -45,12 +45,14 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public void ConnectToGateServer(string ip, int port, Action<bool> connectCallback)
     {
+        Logx.Log("connect to gate : " + ip + " " + port);
+
         tcpNetClient?.Close();
 
         this.connectCallback = connectCallback;
         tcpNetClient = new TcpNetClient();
         tcpNetClient.connectAction += this.OnConnectToGateServerFinish;
-        Logx.Log("connect to gate : " + ip + " " + port);
+
         tcpNetClient.Connect(ip, port);
         tcpNetClient.ReceiveMsgAction += this.OnReceveMsg;
     }

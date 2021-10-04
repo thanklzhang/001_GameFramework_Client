@@ -57,11 +57,13 @@ public class LoginCtrl : BaseCtrl
                 {
                     if (0 == result.Err)
                     {
+                        Logx.Log("StartToLogin : check login success !!!");
                         ui.SetStateText("check login success !!!");
                         this.StartToEnterGame(result);
                     }
                     else
                     {
+                        Logx.Log("StartToLogin : check login fail");
                         ui.SetStateText("check login fail");
                     }
 
@@ -90,6 +92,8 @@ public class LoginCtrl : BaseCtrl
             if (isSuccess)
             {
                 ui.SetStateText("connect gate server success !!!!");
+                Logx.Log("connect gate server success !!!!");
+
                 var loginHandler = NetHandlerManager.Instance.GetHandler<LoginNetHandler>();
 
                 ui.SetStateText("start to enter game ...");
@@ -98,13 +102,14 @@ public class LoginCtrl : BaseCtrl
                 {
                     if (0 == enterResult.Err)
                     {
-                        Logx.Log("StartToEnterGame : success");
+                        Logx.Log("enter game success !!!");
 
                         ui.SetStateText("enter game success !!!");
                         OnGateConnectResult();
                     }
                     else
                     {
+                        Logx.Log("enter game fail !!!");
                         ui.SetStateText("enter game fail !!!");
                     }
                     

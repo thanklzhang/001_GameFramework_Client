@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class BattleManager : Singleton<BattleManager>
-{
-    //真正的战斗开始
-    public void StartCombat()
-    {
-        GameStateManager.Instance.ChangeState(GameState.Combat);
-    }
-}
+//public class BattleManager : Singleton<BattleManager>
+//{
+//    //真正的战斗开始
+//    public void StartCombat()
+//    {
+//        GameStateManager.Instance.ChangeState(GameState.Combat);
+//    }
+//}
 
 
 //public class CombatStart : MonoBehaviour

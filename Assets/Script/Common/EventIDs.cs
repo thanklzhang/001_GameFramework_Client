@@ -17,5 +17,9 @@ public enum EventIDs
     
     //battle
     OnCreateBattle = 101001,
-    
+
+    OnCreateEntity = 101101,
+
+    OnSetEntityPosition = 101201,
+
 }

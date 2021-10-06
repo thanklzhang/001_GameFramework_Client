@@ -22,16 +22,17 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKocDCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKsADCghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSGAoTQXBwbHlD",
-            "cmVhdGVCYXR0bGUyUxDJARIPCgpDaGVja0xvZ2luENEPEg4KCUVudGVyR2Ft",
-            "ZRDSDxIYChNBcHBseUhlcm9FeGFtQmF0dGxlELQQEhcKEk5vdGlmeUNyZWF0",
-            "ZUJhdHRsZRC5FxIXChJQbGF5ZXJMb2FkUHJvZ3Jlc3MQuhcSHgoZTm90aWZ5",
-            "QWxsUGxheWVyTG9hZEZpbmlzaBC7FxIWChFCYXR0bGVSZWFkeUZpbmlzaBC8",
-            "FxIWChFOb3RpZnlCYXR0bGVTdGFydBC9FxIPCgpNb3ZlRW50aXR5EJ0YEhkK",
-            "FE5vdGlmeUNyZWF0ZUVudGl0aWVzEIEZEhUKEE5vdGlmeUVudGl0eU1vdmUQ",
-            "ghkSFQoQVHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFuc2l0aW9uQmF0dGxl",
-            "MlBsYXllchDmGWIGcHJvdG8z"));
+            "cmVhdGVCYXR0bGUyUxDJARIXChJUcmFuc2l0aW9uQmF0dGxlMlMQrQISHgoZ",
+            "VHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIyUxCuAhIPCgpDaGVja0xvZ2luENEP",
+            "Eg4KCUVudGVyR2FtZRDSDxIYChNBcHBseUhlcm9FeGFtQmF0dGxlELQQEhcK",
+            "Ek5vdGlmeUNyZWF0ZUJhdHRsZRC5FxIXChJQbGF5ZXJMb2FkUHJvZ3Jlc3MQ",
+            "uhcSHgoZTm90aWZ5QWxsUGxheWVyTG9hZEZpbmlzaBC7FxIWChFCYXR0bGVS",
+            "ZWFkeUZpbmlzaBC8FxIWChFOb3RpZnlCYXR0bGVTdGFydBC9FxIPCgpNb3Zl",
+            "RW50aXR5EJ0YEhkKFE5vdGlmeUNyZWF0ZUVudGl0aWVzEIEZEhUKEE5vdGlm",
+            "eUVudGl0eU1vdmUQghkSFQoQVHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFu",
+            "c2l0aW9uQmF0dGxlMlBsYXllchDmGWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -48,6 +49,8 @@ namespace NetProto {
     [pbr::OriginalName("CheckLogin2S")] CheckLogin2S = 101,
     [pbr::OriginalName("EnterGame2S")] EnterGame2S = 102,
     [pbr::OriginalName("ApplyCreateBattle2S")] ApplyCreateBattle2S = 201,
+    [pbr::OriginalName("TransitionBattle2S")] TransitionBattle2S = 301,
+    [pbr::OriginalName("TransitionBattle2Player2S")] TransitionBattle2Player2S = 302,
     /// <summary>
     /// 2000+ 客户端-----
     /// </summary>

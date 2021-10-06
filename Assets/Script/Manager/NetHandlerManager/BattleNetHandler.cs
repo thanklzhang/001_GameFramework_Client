@@ -10,16 +10,30 @@ public class BattleNetHandler : NetHandler
 {
     //public Action<scStartBattle> startBattleAction;
     //public Action<scEnterGame> enterGameResultAction;
+
+    public Dictionary<ProtoIDs, Action<byte[]>> battleTransitionMsgDic;
+
     public override void Init()
     {
+        battleTransitionMsgDic = new Dictionary<ProtoIDs, Action<byte[]>>();
 
+        //战斗流程正常协议
         AddListener((int)ProtoIDs.NotifyCreateBattle, OnNotifyCreateBattle);
-
-
         AddListener((int)ProtoIDs.TransitionBattle2Player, OnTransitionBattle2Player);
-       
+
         //AddListener((int)ProtoIDs.EnterGame, OnEnterGame);
 
+        //战斗转发协议 需要转一下
+        AddBattleMsg(ProtoIDs.PlayerLoadProgress, this.OnPlayerLoadProgress);
+        AddBattleMsg(ProtoIDs.NotifyAllPlayerLoadFinish, this.OnNotifyAllPlayerLoadFinish);
+        AddBattleMsg(ProtoIDs.BattleReadyFinish, this.OnBattleReadyFinish);
+        AddBattleMsg(ProtoIDs.NotifyBattleStart, this.OnNotifyBattleStart);
+
+    }
+
+    void AddBattleMsg(ProtoIDs cmd, Action<byte[]> action)
+    {
+        battleTransitionMsgDic.Add(cmd, action);
     }
 
 
@@ -29,26 +43,45 @@ public class BattleNetHandler : NetHandler
     public void TransitionBattleMsg(ProtoIDs cmd, IMessage msg)
     {
         csTransitionBattle tranBattleMsg = new csTransitionBattle();
+
+        var myUid = GameDataManager.Instance.UserGameDataStore.Uid;
+        ClientProtoHead head = new ClientProtoHead()
+        {
+            cmd = (ushort)cmd,
+            uid = myUid
+        };
+
+        var clientData = ProtoMsgUtil.MakeClientMsgBytes(msg.ToByteArray(), head);
+
         tranBattleMsg.Cmd = (int)cmd;
-        tranBattleMsg.Data = msg.ToByteString();
-        NetworkManager.Instance.SendMsg(cmd, tranBattleMsg.ToByteArray());
+        tranBattleMsg.Data = ByteString.CopyFrom(clientData);
+        NetworkManager.Instance.SendMsg(ProtoIDs.TransitionBattle, tranBattleMsg.ToByteArray());
     }
 
     //统一接受战斗消息并解析为客户端需要的结构
     private void OnTransitionBattle2Player(MsgPack msgPack)
     {
-        var trans = csTransitionBattle.Parser.ParseFrom(msgPack.data);
+        var trans = scTransitionBattle2Player.Parser.ParseFrom(msgPack.data);
 
-        var cmd = (ProtoIDs)trans.Cmd;
-        var data = trans.Data;
+        var clientTrueData = trans.Data;
 
-        //if (cmd == ProtoIDs.StartBattle)
-        //{
-        //    this.OnStartBattle(data);
-        //}
+        var clientMsg = ProtoMsgUtil.GetClientMsg(clientTrueData.ToByteArray());
+        var clientCmd = (ProtoIDs)clientMsg.head.cmd;
+
+        Logx.Log("OnTransitionBattle2Player , the true cmd : " + clientCmd);
+
+        var battleMsgData = clientMsg.data;
+
+        if (battleTransitionMsgDic.ContainsKey(clientCmd))
+        {
+            var action = battleTransitionMsgDic[clientCmd];
+            action?.Invoke(battleMsgData);
+        }
+        else
+        {
+            Logx.LogWarning("the cmd is not found : " + clientCmd);
+        }
     }
-
-    //客户端真正操作的协议/////////////////////////////////////////////////////////////////////////
 
     public void OnNotifyCreateBattle(MsgPack msgPack)
     {
@@ -61,33 +94,22 @@ public class BattleNetHandler : NetHandler
 
         CtrlManager.Instance.Enter<BattleCtrl>();
     }
-    ////战斗开始
-    //public void SendStartBattle(Action<scStartBattle> action)
-    //{
-    //    csStartBattle start = new csStartBattle();
-    //    startBattleAction = action;
 
-    //    TransitionBattleMsg(ProtoIDs.StartBattle, start);
-    //}
+    //客户端真正操作的协议/////////////////////////////////////////////////////////////////////////
 
-    //public void OnStartBattle(ByteString data)
-    //{
-    //    scStartBattle startBattle = scStartBattle.Parser.ParseFrom(data);
 
-    //    startBattleAction?.Invoke(startBattle);
-    //    startBattleAction = null;
-
-    //}
-
-    //上报加载进度
-    public void SendPlayerLoadProgress(Action action)
+    //上报加载进度(目前算是 100 )
+    public void SendPlayerLoadProgress(int progress)
     {
-
+        csPlayerLoadProgress csProgress = new csPlayerLoadProgress();
+        csProgress.Progress = progress;
+        TransitionBattleMsg(ProtoIDs.PlayerLoadProgress, csProgress);
     }
 
-    public void OnPlayerLoadProgress()
+    public void OnPlayerLoadProgress(byte[] stringData)
     {
-
+        scPlayerLoadProgress progress = scPlayerLoadProgress.Parser.ParseFrom(stringData);
+        Logx.Log("receive battle msg : PlayerLoadProgress");
     }
 
     //所有人都加载好了
@@ -96,31 +118,33 @@ public class BattleNetHandler : NetHandler
 
     }
 
-    public void OnNotifyAllPlayerLoadFinish()
+    public void OnNotifyAllPlayerLoadFinish(byte[] stringData)
     {
-
+        Logx.Log("receive battle msg : NotifyAllPlayerLoadFinish");
+        scNotifyAllPlayerLoadFinish allFinish = scNotifyAllPlayerLoadFinish.Parser.ParseFrom(stringData);
     }
 
     //战斗准备完成
     public void SendBattleReadyFinish(Action action)
     {
-
+        csBattleReadyFinish ready = new csBattleReadyFinish();
+        TransitionBattleMsg(ProtoIDs.BattleReadyFinish, ready);
     }
 
-    public void OnBattleReadyFinish()
+    public void OnBattleReadyFinish(byte[] stringData)
+    {
+        scBattleReadyFinish readyFinish = scBattleReadyFinish.Parser.ParseFrom(stringData);
+    }
+
+    //战斗正式开始
+    public void SendNotifyBattleStart(Action action)
     {
 
     }
 
-    //战斗流程正式开始
-    public void SendNotifyBattleProcessStart(Action action)
+    public void OnNotifyBattleStart(byte[] stringData)
     {
-
-    }
-
-    public void OnNotifyBattleProcessStart()
-    {
-
+        scNotifyBattleStart battleStart = scNotifyBattleStart.Parser.ParseFrom(stringData);
     }
 
     #region 玩家操作 
@@ -143,7 +167,7 @@ public class BattleNetHandler : NetHandler
     //创建单位
     public void SendNotifyCreateEntities()
     {
-
+        //BattleEntityManager.Instance.CreateEntity();
     }
 
     public void OnNotifyCreateEntities()

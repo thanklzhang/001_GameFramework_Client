@@ -13,6 +13,9 @@ using Table;
 public class GameMain : MonoBehaviour
 {
     public static GameMain Instance;
+
+    public GameObject tempModelAsset;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

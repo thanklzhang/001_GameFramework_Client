@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using NetProto;
-public class BattleEntranceHandler : NetHandler
+public class BattleEntranceNetHandler : NetHandler
 {
     public Action<scApplyHeroExamBattle> applyHeroExamBattleAction;
     //public Action<scEnterGame> enterGameResultAction;

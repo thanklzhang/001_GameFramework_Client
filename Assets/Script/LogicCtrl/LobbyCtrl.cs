@@ -43,7 +43,7 @@ public class LobbyCtrl : BaseCtrl
     {
 
         //开始一场战斗
-        var battleEntranceNet = NetHandlerManager.Instance.GetHandler<BattleEntranceHandler>();
+        var battleEntranceNet = NetHandlerManager.Instance.GetHandler<BattleEntranceNetHandler>();
 
         battleEntranceNet.SendApplyHeroExamBattle((xxx) =>
         {

@@ -5,13 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class GameDataStore
-{
-    public void Init()
-    {
-
-    }
-}
 
 public class HeroData
 {

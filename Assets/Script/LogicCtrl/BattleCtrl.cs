@@ -41,10 +41,7 @@ public class BattleCtrl : BaseCtrl
 
         //假设加载好了
         var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-        battleNet.SendPlayerLoadProgress(() =>
-        {
-
-        });
+        battleNet.SendPlayerLoadProgress(1000);
 
 
     }
@@ -55,7 +52,7 @@ public class BattleCtrl : BaseCtrl
         battleNet.SendBattleReadyFinish(null);
     }
 
-    void OnBattleProcessStart()
+    void OnBattleStart()
     {
 
     }

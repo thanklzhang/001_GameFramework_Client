@@ -35,7 +35,7 @@ public class LoginNetHandler : NetHandler
     public void OnCheckLogin(MsgPack msgPack)
     {
         scCheckLogin check = scCheckLogin.Parser.ParseFrom(msgPack.data);
-
+        GameDataManager.Instance.UserGameDataStore.Uid = (ulong)check.Uid;
         loginResultAction?.Invoke(check);
         loginResultAction = null;
 

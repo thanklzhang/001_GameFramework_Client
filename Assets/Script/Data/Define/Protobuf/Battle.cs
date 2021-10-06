@@ -40,25 +40,25 @@ namespace NetProto {
             "bWF4SHAYBiABKAUSDgoGY3VyckhwGAcgASgFIk8KE0JhdHRsZUVudGl0eUlu",
             "aXRBcmcSOAoUYmF0dGxlRW50aXR5SW5pdExpc3QYASADKAsyGi5OZXRQcm90",
             "by5CYXR0bGVFbnRpdHlJbml0IjUKEkJhdHRsZVNraWxsSW5pdEFyZxIQCghj",
-            "b25maWdJZBgBIAEoBRINCgVsZXZlbBgCIAEoBSIWChRjc1BsYXllckxvYWRQ",
-            "cm9ncmVzcyIjChRzY1BsYXllckxvYWRQcm9ncmVzcxILCgNlcnIYASABKAUi",
-            "HQobY3NOb3RpZnlBbGxQbGF5ZXJMb2FkRmluaXNoIioKG3NjTm90aWZ5QWxs",
-            "UGxheWVyTG9hZEZpbmlzaBILCgNlcnIYASABKAUiFQoTY3NCYXR0bGVSZWFk",
-            "eUZpbmlzaCIiChNzY0JhdHRsZVJlYWR5RmluaXNoEgsKA2VychgBIAEoBSIV",
-            "ChNjc05vdGlmeUJhdHRsZVN0YXJ0IiIKE3NjTm90aWZ5QmF0dGxlU3RhcnQS",
-            "CwoDZXJyGAEgASgFIkcKDGNzTW92ZUVudGl0eRIMCgRndWlkGAEgASgFEikK",
-            "CXRhcmdldFBvcxgCIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90byIbCgxz",
-            "Y01vdmVFbnRpdHkSCwoDZXJyGAEgASgFIjMKEUJhdHRsZUVudGl0eVByb3Rv",
-            "EgwKBGd1aWQYASABKAUSEAoIY29uZmlnSWQYAiABKAUiTQoWc2NOb3RpZnlD",
-            "cmVhdGVFbnRpdGllcxIzCg5iYXR0bGVFbnRpdGllcxgBIAMoCzIbLk5ldFBy",
-            "b3RvLkJhdHRsZUVudGl0eVByb3RvInQKEnNjTm90aWZ5RW50aXR5TW92ZRIM",
-            "CgRndWlkGAEgASgFEigKCHN0YXJ0UG9zGAIgASgLMhYuTmV0UHJvdG8uVmVj",
-            "dG9yM1Byb3RvEiYKBmVuZFBvcxgDIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQ",
-            "cm90byIvChJjc1RyYW5zaXRpb25CYXR0bGUSCwoDY21kGAEgASgFEgwKBGRh",
-            "dGEYAiABKAwiIQoSc2NUcmFuc2l0aW9uQmF0dGxlEgsKA2VychgBIAEoBSIb",
-            "Chljc1RyYW5zaXRpb25CYXR0bGUyUGxheWVyIjYKGXNjVHJhbnNpdGlvbkJh",
-            "dHRsZTJQbGF5ZXISCwoDY21kGAEgASgFEgwKBGRhdGEYAiABKAxiBnByb3Rv",
-            "Mw=="));
+            "b25maWdJZBgBIAEoBRINCgVsZXZlbBgCIAEoBSIoChRjc1BsYXllckxvYWRQ",
+            "cm9ncmVzcxIQCghwcm9ncmVzcxgBIAEoBSIjChRzY1BsYXllckxvYWRQcm9n",
+            "cmVzcxILCgNlcnIYASABKAUiHQobY3NOb3RpZnlBbGxQbGF5ZXJMb2FkRmlu",
+            "aXNoIioKG3NjTm90aWZ5QWxsUGxheWVyTG9hZEZpbmlzaBILCgNlcnIYASAB",
+            "KAUiFQoTY3NCYXR0bGVSZWFkeUZpbmlzaCIiChNzY0JhdHRsZVJlYWR5Rmlu",
+            "aXNoEgsKA2VychgBIAEoBSIVChNjc05vdGlmeUJhdHRsZVN0YXJ0IiIKE3Nj",
+            "Tm90aWZ5QmF0dGxlU3RhcnQSCwoDZXJyGAEgASgFIkcKDGNzTW92ZUVudGl0",
+            "eRIMCgRndWlkGAEgASgFEikKCXRhcmdldFBvcxgCIAEoCzIWLk5ldFByb3Rv",
+            "LlZlY3RvcjNQcm90byIbCgxzY01vdmVFbnRpdHkSCwoDZXJyGAEgASgFIjMK",
+            "EUJhdHRsZUVudGl0eVByb3RvEgwKBGd1aWQYASABKAUSEAoIY29uZmlnSWQY",
+            "AiABKAUiTQoWc2NOb3RpZnlDcmVhdGVFbnRpdGllcxIzCg5iYXR0bGVFbnRp",
+            "dGllcxgBIAMoCzIbLk5ldFByb3RvLkJhdHRsZUVudGl0eVByb3RvInQKEnNj",
+            "Tm90aWZ5RW50aXR5TW92ZRIMCgRndWlkGAEgASgFEigKCHN0YXJ0UG9zGAIg",
+            "ASgLMhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvEiYKBmVuZFBvcxgDIAEoCzIW",
+            "Lk5ldFByb3RvLlZlY3RvcjNQcm90byIvChJjc1RyYW5zaXRpb25CYXR0bGUS",
+            "CwoDY21kGAEgASgFEgwKBGRhdGEYAiABKAwiIQoSc2NUcmFuc2l0aW9uQmF0",
+            "dGxlEgsKA2VychgBIAEoBSIbChljc1RyYW5zaXRpb25CYXR0bGUyUGxheWVy",
+            "IjYKGXNjVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXISCwoDY21kGAEgASgFEgwK",
+            "BGRhdGEYAiABKAxiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -71,7 +71,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityInit), global::NetProto.BattleEntityInit.Parser, new[]{ "ConfigId", "Level", "PlayerIndex", "Position", "SkillInitList", "MaxHp", "CurrHp" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityInitArg), global::NetProto.BattleEntityInitArg.Parser, new[]{ "BattleEntityInitList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleSkillInitArg), global::NetProto.BattleSkillInitArg.Parser, new[]{ "ConfigId", "Level" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csPlayerLoadProgress), global::NetProto.csPlayerLoadProgress.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csPlayerLoadProgress), global::NetProto.csPlayerLoadProgress.Parser, new[]{ "Progress" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scPlayerLoadProgress), global::NetProto.scPlayerLoadProgress.Parser, new[]{ "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csNotifyAllPlayerLoadFinish), global::NetProto.csNotifyAllPlayerLoadFinish.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyAllPlayerLoadFinish), global::NetProto.scNotifyAllPlayerLoadFinish.Parser, new[]{ "Err" }, null, null, null),
@@ -1494,11 +1494,26 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public csPlayerLoadProgress(csPlayerLoadProgress other) : this() {
+      progress_ = other.progress_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public csPlayerLoadProgress Clone() {
       return new csPlayerLoadProgress(this);
+    }
+
+    /// <summary>Field number for the "progress" field.</summary>
+    public const int ProgressFieldNumber = 1;
+    private int progress_;
+    /// <summary>
+    /// 进度 千分比
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Progress {
+      get { return progress_; }
+      set {
+        progress_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1514,12 +1529,14 @@ namespace NetProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Progress != other.Progress) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Progress != 0) hash ^= Progress.GetHashCode();
       return hash;
     }
 
@@ -1530,11 +1547,18 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Progress != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Progress);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Progress != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Progress);
+      }
       return size;
     }
 
@@ -1542,6 +1566,9 @@ namespace NetProto {
     public void MergeFrom(csPlayerLoadProgress other) {
       if (other == null) {
         return;
+      }
+      if (other.Progress != 0) {
+        Progress = other.Progress;
       }
     }
 
@@ -1553,6 +1580,10 @@ namespace NetProto {
           default:
             input.SkipLastField();
             break;
+          case 8: {
+            Progress = input.ReadInt32();
+            break;
+          }
         }
       }
     }

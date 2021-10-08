@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using UnityEngine;
 
-public class BattleViewEntity
-{
-    BattleEntity entityData;
+//public class BattleViewEntity
+//{
+//    BattleEntity entityData;
 
-    public GameObject gameObject;
+//    public GameObject gameObject;
 
-    internal void Init(BattleEntity entity)
-    {
-        this.entityData = entity;
+//    internal void Init(BattleEntity entity)
+//    {
+//        this.entityData = entity;
 
-        //load gameObject
-    }
-}
+//        //load gameObject
+//    }
+//}

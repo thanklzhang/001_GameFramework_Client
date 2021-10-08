@@ -76,6 +76,7 @@ public class ObjectPool
             {
                 isLoadingAsset = true;
                 getObjCallbackList.Add(callback);
+               
                 AssetManager.Instance.Load(path, (asset) =>
                 {
                     this.OnAssetLoadFinish(asset);

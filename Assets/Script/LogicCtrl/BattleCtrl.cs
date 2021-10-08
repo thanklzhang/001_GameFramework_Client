@@ -27,7 +27,30 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
+
+
+    }
+
+    public override void OnEnter(CtrlArgs args)
+    {
+        //假设加载好了
+        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+        battleNet.SendPlayerLoadProgress(1000);
+
+
+        ui.SetStateText("ready all player load finish");
+    }
+
+    public override void OnActive()
+    {
         ui.onCloseBtnClick += OnClickCloseBtn;
+        ui.onReadyStartBtnClick += OnClickReadyStartBtn;
+
+        EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
+        EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
+
+        ui.Show();
+        ui.SetReadyBattleBtnShowState(false);
     }
 
     void OnClickCloseBtn()
@@ -35,31 +58,41 @@ public class BattleCtrl : BaseCtrl
         CtrlManager.Instance.Exit<BattleCtrl>();
     }
 
-    public override void OnEnter(CtrlArgs args)
-    {
-        ui.Show();
-
-        //假设加载好了
-        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-        battleNet.SendPlayerLoadProgress(1000);
-
-
-    }
-
-    void OnAllPlayerLoadFinish()
+    void OnClickReadyStartBtn()
     {
         var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
         battleNet.SendBattleReadyFinish(null);
     }
 
+    void OnAllPlayerLoadFinish()
+    {
+        ui.SetReadyBattleBtnShowState(true);
+
+        ui.SetStateText("ready battle start");
+
+    }
+
     void OnBattleStart()
     {
+        ui.SetReadyBattleBtnShowState(false);
+        ui.SetStateText("OnBattleStart");
+    }
 
+    public override void OnInactive()
+    {
+        EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
+        EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
+
+        ui.Hide();
+
+        ui.onCloseBtnClick -= OnClickCloseBtn;
     }
 
     public override void OnExit()
     {
-        ui.onCloseBtnClick -= OnClickCloseBtn;
+
+
+
         UIManager.Instance.ReleaseUI<BattleUI>();
     }
 

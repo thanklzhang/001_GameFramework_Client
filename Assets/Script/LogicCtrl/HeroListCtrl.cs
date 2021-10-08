@@ -65,11 +65,13 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
-        ui.Show();
+        
     }
 
     public override void OnActive()
     {
+        ui.Show();
+
         ui.onCloseBtnClick += OnClickCloseBtn;
         ui.onGoInfoUIBtnClick += OnClickGoInfoUIBtn;
         ui.onClickOneHeroUpgradeLevelBtn += OnClickOneHeroUpgradeLevelBtn;
@@ -84,6 +86,8 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnInactive()
     {
+        ui.Hide();
+
         ui.onCloseBtnClick -= OnClickCloseBtn;
         ui.onGoInfoUIBtnClick -= OnClickGoInfoUIBtn;
         ui.onClickOneHeroUpgradeLevelBtn -= OnClickOneHeroUpgradeLevelBtn;
@@ -137,6 +141,8 @@ public class HeroListCtrl : BaseCtrl
 
         return uiArgs;
     }
+
+    
 
     public override void OnExit()
     {

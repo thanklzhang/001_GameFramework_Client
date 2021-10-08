@@ -21,6 +21,12 @@ public abstract class BaseUI
         this.OnInit();
     }
 
+
+    protected virtual void OnInit()
+    {
+
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);
@@ -28,7 +34,7 @@ public abstract class BaseUI
 
     public virtual void Refresh(UIArgs args)
     {
-        
+
     }
 
     public void Hide()
@@ -45,11 +51,7 @@ public abstract class BaseUI
 
     protected virtual void OnRelease()
     {
-        
-    }
-
-    protected virtual void OnInit()
-    {
 
     }
+
 }

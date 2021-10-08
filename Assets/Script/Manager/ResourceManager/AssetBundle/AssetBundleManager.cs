@@ -110,7 +110,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             var depPath = deps[i];
             Load(depPath, null, false);
         }
-
+        Logx.Log("LoadTaskManager.Instance.StartAssetBundleLoader , loader.path : " + loader.path);
         //加载任务交给加载管理器去执行
         //Logx.Logz("AssetBundleManager : LoadTrueAssetBundle : start LoadTrueAssetBundle : " + path);
         LoadTaskManager.Instance.StartAssetBundleLoader(loader);

@@ -28,8 +28,10 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.NotifyAllPlayerLoadFinish, this.OnNotifyAllPlayerLoadFinish);
         AddBattleMsg(ProtoIDs.BattleReadyFinish, this.OnBattleReadyFinish);
         AddBattleMsg(ProtoIDs.NotifyBattleStart, this.OnNotifyBattleStart);
+        AddBattleMsg(ProtoIDs.NotifyCreateEntities, this.OnNotifyCreateEntities);
 
     }
+
 
     void AddBattleMsg(ProtoIDs cmd, Action<byte[]> action)
     {
@@ -42,6 +44,7 @@ public class BattleNetHandler : NetHandler
     //统一转发战斗消息
     public void TransitionBattleMsg(ProtoIDs cmd, IMessage msg)
     {
+        Logx.Log("TransitionBattleMsg : send true cmd : " + cmd);
         csTransitionBattle tranBattleMsg = new csTransitionBattle();
 
         var myUid = GameDataManager.Instance.UserGameDataStore.Uid;
@@ -61,6 +64,8 @@ public class BattleNetHandler : NetHandler
     //统一接受战斗消息并解析为客户端需要的结构
     private void OnTransitionBattle2Player(MsgPack msgPack)
     {
+
+
         var trans = scTransitionBattle2Player.Parser.ParseFrom(msgPack.data);
 
         var clientTrueData = trans.Data;
@@ -68,7 +73,7 @@ public class BattleNetHandler : NetHandler
         var clientMsg = ProtoMsgUtil.GetClientMsg(clientTrueData.ToByteArray());
         var clientCmd = (ProtoIDs)clientMsg.head.cmd;
 
-        Logx.Log("OnTransitionBattle2Player , the true cmd : " + clientCmd);
+        Logx.Log("OnTransitionBattle2Player , receive the true cmd : " + clientCmd);
 
         var battleMsgData = clientMsg.data;
 
@@ -106,9 +111,9 @@ public class BattleNetHandler : NetHandler
         TransitionBattleMsg(ProtoIDs.PlayerLoadProgress, csProgress);
     }
 
-    public void OnPlayerLoadProgress(byte[] stringData)
+    public void OnPlayerLoadProgress(byte[] byteData)
     {
-        scPlayerLoadProgress progress = scPlayerLoadProgress.Parser.ParseFrom(stringData);
+        scPlayerLoadProgress progress = scPlayerLoadProgress.Parser.ParseFrom(byteData);
         Logx.Log("receive battle msg : PlayerLoadProgress");
     }
 
@@ -118,10 +123,17 @@ public class BattleNetHandler : NetHandler
 
     }
 
-    public void OnNotifyAllPlayerLoadFinish(byte[] stringData)
+    public void OnNotifyAllPlayerLoadFinish(byte[] byteData)
     {
         Logx.Log("receive battle msg : NotifyAllPlayerLoadFinish");
-        scNotifyAllPlayerLoadFinish allFinish = scNotifyAllPlayerLoadFinish.Parser.ParseFrom(stringData);
+        scNotifyAllPlayerLoadFinish allFinish = scNotifyAllPlayerLoadFinish.Parser.ParseFrom(byteData);
+
+        //先用数据层 之后考虑是否用 battleManager 流程
+        var battleData = GameDataManager.Instance.BattleGameDataStore;
+        battleData.IsAllPlayerLoadFinish = true;
+
+        EventDispatcher.Broadcast(EventIDs.OnAllPlayerLoadFinish);
+
     }
 
     //战斗准备完成
@@ -131,9 +143,9 @@ public class BattleNetHandler : NetHandler
         TransitionBattleMsg(ProtoIDs.BattleReadyFinish, ready);
     }
 
-    public void OnBattleReadyFinish(byte[] stringData)
+    public void OnBattleReadyFinish(byte[] byteData)
     {
-        scBattleReadyFinish readyFinish = scBattleReadyFinish.Parser.ParseFrom(stringData);
+        scBattleReadyFinish readyFinish = scBattleReadyFinish.Parser.ParseFrom(byteData);
     }
 
     //战斗正式开始
@@ -142,10 +154,27 @@ public class BattleNetHandler : NetHandler
 
     }
 
-    public void OnNotifyBattleStart(byte[] stringData)
+    public void OnNotifyBattleStart(byte[] byteData)
     {
-        scNotifyBattleStart battleStart = scNotifyBattleStart.Parser.ParseFrom(stringData);
+        scNotifyBattleStart battleStart = scNotifyBattleStart.Parser.ParseFrom(byteData);
+        EventDispatcher.Broadcast(EventIDs.OnBattleStart);
     }
+
+    private void OnNotifyCreateEntities(byte[] byteData)
+    {
+        scNotifyCreateEntities create = scNotifyCreateEntities.Parser.ParseFrom(byteData);
+        foreach (var item in create.BattleEntities)
+        {
+            var serverEntity = item;
+            var entity = BattleEntityManager.Instance.CreateEntity(serverEntity.Guid, serverEntity.ConfigId);
+            if (entity != null)
+            {
+                var v3 = BattleConvert.ConverToVector3(serverEntity.Position);
+                entity.SetPosition(v3);
+            }
+        }
+    }
+
 
     #region 玩家操作 
 

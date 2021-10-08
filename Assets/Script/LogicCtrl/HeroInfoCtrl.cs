@@ -36,9 +36,18 @@ public class HeroInfoCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
+       
+    }
+
+    public override void OnActive()
+    {
         ui.Show();
     }
 
+    public override void OnInactive()
+    {
+        ui.Hide();
+    }
 
     public override void OnExit()
     {

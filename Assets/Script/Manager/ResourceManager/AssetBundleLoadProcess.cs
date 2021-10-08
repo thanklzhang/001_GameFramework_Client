@@ -15,6 +15,8 @@ public class AssetBundleLoadProcess : BaseLoadProcess
 
     public override void AddLoader(BaseLoader loader)
     {
+        Logx.Log("assetBundle : AddLoader");
+
         var assetBundleLoader = (AssetBundleLoader)loader;
 
         //从缓存池中找到是否有相同 path 如果有则附加 finishCallback
@@ -22,12 +24,15 @@ public class AssetBundleLoadProcess : BaseLoadProcess
         AssetBundleLoader abLoader = null;
         if (!abLoaderDic.TryGetValue(assetBundleLoader.path, out abLoader))
         {
+            Logx.Log("assetBundle : AddLoader 1 assetBundleLoader.path : " + assetBundleLoader.path);
+
             abLoaderDic.Add(assetBundleLoader.path, assetBundleLoader);
             ////Logx.Logz("AssetBundleLoadProcess AddLoader : no loader cache and start a new loader : " + assetBundleLoader.path);
             base.AddLoader(loader);
         }
         else
         {
+            Logx.Log("assetBundle : AddLoader 2");
             ////Logx.Logz("AssetBundleLoadProcess AddLoader : have loader cache " + assetBundleLoader.path);
             abLoader.finishLoadCallback += assetBundleLoader.finishLoadCallback;
             abLoader.refCount += 1;
@@ -36,6 +41,7 @@ public class AssetBundleLoadProcess : BaseLoadProcess
 
     public override void OnLoadFinish(BaseLoader loader)
     {
+        Logx.Log("assetBundle : OnLoadFinish ");
         var assetBundleLoader = (AssetBundleLoader)loader;
         ////Logx.Logz("AssetBundleLoadProcess OnLoadFinish : " + assetBundleLoader.path);
       

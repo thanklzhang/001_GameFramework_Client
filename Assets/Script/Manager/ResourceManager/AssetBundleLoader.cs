@@ -29,21 +29,25 @@ public class AssetBundleLoader : BaseLoader
         refCount += 1;
         //填充 deps
         //这里应该抽出来
+
         deps = AssetBundleManager.Instance.GetDependPaths(this.path).ToList();
-        ////Logx.Logz("AssetBundleLoader OnStart : the count of deps : " + deps.Count);
     }
 
     public override void OnPrepareFinish()
     {
+        Logx.Log("OnPrepareFinish : " + this.path);
         ////Logx.Logz("AssetBundleLoader OnPrepareFinish : " + this.path);
         //准备好了 开始加载
         var resultPath = GetABLoadPath(this.path);
+        Logx.Log("resultPath : " + resultPath);
         abCreateReq = AssetBundle.LoadFromFileAsync(resultPath);
+        Logx.Log("abCreateReq : " + abCreateReq);
     }
 
     internal override void OnLoadFinish()
     {
-        
+        Logx.Log("ab loader OnLoadFinish : " + path);
+
         ////Logx.Logz("AssetBundleLoader OnLoadFinish : " + this.path);
         //ab 加载完成
         AssetBundleCache abCache = new AssetBundleCache();
@@ -81,6 +85,7 @@ public class AssetBundleLoader : BaseLoader
             return false;
 
         }
+        Logx.Log("abCreateReq progress : " + abCreateReq.progress);
         return abCreateReq.progress >= 1;
     }
 

@@ -26,19 +26,41 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
         return null;
     }
 
-    public void CreateEntity(int guid, int configId)
+    //public void CreateEntity(BattleEntity battleEntity)
+    //{
+    //    if (entityDic.ContainsKey(battleEntity.guid))
+    //    {
+    //        Logx.LogWarning("the guid is exist : " + battleEntity.guid);
+    //        return;
+    //    }
+
+    //    entityDic.Add(battleEntity.guid, battleEntity);
+    //}
+
+    public BattleEntity CreateEntity(int guid, int configId)
     {
         if (entityDic.ContainsKey(guid))
         {
             Logx.LogWarning("the guid is exist : " + guid);
-            return;
+            return null;
         }
 
         BattleEntity entity = new BattleEntity();
         entity.Init(guid, configId);
         entityDic.Add(guid, entity);
 
+        return entity;
+
         //EventDispatcher.Broadcast(EventIDs.OnCreateEntity,guid);
+    }
+
+    public void Update(float timeDelta)
+    {
+        foreach (var item in entityDic)
+        {
+            var entity = item.Value;
+            entity.Update(timeDelta);
+        }
     }
 
     public void DestoryEntity(int guid)

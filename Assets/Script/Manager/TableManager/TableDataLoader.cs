@@ -26,7 +26,7 @@ namespace Table
         /// <returns></returns>
         public Dictionary<Type, System.Collections.IList> LoadFromFile()
         {
-
+            //临时路径 之后要打成 ab 
             string[] files = System.IO.Directory.GetFiles(Application.dataPath + "/BuildRes/TableData");
 
             List<TableInfo> infoList = new List<TableInfo>();

@@ -61,6 +61,7 @@ public class GameMain : MonoBehaviour
         GameDataManager.Instance.Init();
         ServiceManager.Instance.Init();
 
+        BattleEntityManager.Instance.Init();
 
 
         Logx.Log("!!!finish init game");
@@ -114,10 +115,10 @@ public class GameMain : MonoBehaviour
         LoadTaskManager.Instance.Update(Time.deltaTime);
         ResourceManager.Instance.Update(Time.deltaTime);
         CtrlManager.Instance.Update(Time.deltaTime);
+        BattleEntityManager.Instance.Update(Time.deltaTime);
+
         NetworkManager.Instance.Update();
-
-
-
+        
     }
 
     private void OnDestroy()

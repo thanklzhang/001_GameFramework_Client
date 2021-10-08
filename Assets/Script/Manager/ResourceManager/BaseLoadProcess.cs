@@ -53,11 +53,10 @@ public class BaseLoadProcess
             //loader 判断状态也可以
             if (loadingLoader.IsLoadFinish())
             {
-                //OnLoadFinish(loadingLoader);
-
                 try
                 {
                     loadingLoader.LoadFinish();
+                    OnLoadFinish(loadingLoader);
                 }
                 catch (Exception e)
                 {
@@ -101,16 +100,19 @@ public class BaseLoadProcess
                 }
             }
         }
+
     }
 
     //添加一个新的 loader 的时候
     public virtual void AddLoader(BaseLoader loader)
     {
+        Logx.Log("base : process AddLoader");
+
         preparingList.Add(loader);
         loader.Start();
         //loaderCache.Add(loader);
     }
-    
+
     //当一个 loader 加载完成的时候
     public virtual void OnLoadFinish(BaseLoader loader)
     {

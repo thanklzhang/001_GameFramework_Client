@@ -14,6 +14,10 @@ public class BattleEntity
 
     public GameObject gameObject;
 
+    //加载相关
+    public bool isFinishLoad = false;
+    public string path;
+
     public void Init(int guid, int configId)
     {
         this.guid = guid;
@@ -28,13 +32,28 @@ public class BattleEntity
 
     public void StartLoadModel()
     {
+        Logx.Log("StartLoadModel");
+        isFinishLoad = false;
 
+        var heroConfig = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.configId);
+
+        var heroResTable = Table.TableManager.Instance.GetById<Table.ResourceConfig>(heroConfig.ModelId);
+        //临时组路径 之后会打进 ab 包
+        path = "Assets/BuildRes/" + heroResTable.Path + "/" + heroResTable.Name + "." + heroResTable.Ext;
+        ResourceManager.Instance.GetObject<GameObject>(path, (obj) =>
+         {
+             OnLoadModelFinish(obj);
+         });
     }
 
-    public void OnLoadModelFinish()
+    public void OnLoadModelFinish(GameObject obj)
     {
+        Logx.Log("OnLoadModelFinish");
+        isFinishLoad = true;
+        var position = gameObject.transform.position;
         GameObject.Destroy(gameObject);
-        gameObject = null;
+        gameObject = obj;
+        gameObject.transform.position = position;
         //gameObject = 
     }
 
@@ -44,8 +63,21 @@ public class BattleEntity
         gameObject.transform.position = pos;
     }
 
+    public void Update(float timeDelta)
+    {
+
+    }
+
     public void Destroy()
     {
-        GameObject.Destroy(gameObject);
+        if (isFinishLoad)
+        {
+            ResourceManager.Instance.ReturnObject(path, gameObject);
+        }
+        else
+        {
+            GameObject.Destroy(gameObject);
+        }
+
     }
 }

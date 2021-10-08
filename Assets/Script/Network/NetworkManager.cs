@@ -68,12 +68,15 @@ public class NetworkManager : Singleton<NetworkManager>
 
     private void OnReceveMsg(TcpNetClient netClient, MsgPack msg)
     {
+        Logx.Log("Network Mgr : ReceiveMsg : cmd : " + (ProtoIDs)msg.cmdId);
+
         NetMsgManager.Instance.OnReceiveMsg(msg);
 
     }
 
     public void SendMsg(ProtoIDs cmd, byte[] data)
     {
+        Logx.Log("Network Mgr : SendMsg : cmd : " + cmd);
         tcpNetClient.Send((int)cmd, data);
     }
 

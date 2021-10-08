@@ -141,17 +141,17 @@ public class LoginCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
-        ui.Show();
+       
     }
 
     public override void OnActive()
     {
-
+        ui.Show();
     }
 
     public override void OnInactive()
     {
-
+        ui.Hide();
     }
 
     public override void OnExit()

@@ -89,32 +89,32 @@
     },
     {
         "id": 15011001,
-        "name": "Hero_101",
-        "path": "Prefabs/Characters",
+        "name": "shangguanling_battle_001",
+        "path": "Prefabs/Models/Role",
         "ext": "prefab",
         "type": 6,
         "tag": ""
     },
     {
         "id": 15011002,
-        "name": "Hero_102",
-        "path": "Prefabs/Characters",
+        "name": "shangguanling_battle_002",
+        "path": "Prefabs/Models/Role",
         "ext": "prefab",
         "type": 6,
         "tag": ""
     },
     {
         "id": 15011003,
-        "name": "Hero_103",
-        "path": "Prefabs/Characters",
+        "name": "shangguanling_battle_003",
+        "path": "Prefabs/Models/Role",
         "ext": "prefab",
         "type": 6,
         "tag": ""
     },
     {
         "id": 15011004,
-        "name": "Hero_104",
-        "path": "Prefabs/Characters",
+        "name": "shangguanling_battle_004",
+        "path": "Prefabs/Models/Role",
         "ext": "prefab",
         "type": 6,
         "tag": ""

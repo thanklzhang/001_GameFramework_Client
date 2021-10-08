@@ -36,6 +36,7 @@ public class LoadTaskManager : Singleton<LoadTaskManager>
 
     public void StartAssetBundleLoader(BaseLoader loader)
     {
+        Logx.Log(abLoadTask + " start to AddLoader");
         abLoadTask.AddLoader(loader);
     }
 

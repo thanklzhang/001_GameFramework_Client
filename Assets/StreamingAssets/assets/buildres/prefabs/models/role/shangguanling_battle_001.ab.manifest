@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1991016371
+CRC: 561467742
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f6e89f83799d1e14c64204e26eef0bed
+    Hash: acd8bee8356b7c40b8c557d6783e8093
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0b4e6f81e806abe768b1f1fc92a5ade4
@@ -24,6 +24,6 @@ ClassTypes:
 - Class: 137
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildRes/Prefabs/Models/Role/001_guiwuzhe.prefab
+- Assets/BuildRes/Prefabs/Models/Role/shangguanling_battle_001.prefab
 Dependencies:
 - E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/sourceres/models/role/gui_wu_shi_001_ty.ab

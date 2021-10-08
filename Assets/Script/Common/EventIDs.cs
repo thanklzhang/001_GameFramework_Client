@@ -17,6 +17,8 @@ public enum EventIDs
     
     //battle
     OnCreateBattle = 101001,
+    OnAllPlayerLoadFinish = 1010002,
+    OnBattleStart = 1010003,
 
     OnCreateEntity = 101101,
 

@@ -27,7 +27,7 @@ public class LobbyCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-      
+
 
         ui.onHeroListBtnClick += OnClickHeroListBtn;
 
@@ -60,11 +60,21 @@ public class LobbyCtrl : BaseCtrl
     //    CtrlManager.Instance.Enter<BattleCtrl>();
     //}
 
-   
+
 
     public override void OnEnter(CtrlArgs args)
     {
+       
+    }
+
+    public override void OnActive()
+    {
         ui.Show();
+    }
+
+    public override void OnInactive()
+    {
+        ui.Hide();
     }
 
     public override void OnExit()

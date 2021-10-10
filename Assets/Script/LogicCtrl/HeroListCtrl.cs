@@ -148,7 +148,7 @@ public class HeroListCtrl : BaseCtrl
     {
      
 
-        UIManager.Instance.ReleaseUI<HeroListUI>();
+        //UIManager.Instance.ReleaseUI<HeroListUI>();
     }
 
 }

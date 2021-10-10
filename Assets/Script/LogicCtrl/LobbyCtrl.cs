@@ -81,7 +81,7 @@ public class LobbyCtrl : BaseCtrl
     {
         ui.onHeroListBtnClick -= OnClickHeroListBtn;
         ui.onBattleBtnClick -= OnClickBattleBtn;
-        UIManager.Instance.ReleaseUI<LobbyUI>();
+        //UIManager.Instance.ReleaseUI<LobbyUI>();
     }
 
 

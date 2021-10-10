@@ -156,7 +156,7 @@ public class LoginCtrl : BaseCtrl
 
     public override void OnExit()
     {
-        UIManager.Instance.ReleaseUI<LoginUI>();
+        //UIManager.Instance.ReleaseUI<LoginUI>();
     }
 
 }

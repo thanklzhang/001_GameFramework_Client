@@ -39,6 +39,7 @@ public class BattleUI : BaseUI
         stateText.text = stateStr;
     }
 
+
     protected override void OnRelease()
     {
         onCloseBtnClick = null;

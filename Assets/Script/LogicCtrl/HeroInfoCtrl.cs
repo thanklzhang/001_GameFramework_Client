@@ -51,7 +51,7 @@ public class HeroInfoCtrl : BaseCtrl
 
     public override void OnExit()
     {
-        UIManager.Instance.ReleaseUI<HeroInfoUI>();
+        //UIManager.Instance.ReleaseUI<HeroInfoUI>();
     }
 
 }

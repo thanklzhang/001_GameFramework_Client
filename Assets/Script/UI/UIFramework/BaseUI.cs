@@ -37,6 +37,11 @@ public abstract class BaseUI
 
     }
 
+    public void Update(float timeDelta)
+    {
+        this.OnUpdate();
+    }
+
     public void Hide()
     {
         gameObject.SetActive(false);
@@ -47,6 +52,11 @@ public abstract class BaseUI
         //GameObject.Destroy(this.gameObject);
         //ResourceManager.Instance.ReturnGameObject(this.gameObject);
         this.OnRelease();
+    }
+
+    protected virtual void OnUpdate()
+    {
+        
     }
 
     protected virtual void OnRelease()

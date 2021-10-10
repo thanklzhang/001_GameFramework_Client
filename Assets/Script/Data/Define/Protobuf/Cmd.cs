@@ -22,7 +22,7 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKsADCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKtsDCghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSGAoTQXBwbHlD",
             "cmVhdGVCYXR0bGUyUxDJARIXChJUcmFuc2l0aW9uQmF0dGxlMlMQrQISHgoZ",
             "VHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIyUxCuAhIPCgpDaGVja0xvZ2luENEP",
@@ -31,8 +31,9 @@ namespace NetProto {
             "uhcSHgoZTm90aWZ5QWxsUGxheWVyTG9hZEZpbmlzaBC7FxIWChFCYXR0bGVS",
             "ZWFkeUZpbmlzaBC8FxIWChFOb3RpZnlCYXR0bGVTdGFydBC9FxIPCgpNb3Zl",
             "RW50aXR5EJ0YEhkKFE5vdGlmeUNyZWF0ZUVudGl0aWVzEIEZEhUKEE5vdGlm",
-            "eUVudGl0eU1vdmUQghkSFQoQVHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFu",
-            "c2l0aW9uQmF0dGxlMlBsYXllchDmGWIGcHJvdG8z"));
+            "eUVudGl0eU1vdmUQghkSGQoUTm90aWZ5RW50aXR5U3RvcE1vdmUQgxkSFQoQ",
+            "VHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFuc2l0aW9uQmF0dGxlMlBsYXll",
+            "chDmGWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -77,6 +78,7 @@ namespace NetProto {
     /// </summary>
     [pbr::OriginalName("NotifyCreateEntities")] NotifyCreateEntities = 3201,
     [pbr::OriginalName("NotifyEntityMove")] NotifyEntityMove = 3202,
+    [pbr::OriginalName("NotifyEntityStopMove")] NotifyEntityStopMove = 3203,
     /// <summary>
     /// 转发战斗
     /// </summary>

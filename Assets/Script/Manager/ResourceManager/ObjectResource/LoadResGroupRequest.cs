@@ -87,5 +87,10 @@ public class LoadResGroupRequest
     internal void Release()
     {
         //for requestList release
+
+        foreach (var request in requestList)
+        {
+            request.Release();
+        }
     }
 }

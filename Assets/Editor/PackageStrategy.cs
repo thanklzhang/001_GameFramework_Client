@@ -43,6 +43,12 @@ public class PackageStrategy
 
         strategyList.Add(new StrategyInfo()
         {
+            path = Const.projectRootPath + "/" + "BuildRes/Prefabs/Scene",
+            type = StrategyType.OneByOneFile
+        });
+
+        strategyList.Add(new StrategyInfo()
+        {
             path = Const.projectRootPath + "/" + "SourceRes/Models/Role",
             type = StrategyType.AllInOneBySubFolder
         });
@@ -91,11 +97,11 @@ public class PackageStrategy
             {
                 continue;
             }
-        
+
             AssetBundleBuild build = new AssetBundleBuild();
-          
-            var abName = file.Replace(ext,Const.ExtName).Replace("\\","/");
-          
+
+            var abName = file.Replace(ext, Const.ExtName).Replace("\\", "/");
+
             build.assetBundleName = abName;
             var assetName = file.Replace("\\", "/");
             build.assetNames = new string[] { assetName };
@@ -121,7 +127,7 @@ public class PackageStrategy
         {
             var file = files[i];
             var ext = Path.GetExtension(file);
-          
+
             if (!IgnorePackageExt.IsCanPackageAsset(ext))
             {
                 continue;
@@ -147,7 +153,7 @@ public class PackageStrategy
             var buildRange = HandleAllInOneByFolder(dir, StrategyType.AllInOneByFolder);
             buildList.AddRange(buildRange);
         }
-        
+
         return buildList;
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7493506626897621504}
   m_Layer: 0
-  m_Name: 001_guiwuzhe
+  m_Name: shangguanling_battle_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,15 +75,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400078, guid: 6ed09cba55bb3024ebb623aa4e575a51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.10545361
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400078, guid: 6ed09cba55bb3024ebb623aa4e575a51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2179533
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400078, guid: 6ed09cba55bb3024ebb623aa4e575a51, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0005892515
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400078, guid: 6ed09cba55bb3024ebb623aa4e575a51, type: 3}
       propertyPath: m_LocalRotation.x

@@ -29,6 +29,8 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.BattleReadyFinish, this.OnBattleReadyFinish);
         AddBattleMsg(ProtoIDs.NotifyBattleStart, this.OnNotifyBattleStart);
         AddBattleMsg(ProtoIDs.NotifyCreateEntities, this.OnNotifyCreateEntities);
+        AddBattleMsg(ProtoIDs.NotifyEntityMove, this.OnNotifyEntityMove);
+        AddBattleMsg(ProtoIDs.NotifyEntityStopMove, this.OnNotifyEntityStopMove);
 
     }
 
@@ -160,6 +162,8 @@ public class BattleNetHandler : NetHandler
         EventDispatcher.Broadcast(EventIDs.OnBattleStart);
     }
 
+
+
     private void OnNotifyCreateEntities(byte[] byteData)
     {
         scNotifyCreateEntities create = scNotifyCreateEntities.Parser.ParseFrom(byteData);
@@ -175,12 +179,43 @@ public class BattleNetHandler : NetHandler
         }
     }
 
+    private void OnNotifyEntityMove(byte[] byteData)
+    {
+        scNotifyEntityMove notifyEntityMove = scNotifyEntityMove.Parser.ParseFrom(byteData);
 
-    #region 玩家操作 
+        var guid = notifyEntityMove.Guid;
+        var targetPos = BattleConvert.ConverToVector3(notifyEntityMove.EndPos);
+        var moveSpeed = BattleConvert.GetValue(notifyEntityMove.MoveSpeed);
+        var entity = BattleEntityManager.Instance.FindEntity(guid);
+        if (entity != null)
+        {
+            entity.StartMove(targetPos, moveSpeed);
+        }
+    }
+
+    protected void OnNotifyEntityStopMove(byte[] byteData)
+    {
+        scNotifyEntityStopMove stop = scNotifyEntityStopMove.Parser.ParseFrom(byteData);
+        var guid = stop.Guid;
+        var endPos = BattleConvert.ConverToVector3(stop.EndPos);
+        var entity = BattleEntityManager.Instance.FindEntity(guid);
+        if (entity != null)
+        {
+            entity.StopMove( endPos);
+        }
+    }
+
+    #region 战斗中玩家操作 
 
     //移动单位实体
-    public void SendMoveEntity()
+    public void SendMoveEntity(int entityGuid, Vector3 targetPos)
     {
+        csMoveEntity move = new csMoveEntity()
+        {
+            Guid = entityGuid,
+            TargetPos = BattleConvert.ConvertToVector3Proto(targetPos)
+        };
+        this.TransitionBattleMsg(ProtoIDs.MoveEntity, move);
 
     }
 
@@ -188,22 +223,6 @@ public class BattleNetHandler : NetHandler
     {
 
     }
-
-    #endregion 
-
-    #region 服务器发来的关键战斗事件
-
-    //创建单位
-    public void SendNotifyCreateEntities()
-    {
-        //BattleEntityManager.Instance.CreateEntity();
-    }
-
-    public void OnNotifyCreateEntities()
-    {
-
-    }
-
 
     #endregion
 

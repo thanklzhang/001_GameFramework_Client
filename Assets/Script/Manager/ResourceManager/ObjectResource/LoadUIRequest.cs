@@ -37,7 +37,7 @@ public class LoadUIRequest<T> : LoadObjectRequest where T : BaseUI, new()
 
     public override void Release()
     {
-
+        UIManager.Instance.ReleaseUI<T>();
     }
 
 }

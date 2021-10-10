@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2726442314
+CRC: 1352859635
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -56,4 +56,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_16:
       Name: assets/buildres/prefabs/ui/loginui.ab
+      Dependencies: {}
+    Info_17:
+      Name: assets/buildres/prefabs/scene/battle_scene_001.ab
       Dependencies: {}

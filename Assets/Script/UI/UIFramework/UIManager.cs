@@ -62,4 +62,5 @@ public class UIManager : Singleton<UIManager>
             //Logx.LogWarning("the ui is not exist in cache dic : " + type);
         }
     }
+
 }

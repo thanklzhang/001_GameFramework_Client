@@ -71,7 +71,7 @@ public class ConfirmCtrl : BaseCtrl
         ui.onClickYesBtn -= OnClickYesBtn;
         ui.onClickNoBtn -= OnClickNoBtn;
 
-        UIManager.Instance.ReleaseUI<ConfirmUI>();
+        //UIManager.Instance.ReleaseUI<ConfirmUI>();
     }
 
 }

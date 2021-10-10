@@ -5,6 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public enum BattleEntityState
+{
+    Idle = 0,
+    Move = 1,
+    ReleasingSkill = 2,
+    Dead = 3,
+}
+
 public class BattleEntity
 {
     public int guid;
@@ -14,9 +22,15 @@ public class BattleEntity
 
     public GameObject gameObject;
 
+    public BattleEntityState state = BattleEntityState.Idle;
+
     //加载相关
     public bool isFinishLoad = false;
     public string path;
+
+    //move
+    Vector3 moveTargetPos;
+    float moveSpeed;
 
     public void Init(int guid, int configId)
     {
@@ -65,7 +79,17 @@ public class BattleEntity
 
     public void Update(float timeDelta)
     {
+        if (state == BattleEntityState.Move)
+        {
+            var moveVector = moveTargetPos - this.gameObject.transform.position;
+            var speed = this.moveSpeed;
+            var dir = moveVector.normalized;
+            //var dis = moveVector.magnitude;
 
+            var currPos = this.gameObject.transform.position;
+
+            this.gameObject.transform.position = currPos + dir * speed * timeDelta;
+        }
     }
 
     public void Destroy()
@@ -80,4 +104,22 @@ public class BattleEntity
         }
 
     }
+
+    internal void StartMove(Vector3 targetPos, float moveSpeed)
+    {
+        Logx.Log("entity start move : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
+        state = BattleEntityState.Move;
+
+        this.moveTargetPos = targetPos;
+        this.moveSpeed = moveSpeed;
+
+    }
+
+    public void StopMove(Vector3 endPos)
+    {
+        state = BattleEntityState.Idle;
+
+        this.SetPosition(endPos);
+    }
+
 }

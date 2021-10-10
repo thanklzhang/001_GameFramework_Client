@@ -1,29 +1,34 @@
 ManifestFileVersion: 0
-CRC: 400669945
+CRC: 1704877205
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 023dc440a4b7dfc62a0d7588624dbb79
+    Hash: a0018611951f9760150b0b64997f5de4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0b4e6f81e806abe768b1f1fc92a5ade4
+    Hash: 0b73033da3dfdc5a030ca1cd01c06e31
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
   Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
   Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
-- Class: 74
+- Class: 48
   Script: {instanceID: 0}
-- Class: 111
+- Class: 64
   Script: {instanceID: 0}
-- Class: 137
+- Class: 65
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildRes/Prefabs/Models/Role/shangguanling_battle_001.prefab
-Dependencies:
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/sourceres/models/role/gui_wu_shi_001_ty.ab
+- Assets/BuildRes/Prefabs/Scene/battle_scene_001.prefab
+Dependencies: []

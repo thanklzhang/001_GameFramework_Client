@@ -47,7 +47,12 @@ public class GameMain : MonoBehaviour
         {
             Debug.LogError("the uiRoot with 'Canvas' name is null");
         }
+
         UIManager.Instance.Init(uiRoot);
+
+        var cameraRoot = transform.Find("CameraRoot");
+        CameraManager.Instance.Init(cameraRoot);
+
         CtrlManager.Instance.Init();
 
         //读取表数据 这里可能换成异步操作

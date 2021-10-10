@@ -81,9 +81,9 @@
     },
     {
         "id": 15010001,
-        "name": "lobby_scene_001",
-        "path": "Scenes",
-        "ext": "unity",
+        "name": "battle_scene_001",
+        "path": "Prefabs/Scene",
+        "ext": "prefab",
         "type": 5,
         "tag": ""
     },

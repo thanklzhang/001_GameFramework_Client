@@ -137,7 +137,7 @@ public class BaseCtrl
 
     }
 
-    private void OnUpdate(float deltaTime)
+    public virtual void OnUpdate(float deltaTime)
     {
 
     }

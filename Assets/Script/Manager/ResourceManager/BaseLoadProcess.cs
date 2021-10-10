@@ -60,7 +60,7 @@ public class BaseLoadProcess
                 }
                 catch (Exception e)
                 {
-                    Logx.LogError("UpdateLoad error : " + e.Message);
+                    Logx.LogError("UpdateLoad error : " + e.Message + " " + e.StackTrace);
                 }
                 finally
                 {

@@ -93,11 +93,10 @@ public class CtrlManager : Singleton<CtrlManager>
                 {
                     ctrl.LoadFinish();
                 }
-
-                if (ctrl.state == CtrlState.Active)
-                {
-                    ctrl.Update(deltaTime);
-                }
+            }
+            if (ctrl.state == CtrlState.Active)
+            {
+                ctrl.Update(deltaTime);
             }
         }
     }

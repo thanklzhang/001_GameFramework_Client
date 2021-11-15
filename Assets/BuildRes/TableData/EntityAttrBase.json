@@ -1,0 +1,32 @@
+[
+    {
+        "id": 10001001,
+        "describe": "\u4e0a\u5b98\u7fce",
+        "attack": 80,
+        "defence": 15,
+        "health": 400,
+        "magic": 100,
+        "attackSpeed": 800,
+        "moveSpeed": 3500
+    },
+    {
+        "id": 10001002,
+        "describe": "\u51e4\u7d2b\u5915",
+        "attack": 100,
+        "defence": 5,
+        "health": 300,
+        "magic": 125,
+        "attackSpeed": 850,
+        "moveSpeed": 4000
+    },
+    {
+        "id": 10003001,
+        "describe": "\u602a\u72691",
+        "attack": 100,
+        "defence": 5,
+        "health": 300,
+        "magic": 125,
+        "attackSpeed": 850,
+        "moveSpeed": 4000
+    }
+]

@@ -23,11 +23,24 @@ public class BattleCtrl : BaseCtrl
         var scenePath = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
         //fill load data
-        this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
-        {
-            new LoadUIRequest<BattleUI>(){selfFinishCallback = OnUILoadFinish},
-            new LoadGameObjectRequest(scenePath,1){selfFinishCallback = OnSceneLoadFinish}
-        });
+        var objsRequestList = new List<LoadObjectRequest>();
+        //ui
+        objsRequestList.Add(new LoadUIRequest<BattleUI>() { selfFinishCallback = OnUILoadFinish });
+        //scene
+        objsRequestList.Add(new LoadGameObjectRequest(scenePath, 1) { selfFinishCallback = OnSceneLoadFinish });
+        //entity
+        var entityLoadReqs = BattleEntityManager.Instance.MakeCurrBattleAllEntityLoadRequests(OnEntityLoadFinish);
+        objsRequestList.AddRange(entityLoadReqs);
+        //
+
+        this.loadRequest = ResourceManager.Instance.LoadObjects(objsRequestList);
+
+    }
+
+    //初始话战斗相关资源
+    public void LoadBattleInitRes()
+    {
+
     }
 
     public void OnUILoadFinish(BattleUI battleUI)
@@ -48,10 +61,14 @@ public class BattleCtrl : BaseCtrl
         camera3D.SetRotation(tempCameraTran.rotation);
     }
 
+    public void OnEntityLoadFinish(BattleEntity viewEntity, GameObject obj)
+    {
+        viewEntity.OnLoadModelFinish(obj);
+    }
+
     public override void OnLoadFinish()
     {
-
-
+        Logx.Log("battle ctrl : OnLoadFinish");
     }
 
     public override void OnEnter(CtrlArgs args)
@@ -113,6 +130,56 @@ public class BattleCtrl : BaseCtrl
         battleNet.SendMoveEntity(guid, clickPos);
     }
 
+    public bool TryToGetRayOnGroundPos(out Vector3 pos)
+    {
+        pos = Vector3.zero;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Debug.DrawRay(ray.origin, ray.direction, Color.red);
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << LayerMask.NameToLayer("Default"));
+        if (hits.Length > 0)
+        {
+            for (int i = 0; i < hits.Length; i++)
+            {
+                var currHit = hits[i];
+                var tag = currHit.collider.tag;
+                if (tag == "Ground")
+                {
+                    Logx.Log("hit ground : " + currHit.collider.gameObject.name);
+                    pos = currHit.point;
+                    return true;
+
+                    //this.OnPlayerClickGround(currHit.point);
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public bool TryToGetRayOnEntity(out GameObject gameObject)
+    {
+        gameObject = null;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Debug.DrawRay(ray.origin, ray.direction, Color.red);
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << LayerMask.NameToLayer("Default"));
+        if (hits.Length > 0)
+        {
+            for (int i = 0; i < hits.Length; i++)
+            {
+                var currHit = hits[i];
+                var tag = currHit.collider.tag;
+                if (tag == "EntityCollider")
+                {
+                    Logx.Log("hit entity : " + currHit.collider.gameObject.name);
+                    gameObject = currHit.collider.gameObject;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public override void OnUpdate(float timeDelta)
     {
@@ -123,23 +190,75 @@ public class BattleCtrl : BaseCtrl
         //判断用户点击右键
         if (Input.GetMouseButtonDown(1))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //Debug.DrawRay(ray.origin, ray.direction, Color.red);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << LayerMask.NameToLayer("Default"));
-            if (hits.Length > 0)
+            Vector3 resultPos;
+            if (TryToGetRayOnGroundPos(out resultPos))
             {
-                for (int i = 0; i < hits.Length; i++)
+                this.OnPlayerClickGround(resultPos);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            this.OnUseSkill(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            this.OnUseSkill(1);
+        }
+    }
+
+    public void OnUseSkill(int index)
+    {
+        int targetGuid = 0;
+        Vector3 targetPos = Vector3.zero;
+        var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
+
+        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+
+        var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+        var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
+        if (releaseTargetType == SkillReleaseTargeType.Point)
+        {
+            Vector3 resultPos;
+            if (TryToGetRayOnGroundPos(out resultPos))
+            {
+                targetPos = resultPos;
+                battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+            }
+        }
+        else if (releaseTargetType == SkillReleaseTargeType.Entity)
+        {
+            GameObject gameObject = null;
+            if (TryToGetRayOnEntity(out gameObject))
+            {
+                //遍历寻找 效率低下 之后更改
+                var battleEntity = BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
+                if (battleEntity != null)
                 {
-                    var currHit = hits[i];
-                    var tag = currHit.collider.tag;
-                    if (tag == "Ground")
+                    Logx.Log("battle entity not null");
+                    targetGuid = battleEntity.guid;
+                    var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+                    var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
+
+                    var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+
+                    //先排除自己
+                    if (localEntity.collider.gameObject.GetInstanceID() != battleEntity.collider.gameObject.GetInstanceID())
                     {
-                        Logx.Log("hit ground : " + currHit.collider.gameObject.name);
-                        this.OnPlayerClickGround(currHit.point);
+                        battleNet.SendUseSkill(skillId, targetGuid, targetPos);
                     }
+
                 }
             }
         }
+
+
+        //var myUid = GameDataManager.Instance.UserGameDataStore.Uid;
+
+        Logx.Log("use skill : skillId : " + skillId + " targetGuid : " + targetGuid + " targetPos : " + targetPos);
+
+
     }
 
     public override void OnInactive()
@@ -157,4 +276,11 @@ public class BattleCtrl : BaseCtrl
         //UIManager.Instance.ReleaseUI<BattleUI>();
     }
 
+    public enum SkillReleaseTargeType
+    {
+        NoTarget = 0,
+        Entity = 1,
+        Point = 2
+
+    }
 }

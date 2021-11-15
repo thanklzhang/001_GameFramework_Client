@@ -53,6 +53,13 @@ public class PackageStrategy
             type = StrategyType.AllInOneBySubFolder
         });
 
+        strategyList.Add(new StrategyInfo()
+        {
+            path = Const.projectRootPath + "/" + "BuildRes/Prefabs/Effects",
+            type = StrategyType.OneByOneFile
+        });
+
+
 
         List<AssetBundleBuild> buildList = new List<AssetBundleBuild>();
         for (int i = 0; i < strategyList.Count; i++)
@@ -121,6 +128,7 @@ public class PackageStrategy
         //var abName = path.Replace(Const.projectRootPath + "/", "") + Const.ExtName;
         AssetBundleBuild build = new AssetBundleBuild();
         var bundleName = path.Replace("\\", "/");
+        List<string> assetNameList = new List<string>();
         build.assetBundleName = bundleName + Const.ExtName;
 
         for (int i = 0; i < files.Length; i++)
@@ -134,9 +142,13 @@ public class PackageStrategy
             }
 
             var assetName = file.Replace("\\", "/");
-            build.assetNames = new string[] { assetName };
-            buildList.Add(build);
+            assetNameList.Add(assetName);
+            //build.assetNames = new string[] { assetName };
+            //buildList.Add(build);
         }
+
+        build.assetNames = assetNameList.ToArray();
+        buildList.Add(build);
 
         return buildList;
     }

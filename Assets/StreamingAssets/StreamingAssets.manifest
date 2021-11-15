@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1352859635
+CRC: 2769138930
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -42,21 +42,37 @@ AssetBundleManifest:
       Name: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
       Dependencies: {}
     Info_12:
+      Name: assets/buildres/prefabs/models/role/monster1_battle.ab
+      Dependencies:
+        Dependency_0: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
+    Info_13:
       Name: assets/buildres/prefabs/models/role/shangguanling_battle_001.ab
       Dependencies:
         Dependency_0: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
-    Info_13:
+    Info_14:
       Name: assets/buildres/prefabs/ui/battleui.ab
       Dependencies: {}
-    Info_14:
+    Info_15:
       Name: assets/buildres/prefabs/ui/confirmui.ab
       Dependencies: {}
-    Info_15:
+    Info_16:
       Name: assets/buildres/prefabs/ui/lobbyui.ab
       Dependencies: {}
-    Info_16:
+    Info_17:
       Name: assets/buildres/prefabs/ui/loginui.ab
       Dependencies: {}
-    Info_17:
+    Info_18:
       Name: assets/buildres/prefabs/scene/battle_scene_001.ab
+      Dependencies: {}
+    Info_19:
+      Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
+      Dependencies: {}
+    Info_20:
+      Name: assets/buildres/prefabs/effects/eft_skill_cal_001.ab
+      Dependencies: {}
+    Info_21:
+      Name: assets/buildres/prefabs/effects/eft_skill_cal_002.ab
+      Dependencies: {}
+    Info_22:
+      Name: assets/buildres/prefabs/effects/eft_skill_projectile_001.ab
       Dependencies: {}

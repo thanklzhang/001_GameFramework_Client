@@ -10,6 +10,7 @@ using System.Linq;
 //过后抽象出来
 public class Logx
 {
+    public static bool enable = true;
     public enum LogType
     {
         Normal = 1,
@@ -23,10 +24,14 @@ public class Logx
 
     }
 
-   
+
 
     public static void Log(object obj)
     {
+        if (!enable)
+        {
+            return;
+        }
         Debug.Log(obj);
     }
 
@@ -40,8 +45,14 @@ public class Logx
         Debug.LogError(obj);
     }
 
+
     public static void Log(string flag, object obj)
     {
+        if (!enable)
+        {
+            return;
+        }
+
         Log(flag + ":" + obj);
     }
     public static void LogWarning(string flag, object obj)

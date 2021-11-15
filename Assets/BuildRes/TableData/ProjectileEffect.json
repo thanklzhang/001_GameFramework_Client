@@ -1,13 +1,26 @@
 [
     {
         "id": 3001001,
-        "name": "\u4e0a\u5b98\u7fce\u6280\u80fd1\u6295\u63b7\u7269",
-        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd\u6295\u63b7\u7269",
+        "name": "\u4e0a\u5b98\u7fce\u666e\u901a\u653b\u51fb\u6295\u63b7\u7269",
+        "describe": "\u4e0a\u5b98\u7fce\u666e\u901a\u653b\u51fb\u6295\u63b7\u7269",
         "isFollow": 1,
         "lastTime": 99999999,
-        "speed": 500,
+        "speed": 9000,
         "startEffectList": "",
-        "collisionEffectList": "4001001",
-        "endEffectList": ""
+        "collisionEffectList": "",
+        "endEffectList": "4001001",
+        "effectResId": 15008002
+    },
+    {
+        "id": 3001002,
+        "name": "\u4e0a\u5b98\u7fce\u6280\u80fd1",
+        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd1\u6295\u63b7\u7269",
+        "isFollow": 0,
+        "lastTime": 99999999,
+        "speed": 3000,
+        "startEffectList": "",
+        "collisionEffectList": "4001002",
+        "endEffectList": "",
+        "effectResId": 15008003
     }
 ]

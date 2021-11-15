@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 644134919
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: edce95b0e2f2ed52a38d55453e0e07d9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c26b4a35994fd2d7b091e216a649b719
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/Prefabs/Effects/eft_skill_cal_002.prefab
+Dependencies: []

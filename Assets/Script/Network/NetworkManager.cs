@@ -68,16 +68,26 @@ public class NetworkManager : Singleton<NetworkManager>
 
     private void OnReceveMsg(TcpNetClient netClient, MsgPack msg)
     {
+        var now = CommonFunction.GetTimeStamp();
+        var delayTime = now - lastSendTimeStamp;
+        //Logx.Log("receive timeStamp : " + now);
+        //Logx.Log("net delay time : " + delayTime);
+
         Logx.Log("Network Mgr : ReceiveMsg : cmd : " + (ProtoIDs)msg.cmdId);
 
         NetMsgManager.Instance.OnReceiveMsg(msg);
 
     }
 
+    public long lastSendTimeStamp = 0;
+
     public void SendMsg(ProtoIDs cmd, byte[] data)
     {
         Logx.Log("Network Mgr : SendMsg : cmd : " + cmd);
+        lastSendTimeStamp = CommonFunction.GetTimeStamp();
+        //Logx.Log("send timeStamp : " + lastSendTimeStamp);
         tcpNetClient.Send((int)cmd, data);
+        //Logx.Log("Network Mgr : send time stamp : " + lastSendTimeStamp);
     }
 
     public void Update()

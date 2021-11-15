@@ -1,0 +1,18 @@
+[
+    {
+        "id": 5001001,
+        "name": "\u4e3b\u7ebf\u7b2c 1 \u573a\u6218\u6597",
+        "describe": "\u4e3b\u7ebf\u7b2c 1 \u573a\u6218\u6597 \u4ecb\u7ecd",
+        "mapId": 7001001,
+        "triggerId": 6001001,
+        "battleConfigId": 8001001
+    },
+    {
+        "id": 5001002,
+        "name": "\u4e3b\u7ebf\u7b2c 2 \u573a\u6218\u6597",
+        "describe": "\u4e3b\u7ebf\u7b2c 2 \u573a\u6218\u6597 \u4ecb\u7ecd",
+        "mapId": 7001002,
+        "triggerId": 6001002,
+        "battleConfigId": 8001002
+    }
+]

@@ -10,7 +10,8 @@ public enum BattleEntityState
     Idle = 0,
     Move = 1,
     ReleasingSkill = 2,
-    Dead = 3,
+    Destroy = 3,
+    Destory = 4
 }
 
 public class BattleEntity
@@ -32,6 +33,12 @@ public class BattleEntity
     Vector3 moveTargetPos;
     float moveSpeed;
 
+    //应该在 load temp obj 上加这个 ， 现在这里加上
+    public Collider collider;
+
+    //技能信息
+    List<BattleSkillInfo> skills;
+
     public void Init(int guid, int configId)
     {
         this.guid = guid;
@@ -41,34 +48,45 @@ public class BattleEntity
         //先拿一个简易的模型暂时放这 然后等真正模型下载好之后在替换即可
         var asset = GameMain.Instance.tempModelAsset;
         gameObject = GameObject.Instantiate(asset);
-        this.StartLoadModel();
-    }
 
-    public void StartLoadModel()
-    {
-        Logx.Log("StartLoadModel");
-        isFinishLoad = false;
-
+        // get path
         var heroConfig = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.configId);
 
         var heroResTable = Table.TableManager.Instance.GetById<Table.ResourceConfig>(heroConfig.ModelId);
         //临时组路径 之后会打进 ab 包
         path = "Assets/BuildRes/" + heroResTable.Path + "/" + heroResTable.Name + "." + heroResTable.Ext;
+
+        isFinishLoad = false;
+
+        //this.StartLoadModel();
+    }
+
+    //开始自行加载(主要用于创建 entity 的时候自己自行异步加载 )
+    public void StartSelfLoadModel()
+    {
+        Logx.Log("StartLoadModel");
+        isFinishLoad = false;
         ResourceManager.Instance.GetObject<GameObject>(path, (obj) =>
-         {
-             OnLoadModelFinish(obj);
-         });
+        {
+            OnLoadModelFinish(obj);
+        });
     }
 
     public void OnLoadModelFinish(GameObject obj)
     {
-        Logx.Log("OnLoadModelFinish");
+        Logx.Log("BattleEntity : OnLoadModelFinish");
         isFinishLoad = true;
         var position = gameObject.transform.position;
         GameObject.Destroy(gameObject);
         gameObject = obj;
         gameObject.transform.position = position;
         //gameObject = 
+        collider = gameObject.GetComponentInChildren<Collider>();
+    }
+
+    internal void SetSkillList(List<BattleSkillInfo> skills)
+    {
+        this.skills = skills;
     }
 
     public void SetPosition(Vector3 pos)
@@ -92,8 +110,14 @@ public class BattleEntity
         }
     }
 
+    internal Vector3 GetPosition()
+    {
+        return this.gameObject.transform.position;
+    }
+
     public void Destroy()
     {
+        this.state = BattleEntityState.Destroy;
         if (isFinishLoad)
         {
             ResourceManager.Instance.ReturnObject(path, gameObject);
@@ -122,4 +146,23 @@ public class BattleEntity
         this.SetPosition(endPos);
     }
 
+    internal void ReleaseSkill()
+    {
+        //play animation
+        Logx.Log("entity release skill : " + this.guid);
+    }
+
+    internal int GetSkillIdByIndex(int index)
+    {
+        if (skills.Count > 0)
+        {
+            return skills[index].configId;
+        }
+        else
+        {
+            Logx.LogWarning("the count of skills is 0 : index : " + index);
+            return -1;
+        }
+
+    }
 }

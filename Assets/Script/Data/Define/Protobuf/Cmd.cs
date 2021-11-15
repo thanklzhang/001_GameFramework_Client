@@ -22,7 +22,7 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKtsDCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKucECghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSGAoTQXBwbHlD",
             "cmVhdGVCYXR0bGUyUxDJARIXChJUcmFuc2l0aW9uQmF0dGxlMlMQrQISHgoZ",
             "VHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIyUxCuAhIPCgpDaGVja0xvZ2luENEP",
@@ -30,10 +30,13 @@ namespace NetProto {
             "Ek5vdGlmeUNyZWF0ZUJhdHRsZRC5FxIXChJQbGF5ZXJMb2FkUHJvZ3Jlc3MQ",
             "uhcSHgoZTm90aWZ5QWxsUGxheWVyTG9hZEZpbmlzaBC7FxIWChFCYXR0bGVS",
             "ZWFkeUZpbmlzaBC8FxIWChFOb3RpZnlCYXR0bGVTdGFydBC9FxIPCgpNb3Zl",
-            "RW50aXR5EJ0YEhkKFE5vdGlmeUNyZWF0ZUVudGl0aWVzEIEZEhUKEE5vdGlm",
-            "eUVudGl0eU1vdmUQghkSGQoUTm90aWZ5RW50aXR5U3RvcE1vdmUQgxkSFQoQ",
-            "VHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFuc2l0aW9uQmF0dGxlMlBsYXll",
-            "chDmGWIGcHJvdG8z"));
+            "RW50aXR5EJ0YEg0KCFVzZVNraWxsEJ4YEhkKFE5vdGlmeUNyZWF0ZUVudGl0",
+            "aWVzEIEZEhUKEE5vdGlmeUVudGl0eU1vdmUQghkSGQoUTm90aWZ5RW50aXR5",
+            "U3RvcE1vdmUQgxkSHQoYTm90aWZ5RW50aXR5UmVsZWFzZVNraWxsEIQZEhwK",
+            "F05vdGlmeUNyZWF0ZVNraWxsRWZmZWN0EIUZEh8KGk5vdGlmeVNraWxsRWZm",
+            "ZWN0U3RhcnRNb3ZlEIYZEh0KGE5vdGlmeVNraWxsRWZmZWN0RGVzdHJveRCH",
+            "GRIVChBUcmFuc2l0aW9uQmF0dGxlEOUZEhwKF1RyYW5zaXRpb25CYXR0bGUy",
+            "UGxheWVyEOYZYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -73,12 +76,17 @@ namespace NetProto {
     /// 玩家操作
     /// </summary>
     [pbr::OriginalName("MoveEntity")] MoveEntity = 3101,
+    [pbr::OriginalName("UseSkill")] UseSkill = 3102,
     /// <summary>
     /// 服务端发来的关键战斗事件
     /// </summary>
     [pbr::OriginalName("NotifyCreateEntities")] NotifyCreateEntities = 3201,
     [pbr::OriginalName("NotifyEntityMove")] NotifyEntityMove = 3202,
     [pbr::OriginalName("NotifyEntityStopMove")] NotifyEntityStopMove = 3203,
+    [pbr::OriginalName("NotifyEntityReleaseSkill")] NotifyEntityReleaseSkill = 3204,
+    [pbr::OriginalName("NotifyCreateSkillEffect")] NotifyCreateSkillEffect = 3205,
+    [pbr::OriginalName("NotifySkillEffectStartMove")] NotifySkillEffectStartMove = 3206,
+    [pbr::OriginalName("NotifySkillEffectDestroy")] NotifySkillEffectDestroy = 3207,
     /// <summary>
     /// 转发战斗
     /// </summary>

@@ -31,6 +31,10 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.NotifyCreateEntities, this.OnNotifyCreateEntities);
         AddBattleMsg(ProtoIDs.NotifyEntityMove, this.OnNotifyEntityMove);
         AddBattleMsg(ProtoIDs.NotifyEntityStopMove, this.OnNotifyEntityStopMove);
+        AddBattleMsg(ProtoIDs.NotifyEntityReleaseSkill, this.OnNotifyEntityUseSkill);
+        AddBattleMsg(ProtoIDs.NotifyCreateSkillEffect, this.OnNotifyCreateSkillEffect);
+        AddBattleMsg(ProtoIDs.NotifySkillEffectStartMove, this.OnNotifySkillEffectStartMove);
+        AddBattleMsg(ProtoIDs.NotifySkillEffectDestroy, this.OnNotifySkillEffectDestroy);
 
     }
 
@@ -94,12 +98,14 @@ public class BattleNetHandler : NetHandler
     {
         Logx.Log("OnNotifyCreateBattle");
         var battleInit = NetProto.scNotifyCreateBattle.Parser.ParseFrom(msgPack.data);
-        GameDataManager.Instance.BattleGameDataStore.SetBattleInitData(battleInit.BattleInitArg);
+        //GameDataManager.Instance.BattleGameDataStore.SetBattleInitData(battleInit.BattleInitArg);
 
-        //EventDispatcher.Broadcast(EventIDs.OnCreateBattle);
+        ////EventDispatcher.Broadcast(EventIDs.OnCreateBattle);
 
 
-        CtrlManager.Instance.Enter<BattleCtrl>();
+        //CtrlManager.Instance.Enter<BattleCtrl>();
+
+        BattleManager.Instance.CreateBattle(battleInit);
     }
 
     //客户端真正操作的协议/////////////////////////////////////////////////////////////////////////
@@ -130,11 +136,13 @@ public class BattleNetHandler : NetHandler
         Logx.Log("receive battle msg : NotifyAllPlayerLoadFinish");
         scNotifyAllPlayerLoadFinish allFinish = scNotifyAllPlayerLoadFinish.Parser.ParseFrom(byteData);
 
-        //先用数据层 之后考虑是否用 battleManager 流程
-        var battleData = GameDataManager.Instance.BattleGameDataStore;
-        battleData.IsAllPlayerLoadFinish = true;
+        ////先用数据层 之后考虑是否用 battleManager 流程
+        //var battleData = GameDataManager.Instance.BattleGameDataStore;
+        //battleData.IsAllPlayerLoadFinish = true;
 
-        EventDispatcher.Broadcast(EventIDs.OnAllPlayerLoadFinish);
+        //EventDispatcher.Broadcast(EventIDs.OnAllPlayerLoadFinish);
+
+        BattleManager.Instance.AllPlayerLoadFinish();
 
     }
 
@@ -159,7 +167,8 @@ public class BattleNetHandler : NetHandler
     public void OnNotifyBattleStart(byte[] byteData)
     {
         scNotifyBattleStart battleStart = scNotifyBattleStart.Parser.ParseFrom(byteData);
-        EventDispatcher.Broadcast(EventIDs.OnBattleStart);
+        //EventDispatcher.Broadcast(EventIDs.OnBattleStart);
+        BattleManager.Instance.StartBattle();
     }
 
 
@@ -170,39 +179,54 @@ public class BattleNetHandler : NetHandler
         foreach (var item in create.BattleEntities)
         {
             var serverEntity = item;
-            var entity = BattleEntityManager.Instance.CreateEntity(serverEntity.Guid, serverEntity.ConfigId);
-            if (entity != null)
-            {
-                var v3 = BattleConvert.ConverToVector3(serverEntity.Position);
-                entity.SetPosition(v3);
-            }
+            BattleManager.Instance.CreateEntity(serverEntity);
         }
     }
 
     private void OnNotifyEntityMove(byte[] byteData)
     {
         scNotifyEntityMove notifyEntityMove = scNotifyEntityMove.Parser.ParseFrom(byteData);
-
-        var guid = notifyEntityMove.Guid;
-        var targetPos = BattleConvert.ConverToVector3(notifyEntityMove.EndPos);
-        var moveSpeed = BattleConvert.GetValue(notifyEntityMove.MoveSpeed);
-        var entity = BattleEntityManager.Instance.FindEntity(guid);
-        if (entity != null)
-        {
-            entity.StartMove(targetPos, moveSpeed);
-        }
+        BattleManager.Instance.EntityStartMove(notifyEntityMove);
     }
 
     protected void OnNotifyEntityStopMove(byte[] byteData)
     {
         scNotifyEntityStopMove stop = scNotifyEntityStopMove.Parser.ParseFrom(byteData);
-        var guid = stop.Guid;
-        var endPos = BattleConvert.ConverToVector3(stop.EndPos);
-        var entity = BattleEntityManager.Instance.FindEntity(guid);
-        if (entity != null)
-        {
-            entity.StopMove( endPos);
-        }
+        BattleManager.Instance.EntityStopMove(stop);
+    }
+
+    public void SendUseSkill(int skillId,int targetGuid,Vector3 targetPos)
+    {
+        csUseSkill useSkill = new csUseSkill();
+        useSkill.Guid = 1;//每个玩家就一个实体 忽略
+        useSkill.SkillId = skillId;
+        useSkill.TargetGuid = targetGuid;
+        useSkill.TargetPos = BattleConvert.ConvertToVector3Proto(targetPos);
+        TransitionBattleMsg(ProtoIDs.UseSkill, useSkill);
+    }
+
+    private void OnNotifyEntityUseSkill(byte[] byteData)
+    {
+        scNotifyEntityUseSkill releaseSkill = scNotifyEntityUseSkill.Parser.ParseFrom(byteData);
+        BattleManager.Instance.EntityUseSkill(releaseSkill);
+    }
+
+    private void OnNotifyCreateSkillEffect(byte[] byteData)
+    {
+        scNotifyCreateSkillEffect skillEffect = scNotifyCreateSkillEffect.Parser.ParseFrom(byteData);
+        BattleManager.Instance.CreateSkillEffect(skillEffect);
+    }
+
+    private void OnNotifySkillEffectStartMove(byte[] byteData)
+    {
+        scNotifySkillEffectStartMove effectStartMove = scNotifySkillEffectStartMove.Parser.ParseFrom(byteData);
+        BattleManager.Instance.SkillEffectStartMove(effectStartMove);
+    }
+
+    private void OnNotifySkillEffectDestroy(byte[] byteData)
+    {
+        scNotifySkillEffectDestroy skillEffectDestroy = scNotifySkillEffectDestroy.Parser.ParseFrom(byteData);
+        BattleManager.Instance.DestroySkillEffect(skillEffectDestroy);
     }
 
     #region 战斗中玩家操作 

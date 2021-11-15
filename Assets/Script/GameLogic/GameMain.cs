@@ -67,6 +67,7 @@ public class GameMain : MonoBehaviour
         ServiceManager.Instance.Init();
 
         BattleEntityManager.Instance.Init();
+        BattleSkillEffectManager.Instance.Init();
 
 
         Logx.Log("!!!finish init game");
@@ -121,6 +122,7 @@ public class GameMain : MonoBehaviour
         ResourceManager.Instance.Update(Time.deltaTime);
         CtrlManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
+        BattleSkillEffectManager.Instance.Update(Time.deltaTime);
 
         NetworkManager.Instance.Update();
         

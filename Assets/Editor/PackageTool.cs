@@ -75,7 +75,7 @@ public class PackageTool
                 var assetName = buildBundle.assetNames[j];
                 if (assetToAbDic.ContainsKey(assetName))
                 {
-                    Debug.LogWarning("zxy : PackageToole : BuildAssetBundle : the assetName is exist : " + assetName);
+                    Debug.LogWarning("zxy : PackageTool : BuildAssetBundle : the assetName is exist : " + assetName);
                 }
                 else
                 {

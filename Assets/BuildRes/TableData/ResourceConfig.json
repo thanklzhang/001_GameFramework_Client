@@ -73,7 +73,31 @@
     },
     {
         "id": 15008002,
-        "name": "BuffEffect",
+        "name": "eft_normal_attack_projectile_001",
+        "path": "Prefabs/Effects",
+        "ext": "prefab",
+        "type": 4,
+        "tag": ""
+    },
+    {
+        "id": 15008003,
+        "name": "eft_skill_projectile_001",
+        "path": "Prefabs/Effects",
+        "ext": "prefab",
+        "type": 4,
+        "tag": ""
+    },
+    {
+        "id": 15008004,
+        "name": "eft_skill_cal_001",
+        "path": "Prefabs/Effects",
+        "ext": "prefab",
+        "type": 4,
+        "tag": ""
+    },
+    {
+        "id": 15008005,
+        "name": "eft_skill_cal_002",
         "path": "Prefabs/Effects",
         "ext": "prefab",
         "type": 4,
@@ -114,6 +138,14 @@
     {
         "id": 15011004,
         "name": "shangguanling_battle_004",
+        "path": "Prefabs/Models/Role",
+        "ext": "prefab",
+        "type": 6,
+        "tag": ""
+    },
+    {
+        "id": 15012001,
+        "name": "monster1_battle",
         "path": "Prefabs/Models/Role",
         "ext": "prefab",
         "type": 6,

@@ -4,6 +4,78 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class HpUIData : UIArgs
+{
+    public int entityGuid;
+    public float preCurrHp;
+    public float nowCurrHp;
+    public float maxHp;
+    public GameObject entityObj;
+}
+
+public class HpUIShowObj
+{
+    HpUIData data;
+    GameObject gameObject;
+    Transform transform;
+
+    public Transform bgRoot;
+    public Transform hp;
+
+    BaseUI parentUI;
+    RectTransform parentTranRect;
+
+    public void Init(GameObject gameObject,BaseUI parentUI)
+    {
+        this.gameObject = gameObject;
+        this.parentUI = parentUI;
+        parentTranRect = parentUI.transform.GetComponent<RectTransform>();
+        this.transform = this.gameObject.transform;
+
+        bgRoot = this.transform.Find("bg");
+        hp = this.transform.Find("bg/hp");
+
+    }
+
+    public void Refresh(HpUIData hpData)
+    {
+        this.data = hpData;
+
+        var currHp = this.data.nowCurrHp;
+        var maxHp = this.data.maxHp;
+        var ratio = currHp / maxHp;
+
+        var width = bgRoot.GetComponent<RectTransform>().rect.width;
+        var currLen = width * ratio;
+
+        var rect = hp.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(currLen, rect.sizeDelta.y);
+
+    }
+
+    public void Update(float timeDelta)
+    {
+        var entityObj = this.data.entityObj;
+        var camera3D = CameraManager.Instance.GetCamera3D();
+        var cameraUI = CameraManager.Instance.GetCameraUI();
+        var screenPos = RectTransformUtility.WorldToScreenPoint(camera3D.camera, entityObj.transform.position);
+        
+        Vector2 uiPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentTranRect, screenPos, cameraUI.camera, out uiPos);
+
+        //这里可以换成实体上的血条挂点
+        this.transform.localPosition = uiPos + Vector2.up * 100;
+    }
+
+    public void Release()
+    {
+
+    }
+
+}
+
+
+
 public class BattleUI : BaseUI
 {
     public Action onCloseBtnClick;
@@ -13,20 +85,40 @@ public class BattleUI : BaseUI
     Button readyStartBtn;
 
     public Text stateText;
+
+    public Transform hpRoot;
+    public GameObject hpTemp;
+    //data
+    Dictionary<int, HpUIShowObj> hpShowObjDic = new Dictionary<int, HpUIShowObj>();
+    Dictionary<int, GameObject> poolObjs = new Dictionary<int, GameObject>();
+
     protected override void OnInit()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         readyStartBtn = this.transform.Find("readyStartBtn").GetComponent<Button>();
         stateText = this.transform.Find("stateText").GetComponent<Text>();
 
+        hpRoot = this.transform.Find("HpShow/root");
+        hpTemp = hpRoot.Find("hpItem").gameObject;
+
         closeBtn.onClick.AddListener(() =>
-        {
-            onCloseBtnClick?.Invoke();
-        });
+         {
+             onCloseBtnClick?.Invoke();
+         });
         readyStartBtn.onClick.AddListener(() =>
         {
             onReadyStartBtnClick?.Invoke();
         });
+
+        poolObjs.Clear();
+        for (int i = 0; i < hpRoot.childCount; i++)
+        {
+            var currObj = hpRoot.GetChild(i).gameObject;
+            poolObjs.Add(currObj.GetInstanceID(), currObj);
+
+        }
+
+
     }
 
     public void SetReadyBattleBtnShowState(bool isShow)
@@ -39,6 +131,35 @@ public class BattleUI : BaseUI
         stateText.text = stateStr;
     }
 
+    public void RefreshHpShow(UIArgs args)
+    {
+        HpUIData hpData = (HpUIData)args;
+
+        HpUIShowObj showObj = null;
+        if (hpShowObjDic.ContainsKey(hpData.entityGuid))
+        {
+            showObj = hpShowObjDic[hpData.entityGuid];
+        }
+        else
+        {
+            showObj = new HpUIShowObj();
+            GameObject newObj = GameObject.Instantiate(hpTemp, this.hpRoot, false);
+            newObj.SetActive(true);
+            poolObjs.Add(newObj.GetInstanceID(), newObj);
+            showObj.Init(newObj,this);
+            hpShowObjDic.Add(hpData.entityGuid, showObj);
+        }
+
+        showObj.Refresh(hpData);
+    }
+
+    protected override void OnUpdate(float timeDelta)
+    {
+        foreach (var item in hpShowObjDic)
+        {
+            item.Value.Update(timeDelta);
+        }
+    }
 
     protected override void OnRelease()
     {

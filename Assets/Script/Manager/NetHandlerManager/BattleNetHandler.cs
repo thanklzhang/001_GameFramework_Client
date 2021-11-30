@@ -35,6 +35,8 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.NotifyCreateSkillEffect, this.OnNotifyCreateSkillEffect);
         AddBattleMsg(ProtoIDs.NotifySkillEffectStartMove, this.OnNotifySkillEffectStartMove);
         AddBattleMsg(ProtoIDs.NotifySkillEffectDestroy, this.OnNotifySkillEffectDestroy);
+        AddBattleMsg(ProtoIDs.NotifySyncEntityAttr, this.OnNotifySyncEntityAttr);
+        AddBattleMsg(ProtoIDs.NotifySyncEntityValue, this.OnNotifySyncEntityValue);
 
     }
 
@@ -195,7 +197,7 @@ public class BattleNetHandler : NetHandler
         BattleManager.Instance.EntityStopMove(stop);
     }
 
-    public void SendUseSkill(int skillId,int targetGuid,Vector3 targetPos)
+    public void SendUseSkill(int skillId, int targetGuid, Vector3 targetPos)
     {
         csUseSkill useSkill = new csUseSkill();
         useSkill.Guid = 1;//每个玩家就一个实体 忽略
@@ -227,6 +229,18 @@ public class BattleNetHandler : NetHandler
     {
         scNotifySkillEffectDestroy skillEffectDestroy = scNotifySkillEffectDestroy.Parser.ParseFrom(byteData);
         BattleManager.Instance.DestroySkillEffect(skillEffectDestroy);
+    }
+
+    private void OnNotifySyncEntityAttr(byte[] byteData)
+    {
+        scNotifySyncEntityAttr sync = scNotifySyncEntityAttr.Parser.ParseFrom(byteData);
+        BattleManager.Instance.SyncEntityAttr(sync);
+    }
+
+    private void OnNotifySyncEntityValue(byte[] byteData)
+    {
+        scNotifySyncEntityValue sync = scNotifySyncEntityValue.Parser.ParseFrom(byteData);
+        BattleManager.Instance.SyncEntityValue(sync);
     }
 
     #region 战斗中玩家操作 

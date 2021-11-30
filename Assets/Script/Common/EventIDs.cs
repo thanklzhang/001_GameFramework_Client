@@ -21,6 +21,7 @@ public enum EventIDs
     OnBattleStart = 1010003,
 
     OnCreateEntity = 101101,
+    OnChangeEntityBattleData = 101102,
 
     OnSetEntityPosition = 101201,
 

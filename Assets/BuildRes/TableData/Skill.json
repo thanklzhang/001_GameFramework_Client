@@ -5,7 +5,9 @@
         "describe": "\u4e0a\u5b98\u7fce\u666e\u901a\u653b\u51fb",
         "skillReleaseTargeType": 1,
         "effectList": "3001001",
-        "releaseRange": 400
+        "releaseRange": 0,
+        "lastTime": 500,
+        "cdTime": 0
     },
     {
         "id": 2001002,
@@ -13,6 +15,18 @@
         "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd 1 \u4ecb\u7ecd \u5411\u4e00\u4e2a\u70b9\u53d1\u5c04\u7403\u653b\u51fb",
         "skillReleaseTargeType": 2,
         "effectList": "3001002",
-        "releaseRange": 400
+        "releaseRange": 8000,
+        "lastTime": 500,
+        "cdTime": 3000
+    },
+    {
+        "id": 2002001,
+        "name": "\u602a\u7269\u666e\u901a\u653b\u51fb",
+        "describe": "\u602a\u7269\u666e\u901a\u653b\u51fb",
+        "skillReleaseTargeType": 1,
+        "effectList": "3002001",
+        "releaseRange": 1500,
+        "lastTime": 500,
+        "cdTime": 3000
     }
 ]

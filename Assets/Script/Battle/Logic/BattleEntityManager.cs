@@ -17,8 +17,6 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
 {
     Dictionary<int, BattleEntity> entityDic;
 
-
-
     public void Init()
     {
         entityDic = new Dictionary<int, BattleEntity>();
@@ -31,10 +29,11 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
     }
 
     //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-    internal void CreateEntity(BattleEntityProto serverEntity)
+    internal BattleEntity CreateEntity(BattleEntityProto serverEntity)
     {
         var entity = CreateViewEntityInfo(serverEntity);
         entity.StartSelfLoadModel();
+        return entity;
     }
 
 
@@ -45,7 +44,7 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
     //    entity.StartSelfLoadModel();
     //}
 
-    //只创建实体信息 , 是创建一个完整实体的一个步骤
+    //只创建一个简单显示实体 包括完整数据 , 是创建一个完整实体的一个步骤
     internal BattleEntity CreateViewEntityInfo(NetProto.BattleEntityProto serverEntity)
     {
         var guid = serverEntity.Guid;
@@ -77,8 +76,22 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
 
         entityDic.Add(guid, entity);
 
+        //EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
+
         //entity.StartLoadModel(loadFinishCallback);
         return entity;
+    }
+
+    /// <summary>
+    /// 通知创建当前所有已存在的实体
+    /// </summary>
+    public void NotifyCreateAllEntities()
+    {
+        foreach (var item in this.entityDic)
+        {
+            var entity = item.Value;
+            EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
+        }
     }
 
     /// <summary>
@@ -133,7 +146,7 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
                     return entity;
                 }
             }
-           
+
 
         }
         return null;

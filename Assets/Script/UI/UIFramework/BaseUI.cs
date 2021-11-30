@@ -39,7 +39,7 @@ public abstract class BaseUI
 
     public void Update(float timeDelta)
     {
-        this.OnUpdate();
+        this.OnUpdate(timeDelta);
     }
 
     public void Hide()
@@ -54,7 +54,7 @@ public abstract class BaseUI
         this.OnRelease();
     }
 
-    protected virtual void OnUpdate()
+    protected virtual void OnUpdate(float timeDelta)
     {
         
     }

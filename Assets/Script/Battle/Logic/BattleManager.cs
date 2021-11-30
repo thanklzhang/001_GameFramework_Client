@@ -109,11 +109,15 @@ public class BattleManager : Singleton<BattleManager>
     public void StartBattle()
     {
         EventDispatcher.Broadcast(EventIDs.OnBattleStart);
+
+        //已经加载好的实体统一走一遍创建流程
+        BattleEntityManager.Instance.NotifyCreateAllEntities();
     }
 
     public void CreateEntity(NetProto.BattleEntityProto serverEntity)
     {
-        BattleEntityManager.Instance.CreateEntity(serverEntity);
+        var entity = BattleEntityManager.Instance.CreateEntity(serverEntity);
+        EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
     }
 
     public void EntityStartMove(scNotifyEntityMove notifyEntityMove)
@@ -178,6 +182,27 @@ public class BattleManager : Singleton<BattleManager>
         BattleSkillEffectManager.Instance.DestorySkillEffect(effectGuid);
     }
 
+    internal void SyncEntityAttr(scNotifySyncEntityAttr sync)
+    {
+        var entityGuid = sync.EntityGuid;
+        var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+        if (entity != null)
+        {
+            entity.SyncAttr(sync.Attrs);
+        }
+    }
+
+
+    internal void SyncEntityValue(scNotifySyncEntityValue sync)
+    {
+        var entityGuid = sync.EntityGuid;
+        var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+        if (entity != null)
+        {
+            entity.SyncValue(sync.Values);
+        }
+    }
+
     //get --------------------
 
     public void GetSkillByIndex()
@@ -207,4 +232,5 @@ public class BattleManager : Singleton<BattleManager>
     {
         return this.localCtrlEntity.gameObject;
     }
+
 }

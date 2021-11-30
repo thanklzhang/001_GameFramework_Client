@@ -9,7 +9,8 @@
         "health": 0,
         "magic": 0,
         "attackSpeed": 0,
-        "moveSpeed": 0
+        "moveSpeed": 0,
+        "attackRange": 0
     },
     {
         "id": 11001002,
@@ -21,7 +22,8 @@
         "health": 50,
         "magic": 20,
         "attackSpeed": 50,
-        "moveSpeed": 100
+        "moveSpeed": 100,
+        "attackRange": 0
     },
     {
         "id": 11001003,
@@ -33,7 +35,8 @@
         "health": 100,
         "magic": 40,
         "attackSpeed": 60,
-        "moveSpeed": 150
+        "moveSpeed": 150,
+        "attackRange": 0
     },
     {
         "id": 11001004,
@@ -45,7 +48,8 @@
         "health": 150,
         "magic": 60,
         "attackSpeed": 70,
-        "moveSpeed": 200
+        "moveSpeed": 200,
+        "attackRange": 0
     },
     {
         "id": 11001005,
@@ -57,7 +61,8 @@
         "health": 200,
         "magic": 80,
         "attackSpeed": 80,
-        "moveSpeed": 250
+        "moveSpeed": 250,
+        "attackRange": 0
     },
     {
         "id": 11001006,
@@ -69,7 +74,8 @@
         "health": 250,
         "magic": 100,
         "attackSpeed": 90,
-        "moveSpeed": 300
+        "moveSpeed": 300,
+        "attackRange": 0
     },
     {
         "id": 11001007,
@@ -81,7 +87,8 @@
         "health": 300,
         "magic": 120,
         "attackSpeed": 100,
-        "moveSpeed": 350
+        "moveSpeed": 350,
+        "attackRange": 0
     },
     {
         "id": 11001008,
@@ -93,7 +100,8 @@
         "health": 350,
         "magic": 140,
         "attackSpeed": 110,
-        "moveSpeed": 400
+        "moveSpeed": 400,
+        "attackRange": 0
     },
     {
         "id": 11001009,
@@ -105,7 +113,8 @@
         "health": 400,
         "magic": 160,
         "attackSpeed": 120,
-        "moveSpeed": 450
+        "moveSpeed": 450,
+        "attackRange": 0
     },
     {
         "id": 11001010,
@@ -117,7 +126,8 @@
         "health": 450,
         "magic": 180,
         "attackSpeed": 130,
-        "moveSpeed": 500
+        "moveSpeed": 500,
+        "attackRange": 0
     },
     {
         "id": 11001011,
@@ -129,7 +139,8 @@
         "health": 500,
         "magic": 200,
         "attackSpeed": 140,
-        "moveSpeed": 550
+        "moveSpeed": 550,
+        "attackRange": 0
     },
     {
         "id": 11001012,
@@ -141,7 +152,8 @@
         "health": 550,
         "magic": 220,
         "attackSpeed": 150,
-        "moveSpeed": 600
+        "moveSpeed": 600,
+        "attackRange": 0
     },
     {
         "id": 11001013,
@@ -153,7 +165,8 @@
         "health": 600,
         "magic": 240,
         "attackSpeed": 160,
-        "moveSpeed": 650
+        "moveSpeed": 650,
+        "attackRange": 0
     },
     {
         "id": 11001014,
@@ -165,7 +178,8 @@
         "health": 650,
         "magic": 260,
         "attackSpeed": 170,
-        "moveSpeed": 700
+        "moveSpeed": 700,
+        "attackRange": 0
     },
     {
         "id": 11001015,
@@ -177,7 +191,8 @@
         "health": 700,
         "magic": 280,
         "attackSpeed": 180,
-        "moveSpeed": 750
+        "moveSpeed": 750,
+        "attackRange": 0
     },
     {
         "id": 11001016,
@@ -189,7 +204,8 @@
         "health": 750,
         "magic": 300,
         "attackSpeed": 190,
-        "moveSpeed": 800
+        "moveSpeed": 800,
+        "attackRange": 0
     },
     {
         "id": 11001017,
@@ -201,7 +217,8 @@
         "health": 800,
         "magic": 320,
         "attackSpeed": 200,
-        "moveSpeed": 850
+        "moveSpeed": 850,
+        "attackRange": 0
     },
     {
         "id": 11001018,
@@ -213,7 +230,8 @@
         "health": 850,
         "magic": 340,
         "attackSpeed": 210,
-        "moveSpeed": 900
+        "moveSpeed": 900,
+        "attackRange": 0
     },
     {
         "id": 11001019,
@@ -225,7 +243,8 @@
         "health": 900,
         "magic": 360,
         "attackSpeed": 220,
-        "moveSpeed": 950
+        "moveSpeed": 950,
+        "attackRange": 0
     },
     {
         "id": 11001020,
@@ -237,7 +256,8 @@
         "health": 950,
         "magic": 380,
         "attackSpeed": 230,
-        "moveSpeed": 1000
+        "moveSpeed": 1000,
+        "attackRange": 0
     },
     {
         "id": 11001021,
@@ -249,7 +269,8 @@
         "health": 1000,
         "magic": 400,
         "attackSpeed": 240,
-        "moveSpeed": 1050
+        "moveSpeed": 1050,
+        "attackRange": 0
     },
     {
         "id": 11001022,
@@ -261,7 +282,8 @@
         "health": 1050,
         "magic": 420,
         "attackSpeed": 250,
-        "moveSpeed": 1100
+        "moveSpeed": 1100,
+        "attackRange": 0
     },
     {
         "id": 11001023,
@@ -273,7 +295,8 @@
         "health": 1100,
         "magic": 440,
         "attackSpeed": 260,
-        "moveSpeed": 1150
+        "moveSpeed": 1150,
+        "attackRange": 0
     },
     {
         "id": 11001024,
@@ -285,7 +308,8 @@
         "health": 1150,
         "magic": 460,
         "attackSpeed": 270,
-        "moveSpeed": 1200
+        "moveSpeed": 1200,
+        "attackRange": 0
     },
     {
         "id": 11001025,
@@ -297,7 +321,8 @@
         "health": 1200,
         "magic": 480,
         "attackSpeed": 280,
-        "moveSpeed": 1250
+        "moveSpeed": 1250,
+        "attackRange": 0
     },
     {
         "id": 11002001,
@@ -309,7 +334,8 @@
         "health": 0,
         "magic": 0,
         "attackSpeed": 0,
-        "moveSpeed": 0
+        "moveSpeed": 0,
+        "attackRange": 0
     },
     {
         "id": 11002002,
@@ -321,7 +347,8 @@
         "health": 366,
         "magic": 226,
         "attackSpeed": 50,
-        "moveSpeed": 500
+        "moveSpeed": 500,
+        "attackRange": 0
     },
     {
         "id": 11002003,
@@ -333,7 +360,8 @@
         "health": 367,
         "magic": 227,
         "attackSpeed": 51,
-        "moveSpeed": 501
+        "moveSpeed": 501,
+        "attackRange": 0
     },
     {
         "id": 11002004,
@@ -345,7 +373,8 @@
         "health": 368,
         "magic": 228,
         "attackSpeed": 52,
-        "moveSpeed": 502
+        "moveSpeed": 502,
+        "attackRange": 0
     },
     {
         "id": 11002005,
@@ -357,7 +386,8 @@
         "health": 369,
         "magic": 229,
         "attackSpeed": 53,
-        "moveSpeed": 503
+        "moveSpeed": 503,
+        "attackRange": 0
     },
     {
         "id": 11002006,
@@ -369,7 +399,8 @@
         "health": 370,
         "magic": 230,
         "attackSpeed": 54,
-        "moveSpeed": 504
+        "moveSpeed": 504,
+        "attackRange": 0
     },
     {
         "id": 11002007,
@@ -381,7 +412,8 @@
         "health": 371,
         "magic": 231,
         "attackSpeed": 55,
-        "moveSpeed": 505
+        "moveSpeed": 505,
+        "attackRange": 0
     },
     {
         "id": 11002008,
@@ -393,7 +425,8 @@
         "health": 372,
         "magic": 232,
         "attackSpeed": 56,
-        "moveSpeed": 506
+        "moveSpeed": 506,
+        "attackRange": 0
     },
     {
         "id": 11002009,
@@ -405,7 +438,8 @@
         "health": 373,
         "magic": 233,
         "attackSpeed": 57,
-        "moveSpeed": 507
+        "moveSpeed": 507,
+        "attackRange": 0
     },
     {
         "id": 11002010,
@@ -417,7 +451,8 @@
         "health": 374,
         "magic": 234,
         "attackSpeed": 58,
-        "moveSpeed": 508
+        "moveSpeed": 508,
+        "attackRange": 0
     },
     {
         "id": 11002011,
@@ -429,7 +464,8 @@
         "health": 375,
         "magic": 235,
         "attackSpeed": 59,
-        "moveSpeed": 509
+        "moveSpeed": 509,
+        "attackRange": 0
     },
     {
         "id": 11002012,
@@ -441,7 +477,8 @@
         "health": 376,
         "magic": 236,
         "attackSpeed": 60,
-        "moveSpeed": 510
+        "moveSpeed": 510,
+        "attackRange": 0
     },
     {
         "id": 11002013,
@@ -453,7 +490,8 @@
         "health": 377,
         "magic": 237,
         "attackSpeed": 61,
-        "moveSpeed": 511
+        "moveSpeed": 511,
+        "attackRange": 0
     },
     {
         "id": 11002014,
@@ -465,7 +503,8 @@
         "health": 378,
         "magic": 238,
         "attackSpeed": 62,
-        "moveSpeed": 512
+        "moveSpeed": 512,
+        "attackRange": 0
     },
     {
         "id": 11002015,
@@ -477,7 +516,8 @@
         "health": 379,
         "magic": 239,
         "attackSpeed": 63,
-        "moveSpeed": 513
+        "moveSpeed": 513,
+        "attackRange": 0
     },
     {
         "id": 11002016,
@@ -489,7 +529,8 @@
         "health": 380,
         "magic": 240,
         "attackSpeed": 64,
-        "moveSpeed": 514
+        "moveSpeed": 514,
+        "attackRange": 0
     },
     {
         "id": 11002017,
@@ -501,7 +542,8 @@
         "health": 381,
         "magic": 241,
         "attackSpeed": 65,
-        "moveSpeed": 515
+        "moveSpeed": 515,
+        "attackRange": 0
     },
     {
         "id": 11002018,
@@ -513,7 +555,8 @@
         "health": 382,
         "magic": 242,
         "attackSpeed": 66,
-        "moveSpeed": 516
+        "moveSpeed": 516,
+        "attackRange": 0
     },
     {
         "id": 11002019,
@@ -525,7 +568,8 @@
         "health": 383,
         "magic": 243,
         "attackSpeed": 67,
-        "moveSpeed": 517
+        "moveSpeed": 517,
+        "attackRange": 0
     },
     {
         "id": 11002020,
@@ -537,7 +581,8 @@
         "health": 384,
         "magic": 244,
         "attackSpeed": 68,
-        "moveSpeed": 518
+        "moveSpeed": 518,
+        "attackRange": 0
     },
     {
         "id": 11002021,
@@ -549,7 +594,8 @@
         "health": 385,
         "magic": 245,
         "attackSpeed": 69,
-        "moveSpeed": 519
+        "moveSpeed": 519,
+        "attackRange": 0
     },
     {
         "id": 11002022,
@@ -561,7 +607,8 @@
         "health": 386,
         "magic": 246,
         "attackSpeed": 70,
-        "moveSpeed": 520
+        "moveSpeed": 520,
+        "attackRange": 0
     },
     {
         "id": 11002023,
@@ -573,7 +620,8 @@
         "health": 387,
         "magic": 247,
         "attackSpeed": 71,
-        "moveSpeed": 521
+        "moveSpeed": 521,
+        "attackRange": 0
     },
     {
         "id": 11002024,
@@ -585,7 +633,8 @@
         "health": 388,
         "magic": 248,
         "attackSpeed": 72,
-        "moveSpeed": 522
+        "moveSpeed": 522,
+        "attackRange": 0
     },
     {
         "id": 11002025,
@@ -597,6 +646,7 @@
         "health": 389,
         "magic": 249,
         "attackSpeed": 73,
-        "moveSpeed": 523
+        "moveSpeed": 523,
+        "attackRange": 0
     }
 ]

@@ -7,8 +7,8 @@
         "lastTime": 99999999,
         "speed": 9000,
         "startEffectList": "",
-        "collisionEffectList": "",
-        "endEffectList": "4001001",
+        "collisionEffectList": "4001001",
+        "endEffectList": "",
         "effectResId": 15008002
     },
     {
@@ -16,10 +16,22 @@
         "name": "\u4e0a\u5b98\u7fce\u6280\u80fd1",
         "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd1\u6295\u63b7\u7269",
         "isFollow": 0,
-        "lastTime": 99999999,
-        "speed": 3000,
+        "lastTime": 2000,
+        "speed": 7000,
         "startEffectList": "",
         "collisionEffectList": "4001002",
+        "endEffectList": "",
+        "effectResId": 15008003
+    },
+    {
+        "id": 3002001,
+        "name": "\u602a\u72691\u666e\u901a\u653b\u51fb",
+        "describe": "\u602a\u72691\u666e\u901a\u653b\u51fb",
+        "isFollow": 1,
+        "lastTime": 99999999,
+        "speed": 9000,
+        "startEffectList": "",
+        "collisionEffectList": "4002001",
         "endEffectList": "",
         "effectResId": 15008003
     }

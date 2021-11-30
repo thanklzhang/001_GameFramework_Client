@@ -59,20 +59,26 @@ namespace NetProto {
             "Fi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEQoJbW92ZVNwZWVkGAQgASgFIk4K",
             "FnNjTm90aWZ5RW50aXR5U3RvcE1vdmUSDAoEZ3VpZBgBIAEoBRImCgZlbmRQ",
             "b3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8iNQoWc2NOb3RpZnlF",
-            "bnRpdHlVc2VTa2lsbBIMCgRndWlkGAEgASgFEg0KBXJlc0lkGAIgASgFIngK",
+            "bnRpdHlVc2VTa2lsbBIMCgRndWlkGAEgASgFEg0KBXJlc0lkGAIgASgFImIK",
             "GXNjTm90aWZ5Q3JlYXRlU2tpbGxFZmZlY3QSDAoEZ3VpZBgBIAEoBRINCgVy",
             "ZXNJZBgCIAEoBRIoCghwb3NpdGlvbhgDIAEoCzIWLk5ldFByb3RvLlZlY3Rv",
-            "cjNQcm90bxIUCgxpc1Nob3dFZmZlY3QYBCABKAUiwAEKHHNjTm90aWZ5U2tp",
-            "bGxFZmZlY3RTdGFydE1vdmUSEgoKZWZmZWN0R3VpZBgBIAEoBRIoCghzdGFy",
-            "dFBvcxgCIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90bxIpCgl0YXJnZXRQ",
-            "b3MYAyABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEgoKdGFyZ2V0R3Vp",
-            "ZBgEIAEoBRIQCghpc0ZvbGxvdxgFIAEoCBIRCgltb3ZlU3BlZWQYBiABKAUi",
-            "MAoac2NOb3RpZnlTa2lsbEVmZmVjdERlc3Ryb3kSEgoKZWZmZWN0R3VpZBgB",
-            "IAEoBSIvChJjc1RyYW5zaXRpb25CYXR0bGUSCwoDY21kGAEgASgFEgwKBGRh",
-            "dGEYAiABKAwiIQoSc2NUcmFuc2l0aW9uQmF0dGxlEgsKA2VychgBIAEoBSIb",
-            "Chljc1RyYW5zaXRpb25CYXR0bGUyUGxheWVyIjYKGXNjVHJhbnNpdGlvbkJh",
-            "dHRsZTJQbGF5ZXISCwoDY21kGAEgASgFEgwKBGRhdGEYAiABKAxiBnByb3Rv",
-            "Mw=="));
+            "cjNQcm90byLAAQocc2NOb3RpZnlTa2lsbEVmZmVjdFN0YXJ0TW92ZRISCgpl",
+            "ZmZlY3RHdWlkGAEgASgFEigKCHN0YXJ0UG9zGAIgASgLMhYuTmV0UHJvdG8u",
+            "VmVjdG9yM1Byb3RvEikKCXRhcmdldFBvcxgDIAEoCzIWLk5ldFByb3RvLlZl",
+            "Y3RvcjNQcm90bxISCgp0YXJnZXRHdWlkGAQgASgFEhAKCGlzRm9sbG93GAUg",
+            "ASgIEhEKCW1vdmVTcGVlZBgGIAEoBSIwChpzY05vdGlmeVNraWxsRWZmZWN0",
+            "RGVzdHJveRISCgplZmZlY3RHdWlkGAEgASgFIjUKFkJhdHRsZUVudGl0eVZh",
+            "bHVlUHJvdG8SDAoEdHlwZRgBIAEoBRINCgV2YWx1ZRgCIAEoBSJfChdzY05v",
+            "dGlmeVN5bmNFbnRpdHlWYWx1ZRISCgplbnRpdHlHdWlkGAEgASgFEjAKBnZh",
+            "bHVlcxgCIAMoCzIgLk5ldFByb3RvLkJhdHRsZUVudGl0eVZhbHVlUHJvdG8i",
+            "NAoVQmF0dGxlRW50aXR5QXR0clByb3RvEgwKBHR5cGUYASABKAUSDQoFdmFs",
+            "dWUYAiABKAUiXAoWc2NOb3RpZnlTeW5jRW50aXR5QXR0chISCgplbnRpdHlH",
+            "dWlkGAEgASgFEi4KBWF0dHJzGAIgAygLMh8uTmV0UHJvdG8uQmF0dGxlRW50",
+            "aXR5QXR0clByb3RvIi8KEmNzVHJhbnNpdGlvbkJhdHRsZRILCgNjbWQYASAB",
+            "KAUSDAoEZGF0YRgCIAEoDCIhChJzY1RyYW5zaXRpb25CYXR0bGUSCwoDZXJy",
+            "GAEgASgFIhsKGWNzVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIiNgoZc2NUcmFu",
+            "c2l0aW9uQmF0dGxlMlBsYXllchILCgNjbWQYASABKAUSDAoEZGF0YRgCIAEo",
+            "DGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -101,9 +107,13 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityMove), global::NetProto.scNotifyEntityMove.Parser, new[]{ "Guid", "StartPos", "EndPos", "MoveSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityStopMove), global::NetProto.scNotifyEntityStopMove.Parser, new[]{ "Guid", "EndPos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityUseSkill), global::NetProto.scNotifyEntityUseSkill.Parser, new[]{ "Guid", "ResId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateSkillEffect), global::NetProto.scNotifyCreateSkillEffect.Parser, new[]{ "Guid", "ResId", "Position", "IsShowEffect" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateSkillEffect), global::NetProto.scNotifyCreateSkillEffect.Parser, new[]{ "Guid", "ResId", "Position" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillEffectStartMove), global::NetProto.scNotifySkillEffectStartMove.Parser, new[]{ "EffectGuid", "StartPos", "TargetPos", "TargetGuid", "IsFollow", "MoveSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillEffectDestroy), global::NetProto.scNotifySkillEffectDestroy.Parser, new[]{ "EffectGuid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityValueProto), global::NetProto.BattleEntityValueProto.Parser, new[]{ "Type", "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySyncEntityValue), global::NetProto.scNotifySyncEntityValue.Parser, new[]{ "EntityGuid", "Values" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityAttrProto), global::NetProto.BattleEntityAttrProto.Parser, new[]{ "Type", "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySyncEntityAttr), global::NetProto.scNotifySyncEntityAttr.Parser, new[]{ "EntityGuid", "Attrs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csTransitionBattle), global::NetProto.csTransitionBattle.Parser, new[]{ "Cmd", "Data" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scTransitionBattle), global::NetProto.scTransitionBattle.Parser, new[]{ "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csTransitionBattle2Player), global::NetProto.csTransitionBattle2Player.Parser, null, null, null, null),
@@ -3677,7 +3687,6 @@ namespace NetProto {
       guid_ = other.guid_;
       resId_ = other.resId_;
       Position = other.position_ != null ? other.Position.Clone() : null;
-      isShowEffect_ = other.isShowEffect_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3718,20 +3727,6 @@ namespace NetProto {
       }
     }
 
-    /// <summary>Field number for the "isShowEffect" field.</summary>
-    public const int IsShowEffectFieldNumber = 4;
-    private int isShowEffect_;
-    /// <summary>
-    /// 是否只是展示效果 , 不受销毁事件控制
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int IsShowEffect {
-      get { return isShowEffect_; }
-      set {
-        isShowEffect_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as scNotifyCreateSkillEffect);
@@ -3748,7 +3743,6 @@ namespace NetProto {
       if (Guid != other.Guid) return false;
       if (ResId != other.ResId) return false;
       if (!object.Equals(Position, other.Position)) return false;
-      if (IsShowEffect != other.IsShowEffect) return false;
       return true;
     }
 
@@ -3758,7 +3752,6 @@ namespace NetProto {
       if (Guid != 0) hash ^= Guid.GetHashCode();
       if (ResId != 0) hash ^= ResId.GetHashCode();
       if (position_ != null) hash ^= Position.GetHashCode();
-      if (IsShowEffect != 0) hash ^= IsShowEffect.GetHashCode();
       return hash;
     }
 
@@ -3781,10 +3774,6 @@ namespace NetProto {
         output.WriteRawTag(26);
         output.WriteMessage(Position);
       }
-      if (IsShowEffect != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(IsShowEffect);
-      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3798,9 +3787,6 @@ namespace NetProto {
       }
       if (position_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
-      }
-      if (IsShowEffect != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(IsShowEffect);
       }
       return size;
     }
@@ -3821,9 +3807,6 @@ namespace NetProto {
           position_ = new global::NetProto.Vector3Proto();
         }
         Position.MergeFrom(other.Position);
-      }
-      if (other.IsShowEffect != 0) {
-        IsShowEffect = other.IsShowEffect;
       }
     }
 
@@ -3848,10 +3831,6 @@ namespace NetProto {
               position_ = new global::NetProto.Vector3Proto();
             }
             input.ReadMessage(position_);
-            break;
-          }
-          case 32: {
-            IsShowEffect = input.ReadInt32();
             break;
           }
         }
@@ -4255,6 +4234,579 @@ namespace NetProto {
 
   }
 
+  public sealed partial class BattleEntityValueProto : pb::IMessage<BattleEntityValueProto> {
+    private static readonly pb::MessageParser<BattleEntityValueProto> _parser = new pb::MessageParser<BattleEntityValueProto>(() => new BattleEntityValueProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BattleEntityValueProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[28]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleEntityValueProto() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleEntityValueProto(BattleEntityValueProto other) : this() {
+      type_ = other.type_;
+      value_ = other.value_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleEntityValueProto Clone() {
+      return new BattleEntityValueProto(this);
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 1;
+    private int type_;
+    /// <summary>
+    ///  1 当前生命值, 2 当前法力值
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "value" field.</summary>
+    public const int ValueFieldNumber = 2;
+    private int value_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Value {
+      get { return value_; }
+      set {
+        value_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BattleEntityValueProto);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BattleEntityValueProto other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Type != other.Type) return false;
+      if (Value != other.Value) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Value != 0) hash ^= Value.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Type != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Type);
+      }
+      if (Value != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Value);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
+      if (Value != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Value);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BattleEntityValueProto other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
+      if (other.Value != 0) {
+        Value = other.Value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Value = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 同步实体数据值
+  /// </summary>
+  public sealed partial class scNotifySyncEntityValue : pb::IMessage<scNotifySyncEntityValue> {
+    private static readonly pb::MessageParser<scNotifySyncEntityValue> _parser = new pb::MessageParser<scNotifySyncEntityValue>(() => new scNotifySyncEntityValue());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scNotifySyncEntityValue> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[29]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySyncEntityValue() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySyncEntityValue(scNotifySyncEntityValue other) : this() {
+      entityGuid_ = other.entityGuid_;
+      values_ = other.values_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySyncEntityValue Clone() {
+      return new scNotifySyncEntityValue(this);
+    }
+
+    /// <summary>Field number for the "entityGuid" field.</summary>
+    public const int EntityGuidFieldNumber = 1;
+    private int entityGuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int EntityGuid {
+      get { return entityGuid_; }
+      set {
+        entityGuid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "values" field.</summary>
+    public const int ValuesFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::NetProto.BattleEntityValueProto> _repeated_values_codec
+        = pb::FieldCodec.ForMessage(18, global::NetProto.BattleEntityValueProto.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.BattleEntityValueProto> values_ = new pbc::RepeatedField<global::NetProto.BattleEntityValueProto>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NetProto.BattleEntityValueProto> Values {
+      get { return values_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scNotifySyncEntityValue);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scNotifySyncEntityValue other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (EntityGuid != other.EntityGuid) return false;
+      if(!values_.Equals(other.values_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (EntityGuid != 0) hash ^= EntityGuid.GetHashCode();
+      hash ^= values_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EntityGuid != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(EntityGuid);
+      }
+      values_.WriteTo(output, _repeated_values_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (EntityGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EntityGuid);
+      }
+      size += values_.CalculateSize(_repeated_values_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scNotifySyncEntityValue other) {
+      if (other == null) {
+        return;
+      }
+      if (other.EntityGuid != 0) {
+        EntityGuid = other.EntityGuid;
+      }
+      values_.Add(other.values_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            EntityGuid = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            values_.AddEntriesFrom(input, _repeated_values_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BattleEntityAttrProto : pb::IMessage<BattleEntityAttrProto> {
+    private static readonly pb::MessageParser<BattleEntityAttrProto> _parser = new pb::MessageParser<BattleEntityAttrProto>(() => new BattleEntityAttrProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BattleEntityAttrProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[30]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleEntityAttrProto() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleEntityAttrProto(BattleEntityAttrProto other) : this() {
+      type_ = other.type_;
+      value_ = other.value_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleEntityAttrProto Clone() {
+      return new BattleEntityAttrProto(this);
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 1;
+    private int type_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "value" field.</summary>
+    public const int ValueFieldNumber = 2;
+    private int value_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Value {
+      get { return value_; }
+      set {
+        value_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BattleEntityAttrProto);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BattleEntityAttrProto other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Type != other.Type) return false;
+      if (Value != other.Value) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Value != 0) hash ^= Value.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Type != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Type);
+      }
+      if (Value != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Value);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
+      if (Value != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Value);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BattleEntityAttrProto other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
+      if (other.Value != 0) {
+        Value = other.Value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Value = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 同步实体属性
+  /// </summary>
+  public sealed partial class scNotifySyncEntityAttr : pb::IMessage<scNotifySyncEntityAttr> {
+    private static readonly pb::MessageParser<scNotifySyncEntityAttr> _parser = new pb::MessageParser<scNotifySyncEntityAttr>(() => new scNotifySyncEntityAttr());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scNotifySyncEntityAttr> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[31]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySyncEntityAttr() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySyncEntityAttr(scNotifySyncEntityAttr other) : this() {
+      entityGuid_ = other.entityGuid_;
+      attrs_ = other.attrs_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySyncEntityAttr Clone() {
+      return new scNotifySyncEntityAttr(this);
+    }
+
+    /// <summary>Field number for the "entityGuid" field.</summary>
+    public const int EntityGuidFieldNumber = 1;
+    private int entityGuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int EntityGuid {
+      get { return entityGuid_; }
+      set {
+        entityGuid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "attrs" field.</summary>
+    public const int AttrsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::NetProto.BattleEntityAttrProto> _repeated_attrs_codec
+        = pb::FieldCodec.ForMessage(18, global::NetProto.BattleEntityAttrProto.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.BattleEntityAttrProto> attrs_ = new pbc::RepeatedField<global::NetProto.BattleEntityAttrProto>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NetProto.BattleEntityAttrProto> Attrs {
+      get { return attrs_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scNotifySyncEntityAttr);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scNotifySyncEntityAttr other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (EntityGuid != other.EntityGuid) return false;
+      if(!attrs_.Equals(other.attrs_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (EntityGuid != 0) hash ^= EntityGuid.GetHashCode();
+      hash ^= attrs_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EntityGuid != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(EntityGuid);
+      }
+      attrs_.WriteTo(output, _repeated_attrs_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (EntityGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EntityGuid);
+      }
+      size += attrs_.CalculateSize(_repeated_attrs_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scNotifySyncEntityAttr other) {
+      if (other == null) {
+        return;
+      }
+      if (other.EntityGuid != 0) {
+        EntityGuid = other.EntityGuid;
+      }
+      attrs_.Add(other.attrs_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            EntityGuid = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            attrs_.AddEntriesFrom(input, _repeated_attrs_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   /// <summary>
   /// 转发战斗协议给战斗服务器(输入)
   /// </summary>
@@ -4265,7 +4817,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[28]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[32]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4410,7 +4962,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[29]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[33]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4530,7 +5082,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[30]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[34]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4619,7 +5171,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[31]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[35]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

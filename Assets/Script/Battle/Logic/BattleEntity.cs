@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Protobuf.Collections;
+using NetProto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +16,50 @@ public enum BattleEntityState
     Destory = 4
 }
 
+public enum EntityAttrType
+{
+    Null = 0,
+
+    //数值
+    Attack = 1,
+    Defence = 2,
+    MaxHealth = 3,
+    AttackSpeed = 4,
+    MoveSpeed = 5,
+
+    //千分比
+    Attack_Permillage = 1001,
+    Defence_Permillage = 1002,
+    MaxHealth_Permillage = 1003,
+    AttackSpeed_Permillage = 1004,
+    MoveSpeed_Permillage = 1005,
+
+}
+
+//实体当前数据值类型
+public enum EntityCurrValueType
+{
+    CurrHealth = 1,
+    CurrMagic = 2,
+}
+
+public class BattleEntityAttr
+{
+    public int attack;
+    public int defence;
+    public int maxHealth;
+
+}
+
 public class BattleEntity
 {
     public int guid;
     public int configId;
 
-    //public Vector3 position;
-
     public GameObject gameObject;
+
+    public GameObject tempModel;
+    public GameObject model;
 
     public BattleEntityState state = BattleEntityState.Idle;
 
@@ -36,8 +74,18 @@ public class BattleEntity
     //应该在 load temp obj 上加这个 ， 现在这里加上
     public Collider collider;
 
-    //技能信息
+    public int level;
+    public int CurrHealth;
+    public int MaxHealth
+    {
+        get
+        {
+            return attr.maxHealth;
+        }
+
+    }
     List<BattleSkillInfo> skills;
+    public BattleEntityAttr attr = new BattleEntityAttr();
 
     public void Init(int guid, int configId)
     {
@@ -48,6 +96,8 @@ public class BattleEntity
         //先拿一个简易的模型暂时放这 然后等真正模型下载好之后在替换即可
         var asset = GameMain.Instance.tempModelAsset;
         gameObject = GameObject.Instantiate(asset);
+
+        tempModel = gameObject.transform.Find("Cube").gameObject;
 
         // get path
         var heroConfig = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.configId);
@@ -76,10 +126,15 @@ public class BattleEntity
     {
         Logx.Log("BattleEntity : OnLoadModelFinish");
         isFinishLoad = true;
-        var position = gameObject.transform.position;
-        GameObject.Destroy(gameObject);
-        gameObject = obj;
-        gameObject.transform.position = position;
+        //var position = gameObject.transform.position;
+        //GameObject.Destroy(gameObject);
+        tempModel.SetActive(false);
+
+        model = obj;
+        model.transform.SetParent(this.gameObject.transform);
+        model.transform.localPosition = Vector3.zero;
+
+        //gameObject.transform.position = position;
         //gameObject = 
         collider = gameObject.GetComponentInChildren<Collider>();
     }
@@ -120,12 +175,10 @@ public class BattleEntity
         this.state = BattleEntityState.Destroy;
         if (isFinishLoad)
         {
-            ResourceManager.Instance.ReturnObject(path, gameObject);
+            ResourceManager.Instance.ReturnObject(path, model);
         }
-        else
-        {
-            GameObject.Destroy(gameObject);
-        }
+
+        GameObject.Destroy(gameObject);
 
     }
 
@@ -163,6 +216,43 @@ public class BattleEntity
             Logx.LogWarning("the count of skills is 0 : index : " + index);
             return -1;
         }
+
+    }
+
+    internal void SyncAttr(RepeatedField<BattleEntityAttrProto> attrs)
+    {
+        foreach (var item in attrs)
+        {
+            var type = (EntityAttrType)item.Type;
+            if (type == EntityAttrType.Attack)
+            {
+                this.attr.attack = item.Value;
+            }
+            else if (type == EntityAttrType.MaxHealth)
+            {
+                this.attr.maxHealth = item.Value;
+            }
+
+            Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.Value);
+        }
+        EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
+    }
+
+    internal void SyncValue(RepeatedField<BattleEntityValueProto> values)
+    {
+        foreach (var item in values)
+        {
+            var type = (EntityCurrValueType)item.Type;
+            var value = item.Value;
+            if (type == EntityCurrValueType.CurrHealth)
+            {
+                this.CurrHealth = value;
+            }
+
+
+            Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.Value);
+        }
+        EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
 
     }
 }

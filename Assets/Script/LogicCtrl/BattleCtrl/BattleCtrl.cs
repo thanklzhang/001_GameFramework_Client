@@ -10,9 +10,20 @@ public class BattleCtrl : BaseCtrl
 {
     BattleUI ui;
     GameObject sceneObj;
+
+    HpModule hpModule;
     public override void OnInit()
     {
         //this.isParallel = false;
+
+        //生命周期好像有点不对
+        EventDispatcher.AddListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
+        EventDispatcher.AddListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
+
+        hpModule = new HpModule();
+
+        
+
     }
 
     public override void OnStartLoad()
@@ -46,6 +57,10 @@ public class BattleCtrl : BaseCtrl
     public void OnUILoadFinish(BattleUI battleUI)
     {
         this.ui = battleUI;
+
+        hpModule.Init(ui);
+
+
     }
 
     public void OnSceneLoadFinish(HashSet<GameObject> gameObjects)
@@ -117,6 +132,7 @@ public class BattleCtrl : BaseCtrl
         ui.SetReadyBattleBtnShowState(false);
         ui.SetStateText("OnBattleStart");
     }
+
 
     //用户点击地面的时候(右键)
     void OnPlayerClickGround(Vector3 clickPos)
@@ -261,6 +277,19 @@ public class BattleCtrl : BaseCtrl
 
     }
 
+    //当创建了 entity 的时候
+    public void OnCreateEntity(BattleEntity entity)
+    {
+        hpModule.RefreshEntityData(entity);
+    }
+
+
+    //当实体战斗数据改变了
+    public void OnChangeEntityBattleData(BattleEntity entity)
+    {
+        hpModule.RefreshEntityData(entity);
+    }
+
     public override void OnInactive()
     {
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
@@ -273,7 +302,8 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnExit()
     {
-        //UIManager.Instance.ReleaseUI<BattleUI>();
+        EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
+        EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
     }
 
     public enum SkillReleaseTargeType

@@ -159,7 +159,8 @@ public class BattleManager : Singleton<BattleManager>
         var guid = createSkillEffect.Guid;
         var resId = createSkillEffect.ResId;
         var pos = BattleConvert.ConverToVector3(createSkillEffect.Position);
-        BattleSkillEffectManager.Instance.CreateSkillEffect(guid, resId, pos);
+        var followEntityGuid = createSkillEffect.FollowEntityGuid;
+        BattleSkillEffectManager.Instance.CreateSkillEffect(guid, resId, pos, followEntityGuid);
     }
 
     public void SkillEffectStartMove(scNotifySkillEffectStartMove effectStartMove)

@@ -32,15 +32,9 @@ public class LoginCtrl : BaseCtrl
     public override void OnLoadFinish()
     {
         ui.onLoginBtnClick += OnClickLoginBtn;
+        ui.onRegisteBtnClick += OnRegisteBtnClick;
 
         ui.SetStateText("no login");
-    }
-
-    public void OnClickLoginBtn(string account, string password)
-    {
-
-        account = "zxy";
-        password = "zhang425";
         ui.SetStateText("start to connect to login server ...");
         NetworkManager.Instance.ConnectToLoginServer((isSuccess) =>
         {
@@ -50,25 +44,6 @@ public class LoginCtrl : BaseCtrl
                 ui.SetStateText("connect to login server success !!!");
 
                 Logx.Log("StartToLogin : login success");
-
-                var loginHandler = NetHandlerManager.Instance.GetHandler<LoginNetHandler>();
-                ui.SetStateText("start to check login ...");
-                loginHandler.SendCheckLogin(account, password, (result) =>
-                {
-                    if (0 == result.Err)
-                    {
-                        Logx.Log("StartToLogin : check login success !!!");
-                        ui.SetStateText("check login success !!!");
-                        this.StartToEnterGame(result);
-                    }
-                    else
-                    {
-                        Logx.Log("StartToLogin : check login fail");
-                        ui.SetStateText("check login fail");
-                    }
-
-                });
-
             }
             else
             {
@@ -76,6 +51,58 @@ public class LoginCtrl : BaseCtrl
                 ui.SetStateText("connect login server fail");
             }
         });
+
+    }
+
+    public void OnClickLoginBtn(string account, string password)
+    {
+
+        //account = "zxy";
+        //password = "zhang425";
+        //ui.SetStateText("start to connect to login server ...");
+        var loginHandler = NetHandlerManager.Instance.GetHandler<LoginNetHandler>();
+        ui.SetStateText("start to check login ...");
+        loginHandler.SendCheckLogin(account, password, (result) =>
+        {
+            if (0 == result.Err)
+            {
+                Logx.Log("StartToLogin : check login success !!!");
+                ui.SetStateText("check login success !!!");
+                this.StartToEnterGame(result);
+                LocalDataTools.SetString("currAccount", account);
+                LocalDataTools.SetString("currPassword", password);
+            }
+            else
+            {
+                Logx.Log("StartToLogin : check login fail");
+                ui.SetStateText("check login fail");
+            }
+
+        });
+    }
+
+    public void OnRegisteBtnClick(string account, string password,string againPassword)
+    {
+        if (password != againPassword)
+        {
+            Logx.Log("regist fail , the password is not the same as againPassword");
+            return;
+        }
+
+        var loginHandler = NetHandlerManager.Instance.GetHandler<LoginNetHandler>();
+        loginHandler.SendRegistAccount(account, password, (result) =>
+        {
+            if (0 == result.Err)
+            {
+                Logx.Log("regist success !!! " + result.Account);
+            }
+            else
+            {
+                Logx.Log("regist fail !!! " + result.Account);
+            }
+
+        });
+
     }
 
     void StartToEnterGame(NetProto.scCheckLogin result)
@@ -98,7 +125,7 @@ public class LoginCtrl : BaseCtrl
 
                 ui.SetStateText("start to enter game ...");
 
-                loginHandler.SendEnterGame(uid, 1, (enterResult) =>
+                loginHandler.SendEnterGame(uid, "", (enterResult) =>
                 {
                     if (0 == enterResult.Err)
                     {

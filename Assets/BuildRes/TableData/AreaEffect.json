@@ -1,0 +1,24 @@
+[
+    {
+        "id": 13001003,
+        "name": "\u4e0a\u5b98\u7fce\u6280\u80fd2\u533a\u57df\u9009\u62e9",
+        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd2\u533a\u57df\u9009\u62e9",
+        "areaType": 0,
+        "centerType": 0,
+        "range": 4000,
+        "selectEntityType": 2,
+        "effectList": "14001001",
+        "effectResId": 15008002
+    },
+    {
+        "id": 13001004,
+        "name": "(\u5148\u4e0d\u7528)\u4e0a\u5b98\u7fce\u6280\u80fd3\u4f4d\u79fb\u4e2d\u533a\u57df\u9009\u62e9",
+        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd3\u4f4d\u79fb\u4e2d\u533a\u57df\u9009\u62e9",
+        "areaType": 0,
+        "centerType": 0,
+        "range": 3000,
+        "selectEntityType": 2,
+        "effectList": "4001004",
+        "effectResId": 15008002
+    }
+]

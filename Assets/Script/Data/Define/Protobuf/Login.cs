@@ -25,14 +25,18 @@ namespace NetProto {
             "CgtMb2dpbi5wcm90bxIITmV0UHJvdG8iMQoMY3NDaGVja0xvZ2luEg8KB2Fj",
             "Y291bnQYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiUQoMc2NDaGVja0xvZ2lu",
             "EgsKA2VychgBIAEoBRIKCgJpcBgCIAEoCRIMCgRwb3J0GAMgASgFEgsKA3Vp",
-            "ZBgEIAEoBRINCgV0b2tlbhgFIAEoBSIpCgtjc0VudGVyR2FtZRILCgN1aWQY",
-            "ASABKAUSDQoFdG9rZW4YAiABKAUiGgoLc2NFbnRlckdhbWUSCwoDZXJyGAEg",
-            "ASgFYgZwcm90bzM="));
+            "ZBgEIAEoBRINCgV0b2tlbhgFIAEoCSI0Cg9jc1JlZ2lzdEFjY291bnQSDwoH",
+            "YWNjb3VudBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSIvCg9zY1JlZ2lzdEFj",
+            "Y291bnQSCwoDZXJyGAEgASgFEg8KB2FjY291bnQYAiABKAkiKQoLY3NFbnRl",
+            "ckdhbWUSCwoDdWlkGAEgASgFEg0KBXRva2VuGAIgASgJIhoKC3NjRW50ZXJH",
+            "YW1lEgsKA2VychgBIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csCheckLogin), global::NetProto.csCheckLogin.Parser, new[]{ "Account", "Password" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scCheckLogin), global::NetProto.scCheckLogin.Parser, new[]{ "Err", "Ip", "Port", "Uid", "Token" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csRegistAccount), global::NetProto.csRegistAccount.Parser, new[]{ "Account", "Password" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scRegistAccount), global::NetProto.scRegistAccount.Parser, new[]{ "Err", "Account" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csEnterGame), global::NetProto.csEnterGame.Parser, new[]{ "Uid", "Token" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scEnterGame), global::NetProto.scEnterGame.Parser, new[]{ "Err" }, null, null, null)
           }));
@@ -268,12 +272,12 @@ namespace NetProto {
 
     /// <summary>Field number for the "token" field.</summary>
     public const int TokenFieldNumber = 5;
-    private int token_;
+    private string token_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Token {
+    public string Token {
       get { return token_; }
       set {
-        token_ = value;
+        token_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -305,7 +309,7 @@ namespace NetProto {
       if (Ip.Length != 0) hash ^= Ip.GetHashCode();
       if (Port != 0) hash ^= Port.GetHashCode();
       if (Uid != 0) hash ^= Uid.GetHashCode();
-      if (Token != 0) hash ^= Token.GetHashCode();
+      if (Token.Length != 0) hash ^= Token.GetHashCode();
       return hash;
     }
 
@@ -332,9 +336,9 @@ namespace NetProto {
         output.WriteRawTag(32);
         output.WriteInt32(Uid);
       }
-      if (Token != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(Token);
+      if (Token.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Token);
       }
     }
 
@@ -353,8 +357,8 @@ namespace NetProto {
       if (Uid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Uid);
       }
-      if (Token != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Token);
+      if (Token.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
       }
       return size;
     }
@@ -376,7 +380,7 @@ namespace NetProto {
       if (other.Uid != 0) {
         Uid = other.Uid;
       }
-      if (other.Token != 0) {
+      if (other.Token.Length != 0) {
         Token = other.Token;
       }
     }
@@ -405,8 +409,298 @@ namespace NetProto {
             Uid = input.ReadInt32();
             break;
           }
-          case 40: {
-            Token = input.ReadInt32();
+          case 42: {
+            Token = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class csRegistAccount : pb::IMessage<csRegistAccount> {
+    private static readonly pb::MessageParser<csRegistAccount> _parser = new pb::MessageParser<csRegistAccount>(() => new csRegistAccount());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<csRegistAccount> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.LoginReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public csRegistAccount() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public csRegistAccount(csRegistAccount other) : this() {
+      account_ = other.account_;
+      password_ = other.password_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public csRegistAccount Clone() {
+      return new csRegistAccount(this);
+    }
+
+    /// <summary>Field number for the "account" field.</summary>
+    public const int AccountFieldNumber = 1;
+    private string account_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Account {
+      get { return account_; }
+      set {
+        account_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "password" field.</summary>
+    public const int PasswordFieldNumber = 2;
+    private string password_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Password {
+      get { return password_; }
+      set {
+        password_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as csRegistAccount);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(csRegistAccount other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Account != other.Account) return false;
+      if (Password != other.Password) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Account.Length != 0) hash ^= Account.GetHashCode();
+      if (Password.Length != 0) hash ^= Password.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Account.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Account);
+      }
+      if (Password.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Password);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Account.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Account);
+      }
+      if (Password.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(csRegistAccount other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Account.Length != 0) {
+        Account = other.Account;
+      }
+      if (other.Password.Length != 0) {
+        Password = other.Password;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Account = input.ReadString();
+            break;
+          }
+          case 18: {
+            Password = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class scRegistAccount : pb::IMessage<scRegistAccount> {
+    private static readonly pb::MessageParser<scRegistAccount> _parser = new pb::MessageParser<scRegistAccount>(() => new scRegistAccount());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scRegistAccount> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.LoginReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scRegistAccount() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scRegistAccount(scRegistAccount other) : this() {
+      err_ = other.err_;
+      account_ = other.account_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scRegistAccount Clone() {
+      return new scRegistAccount(this);
+    }
+
+    /// <summary>Field number for the "err" field.</summary>
+    public const int ErrFieldNumber = 1;
+    private int err_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Err {
+      get { return err_; }
+      set {
+        err_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "account" field.</summary>
+    public const int AccountFieldNumber = 2;
+    private string account_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Account {
+      get { return account_; }
+      set {
+        account_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scRegistAccount);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scRegistAccount other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Err != other.Err) return false;
+      if (Account != other.Account) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Err != 0) hash ^= Err.GetHashCode();
+      if (Account.Length != 0) hash ^= Account.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Err != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Err);
+      }
+      if (Account.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Account);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Err != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Err);
+      }
+      if (Account.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Account);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scRegistAccount other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Err != 0) {
+        Err = other.Err;
+      }
+      if (other.Account.Length != 0) {
+        Account = other.Account;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Err = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Account = input.ReadString();
             break;
           }
         }
@@ -422,7 +716,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.LoginReflection.Descriptor.MessageTypes[2]; }
+      get { return global::NetProto.LoginReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -464,12 +758,12 @@ namespace NetProto {
 
     /// <summary>Field number for the "token" field.</summary>
     public const int TokenFieldNumber = 2;
-    private int token_;
+    private string token_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Token {
+    public string Token {
       get { return token_; }
       set {
-        token_ = value;
+        token_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -495,7 +789,7 @@ namespace NetProto {
     public override int GetHashCode() {
       int hash = 1;
       if (Uid != 0) hash ^= Uid.GetHashCode();
-      if (Token != 0) hash ^= Token.GetHashCode();
+      if (Token.Length != 0) hash ^= Token.GetHashCode();
       return hash;
     }
 
@@ -510,9 +804,9 @@ namespace NetProto {
         output.WriteRawTag(8);
         output.WriteInt32(Uid);
       }
-      if (Token != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Token);
+      if (Token.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Token);
       }
     }
 
@@ -522,8 +816,8 @@ namespace NetProto {
       if (Uid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Uid);
       }
-      if (Token != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Token);
+      if (Token.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
       }
       return size;
     }
@@ -536,7 +830,7 @@ namespace NetProto {
       if (other.Uid != 0) {
         Uid = other.Uid;
       }
-      if (other.Token != 0) {
+      if (other.Token.Length != 0) {
         Token = other.Token;
       }
     }
@@ -553,8 +847,8 @@ namespace NetProto {
             Uid = input.ReadInt32();
             break;
           }
-          case 16: {
-            Token = input.ReadInt32();
+          case 18: {
+            Token = input.ReadString();
             break;
           }
         }
@@ -570,7 +864,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.LoginReflection.Descriptor.MessageTypes[3]; }
+      get { return global::NetProto.LoginReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

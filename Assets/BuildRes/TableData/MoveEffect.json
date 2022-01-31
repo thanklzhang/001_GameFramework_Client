@@ -1,0 +1,15 @@
+[
+    {
+        "id": 16001001,
+        "name": "\u4e0a\u5b98\u7fce\u6280\u80fd3\u4f4d\u79fb",
+        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd3\u4f4d\u79fb",
+        "moveSpeed": 7000,
+        "moveTargetPos": 0,
+        "endPosType": 1,
+        "startEffectList": "14001002",
+        "endEffectList": "",
+        "endRemoveEffectList": "14001002",
+        "isThisEndForSkillEnd": 1,
+        "effectResId": 15008002
+    }
+]

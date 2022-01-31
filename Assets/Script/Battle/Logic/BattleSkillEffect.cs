@@ -41,6 +41,8 @@ public class BattleSkillEffect
     float totalTotalTime;
     bool isLoop;
 
+    
+
     public void Init(int guid, int resId)
     {
         this.guid = guid;
@@ -72,6 +74,12 @@ public class BattleSkillEffect
         {
             OnLoadModelFinish(obj);
         });
+    }
+
+    //设置该特效为一直跟随实体
+    internal void SetFollowEntityGuid(int followEntityGuid)
+    {
+        StartMove(Vector3.zero, followEntityGuid,9999999.0f);
     }
 
     public void OnLoadModelFinish(GameObject obj)

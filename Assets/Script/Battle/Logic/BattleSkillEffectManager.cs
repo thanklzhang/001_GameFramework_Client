@@ -25,9 +25,9 @@ public class BattleSkillEffectManager : Singleton<BattleSkillEffectManager>
     }
 
     //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-    internal void CreateSkillEffect(int guid, int resId, Vector3 pos)
+    internal void CreateSkillEffect(int guid, int resId, Vector3 pos, int followEntityGuid)
     {
-        var skillEffect = CreateSkillEffectInfo(guid, resId, pos);
+        var skillEffect = CreateSkillEffectInfo(guid, resId, pos, followEntityGuid);
         skillEffect.StartSelfLoadModel();
     }
 
@@ -40,7 +40,7 @@ public class BattleSkillEffectManager : Singleton<BattleSkillEffectManager>
     //}
 
     //只创建实体信息 , 是创建一个完整实体的一个步骤
-    internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos)
+    internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos, int followEntityGuid)
     {
         //var guid = serverEntity.Guid;
         //var configId = serverEntity.ConfigId;
@@ -54,6 +54,7 @@ public class BattleSkillEffectManager : Singleton<BattleSkillEffectManager>
         BattleSkillEffect skillEffect = new BattleSkillEffect();
         skillEffect.Init(guid, resId);
         skillEffect.SetPosition(pos);
+        skillEffect.SetFollowEntityGuid(followEntityGuid);
 
         skillEffectDic.Add(guid, skillEffect);
 

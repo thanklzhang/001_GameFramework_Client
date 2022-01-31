@@ -59,26 +59,26 @@ namespace NetProto {
             "Fi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEQoJbW92ZVNwZWVkGAQgASgFIk4K",
             "FnNjTm90aWZ5RW50aXR5U3RvcE1vdmUSDAoEZ3VpZBgBIAEoBRImCgZlbmRQ",
             "b3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8iNQoWc2NOb3RpZnlF",
-            "bnRpdHlVc2VTa2lsbBIMCgRndWlkGAEgASgFEg0KBXJlc0lkGAIgASgFImIK",
+            "bnRpdHlVc2VTa2lsbBIMCgRndWlkGAEgASgFEg0KBXJlc0lkGAIgASgFInwK",
             "GXNjTm90aWZ5Q3JlYXRlU2tpbGxFZmZlY3QSDAoEZ3VpZBgBIAEoBRINCgVy",
             "ZXNJZBgCIAEoBRIoCghwb3NpdGlvbhgDIAEoCzIWLk5ldFByb3RvLlZlY3Rv",
-            "cjNQcm90byLAAQocc2NOb3RpZnlTa2lsbEVmZmVjdFN0YXJ0TW92ZRISCgpl",
-            "ZmZlY3RHdWlkGAEgASgFEigKCHN0YXJ0UG9zGAIgASgLMhYuTmV0UHJvdG8u",
-            "VmVjdG9yM1Byb3RvEikKCXRhcmdldFBvcxgDIAEoCzIWLk5ldFByb3RvLlZl",
-            "Y3RvcjNQcm90bxISCgp0YXJnZXRHdWlkGAQgASgFEhAKCGlzRm9sbG93GAUg",
-            "ASgIEhEKCW1vdmVTcGVlZBgGIAEoBSIwChpzY05vdGlmeVNraWxsRWZmZWN0",
-            "RGVzdHJveRISCgplZmZlY3RHdWlkGAEgASgFIjUKFkJhdHRsZUVudGl0eVZh",
-            "bHVlUHJvdG8SDAoEdHlwZRgBIAEoBRINCgV2YWx1ZRgCIAEoBSJfChdzY05v",
-            "dGlmeVN5bmNFbnRpdHlWYWx1ZRISCgplbnRpdHlHdWlkGAEgASgFEjAKBnZh",
-            "bHVlcxgCIAMoCzIgLk5ldFByb3RvLkJhdHRsZUVudGl0eVZhbHVlUHJvdG8i",
-            "NAoVQmF0dGxlRW50aXR5QXR0clByb3RvEgwKBHR5cGUYASABKAUSDQoFdmFs",
-            "dWUYAiABKAUiXAoWc2NOb3RpZnlTeW5jRW50aXR5QXR0chISCgplbnRpdHlH",
-            "dWlkGAEgASgFEi4KBWF0dHJzGAIgAygLMh8uTmV0UHJvdG8uQmF0dGxlRW50",
-            "aXR5QXR0clByb3RvIi8KEmNzVHJhbnNpdGlvbkJhdHRsZRILCgNjbWQYASAB",
-            "KAUSDAoEZGF0YRgCIAEoDCIhChJzY1RyYW5zaXRpb25CYXR0bGUSCwoDZXJy",
-            "GAEgASgFIhsKGWNzVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIiNgoZc2NUcmFu",
-            "c2l0aW9uQmF0dGxlMlBsYXllchILCgNjbWQYASABKAUSDAoEZGF0YRgCIAEo",
-            "DGIGcHJvdG8z"));
+            "cjNQcm90bxIYChBmb2xsb3dFbnRpdHlHdWlkGAQgASgFIsABChxzY05vdGlm",
+            "eVNraWxsRWZmZWN0U3RhcnRNb3ZlEhIKCmVmZmVjdEd1aWQYASABKAUSKAoI",
+            "c3RhcnRQb3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SKQoJdGFy",
+            "Z2V0UG9zGAMgASgLMhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvEhIKCnRhcmdl",
+            "dEd1aWQYBCABKAUSEAoIaXNGb2xsb3cYBSABKAgSEQoJbW92ZVNwZWVkGAYg",
+            "ASgFIjAKGnNjTm90aWZ5U2tpbGxFZmZlY3REZXN0cm95EhIKCmVmZmVjdEd1",
+            "aWQYASABKAUiNQoWQmF0dGxlRW50aXR5VmFsdWVQcm90bxIMCgR0eXBlGAEg",
+            "ASgFEg0KBXZhbHVlGAIgASgFIl8KF3NjTm90aWZ5U3luY0VudGl0eVZhbHVl",
+            "EhIKCmVudGl0eUd1aWQYASABKAUSMAoGdmFsdWVzGAIgAygLMiAuTmV0UHJv",
+            "dG8uQmF0dGxlRW50aXR5VmFsdWVQcm90byI0ChVCYXR0bGVFbnRpdHlBdHRy",
+            "UHJvdG8SDAoEdHlwZRgBIAEoBRINCgV2YWx1ZRgCIAEoBSJcChZzY05vdGlm",
+            "eVN5bmNFbnRpdHlBdHRyEhIKCmVudGl0eUd1aWQYASABKAUSLgoFYXR0cnMY",
+            "AiADKAsyHy5OZXRQcm90by5CYXR0bGVFbnRpdHlBdHRyUHJvdG8iLwoSY3NU",
+            "cmFuc2l0aW9uQmF0dGxlEgsKA2NtZBgBIAEoBRIMCgRkYXRhGAIgASgMIiEK",
+            "EnNjVHJhbnNpdGlvbkJhdHRsZRILCgNlcnIYASABKAUiGwoZY3NUcmFuc2l0",
+            "aW9uQmF0dGxlMlBsYXllciI2ChlzY1RyYW5zaXRpb25CYXR0bGUyUGxheWVy",
+            "EgsKA2NtZBgBIAEoBRIMCgRkYXRhGAIgASgMYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -107,7 +107,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityMove), global::NetProto.scNotifyEntityMove.Parser, new[]{ "Guid", "StartPos", "EndPos", "MoveSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityStopMove), global::NetProto.scNotifyEntityStopMove.Parser, new[]{ "Guid", "EndPos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityUseSkill), global::NetProto.scNotifyEntityUseSkill.Parser, new[]{ "Guid", "ResId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateSkillEffect), global::NetProto.scNotifyCreateSkillEffect.Parser, new[]{ "Guid", "ResId", "Position" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateSkillEffect), global::NetProto.scNotifyCreateSkillEffect.Parser, new[]{ "Guid", "ResId", "Position", "FollowEntityGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillEffectStartMove), global::NetProto.scNotifySkillEffectStartMove.Parser, new[]{ "EffectGuid", "StartPos", "TargetPos", "TargetGuid", "IsFollow", "MoveSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillEffectDestroy), global::NetProto.scNotifySkillEffectDestroy.Parser, new[]{ "EffectGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityValueProto), global::NetProto.BattleEntityValueProto.Parser, new[]{ "Type", "Value" }, null, null, null),
@@ -3687,6 +3687,7 @@ namespace NetProto {
       guid_ = other.guid_;
       resId_ = other.resId_;
       Position = other.position_ != null ? other.Position.Clone() : null;
+      followEntityGuid_ = other.followEntityGuid_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3727,6 +3728,20 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "followEntityGuid" field.</summary>
+    public const int FollowEntityGuidFieldNumber = 4;
+    private int followEntityGuid_;
+    /// <summary>
+    /// 跟随的实体 id 一般 buff 都会一直跟随
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FollowEntityGuid {
+      get { return followEntityGuid_; }
+      set {
+        followEntityGuid_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as scNotifyCreateSkillEffect);
@@ -3743,6 +3758,7 @@ namespace NetProto {
       if (Guid != other.Guid) return false;
       if (ResId != other.ResId) return false;
       if (!object.Equals(Position, other.Position)) return false;
+      if (FollowEntityGuid != other.FollowEntityGuid) return false;
       return true;
     }
 
@@ -3752,6 +3768,7 @@ namespace NetProto {
       if (Guid != 0) hash ^= Guid.GetHashCode();
       if (ResId != 0) hash ^= ResId.GetHashCode();
       if (position_ != null) hash ^= Position.GetHashCode();
+      if (FollowEntityGuid != 0) hash ^= FollowEntityGuid.GetHashCode();
       return hash;
     }
 
@@ -3774,6 +3791,10 @@ namespace NetProto {
         output.WriteRawTag(26);
         output.WriteMessage(Position);
       }
+      if (FollowEntityGuid != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(FollowEntityGuid);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3787,6 +3808,9 @@ namespace NetProto {
       }
       if (position_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
+      }
+      if (FollowEntityGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FollowEntityGuid);
       }
       return size;
     }
@@ -3807,6 +3831,9 @@ namespace NetProto {
           position_ = new global::NetProto.Vector3Proto();
         }
         Position.MergeFrom(other.Position);
+      }
+      if (other.FollowEntityGuid != 0) {
+        FollowEntityGuid = other.FollowEntityGuid;
       }
     }
 
@@ -3831,6 +3858,10 @@ namespace NetProto {
               position_ = new global::NetProto.Vector3Proto();
             }
             input.ReadMessage(position_);
+            break;
+          }
+          case 32: {
+            FollowEntityGuid = input.ReadInt32();
             break;
           }
         }
@@ -4117,6 +4148,9 @@ namespace NetProto {
 
   }
 
+  /// <summary>
+  /// 服务端通知 有技能效果销毁
+  /// </summary>
   public sealed partial class scNotifySkillEffectDestroy : pb::IMessage<scNotifySkillEffectDestroy> {
     private static readonly pb::MessageParser<scNotifySkillEffectDestroy> _parser = new pb::MessageParser<scNotifySkillEffectDestroy>(() => new scNotifySkillEffectDestroy());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

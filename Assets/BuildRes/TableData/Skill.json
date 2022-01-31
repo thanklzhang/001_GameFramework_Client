@@ -4,9 +4,11 @@
         "name": "\u4e0a\u5b98\u7fce\u666e\u901a\u653b\u51fb",
         "describe": "\u4e0a\u5b98\u7fce\u666e\u901a\u653b\u51fb",
         "skillReleaseTargeType": 1,
+        "skillReleaseType": 0,
         "effectList": "3001001",
         "releaseRange": 0,
-        "lastTime": 500,
+        "beforeTime": 200,
+        "afterTime": 200,
         "cdTime": 0
     },
     {
@@ -14,19 +16,59 @@
         "name": "\u4e0a\u5b98\u7fce\u6280\u80fd1",
         "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd 1 \u4ecb\u7ecd \u5411\u4e00\u4e2a\u70b9\u53d1\u5c04\u7403\u653b\u51fb",
         "skillReleaseTargeType": 2,
+        "skillReleaseType": 0,
         "effectList": "3001002",
         "releaseRange": 8000,
-        "lastTime": 500,
-        "cdTime": 3000
+        "beforeTime": 200,
+        "afterTime": 200,
+        "cdTime": 1000
+    },
+    {
+        "id": 2001003,
+        "name": "\u4e0a\u5b98\u7fce\u6280\u80fd2",
+        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd 2 \u4ecb\u7ecd \u5468\u56f4\u51fb\u6655",
+        "skillReleaseTargeType": 0,
+        "skillReleaseType": 0,
+        "effectList": "13001003",
+        "releaseRange": 0,
+        "beforeTime": 200,
+        "afterTime": 200,
+        "cdTime": 2000
+    },
+    {
+        "id": 2001004,
+        "name": "\u4e0a\u5b98\u7fce\u6280\u80fd3",
+        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd 3 \u4ecb\u7ecd \u5feb\u901f\u79fb\u52a8\u5230\u6307\u5b9a\u4f4d\u7f6e \u4f24\u5bb3\u6cbf\u9014\u654c\u4eba",
+        "skillReleaseTargeType": 2,
+        "skillReleaseType": 1,
+        "effectList": "16001001",
+        "releaseRange": 8000,
+        "beforeTime": 0,
+        "afterTime": 0,
+        "cdTime": 1500
+    },
+    {
+        "id": 2001005,
+        "name": "\u4e0a\u5b98\u7fce\u6280\u80fd4",
+        "describe": "\u4e0a\u5b98\u7fce\u6280\u80fd 4 \u4ecb\u7ecd \u76ee\u6807\u6d41\u8840\u5e76\u4e14\u964d\u4f4e\u653b\u51fb\u529b",
+        "skillReleaseTargeType": 1,
+        "skillReleaseType": 0,
+        "effectList": "14001003,14001004",
+        "releaseRange": 12000,
+        "beforeTime": 200,
+        "afterTime": 200,
+        "cdTime": 7000
     },
     {
         "id": 2002001,
         "name": "\u602a\u7269\u666e\u901a\u653b\u51fb",
         "describe": "\u602a\u7269\u666e\u901a\u653b\u51fb",
         "skillReleaseTargeType": 1,
+        "skillReleaseType": 0,
         "effectList": "3002001",
         "releaseRange": 1500,
-        "lastTime": 500,
-        "cdTime": 3000
+        "beforeTime": 200,
+        "afterTime": 200,
+        "cdTime": 0
     }
 ]

@@ -48,7 +48,7 @@ public class BattleEntityAttr
     public int attack;
     public int defence;
     public int maxHealth;
-
+    public float moveSpeed;
 }
 
 public class BattleEntity
@@ -69,7 +69,7 @@ public class BattleEntity
 
     //move
     Vector3 moveTargetPos;
-    float moveSpeed;
+    //float moveSpeed;
 
     //应该在 load temp obj 上加这个 ， 现在这里加上
     public Collider collider;
@@ -155,7 +155,7 @@ public class BattleEntity
         if (state == BattleEntityState.Move)
         {
             var moveVector = moveTargetPos - this.gameObject.transform.position;
-            var speed = this.moveSpeed;
+            var speed = this.attr.moveSpeed;
             var dir = moveVector.normalized;
             //var dis = moveVector.magnitude;
 
@@ -188,7 +188,7 @@ public class BattleEntity
         state = BattleEntityState.Move;
 
         this.moveTargetPos = targetPos;
-        this.moveSpeed = moveSpeed;
+        this.attr.moveSpeed = moveSpeed;
 
     }
 
@@ -231,6 +231,11 @@ public class BattleEntity
             else if (type == EntityAttrType.MaxHealth)
             {
                 this.attr.maxHealth = item.Value;
+            }
+            else if (type == EntityAttrType.MoveSpeed)
+            {
+                // /1000
+                this.attr.moveSpeed = item.Value / 1000.0f;
             }
 
             Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.Value);

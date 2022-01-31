@@ -222,6 +222,21 @@ public class BattleCtrl : BaseCtrl
         {
             this.OnUseSkill(1);
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            this.OnUseSkill(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            this.OnUseSkill(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            this.OnUseSkill(4);
+        }
     }
 
     public void OnUseSkill(int index)
@@ -267,6 +282,10 @@ public class BattleCtrl : BaseCtrl
 
                 }
             }
+        }
+        else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
+        {
+            battleNet.SendUseSkill(skillId, targetGuid, targetPos);
         }
 
 

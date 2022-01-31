@@ -22,22 +22,23 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKp4FCghQcm90b0lEcxIJCgVGaXJzdBAA",
-            "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSGAoTQXBwbHlD",
-            "cmVhdGVCYXR0bGUyUxDJARIXChJUcmFuc2l0aW9uQmF0dGxlMlMQrQISHgoZ",
-            "VHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIyUxCuAhIPCgpDaGVja0xvZ2luENEP",
-            "Eg4KCUVudGVyR2FtZRDSDxIYChNBcHBseUhlcm9FeGFtQmF0dGxlELQQEhcK",
-            "Ek5vdGlmeUNyZWF0ZUJhdHRsZRC5FxIXChJQbGF5ZXJMb2FkUHJvZ3Jlc3MQ",
-            "uhcSHgoZTm90aWZ5QWxsUGxheWVyTG9hZEZpbmlzaBC7FxIWChFCYXR0bGVS",
-            "ZWFkeUZpbmlzaBC8FxIWChFOb3RpZnlCYXR0bGVTdGFydBC9FxIPCgpNb3Zl",
-            "RW50aXR5EJ0YEg0KCFVzZVNraWxsEJ4YEhkKFE5vdGlmeUNyZWF0ZUVudGl0",
-            "aWVzEIEZEhUKEE5vdGlmeUVudGl0eU1vdmUQghkSGQoUTm90aWZ5RW50aXR5",
-            "U3RvcE1vdmUQgxkSHQoYTm90aWZ5RW50aXR5UmVsZWFzZVNraWxsEIQZEhwK",
-            "F05vdGlmeUNyZWF0ZVNraWxsRWZmZWN0EIUZEh8KGk5vdGlmeVNraWxsRWZm",
-            "ZWN0U3RhcnRNb3ZlEIYZEh0KGE5vdGlmeVNraWxsRWZmZWN0RGVzdHJveRCH",
-            "GRIZChROb3RpZnlTeW5jRW50aXR5QXR0chCIGRIaChVOb3RpZnlTeW5jRW50",
-            "aXR5VmFsdWUQiRkSFQoQVHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFuc2l0",
-            "aW9uQmF0dGxlMlBsYXllchDmGWIGcHJvdG8z"));
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKscFCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSEwoPUmVnaXN0",
+            "QWNjb3VudDJTEGcSGAoTQXBwbHlDcmVhdGVCYXR0bGUyUxDJARIXChJUcmFu",
+            "c2l0aW9uQmF0dGxlMlMQrQISHgoZVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIy",
+            "UxCuAhIPCgpDaGVja0xvZ2luENEPEg4KCUVudGVyR2FtZRDSDxISCg1SZWdp",
+            "c3RBY2NvdW50ENMPEhgKE0FwcGx5SGVyb0V4YW1CYXR0bGUQtBASFwoSTm90",
+            "aWZ5Q3JlYXRlQmF0dGxlELkXEhcKElBsYXllckxvYWRQcm9ncmVzcxC6FxIe",
+            "ChlOb3RpZnlBbGxQbGF5ZXJMb2FkRmluaXNoELsXEhYKEUJhdHRsZVJlYWR5",
+            "RmluaXNoELwXEhYKEU5vdGlmeUJhdHRsZVN0YXJ0EL0XEg8KCk1vdmVFbnRp",
+            "dHkQnRgSDQoIVXNlU2tpbGwQnhgSGQoUTm90aWZ5Q3JlYXRlRW50aXRpZXMQ",
+            "gRkSFQoQTm90aWZ5RW50aXR5TW92ZRCCGRIZChROb3RpZnlFbnRpdHlTdG9w",
+            "TW92ZRCDGRIdChhOb3RpZnlFbnRpdHlSZWxlYXNlU2tpbGwQhBkSHAoXTm90",
+            "aWZ5Q3JlYXRlU2tpbGxFZmZlY3QQhRkSHwoaTm90aWZ5U2tpbGxFZmZlY3RT",
+            "dGFydE1vdmUQhhkSHQoYTm90aWZ5U2tpbGxFZmZlY3REZXN0cm95EIcZEhkK",
+            "FE5vdGlmeVN5bmNFbnRpdHlBdHRyEIgZEhoKFU5vdGlmeVN5bmNFbnRpdHlW",
+            "YWx1ZRCJGRIVChBUcmFuc2l0aW9uQmF0dGxlEOUZEhwKF1RyYW5zaXRpb25C",
+            "YXR0bGUyUGxheWVyEOYZYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -53,6 +54,7 @@ namespace NetProto {
     /// </summary>
     [pbr::OriginalName("CheckLogin2S")] CheckLogin2S = 101,
     [pbr::OriginalName("EnterGame2S")] EnterGame2S = 102,
+    [pbr::OriginalName("RegistAccount2S")] RegistAccount2S = 103,
     [pbr::OriginalName("ApplyCreateBattle2S")] ApplyCreateBattle2S = 201,
     [pbr::OriginalName("TransitionBattle2S")] TransitionBattle2S = 301,
     [pbr::OriginalName("TransitionBattle2Player2S")] TransitionBattle2Player2S = 302,
@@ -61,6 +63,7 @@ namespace NetProto {
     /// </summary>
     [pbr::OriginalName("CheckLogin")] CheckLogin = 2001,
     [pbr::OriginalName("EnterGame")] EnterGame = 2002,
+    [pbr::OriginalName("RegistAccount")] RegistAccount = 2003,
     /// <summary>
     /// 战斗入口
     /// </summary>

@@ -31,7 +31,7 @@ public class LobbyCtrl : BaseCtrl
 
         ui.onHeroListBtnClick += OnClickHeroListBtn;
 
-        ui.onBattleBtnClick += OnClickBattleBtn;
+        ui.onMainTaskBtnClick += OnClickMainTaskBtn;
     }
 
     public void OnClickHeroListBtn()
@@ -39,18 +39,19 @@ public class LobbyCtrl : BaseCtrl
         CtrlManager.Instance.Enter<HeroListCtrl>();
     }
 
-    public void OnClickBattleBtn()
+    public void OnClickMainTaskBtn()
     {
+        //开始主线
+        //var battleEntranceNet = NetHandlerManager.Instance.GetHandler<BattleEntranceNetHandler>();
 
-        //开始一场战斗
-        var battleEntranceNet = NetHandlerManager.Instance.GetHandler<BattleEntranceNetHandler>();
+        //battleEntranceNet.SendApplyHeroExamBattle((xxx) =>
+        //{
+        //    //center 房间创建好了 等待战斗开始
 
-        battleEntranceNet.SendApplyHeroExamBattle((xxx) =>
-        {
-            //center 房间创建好了 等待战斗开始
+        //    //this.OnStartBattle();
+        //});
 
-            //this.OnStartBattle();
-        });
+        CtrlManager.Instance.Enter<MainTaskCtrl>();
 
     }
 
@@ -64,7 +65,7 @@ public class LobbyCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
-       
+
     }
 
     public override void OnActive()
@@ -80,7 +81,7 @@ public class LobbyCtrl : BaseCtrl
     public override void OnExit()
     {
         ui.onHeroListBtnClick -= OnClickHeroListBtn;
-        ui.onBattleBtnClick -= OnClickBattleBtn;
+        ui.onMainTaskBtnClick -= OnClickMainTaskBtn;
         //UIManager.Instance.ReleaseUI<LobbyUI>();
     }
 

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System;
+using NetProto;
 
 public class ProtoMsgUtil
 {
@@ -119,5 +120,6 @@ public class ProtoMsgUtil
 
         return clientMsg;
     }
+
 
 }

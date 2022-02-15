@@ -76,7 +76,7 @@
         "entityColliderEffectList": "4001004",
         "colliderRadius": 4000,
         "addedAttrGroup": "1005",
-        "addedValueGroup": "0,-800,0",
+        "addedValueGroup": "0,-800,1",
         "effectResId": 15008002
     }
 ]

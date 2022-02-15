@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData;
 using NetProto;
 using UnityEngine;
 
@@ -76,7 +77,7 @@ public class BattleManager : Singleton<BattleManager>
         }
 
         //设置本地玩家
-        var userDataStore = GameDataManager.Instance.UserGameDataStore;
+        var userDataStore = GameDataManager.Instance.UserStore;
         var uid = (int)userDataStore.Uid;
         if (players.ContainsKey(uid))
         {

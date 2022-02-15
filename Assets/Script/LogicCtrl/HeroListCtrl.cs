@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Table;
@@ -99,7 +100,7 @@ public class HeroListCtrl : BaseCtrl
     public void OnUpgradeHeroLevel(HeroData heroData)
     {
         //目前不用传来的 直接取值即可
-        var nowHeroData = GameDataManager.Instance.HeroGameDataStore.GetDataById(heroData.id);
+        var nowHeroData = GameDataManager.Instance.HeroStore.GetDataById(heroData.id);
         ui.RefreshOneHero(ConvertToUIHeroData(nowHeroData));
 
     }
@@ -109,7 +110,7 @@ public class HeroListCtrl : BaseCtrl
         HeroCardUIData uiData = new HeroCardUIData();
         uiData.id = heroData.id;
         uiData.level = heroData.level;
-        var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
+        var heroDataStore = GameDataManager.Instance.HeroStore;
         var serverHeroData = heroDataStore.GetDataById(heroData.id);
         if (serverHeroData != null)
         {
@@ -120,7 +121,7 @@ public class HeroListCtrl : BaseCtrl
 
     public HeroListUIArgs ConvertToUIArgs()
     {
-        var heroDataStore = GameDataManager.Instance.HeroGameDataStore;
+        var heroDataStore = GameDataManager.Instance.HeroStore;
         var heroTbList = TableManager.Instance.GetList<Table.HeroInfo>();
         HeroListUIArgs uiArgs = new HeroListUIArgs();
         uiArgs.cardList = new List<HeroCardUIData>();

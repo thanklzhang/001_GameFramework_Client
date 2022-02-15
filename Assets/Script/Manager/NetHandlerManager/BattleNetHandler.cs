@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using NetProto;
+using GameData;
+
 public class BattleNetHandler : NetHandler
 {
     //public Action<scStartBattle> startBattleAction;
@@ -55,7 +57,7 @@ public class BattleNetHandler : NetHandler
         Logx.Log("TransitionBattleMsg : send true cmd : " + cmd);
         csTransitionBattle tranBattleMsg = new csTransitionBattle();
 
-        var myUid = GameDataManager.Instance.UserGameDataStore.Uid;
+        var myUid = GameDataManager.Instance.UserStore.Uid;
         ClientProtoHead head = new ClientProtoHead()
         {
             cmd = (ushort)cmd,

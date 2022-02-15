@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using NetProto;
+using GameData;
+
 public class LoginNetHandler : NetHandler
 {
     public Action<scCheckLogin> loginResultAction;
@@ -36,7 +38,7 @@ public class LoginNetHandler : NetHandler
     public void OnCheckLogin(MsgPack msgPack)
     {
         scCheckLogin check = scCheckLogin.Parser.ParseFrom(msgPack.data);
-        GameDataManager.Instance.UserGameDataStore.Uid = (ulong)check.Uid;
+        GameDataManager.Instance.UserStore.Uid = (ulong)check.Uid;
         loginResultAction?.Invoke(check);
         loginResultAction = null;
 

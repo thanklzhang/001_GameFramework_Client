@@ -8,17 +8,17 @@ public class LobbyUI : BaseUI
 {
     public Action onCloseBtnClick;
     public Action onHeroListBtnClick;
-    public Action onBattleBtnClick;
+    public Action onMainTaskBtnClick;
 
     Button closeBtn;
     Button heroListBtn;
-    Button battleBtn;
+    Button mainTaskBtn;
 
     protected override void OnInit()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         heroListBtn = this.transform.Find("heroListBtn").GetComponent<Button>();
-        battleBtn = this.transform.Find("battleBtn").GetComponent<Button>();
+        mainTaskBtn = this.transform.Find("mainTaskBtn").GetComponent<Button>();
 
         closeBtn.onClick.AddListener(() =>
         {
@@ -30,16 +30,16 @@ public class LobbyUI : BaseUI
             onHeroListBtnClick?.Invoke();
         });
 
-        battleBtn.onClick.AddListener(() =>
+        mainTaskBtn.onClick.AddListener(() =>
         {
-            onBattleBtnClick?.Invoke();
+            onMainTaskBtnClick?.Invoke();
         });
     }
     protected override void OnRelease()
     {
         onCloseBtnClick = null;
         onHeroListBtnClick = null;
-        onBattleBtnClick = null;
+        onMainTaskBtnClick = null;
     }
 }
 

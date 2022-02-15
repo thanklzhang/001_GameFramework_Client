@@ -45,5 +45,13 @@ public class NetHandler
     //    Debug.Log("send msg to SS server: " + eventType.ToString() + " (" + (int)eventType + ")");
     //    NetworkManager.Instance.SendMsgToSS((int)eventType, data.ToByteArray());
     //}
+
+
+    //log str
+    public void LogNetErrStr(int cmd, int err)
+    {
+        var str = "receive msg err : " + cmd + "(" + (int)cmd + ") , errCode : " + err;
+        Logx.Log(str);
+    }
 }
 

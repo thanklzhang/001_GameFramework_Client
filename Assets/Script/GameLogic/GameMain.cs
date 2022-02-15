@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using Assets.Script.Combat;
 using LitJson;
 using Table;
+using GameData;
 
 public class GameMain : MonoBehaviour
 {

@@ -12,9 +12,10 @@ public enum EventIDs
 {
     Null = 0,
     
-    //自定义事件
+    //自定义事件--------------
     OnUpgradeHeroLevel = 100001,
-    
+    OnRefreshAllMainTaskData = 100051,
+
     //battle
     OnCreateBattle = 101001,
     OnAllPlayerLoadFinish = 1010002,
@@ -24,5 +25,7 @@ public enum EventIDs
     OnChangeEntityBattleData = 101102,
 
     OnSetEntityPosition = 101201,
+
+  
 
 }

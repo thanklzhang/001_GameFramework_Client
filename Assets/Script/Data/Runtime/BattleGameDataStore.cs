@@ -1,4 +1,5 @@
-﻿using NetProto;
+﻿using GameData;
+using NetProto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

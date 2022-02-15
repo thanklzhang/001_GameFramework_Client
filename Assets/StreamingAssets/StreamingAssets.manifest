@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 328182169
+CRC: 1278629611
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -62,17 +62,23 @@ AssetBundleManifest:
       Name: assets/buildres/prefabs/ui/loginui.ab
       Dependencies: {}
     Info_18:
-      Name: assets/buildres/prefabs/scene/battle_scene_001.ab
+      Name: assets/buildres/prefabs/ui/maintaskstageui.ab
       Dependencies: {}
     Info_19:
-      Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
+      Name: assets/buildres/prefabs/ui/maintaskui.ab
       Dependencies: {}
     Info_20:
-      Name: assets/buildres/prefabs/effects/eft_skill_cal_001.ab
+      Name: assets/buildres/prefabs/scene/battle_scene_001.ab
       Dependencies: {}
     Info_21:
-      Name: assets/buildres/prefabs/effects/eft_skill_cal_002.ab
+      Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
       Dependencies: {}
     Info_22:
+      Name: assets/buildres/prefabs/effects/eft_skill_cal_001.ab
+      Dependencies: {}
+    Info_23:
+      Name: assets/buildres/prefabs/effects/eft_skill_cal_002.ab
+      Dependencies: {}
+    Info_24:
       Name: assets/buildres/prefabs/effects/eft_skill_projectile_001.ab
       Dependencies: {}

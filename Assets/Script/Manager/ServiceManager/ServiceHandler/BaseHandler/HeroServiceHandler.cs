@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ public abstract class HeroServiceHandler : BaseHandler
     //receive
     protected void OnUpgradeHeroLevel(HeroData heroData)
     {
-        GameDataManager.Instance.HeroGameDataStore.UpdateOneHero(heroData);
+        GameDataManager.Instance.HeroStore.UpdateOneHero(heroData);
         EventDispatcher.Broadcast(EventIDs.OnUpgradeHeroLevel, heroData);
     }
 }

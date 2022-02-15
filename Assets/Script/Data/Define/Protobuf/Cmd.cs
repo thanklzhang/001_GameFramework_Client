@@ -22,23 +22,25 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKscFCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKo8GCghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSEwoPUmVnaXN0",
             "QWNjb3VudDJTEGcSGAoTQXBwbHlDcmVhdGVCYXR0bGUyUxDJARIXChJUcmFu",
             "c2l0aW9uQmF0dGxlMlMQrQISHgoZVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIy",
             "UxCuAhIPCgpDaGVja0xvZ2luENEPEg4KCUVudGVyR2FtZRDSDxISCg1SZWdp",
-            "c3RBY2NvdW50ENMPEhgKE0FwcGx5SGVyb0V4YW1CYXR0bGUQtBASFwoSTm90",
-            "aWZ5Q3JlYXRlQmF0dGxlELkXEhcKElBsYXllckxvYWRQcm9ncmVzcxC6FxIe",
-            "ChlOb3RpZnlBbGxQbGF5ZXJMb2FkRmluaXNoELsXEhYKEUJhdHRsZVJlYWR5",
-            "RmluaXNoELwXEhYKEU5vdGlmeUJhdHRsZVN0YXJ0EL0XEg8KCk1vdmVFbnRp",
-            "dHkQnRgSDQoIVXNlU2tpbGwQnhgSGQoUTm90aWZ5Q3JlYXRlRW50aXRpZXMQ",
-            "gRkSFQoQTm90aWZ5RW50aXR5TW92ZRCCGRIZChROb3RpZnlFbnRpdHlTdG9w",
-            "TW92ZRCDGRIdChhOb3RpZnlFbnRpdHlSZWxlYXNlU2tpbGwQhBkSHAoXTm90",
-            "aWZ5Q3JlYXRlU2tpbGxFZmZlY3QQhRkSHwoaTm90aWZ5U2tpbGxFZmZlY3RT",
-            "dGFydE1vdmUQhhkSHQoYTm90aWZ5U2tpbGxFZmZlY3REZXN0cm95EIcZEhkK",
-            "FE5vdGlmeVN5bmNFbnRpdHlBdHRyEIgZEhoKFU5vdGlmeVN5bmNFbnRpdHlW",
-            "YWx1ZRCJGRIVChBUcmFuc2l0aW9uQmF0dGxlEOUZEhwKF1RyYW5zaXRpb25C",
-            "YXR0bGUyUGxheWVyEOYZYgZwcm90bzM="));
+            "c3RBY2NvdW50ENMPEhEKDFN5bmNNYWluVGFzaxDaDxIYChNGaW5pc2hNYWlu",
+            "VGFza1N0YWdlENsPEhkKFFJlY2VpdmVNYWluVGFza1J3YXJkENwPEhgKE0Fw",
+            "cGx5SGVyb0V4YW1CYXR0bGUQtBASFwoSTm90aWZ5Q3JlYXRlQmF0dGxlELkX",
+            "EhcKElBsYXllckxvYWRQcm9ncmVzcxC6FxIeChlOb3RpZnlBbGxQbGF5ZXJM",
+            "b2FkRmluaXNoELsXEhYKEUJhdHRsZVJlYWR5RmluaXNoELwXEhYKEU5vdGlm",
+            "eUJhdHRsZVN0YXJ0EL0XEg8KCk1vdmVFbnRpdHkQnRgSDQoIVXNlU2tpbGwQ",
+            "nhgSGQoUTm90aWZ5Q3JlYXRlRW50aXRpZXMQgRkSFQoQTm90aWZ5RW50aXR5",
+            "TW92ZRCCGRIZChROb3RpZnlFbnRpdHlTdG9wTW92ZRCDGRIdChhOb3RpZnlF",
+            "bnRpdHlSZWxlYXNlU2tpbGwQhBkSHAoXTm90aWZ5Q3JlYXRlU2tpbGxFZmZl",
+            "Y3QQhRkSHwoaTm90aWZ5U2tpbGxFZmZlY3RTdGFydE1vdmUQhhkSHQoYTm90",
+            "aWZ5U2tpbGxFZmZlY3REZXN0cm95EIcZEhkKFE5vdGlmeVN5bmNFbnRpdHlB",
+            "dHRyEIgZEhoKFU5vdGlmeVN5bmNFbnRpdHlWYWx1ZRCJGRIVChBUcmFuc2l0",
+            "aW9uQmF0dGxlEOUZEhwKF1RyYW5zaXRpb25CYXR0bGUyUGxheWVyEOYZYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -50,7 +52,7 @@ namespace NetProto {
   public enum ProtoIDs {
     [pbr::OriginalName("First")] First = 0,
     /// <summary>
-    /// 1 -- 2000 服务端-----
+    /// 1 -- 2000 服务端----------------------------------------------
     /// </summary>
     [pbr::OriginalName("CheckLogin2S")] CheckLogin2S = 101,
     [pbr::OriginalName("EnterGame2S")] EnterGame2S = 102,
@@ -59,13 +61,19 @@ namespace NetProto {
     [pbr::OriginalName("TransitionBattle2S")] TransitionBattle2S = 301,
     [pbr::OriginalName("TransitionBattle2Player2S")] TransitionBattle2Player2S = 302,
     /// <summary>
-    /// 2000+ 客户端-----
+    /// 2000+ 客户端--------------------------------------------------
     /// </summary>
     [pbr::OriginalName("CheckLogin")] CheckLogin = 2001,
     [pbr::OriginalName("EnterGame")] EnterGame = 2002,
     [pbr::OriginalName("RegistAccount")] RegistAccount = 2003,
     /// <summary>
-    /// 战斗入口
+    /// 主线任务
+    /// </summary>
+    [pbr::OriginalName("SyncMainTask")] SyncMainTask = 2010,
+    [pbr::OriginalName("FinishMainTaskStage")] FinishMainTaskStage = 2011,
+    [pbr::OriginalName("ReceiveMainTaskRward")] ReceiveMainTaskRward = 2012,
+    /// <summary>
+    /// 英雄试炼战斗入口
     /// </summary>
     [pbr::OriginalName("ApplyHeroExamBattle")] ApplyHeroExamBattle = 2100,
     /// <summary>

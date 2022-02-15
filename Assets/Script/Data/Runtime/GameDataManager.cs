@@ -5,33 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-
-public class GameDataStore
+namespace GameData
 {
-    public void Init()
+    public class GameDataStore
     {
+        public void Init()
+        {
+
+        }
+    }
+
+    public class GameDataManager : Singleton<GameDataManager>
+    {
+        HeroGameDataStore heroStore = new HeroGameDataStore();
+        public HeroGameDataStore HeroStore { get => heroStore; }
+
+        BattleGameDataStore battleStore = new BattleGameDataStore();
+        public BattleGameDataStore BattleStore { get => battleStore; }
+
+        UserGameDataStore userStore = new UserGameDataStore();
+        public UserGameDataStore UserStore { get => userStore; }
+
+        MainTaskGameDataStore mainTaskStore = new MainTaskGameDataStore();
+        public MainTaskGameDataStore MainTaskStore { get => mainTaskStore; }
+
+        internal void Init()
+        {
+            HeroStore.Init();
+            BattleStore.Init();
+            UserStore.Init();
+            MainTaskStore.Init();
+        }
 
     }
 }
 
-public class GameDataManager : Singleton<GameDataManager>
-{
-
-
-    HeroGameDataStore heroGameDataStore = new HeroGameDataStore();
-    public HeroGameDataStore HeroGameDataStore { get => heroGameDataStore; }
-
-    BattleGameDataStore battleGameDataStore = new BattleGameDataStore();
-    public BattleGameDataStore BattleGameDataStore { get => battleGameDataStore; }
-
-    UserGameDataStore userGameDataStore = new UserGameDataStore();
-    public UserGameDataStore UserGameDataStore { get => userGameDataStore; }
-
-    internal void Init()
-    {
-        HeroGameDataStore.Init();
-        BattleGameDataStore.Init();
-        UserGameDataStore.Init();
-    }
-
-}

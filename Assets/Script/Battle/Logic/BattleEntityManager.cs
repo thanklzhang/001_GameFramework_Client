@@ -253,6 +253,17 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
         }
     }
 
+    public void ReleaseAllEntities()
+    {
+        foreach (var item in entityDic)
+        {
+            var entity = item.Value;
+            entity.Destroy();
+        }
+
+        entityDic.Clear();
+    }
+
     public void RemoveListener()
     {
         //EventDispatcher.RemoveListener<BattleEntityInfo>(EventIDs.OnCreateBattle, CreateEntity);

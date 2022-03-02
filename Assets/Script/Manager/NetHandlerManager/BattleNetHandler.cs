@@ -22,6 +22,7 @@ public class BattleNetHandler : NetHandler
         //战斗流程正常协议
         AddListener((int)ProtoIDs.NotifyCreateBattle, OnNotifyCreateBattle);
         AddListener((int)ProtoIDs.TransitionBattle2Player, OnTransitionBattle2Player);
+        AddListener((int)ProtoIDs.NotifyBattleEnd, OnNotifyBattleEnd);
 
         //AddListener((int)ProtoIDs.EnterGame, OnEnterGame);
 
@@ -39,6 +40,7 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.NotifySkillEffectDestroy, this.OnNotifySkillEffectDestroy);
         AddBattleMsg(ProtoIDs.NotifySyncEntityAttr, this.OnNotifySyncEntityAttr);
         AddBattleMsg(ProtoIDs.NotifySyncEntityValue, this.OnNotifySyncEntityValue);
+        AddBattleMsg(ProtoIDs.NotifyEntityDead, this.OnNotifyEntityDead);
 
     }
 
@@ -74,8 +76,6 @@ public class BattleNetHandler : NetHandler
     //统一接受战斗消息并解析为客户端需要的结构
     private void OnTransitionBattle2Player(MsgPack msgPack)
     {
-
-
         var trans = scTransitionBattle2Player.Parser.ParseFrom(msgPack.data);
 
         var clientTrueData = trans.Data;
@@ -243,6 +243,18 @@ public class BattleNetHandler : NetHandler
     {
         scNotifySyncEntityValue sync = scNotifySyncEntityValue.Parser.ParseFrom(byteData);
         BattleManager.Instance.SyncEntityValue(sync);
+    }
+
+    private void OnNotifyEntityDead(byte[] byteData)
+    {
+        scNotifyEntityDead sync = scNotifyEntityDead.Parser.ParseFrom(byteData);
+        BattleManager.Instance.EntityDead(sync);
+    }
+
+    private void OnNotifyBattleEnd(MsgPack msgPack)
+    {
+        scNotifyBattleEnd sync = scNotifyBattleEnd.Parser.ParseFrom(msgPack.data);
+        BattleManager.Instance.BattleEnd(sync);
     }
 
     #region 战斗中玩家操作 

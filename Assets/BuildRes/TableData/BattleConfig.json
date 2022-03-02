@@ -1,12 +1,12 @@
 [
     {
         "id": 8001001,
-        "name": "\u4e3b\u7ebf\u7b2c 1 \u573a\u6218\u6597\u89e6\u53d1\u5668",
+        "name": "\u4e3b\u7ebf\u7b2c 1 \u573a\u6218\u6597\u914d\u7f6e",
         "configFilePath": "MainTaskBattle_001/config.json"
     },
     {
         "id": 8001002,
-        "name": "\u4e3b\u7ebf\u7b2c 2 \u573a\u6218\u6597\u89e6\u53d1\u5668",
+        "name": "\u4e3b\u7ebf\u7b2c 2 \u573a\u6218\u6597\u914d\u7f6e",
         "configFilePath": "MainTaskBattle_002/config.json"
     }
 ]

@@ -51,7 +51,7 @@ public class NetHandler
     public void LogNetErrStr(int cmd, int err)
     {
         var str = "receive msg err : " + cmd + "(" + (int)cmd + ") , errCode : " + err;
-        Logx.Log(str);
+        Logx.LogError(str);
     }
 }
 

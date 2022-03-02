@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf.Collections;
 using NetProto;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,8 @@ public enum BattleEntityState
     Idle = 0,
     Move = 1,
     ReleasingSkill = 2,
-    Destroy = 3,
-    Destory = 4
+    Dead = 3,
+    Destroy = 4
 }
 
 public enum EntityAttrType
@@ -87,6 +88,8 @@ public class BattleEntity
     List<BattleSkillInfo> skills;
     public BattleEntityAttr attr = new BattleEntityAttr();
 
+    public Animation animation;
+
     public void Init(int guid, int configId)
     {
         this.guid = guid;
@@ -137,6 +140,7 @@ public class BattleEntity
         //gameObject.transform.position = position;
         //gameObject = 
         collider = gameObject.GetComponentInChildren<Collider>();
+        animation = gameObject.GetComponentInChildren<Animation>();
     }
 
     internal void SetSkillList(List<BattleSkillInfo> skills)
@@ -176,9 +180,12 @@ public class BattleEntity
         if (isFinishLoad)
         {
             ResourceManager.Instance.ReturnObject(path, model);
+            model.transform.SetParent(null);
         }
 
         GameObject.Destroy(gameObject);
+
+        EventDispatcher.Broadcast(EventIDs.OnEntityDestroy, this);
 
     }
 
@@ -189,19 +196,20 @@ public class BattleEntity
 
         this.moveTargetPos = targetPos;
         this.attr.moveSpeed = moveSpeed;
-
+        PlayAnimation("walk");
     }
 
     public void StopMove(Vector3 endPos)
     {
         state = BattleEntityState.Idle;
-
+        PlayAnimation("free");
         this.SetPosition(endPos);
     }
 
     internal void ReleaseSkill()
     {
         //play animation
+        PlayAnimation("skill");
         Logx.Log("entity release skill : " + this.guid);
     }
 
@@ -259,5 +267,29 @@ public class BattleEntity
         }
         EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
 
+    }
+
+    public void PlayAnimation(string aniName)
+    {
+        if (isFinishLoad && animation != null)
+        {
+            animation.Play(aniName);
+        }
+    }
+
+    public void Dead()
+    {
+        PlayAnimation("death");
+        state = BattleEntityState.Dead;
+        CoroutineManager.Instance.StartCoroutine(RemoveSelf());
+
+    }
+
+    public IEnumerator RemoveSelf()
+    {
+        yield return new WaitForSeconds(2);
+
+        //这里应该是设置成标志 然后删除
+        BattleEntityManager.Instance.DestoryEntity(this.guid);
     }
 }

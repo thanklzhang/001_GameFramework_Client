@@ -29,7 +29,7 @@
         "health": 1200,
         "magic": 125,
         "attackSpeed": 850,
-        "moveSpeed": 4000,
+        "moveSpeed": 2800,
         "attackRange": 1500
     }
 ]

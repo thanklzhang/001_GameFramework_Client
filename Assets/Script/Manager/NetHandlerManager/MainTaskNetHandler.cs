@@ -17,6 +17,7 @@ public class MainTaskNetHandler : NetHandler
     {
 
         AddListener((int)ProtoIDs.SyncMainTask, OnSyncMainTask);
+        AddListener((int)ProtoIDs.ApplyMainTaskBattle, OnApplyMainTaskBattle);
         AddListener((int)ProtoIDs.FinishMainTaskStage, OnFinishStage);
         AddListener((int)ProtoIDs.ReceiveMainTaskRward, OnReceiveRward);
 
@@ -68,6 +69,29 @@ public class MainTaskNetHandler : NetHandler
 
         EventDispatcher.Broadcast(EventIDs.OnRefreshAllMainTaskData);
 
+    }
+
+    //申请 主线 战斗
+    public void SendApplyMainTaskBattle(int chapterId, int stageId, Action action)
+    {
+        csApplyMainTaskBattle apply = new csApplyMainTaskBattle();
+        apply.ChapterId = chapterId;
+        apply.StageId = stageId;
+        NetworkManager.Instance.SendMsg(ProtoIDs.ApplyMainTaskBattle, apply.ToByteArray());
+    }
+
+    public void OnApplyMainTaskBattle(MsgPack msgPack)
+    {
+        scApplyMainTaskBattle resp = scApplyMainTaskBattle.Parser.ParseFrom(msgPack.data);
+        var err = resp.Err;
+        if (0 == err)
+        {
+
+        }
+        else
+        {
+            LogNetErrStr(msgPack.cmdId, err);
+        }
     }
 
     //完成关卡

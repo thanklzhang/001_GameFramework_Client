@@ -53,6 +53,7 @@ public class HpModule
         {
             hpData = new HpData();
             hpData.Init();
+            hpDic.Add(entity.guid, hpData);
         }
 
         hpData.Refresh(entity);
@@ -71,7 +72,16 @@ public class HpModule
 
     public void DestroyEntityHp(BattleEntity entity)
     {
-
+        if (hpDic.ContainsKey(entity.guid))
+        {
+            var hpData = hpDic[entity.guid];
+            battleUI.DestoryHpUI(entity.guid);
+            hpDic.Remove(entity.guid);
+        }
+        else
+        {
+            Logx.LogWarning("HpModule DestroyEntityHp : the guid is not found : " + entity.guid);
+        }
     }
 
     public void Release()

@@ -7,6 +7,14 @@ using GameData;
 using NetProto;
 using UnityEngine;
 
+public enum BattleState
+{
+    Null = 0,
+    Loading = 1,
+    Running = 2,
+    End = 3
+}
+
 public class ClientPlayer
 {
     public int playerIndex;
@@ -29,6 +37,9 @@ public class BattleManager : Singleton<BattleManager>
     ClientPlayer localPlayer;
     //本地玩家控制的英雄
     BattleEntity localCtrlEntity;
+
+    public BattleState battleState;
+
     //public BattleEntityInfo LocalCtrlEntity
     //{
     //    get
@@ -41,6 +52,7 @@ public class BattleManager : Singleton<BattleManager>
     public void Init()
     {
         this.RegisterListener();
+        battleState = BattleState.Null;
     }
 
     public void RegisterListener()
@@ -98,6 +110,8 @@ public class BattleManager : Singleton<BattleManager>
         //设置本地玩家控制的英雄
         this.localCtrlEntity = BattleEntityManager.Instance.FindEntity(this.localPlayer.ctrlHeroGuid);
 
+        battleState = BattleState.Loading;
+
         //进入战斗状态
         CtrlManager.Instance.Enter<BattleCtrl>();
     }
@@ -113,6 +127,8 @@ public class BattleManager : Singleton<BattleManager>
 
         //已经加载好的实体统一走一遍创建流程
         BattleEntityManager.Instance.NotifyCreateAllEntities();
+
+        battleState = BattleState.Running;
     }
 
     public void CreateEntity(NetProto.BattleEntityProto serverEntity)
@@ -203,6 +219,25 @@ public class BattleManager : Singleton<BattleManager>
         {
             entity.SyncValue(sync.Values);
         }
+    }
+
+    public void EntityDead(scNotifyEntityDead entityDead)
+    {
+        var entityGuid = entityDead.EntityGuid;
+        var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+        if (entity != null)
+        {
+            entity.Dead();
+        }
+    }
+
+    public void BattleEnd(scNotifyBattleEnd battleEnd)
+    {
+        var isWin = 1 == battleEnd.IsWin;
+
+        battleState = BattleState.End;
+
+        EventDispatcher.Broadcast<bool>(EventIDs.OnBattleEnd, isWin);
     }
 
     //get --------------------

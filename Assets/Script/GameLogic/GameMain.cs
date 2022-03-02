@@ -129,6 +129,11 @@ public class GameMain : MonoBehaviour
         
     }
 
+    private void LateUpdate()
+    {
+        CtrlManager.Instance.LateUpdate(Time.deltaTime);
+    }
+
     private void OnDestroy()
     {
 

@@ -10,9 +10,12 @@ using UnityEngine.UI;
 public class BattleCtrl : BaseCtrl
 {
     BattleUI ui;
+    BattleResultUI resultUI;
     GameObject sceneObj;
 
     HpModule hpModule;
+
+    string scenePath;
     public override void OnInit()
     {
         //this.isParallel = false;
@@ -20,10 +23,10 @@ public class BattleCtrl : BaseCtrl
         //生命周期好像有点不对
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
+        EventDispatcher.AddListener<BattleEntity>(EventIDs.OnEntityDestroy, OnEntityDestroy);
+        EventDispatcher.AddListener<bool>(EventIDs.OnBattleEnd, OnOnBattleEnd);
 
         hpModule = new HpModule();
-
-        
 
     }
 
@@ -32,12 +35,14 @@ public class BattleCtrl : BaseCtrl
         //scene
         var sceneResId = 15010001;
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(sceneResId);
-        var scenePath = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
+        scenePath = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
         //fill load data
         var objsRequestList = new List<LoadObjectRequest>();
-        //ui
+        //battle ui
         objsRequestList.Add(new LoadUIRequest<BattleUI>() { selfFinishCallback = OnUILoadFinish });
+        //battle end ui
+        objsRequestList.Add(new LoadUIRequest<BattleResultUI>() { selfFinishCallback = OnBattleResultUILoadFinish });
         //scene
         objsRequestList.Add(new LoadGameObjectRequest(scenePath, 1) { selfFinishCallback = OnSceneLoadFinish });
         //entity
@@ -61,6 +66,13 @@ public class BattleCtrl : BaseCtrl
 
         hpModule.Init(ui);
 
+
+    }
+
+    public void OnBattleResultUILoadFinish(BattleResultUI battleResultUI)
+    {
+        this.resultUI = battleResultUI;
+        this.resultUI.Hide();
 
     }
 
@@ -102,6 +114,8 @@ public class BattleCtrl : BaseCtrl
         ui.onCloseBtnClick += OnClickCloseBtn;
         ui.onReadyStartBtnClick += OnClickReadyStartBtn;
 
+        this.resultUI.onClickConfirmBtn += OnClickResultConfirmBtn;
+
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
@@ -118,6 +132,11 @@ public class BattleCtrl : BaseCtrl
     {
         var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
         battleNet.SendBattleReadyFinish(null);
+    }
+
+    void OnClickResultConfirmBtn()
+    {
+        CtrlManager.Instance.Exit<BattleCtrl>();
     }
 
     void OnAllPlayerLoadFinish()
@@ -202,6 +221,12 @@ public class BattleCtrl : BaseCtrl
     {
         this.ui.Update(timeDelta);
 
+        var battleState = BattleManager.Instance.battleState;
+        if (battleState == BattleState.End)
+        {
+            return;
+        }
+
         //这里逻辑应该再封装一层 input 
 
         //判断用户点击右键
@@ -238,6 +263,24 @@ public class BattleCtrl : BaseCtrl
         {
             this.OnUseSkill(4);
         }
+
+    }
+
+    public override void OnLateUpdate(float deltaTime)
+    {
+        //摄像机
+        UpdateCamera();
+    }
+
+    public Vector3 cameraOffset = new Vector3(0, 10, -3.2f);
+
+    public void UpdateCamera()
+    {
+        var heroObj = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+        var camera3D = CameraManager.Instance.GetCamera3D();
+        var heroPos = heroObj.transform.position + cameraOffset;
+
+        camera3D.SetPosition(heroPos);
     }
 
     public void OnUseSkill(int index)
@@ -310,20 +353,49 @@ public class BattleCtrl : BaseCtrl
         hpModule.RefreshEntityData(entity);
     }
 
+    public void OnEntityDestroy(BattleEntity entity)
+    {
+        hpModule.DestroyEntityHp(entity);
+    }
+
+    public void OnOnBattleEnd(bool isWin)
+    {
+        var args = new BattleResultUIArgs()
+        {
+            isWin = isWin
+        };
+        this.resultUI.Refresh(args);
+        this.resultUI.Show();
+    }
+
     public override void OnInactive()
     {
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
+
         ui.Hide();
 
+        ui.onReadyStartBtnClick -= OnClickReadyStartBtn;
         ui.onCloseBtnClick -= OnClickCloseBtn;
+
+        resultUI.onClickConfirmBtn -= OnClickResultConfirmBtn;
     }
 
     public override void OnExit()
     {
+
+        UIManager.Instance.ReleaseUI<BattleUI>();
+        UIManager.Instance.ReleaseUI<BattleResultUI>();
+        ResourceManager.Instance.ReturnObject(scenePath, this.sceneObj);
+        BattleEntityManager.Instance.ReleaseAllEntities();
+
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
+        EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
+        EventDispatcher.RemoveListener<bool>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
+
+      
     }
 
     public enum SkillReleaseTargeType

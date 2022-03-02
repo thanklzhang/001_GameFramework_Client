@@ -95,6 +95,11 @@ public class BaseCtrl
         this.OnUpdate(deltaTime);
     }
 
+    public void LateUpdate(float deltaTime)
+    {
+        this.OnLateUpdate(deltaTime);
+    }
+
     internal void Inactive()
     {
         state = CtrlState.Inactive;
@@ -140,6 +145,11 @@ public class BaseCtrl
     public virtual void OnUpdate(float deltaTime)
     {
 
+    }
+
+    public virtual void OnLateUpdate(float deltaTime)
+    {
+        
     }
 
     public virtual void OnActive()

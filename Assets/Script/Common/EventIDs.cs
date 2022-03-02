@@ -23,6 +23,8 @@ public enum EventIDs
 
     OnCreateEntity = 101101,
     OnChangeEntityBattleData = 101102,
+    OnEntityDestroy = 101103,//实体销毁(死亡之后)
+    OnBattleEnd = 101104,
 
     OnSetEntityPosition = 101201,
 

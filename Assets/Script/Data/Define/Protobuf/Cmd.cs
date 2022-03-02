@@ -22,25 +22,27 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKo8GCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKu4GCghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSEwoPUmVnaXN0",
             "QWNjb3VudDJTEGcSGAoTQXBwbHlDcmVhdGVCYXR0bGUyUxDJARIXChJUcmFu",
             "c2l0aW9uQmF0dGxlMlMQrQISHgoZVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIy",
-            "UxCuAhIPCgpDaGVja0xvZ2luENEPEg4KCUVudGVyR2FtZRDSDxISCg1SZWdp",
-            "c3RBY2NvdW50ENMPEhEKDFN5bmNNYWluVGFzaxDaDxIYChNGaW5pc2hNYWlu",
-            "VGFza1N0YWdlENsPEhkKFFJlY2VpdmVNYWluVGFza1J3YXJkENwPEhgKE0Fw",
-            "cGx5SGVyb0V4YW1CYXR0bGUQtBASFwoSTm90aWZ5Q3JlYXRlQmF0dGxlELkX",
-            "EhcKElBsYXllckxvYWRQcm9ncmVzcxC6FxIeChlOb3RpZnlBbGxQbGF5ZXJM",
-            "b2FkRmluaXNoELsXEhYKEUJhdHRsZVJlYWR5RmluaXNoELwXEhYKEU5vdGlm",
-            "eUJhdHRsZVN0YXJ0EL0XEg8KCk1vdmVFbnRpdHkQnRgSDQoIVXNlU2tpbGwQ",
-            "nhgSGQoUTm90aWZ5Q3JlYXRlRW50aXRpZXMQgRkSFQoQTm90aWZ5RW50aXR5",
-            "TW92ZRCCGRIZChROb3RpZnlFbnRpdHlTdG9wTW92ZRCDGRIdChhOb3RpZnlF",
-            "bnRpdHlSZWxlYXNlU2tpbGwQhBkSHAoXTm90aWZ5Q3JlYXRlU2tpbGxFZmZl",
-            "Y3QQhRkSHwoaTm90aWZ5U2tpbGxFZmZlY3RTdGFydE1vdmUQhhkSHQoYTm90",
-            "aWZ5U2tpbGxFZmZlY3REZXN0cm95EIcZEhkKFE5vdGlmeVN5bmNFbnRpdHlB",
-            "dHRyEIgZEhoKFU5vdGlmeVN5bmNFbnRpdHlWYWx1ZRCJGRIVChBUcmFuc2l0",
-            "aW9uQmF0dGxlEOUZEhwKF1RyYW5zaXRpb25CYXR0bGUyUGxheWVyEOYZYgZw",
-            "cm90bzM="));
+            "UxCuAhIWChFOb3RpZnlCYXR0bGVFbmQyUxCvAhIPCgpDaGVja0xvZ2luENEP",
+            "Eg4KCUVudGVyR2FtZRDSDxISCg1SZWdpc3RBY2NvdW50ENMPEhEKDFN5bmNN",
+            "YWluVGFzaxDaDxIYChNGaW5pc2hNYWluVGFza1N0YWdlENsPEhkKFFJlY2Vp",
+            "dmVNYWluVGFza1J3YXJkENwPEhgKE0FwcGx5SGVyb0V4YW1CYXR0bGUQtBAS",
+            "GAoTQXBwbHlNYWluVGFza0JhdHRsZRC1EBIXChJOb3RpZnlDcmVhdGVCYXR0",
+            "bGUQuRcSFwoSUGxheWVyTG9hZFByb2dyZXNzELoXEh4KGU5vdGlmeUFsbFBs",
+            "YXllckxvYWRGaW5pc2gQuxcSFgoRQmF0dGxlUmVhZHlGaW5pc2gQvBcSFgoR",
+            "Tm90aWZ5QmF0dGxlU3RhcnQQvRcSDwoKTW92ZUVudGl0eRCdGBINCghVc2VT",
+            "a2lsbBCeGBIZChROb3RpZnlDcmVhdGVFbnRpdGllcxCBGRIVChBOb3RpZnlF",
+            "bnRpdHlNb3ZlEIIZEhkKFE5vdGlmeUVudGl0eVN0b3BNb3ZlEIMZEh0KGE5v",
+            "dGlmeUVudGl0eVJlbGVhc2VTa2lsbBCEGRIcChdOb3RpZnlDcmVhdGVTa2ls",
+            "bEVmZmVjdBCFGRIfChpOb3RpZnlTa2lsbEVmZmVjdFN0YXJ0TW92ZRCGGRId",
+            "ChhOb3RpZnlTa2lsbEVmZmVjdERlc3Ryb3kQhxkSGQoUTm90aWZ5U3luY0Vu",
+            "dGl0eUF0dHIQiBkSGgoVTm90aWZ5U3luY0VudGl0eVZhbHVlEIkZEhUKEE5v",
+            "dGlmeUVudGl0eURlYWQQihkSFAoPTm90aWZ5QmF0dGxlRW5kEIsZEhUKEFRy",
+            "YW5zaXRpb25CYXR0bGUQ5RkSHAoXVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIQ",
+            "5hliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -60,6 +62,7 @@ namespace NetProto {
     [pbr::OriginalName("ApplyCreateBattle2S")] ApplyCreateBattle2S = 201,
     [pbr::OriginalName("TransitionBattle2S")] TransitionBattle2S = 301,
     [pbr::OriginalName("TransitionBattle2Player2S")] TransitionBattle2Player2S = 302,
+    [pbr::OriginalName("NotifyBattleEnd2S")] NotifyBattleEnd2S = 303,
     /// <summary>
     /// 2000+ 客户端--------------------------------------------------
     /// </summary>
@@ -73,9 +76,13 @@ namespace NetProto {
     [pbr::OriginalName("FinishMainTaskStage")] FinishMainTaskStage = 2011,
     [pbr::OriginalName("ReceiveMainTaskRward")] ReceiveMainTaskRward = 2012,
     /// <summary>
-    /// 英雄试炼战斗入口
+    /// 战斗入口
     /// </summary>
     [pbr::OriginalName("ApplyHeroExamBattle")] ApplyHeroExamBattle = 2100,
+    /// <summary>
+    /// 主线
+    /// </summary>
+    [pbr::OriginalName("ApplyMainTaskBattle")] ApplyMainTaskBattle = 2101,
     /// <summary>
     /// 战斗开始流程
     /// </summary>
@@ -101,6 +108,8 @@ namespace NetProto {
     [pbr::OriginalName("NotifySkillEffectDestroy")] NotifySkillEffectDestroy = 3207,
     [pbr::OriginalName("NotifySyncEntityAttr")] NotifySyncEntityAttr = 3208,
     [pbr::OriginalName("NotifySyncEntityValue")] NotifySyncEntityValue = 3209,
+    [pbr::OriginalName("NotifyEntityDead")] NotifyEntityDead = 3210,
+    [pbr::OriginalName("NotifyBattleEnd")] NotifyBattleEnd = 3211,
     /// <summary>
     /// 转发战斗
     /// </summary>

@@ -25,7 +25,7 @@ public class HpUIShowObj
     BaseUI parentUI;
     RectTransform parentTranRect;
 
-    public void Init(GameObject gameObject,BaseUI parentUI)
+    public void Init(GameObject gameObject, BaseUI parentUI)
     {
         this.gameObject = gameObject;
         this.parentUI = parentUI;
@@ -59,7 +59,7 @@ public class HpUIShowObj
         var camera3D = CameraManager.Instance.GetCamera3D();
         var cameraUI = CameraManager.Instance.GetCameraUI();
         var screenPos = RectTransformUtility.WorldToScreenPoint(camera3D.camera, entityObj.transform.position);
-        
+
         Vector2 uiPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(parentTranRect, screenPos, cameraUI.camera, out uiPos);
 
@@ -67,9 +67,9 @@ public class HpUIShowObj
         this.transform.localPosition = uiPos + Vector2.up * 100;
     }
 
-    public void Release()
+    public void Destroy()
     {
-
+        GameObject.Destroy(this.gameObject);
     }
 
 }
@@ -146,11 +146,25 @@ public class BattleUI : BaseUI
             GameObject newObj = GameObject.Instantiate(hpTemp, this.hpRoot, false);
             newObj.SetActive(true);
             poolObjs.Add(newObj.GetInstanceID(), newObj);
-            showObj.Init(newObj,this);
+            showObj.Init(newObj, this);
             hpShowObjDic.Add(hpData.entityGuid, showObj);
         }
 
         showObj.Refresh(hpData);
+    }
+
+    public void DestoryHpUI(int entityGuid)
+    {
+        if (hpShowObjDic.ContainsKey(entityGuid))
+        {
+            var hpShowObj = hpShowObjDic[entityGuid];
+            hpShowObj.Destroy();
+            hpShowObjDic.Remove(entityGuid);
+        }
+        else
+        {
+            Logx.LogWarning("BattleUI DestoryHpUI : the entityGuid is not found : " + entityGuid);
+        }
     }
 
     protected override void OnUpdate(float timeDelta)

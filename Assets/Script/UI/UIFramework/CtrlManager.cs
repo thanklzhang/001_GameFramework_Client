@@ -101,6 +101,18 @@ public class CtrlManager : Singleton<CtrlManager>
         }
     }
 
+    public void LateUpdate(float deltaTime)
+    {
+        for (int i = 0; i < ctrlCacheList.Count; i++)
+        {
+            var ctrl = ctrlCacheList[i];
+            if (ctrl.state == CtrlState.Active)
+            {
+                ctrl.LateUpdate(deltaTime);
+            }
+        }
+    }
+
     //public void Enter<T>(CtrlArgs args = null) where T : BaseCtrl, new()
     //{
     //    var findCtrl = FindCtrl<T>();

@@ -24,6 +24,11 @@ public class CameraObject
     {
         root.rotation = quaternion;
     }
+
+    internal object GetPosition()
+    {
+        return this.root.position;
+    }
 }
 
 //网络消息管理器 可以在这里收敛所有协议消息

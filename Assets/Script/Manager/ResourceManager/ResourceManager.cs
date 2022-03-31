@@ -49,4 +49,17 @@ public class ResourceManager : Singleton<ResourceManager>
         }
     }
 
+
+    public T GetObjectByEditor<T>(string path) where T : UnityEngine.Object
+    {
+        return UnityEditor.AssetDatabase.LoadAssetAtPath<T>(path);
+    }
+
+    public T GetObjectByConfiIdEditor<T>(int configId) where T : UnityEngine.Object
+    {
+        var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(configId);
+        var path = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
+        return GetObjectByEditor<T>(path);
+    }
+
 }

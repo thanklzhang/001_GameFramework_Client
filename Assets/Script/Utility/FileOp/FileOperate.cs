@@ -30,5 +30,23 @@ public class FileOperate
 
         return line;
     }
+
+
+    public static void SaveToFile(string path, string str)
+    {
+        FileStream fs = new FileStream(path, FileMode.Truncate, FileAccess.Write);
+        using (StreamWriter sw = new StreamWriter(fs))
+        {
+            sw.Write(str);
+        }
+
+    }
+
+
+    public static string[] GetAllFilesFromFolder(string folderPath,string pattern = "")
+    {
+        string[] files = System.IO.Directory.GetFiles(folderPath, pattern);
+        return files;
+    }
 }
 

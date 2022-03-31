@@ -88,6 +88,7 @@ namespace LitJson
 
         public JsonToken Token {
             get { return token; }
+            set { token = value; }
         }
 
         public object Value {

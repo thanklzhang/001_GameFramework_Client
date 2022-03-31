@@ -82,5 +82,19 @@ namespace Table
             }
             return null;
         }
+
+        public void Clear()
+        {
+            foreach (var item in typeToListConfigDic)
+            {
+                item.Value.Clear();
+            }
+            foreach (var item in typeToDicConfigDic)
+            {
+                item.Value.Clear();
+            }
+            typeToListConfigDic.Clear();
+            typeToDicConfigDic.Clear();
+        }
     }
 }

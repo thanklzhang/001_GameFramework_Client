@@ -25,4 +25,13 @@ public class MathTool
         return d * direct.normalized + point;
     }
 
+
+    public static Vector3 GetVector3Lerp(Vector3 a, Vector3 b,float delta01)
+    {
+        var vector = b - a;
+        var dir = vector.normalized;
+        var len = vector.magnitude;
+        var currPos = a + len * delta01 * dir;
+        return currPos;
+    }
 }

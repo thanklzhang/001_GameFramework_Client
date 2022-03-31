@@ -10,6 +10,7 @@ using Assets.Script.Combat;
 using LitJson;
 using Table;
 using GameData;
+using PlotDesigner.Runtime;
 
 public class GameMain : MonoBehaviour
 {
@@ -75,6 +76,18 @@ public class GameMain : MonoBehaviour
 
         this.StartToLogin();
 
+
+        //test
+
+        PlotDirector pd = new PlotDirector();
+        pd.Init();
+        var file = "plog_main_task_001.json";
+        var plotConfigFolderPath = Application.dataPath + "/BuildRes/PlotConfig";
+        var path = Path.Combine(plotConfigFolderPath, file);
+        var plot = JsonTool.LoadObjectFromFile<Plot>(path);
+        Logx.Log("path : " + path);
+        pd.StartPlot(plot);
+
     }
 
     void StartToLogin()
@@ -137,6 +150,13 @@ public class GameMain : MonoBehaviour
     private void OnDestroy()
     {
 
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    public static void Startup()
+    {
+        var gameInitPrefab = Resources.Load("GameInit") as GameObject;
+        var go = Instantiate(gameInitPrefab);
     }
 
 }

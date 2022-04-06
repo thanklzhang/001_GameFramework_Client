@@ -70,23 +70,15 @@ public class GameMain : MonoBehaviour
 
         BattleEntityManager.Instance.Init();
         BattleSkillEffectManager.Instance.Init();
+        PlotManager.Instance.Init();
 
+        //Logx.Log("!!!finish init game");
 
-        Logx.Log("!!!finish init game");
-
-        this.StartToLogin();
+        //this.StartToLogin();
 
 
         //test
-
-        PlotDirector pd = new PlotDirector();
-        pd.Init();
-        var file = "plog_main_task_001.json";
-        var plotConfigFolderPath = Application.dataPath + "/BuildRes/PlotConfig";
-        var path = Path.Combine(plotConfigFolderPath, file);
-        var plot = JsonTool.LoadObjectFromFile<Plot>(path);
-        Logx.Log("path : " + path);
-        pd.StartPlot(plot);
+        PlotManager.Instance.Test();
 
     }
 
@@ -137,6 +129,7 @@ public class GameMain : MonoBehaviour
         CtrlManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
         BattleSkillEffectManager.Instance.Update(Time.deltaTime);
+        PlotManager.Instance.Update(Time.deltaTime);
 
         NetworkManager.Instance.Update();
         

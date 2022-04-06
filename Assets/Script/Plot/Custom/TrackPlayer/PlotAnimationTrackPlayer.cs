@@ -9,20 +9,13 @@ namespace PlotDesigner.Runtime
 {
     public class PlotAnimationTrackPlayer : PlotTrackPlayer
     {
-        AnimationTrack animationTrack;
-
-        public override void Init(Track trackData)
-        {
-            base.Init(trackData);
-            this.animationTrack = (AnimationTrack)trackData;
-        }
-
-        public override void Execute()
+        //AnimationTrack animationTrack;
+        public override void OnStartExecute()
         {
 
         }
 
-        public override void Update(float timeDelta)
+        public override void OnUpdate(float timeDelta)
         {
 
         }

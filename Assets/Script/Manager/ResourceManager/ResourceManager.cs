@@ -20,7 +20,7 @@ public class ResourceManager : Singleton<ResourceManager>
         return req;
     }
 
-    //Get Obj by pool (include : gameObject texture sprite material)
+    //get obj by pool (include : gameObject texture sprite material)
     public void GetObject<T>(string path, Action<T> callback, bool isSync = false) where T : UnityEngine.Object
     {
         ObjectPoolManager.Instance.GetObject<T>(path, (obj) =>

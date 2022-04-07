@@ -19,6 +19,10 @@ public class CameraObject
     {
         root.position = pos;
     }
+    public void SetForward(Vector3 dir)
+    {
+        root.forward = dir;
+    }
 
     public void SetRotation(Quaternion quaternion)
     {

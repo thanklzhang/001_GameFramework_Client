@@ -72,13 +72,13 @@ public class GameMain : MonoBehaviour
         BattleSkillEffectManager.Instance.Init();
         PlotManager.Instance.Init();
 
-        //Logx.Log("!!!finish init game");
+        Logx.Log("!!!finish init game");
 
-        //this.StartToLogin();
+        this.StartToLogin();
 
 
-        //test
-        PlotManager.Instance.Test();
+        ////test
+        //PlotManager.Instance.Test();
 
     }
 

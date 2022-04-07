@@ -32,6 +32,11 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnStartLoad()
     {
+
+        var battleTableId = BattleManager.Instance.battleTableId;
+        var battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleTableId);
+        var battleTriggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleTb.TriggerId); 
+
         //scene
         var sceneResId = 15010001;
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(sceneResId);
@@ -76,6 +81,9 @@ public class BattleCtrl : BaseCtrl
 
     }
 
+    
+    public Quaternion cameraRotationOffset;
+
     public void OnSceneLoadFinish(HashSet<GameObject> gameObjects)
     {
         //先这样去 之后增加 scene 读取的接口
@@ -87,6 +95,7 @@ public class BattleCtrl : BaseCtrl
         var camera3D = CameraManager.Instance.GetCamera3D();
         camera3D.SetPosition(tempCameraTran.position);
         camera3D.SetRotation(tempCameraTran.rotation);
+        cameraRotationOffset = tempCameraTran.rotation;
     }
 
     public void OnEntityLoadFinish(BattleEntity viewEntity, GameObject obj)
@@ -272,15 +281,24 @@ public class BattleCtrl : BaseCtrl
         UpdateCamera();
     }
 
-    public Vector3 cameraOffset = new Vector3(0, 10, -3.2f);
+   
+    public Vector3 cameraPosOffset = new Vector3(0, 10, -3.2f);
+    //public Vector3 cameraForwardOffset = new Vector3(0, 10, -3.2f);
+    //public Quaternion cameraQuaternionOffset = new Quaternion(69.94f, -0.032f, -0.001f,1.0f);
 
     public void UpdateCamera()
     {
+        if (PlotManager.Instance.IsRunning())
+        {
+            return;
+        }
         var heroObj = BattleManager.Instance.GetLocalCtrlHeroGameObject();
         var camera3D = CameraManager.Instance.GetCamera3D();
-        var heroPos = heroObj.transform.position + cameraOffset;
+        var heroPos = heroObj.transform.position + cameraPosOffset;
 
         camera3D.SetPosition(heroPos);
+        //camera3D.SetForward(heroPos);
+        camera3D.SetRotation(this.cameraRotationOffset);
     }
 
     public void OnUseSkill(int index)

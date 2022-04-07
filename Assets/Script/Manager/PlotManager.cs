@@ -25,14 +25,21 @@ public class PlotManager : Singleton<PlotManager>
         plotPlayer.SetPlotRoot(plotRoot);
     }
 
-    public void Test()
+    public void StartPlot(string plotName)
     {
-        var file = "plog_main_task_001.json";
+        //plog_main_task_001
+        var file = plotName + ".json";
         var plotConfigFolderPath = Application.dataPath + "/BuildRes/PlotConfig";
         var path = Path.Combine(plotConfigFolderPath, file);
         var plot = JsonTool.LoadObjectFromFile<Plot>(path);
         Logx.Log("path : " + path);
         plotPlayer.StartPlot(plot);
+
+    }
+
+    public bool IsRunning()
+    {
+        return this.plotPlayer.IsRunning();
     }
 
     public void Update(float deltaTime)

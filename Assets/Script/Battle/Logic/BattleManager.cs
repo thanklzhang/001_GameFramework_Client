@@ -29,7 +29,7 @@ public class BattleManager : Singleton<BattleManager>
 {
     //战斗信息
     public int battleGuid;
-    public int battleConfigId;
+    public int battleTableId;
     public int battleRoomId;
 
     //玩家信息
@@ -70,7 +70,7 @@ public class BattleManager : Singleton<BattleManager>
         var battleInitArg = battleInit.BattleInitArg;
         //战斗信息
         this.battleGuid = battleInitArg.Guid;
-        this.battleConfigId = battleInitArg.ConfigId;
+        this.battleTableId = battleInitArg.TableId;
         this.battleRoomId = battleInitArg.RoomId;
 
         //玩家信息
@@ -231,6 +231,13 @@ public class BattleManager : Singleton<BattleManager>
         }
     }
 
+    public void PlayPlot(scNotifyPlayPlot playPlot)
+    {
+        var name = playPlot.PlotName;
+        PlotManager.Instance.StartPlot(name);
+    }
+
+
     public void BattleEnd(scNotifyBattleEnd battleEnd)
     {
         var isWin = 1 == battleEnd.IsWin;
@@ -239,6 +246,7 @@ public class BattleManager : Singleton<BattleManager>
 
         EventDispatcher.Broadcast<bool>(EventIDs.OnBattleEnd, isWin);
     }
+
 
     //get --------------------
 

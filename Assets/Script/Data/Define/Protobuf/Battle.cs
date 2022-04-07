@@ -29,65 +29,66 @@ namespace NetProto {
             "KAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SDQoFbGV2ZWwYBiABKAUSDQoF",
             "bWF4SHAYByABKAUSDgoGY3VyckhwGAggASgFIhYKFGNzTm90aWZ5Q3JlYXRl",
             "QmF0dGxlIkYKFHNjTm90aWZ5Q3JlYXRlQmF0dGxlEi4KDWJhdHRsZUluaXRB",
-            "cmcYASABKAsyFy5OZXRQcm90by5CYXR0bGVJbml0QXJnIrEBCg1CYXR0bGVJ",
-            "bml0QXJnEgwKBGd1aWQYASABKAUSEAoIY29uZmlnSWQYAiABKAUSDgoGcm9v",
-            "bUlkGAMgASgFEjoKE2JhdHRsZVBsYXllckluaXRBcmcYBCABKAsyHS5OZXRQ",
-            "cm90by5CYXR0bGVQbGF5ZXJJbml0QXJnEjQKDWVudGl0eUluaXRBcmcYBSAB",
-            "KAsyHS5OZXRQcm90by5CYXR0bGVFbnRpdHlJbml0QXJnIlkKEUJhdHRsZVBs",
-            "YXllclByb3RvEhMKC3BsYXllckluZGV4GAEgASgFEgwKBHRlYW0YAiABKAUS",
-            "CwoDdWlkGAMgASgFEhQKDGN0cmxIZXJvR3VpZBgEIAEoBSJGChNCYXR0bGVQ",
-            "bGF5ZXJJbml0QXJnEi8KCnBsYXllckxpc3QYASADKAsyGy5OZXRQcm90by5C",
-            "YXR0bGVQbGF5ZXJQcm90byISChBCYXR0bGVNYXBJbml0QXJnIlAKE0JhdHRs",
-            "ZUVudGl0eUluaXRBcmcSOQoUYmF0dGxlRW50aXR5SW5pdExpc3QYASADKAsy",
-            "Gy5OZXRQcm90by5CYXR0bGVFbnRpdHlQcm90byIzChBCYXR0bGVTa2lsbFBy",
-            "b3RvEhAKCGNvbmZpZ0lkGAEgASgFEg0KBWxldmVsGAIgASgFIigKFGNzUGxh",
-            "eWVyTG9hZFByb2dyZXNzEhAKCHByb2dyZXNzGAEgASgFIiMKFHNjUGxheWVy",
-            "TG9hZFByb2dyZXNzEgsKA2VychgBIAEoBSIdChtjc05vdGlmeUFsbFBsYXll",
-            "ckxvYWRGaW5pc2giKgobc2NOb3RpZnlBbGxQbGF5ZXJMb2FkRmluaXNoEgsK",
-            "A2VychgBIAEoBSIVChNjc0JhdHRsZVJlYWR5RmluaXNoIiIKE3NjQmF0dGxl",
-            "UmVhZHlGaW5pc2gSCwoDZXJyGAEgASgFIhUKE2NzTm90aWZ5QmF0dGxlU3Rh",
-            "cnQiIgoTc2NOb3RpZnlCYXR0bGVTdGFydBILCgNlcnIYASABKAUiRwoMY3NN",
-            "b3ZlRW50aXR5EgwKBGd1aWQYASABKAUSKQoJdGFyZ2V0UG9zGAIgASgLMhYu",
-            "TmV0UHJvdG8uVmVjdG9yM1Byb3RvIhsKDHNjTW92ZUVudGl0eRILCgNlcnIY",
-            "ASABKAUiagoKY3NVc2VTa2lsbBIMCgRndWlkGAEgASgFEg8KB3NraWxsSWQY",
-            "AiABKAUSKQoJdGFyZ2V0UG9zGAMgASgLMhYuTmV0UHJvdG8uVmVjdG9yM1By",
-            "b3RvEhIKCnRhcmdldEd1aWQYBCABKAUiGQoKc2NVc2VTa2lsbBILCgNlcnIY",
-            "ASABKAUiTQoWc2NOb3RpZnlDcmVhdGVFbnRpdGllcxIzCg5iYXR0bGVFbnRp",
-            "dGllcxgBIAMoCzIbLk5ldFByb3RvLkJhdHRsZUVudGl0eVByb3RvIocBChJz",
-            "Y05vdGlmeUVudGl0eU1vdmUSDAoEZ3VpZBgBIAEoBRIoCghzdGFydFBvcxgC",
-            "IAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90bxImCgZlbmRQb3MYAyABKAsy",
-            "Fi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEQoJbW92ZVNwZWVkGAQgASgFIk4K",
-            "FnNjTm90aWZ5RW50aXR5U3RvcE1vdmUSDAoEZ3VpZBgBIAEoBRImCgZlbmRQ",
-            "b3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8iNQoWc2NOb3RpZnlF",
-            "bnRpdHlVc2VTa2lsbBIMCgRndWlkGAEgASgFEg0KBXJlc0lkGAIgASgFInwK",
-            "GXNjTm90aWZ5Q3JlYXRlU2tpbGxFZmZlY3QSDAoEZ3VpZBgBIAEoBRINCgVy",
-            "ZXNJZBgCIAEoBRIoCghwb3NpdGlvbhgDIAEoCzIWLk5ldFByb3RvLlZlY3Rv",
-            "cjNQcm90bxIYChBmb2xsb3dFbnRpdHlHdWlkGAQgASgFIsABChxzY05vdGlm",
-            "eVNraWxsRWZmZWN0U3RhcnRNb3ZlEhIKCmVmZmVjdEd1aWQYASABKAUSKAoI",
-            "c3RhcnRQb3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SKQoJdGFy",
-            "Z2V0UG9zGAMgASgLMhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvEhIKCnRhcmdl",
-            "dEd1aWQYBCABKAUSEAoIaXNGb2xsb3cYBSABKAgSEQoJbW92ZVNwZWVkGAYg",
-            "ASgFIjAKGnNjTm90aWZ5U2tpbGxFZmZlY3REZXN0cm95EhIKCmVmZmVjdEd1",
-            "aWQYASABKAUiNQoWQmF0dGxlRW50aXR5VmFsdWVQcm90bxIMCgR0eXBlGAEg",
-            "ASgFEg0KBXZhbHVlGAIgASgFIl8KF3NjTm90aWZ5U3luY0VudGl0eVZhbHVl",
-            "EhIKCmVudGl0eUd1aWQYASABKAUSMAoGdmFsdWVzGAIgAygLMiAuTmV0UHJv",
-            "dG8uQmF0dGxlRW50aXR5VmFsdWVQcm90byI0ChVCYXR0bGVFbnRpdHlBdHRy",
-            "UHJvdG8SDAoEdHlwZRgBIAEoBRINCgV2YWx1ZRgCIAEoBSJcChZzY05vdGlm",
-            "eVN5bmNFbnRpdHlBdHRyEhIKCmVudGl0eUd1aWQYASABKAUSLgoFYXR0cnMY",
-            "AiADKAsyHy5OZXRQcm90by5CYXR0bGVFbnRpdHlBdHRyUHJvdG8iKAoSc2NO",
-            "b3RpZnlFbnRpdHlEZWFkEhIKCmVudGl0eUd1aWQYASABKAUiIgoRc2NOb3Rp",
-            "ZnlCYXR0bGVFbmQSDQoFaXNXaW4YASABKAUiLwoSY3NUcmFuc2l0aW9uQmF0",
-            "dGxlEgsKA2NtZBgBIAEoBRIMCgRkYXRhGAIgASgMIiEKEnNjVHJhbnNpdGlv",
-            "bkJhdHRsZRILCgNlcnIYASABKAUiGwoZY3NUcmFuc2l0aW9uQmF0dGxlMlBs",
-            "YXllciI2ChlzY1RyYW5zaXRpb25CYXR0bGUyUGxheWVyEgsKA2NtZBgBIAEo",
-            "BRIMCgRkYXRhGAIgASgMYgZwcm90bzM="));
+            "cmcYASABKAsyFy5OZXRQcm90by5CYXR0bGVJbml0QXJnIrABCg1CYXR0bGVJ",
+            "bml0QXJnEgwKBGd1aWQYASABKAUSDwoHdGFibGVJZBgCIAEoBRIOCgZyb29t",
+            "SWQYAyABKAUSOgoTYmF0dGxlUGxheWVySW5pdEFyZxgEIAEoCzIdLk5ldFBy",
+            "b3RvLkJhdHRsZVBsYXllckluaXRBcmcSNAoNZW50aXR5SW5pdEFyZxgFIAEo",
+            "CzIdLk5ldFByb3RvLkJhdHRsZUVudGl0eUluaXRBcmciWQoRQmF0dGxlUGxh",
+            "eWVyUHJvdG8SEwoLcGxheWVySW5kZXgYASABKAUSDAoEdGVhbRgCIAEoBRIL",
+            "CgN1aWQYAyABKAUSFAoMY3RybEhlcm9HdWlkGAQgASgFIkYKE0JhdHRsZVBs",
+            "YXllckluaXRBcmcSLwoKcGxheWVyTGlzdBgBIAMoCzIbLk5ldFByb3RvLkJh",
+            "dHRsZVBsYXllclByb3RvIhIKEEJhdHRsZU1hcEluaXRBcmciUAoTQmF0dGxl",
+            "RW50aXR5SW5pdEFyZxI5ChRiYXR0bGVFbnRpdHlJbml0TGlzdBgBIAMoCzIb",
+            "Lk5ldFByb3RvLkJhdHRsZUVudGl0eVByb3RvIjMKEEJhdHRsZVNraWxsUHJv",
+            "dG8SEAoIY29uZmlnSWQYASABKAUSDQoFbGV2ZWwYAiABKAUiKAoUY3NQbGF5",
+            "ZXJMb2FkUHJvZ3Jlc3MSEAoIcHJvZ3Jlc3MYASABKAUiIwoUc2NQbGF5ZXJM",
+            "b2FkUHJvZ3Jlc3MSCwoDZXJyGAEgASgFIh0KG2NzTm90aWZ5QWxsUGxheWVy",
+            "TG9hZEZpbmlzaCIqChtzY05vdGlmeUFsbFBsYXllckxvYWRGaW5pc2gSCwoD",
+            "ZXJyGAEgASgFIhUKE2NzQmF0dGxlUmVhZHlGaW5pc2giIgoTc2NCYXR0bGVS",
+            "ZWFkeUZpbmlzaBILCgNlcnIYASABKAUiFQoTY3NOb3RpZnlCYXR0bGVTdGFy",
+            "dCIiChNzY05vdGlmeUJhdHRsZVN0YXJ0EgsKA2VychgBIAEoBSJHCgxjc01v",
+            "dmVFbnRpdHkSDAoEZ3VpZBgBIAEoBRIpCgl0YXJnZXRQb3MYAiABKAsyFi5O",
+            "ZXRQcm90by5WZWN0b3IzUHJvdG8iGwoMc2NNb3ZlRW50aXR5EgsKA2VychgB",
+            "IAEoBSJqCgpjc1VzZVNraWxsEgwKBGd1aWQYASABKAUSDwoHc2tpbGxJZBgC",
+            "IAEoBRIpCgl0YXJnZXRQb3MYAyABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJv",
+            "dG8SEgoKdGFyZ2V0R3VpZBgEIAEoBSIZCgpzY1VzZVNraWxsEgsKA2VychgB",
+            "IAEoBSJNChZzY05vdGlmeUNyZWF0ZUVudGl0aWVzEjMKDmJhdHRsZUVudGl0",
+            "aWVzGAEgAygLMhsuTmV0UHJvdG8uQmF0dGxlRW50aXR5UHJvdG8ihwEKEnNj",
+            "Tm90aWZ5RW50aXR5TW92ZRIMCgRndWlkGAEgASgFEigKCHN0YXJ0UG9zGAIg",
+            "ASgLMhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvEiYKBmVuZFBvcxgDIAEoCzIW",
+            "Lk5ldFByb3RvLlZlY3RvcjNQcm90bxIRCgltb3ZlU3BlZWQYBCABKAUiTgoW",
+            "c2NOb3RpZnlFbnRpdHlTdG9wTW92ZRIMCgRndWlkGAEgASgFEiYKBmVuZFBv",
+            "cxgCIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90byI1ChZzY05vdGlmeUVu",
+            "dGl0eVVzZVNraWxsEgwKBGd1aWQYASABKAUSDQoFcmVzSWQYAiABKAUifAoZ",
+            "c2NOb3RpZnlDcmVhdGVTa2lsbEVmZmVjdBIMCgRndWlkGAEgASgFEg0KBXJl",
+            "c0lkGAIgASgFEigKCHBvc2l0aW9uGAMgASgLMhYuTmV0UHJvdG8uVmVjdG9y",
+            "M1Byb3RvEhgKEGZvbGxvd0VudGl0eUd1aWQYBCABKAUiwAEKHHNjTm90aWZ5",
+            "U2tpbGxFZmZlY3RTdGFydE1vdmUSEgoKZWZmZWN0R3VpZBgBIAEoBRIoCghz",
+            "dGFydFBvcxgCIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90bxIpCgl0YXJn",
+            "ZXRQb3MYAyABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEgoKdGFyZ2V0",
+            "R3VpZBgEIAEoBRIQCghpc0ZvbGxvdxgFIAEoCBIRCgltb3ZlU3BlZWQYBiAB",
+            "KAUiMAoac2NOb3RpZnlTa2lsbEVmZmVjdERlc3Ryb3kSEgoKZWZmZWN0R3Vp",
+            "ZBgBIAEoBSI1ChZCYXR0bGVFbnRpdHlWYWx1ZVByb3RvEgwKBHR5cGUYASAB",
+            "KAUSDQoFdmFsdWUYAiABKAUiXwoXc2NOb3RpZnlTeW5jRW50aXR5VmFsdWUS",
+            "EgoKZW50aXR5R3VpZBgBIAEoBRIwCgZ2YWx1ZXMYAiADKAsyIC5OZXRQcm90",
+            "by5CYXR0bGVFbnRpdHlWYWx1ZVByb3RvIjQKFUJhdHRsZUVudGl0eUF0dHJQ",
+            "cm90bxIMCgR0eXBlGAEgASgFEg0KBXZhbHVlGAIgASgFIlwKFnNjTm90aWZ5",
+            "U3luY0VudGl0eUF0dHISEgoKZW50aXR5R3VpZBgBIAEoBRIuCgVhdHRycxgC",
+            "IAMoCzIfLk5ldFByb3RvLkJhdHRsZUVudGl0eUF0dHJQcm90byIoChJzY05v",
+            "dGlmeUVudGl0eURlYWQSEgoKZW50aXR5R3VpZBgBIAEoBSIkChBzY05vdGlm",
+            "eVBsYXlQbG90EhAKCHBsb3ROYW1lGAEgASgJIiIKEXNjTm90aWZ5QmF0dGxl",
+            "RW5kEg0KBWlzV2luGAEgASgFIi8KEmNzVHJhbnNpdGlvbkJhdHRsZRILCgNj",
+            "bWQYASABKAUSDAoEZGF0YRgCIAEoDCIhChJzY1RyYW5zaXRpb25CYXR0bGUS",
+            "CwoDZXJyGAEgASgFIhsKGWNzVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIiNgoZ",
+            "c2NUcmFuc2l0aW9uQmF0dGxlMlBsYXllchILCgNjbWQYASABKAUSDAoEZGF0",
+            "YRgCIAEoDGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityProto), global::NetProto.BattleEntityProto.Parser, new[]{ "Guid", "ConfigId", "PlayerIndex", "SkillInitList", "Position", "Level", "MaxHp", "CurrHp" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csNotifyCreateBattle), global::NetProto.csNotifyCreateBattle.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateBattle), global::NetProto.scNotifyCreateBattle.Parser, new[]{ "BattleInitArg" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleInitArg), global::NetProto.BattleInitArg.Parser, new[]{ "Guid", "ConfigId", "RoomId", "BattlePlayerInitArg", "EntityInitArg" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleInitArg), global::NetProto.BattleInitArg.Parser, new[]{ "Guid", "TableId", "RoomId", "BattlePlayerInitArg", "EntityInitArg" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattlePlayerProto), global::NetProto.BattlePlayerProto.Parser, new[]{ "PlayerIndex", "Team", "Uid", "CtrlHeroGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattlePlayerInitArg), global::NetProto.BattlePlayerInitArg.Parser, new[]{ "PlayerList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleMapInitArg), global::NetProto.BattleMapInitArg.Parser, null, null, null, null),
@@ -117,6 +118,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityAttrProto), global::NetProto.BattleEntityAttrProto.Parser, new[]{ "Type", "Value" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySyncEntityAttr), global::NetProto.scNotifySyncEntityAttr.Parser, new[]{ "EntityGuid", "Attrs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityDead), global::NetProto.scNotifyEntityDead.Parser, new[]{ "EntityGuid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlayPlot), global::NetProto.scNotifyPlayPlot.Parser, new[]{ "PlotName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyBattleEnd), global::NetProto.scNotifyBattleEnd.Parser, new[]{ "IsWin" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csTransitionBattle), global::NetProto.csTransitionBattle.Parser, new[]{ "Cmd", "Data" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scTransitionBattle), global::NetProto.scTransitionBattle.Parser, new[]{ "Err" }, null, null, null),
@@ -682,7 +684,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public BattleInitArg(BattleInitArg other) : this() {
       guid_ = other.guid_;
-      configId_ = other.configId_;
+      tableId_ = other.tableId_;
       roomId_ = other.roomId_;
       BattlePlayerInitArg = other.battlePlayerInitArg_ != null ? other.BattlePlayerInitArg.Clone() : null;
       EntityInitArg = other.entityInitArg_ != null ? other.EntityInitArg.Clone() : null;
@@ -707,17 +709,17 @@ namespace NetProto {
       }
     }
 
-    /// <summary>Field number for the "configId" field.</summary>
-    public const int ConfigIdFieldNumber = 2;
-    private int configId_;
+    /// <summary>Field number for the "tableId" field.</summary>
+    public const int TableIdFieldNumber = 2;
+    private int tableId_;
     /// <summary>
     /// 战斗 表配置 id
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int ConfigId {
-      get { return configId_; }
+    public int TableId {
+      get { return tableId_; }
       set {
-        configId_ = value;
+        tableId_ = value;
       }
     }
 
@@ -777,7 +779,7 @@ namespace NetProto {
         return true;
       }
       if (Guid != other.Guid) return false;
-      if (ConfigId != other.ConfigId) return false;
+      if (TableId != other.TableId) return false;
       if (RoomId != other.RoomId) return false;
       if (!object.Equals(BattlePlayerInitArg, other.BattlePlayerInitArg)) return false;
       if (!object.Equals(EntityInitArg, other.EntityInitArg)) return false;
@@ -788,7 +790,7 @@ namespace NetProto {
     public override int GetHashCode() {
       int hash = 1;
       if (Guid != 0) hash ^= Guid.GetHashCode();
-      if (ConfigId != 0) hash ^= ConfigId.GetHashCode();
+      if (TableId != 0) hash ^= TableId.GetHashCode();
       if (RoomId != 0) hash ^= RoomId.GetHashCode();
       if (battlePlayerInitArg_ != null) hash ^= BattlePlayerInitArg.GetHashCode();
       if (entityInitArg_ != null) hash ^= EntityInitArg.GetHashCode();
@@ -806,9 +808,9 @@ namespace NetProto {
         output.WriteRawTag(8);
         output.WriteInt32(Guid);
       }
-      if (ConfigId != 0) {
+      if (TableId != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(ConfigId);
+        output.WriteInt32(TableId);
       }
       if (RoomId != 0) {
         output.WriteRawTag(24);
@@ -830,8 +832,8 @@ namespace NetProto {
       if (Guid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Guid);
       }
-      if (ConfigId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ConfigId);
+      if (TableId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TableId);
       }
       if (RoomId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
@@ -853,8 +855,8 @@ namespace NetProto {
       if (other.Guid != 0) {
         Guid = other.Guid;
       }
-      if (other.ConfigId != 0) {
-        ConfigId = other.ConfigId;
+      if (other.TableId != 0) {
+        TableId = other.TableId;
       }
       if (other.RoomId != 0) {
         RoomId = other.RoomId;
@@ -886,7 +888,7 @@ namespace NetProto {
             break;
           }
           case 16: {
-            ConfigId = input.ReadInt32();
+            TableId = input.ReadInt32();
             break;
           }
           case 24: {
@@ -4966,6 +4968,126 @@ namespace NetProto {
   }
 
   /// <summary>
+  /// 服务器通知 播放剧情
+  /// </summary>
+  public sealed partial class scNotifyPlayPlot : pb::IMessage<scNotifyPlayPlot> {
+    private static readonly pb::MessageParser<scNotifyPlayPlot> _parser = new pb::MessageParser<scNotifyPlayPlot>(() => new scNotifyPlayPlot());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scNotifyPlayPlot> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[33]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifyPlayPlot() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifyPlayPlot(scNotifyPlayPlot other) : this() {
+      plotName_ = other.plotName_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifyPlayPlot Clone() {
+      return new scNotifyPlayPlot(this);
+    }
+
+    /// <summary>Field number for the "plotName" field.</summary>
+    public const int PlotNameFieldNumber = 1;
+    private string plotName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string PlotName {
+      get { return plotName_; }
+      set {
+        plotName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scNotifyPlayPlot);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scNotifyPlayPlot other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PlotName != other.PlotName) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PlotName.Length != 0) hash ^= PlotName.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (PlotName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(PlotName);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (PlotName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlotName);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scNotifyPlayPlot other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PlotName.Length != 0) {
+        PlotName = other.PlotName;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            PlotName = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   /// 通知战斗结束
   /// </summary>
   public sealed partial class scNotifyBattleEnd : pb::IMessage<scNotifyBattleEnd> {
@@ -4975,7 +5097,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[33]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[34]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5095,7 +5217,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[34]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[35]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5240,7 +5362,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[35]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[36]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5360,7 +5482,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[36]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[37]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5449,7 +5571,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[37]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[38]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

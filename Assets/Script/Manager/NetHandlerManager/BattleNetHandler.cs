@@ -41,7 +41,7 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.NotifySyncEntityAttr, this.OnNotifySyncEntityAttr);
         AddBattleMsg(ProtoIDs.NotifySyncEntityValue, this.OnNotifySyncEntityValue);
         AddBattleMsg(ProtoIDs.NotifyEntityDead, this.OnNotifyEntityDead);
-
+        AddBattleMsg(ProtoIDs.NotifyPlayPlot, this.OnNotifyPlayPlot);
     }
 
 
@@ -249,6 +249,12 @@ public class BattleNetHandler : NetHandler
     {
         scNotifyEntityDead sync = scNotifyEntityDead.Parser.ParseFrom(byteData);
         BattleManager.Instance.EntityDead(sync);
+    }
+
+    private void OnNotifyPlayPlot(byte[] byteData)
+    {
+        scNotifyPlayPlot sync = scNotifyPlayPlot.Parser.ParseFrom(byteData);
+        BattleManager.Instance.PlayPlot(sync);
     }
 
     private void OnNotifyBattleEnd(MsgPack msgPack)

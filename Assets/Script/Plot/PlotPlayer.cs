@@ -289,6 +289,11 @@ namespace PlotDesigner.Runtime
             return currTime;
         }
 
+        public bool IsRunning()
+        {
+            return isRunning;
+        }
+
         //结束
         public void OnEnd()
         {

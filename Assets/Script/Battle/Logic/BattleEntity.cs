@@ -292,4 +292,9 @@ public class BattleEntity
         //这里应该是设置成标志 然后删除
         BattleEntityManager.Instance.DestoryEntity(this.guid);
     }
+
+    internal void SetShowState(bool isShow)
+    {
+        gameObject.SetActive(isShow);
+    }
 }

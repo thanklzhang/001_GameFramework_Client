@@ -22,7 +22,7 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKoMHCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKsoHCghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSEwoPUmVnaXN0",
             "QWNjb3VudDJTEGcSGAoTQXBwbHlDcmVhdGVCYXR0bGUyUxDJARIXChJUcmFu",
             "c2l0aW9uQmF0dGxlMlMQrQISHgoZVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIy",
@@ -34,15 +34,17 @@ namespace NetProto {
             "bGUQuRcSFwoSUGxheWVyTG9hZFByb2dyZXNzELoXEh4KGU5vdGlmeUFsbFBs",
             "YXllckxvYWRGaW5pc2gQuxcSFgoRQmF0dGxlUmVhZHlGaW5pc2gQvBcSFgoR",
             "Tm90aWZ5QmF0dGxlU3RhcnQQvRcSDwoKTW92ZUVudGl0eRCdGBINCghVc2VT",
-            "a2lsbBCeGBIZChROb3RpZnlDcmVhdGVFbnRpdGllcxCBGRIVChBOb3RpZnlF",
-            "bnRpdHlNb3ZlEIIZEhkKFE5vdGlmeUVudGl0eVN0b3BNb3ZlEIMZEh0KGE5v",
-            "dGlmeUVudGl0eVJlbGVhc2VTa2lsbBCEGRIcChdOb3RpZnlDcmVhdGVTa2ls",
-            "bEVmZmVjdBCFGRIfChpOb3RpZnlTa2lsbEVmZmVjdFN0YXJ0TW92ZRCGGRId",
-            "ChhOb3RpZnlTa2lsbEVmZmVjdERlc3Ryb3kQhxkSGQoUTm90aWZ5U3luY0Vu",
-            "dGl0eUF0dHIQiBkSGgoVTm90aWZ5U3luY0VudGl0eVZhbHVlEIkZEhUKEE5v",
-            "dGlmeUVudGl0eURlYWQQihkSFAoPTm90aWZ5QmF0dGxlRW5kEIsZEhMKDk5v",
-            "dGlmeVBsYXlQbG90EIwZEhUKEFRyYW5zaXRpb25CYXR0bGUQ5RkSHAoXVHJh",
-            "bnNpdGlvbkJhdHRsZTJQbGF5ZXIQ5hliBnByb3RvMw=="));
+            "a2lsbBCeGBISCg1DbGllbnRQbG90RW5kELoYEhkKFE5vdGlmeUNyZWF0ZUVu",
+            "dGl0aWVzEIEZEhUKEE5vdGlmeUVudGl0eU1vdmUQghkSGQoUTm90aWZ5RW50",
+            "aXR5U3RvcE1vdmUQgxkSHQoYTm90aWZ5RW50aXR5UmVsZWFzZVNraWxsEIQZ",
+            "EhwKF05vdGlmeUNyZWF0ZVNraWxsRWZmZWN0EIUZEh8KGk5vdGlmeVNraWxs",
+            "RWZmZWN0U3RhcnRNb3ZlEIYZEh0KGE5vdGlmeVNraWxsRWZmZWN0RGVzdHJv",
+            "eRCHGRIZChROb3RpZnlTeW5jRW50aXR5QXR0chCIGRIaChVOb3RpZnlTeW5j",
+            "RW50aXR5VmFsdWUQiRkSFQoQTm90aWZ5RW50aXR5RGVhZBCKGRIUCg9Ob3Rp",
+            "ZnlCYXR0bGVFbmQQixkSEwoOTm90aWZ5UGxheVBsb3QQjBkSEgoNTm90aWZ5",
+            "UGxvdEVuZBCNGRIdChhOb3RpZnlTZXRFbnRpdHlTaG93U3RhdGUQjhkSFQoQ",
+            "VHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFuc2l0aW9uQmF0dGxlMlBsYXll",
+            "chDmGWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -96,6 +98,7 @@ namespace NetProto {
     /// </summary>
     [pbr::OriginalName("MoveEntity")] MoveEntity = 3101,
     [pbr::OriginalName("UseSkill")] UseSkill = 3102,
+    [pbr::OriginalName("ClientPlotEnd")] ClientPlotEnd = 3130,
     /// <summary>
     /// 服务端发来的关键战斗事件
     /// </summary>
@@ -111,6 +114,8 @@ namespace NetProto {
     [pbr::OriginalName("NotifyEntityDead")] NotifyEntityDead = 3210,
     [pbr::OriginalName("NotifyBattleEnd")] NotifyBattleEnd = 3211,
     [pbr::OriginalName("NotifyPlayPlot")] NotifyPlayPlot = 3212,
+    [pbr::OriginalName("NotifyPlotEnd")] NotifyPlotEnd = 3213,
+    [pbr::OriginalName("NotifySetEntityShowState")] NotifySetEntityShowState = 3214,
     /// <summary>
     /// 转发战斗
     /// </summary>

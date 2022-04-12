@@ -42,6 +42,10 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.NotifySyncEntityValue, this.OnNotifySyncEntityValue);
         AddBattleMsg(ProtoIDs.NotifyEntityDead, this.OnNotifyEntityDead);
         AddBattleMsg(ProtoIDs.NotifyPlayPlot, this.OnNotifyPlayPlot);
+        AddBattleMsg(ProtoIDs.ClientPlotEnd, this.OnClientPlotEnd);
+        AddBattleMsg(ProtoIDs.NotifyPlotEnd, this.OnNotifyPlotEnd);
+        AddBattleMsg(ProtoIDs.NotifySetEntityShowState, this.OnNotifySetEntityShowState);
+
     }
 
 
@@ -215,6 +219,17 @@ public class BattleNetHandler : NetHandler
         BattleManager.Instance.EntityUseSkill(releaseSkill);
     }
 
+    public void SendClientPlotEnd()
+    {
+        csClientPlotEnd clientPlotEnd = new csClientPlotEnd();
+        TransitionBattleMsg(ProtoIDs.ClientPlotEnd, clientPlotEnd);
+    }
+
+    private void OnClientPlotEnd(byte[] byteData)
+    {
+        
+    }
+
     private void OnNotifyCreateSkillEffect(byte[] byteData)
     {
         scNotifyCreateSkillEffect skillEffect = scNotifyCreateSkillEffect.Parser.ParseFrom(byteData);
@@ -261,6 +276,18 @@ public class BattleNetHandler : NetHandler
     {
         scNotifyBattleEnd sync = scNotifyBattleEnd.Parser.ParseFrom(msgPack.data);
         BattleManager.Instance.BattleEnd(sync);
+    }
+
+    public void OnNotifyPlotEnd(byte[] byteData)
+    {
+        scNotifyPlotEnd sync = scNotifyPlotEnd.Parser.ParseFrom(byteData);
+        BattleManager.Instance.PlotEnd(sync);
+    }
+
+    public void OnNotifySetEntityShowState(byte[] byteData)
+    {
+        scNotifySetEntityShowState sync = scNotifySetEntityShowState.Parser.ParseFrom(byteData);
+        BattleManager.Instance.SetEntitiesShowState(sync);
     }
 
     #region 战斗中玩家操作 

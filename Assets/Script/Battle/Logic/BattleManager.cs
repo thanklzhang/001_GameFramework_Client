@@ -247,6 +247,18 @@ public class BattleManager : Singleton<BattleManager>
         EventDispatcher.Broadcast<bool>(EventIDs.OnBattleEnd, isWin);
     }
 
+    internal void PlotEnd(scNotifyPlotEnd sync)
+    {
+        PlotManager.Instance.ClosePlot();
+    }
+
+
+    internal void SetEntitiesShowState(scNotifySetEntityShowState sync)
+    {
+        var entityGuids = sync.Guids.ToList();
+        var isShow = sync.IsShow;
+        BattleEntityManager.Instance.SetEntitiesShowState(entityGuids, isShow);
+    }
 
     //get --------------------
 

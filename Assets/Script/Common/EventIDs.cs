@@ -15,6 +15,7 @@ public enum EventIDs
     //自定义事件--------------
     OnUpgradeHeroLevel = 100001,
     OnRefreshAllMainTaskData = 100051,
+    OnPlotEnd = 100071,
 
     //battle
     OnCreateBattle = 101001,
@@ -25,6 +26,7 @@ public enum EventIDs
     OnChangeEntityBattleData = 101102,
     OnEntityDestroy = 101103,//实体销毁(死亡之后)
     OnBattleEnd = 101104,
+    OnEntityChangeShowState = 101105,//实体改变了显隐时
 
     OnSetEntityPosition = 101201,
 

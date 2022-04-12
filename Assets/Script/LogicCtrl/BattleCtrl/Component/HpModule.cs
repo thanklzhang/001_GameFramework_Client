@@ -84,8 +84,27 @@ public class HpModule
         }
     }
 
+    public HpData FindHpData(BattleEntity entity)
+    {
+        HpData hpData = null;
+        if (hpDic.ContainsKey(entity.guid))
+        {
+            hpData = hpDic[entity.guid];
+        }
+        else
+        {
+            Logx.LogWarning("HpModule FindHp : the guid is not found : " + entity.guid);
+        }
+        return hpData;
+    }
+
     public void Release()
     {
 
+    }
+
+    internal void ChangeShowState(BattleEntity entity, bool isShow)
+    {
+        
     }
 }

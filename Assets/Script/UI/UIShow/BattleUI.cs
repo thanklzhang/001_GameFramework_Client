@@ -72,6 +72,10 @@ public class HpUIShowObj
         GameObject.Destroy(this.gameObject);
     }
 
+    internal void SetShowState(bool isShow)
+    {
+        gameObject.SetActive(isShow);
+    }
 }
 
 
@@ -164,6 +168,29 @@ public class BattleUI : BaseUI
         else
         {
             Logx.LogWarning("BattleUI DestoryHpUI : the entityGuid is not found : " + entityGuid);
+        }
+    }
+
+    public HpUIShowObj FindHpUI(int entityGuid)
+    {
+        HpUIShowObj showObj = null;
+        if (hpShowObjDic.ContainsKey(entityGuid))
+        {
+            showObj = hpShowObjDic[entityGuid];
+        }
+        else
+        {
+            Logx.LogWarning("BattleUI DestoryHpUI : the entityGuid is not found : " + entityGuid);
+        }
+        return showObj;
+    }
+
+    public void SetHpShowState(int entityGuid, bool isShow)
+    {
+        var hpUI = FindHpUI(entityGuid);
+        if (hpUI != null)
+        {
+            hpUI.SetShowState(isShow);
         }
     }
 

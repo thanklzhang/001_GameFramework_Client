@@ -21,10 +21,12 @@ public class BattleCtrl : BaseCtrl
         //this.isParallel = false;
 
         //生命周期好像有点不对
+        EventDispatcher.AddListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnEntityDestroy, OnEntityDestroy);
         EventDispatcher.AddListener<bool>(EventIDs.OnBattleEnd, OnOnBattleEnd);
+        EventDispatcher.AddListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
 
         hpModule = new HpModule();
 
@@ -35,7 +37,7 @@ public class BattleCtrl : BaseCtrl
 
         var battleTableId = BattleManager.Instance.battleTableId;
         var battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleTableId);
-        var battleTriggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleTb.TriggerId); 
+        var battleTriggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleTb.TriggerId);
 
         //scene
         var sceneResId = 15010001;
@@ -81,7 +83,7 @@ public class BattleCtrl : BaseCtrl
 
     }
 
-    
+
     public Quaternion cameraRotationOffset;
 
     public void OnSceneLoadFinish(HashSet<GameObject> gameObjects)
@@ -226,6 +228,13 @@ public class BattleCtrl : BaseCtrl
         return false;
     }
 
+
+    public void OnPlayPlotEnd(string plotName)
+    {
+        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+        battleNet.SendClientPlotEnd();
+
+    }
     public override void OnUpdate(float timeDelta)
     {
         this.ui.Update(timeDelta);
@@ -281,7 +290,7 @@ public class BattleCtrl : BaseCtrl
         UpdateCamera();
     }
 
-   
+
     public Vector3 cameraPosOffset = new Vector3(0, 10, -3.2f);
     //public Vector3 cameraForwardOffset = new Vector3(0, 10, -3.2f);
     //public Quaternion cameraQuaternionOffset = new Quaternion(69.94f, -0.032f, -0.001f,1.0f);
@@ -386,6 +395,13 @@ public class BattleCtrl : BaseCtrl
         this.resultUI.Show();
     }
 
+    //entity 改变显隐的时候
+    public void OnEntityChangeShowState(BattleEntity entity, bool isShow)
+    {
+        //找到血条也要显隐
+        ui.SetHpShowState(entity.guid, isShow);
+    }
+
     public override void OnInactive()
     {
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
@@ -408,12 +424,15 @@ public class BattleCtrl : BaseCtrl
         ResourceManager.Instance.ReturnObject(scenePath, this.sceneObj);
         BattleEntityManager.Instance.ReleaseAllEntities();
 
+        EventDispatcher.RemoveListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
+
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
+        EventDispatcher.RemoveListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
         EventDispatcher.RemoveListener<bool>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
 
-      
+
     }
 
     public enum SkillReleaseTargeType

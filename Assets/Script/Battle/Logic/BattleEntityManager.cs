@@ -273,4 +273,18 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
     {
         this.RemoveListener();
     }
+
+    //这里时只是控制显隐
+    internal void SetEntitiesShowState(List<int> entityGuids, bool isShow)
+    {
+        foreach (var guid in entityGuids)
+        {
+            var entity = FindEntity(guid);
+            if (entity != null)
+            {
+                entity.SetShowState(isShow);
+                EventDispatcher.Broadcast(EventIDs.OnEntityChangeShowState, entity,isShow);
+            }
+        }
+    }
 }

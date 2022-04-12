@@ -35,16 +35,36 @@ namespace PlotDesigner.Runtime
         Dictionary<int, int> gameObjectResIdToCountDic;
 
         float maxEndTime;
+
+        public Action<string> endAction;
         public void Init()
         {
+            this.Reset();
+        }
+
+        public void Reset()
+        {
+
             trackPlayerList = new List<PlotTrackPlayer>();
             plotEntityDic = new Dictionary<int, PlotEntity>();
             assembleName = "Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
+
+            plotData = null;
+           
+            currTime = 0.0f;
+            isRunning = false;
+            isEnd = false;
+            isLoading = false;
+            gameObjectResIdToCountDic = null;
+            maxEndTime = 0.0f;
+            endAction = null;
         }
 
-        internal void StartPlot(Plot plot)
+
+        internal void StartPlot(Plot plot, Action<string> endAction = null)
         {
             Logx.Log("plot : StartPlot");
+            this.endAction = endAction;
 
             plotMain.gameObject.SetActive(true);
 
@@ -263,7 +283,7 @@ namespace PlotDesigner.Runtime
 
             if (currTime >= maxEndTime)
             {
-                isRunning = false;
+                //isRunning = false;
                 OnEnd();
             }
         }
@@ -299,12 +319,36 @@ namespace PlotDesigner.Runtime
         {
             Logx.Log("plot : OnEnd , currTime : " + currTime);
             isEnd = true;
+            this.endAction.Invoke("");
+
         }
 
+      
         //关闭
         public void Close()
         {
+            Logx.Log("plot : Close ");
+
             plotMain.gameObject.SetActive(false);
+
+            //释放资源
+            foreach (var item in plotEntityDic)
+            {
+                var plotEntity = item.Value;
+                //目前只看 gameObject
+                if (plotEntity.obj is GameObject)
+                {
+                    var go = plotEntity.obj as GameObject;
+
+                    var resId = plotEntity.res;
+                    var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
+                    var path = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
+
+                    ResourceManager.Instance.ReturnObject(path, go);
+                }
+            }
+
+            Reset();
         }
 
     }

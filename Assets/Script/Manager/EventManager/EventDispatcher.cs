@@ -19,6 +19,13 @@ static public class EventDispatcher
         EventManager.AddListener(eventId, handler);
     }
 
+    static public void AddListener<T,K>(EventIDs eventEnums, Callback<T,K> handler)
+    {
+        var eventId = (int)eventEnums;
+        //Debug.Log("add evenType : " + eventType);
+        EventManager.AddListener(eventId, handler);
+    }
+
 
     static public void RemoveListener(EventIDs eventEnums, Callback handler)
     {
@@ -27,6 +34,12 @@ static public class EventDispatcher
     }
 
     static public void RemoveListener<T>(EventIDs eventEnums, Callback<T> handler)
+    {
+        var eventId = (int)eventEnums;
+        EventManager.RemoveListener(eventId, handler);
+    }
+
+    static public void RemoveListener<T,K>(EventIDs eventEnums, Callback<T,K> handler)
     {
         var eventId = (int)eventEnums;
         EventManager.RemoveListener(eventId, handler);
@@ -42,6 +55,12 @@ static public class EventDispatcher
     {
         var eventId = (int)eventEnums;
         EventManager.Broadcast(eventId, arg1);
+    }
+
+    static public void Broadcast<T,K>(EventIDs eventEnums, T arg1,K arg2)
+    {
+        var eventId = (int)eventEnums;
+        EventManager.Broadcast(eventId, arg1, arg2);
     }
 
 

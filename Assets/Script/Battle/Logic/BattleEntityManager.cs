@@ -274,6 +274,16 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
         this.RemoveListener();
     }
 
+    public void SetAllEntityShowState(bool isShow)
+    {
+        foreach (var kv in this.entityDic)
+        {
+            var entity = kv.Value;
+            entity.SetShowState(isShow);
+            EventDispatcher.Broadcast(EventIDs.OnEntityChangeShowState, entity, isShow);
+        }
+    }
+
     //这里时只是控制显隐
     internal void SetEntitiesShowState(List<int> entityGuids, bool isShow)
     {
@@ -283,7 +293,7 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
             if (entity != null)
             {
                 entity.SetShowState(isShow);
-                EventDispatcher.Broadcast(EventIDs.OnEntityChangeShowState, entity,isShow);
+                EventDispatcher.Broadcast(EventIDs.OnEntityChangeShowState, entity, isShow);
             }
         }
     }

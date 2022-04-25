@@ -11,7 +11,7 @@ public abstract class HeroServiceHandler : BaseHandler
     //receive
     protected void OnUpgradeHeroLevel(HeroData heroData)
     {
-        GameDataManager.Instance.HeroStore.UpdateOneHero(heroData);
-        EventDispatcher.Broadcast(EventIDs.OnUpgradeHeroLevel, heroData);
+        //GameDataManager.Instance.HeroStore.UpdateOneHero(heroData);
+        //EventDispatcher.Broadcast(EventIDs.OnUpgradeHeroLevel, heroData);
     }
 }

@@ -234,6 +234,10 @@ public class BattleManager : Singleton<BattleManager>
     public void PlayPlot(scNotifyPlayPlot playPlot)
     {
         var name = playPlot.PlotName;
+
+        BattleEntityManager.Instance.SetAllEntityShowState(false);
+        CameraManager.Instance.GetCameraUI().SetUICameraShowState(false);
+
         PlotManager.Instance.StartPlot(name);
     }
 
@@ -249,6 +253,9 @@ public class BattleManager : Singleton<BattleManager>
 
     internal void PlotEnd(scNotifyPlotEnd sync)
     {
+        BattleEntityManager.Instance.SetAllEntityShowState(true);
+        CameraManager.Instance.GetCameraUI().SetUICameraShowState(true);
+
         PlotManager.Instance.ClosePlot();
     }
 

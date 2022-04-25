@@ -33,6 +33,12 @@ public class CameraObject
     {
         return this.root.position;
     }
+
+    public void SetUICameraShowState(bool isShow)
+    {
+        this.root.gameObject.SetActive(isShow);
+    }
+
 }
 
 //网络消息管理器 可以在这里收敛所有协议消息

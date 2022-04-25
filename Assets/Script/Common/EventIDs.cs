@@ -16,6 +16,7 @@ public enum EventIDs
     OnUpgradeHeroLevel = 100001,
     OnRefreshAllMainTaskData = 100051,
     OnPlotEnd = 100071,
+    OnRefreshHeroListData = 100101,
 
     //battle
     OnCreateBattle = 101001,
@@ -29,7 +30,7 @@ public enum EventIDs
     OnEntityChangeShowState = 101105,//实体改变了显隐时
 
     OnSetEntityPosition = 101201,
-
+    //
   
 
 }

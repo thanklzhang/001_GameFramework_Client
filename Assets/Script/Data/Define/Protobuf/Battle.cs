@@ -79,12 +79,12 @@ namespace NetProto {
             "ChJzY05vdGlmeUVudGl0eURlYWQSEgoKZW50aXR5R3VpZBgBIAEoBSIkChBz",
             "Y05vdGlmeVBsYXlQbG90EhAKCHBsb3ROYW1lGAEgASgJIhEKD3NjTm90aWZ5",
             "UGxvdEVuZCI7ChpzY05vdGlmeVNldEVudGl0eVNob3dTdGF0ZRINCgVndWlk",
-            "cxgBIAMoBRIOCgZpc1Nob3cYAiABKAgiIgoRc2NOb3RpZnlCYXR0bGVFbmQS",
-            "DQoFaXNXaW4YASABKAUiLwoSY3NUcmFuc2l0aW9uQmF0dGxlEgsKA2NtZBgB",
-            "IAEoBRIMCgRkYXRhGAIgASgMIiEKEnNjVHJhbnNpdGlvbkJhdHRsZRILCgNl",
-            "cnIYASABKAUiGwoZY3NUcmFuc2l0aW9uQmF0dGxlMlBsYXllciI2ChlzY1Ry",
-            "YW5zaXRpb25CYXR0bGUyUGxheWVyEgsKA2NtZBgBIAEoBRIMCgRkYXRhGAIg",
-            "ASgMYgZwcm90bzM="));
+            "cxgBIAMoBRIOCgZpc1Nob3cYAiABKAgiQwoRc2NOb3RpZnlCYXR0bGVFbmQS",
+            "DQoFaXNXaW4YASABKAUSHwoHcmV3YXJkcxgCIAMoCzIOLk5ldFByb3RvLkl0",
+            "ZW0iLwoSY3NUcmFuc2l0aW9uQmF0dGxlEgsKA2NtZBgBIAEoBRIMCgRkYXRh",
+            "GAIgASgMIiEKEnNjVHJhbnNpdGlvbkJhdHRsZRILCgNlcnIYASABKAUiGwoZ",
+            "Y3NUcmFuc2l0aW9uQmF0dGxlMlBsYXllciI2ChlzY1RyYW5zaXRpb25CYXR0",
+            "bGUyUGxheWVyEgsKA2NtZBgBIAEoBRIMCgRkYXRhGAIgASgMYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -126,7 +126,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlayPlot), global::NetProto.scNotifyPlayPlot.Parser, new[]{ "PlotName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlotEnd), global::NetProto.scNotifyPlotEnd.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySetEntityShowState), global::NetProto.scNotifySetEntityShowState.Parser, new[]{ "Guids", "IsShow" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyBattleEnd), global::NetProto.scNotifyBattleEnd.Parser, new[]{ "IsWin" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyBattleEnd), global::NetProto.scNotifyBattleEnd.Parser, new[]{ "IsWin", "Rewards" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csTransitionBattle), global::NetProto.csTransitionBattle.Parser, new[]{ "Cmd", "Data" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scTransitionBattle), global::NetProto.scTransitionBattle.Parser, new[]{ "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csTransitionBattle2Player), global::NetProto.csTransitionBattle2Player.Parser, null, null, null, null),
@@ -5567,6 +5567,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public scNotifyBattleEnd(scNotifyBattleEnd other) : this() {
       isWin_ = other.isWin_;
+      rewards_ = other.rewards_.Clone();
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5585,6 +5586,16 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "rewards" field.</summary>
+    public const int RewardsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::NetProto.Item> _repeated_rewards_codec
+        = pb::FieldCodec.ForMessage(18, global::NetProto.Item.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.Item> rewards_ = new pbc::RepeatedField<global::NetProto.Item>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NetProto.Item> Rewards {
+      get { return rewards_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as scNotifyBattleEnd);
@@ -5599,6 +5610,7 @@ namespace NetProto {
         return true;
       }
       if (IsWin != other.IsWin) return false;
+      if(!rewards_.Equals(other.rewards_)) return false;
       return true;
     }
 
@@ -5606,6 +5618,7 @@ namespace NetProto {
     public override int GetHashCode() {
       int hash = 1;
       if (IsWin != 0) hash ^= IsWin.GetHashCode();
+      hash ^= rewards_.GetHashCode();
       return hash;
     }
 
@@ -5620,6 +5633,7 @@ namespace NetProto {
         output.WriteRawTag(8);
         output.WriteInt32(IsWin);
       }
+      rewards_.WriteTo(output, _repeated_rewards_codec);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5628,6 +5642,7 @@ namespace NetProto {
       if (IsWin != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(IsWin);
       }
+      size += rewards_.CalculateSize(_repeated_rewards_codec);
       return size;
     }
 
@@ -5639,6 +5654,7 @@ namespace NetProto {
       if (other.IsWin != 0) {
         IsWin = other.IsWin;
       }
+      rewards_.Add(other.rewards_);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5651,6 +5667,10 @@ namespace NetProto {
             break;
           case 8: {
             IsWin = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            rewards_.AddEntriesFrom(input, _repeated_rewards_codec);
             break;
           }
         }

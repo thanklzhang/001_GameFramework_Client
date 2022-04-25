@@ -40,7 +40,7 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-        
+
     }
 
     public void OnClickCloseBtn()
@@ -59,14 +59,17 @@ public class HeroListCtrl : BaseCtrl
         CtrlManager.Instance.Enter<ConfirmCtrl>(args);
     }
 
-    public void OnClickOneHeroUpgradeLevelBtn(int heroId)
+    public void OnClickOneHeroUpgradeLevelBtn(int heroGuid,int level)
     {
-        ServiceManager.Instance.heroService.UpgradeHeroLevel(heroId);
+        //ServiceManager.Instance.heroService.UpgradeHeroLevel(heroId);
+        var netHandler = NetHandlerManager.Instance.GetHandler<HeroListNetHandler>();
+        netHandler.SendUpgradeHeroLevel(heroGuid, level);
+
     }
 
     public override void OnEnter(CtrlArgs args)
     {
-        
+
     }
 
     public override void OnActive()
@@ -77,13 +80,19 @@ public class HeroListCtrl : BaseCtrl
         ui.onGoInfoUIBtnClick += OnClickGoInfoUIBtn;
         ui.onClickOneHeroUpgradeLevelBtn += OnClickOneHeroUpgradeLevelBtn;
 
-        EventDispatcher.AddListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+        //EventDispatcher.AddListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+        EventDispatcher.AddListener(EventIDs.OnRefreshHeroListData, OnRefreshHeroListData);
 
+        this.RefreshInfo();
+    }
 
+    public void RefreshInfo()
+    {
         //组装数据并传递给 UI 层数据
         HeroListUIArgs uiArgs = ConvertToUIArgs();
         ui.Refresh(uiArgs);
     }
+
 
     public override void OnInactive()
     {
@@ -93,46 +102,55 @@ public class HeroListCtrl : BaseCtrl
         ui.onGoInfoUIBtnClick -= OnClickGoInfoUIBtn;
         ui.onClickOneHeroUpgradeLevelBtn -= OnClickOneHeroUpgradeLevelBtn;
 
-        EventDispatcher.RemoveListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+        //EventDispatcher.RemoveListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+        EventDispatcher.RemoveListener(EventIDs.OnRefreshHeroListData, OnRefreshHeroListData);
     }
 
-
-    public void OnUpgradeHeroLevel(HeroData heroData)
+    //刷新英雄列表数据
+    public void OnRefreshHeroListData()
     {
-        //目前不用传来的 直接取值即可
-        var nowHeroData = GameDataManager.Instance.HeroStore.GetDataById(heroData.id);
-        ui.RefreshOneHero(ConvertToUIHeroData(nowHeroData));
-
+        this.RefreshInfo();
     }
 
-    public HeroCardUIData ConvertToUIHeroData(HeroData heroData)
-    {
-        HeroCardUIData uiData = new HeroCardUIData();
-        uiData.id = heroData.id;
-        uiData.level = heroData.level;
-        var heroDataStore = GameDataManager.Instance.HeroStore;
-        var serverHeroData = heroDataStore.GetDataById(heroData.id);
-        if (serverHeroData != null)
-        {
-            uiData.isUnlock = true;
-        }
-        return uiData;
-    }
+    //public void OnUpgradeHeroLevel(HeroData heroData)
+    //{
+    //    //目前不用传来的 直接取值即可
+    //    var nowHeroData = GameDataManager.Instance.HeroStore.GetDataById(heroData.guid);
+    //    ui.RefreshOneHero(ConvertToUIHeroData(nowHeroData));
+
+    //}
+
+    //public HeroCardUIData ConvertToUIHeroData(HeroData heroData)
+    //{
+    //    HeroCardUIData uiData = new HeroCardUIData();
+    //    uiData.id = heroData.guid;
+    //    uiData.level = heroData.level;
+    //    var heroDataStore = GameDataManager.Instance.HeroStore;
+    //    var serverHeroData = heroDataStore.GetDataByGuid(heroData.guid);
+    //    if (serverHeroData != null)
+    //    {
+    //        uiData.isUnlock = true;
+    //    }
+    //    return uiData;
+    //}
 
     public HeroListUIArgs ConvertToUIArgs()
     {
         var heroDataStore = GameDataManager.Instance.HeroStore;
         var heroTbList = TableManager.Instance.GetList<Table.HeroInfo>();
+
+        //开始填充
         HeroListUIArgs uiArgs = new HeroListUIArgs();
         uiArgs.cardList = new List<HeroCardUIData>();
         foreach (var item in heroTbList)
         {
             var hero = item;
             var uiData = new HeroCardUIData();
-            uiData.id = hero.Id;
-            var serverHeroData = heroDataStore.GetDataById(hero.Id);
+            uiData.configId = hero.Id;
+            var serverHeroData = heroDataStore.GetDataByConfigId(hero.Id);
             if (serverHeroData != null)
             {
+                uiData.guid = serverHeroData.guid;
                 uiData.level = serverHeroData.level;
                 uiData.isUnlock = true;
             }
@@ -143,11 +161,11 @@ public class HeroListCtrl : BaseCtrl
         return uiArgs;
     }
 
-    
+
 
     public override void OnExit()
     {
-     
+
 
         //UIManager.Instance.ReleaseUI<HeroListUI>();
     }

@@ -13,16 +13,17 @@ public class HeroListUIArgs : UIArgs
 
 public class HeroCardUIData
 {
-    public int id;
+    public int guid;
+    public int configId;
     public int level;
     public bool isUnlock;
 
 }
 
-public class HeroCardShowObj
+public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
 {
-    GameObject gameObject;
-    Transform transform;
+    //GameObject gameObject;
+    //Transform transform;
 
     Text levelText;
     Text nameText;
@@ -30,17 +31,14 @@ public class HeroCardShowObj
 
     Button upgradeLevelBtn;
 
-    Action<int> clickUpgradeLevelCallback;
+    //Action<int> clickUpgradeLevelCallback;
 
     public HeroCardUIData uiData;
 
-    public void Init(GameObject obj, Action<int> clickUpgradeLevelCallback)
+
+
+    public override void OnInit()
     {
-        this.gameObject = obj;
-        this.transform = this.gameObject.transform;
-
-        this.clickUpgradeLevelCallback = clickUpgradeLevelCallback;
-
         levelText = this.transform.Find("level").GetComponent<Text>();
         nameText = this.transform.Find("name").GetComponent<Text>();
         unlockFlagObj = this.transform.Find("lockFlag").gameObject;
@@ -49,25 +47,39 @@ public class HeroCardShowObj
 
         upgradeLevelBtn.onClick.AddListener(() =>
         {
-            clickUpgradeLevelCallback?.Invoke(this.uiData.id);
+            this.parentObj.OnClickUpgradeLevelCallback(this.uiData.guid, 1);
+            //clickUpgradeLevelCallback?.Invoke(this.uiData.id);
         });
     }
 
-    public void Refresh(HeroCardUIData uiData)
-    {
-        this.uiData = uiData;
+    //public void Refresh(HeroCardUIData uiData)
+    //{
+    //    this.uiData = uiData;
 
-        var id = this.uiData.id;
-        var heroInfoTable = TableManager.Instance.GetById<Table.HeroInfo>(id);
-        levelText.text = "" + this.uiData.level;
+    //    var id = this.uiData.id;
+    //    var heroInfoTable = TableManager.Instance.GetById<Table.HeroInfo>(id);
+    //    levelText.text = "" + this.uiData.level;
+    //    nameText.text = "" + heroInfoTable.Name;
+    //    unlockFlagObj.SetActive(!this.uiData.isUnlock);
+    //    upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
+    //}
+
+    public override void OnRefresh(object data, int index)
+    {
+
+        this.uiData = (HeroCardUIData)data;
+
+        var configId = this.uiData.configId;
+        var heroInfoTable = TableManager.Instance.GetById<Table.HeroInfo>(configId);
+        levelText.text = "Lv." + this.uiData.level;
         nameText.text = "" + heroInfoTable.Name;
         unlockFlagObj.SetActive(!this.uiData.isUnlock);
         upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
     }
 
-    public void Release()
+    public override void OnRelease()
     {
-        clickUpgradeLevelCallback = null;
+        //clickUpgradeLevelCallback = null;
         upgradeLevelBtn.onClick.RemoveAllListeners();
     }
 
@@ -78,7 +90,7 @@ public class HeroListUI : BaseUI
     public Action onGoInfoUIBtnClick;
     public Action onCloseBtnClick;
 
-    public Action<int> onClickOneHeroUpgradeLevelBtn;
+    public Action<int, int> onClickOneHeroUpgradeLevelBtn;
 
     Button goInfoUIBtn;
     Button closeBtn;
@@ -86,8 +98,8 @@ public class HeroListUI : BaseUI
     Transform heroListRoot;
 
     List<HeroCardUIData> cardDataList = new List<HeroCardUIData>();
-
     List<HeroCardShowObj> showDataObjList = new List<HeroCardShowObj>();
+
     protected override void OnInit()
     {
         goInfoUIBtn = this.transform.Find("root/HeroCard/enterInfoBtn").GetComponent<Button>();
@@ -105,17 +117,22 @@ public class HeroListUI : BaseUI
         });
     }
 
-    internal void RefreshOneHero(HeroCardUIData nowHeroData)
+    public void OnClickUpgradeLevelCallback(int guid, int level)
     {
-        foreach (var item in showDataObjList)
-        {
-            if (item.uiData.id == nowHeroData.id)
-            {
-                item.Refresh(nowHeroData);
-                break;
-            }
-        }
+        onClickOneHeroUpgradeLevelBtn?.Invoke(guid, level);
     }
+
+    //internal void RefreshOneHero(HeroCardUIData nowHeroData)
+    //{
+    //    foreach (var item in showDataObjList)
+    //    {
+    //        if (item.uiData.id == nowHeroData.id)
+    //        {
+    //            item.Refresh(nowHeroData);
+    //            break;
+    //        }
+    //    }
+    //}
 
     public override void Refresh(UIArgs args)
     {
@@ -128,42 +145,50 @@ public class HeroListUI : BaseUI
 
     void RefreshHeroList()
     {
-        for (int i = 0; i < this.cardDataList.Count; i++)
-        {
-            var cardData = this.cardDataList[i];
+        //for (int i = 0; i < this.cardDataList.Count; i++)
+        //{
+        //    var cardData = this.cardDataList[i];
 
-            GameObject go = null;
-            if (i < heroListRoot.childCount)
-            {
-                go = heroListRoot.GetChild(i).gameObject;
-            }
-            else
-            {
-                var tempObj = heroListRoot.GetChild(0).gameObject;
-                go = GameObject.Instantiate(tempObj, heroListRoot);
-            }
+        //    GameObject go = null;
+        //    if (i < heroListRoot.childCount)
+        //    {
+        //        go = heroListRoot.GetChild(i).gameObject;
+        //    }
+        //    else
+        //    {
+        //        var tempObj = heroListRoot.GetChild(0).gameObject;
+        //        go = GameObject.Instantiate(tempObj, heroListRoot);
+        //    }
 
-            HeroCardShowObj showObj = null;
-            if (i < showDataObjList.Count)
-            {
-                showObj = showDataObjList[i];
-            }
-            else
-            {
-                showObj = new HeroCardShowObj();
-                showDataObjList.Add(showObj);
-                showObj.Init(go, onClickOneHeroUpgradeLevelBtn);
-            }
+        //    HeroCardShowObj showObj = null;
+        //    if (i < showDataObjList.Count)
+        //    {
+        //        showObj = showDataObjList[i];
+        //    }
+        //    else
+        //    {
+        //        showObj = new HeroCardShowObj();
+        //        showDataObjList.Add(showObj);
+        //        showObj.Init(go, onClickOneHeroUpgradeLevelBtn);
+        //    }
 
-            go.SetActive(true);
-            showObj.Refresh(cardData);
-        }
+        //    go.SetActive(true);
+        //    showObj.Refresh(cardData);
+        //}
 
-        for (int i = this.cardDataList.Count; i < heroListRoot.childCount; i++)
-        {
-            var obj = heroListRoot.GetChild(i).gameObject;
-            obj.SetActive(false);
-        }
+        //for (int i = this.cardDataList.Count; i < heroListRoot.childCount; i++)
+        //{
+        //    var obj = heroListRoot.GetChild(i).gameObject;
+        //    obj.SetActive(false);
+        //}
+
+        UIListArgs<HeroCardShowObj, HeroListUI> args = new UIListArgs<HeroCardShowObj, HeroListUI>();
+        args.dataList = cardDataList;
+        args.showObjList = showDataObjList;
+        args.root = heroListRoot;
+        args.parentObj = this;
+        UIFunc.DoUIList(args);
+
     }
 
     protected override void OnRelease()

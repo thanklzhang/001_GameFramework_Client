@@ -1,4 +1,5 @@
 ﻿using GameData;
+using Google.Protobuf.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ using UnityEngine;
 
 public class HeroData
 {
-    public int id;
+    public int guid;
+    public int configId;
     public int level;
 }
 
@@ -22,39 +24,67 @@ public class HeroGameDataStore : GameDataStore
     public List<HeroData> HeroList { get => heroList; set => heroList = value; }
     public Dictionary<int, HeroData> HeroDic { get => heroDic; }
 
-    public void SetHeroDataList(List<HeroData> heroList)
-    {
-        //增删改查
-        this.heroList = heroList;
-        this.heroDic = this.heroList.ToDictionary(hero => hero.id);
-    }
+    //public void SetHeroDataList(List<HeroData> heroList)
+    //{
+    //    //增删改查
+    //    this.heroList = heroList;
+    //    this.heroDic = this.heroList.ToDictionary(hero => hero.id);
+    //}
 
-    void AddOneHero(HeroData heroData)
+    public void SetHeroDataList(RepeatedField<NetProto.HeroProto> heroList)//List<HeroData> heroList
     {
-
-    }
-
-    public void UpdateOneHero(HeroData heroData)
-    {
-        //update
-        var findData = GetDataById(heroData.id);
-        if (findData != null)
+        foreach (var serverHero in heroList)
         {
-            findData.level = heroData.level;
-            //idUnlock
+            UpdateOneHero(serverHero);
         }
+
+        this.heroDic = this.heroList.ToDictionary(hero => hero.guid);
+
+        EventDispatcher.Broadcast(EventIDs.OnRefreshHeroListData);
     }
 
-    public HeroData GetDataById(int id)
+
+    public void UpdateOneHero(NetProto.HeroProto serverHero)
     {
-        if (HeroDic.ContainsKey(id))
+        var currLocalHero = this.GetDataByGuid(serverHero.Guid);
+        if (null == currLocalHero)
         {
-            return HeroDic[id];
+            currLocalHero = new HeroData();
+            this.heroList.Add(currLocalHero);
+            this.heroDic.Add(serverHero.Guid, currLocalHero);
+            //add
+        }
+        else
+        {
+            //update
+        }
+        currLocalHero.guid = serverHero.Guid;
+        currLocalHero.configId = serverHero.ConfigId;
+        currLocalHero.level = serverHero.Level;
+    }
+
+    public HeroData GetDataByGuid(int guid)
+    {
+        if (HeroDic.ContainsKey(guid))
+        {
+            return HeroDic[guid];
         }
         else
         {
             return null;
         }
 
+    }
+
+    public HeroData GetDataByConfigId(int configId)
+    {
+        foreach (var hero in HeroList)
+        {
+            if (hero.configId == configId)
+            {
+                return hero;
+            }
+        }
+        return null;
     }
 }

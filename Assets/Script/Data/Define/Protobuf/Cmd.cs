@@ -22,29 +22,31 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKsoHCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKqgICghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSEwoPUmVnaXN0",
             "QWNjb3VudDJTEGcSGAoTQXBwbHlDcmVhdGVCYXR0bGUyUxDJARIXChJUcmFu",
             "c2l0aW9uQmF0dGxlMlMQrQISHgoZVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIy",
             "UxCuAhIWChFOb3RpZnlCYXR0bGVFbmQyUxCvAhIPCgpDaGVja0xvZ2luENEP",
             "Eg4KCUVudGVyR2FtZRDSDxISCg1SZWdpc3RBY2NvdW50ENMPEhEKDFN5bmNN",
             "YWluVGFzaxDaDxIYChNGaW5pc2hNYWluVGFza1N0YWdlENsPEhkKFFJlY2Vp",
-            "dmVNYWluVGFza1J3YXJkENwPEhgKE0FwcGx5SGVyb0V4YW1CYXR0bGUQtBAS",
-            "GAoTQXBwbHlNYWluVGFza0JhdHRsZRC1EBIXChJOb3RpZnlDcmVhdGVCYXR0",
-            "bGUQuRcSFwoSUGxheWVyTG9hZFByb2dyZXNzELoXEh4KGU5vdGlmeUFsbFBs",
-            "YXllckxvYWRGaW5pc2gQuxcSFgoRQmF0dGxlUmVhZHlGaW5pc2gQvBcSFgoR",
-            "Tm90aWZ5QmF0dGxlU3RhcnQQvRcSDwoKTW92ZUVudGl0eRCdGBINCghVc2VT",
-            "a2lsbBCeGBISCg1DbGllbnRQbG90RW5kELoYEhkKFE5vdGlmeUNyZWF0ZUVu",
-            "dGl0aWVzEIEZEhUKEE5vdGlmeUVudGl0eU1vdmUQghkSGQoUTm90aWZ5RW50",
-            "aXR5U3RvcE1vdmUQgxkSHQoYTm90aWZ5RW50aXR5UmVsZWFzZVNraWxsEIQZ",
-            "EhwKF05vdGlmeUNyZWF0ZVNraWxsRWZmZWN0EIUZEh8KGk5vdGlmeVNraWxs",
-            "RWZmZWN0U3RhcnRNb3ZlEIYZEh0KGE5vdGlmeVNraWxsRWZmZWN0RGVzdHJv",
-            "eRCHGRIZChROb3RpZnlTeW5jRW50aXR5QXR0chCIGRIaChVOb3RpZnlTeW5j",
-            "RW50aXR5VmFsdWUQiRkSFQoQTm90aWZ5RW50aXR5RGVhZBCKGRIUCg9Ob3Rp",
-            "ZnlCYXR0bGVFbmQQixkSEwoOTm90aWZ5UGxheVBsb3QQjBkSEgoNTm90aWZ5",
-            "UGxvdEVuZBCNGRIdChhOb3RpZnlTZXRFbnRpdHlTaG93U3RhdGUQjhkSFQoQ",
-            "VHJhbnNpdGlvbkJhdHRsZRDlGRIcChdUcmFuc2l0aW9uQmF0dGxlMlBsYXll",
-            "chDmGWIGcHJvdG8z"));
+            "dmVNYWluVGFza1J3YXJkENwPEgwKB1N5bmNCYWcQ5A8SDwoKVXBkYXRlSXRl",
+            "bRDlDxIRCgxTeW5jSGVyb0xpc3QQ7g8SEwoOVXBkYXRlSGVyb0xpc3QQ7w8S",
+            "FQoQVXBncmFkZUhlcm9MZXZlbBDwDxIYChNBcHBseUhlcm9FeGFtQmF0dGxl",
+            "ELQQEhgKE0FwcGx5TWFpblRhc2tCYXR0bGUQtRASFwoSTm90aWZ5Q3JlYXRl",
+            "QmF0dGxlELkXEhcKElBsYXllckxvYWRQcm9ncmVzcxC6FxIeChlOb3RpZnlB",
+            "bGxQbGF5ZXJMb2FkRmluaXNoELsXEhYKEUJhdHRsZVJlYWR5RmluaXNoELwX",
+            "EhYKEU5vdGlmeUJhdHRsZVN0YXJ0EL0XEg8KCk1vdmVFbnRpdHkQnRgSDQoI",
+            "VXNlU2tpbGwQnhgSEgoNQ2xpZW50UGxvdEVuZBC6GBIZChROb3RpZnlDcmVh",
+            "dGVFbnRpdGllcxCBGRIVChBOb3RpZnlFbnRpdHlNb3ZlEIIZEhkKFE5vdGlm",
+            "eUVudGl0eVN0b3BNb3ZlEIMZEh0KGE5vdGlmeUVudGl0eVJlbGVhc2VTa2ls",
+            "bBCEGRIcChdOb3RpZnlDcmVhdGVTa2lsbEVmZmVjdBCFGRIfChpOb3RpZnlT",
+            "a2lsbEVmZmVjdFN0YXJ0TW92ZRCGGRIdChhOb3RpZnlTa2lsbEVmZmVjdERl",
+            "c3Ryb3kQhxkSGQoUTm90aWZ5U3luY0VudGl0eUF0dHIQiBkSGgoVTm90aWZ5",
+            "U3luY0VudGl0eVZhbHVlEIkZEhUKEE5vdGlmeUVudGl0eURlYWQQihkSFAoP",
+            "Tm90aWZ5QmF0dGxlRW5kEIsZEhMKDk5vdGlmeVBsYXlQbG90EIwZEhIKDU5v",
+            "dGlmeVBsb3RFbmQQjRkSHQoYTm90aWZ5U2V0RW50aXR5U2hvd1N0YXRlEI4Z",
+            "EhUKEFRyYW5zaXRpb25CYXR0bGUQ5RkSHAoXVHJhbnNpdGlvbkJhdHRsZTJQ",
+            "bGF5ZXIQ5hliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -77,6 +79,17 @@ namespace NetProto {
     [pbr::OriginalName("SyncMainTask")] SyncMainTask = 2010,
     [pbr::OriginalName("FinishMainTaskStage")] FinishMainTaskStage = 2011,
     [pbr::OriginalName("ReceiveMainTaskRward")] ReceiveMainTaskRward = 2012,
+    /// <summary>
+    /// 背包
+    /// </summary>
+    [pbr::OriginalName("SyncBag")] SyncBag = 2020,
+    [pbr::OriginalName("UpdateItem")] UpdateItem = 2021,
+    /// <summary>
+    /// 英雄
+    /// </summary>
+    [pbr::OriginalName("SyncHeroList")] SyncHeroList = 2030,
+    [pbr::OriginalName("UpdateHeroList")] UpdateHeroList = 2031,
+    [pbr::OriginalName("UpgradeHeroLevel")] UpgradeHeroLevel = 2032,
     /// <summary>
     /// 战斗入口
     /// </summary>

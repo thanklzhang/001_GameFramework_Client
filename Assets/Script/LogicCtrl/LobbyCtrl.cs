@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 public class LobbyCtrl : BaseCtrl
 {
     LobbyUI ui;
+    TitleBarUI titleBarUI;
     public override void OnInit()
     {
         //this.isParallel = false;
@@ -17,12 +19,19 @@ public class LobbyCtrl : BaseCtrl
         this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
             new LoadUIRequest<LobbyUI>(){selfFinishCallback = OnUILoadFinish},
+            new LoadUIRequest<TitleBarUI>(){selfFinishCallback = OnTitleUILoadFinish},
         });
     }
 
     public void OnUILoadFinish(LobbyUI lobbyUI)
     {
         this.ui = lobbyUI;
+    }
+
+
+    public void OnTitleUILoadFinish(TitleBarUI titleBarUI)
+    {
+        this.titleBarUI = titleBarUI;
     }
 
     public override void OnLoadFinish()
@@ -71,11 +80,37 @@ public class LobbyCtrl : BaseCtrl
     public override void OnActive()
     {
         ui.Show();
+        titleBarUI.Show();
+
+        RefreshAll();
+    }
+
+    public void RefreshAll()
+    {
+        RefreshTitleBarUI();
+    }
+
+    public void RefreshTitleBarUI()
+    {
+        //给标题栏 ui 提供数据
+        TitleBarUIArgs titleArgs = new TitleBarUIArgs();
+        titleArgs.optionList = new List<TitleOptionUIData>();
+
+        //先就显示一个
+        var bagStore = GameDataManager.Instance.BagStore;
+        TitleOptionUIData optionData = new TitleOptionUIData();
+        optionData.configId = 22000001;
+        optionData.count = bagStore.GetCountByConfigId(optionData.configId);
+
+        titleArgs.optionList.Add(optionData);
+
+        titleBarUI.Refresh(titleArgs);
     }
 
     public override void OnInactive()
     {
         ui.Hide();
+        titleBarUI.Hide();
     }
 
     public override void OnExit()

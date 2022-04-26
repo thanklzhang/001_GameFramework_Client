@@ -29,12 +29,16 @@ namespace GameData
         MainTaskGameDataStore mainTaskStore = new MainTaskGameDataStore();
         public MainTaskGameDataStore MainTaskStore { get => mainTaskStore; }
 
+        BagGameDataStore bagGameDataStore = new BagGameDataStore();
+        public BagGameDataStore BagStore { get => bagGameDataStore; }
+
         internal void Init()
         {
             HeroStore.Init();
             BattleStore.Init();
             UserStore.Init();
             MainTaskStore.Init();
+            BagStore.Init();
         }
 
     }

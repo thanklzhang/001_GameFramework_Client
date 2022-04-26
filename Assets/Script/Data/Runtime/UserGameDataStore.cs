@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-
-public class UserGameDataStore : GameDataStore
+namespace GameData
 {
-    private ulong uid;
+    public class UserGameDataStore : GameDataStore
+    {
+        private ulong uid;
 
-    public ulong Uid { get => uid; set => uid = value; }
+        public ulong Uid { get => uid; set => uid = value; }
+    }
 }

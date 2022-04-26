@@ -17,6 +17,7 @@ public enum EventIDs
     OnRefreshAllMainTaskData = 100051,
     OnPlotEnd = 100071,
     OnRefreshHeroListData = 100101,
+    OnRefreshBagData = 100102,
 
     //battle
     OnCreateBattle = 101001,

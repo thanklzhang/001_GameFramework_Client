@@ -15,6 +15,7 @@ public class NetHandlerManager : Singleton<NetHandlerManager>
         AddNetHandler(typeof(BattleEntranceNetHandler), new BattleEntranceNetHandler());
         AddNetHandler(typeof(MainTaskNetHandler), new MainTaskNetHandler());
         AddNetHandler(typeof(HeroListNetHandler), new HeroListNetHandler());
+        AddNetHandler(typeof(BagNetHandler), new BagNetHandler());
     }
 
     void AddNetHandler(Type type, NetHandler netHandler)

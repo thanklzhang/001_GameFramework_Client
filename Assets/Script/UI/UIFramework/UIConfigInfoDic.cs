@@ -22,6 +22,7 @@ public class UIConfigInfoDic
         {typeof(MainTaskUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/MainTaskUI.prefab" }},
         {typeof(MainTaskStageUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/MainTaskStageUI.prefab" }},
          {typeof(BattleResultUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/BattleResultUI.prefab" }},
+         {typeof(TitleBarUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TitleBarUI.prefab" }},
 
     };
 

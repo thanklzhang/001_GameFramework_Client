@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 190698226
+CRC: 213200637
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1e4c50ec30901871a6017af02e74a524
+    Hash: ac69bfee085209730a4719fb78890065
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 65119f005d5cebd443414130bd7671e5
+    Hash: 536ca064bc3237015af634754da1f1d6
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,19 +20,17 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
-  Script: {instanceID: 0}
-- Class: 213
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildRes/Prefabs/UI/TitleUI.prefab
+- Assets/BuildRes/Prefabs/UI/TitleBarUI.prefab
 Dependencies: []

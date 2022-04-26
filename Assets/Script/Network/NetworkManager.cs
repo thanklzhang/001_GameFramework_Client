@@ -73,9 +73,17 @@ public class NetworkManager : Singleton<NetworkManager>
         //Logx.Log("receive timeStamp : " + now);
         //Logx.Log("net delay time : " + delayTime);
 
-        Logx.Log("Network Mgr : ReceiveMsg : cmd : " + (ProtoIDs)msg.cmdId);
+        if (msg != null)
+        {
+            Logx.Log("Network Mgr : ReceiveMsg : cmd : " + (ProtoIDs)msg.cmdId);
 
-        NetMsgManager.Instance.OnReceiveMsg(msg);
+            NetMsgManager.Instance.OnReceiveMsg(msg);
+        }
+        else
+        {
+            Logx.LogError("NetworkManager : OnReceveMsg : the msg is null");
+        }
+        
 
     }
 

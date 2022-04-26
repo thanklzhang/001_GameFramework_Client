@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1360335909
+CRC: 3603356545
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -24,64 +24,67 @@ AssetBundleManifest:
       Name: assets/buildres/prefabs/ui/herolistui.ab
       Dependencies: {}
     Info_6:
-      Name: assets/buildres/prefabs/ui/titleui.ab
-      Dependencies: {}
-    Info_7:
       Name: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
       Dependencies: {}
-    Info_8:
+    Info_7:
       Name: assets/sourceres/models/role/jing_ling_nan_001_ty.ab
       Dependencies: {}
-    Info_9:
+    Info_8:
       Name: assets/sourceres/models/role/jing_ling_zhu_jian_zhu_001.ab
       Dependencies: {}
-    Info_10:
+    Info_9:
       Name: assets/sourceres/models/role/jlxb_yc_001_ty.ab
       Dependencies: {}
-    Info_11:
+    Info_10:
       Name: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
       Dependencies: {}
-    Info_12:
+    Info_11:
       Name: assets/buildres/prefabs/models/role/monster1_battle.ab
       Dependencies:
         Dependency_0: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
-    Info_13:
+    Info_12:
       Name: assets/buildres/prefabs/models/role/shangguanling_battle_001.ab
       Dependencies:
         Dependency_0: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
-    Info_14:
+    Info_13:
       Name: assets/buildres/prefabs/ui/battleresultui.ab
       Dependencies: {}
-    Info_15:
+    Info_14:
       Name: assets/buildres/prefabs/ui/battleui.ab
       Dependencies: {}
-    Info_16:
+    Info_15:
       Name: assets/buildres/prefabs/ui/confirmui.ab
       Dependencies: {}
-    Info_17:
+    Info_16:
       Name: assets/buildres/prefabs/ui/lobbyui.ab
       Dependencies: {}
-    Info_18:
+    Info_17:
       Name: assets/buildres/prefabs/ui/loginui.ab
       Dependencies: {}
-    Info_19:
+    Info_18:
       Name: assets/buildres/prefabs/ui/maintaskstageui.ab
       Dependencies: {}
-    Info_20:
+    Info_19:
       Name: assets/buildres/prefabs/ui/maintaskui.ab
       Dependencies: {}
+    Info_20:
+      Name: assets/buildres/prefabs/ui/titlebarui.ab
+      Dependencies: {}
     Info_21:
-      Name: assets/buildres/prefabs/scene/battle_scene_001.ab
+      Name: assets/buildres/prefabs/ui/titleui_del.ab
       Dependencies: {}
     Info_22:
-      Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
+      Name: assets/buildres/prefabs/scene/battle_scene_001.ab
       Dependencies: {}
     Info_23:
-      Name: assets/buildres/prefabs/effects/eft_skill_cal_001.ab
+      Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
       Dependencies: {}
     Info_24:
-      Name: assets/buildres/prefabs/effects/eft_skill_cal_002.ab
+      Name: assets/buildres/prefabs/effects/eft_skill_cal_001.ab
       Dependencies: {}
     Info_25:
+      Name: assets/buildres/prefabs/effects/eft_skill_cal_002.ab
+      Dependencies: {}
+    Info_26:
       Name: assets/buildres/prefabs/effects/eft_skill_projectile_001.ab
       Dependencies: {}

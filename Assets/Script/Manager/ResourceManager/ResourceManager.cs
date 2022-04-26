@@ -49,11 +49,12 @@ public class ResourceManager : Singleton<ResourceManager>
         }
     }
 
-
+#if UNITY_EDITOR
     public T GetObjectByEditor<T>(string path) where T : UnityEngine.Object
     {
         return UnityEditor.AssetDatabase.LoadAssetAtPath<T>(path);
     }
+
 
     public T GetObjectByConfiIdEditor<T>(int configId) where T : UnityEngine.Object
     {
@@ -61,5 +62,5 @@ public class ResourceManager : Singleton<ResourceManager>
         var path = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
         return GetObjectByEditor<T>(path);
     }
-
+#endif
 }

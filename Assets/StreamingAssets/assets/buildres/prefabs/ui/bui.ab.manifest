@@ -1,23 +1,19 @@
 ManifestFileVersion: 0
-CRC: 391551991
+CRC: 1476910544
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8d8f2f3a5f006692710c744f29f6e412
+    Hash: 4057a685f813411c73c221a7f318af53
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f98c7bdb74dd487f54cac0f4547117d5
+    Hash: a30fdafe4418bb595201c62275f371b9
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
-- Class: 28
-  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 115
-  Script: {instanceID: 0}
-- Class: 213
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
@@ -25,4 +21,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/BuildRes/Prefabs/UI/BUI.prefab
-Dependencies: []
+Dependencies:
+- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/textures/item/item0.ab

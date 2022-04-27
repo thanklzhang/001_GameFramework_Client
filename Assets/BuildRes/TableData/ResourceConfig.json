@@ -56,6 +56,14 @@
         "tag": ""
     },
     {
+        "id": 15002001,
+        "name": "item0",
+        "path": "Textures/Item",
+        "ext": "png",
+        "type": 2,
+        "tag": ""
+    },
+    {
         "id": 15006001,
         "name": "click",
         "path": "Audio",

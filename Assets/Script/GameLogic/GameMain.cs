@@ -80,7 +80,24 @@ public class GameMain : MonoBehaviour
         ////test
         //PlotManager.Instance.Test();
 
+
     }
+
+    //IEnumerator XXX()
+    //{
+    //    var img = GameObject.Find("Image__").GetComponent<RawImage>();
+    //    var path = Const.AppStreamingAssetPath + "/" + "Assets/BuildRes/Textures/BG/main_bg.ab";
+
+    //    var abCreateReq = AssetBundle.LoadFromFileAsync(path);
+
+    //    yield return abCreateReq;
+
+    //    var ab = abCreateReq.assetBundle;
+    //    var assetName = "Assets/BuildRes/Textures/BG/main_bg.png";
+    //    var asset = ab.LoadAsset<Texture>(assetName);
+    //    img.texture = asset;
+
+    //}
 
     void StartToLogin()
     {

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 619050720
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1e42416c5d3c4f2b4d41a0965ca6896b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7859cd501ea75098bcf7e53f1b477c26
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/Textures/Item/item0.png
+Dependencies: []

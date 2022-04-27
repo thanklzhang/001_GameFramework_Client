@@ -40,5 +40,10 @@
     "Assets/BuildRes/Prefabs/Effects/eft_normal_attack_projectile_001.prefab"                          : "Assets/BuildRes/Prefabs/Effects/eft_normal_attack_projectile_001.ab",
     "Assets/BuildRes/Prefabs/Effects/eft_skill_cal_001.prefab"                                         : "Assets/BuildRes/Prefabs/Effects/eft_skill_cal_001.ab",
     "Assets/BuildRes/Prefabs/Effects/eft_skill_cal_002.prefab"                                         : "Assets/BuildRes/Prefabs/Effects/eft_skill_cal_002.ab",
-    "Assets/BuildRes/Prefabs/Effects/eft_skill_projectile_001.prefab"                                  : "Assets/BuildRes/Prefabs/Effects/eft_skill_projectile_001.ab"
+    "Assets/BuildRes/Prefabs/Effects/eft_skill_projectile_001.prefab"                                  : "Assets/BuildRes/Prefabs/Effects/eft_skill_projectile_001.ab",
+    "Assets/BuildRes/Textures/BG/login_bg.jpg"                                                         : "Assets/BuildRes/Textures/BG/login_bg.ab",
+    "Assets/BuildRes/Textures/BG/main_bg.png"                                                          : "Assets/BuildRes/Textures/BG/main_bg.ab",
+    "Assets/BuildRes/Textures/Item/item0.png"                                                          : "Assets/BuildRes/Textures/Item/item0.ab",
+    "Assets/BuildRes/Textures/Item/item1.png"                                                          : "Assets/BuildRes/Textures/Item/item1.ab",
+    "Assets/BuildRes/Textures/Item/item2.png"                                                          : "Assets/BuildRes/Textures/Item/item2.ab"
 }

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 75305270
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 639cee6f4d5c4605ab9fc7b437c5b39e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7859cd501ea75098bcf7e53f1b477c26
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/Textures/BG/main_bg.png
+Dependencies: []

@@ -34,7 +34,7 @@ public class Const
 
     public static string projectRootPath = "Assets";
     //不用了
-    public static string buildPath = "BuildRes";
+    public static string buildPath = "Assets/BuildRes";
     //public static string ProjectResPath = "Assets/Resources";
     //public static string AssetsPath = "Assets";
 

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2630573713
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 083f8012aa40b32fc7e871b4185743ae
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7859cd501ea75098bcf7e53f1b477c26
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/Textures/BG/login_bg.jpg
+Dependencies: []

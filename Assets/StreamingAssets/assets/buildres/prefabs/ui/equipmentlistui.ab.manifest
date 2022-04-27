@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2857949609
+CRC: 2822077025
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b261eca6915ac8124891f4ad3da98876
+    Hash: e76f0bccc0043f8aa1f0aace63b087e2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 65119f005d5cebd443414130bd7671e5
@@ -38,3 +38,5 @@ Assets:
 Dependencies:
 - E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/aui.ab
 - E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/bui.ab
+- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/textures/bg/login_bg.ab
+- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/textures/item/item0.ab

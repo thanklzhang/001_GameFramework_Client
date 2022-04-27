@@ -13,7 +13,7 @@ public enum StrategyType
     OneByOneFile = 1,
     //该目录所有文件打成一个包
     AllInOneByFolder = 2,
-    //该目录所有一级文件打成一个包
+    //该目录所有一级文件夹打成一个包
     AllInOneBySubFolder = 3,
 }
 
@@ -59,6 +59,17 @@ public class PackageStrategy
             type = StrategyType.OneByOneFile
         });
 
+        strategyList.Add(new StrategyInfo()
+        {
+            path = Const.projectRootPath + "/" + "BuildRes/Textures/BG",
+            type = StrategyType.OneByOneFile
+        });
+
+        strategyList.Add(new StrategyInfo()
+        {
+            path = Const.projectRootPath + "/" + "BuildRes/Textures/Item",
+            type = StrategyType.OneByOneFile
+        });
 
 
         List<AssetBundleBuild> buildList = new List<AssetBundleBuild>();

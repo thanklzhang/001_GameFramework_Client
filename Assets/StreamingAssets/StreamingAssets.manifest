@@ -1,14 +1,16 @@
 ManifestFileVersion: 0
-CRC: 3603356545
+CRC: 2553342112
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: assets/buildres/prefabs/ui/aui.ab
       Dependencies:
         Dependency_0: assets/buildres/prefabs/ui/cui.ab
+        Dependency_1: assets/buildres/textures/bg/login_bg.ab
     Info_1:
       Name: assets/buildres/prefabs/ui/bui.ab
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: assets/buildres/textures/item/item0.ab
     Info_2:
       Name: assets/buildres/prefabs/ui/cui.ab
       Dependencies: {}
@@ -17,6 +19,8 @@ AssetBundleManifest:
       Dependencies:
         Dependency_0: assets/buildres/prefabs/ui/aui.ab
         Dependency_1: assets/buildres/prefabs/ui/bui.ab
+        Dependency_2: assets/buildres/textures/bg/login_bg.ab
+        Dependency_3: assets/buildres/textures/item/item0.ab
     Info_4:
       Name: assets/buildres/prefabs/ui/heroinfoui.ab
       Dependencies: {}
@@ -87,4 +91,19 @@ AssetBundleManifest:
       Dependencies: {}
     Info_26:
       Name: assets/buildres/prefabs/effects/eft_skill_projectile_001.ab
+      Dependencies: {}
+    Info_27:
+      Name: assets/buildres/textures/bg/login_bg.ab
+      Dependencies: {}
+    Info_28:
+      Name: assets/buildres/textures/bg/main_bg.ab
+      Dependencies: {}
+    Info_29:
+      Name: assets/buildres/textures/item/item0.ab
+      Dependencies: {}
+    Info_30:
+      Name: assets/buildres/textures/item/item1.ab
+      Dependencies: {}
+    Info_31:
+      Name: assets/buildres/textures/item/item2.ab
       Dependencies: {}

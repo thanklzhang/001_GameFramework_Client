@@ -45,7 +45,7 @@ public class PoolObj
         {
             var go = obj as GameObject;
             go.SetActive(false);
-            
+
         }
         this.isUsing = false;
     }
@@ -59,8 +59,10 @@ public class ObjectPool
     public string path;
     //Action<UnityEngine.Object> getObjCallbackList;
     List<Action<UnityEngine.Object>> getObjCallbackList = new List<Action<UnityEngine.Object>>();
-    internal void GetObject(Action<UnityEngine.Object> callback)
+    Type type;
+    internal void GetObject<T>(Action<UnityEngine.Object> callback)
     {
+        this.type = typeof(T);
         if (null == assetObj)
         {
             //这里这 loadAsset 一次 ，防止同时多次 LoadAsset 调用造成 ab 计数错误
@@ -76,7 +78,7 @@ public class ObjectPool
             {
                 isLoadingAsset = true;
                 getObjCallbackList.Add(callback);
-               
+
                 AssetManager.Instance.Load(path, (asset) =>
                 {
                     this.OnAssetLoadFinish(asset);
@@ -96,7 +98,11 @@ public class ObjectPool
     public bool IsGameObject()
     {
         //TODO : 根据 path 来进行断定是否是 GameObject
-        return true;
+        if (this.type == typeof(GameObject))
+        {
+            return true;
+        }
+        return false;
     }
 
     public PoolObj GetCachePoolObj()
@@ -217,7 +223,7 @@ public class ObjectPoolGroup
 {
     public Dictionary<string, ObjectPool> objectPoolDic = new Dictionary<string, ObjectPool>();
 
-    internal void GetObject(string path, Action<UnityEngine.Object> callback)
+    internal void GetObject<T>(string path, Action<UnityEngine.Object> callback)
     {
         ObjectPool pool = null;
         if (objectPoolDic.ContainsKey(path))
@@ -231,7 +237,7 @@ public class ObjectPoolGroup
             objectPoolDic.Add(path, pool);
         }
 
-        pool.GetObject(callback);
+        pool.GetObject<T>(callback);
     }
 
     public void ReturnObj(string path, UnityEngine.Object obj)
@@ -269,7 +275,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             objectPoolGroupDic.Add(type, group);
         }
 
-        group.GetObject(path, callback);
+        group.GetObject<T>(path, callback);
 
     }
 

@@ -302,6 +302,10 @@ public class BattleCtrl : BaseCtrl
             return;
         }
         var heroObj = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+        if (null == heroObj)
+        {
+            return;
+        }
         var camera3D = CameraManager.Instance.GetCamera3D();
         var heroPos = heroObj.transform.position + cameraPosOffset;
 

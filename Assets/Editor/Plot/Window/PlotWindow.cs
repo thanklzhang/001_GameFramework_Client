@@ -62,7 +62,7 @@ namespace PlotDesigner.Editor
                 fileList.Add(Path.GetFileName(filePath));
             }
 
-            //collect track and track node1
+            //collect track and track node
             trackTypeList = new List<Type>();
             trackNodeTypeList = new List<Type>();
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();

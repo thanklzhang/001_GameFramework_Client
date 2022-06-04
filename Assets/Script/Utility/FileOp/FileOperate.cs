@@ -43,9 +43,9 @@ public class FileOperate
     }
 
 
-    public static string[] GetAllFilesFromFolder(string folderPath,string pattern = "")
+    public static string[] GetAllFilesFromFolder(string folderPath,string pattern = "", SearchOption option = SearchOption.TopDirectoryOnly)
     {
-        string[] files = System.IO.Directory.GetFiles(folderPath, pattern);
+        string[] files = System.IO.Directory.GetFiles(folderPath, pattern, option);
         return files;
     }
 }

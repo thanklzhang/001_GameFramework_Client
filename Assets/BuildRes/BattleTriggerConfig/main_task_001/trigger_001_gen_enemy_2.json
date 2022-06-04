@@ -1,0 +1,325 @@
+
+{
+    "triggerEvent" : {
+        "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "__TYPE__"     : "Battle.BattleTrigger.Config.TimePassEvent",
+        "targetTime"   : 324.0
+    },
+    "executeGroup" : [
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.LoopNode",
+            "loopCount"    : {
+                "value" : 5
+            },
+            "loopExecuteGroup" : [
+                {
+                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+                    "count"        : {
+                        "value" : 1
+                    },
+                    "entityType"   : {
+                        "configId" : 1000201
+                    },
+                    "createPosition" : {
+                        "x" : {
+                            "value" : 18.0
+                        },
+                        "y" : {
+                            "value" : 0.0
+                        },
+                        "z" : {
+                            "value" : 10.0
+                        }
+                    }
+                },
+                {
+                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+                    "delayTime"    : {
+                        "value" : 1.03100001811981
+                    }
+                },
+                {
+                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+                    "delayTime"    : {
+                        "value" : 2.0
+                    }
+                },
+                {
+                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "__TYPE__"     : "Battle.BattleTrigger.Config.LoopNode",
+                    "loopCount"    : {
+                        "value" : 0
+                    },
+                    "loopExecuteGroup" : [
+                        {
+                            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                            "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+                            "count"        : {
+                                "value" : 0
+                            },
+                            "entityType"   : {
+                                "configId" : 0
+                            },
+                            "createPosition" : {
+                                "x" : {
+                                    "value" : 0.0
+                                },
+                                "y" : {
+                                    "value" : 0.0
+                                },
+                                "z" : {
+                                    "value" : 0.0
+                                }
+                            }
+                        },
+                        {
+                            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                            "__TYPE__"     : "Battle.BattleTrigger.Config.LoopNode",
+                            "loopCount"    : {
+                                "value" : 0
+                            },
+                            "loopExecuteGroup" : [
+                                {
+                                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                    "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+                                    "count"        : {
+                                        "value" : 0
+                                    },
+                                    "entityType"   : {
+                                        "configId" : 0
+                                    },
+                                    "createPosition" : {
+                                        "x" : {
+                                            "value" : 0.0
+                                        },
+                                        "y" : {
+                                            "value" : 0.0
+                                        },
+                                        "z" : {
+                                            "value" : 0.0
+                                        }
+                                    }
+                                },
+                                {
+                                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                    "__TYPE__"     : "Battle.BattleTrigger.Config.LoopNode",
+                                    "loopCount"    : {
+                                        "value" : 0
+                                    },
+                                    "loopExecuteGroup" : [
+                                        {
+                                            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                            "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+                                            "count"        : {
+                                                "value" : 0
+                                            },
+                                            "entityType"   : {
+                                                "configId" : 0
+                                            },
+                                            "createPosition" : {
+                                                "x" : {
+                                                    "value" : 0.0
+                                                },
+                                                "y" : {
+                                                    "value" : 0.0
+                                                },
+                                                "z" : {
+                                                    "value" : 0.0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                            "__TYPE__"     : "Battle.BattleTrigger.Config.FloatCheck",
+                                            "aExecuteGroup" : [
+                                                {
+                                                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                                    "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+                                                    "delayTime"    : {
+                                                        "value" : 2.0
+                                                    }
+                                                }
+                                            ],
+                                            "bExecuteGroup" : [
+                                                {
+                                                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                                    "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+                                                    "count"        : {
+                                                        "value" : 0
+                                                    },
+                                                    "entityType"   : {
+                                                        "configId" : 0
+                                                    },
+                                                    "createPosition" : {
+                                                        "x" : {
+                                                            "value" : 0.0
+                                                        },
+                                                        "y" : {
+                                                            "value" : 0.0
+                                                        },
+                                                        "z" : {
+                                                            "value" : 0.0
+                                                        }
+                                                    }
+                                                }
+                                            ],
+                                            "a"             : {
+                                                "value" : 0.0
+                                            },
+                                            "op"            : {
+                                                "value" : 0
+                                            },
+                                            "b"             : {
+                                                "value" : 0.0
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+            "delayTime"    : {
+                "value" : 5.0
+            }
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+            "count"        : {
+                "value" : 1
+            },
+            "entityType"   : {
+                "configId" : 1000201
+            },
+            "createPosition" : {
+                "x" : {
+                    "value" : 18.0
+                },
+                "y" : {
+                    "value" : 0.0
+                },
+                "z" : {
+                    "value" : 10.0
+                }
+            }
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+            "delayTime"    : {
+                "value" : 2.0
+            }
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.FloatCheck",
+            "aExecuteGroup" : [
+                {
+                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+                    "delayTime"    : {
+                        "value" : 2.0
+                    }
+                }
+            ],
+            "bExecuteGroup" : [
+                {
+                    "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+                    "count"        : {
+                        "value" : 0
+                    },
+                    "entityType"   : {
+                        "configId" : 0
+                    },
+                    "createPosition" : {
+                        "x" : {
+                            "value" : 0.0
+                        },
+                        "y" : {
+                            "value" : 0.0
+                        },
+                        "z" : {
+                            "value" : 0.0
+                        }
+                    }
+                }
+            ],
+            "a"             : {
+                "value" : 0.0
+            },
+            "op"            : {
+                "value" : 0
+            },
+            "b"             : {
+                "value" : 0.0
+            }
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+            "delayTime"    : {
+                "value" : 2.0
+            }
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+            "count"        : {
+                "value" : 0
+            },
+            "entityType"   : {
+                "configId" : 0
+            },
+            "createPosition" : {
+                "x" : {
+                    "value" : 0.0
+                },
+                "y" : {
+                    "value" : 0.0
+                },
+                "z" : {
+                    "value" : 0.0
+                }
+            }
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.CreateEntityNode",
+            "count"        : {
+                "value" : 0
+            },
+            "entityType"   : {
+                "configId" : 0
+            },
+            "createPosition" : {
+                "x" : {
+                    "value" : 0.0
+                },
+                "y" : {
+                    "value" : 0.0
+                },
+                "z" : {
+                    "value" : 0.0
+                }
+            }
+        },
+        {
+            "__ASSEMBLY__" : "BattleServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "__TYPE__"     : "Battle.BattleTrigger.Config.DelayTimeNode",
+            "delayTime"    : {
+                "value" : 2.0
+            }
+        }
+    ]
+}

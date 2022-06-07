@@ -12,13 +12,7 @@ using PlotDesigner.Runtime;
 
 namespace BattleTrigger.Editor
 {
-    public enum ConditionOperateType
-    {
-        Plus = 0,
-        Minus = 1,
-        Multi = 2,
-        Divide = 3
-    }
+
 
     public enum ConditionCompareType
     {
@@ -30,8 +24,14 @@ namespace BattleTrigger.Editor
         GreaterEqual = 5
     }
 
-    public class ConditionCheckNodeGraph : TriggerNodeGraph
+    public class ConditionNodeGraph : TriggerNodeGraph
     {
+        //条件判断
+        public ConditionCheckType conditionCheckType;
+        public ConditionCheck conditionCheck;
+
+
+        //执行的行为
         public TriggerGroupGraph aExecuteGroup;
         public TriggerGroupGraph bExecuteGroup;
 
@@ -86,6 +86,11 @@ namespace BattleTrigger.Editor
 
         public override void OnParse(JsonData nodeJsonData)
         {
+            //条件判断
+            conditionCheckType = (ConditionCheckType)int.Parse(nodeJsonData["conditionCheckType"].ToString());
+            conditionCheck = ConditionCheck.ParseConditionCheck(nodeJsonData["check"]);
+
+            //执行行为
             var aGroup = nodeJsonData["aExecuteGroup"];
             var aNodeGraphList = TriggerWindow.instance.ParseTriggerNodeList(aGroup, this.floor + 1);
             aExecuteGroup = new TriggerGroupGraph();
@@ -110,6 +115,11 @@ namespace BattleTrigger.Editor
 
         public override void OnCreate()
         {
+            //条件判断
+            conditionCheck = new Number_ConditionCheck();
+            conditionCheck.Create();
+
+            //执行行为
             aExecuteGroup = new TriggerGroupGraph();
             var aNodeGraphList = new List<TriggerNodeGraph>();
             aExecuteGroup.Init(aNodeGraphList, this.floor + 1);
@@ -141,10 +151,29 @@ namespace BattleTrigger.Editor
 
         public override JsonData OnToJson(JsonData jd)
         {
+            jd["conditionCheckType"] = (int)this.conditionCheckType;
+            jd["check"] = conditionCheck.ToJson();
+
             jd["aExecuteGroup"] = aExecuteGroup.ToJson();
             jd["bExecuteGroup"] = bExecuteGroup.ToJson();
 
             return jd;
+        }
+
+
+        public override TriggerNodeGraph OnClone()
+        {
+            ConditionNodeGraph node = new ConditionNodeGraph();
+
+            node.conditionCheckType = this.conditionCheckType;
+            node.conditionCheck = this.conditionCheck.Clone();
+
+            node.aExecuteGroup = this.aExecuteGroup.Clone();
+            node.bExecuteGroup = this.bExecuteGroup.Clone();
+            node.aShowGraph = this.aShowGraph.Clone();
+            node.bShowGraph = this.bShowGraph.Clone();
+
+            return node;
         }
 
         public override void SetFloorIncludeChildren(int floor)
@@ -171,6 +200,23 @@ namespace BattleTrigger.Editor
             }
             GUILayout.Space(6);
         }
+
+        //
+
+
+        public override string GetDrawContentStr()//Rect childRect
+        {
+            var str = this.conditionCheck.GetDrawContentStr();
+            return str;
+        }
+
+        public override void DrawSelectInfo()
+        {
+            conditionCheckType = (ConditionCheckType)EditorGUILayout.EnumPopup(conditionCheckType, new GUILayoutOption[] { GUILayout.Width(100) });
+
+            this.conditionCheck.DrawSelectInfo();
+        }
+
 
     }
 

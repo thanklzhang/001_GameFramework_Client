@@ -67,6 +67,7 @@ namespace BattleTrigger.Editor
         public JsonData ToJson()
         {
             JsonData arr = new JsonData();
+            arr.SetJsonType(JsonType.Array);
             foreach (var nodeGraph in triggerNodeGraphList)
             {
                 var jsonD = nodeGraph.ToJson();

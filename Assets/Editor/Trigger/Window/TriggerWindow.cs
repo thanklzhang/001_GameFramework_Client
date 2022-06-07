@@ -42,7 +42,7 @@ namespace BattleTrigger.Editor
             window = EditorWindow.GetWindow<TriggerWindow>(false, "Trigger Editor");
             TriggerWindow.instance = window;
 
-            window.minSize = new Vector2(1300f, 100f);
+            window.minSize = new Vector2(1300f, 500f);
             window.wantsMouseMove = true;
             window.Init();
         }
@@ -393,6 +393,7 @@ namespace BattleTrigger.Editor
 
         public TriggerNodeGraph currSelectTriggerNodeGraph;
 
+        Vector2 triggerSelectNodeProcessScrollPos;
         public void DrawSelectTriggerNodeInfo()
         {
             if (null == currSelectTriggerNodeGraph)
@@ -403,14 +404,21 @@ namespace BattleTrigger.Editor
             rect.x += 560;
             rect.y += 20;
             rect.width = 460;
-            rect.height = 500;//dynamic
+            rect.height = 440;//dynamic
 
             GUILayout.BeginArea(rect);
+
+            triggerSelectNodeProcessScrollPos = GUILayout.BeginScrollView(triggerSelectNodeProcessScrollPos, false, true, new GUILayoutOption[] { });
+
+
             GUILayout.BeginVertical();
 
             currSelectTriggerNodeGraph.DrawSelectInfo();
 
             GUILayout.EndVertical();
+
+            GUILayout.EndScrollView();
+
             GUILayout.EndArea();
         }
 

@@ -15,21 +15,25 @@ namespace BattleTrigger.Editor
     [Serializable]
     public class DelayTimeNodeGraph : TriggerNodeGraph
     {
-        public float delayTime;
+        //public float delayTime;
+
+        public NumberVarField delayTime;
 
         public override void OnParse(JsonData nodeJsonData)
         {
-            delayTime = (float.Parse(nodeJsonData["delayTime"]["value"].ToString()));
+            //delayTime = (float.Parse(nodeJsonData["delayTime"]["value"].ToString()));
+            delayTime = NumberVarField.ParseNumberVarField(nodeJsonData["delayTime"]);
         }
 
         public override void OnCreate()
         {
-            delayTime = 2.00f;
+            delayTime = new NumberVarField();
+            delayTime.Create();
         }
 
         public override string GetDrawContentStr()//Rect childRect
         {
-            var str = "等待 " + delayTime + " 秒";
+            var str = "等待 " + delayTime.GetDrawContentStr() + " 秒";
             return str;
         }
 
@@ -41,7 +45,9 @@ namespace BattleTrigger.Editor
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("等待", style);
-            delayTime = EditorGUILayout.FloatField(delayTime, new GUILayoutOption[] { GUILayout.Width(50) });
+
+            delayTime.DrawSelectInfo();
+
             GUILayout.Label("秒", style);
             GUILayout.EndHorizontal();
         }
@@ -50,15 +56,14 @@ namespace BattleTrigger.Editor
         {
             TriggerNodeGraph node = new DelayTimeNodeGraph();
             var delayTimeNode = node as DelayTimeNodeGraph;
-            delayTimeNode.delayTime = this.delayTime;
+            delayTimeNode.delayTime = (NumberVarField)this.delayTime.Clone();
 
             return delayTimeNode;
         }
 
         public override JsonData OnToJson(JsonData jd)
         {
-            jd["delayTime"] = new JsonData();
-            jd["delayTime"]["value"] = delayTime;
+            jd["delayTime"] = delayTime.ToJson();
             return jd;
         }
 

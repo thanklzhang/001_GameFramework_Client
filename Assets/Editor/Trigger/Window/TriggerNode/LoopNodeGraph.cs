@@ -15,7 +15,7 @@ namespace BattleTrigger.Editor
     [Serializable]
     public class LoopNodeGraph : TriggerNodeGraph
     {
-        public int loopCount;
+        public NumberVarField loopCount;
 
         public TriggerNodeGraph actionShowNodeGraph;
 
@@ -25,7 +25,7 @@ namespace BattleTrigger.Editor
 
         public override string GetDrawContentStr()//Rect childRect
         {
-            var str = string.Format("循环 {0} 次", loopCount);
+            var str = string.Format("循环 {0} 次", loopCount.GetDrawContentStr());
             return str;
         }
 
@@ -41,7 +41,7 @@ namespace BattleTrigger.Editor
 
         public override void OnParse(JsonData nodeJsonData)
         {
-            loopCount = (int.Parse(nodeJsonData["loopCount"]["value"].ToString()));
+            loopCount = NumberVarField.ParseNumberVarField(nodeJsonData["loopCount"]);
 
             var group = nodeJsonData["loopExecuteGroup"];
             var nodeGraphList = TriggerWindow.instance.ParseTriggerNodeList(group, this.floor + 1);
@@ -56,6 +56,9 @@ namespace BattleTrigger.Editor
 
         public override void OnCreate()
         {
+            loopCount = new NumberVarField();
+            loopCount.Create();
+
             loopExecuteGroup = new TriggerGroupGraph();
             var nodeGraphList = new List<TriggerNodeGraph>();
             loopExecuteGroup.Init(nodeGraphList, this.floor + 1);
@@ -74,7 +77,8 @@ namespace BattleTrigger.Editor
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("循环 ", style);
-            loopCount = EditorGUILayout.IntField(loopCount, new GUILayoutOption[] { GUILayout.Width(40) });
+            //loopCount = EditorGUILayout.IntField(loopCount, new GUILayoutOption[] { GUILayout.Width(40) });
+            loopCount.DrawSelectInfo();
             GUILayout.Label(" 次", style);
             GUILayout.EndHorizontal();
         }
@@ -83,7 +87,7 @@ namespace BattleTrigger.Editor
         {
             TriggerNodeGraph node = new LoopNodeGraph();
             var loopNode = node as LoopNodeGraph;
-            loopNode.loopCount = this.loopCount;
+            loopNode.loopCount = (NumberVarField)this.loopCount.Clone();
             loopNode.actionShowNodeGraph = this.actionShowNodeGraph.Clone();
             loopNode.loopExecuteGroup = this.loopExecuteGroup.Clone();
 
@@ -94,7 +98,7 @@ namespace BattleTrigger.Editor
         public override JsonData OnToJson(JsonData jd)
         {
             jd["loopCount"] = new JsonData();
-            jd["loopCount"]["value"] = loopCount;
+            jd["loopCount"] = loopCount.ToJson();
             jd["loopExecuteGroup"] = loopExecuteGroup.ToJson();
 
             return jd;

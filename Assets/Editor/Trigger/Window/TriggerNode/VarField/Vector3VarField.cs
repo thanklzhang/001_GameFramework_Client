@@ -12,70 +12,68 @@ using PlotDesigner.Runtime;
 
 namespace BattleTrigger.Editor
 {
-    public enum Number_GetValueFromType
+    public enum Vector3_GetValueFromType
     {
-        [EnumLabel("浮点数固定值")]
-        FloatFixed = 0,
-        [EnumLabel("整数固定值")]
-        IntFixed = 1,
+        [EnumLabel("固定值")]
+        Vector3Fixed = 0,
         [EnumLabel("表达式")]
-        CalculateExpression = 2,
-        [EnumLabel("实体属性")]
-        EntityAttr = 10,
+        Vector3CalculateExpression = 2,
+        [EnumLabel("实体点")]
+        EntityPoint = 10,
     }
 
-    public class NumberVarField : BaseVarField
+    public class Vector3VarField : BaseVarField
     {
-        Number_GetValueFromType getType;
-        NumberVar numberVar;
+        Vector3_GetValueFromType getType;
+        Vector3Var vector3Var;
 
         public override void OnParse(JsonData nodeJsonData)
         {
-            getType = (Number_GetValueFromType)(int.Parse(nodeJsonData["getType"].ToString()));
-            numberVar = NumberVar.ParseNumberValue(nodeJsonData["numberVar"]);
+            getType = (Vector3_GetValueFromType)(int.Parse(nodeJsonData["getType"].ToString()));
+            vector3Var = Vector3Var.ParseNumberValue(nodeJsonData["vector3Var"]);
         }
 
         public override void OnCreate()
         {
-            getType = Number_GetValueFromType.FloatFixed;
-            numberVar = new FloatFixedVar();
-            numberVar.Create();
+            getType = Vector3_GetValueFromType.Vector3Fixed;
+            vector3Var = new Vector3FixedVar();
+            vector3Var.Create();
         }
 
         public override string GetDrawContentStr()
         {
-            return numberVar.GetDrawContentStr();
+            return vector3Var.GetDrawContentStr();
         }
 
         public override void DrawSelectInfo()
         {
-            getType = (Number_GetValueFromType)EditorGUILayout_Ex.EnumPopup(getType, new GUILayoutOption[] { GUILayout.Width(100) });
+            getType = (Vector3_GetValueFromType)EditorGUILayout_Ex.EnumPopup(getType, new GUILayoutOption[] { GUILayout.Width(100) });
 
             //根据选择的 numberGetType 来进行各自的输入显示
-            var numberType = GetNumberClassType(getType);
-            if (null != numberType)
+            var vector3Type = GetNumberClassType(getType);
+            if (null != vector3Type)
             {
                 //if (!a.GetType().IsSubclassOf(numberType))
-                if (numberType != numberVar.GetType())
+                if (vector3Type != vector3Var.GetType())
                 {
-                    numberVar = null;
-                    numberVar = Activator.CreateInstance(numberType) as NumberVar;
-                    numberVar.Create();
+                    vector3Var = null;
+                    vector3Var = Activator.CreateInstance(vector3Type) as Vector3Var;
+                    vector3Var.Create();
                 }
             }
 
-            numberVar.DrawSelectInfo();
+            vector3Var.DrawSelectInfo();
         }
         public static string NameSpaceName = "BattleTrigger.Editor";
-        public Type GetNumberClassType(Number_GetValueFromType enumType)
+        public Type GetNumberClassType(Vector3_GetValueFromType enumType)
         {
             var enumName = enumType.ToString();
-            //Logx.Log("aEnumName:" + enumName);
+            Logx.Log("aEnumName:" + enumName);
             var enumfullName = NameSpaceName + "." + enumName + "Var";
             var numberType = Type.GetType(enumfullName);
             if (null == numberType)
             {
-                Logx.LogError("the type of numberVar is not found : " + enumfullName);
+                Logx.LogError("the type of vector3Var is not found : " + enumfullName);
                 return null;
             }
             return numberType;
@@ -83,11 +81,11 @@ namespace BattleTrigger.Editor
 
         public override BaseVarField OnClone()
         {
-            NumberVarField fi = new NumberVarField();
-            fi.getType = this.getType;
-            fi.numberVar = this.numberVar.Clone();
+            Vector3VarField v3VF = new Vector3VarField();
+            v3VF.getType = this.getType;
+            v3VF.vector3Var = this.vector3Var.Clone();
 
-            return fi;
+            return v3VF;
         }
 
         public override JsonData OnToJson()
@@ -100,18 +98,18 @@ namespace BattleTrigger.Editor
 
             jd["__TYPE__"] = typeName;
             jd["getType"] = (int)this.getType;
-            jd["numberVar"] = numberVar.ToJson();
+            jd["vector3Var"] = vector3Var.ToJson();
             return jd;
         }
 
-        public static NumberVarField ParseNumberVarField(JsonData nodeJsonData)
+        public static Vector3VarField ParseVector3VarField(JsonData nodeJsonData)
         {
             if (null == nodeJsonData)
             {
                 return null;
             }
 
-            NumberVarField numberVarField = null;
+            Vector3VarField vector3VarField = null;
 
             if (!nodeJsonData.ContainsKey("__TYPE__"))
             {
@@ -123,28 +121,28 @@ namespace BattleTrigger.Editor
             var str = strs[strs.Length - 1];
 
             var fullName = NameSpaceName + "." + str;
-            //Logx.Log("ParseNumberVarField fullName : " + fullName);
+            //Logx.Log("ParseVector3VarField fullName : " + fullName);
             var resultClassName = fullName;
             var type = Type.GetType(resultClassName);
             if (type != null)
             {
-                if (type.IsSubclassOf(typeof(NumberVarField)) || type == typeof(NumberVarField))
+                if (type.IsSubclassOf(typeof(Vector3VarField)) || type == typeof(Vector3VarField))
                 {
-                    numberVarField = Activator.CreateInstance(type) as NumberVarField;
-                    numberVarField.Parse(nodeJsonData);
+                    vector3VarField = Activator.CreateInstance(type) as Vector3VarField;
+                    vector3VarField.Parse(nodeJsonData);
                 }
             }
             else
             {
-                Logx.LogError("the type of numberVarField is not found : " + resultClassName);
+                Logx.LogError("the type of vector3VarField is not found : " + resultClassName);
             }
 
-            return numberVarField;
+            return vector3VarField;
         }
 
-        public virtual float Get()
+        public virtual Vector3 Get()
         {
-            return this.numberVar.Get();
+            return this.vector3Var.Get();
         }
     }
 }

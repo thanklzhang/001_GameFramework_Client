@@ -51,19 +51,10 @@ namespace BattleTrigger.Editor
         {
             triggerConfigFolderPath = Application.dataPath + "/BuildRes/BattleTriggerConfig";
 
-            //读取所有触发器文件
-            var path = triggerConfigFolderPath;
-            var filePaths = FileOperate.GetAllFilesFromFolder(path, "*.json", SearchOption.AllDirectories);
+            ReadFiles();
 
-            for (int i = 0; i < filePaths.Length; i++)
-            {
-                var filePath = filePaths[i];
-                var pathName = filePath.Substring(triggerConfigFolderPath.Length + 1);
-                fileList.Add(pathName);//Path.GetFileName(filePath);
-            }
-
-            //collect track and track node
-            triggerNodeTypeList = new List<Type>();
+             //collect track and track node
+             triggerNodeTypeList = new List<Type>();
             triggerEventTypeList = new List<Type>();
 
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -89,6 +80,20 @@ namespace BattleTrigger.Editor
                     }
                 }
 
+            }
+        }
+
+        public void ReadFiles()
+        {
+            //读取所有触发器文件
+            var path = triggerConfigFolderPath;
+            var filePaths = FileOperate.GetAllFilesFromFolder(path, "*.json", SearchOption.AllDirectories);
+            fileList = new List<string>();
+            for (int i = 0; i < filePaths.Length; i++)
+            {
+                var filePath = filePaths[i];
+                var pathName = filePath.Substring(triggerConfigFolderPath.Length + 1);
+                fileList.Add(pathName);//Path.GetFileName(filePath);
             }
         }
 
@@ -197,6 +202,28 @@ namespace BattleTrigger.Editor
         {
             GUILayout.BeginArea(new Rect(0, 0, 250, 500), EditorStyles.helpBox);
             GUILayout.Label("战斗触发器文件");
+            if (GUILayout.Button("新建触发器"))
+            {
+                var scrPath = Const.buildPath + "/" + "FileTemplate/BattleTriggerTemp/battle_trigger_temp.json";
+                var desName = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger";
+                //var desPath = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger.json";
+                var currDesName = desName;
+                for (int i = 0; i < 10000; i++)
+                {
+                    if (File.Exists(currDesName + ".json"))
+                    {
+                        currDesName = desName + i;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                var resultDesPath = currDesName + ".json";
+                FileTool.CopyFile(scrPath, resultDesPath);
+                ReadFiles();
+                //AssetDatabase.Refresh();
+            }
             fileCatalogueScrollPos = GUILayout.BeginScrollView(fileCatalogueScrollPos, false, true, new GUILayoutOption[] { });
 
             //TODO 树形结构
@@ -301,7 +328,7 @@ namespace BattleTrigger.Editor
             var str = strs[strs.Length - 1];
 
             var fullName = NameSpaceName + "." + str;
-            Logx.Log("ParseTriggerActionNode fullName : " + fullName);
+            //Logx.Log("ParseTriggerActionNode fullName : " + fullName);
             var resultClassName = fullName + "Graph";
             var type = Type.GetType(resultClassName);
             if (type != null)

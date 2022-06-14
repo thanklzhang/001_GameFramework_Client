@@ -19,27 +19,37 @@ namespace BattleTrigger.Editor
     [Serializable]
     public class CreateEntityNodeGraph : TriggerNodeGraph
     {
-        public int count;
+        public NumberVarField count;
         //public CreateEntityType createEntityType;
+        //TODO 根据 configId 显示头像等缩略信息
         public int configId;
-        public Vector3 createPosition;
-
-        public override string GetDrawContentStr()//Rect childRect
-        {
-            var str = string.Format("创建 {0} 个 '配置 id 为 {1}' 的实体 在 {2} 点上", count, configId, createPosition);
-            return str;
-        }
+        public Vector3VarField createPosition;
 
         public override void OnParse(JsonData nodeJsonData)
         {
 
-            count = (int.Parse(nodeJsonData["count"]["value"].ToString()));
+            count = NumberVarField.ParseNumberVarField(nodeJsonData["count"]);
+
             configId = (int.Parse(nodeJsonData["entityType"]["configId"].ToString()));
 
-            var x = (float.Parse(nodeJsonData["createPosition"]["x"]["value"].ToString()));
-            var y = (float.Parse(nodeJsonData["createPosition"]["y"]["value"].ToString()));
-            var z = (float.Parse(nodeJsonData["createPosition"]["z"]["value"].ToString()));
-            createPosition = new Vector3(x, y, z);
+            createPosition = Vector3VarField.ParseVector3VarField(nodeJsonData["createPosition"]);
+        }
+
+        public override void OnCreate()
+        {
+            count = new NumberVarField();
+            count.Create();
+
+            configId = 0;
+
+            createPosition = new Vector3VarField();
+            createPosition.Create();
+        }
+
+        public override string GetDrawContentStr()//Rect childRect
+        {
+            var str = string.Format("创建 {0} 个 '配置 id 为 {1}' 的实体 在 {2} 点上", count.GetDrawContentStr(), configId, createPosition.GetDrawContentStr());
+            return str;
         }
 
         public override void DrawSelectInfo()
@@ -49,25 +59,26 @@ namespace BattleTrigger.Editor
             style.normal.textColor = Color.white;
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("创建 ", style);
-            count = EditorGUILayout.IntField(count, new GUILayoutOption[] { GUILayout.Width(40) });
-            GUILayout.Label(" 个", style);
+            GUILayout.Label("创建 ", style, new GUILayoutOption[] { GUILayout.Width(30) });
+            //count = EditorGUILayout.IntField(count, new GUILayoutOption[] { GUILayout.Width(40) });
+            count.DrawSelectInfo();
+            GUILayout.Label(" 个", style, new GUILayoutOption[] { GUILayout.Width(25) });
             GUILayout.EndHorizontal();
 
             GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("配置 id 为", style);
+            GUILayout.Label("配置 id 为", style, new GUILayoutOption[] { GUILayout.Width(100) });
             configId = EditorGUILayout.IntField(configId, new GUILayoutOption[] { GUILayout.Width(120) });
-            GUILayout.Label("的实体", style);
+            GUILayout.Label("的实体", style, new GUILayoutOption[] { GUILayout.Width(60) });
             GUILayout.EndHorizontal();
 
             GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("在", style);
-            createPosition = EditorGUILayout.Vector3Field("", createPosition);
-            GUILayout.Label("点上", style);
+            GUILayout.Label("在", style, new GUILayoutOption[] { GUILayout.Width(15) });
+            createPosition.DrawSelectInfo();
+            GUILayout.Label("点上", style, new GUILayoutOption[] { GUILayout.Width(50) });
             GUILayout.EndHorizontal();
         }
 
@@ -75,27 +86,21 @@ namespace BattleTrigger.Editor
         {
             TriggerNodeGraph node = new CreateEntityNodeGraph();
             var createEntityNode = node as CreateEntityNodeGraph;
-            createEntityNode.count = this.count;
+            createEntityNode.count = (NumberVarField)this.count.Clone();
             createEntityNode.configId = this.configId;
-            createEntityNode.createPosition = this.createPosition;
+            createEntityNode.createPosition = (Vector3VarField)this.createPosition.Clone();
             return createEntityNode;
         }
 
         public override JsonData OnToJson(JsonData jd)
         {
             jd["count"] = new JsonData();
-            jd["count"]["value"] = count;
+            jd["count"] = count.ToJson();
 
             jd["entityType"] = new JsonData();
             jd["entityType"]["configId"] = configId;
 
-            jd["createPosition"] = new JsonData();
-            jd["createPosition"]["x"] = new JsonData();
-            jd["createPosition"]["x"]["value"] = createPosition.x;
-            jd["createPosition"]["y"] = new JsonData();
-            jd["createPosition"]["y"]["value"] = createPosition.y;
-            jd["createPosition"]["z"] = new JsonData();
-            jd["createPosition"]["z"]["value"] = createPosition.z;
+            jd["createPosition"] = this.createPosition.ToJson();
 
             return jd;
         }

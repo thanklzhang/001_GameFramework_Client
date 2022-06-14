@@ -47,7 +47,7 @@ namespace BattleTrigger.Editor
             var width = 50 + str.Length * 8;
             if (GUILayout.Button(str, bgBtnStyle, new GUILayoutOption[] { GUILayout.Height(20), GUILayout.Width(width) }))
             {
-                Logx.Log("TriggerWindow.instance.isRightClick : " + TriggerWindow.instance.isRightClick);
+                //Logx.Log("TriggerWindow.instance.isRightClick : " + TriggerWindow.instance.isRightClick);
                 if (TriggerWindow.instance.isRightClick)
                 {
                     //右键带年纪

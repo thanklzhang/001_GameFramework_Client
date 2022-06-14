@@ -93,7 +93,7 @@ namespace BattleTrigger.Editor
             aField.DrawSelectInfo();
             GUILayout.EndHorizontal();
             
-            op = (CalculateVarType)EditorGUILayout.EnumPopup(op, new GUILayoutOption[] { GUILayout.Width(100) });
+            op = (CalculateVarType)EditorGUILayout_Ex.EnumPopup(op, new GUILayoutOption[] { GUILayout.Width(35) });
 
             GUILayout.BeginHorizontal();
             bField.DrawSelectInfo();

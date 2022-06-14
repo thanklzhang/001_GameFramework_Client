@@ -39,6 +39,13 @@ public class FileTool
         }
 
     }
+
+    public static void CopyFile(string srcFilePath,string desFilePath)
+    {
+       
+        System.IO.File.Copy(srcFilePath, desFilePath);//复制文件
+    }
+
     /// <summary>
     /// 复制文件夹及文件
     /// </summary>

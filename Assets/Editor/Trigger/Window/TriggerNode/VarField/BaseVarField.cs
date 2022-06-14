@@ -64,9 +64,6 @@ namespace BattleTrigger.Editor
             return null;
         }
 
-        public virtual float Get()
-        {
-            return 0;
-        }
+        
     }
 }

@@ -12,14 +12,7 @@ using PlotDesigner.Runtime;
 
 namespace BattleTrigger.Editor
 {
-    public enum Number_GetValueFromType
-    {
-        FloatFixed = 0,
-        IntFixed = 1,
-        CalculateExpression = 2,
-        UnitAttr = 10,
-    }
-
+   
     public class Number_ConditionCheck : ConditionCheck
     {
         NumberVarField aField;

@@ -12,25 +12,23 @@ using PlotDesigner.Runtime;
 
 namespace BattleTrigger.Editor
 {
-    public enum CalculateVarType
+    public enum Vector3CalculateVarType
     {
         [EnumLabel("+")]
         Plus = 0,
         [EnumLabel("-")]
         Minus = 1,
-        [EnumLabel("*")]
-        Multi = 2,
-        [EnumLabel("÷")]
-        Divide = 3
+        //Multi = 2,
+        //Divide = 3
     }
 
-   
 
-    public class NumberVar : BaseVar
+
+    public class Vector3Var : BaseVar
     {
-        public virtual float Get()
+        public virtual Vector3 Get()
         {
-            return 0;
+            return Vector3.zero;
         }
 
         public void Parse(JsonData nodeJsonData)
@@ -50,7 +48,7 @@ namespace BattleTrigger.Editor
 
         public virtual void OnCreate()
         {
-            
+
         }
 
         public JsonData ToJson()
@@ -68,12 +66,12 @@ namespace BattleTrigger.Editor
             return jsonData;
         }
 
-        public NumberVar Clone()
+        public Vector3Var Clone()
         {
             return this.OnClone();
         }
 
-        public virtual NumberVar OnClone()
+        public virtual Vector3Var OnClone()
         {
             return null;
         }
@@ -89,14 +87,14 @@ namespace BattleTrigger.Editor
         }
 
         public static string NameSpaceName = "BattleTrigger.Editor";
-        public static NumberVar ParseNumberValue(JsonData nodeJsonData)
+        public static Vector3Var ParseNumberValue(JsonData nodeJsonData)
         {
             if (null == nodeJsonData)
             {
                 return null;
             }
 
-            NumberVar numberVar = null;
+            Vector3Var vector3Var = null;
 
             if (!nodeJsonData.ContainsKey("__TYPE__"))
             {
@@ -108,23 +106,23 @@ namespace BattleTrigger.Editor
             var str = strs[strs.Length - 1];
 
             var fullName = NameSpaceName + "." + str;
-            //Logx.Log("ParseNumberValue fullName : " + fullName);
+            //Logx.Log("ParseVector3rValue fullName : " + fullName);
             var resultClassName = fullName;
             var type = Type.GetType(resultClassName);
             if (type != null)
             {
-                if (type.IsSubclassOf(typeof(NumberVar)))
+                if (type.IsSubclassOf(typeof(Vector3Var)))
                 {
-                    numberVar = Activator.CreateInstance(type) as NumberVar;
-                    numberVar.Parse(nodeJsonData);
+                    vector3Var = Activator.CreateInstance(type) as Vector3Var;
+                    vector3Var.Parse(nodeJsonData);
                 }
             }
             else
             {
-                Logx.LogError("the type of numberVar is not found : " + resultClassName);
+                Logx.LogError("the type of vector3Var is not found : " + resultClassName);
             }
 
-            return numberVar;
+            return vector3Var;
         }
 
         //public static JsonData ToNumberJsonData(NumberVar numberVar)
@@ -132,24 +130,16 @@ namespace BattleTrigger.Editor
 
         //}
 
-        public static string GetCompareTypeStr(CalculateVarType calculateType)
+        public static string GetCompareTypeStr(Vector3CalculateVarType calculateType)
         {
             string str = "";
-            if (calculateType == CalculateVarType.Plus)
+            if (calculateType == Vector3CalculateVarType.Plus)
             {
                 str = "+";
             }
-            else if (calculateType == CalculateVarType.Minus)
+            else if (calculateType == Vector3CalculateVarType.Minus)
             {
                 str = "-";
-            }
-            else if (calculateType == CalculateVarType.Multi)
-            {
-                str = "*";
-            }
-            else if (calculateType == CalculateVarType.Divide)
-            {
-                str = "/";
             }
 
             return str;

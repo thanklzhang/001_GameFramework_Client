@@ -1,4 +1,5 @@
-﻿using GameData;
+﻿using Battle_Client;
+using GameData;
 using System;
 using System.Collections;
 using System.Collections.Generic;

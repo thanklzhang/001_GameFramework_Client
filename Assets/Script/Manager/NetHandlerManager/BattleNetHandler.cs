@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using NetProto;
 using GameData;
+using Battle_Client;
 
 public class BattleNetHandler : NetHandler
 {

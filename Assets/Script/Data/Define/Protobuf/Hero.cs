@@ -25,16 +25,15 @@ namespace NetProto {
             "CgpIZXJvLnByb3RvEghOZXRQcm90bxoMQ29tbW9uLnByb3RvIhAKDmNzU3lu",
             "Y0hlcm9MaXN0IkQKDnNjU3luY0hlcm9MaXN0EgsKA2VychgBIAEoBRIlCgho",
             "ZXJvTGlzdBgCIAMoCzITLk5ldFByb3RvLkhlcm9Qcm90byIxChJjc1VwZ3Jh",
-            "ZGVIZXJvTGV2ZWwSDAoEZ3VpZBgBIAEoBRINCgVsZXZlbBgCIAEoBSJIChJz",
-            "Y1VwZ3JhZGVIZXJvTGV2ZWwSCwoDZXJyGAEgASgFEiUKCGhlcm9MaXN0GAIg",
-            "AygLMhMuTmV0UHJvdG8uSGVyb1Byb3RvYgZwcm90bzM="));
+            "ZGVIZXJvTGV2ZWwSDAoEZ3VpZBgBIAEoBRINCgVsZXZlbBgCIAEoBSIhChJz",
+            "Y1VwZ3JhZGVIZXJvTGV2ZWwSCwoDZXJyGAEgASgFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csSyncHeroList), global::NetProto.csSyncHeroList.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scSyncHeroList), global::NetProto.scSyncHeroList.Parser, new[]{ "Err", "HeroList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csUpgradeHeroLevel), global::NetProto.csUpgradeHeroLevel.Parser, new[]{ "Guid", "Level" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scUpgradeHeroLevel), global::NetProto.scUpgradeHeroLevel.Parser, new[]{ "Err", "HeroList" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scUpgradeHeroLevel), global::NetProto.scUpgradeHeroLevel.Parser, new[]{ "Err" }, null, null, null)
           }));
     }
     #endregion
@@ -437,7 +436,6 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public scUpgradeHeroLevel(scUpgradeHeroLevel other) : this() {
       err_ = other.err_;
-      heroList_ = other.heroList_.Clone();
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -448,22 +446,15 @@ namespace NetProto {
     /// <summary>Field number for the "err" field.</summary>
     public const int ErrFieldNumber = 1;
     private int err_;
+    /// <summary>
+    /// HeroProto hero = 2;
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Err {
       get { return err_; }
       set {
         err_ = value;
       }
-    }
-
-    /// <summary>Field number for the "heroList" field.</summary>
-    public const int HeroListFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::NetProto.HeroProto> _repeated_heroList_codec
-        = pb::FieldCodec.ForMessage(18, global::NetProto.HeroProto.Parser);
-    private readonly pbc::RepeatedField<global::NetProto.HeroProto> heroList_ = new pbc::RepeatedField<global::NetProto.HeroProto>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NetProto.HeroProto> HeroList {
-      get { return heroList_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -480,7 +471,6 @@ namespace NetProto {
         return true;
       }
       if (Err != other.Err) return false;
-      if(!heroList_.Equals(other.heroList_)) return false;
       return true;
     }
 
@@ -488,7 +478,6 @@ namespace NetProto {
     public override int GetHashCode() {
       int hash = 1;
       if (Err != 0) hash ^= Err.GetHashCode();
-      hash ^= heroList_.GetHashCode();
       return hash;
     }
 
@@ -503,7 +492,6 @@ namespace NetProto {
         output.WriteRawTag(8);
         output.WriteInt32(Err);
       }
-      heroList_.WriteTo(output, _repeated_heroList_codec);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -512,7 +500,6 @@ namespace NetProto {
       if (Err != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Err);
       }
-      size += heroList_.CalculateSize(_repeated_heroList_codec);
       return size;
     }
 
@@ -524,7 +511,6 @@ namespace NetProto {
       if (other.Err != 0) {
         Err = other.Err;
       }
-      heroList_.Add(other.heroList_);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -537,10 +523,6 @@ namespace NetProto {
             break;
           case 8: {
             Err = input.ReadInt32();
-            break;
-          }
-          case 18: {
-            heroList_.AddEntriesFrom(input, _repeated_heroList_codec);
             break;
           }
         }

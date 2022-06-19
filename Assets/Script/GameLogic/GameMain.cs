@@ -11,6 +11,7 @@ using LitJson;
 using Table;
 using GameData;
 using PlotDesigner.Runtime;
+using Battle_Client;
 
 public class GameMain : MonoBehaviour
 {

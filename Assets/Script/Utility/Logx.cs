@@ -11,6 +11,7 @@ using System.Linq;
 public class Logx
 {
     public static bool enable = true;
+    public static bool isShowFrame = true;
     public enum LogType
     {
         Normal = 1,
@@ -32,7 +33,18 @@ public class Logx
         {
             return;
         }
-        Debug.Log(obj);
+        if (isShowFrame)
+        {
+            var currBattleFrameNum = GameMain.Instance.currBattleFrameNum;
+            Debug.Log("[frame:" + currBattleFrameNum + "] " + obj);
+
+        }
+        else
+        {
+            Debug.Log(obj);
+        }
+        
+
     }
 
     public static void LogWarning(object obj)

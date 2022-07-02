@@ -1,7 +1,7 @@
 [
     {
         "id": 12001001,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 1,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 0,
@@ -14,7 +14,7 @@
     },
     {
         "id": 12001002,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 2,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 10,
@@ -27,7 +27,7 @@
     },
     {
         "id": 12001003,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 3,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 11,
@@ -40,7 +40,7 @@
     },
     {
         "id": 12001004,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 4,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 12,
@@ -53,7 +53,7 @@
     },
     {
         "id": 12001005,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 5,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 13,
@@ -66,7 +66,7 @@
     },
     {
         "id": 12001006,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 6,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 14,
@@ -79,7 +79,7 @@
     },
     {
         "id": 12001007,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 7,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 15,
@@ -92,7 +92,7 @@
     },
     {
         "id": 12001008,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 8,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 16,
@@ -105,7 +105,7 @@
     },
     {
         "id": 12001009,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 9,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 17,
@@ -118,7 +118,7 @@
     },
     {
         "id": 12001010,
-        "entityId": 1000001,
+        "templateId": 1,
         "starLevel": 10,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 18,
@@ -131,7 +131,7 @@
     },
     {
         "id": 12002001,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 1,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 0,
@@ -144,7 +144,7 @@
     },
     {
         "id": 12002002,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 2,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 151,
@@ -157,7 +157,7 @@
     },
     {
         "id": 12002003,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 3,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 152,
@@ -170,7 +170,7 @@
     },
     {
         "id": 12002004,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 4,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 153,
@@ -183,7 +183,7 @@
     },
     {
         "id": 12002005,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 5,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 154,
@@ -196,7 +196,7 @@
     },
     {
         "id": 12002006,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 6,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 155,
@@ -209,7 +209,7 @@
     },
     {
         "id": 12002007,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 7,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 156,
@@ -222,7 +222,7 @@
     },
     {
         "id": 12002008,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 8,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 157,
@@ -235,7 +235,7 @@
     },
     {
         "id": 12002009,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 9,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 158,
@@ -248,7 +248,7 @@
     },
     {
         "id": 12002010,
-        "entityId": 1000002,
+        "templateId": 2,
         "starLevel": 10,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 159,

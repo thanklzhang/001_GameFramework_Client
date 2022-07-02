@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Battle;
+using Battle_Client;
+using GameData;
+using NetProto;
+using UnityEngine;
+namespace Battle_Client
+{
+    public interface IBattleClientMsgSender
+    {
+        void Send_PlayerLoadProgress(int progress);//千分比
+        void Send_BattleReadyFinish();
+        void Send_ClientPlotEnd();
+        void Send_MoveEntity(int guid, UnityEngine.Vector3 targetPos);
+        void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos);
+       
+    }
+}

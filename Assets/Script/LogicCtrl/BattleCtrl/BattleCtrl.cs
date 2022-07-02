@@ -29,6 +29,10 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.AddListener<bool>(EventIDs.OnBattleEnd, OnOnBattleEnd);
         EventDispatcher.AddListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
 
+        EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
+        EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
+
+
         hpModule = new HpModule();
 
     }
@@ -114,11 +118,14 @@ public class BattleCtrl : BaseCtrl
     public override void OnEnter(CtrlArgs args)
     {
         //假设加载好了
-        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-        battleNet.SendPlayerLoadProgress(1000);
+        //var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+        //battleNet.SendPlayerLoadProgress(1000);
+
+        ui.SetStateText("self load finish , wait all player load finish");
+        BattleManager.Instance.MsgSender.Send_PlayerLoadProgress(1000);
 
 
-        ui.SetStateText("ready all player load finish");
+       
     }
 
     public override void OnActive()
@@ -128,8 +135,8 @@ public class BattleCtrl : BaseCtrl
 
         this.resultUI.onClickConfirmBtn += OnClickResultConfirmBtn;
 
-        EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
-        EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
+        //EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
+        //EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
         ui.Show();
         ui.SetReadyBattleBtnShowState(false);
@@ -142,8 +149,10 @@ public class BattleCtrl : BaseCtrl
 
     void OnClickReadyStartBtn()
     {
-        var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-        battleNet.SendBattleReadyFinish(null);
+        //var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+        //battleNet.SendBattleReadyFinish(null);
+
+        BattleManager.Instance.MsgSender.Send_BattleReadyFinish();
     }
 
     void OnClickResultConfirmBtn()
@@ -155,7 +164,7 @@ public class BattleCtrl : BaseCtrl
     {
         ui.SetReadyBattleBtnShowState(true);
 
-        ui.SetStateText("ready battle start");
+        ui.SetStateText("wait to battle start");
 
     }
 
@@ -175,7 +184,9 @@ public class BattleCtrl : BaseCtrl
         var myUid = GameDataManager.Instance.UserStore.Uid;
 
         var guid = 1;//目前这个不用发 因为 1 个玩家只控制一个英雄实体 服务器已经记录 这里先保留 entity guid
-        battleNet.SendMoveEntity(guid, clickPos);
+        //battleNet.SendMoveEntity(guid, clickPos);
+        BattleManager.Instance.MsgSender.Send_MoveEntity(guid,clickPos);
+
     }
 
     public bool TryToGetRayOnGroundPos(out Vector3 pos)
@@ -240,7 +251,7 @@ public class BattleCtrl : BaseCtrl
     {
         this.ui.Update(timeDelta);
 
-        var battleState = BattleManager.Instance.battleState;
+        var battleState = BattleManager.Instance.BattleState;
         if (battleState == BattleState.End)
         {
             return;
@@ -409,8 +420,8 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnInactive()
     {
-        EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
-        EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
+        //EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
+        //EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
 
         ui.Hide();
@@ -436,6 +447,9 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
         EventDispatcher.RemoveListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
         EventDispatcher.RemoveListener<bool>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
+
+        EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
+        EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
 
     }

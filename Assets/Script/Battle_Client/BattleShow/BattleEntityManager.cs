@@ -34,12 +34,19 @@ namespace Battle_Client
         }
 
         //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-        internal BattleEntity CreateEntity(BattleEntityProto serverEntity)
+        //internal BattleEntity CreateEntity(BattleEntityProto serverEntity)
+        //{
+        //    var entity = CreateViewEntityInfo(serverEntity);
+        //    entity.StartSelfLoadModel();
+        //    return entity;
+        //}
+        internal BattleEntity CreateEntity(BattleClientMsg_Entity msg_entity)
         {
-            var entity = CreateViewEntityInfo(serverEntity);
+            var entity = CreateViewEntityInfo(msg_entity);
             entity.StartSelfLoadModel();
             return entity;
         }
+
 
 
         ////收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
@@ -50,10 +57,47 @@ namespace Battle_Client
         //}
 
         //只创建一个简单显示实体 包括完整数据 , 是创建一个完整实体的一个步骤
-        internal BattleEntity CreateViewEntityInfo(NetProto.BattleEntityProto serverEntity)
+        //internal BattleEntity CreateViewEntityInfo(NetProto.BattleEntityProto serverEntity)
+        //{
+        //    var guid = serverEntity.Guid;
+        //    var configId = serverEntity.ConfigId;
+
+        //    if (entityDic.ContainsKey(guid))
+        //    {
+        //        Logx.LogWarning("BattleEntityManager : OnCreateEntity : the guid is exist : " + guid);
+        //        return null;
+        //    }
+
+        //    BattleEntity entity = new BattleEntity();
+        //    entity.Init(guid, configId);
+        //    entity.SetPosition(BattleConvert.ConverToVector3(serverEntity.Position));
+
+        //    //填充技能
+        //    List<BattleSkillInfo> skills = new List<BattleSkillInfo>();
+        //    foreach (var serverSkill in serverEntity.SkillInitList)
+        //    {
+        //        BattleSkillInfo skill = new BattleSkillInfo()
+        //        {
+        //            configId = serverSkill.ConfigId,
+        //            level = serverSkill.Level
+        //        };
+        //        skills.Add(skill);
+        //    }
+        //    entity.SetSkillList(skills);
+
+
+        //    entityDic.Add(guid, entity);
+
+        //    //EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
+
+        //    //entity.StartLoadModel(loadFinishCallback);
+        //    return entity;
+        //}
+
+        internal BattleEntity CreateViewEntityInfo(BattleClientMsg_Entity msgEntity)
         {
-            var guid = serverEntity.Guid;
-            var configId = serverEntity.ConfigId;
+            var guid = msgEntity.guid;
+            var configId = msgEntity.configId;
 
             if (entityDic.ContainsKey(guid))
             {
@@ -63,16 +107,17 @@ namespace Battle_Client
 
             BattleEntity entity = new BattleEntity();
             entity.Init(guid, configId);
-            entity.SetPosition(BattleConvert.ConverToVector3(serverEntity.Position));
+            entity.SetPosition(msgEntity.position);
 
             //填充技能
             List<BattleSkillInfo> skills = new List<BattleSkillInfo>();
-            foreach (var serverSkill in serverEntity.SkillInitList)
+            msgEntity.skills = null == msgEntity.skills ? new List<BattleClientMsg_Skill>() : msgEntity.skills;
+            foreach (var serverSkill in msgEntity.skills)
             {
                 BattleSkillInfo skill = new BattleSkillInfo()
                 {
-                    configId = serverSkill.ConfigId,
-                    level = serverSkill.Level
+                    configId = serverSkill.configId,
+                    level = serverSkill.level
                 };
                 skills.Add(skill);
             }
@@ -86,6 +131,7 @@ namespace Battle_Client
             //entity.StartLoadModel(loadFinishCallback);
             return entity;
         }
+
 
         /// <summary>
         /// 通知创建当前所有已存在的实体
@@ -290,7 +336,7 @@ namespace Battle_Client
         }
 
         //这里时只是控制显隐
-        internal void SetEntitiesShowState(List<int> entityGuids, bool isShow)
+        internal void SetEntitiesShowState(bool isShow, List<int> entityGuids)
         {
             foreach (var guid in entityGuids)
             {

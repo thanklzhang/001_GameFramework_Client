@@ -6,12 +6,12 @@ using System.IO;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Assets.Script.Combat;
 using LitJson;
 using Table;
 using GameData;
 using PlotDesigner.Runtime;
 using Battle_Client;
+
 
 public class GameMain : MonoBehaviour
 {
@@ -22,17 +22,27 @@ public class GameMain : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        Instance = this;
     }
 
     private void Start()
     {
-        Instance = this;
 
-        this.GameInit();
+
+        //this.StartToLogin();
     }
 
 
-    void GameInit()
+    //[RuntimeInitializeOnLoadMethod]
+    //public static void Startup()
+    //{
+    //    var scene = SceneManager.GetActiveScene();
+    //    var gameInitPrefab = Resources.Load("GameInit") as GameObject;
+    //    var go = Instantiate(gameInitPrefab);
+    //}
+
+    public void GameInit()
     {
         Logx.Log("!!!game startup ... ");
 
@@ -75,8 +85,6 @@ public class GameMain : MonoBehaviour
 
         Logx.Log("!!!finish init game");
 
-        this.StartToLogin();
-
 
         ////test
         //PlotManager.Instance.Test();
@@ -100,12 +108,15 @@ public class GameMain : MonoBehaviour
 
     //}
 
-    void StartToLogin()
+    public void StartToLogin()
     {
         CtrlManager.Instance.Enter<LoginCtrl>();
+    }
 
-
-
+    public void StartLocalBattle()
+    {
+        int battleConfigId = 5001011;
+        BattleManager.Instance.CreateLocalBattle(battleConfigId);
     }
 
     //void StartToEnterGame(NetProto.scCheckLogin result)
@@ -139,18 +150,26 @@ public class GameMain : MonoBehaviour
         Logx.Log("StartGame !!!");
     }
 
+    public int currBattleFrameNum = 0;
+
     // Update is called once per frame
     void Update()
     {
+       
         LoadTaskManager.Instance.Update(Time.deltaTime);
         ResourceManager.Instance.Update(Time.deltaTime);
         CtrlManager.Instance.Update(Time.deltaTime);
+
+        BattleManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
         BattleSkillEffectManager.Instance.Update(Time.deltaTime);
+
         PlotManager.Instance.Update(Time.deltaTime);
 
         NetworkManager.Instance.Update();
-        
+
+        currBattleFrameNum = currBattleFrameNum + 1;
+
     }
 
     private void LateUpdate()
@@ -161,13 +180,6 @@ public class GameMain : MonoBehaviour
     private void OnDestroy()
     {
 
-    }
-
-    [RuntimeInitializeOnLoadMethod]
-    public static void Startup()
-    {
-        var gameInitPrefab = Resources.Load("GameInit") as GameObject;
-        var go = Instantiate(gameInitPrefab);
     }
 
 }

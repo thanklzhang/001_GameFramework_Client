@@ -1,7 +1,7 @@
 [
     {
         "id": 11001001,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 1,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 0,
@@ -14,7 +14,7 @@
     },
     {
         "id": 11001002,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 2,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 10,
@@ -27,7 +27,7 @@
     },
     {
         "id": 11001003,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 3,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 20,
@@ -40,7 +40,7 @@
     },
     {
         "id": 11001004,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 4,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 30,
@@ -53,7 +53,7 @@
     },
     {
         "id": 11001005,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 5,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 40,
@@ -66,7 +66,7 @@
     },
     {
         "id": 11001006,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 6,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 50,
@@ -79,7 +79,7 @@
     },
     {
         "id": 11001007,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 7,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 60,
@@ -92,7 +92,7 @@
     },
     {
         "id": 11001008,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 8,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 70,
@@ -105,7 +105,7 @@
     },
     {
         "id": 11001009,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 9,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 80,
@@ -118,7 +118,7 @@
     },
     {
         "id": 11001010,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 10,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 90,
@@ -131,7 +131,7 @@
     },
     {
         "id": 11001011,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 11,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 100,
@@ -144,7 +144,7 @@
     },
     {
         "id": 11001012,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 12,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 110,
@@ -157,7 +157,7 @@
     },
     {
         "id": 11001013,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 13,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 120,
@@ -170,7 +170,7 @@
     },
     {
         "id": 11001014,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 14,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 130,
@@ -183,7 +183,7 @@
     },
     {
         "id": 11001015,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 15,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 140,
@@ -196,7 +196,7 @@
     },
     {
         "id": 11001016,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 16,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 150,
@@ -209,7 +209,7 @@
     },
     {
         "id": 11001017,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 17,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 160,
@@ -222,7 +222,7 @@
     },
     {
         "id": 11001018,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 18,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 170,
@@ -235,7 +235,7 @@
     },
     {
         "id": 11001019,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 19,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 180,
@@ -248,7 +248,7 @@
     },
     {
         "id": 11001020,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 20,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 190,
@@ -261,7 +261,7 @@
     },
     {
         "id": 11001021,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 21,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 200,
@@ -274,7 +274,7 @@
     },
     {
         "id": 11001022,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 22,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 210,
@@ -287,7 +287,7 @@
     },
     {
         "id": 11001023,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 23,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 220,
@@ -300,7 +300,7 @@
     },
     {
         "id": 11001024,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 24,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 230,
@@ -313,7 +313,7 @@
     },
     {
         "id": 11001025,
-        "entityId": 1000001,
+        "templateId": 1,
         "level": 25,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 240,
@@ -326,7 +326,7 @@
     },
     {
         "id": 11002001,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 1,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 0,
@@ -339,7 +339,7 @@
     },
     {
         "id": 11002002,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 2,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 151,
@@ -352,7 +352,7 @@
     },
     {
         "id": 11002003,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 3,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 152,
@@ -365,7 +365,7 @@
     },
     {
         "id": 11002004,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 4,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 153,
@@ -378,7 +378,7 @@
     },
     {
         "id": 11002005,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 5,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 154,
@@ -391,7 +391,7 @@
     },
     {
         "id": 11002006,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 6,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 155,
@@ -404,7 +404,7 @@
     },
     {
         "id": 11002007,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 7,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 156,
@@ -417,7 +417,7 @@
     },
     {
         "id": 11002008,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 8,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 157,
@@ -430,7 +430,7 @@
     },
     {
         "id": 11002009,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 9,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 158,
@@ -443,7 +443,7 @@
     },
     {
         "id": 11002010,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 10,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 159,
@@ -456,7 +456,7 @@
     },
     {
         "id": 11002011,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 11,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 160,
@@ -469,7 +469,7 @@
     },
     {
         "id": 11002012,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 12,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 161,
@@ -482,7 +482,7 @@
     },
     {
         "id": 11002013,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 13,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 162,
@@ -495,7 +495,7 @@
     },
     {
         "id": 11002014,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 14,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 163,
@@ -508,7 +508,7 @@
     },
     {
         "id": 11002015,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 15,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 164,
@@ -521,7 +521,7 @@
     },
     {
         "id": 11002016,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 16,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 165,
@@ -534,7 +534,7 @@
     },
     {
         "id": 11002017,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 17,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 166,
@@ -547,7 +547,7 @@
     },
     {
         "id": 11002018,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 18,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 167,
@@ -560,7 +560,7 @@
     },
     {
         "id": 11002019,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 19,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 168,
@@ -573,7 +573,7 @@
     },
     {
         "id": 11002020,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 20,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 169,
@@ -586,7 +586,7 @@
     },
     {
         "id": 11002021,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 21,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 170,
@@ -599,7 +599,7 @@
     },
     {
         "id": 11002022,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 22,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 171,
@@ -612,7 +612,7 @@
     },
     {
         "id": 11002023,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 23,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 172,
@@ -625,7 +625,7 @@
     },
     {
         "id": 11002024,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 24,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 173,
@@ -638,7 +638,7 @@
     },
     {
         "id": 11002025,
-        "entityId": 1000002,
+        "templateId": 2,
         "level": 25,
         "describe": "\u51e4\u7d2b\u5915",
         "attack": 174,

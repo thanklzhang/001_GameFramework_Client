@@ -157,20 +157,6 @@ namespace Battle_Client
             gameObject.transform.position = pos;
         }
 
-        public void Update(float timeDelta)
-        {
-            if (state == BattleEntityState.Move)
-            {
-                var moveVector = moveTargetPos - this.gameObject.transform.position;
-                var speed = this.attr.moveSpeed;
-                var dir = moveVector.normalized;
-                //var dis = moveVector.magnitude;
-
-                var currPos = this.gameObject.transform.position;
-
-                this.gameObject.transform.position = currPos + dir * speed * timeDelta;
-            }
-        }
 
         internal Vector3 GetPosition()
         {
@@ -194,7 +180,7 @@ namespace Battle_Client
 
         internal void StartMove(Vector3 targetPos, float moveSpeed)
         {
-            Logx.Log("entity start move : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
+            //Logx.Log("moveTest : battleClient : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
             state = BattleEntityState.Move;
 
             this.moveTargetPos = targetPos;
@@ -202,12 +188,50 @@ namespace Battle_Client
             PlayAnimation("walk");
         }
 
+        //根据消息来真实的终止移动
         public void StopMove(Vector3 endPos)
         {
             state = BattleEntityState.Idle;
+
+            //if (this.configId == 1200001)
+            //{
+            //    Logx.Log("moveTest : battleClient : reach : " + endPos.x + " " + endPos.z);
+
+            //}
+
+
+
             PlayAnimation("free");
+
+            if (CheckPosIsForcePullBack(endPos))
+            {
+                this.SetPosition(endPos);
+            }
+        }
+
+        //检查当前点和目标的距离是否需要强制拉回
+        public bool CheckPosIsForcePullBack(Vector3 checkPos)
+        {
+            var len = (checkPos - this.GetPosition()).magnitude;
+            
+            if (len <= 0.1)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void FakeStopMove(Vector3 endPos)
+        {
+            state = BattleEntityState.Idle;
+
+            //Logx.Log("moveTest : battleClient : fake reach : " + endPos.x + " " + endPos.y);
+
+            PlayAnimation("free");
+
             this.SetPosition(endPos);
         }
+
 
         internal void ReleaseSkill()
         {
@@ -230,48 +254,132 @@ namespace Battle_Client
 
         }
 
-        internal void SyncAttr(RepeatedField<BattleEntityAttrProto> attrs)
+        //internal void SyncAttr(RepeatedField<BattleEntityAttrProto> attrs)
+        //{
+        //    foreach (var item in attrs)
+        //    {
+        //        var type = (EntityAttrType)item.Type;
+        //        if (type == EntityAttrType.Attack)
+        //        {
+        //            this.attr.attack = item.Value;
+        //        }
+        //        else if (type == EntityAttrType.MaxHealth)
+        //        {
+        //            this.attr.maxHealth = item.Value;
+        //        }
+        //        else if (type == EntityAttrType.MoveSpeed)
+        //        {
+        //            // /1000
+        //            this.attr.moveSpeed = item.Value / 1000.0f;
+        //        }
+
+        //        Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.Value);
+        //    }
+        //    EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
+        //}
+
+        internal void SyncAttr(List<BattleClientMsg_BattleAttr> attrs)
         {
             foreach (var item in attrs)
             {
-                var type = (EntityAttrType)item.Type;
+                var type = (EntityAttrType)item.type;
                 if (type == EntityAttrType.Attack)
                 {
-                    this.attr.attack = item.Value;
+                    this.attr.attack = item.value;
                 }
                 else if (type == EntityAttrType.MaxHealth)
                 {
-                    this.attr.maxHealth = item.Value;
+                    this.attr.maxHealth = item.value;
                 }
                 else if (type == EntityAttrType.MoveSpeed)
                 {
                     // /1000
-                    this.attr.moveSpeed = item.Value / 1000.0f;
+                    this.attr.moveSpeed = item.value / 1000.0f;
                 }
 
-                Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.Value);
+                Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
             }
             EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
         }
 
-        internal void SyncValue(RepeatedField<BattleEntityValueProto> values)
+
+        //internal void SyncValue(RepeatedField<BattleEntityValueProto> values)
+        //{
+        //    foreach (var item in values)
+        //    {
+        //        var type = (EntityCurrValueType)item.Type;
+        //        var value = item.Value;
+        //        if (type == EntityCurrValueType.CurrHealth)
+        //        {
+        //            this.CurrHealth = value;
+        //        }
+
+
+        //        Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.Value);
+        //    }
+        //    EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
+
+        //}
+
+        internal void SyncValue(List<BattleClientMsg_BattleValue> values)
         {
             foreach (var item in values)
             {
-                var type = (EntityCurrValueType)item.Type;
-                var value = item.Value;
+                var type = (EntityCurrValueType)item.type;
+                var value = item.value;
                 if (type == EntityCurrValueType.CurrHealth)
                 {
                     this.CurrHealth = value;
                 }
 
 
-                Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.Value);
+                Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
             }
             EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
 
         }
 
+        public void Update(float timeDelta)
+        {
+            if (state == BattleEntityState.Move)
+            {
+                var moveVector = moveTargetPos - this.gameObject.transform.position;
+                var speed = this.attr.moveSpeed;
+                var dir = moveVector.normalized;
+                //var dis = moveVector.magnitude;
+
+                var currPos = this.gameObject.transform.position;
+                var moveDistance = (dir * speed * timeDelta).magnitude;
+
+                var currFramePos = currPos;
+                //预测下一帧位置
+                var moveDelta = dir * speed * timeDelta;
+                var nextFramePos = currPos + moveDelta;
+
+                var dotValue = Vector3.Dot(currFramePos - moveTargetPos, moveTargetPos - nextFramePos);
+                if (dotValue >= 0)
+                {
+                    //到达
+                    this.FakeStopMove(moveTargetPos);
+                }
+                else
+                {
+                    moveDelta = dir * speed * timeDelta;
+                    //Logx.Log("moveTest : battleClient : moveDis : " + moveDelta.x + " " + moveDelta.z);
+                    this.gameObject.transform.position = currPos + moveDelta;
+                }
+
+
+
+                if (this.configId == 1200001)
+                {
+                   
+                    var pos = this.gameObject.transform.position;
+                    //Logx.Log("moveTest : battleClient : now pos : " + pos.x + " " + pos.z);
+                }
+
+            }
+        }
         public void PlayAnimation(string aniName)
         {
             if (isFinishLoad && animation != null)

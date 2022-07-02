@@ -114,7 +114,8 @@ public class BattleNetHandler : NetHandler
 
         //CtrlManager.Instance.Enter<BattleCtrl>();
 
-        BattleManager.Instance.CreateBattle(battleInit);
+        //TODO battleInit convert to BattleClient_CreateBattleArgs
+        //BattleManager.Instance.CreateBattle(battleInit);
     }
 
     //客户端真正操作的协议/////////////////////////////////////////////////////////////////////////
@@ -151,7 +152,7 @@ public class BattleNetHandler : NetHandler
 
         //EventDispatcher.Broadcast(EventIDs.OnAllPlayerLoadFinish);
 
-        BattleManager.Instance.AllPlayerLoadFinish();
+        BattleManager.Instance.MsgReceiver.On_AllPlayerLoadFinish();
 
     }
 
@@ -177,7 +178,7 @@ public class BattleNetHandler : NetHandler
     {
         scNotifyBattleStart battleStart = scNotifyBattleStart.Parser.ParseFrom(byteData);
         //EventDispatcher.Broadcast(EventIDs.OnBattleStart);
-        BattleManager.Instance.StartBattle();
+        BattleManager.Instance.MsgReceiver.On_StartBattle();
     }
 
 
@@ -185,23 +186,23 @@ public class BattleNetHandler : NetHandler
     private void OnNotifyCreateEntities(byte[] byteData)
     {
         scNotifyCreateEntities create = scNotifyCreateEntities.Parser.ParseFrom(byteData);
-        foreach (var item in create.BattleEntities)
-        {
-            var serverEntity = item;
-            BattleManager.Instance.CreateEntity(serverEntity);
-        }
+        //foreach (var item in create.BattleEntities)
+        //{
+        //    var serverEntity = item;
+        //    BattleManager.Instance.MsgReceiver.On_CreateEntity(serverEntity);
+        //}
     }
 
     private void OnNotifyEntityMove(byte[] byteData)
     {
         scNotifyEntityMove notifyEntityMove = scNotifyEntityMove.Parser.ParseFrom(byteData);
-        BattleManager.Instance.EntityStartMove(notifyEntityMove);
+        //BattleManager.Instance.MsgReceiver.On_EntityStartMove(notifyEntityMove);
     }
 
     protected void OnNotifyEntityStopMove(byte[] byteData)
     {
         scNotifyEntityStopMove stop = scNotifyEntityStopMove.Parser.ParseFrom(byteData);
-        BattleManager.Instance.EntityStopMove(stop);
+        //BattleManager.Instance.MsgReceiver.On_EntityStopMove(stop);
     }
 
     public void SendUseSkill(int skillId, int targetGuid, Vector3 targetPos)
@@ -217,7 +218,7 @@ public class BattleNetHandler : NetHandler
     private void OnNotifyEntityUseSkill(byte[] byteData)
     {
         scNotifyEntityUseSkill releaseSkill = scNotifyEntityUseSkill.Parser.ParseFrom(byteData);
-        BattleManager.Instance.EntityUseSkill(releaseSkill);
+        //BattleManager.Instance.MsgReceiver.On_EntityUseSkill(releaseSkill);
     }
 
     public void SendClientPlotEnd()
@@ -234,61 +235,61 @@ public class BattleNetHandler : NetHandler
     private void OnNotifyCreateSkillEffect(byte[] byteData)
     {
         scNotifyCreateSkillEffect skillEffect = scNotifyCreateSkillEffect.Parser.ParseFrom(byteData);
-        BattleManager.Instance.CreateSkillEffect(skillEffect);
+        //BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(skillEffect);
     }
 
     private void OnNotifySkillEffectStartMove(byte[] byteData)
     {
         scNotifySkillEffectStartMove effectStartMove = scNotifySkillEffectStartMove.Parser.ParseFrom(byteData);
-        BattleManager.Instance.SkillEffectStartMove(effectStartMove);
+        //BattleManager.Instance.MsgReceiver.On_SkillEffectStartMove(effectStartMove);
     }
 
     private void OnNotifySkillEffectDestroy(byte[] byteData)
     {
         scNotifySkillEffectDestroy skillEffectDestroy = scNotifySkillEffectDestroy.Parser.ParseFrom(byteData);
-        BattleManager.Instance.DestroySkillEffect(skillEffectDestroy);
+        //BattleManager.Instance.MsgReceiver.On_DestroySkillEffect(skillEffectDestroy);
     }
 
     private void OnNotifySyncEntityAttr(byte[] byteData)
     {
         scNotifySyncEntityAttr sync = scNotifySyncEntityAttr.Parser.ParseFrom(byteData);
-        BattleManager.Instance.SyncEntityAttr(sync);
+        //BattleManager.Instance.MsgReceiver.On_SyncEntityAttr(sync);
     }
 
     private void OnNotifySyncEntityValue(byte[] byteData)
     {
         scNotifySyncEntityValue sync = scNotifySyncEntityValue.Parser.ParseFrom(byteData);
-        BattleManager.Instance.SyncEntityValue(sync);
+        //BattleManager.Instance.MsgReceiver.On_SyncEntityValue(sync);
     }
 
     private void OnNotifyEntityDead(byte[] byteData)
     {
         scNotifyEntityDead sync = scNotifyEntityDead.Parser.ParseFrom(byteData);
-        BattleManager.Instance.EntityDead(sync);
+        //BattleManager.Instance.MsgReceiver.On_EntityDead(sync);
     }
 
     private void OnNotifyPlayPlot(byte[] byteData)
     {
         scNotifyPlayPlot sync = scNotifyPlayPlot.Parser.ParseFrom(byteData);
-        BattleManager.Instance.PlayPlot(sync);
+        //BattleManager.Instance.MsgReceiver.On_PlayPlot(sync);
     }
 
     private void OnNotifyBattleEnd(MsgPack msgPack)
     {
         scNotifyBattleEnd sync = scNotifyBattleEnd.Parser.ParseFrom(msgPack.data);
-        BattleManager.Instance.BattleEnd(sync);
+        //BattleManager.Instance.MsgReceiver.On_BattleEnd(sync);
     }
 
     public void OnNotifyPlotEnd(byte[] byteData)
     {
         scNotifyPlotEnd sync = scNotifyPlotEnd.Parser.ParseFrom(byteData);
-        BattleManager.Instance.PlotEnd(sync);
+        //BattleManager.Instance.MsgReceiver.On_PlotEnd(sync);
     }
 
     public void OnNotifySetEntityShowState(byte[] byteData)
     {
         scNotifySetEntityShowState sync = scNotifySetEntityShowState.Parser.ParseFrom(byteData);
-        BattleManager.Instance.SetEntitiesShowState(sync);
+        //BattleManager.Instance.MsgReceiver.On_SetEntitiesShowState(sync);
     }
 
     #region 战斗中玩家操作 

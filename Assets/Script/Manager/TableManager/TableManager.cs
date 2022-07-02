@@ -9,8 +9,8 @@ namespace Table
 {
     public class TableManager : Singleton<TableManager>
     {
-        Dictionary<Type, IList> typeToListConfigDic = new Dictionary<Type, IList>();
-        Dictionary<Type, Dictionary<int, Table.BaseTable>> typeToDicConfigDic = new Dictionary<Type, Dictionary<int, Table.BaseTable>>();
+        public Dictionary<Type, IList> typeToListConfigDic = new Dictionary<Type, IList>();
+        public Dictionary<Type, Dictionary<int, Table.BaseTable>> typeToDicConfigDic = new Dictionary<Type, Dictionary<int, Table.BaseTable>>();
 
         internal void Init()
         {
@@ -49,7 +49,7 @@ namespace Table
                 }
                 else
                 {
-                    Logx.LogError("Table", "the id is not found : " + id);
+                    Logx.LogError("Table", "the id is not found : " + id + " type : " + type);
                 }
             }
             else

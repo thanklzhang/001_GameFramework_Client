@@ -25,12 +25,11 @@ public class HpData
 public class HpModule
 {
     BattleUI battleUI;
-    Dictionary<int, HpData> hpDic;
+    Dictionary<int, HpData> hpDic = new Dictionary<int, HpData>();
 
     public void Init(BattleUI battleUI)
     {
         this.battleUI = battleUI;
-        hpDic = new Dictionary<int, HpData>();
     }
 
     public void Refresh()
@@ -68,7 +67,7 @@ public class HpModule
             entityObj = entity.gameObject
         };
 
-        battleUI.RefreshHpShow(args);
+        battleUI?.RefreshHpShow(args);
     }
 
     public void DestroyEntityHp(BattleEntity entity)

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2553342112
+CRC: 3701250311
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -79,7 +79,8 @@ AssetBundleManifest:
       Dependencies: {}
     Info_22:
       Name: assets/buildres/prefabs/scene/battle_scene_001.ab
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: assets/sourceres/models/build/model.ab
     Info_23:
       Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
       Dependencies: {}
@@ -106,4 +107,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_31:
       Name: assets/buildres/textures/item/item2.ab
+      Dependencies: {}
+    Info_32:
+      Name: assets/sourceres/models/build/model.ab
       Dependencies: {}

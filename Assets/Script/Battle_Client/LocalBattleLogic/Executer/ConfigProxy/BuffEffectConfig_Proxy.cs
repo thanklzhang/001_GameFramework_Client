@@ -48,7 +48,7 @@ namespace Battle
 
         public float LastTime => tableConfig.LastTime;
 
-        public BuffType Type => (BuffType)tableConfig.Type;
+        //public BuffType Type => (BuffType)tableConfig.Type;
 
         public List<EntityAttrType> AddedAttrGroup => addedAttrGroup;
 
@@ -71,6 +71,8 @@ namespace Battle
         public int Id => tableConfig.Id;
 
         public int EffectResId => tableConfig.EffectResId;
+
+        public EffectTargetType effectTargetType => (EffectTargetType)tableConfig.EffectTargetType;
     }
 
 }

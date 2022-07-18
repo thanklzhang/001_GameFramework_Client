@@ -35,9 +35,12 @@ public class Logx
         }
         if (isShowFrame)
         {
+#if UNITY_EDITOR
+            Debug.Log(obj);
+#else
             var currBattleFrameNum = GameMain.Instance.currBattleFrameNum;
             Debug.Log("[frame:" + currBattleFrameNum + "] " + obj);
-
+#endif
         }
         else
         {

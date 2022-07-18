@@ -108,6 +108,7 @@ namespace BattleTrigger.Editor
             node.groupGraph = this.groupGraph;
             node.bgBtnStyle = this.bgBtnStyle;
             node.headOffsetX = this.headOffsetX;
+            node.showStr = this.showStr;
 
             return node;
         }

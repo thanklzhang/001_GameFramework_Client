@@ -32,7 +32,7 @@ namespace Battle_Client
             var jsonFileRootPath = striggerTb.ScriptPath;
 
             //这里文件应该是一开始都加载好 这里先这么读取
-            string Battle_Config_Path = Const.buildPath + "/Battle";
+            string Battle_Config_Path = Const.buildPath + "/BattleTriggerConfig";
             string triggerPath = Battle_Config_Path + "/" + jsonFileRootPath;
             string[] files = System.IO.Directory.GetFiles(triggerPath);
 

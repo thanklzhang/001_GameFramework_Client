@@ -64,16 +64,28 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_EntityDead(battleEntity.guid);
         }
 
-        public void NotifyAll_EntityStartMove(int guid, Vector3 targetPos, float finalMoveSpeed)
+        public void NotifyAll_EntityStartMove(int guid, Vector3 targetPos, Vector3 dir, float finalMoveSpeed)
         {
             var pos = new UnityEngine.Vector3(targetPos.x, targetPos.y, targetPos.z);
-            BattleManager.Instance.MsgReceiver.On_EntityStartMove(guid, pos, finalMoveSpeed);
+            var uDir = new UnityEngine.Vector3(dir.x, dir.y, dir.z);
+            BattleManager.Instance.MsgReceiver.On_EntityStartMove(guid, pos, uDir,finalMoveSpeed);
         }
 
         public void NotifyAll_EntityStopMove(int guid, Vector3 position)
         {
             var pos = new UnityEngine.Vector3(position.x, position.y, position.z);
             BattleManager.Instance.MsgReceiver.On_EntityStopMove(guid, pos);
+        }
+
+        public void NotifyAll_SyncEntityDir(int guid, Vector3 dir)
+        {
+            var pos = new UnityEngine.Vector3(dir.x, dir.y, dir.z);
+            BattleManager.Instance.MsgReceiver.On_EntitySyncDir(guid, pos);
+        }
+
+        public void NotifyAll_OnEntityStartSkillEffect(int guid, int skillConfig)
+        {
+            BattleManager.Instance.MsgReceiver.On_EntityUseSkill(guid, skillConfig);
         }
 
         public void NotifyAll_PlayPlot(string name)
@@ -142,6 +154,8 @@ namespace Battle_Client
             values.Add(v);
             BattleManager.Instance.MsgReceiver.On_SyncEntityValue(guid, values);
         }
+
+        
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {

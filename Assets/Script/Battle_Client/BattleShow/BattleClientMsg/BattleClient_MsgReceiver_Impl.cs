@@ -59,7 +59,7 @@ namespace Battle_Client
             }
         }
 
-        public void On_EntityStartMove(int Guid, UnityEngine.Vector3 EndPos, float MoveSpeed)
+        public void On_EntityStartMove(int Guid, UnityEngine.Vector3 EndPos, UnityEngine.Vector3 dir, float MoveSpeed)
         {
             var guid = Guid;
             var targetPos = EndPos;
@@ -67,7 +67,7 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(guid);
             if (entity != null)
             {
-                entity.StartMove(targetPos, moveSpeed);
+                entity.StartMove(targetPos, dir,moveSpeed);
             }
         }
 
@@ -82,13 +82,23 @@ namespace Battle_Client
             }
         }
 
-        public void On_EntityUseSkill(int entityGuid)
+
+        public void On_EntitySyncDir(int guid, UnityEngine.Vector3 dir)
+        {
+            var entity = BattleEntityManager.Instance.FindEntity(guid);
+            if (entity != null)
+            {
+                entity.SetToward(dir);
+            }
+        }
+
+        public void On_EntityUseSkill(int entityGuid,int skillConfig)
         {
             var guid = entityGuid;
             var entity = BattleEntityManager.Instance.FindEntity(guid);
             if (entity != null)
             {
-                entity.ReleaseSkill();
+                entity.ReleaseSkill(skillConfig);
             }
         }
 

@@ -40,7 +40,7 @@ namespace Battle_Client
         //    entity.StartSelfLoadModel();
         //}
 
-        //只创建实体信息 , 是创建一个完整实体的一个步骤
+        //只创建技能信息 , 是创建一个技能实体的一个步骤
         internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos, int followEntityGuid)
         {
             //var guid = serverEntity.Guid;

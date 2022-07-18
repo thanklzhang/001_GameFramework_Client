@@ -49,9 +49,7 @@ namespace Battle
 
         public int Id => tableConfig.Id;
 
-
-
-
+        public EffectEntityTargetType EffectTargetType => (EffectEntityTargetType)tableConfig.EffectTargetType;
     }
 
 }

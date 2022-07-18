@@ -19,6 +19,8 @@ namespace Battle_Client
         public int roomId;
         public List<BattleClient_ClientPlayer> clientPlayers;
         public List<BattleClientMsg_Entity> entityList;
+        public int mapSizeX;
+        public int mapSizeZ;
     }
 
     public class BattleClient_ClientPlayer

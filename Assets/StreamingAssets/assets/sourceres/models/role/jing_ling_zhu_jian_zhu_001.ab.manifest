@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3818170793
+CRC: 3449021345
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9eda712f9f50d9d54f4c207378560f24
+    Hash: 2345676617e11e8ad80ebd840bc7d6c1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: efb72eddd7126370d52e94cc6945f6c6
+    Hash: c97e9f50c5c1df1b8794131ec8596ed5
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,8 +30,6 @@ ClassTypes:
 - Class: 111
   Script: {instanceID: 0}
 - Class: 137
-  Script: {instanceID: 0}
-- Class: 213
   Script: {instanceID: 0}
 Assets:
 - Assets/SourceRes/Models/Role/jing_ling_zhu_jian_zhu_001/jing_ling_bao_zha_001.FBX

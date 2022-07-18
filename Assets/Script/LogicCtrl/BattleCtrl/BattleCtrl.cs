@@ -125,7 +125,7 @@ public class BattleCtrl : BaseCtrl
         BattleManager.Instance.MsgSender.Send_PlayerLoadProgress(1000);
 
 
-       
+
     }
 
     public override void OnActive()
@@ -185,7 +185,7 @@ public class BattleCtrl : BaseCtrl
 
         var guid = 1;//目前这个不用发 因为 1 个玩家只控制一个英雄实体 服务器已经记录 这里先保留 entity guid
         //battleNet.SendMoveEntity(guid, clickPos);
-        BattleManager.Instance.MsgSender.Send_MoveEntity(guid,clickPos);
+        BattleManager.Instance.MsgSender.Send_MoveEntity(guid, clickPos);
 
     }
 
@@ -335,6 +335,12 @@ public class BattleCtrl : BaseCtrl
         var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
 
         var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+
+        var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+        var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
+
+        var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+
         var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
         if (releaseTargetType == SkillReleaseTargeType.Point)
         {
@@ -342,7 +348,8 @@ public class BattleCtrl : BaseCtrl
             if (TryToGetRayOnGroundPos(out resultPos))
             {
                 targetPos = resultPos;
-                battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+                //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+                BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
             }
         }
         else if (releaseTargetType == SkillReleaseTargeType.Entity)
@@ -356,15 +363,13 @@ public class BattleCtrl : BaseCtrl
                 {
                     Logx.Log("battle entity not null");
                     targetGuid = battleEntity.guid;
-                    var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
-                    var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
-
-                    var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+                 
 
                     //先排除自己
                     if (localEntity.collider.gameObject.GetInstanceID() != battleEntity.collider.gameObject.GetInstanceID())
                     {
-                        battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+                        //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+                        BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
                     }
 
                 }
@@ -372,7 +377,8 @@ public class BattleCtrl : BaseCtrl
         }
         else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
         {
-            battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+            //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+            BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
         }
 
 

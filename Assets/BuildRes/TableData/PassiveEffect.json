@@ -1,0 +1,24 @@
+[
+    {
+        "id": 18001001,
+        "name": "\u666e\u901a\u51fb\u4e2d\u65f6\u589e\u52a0buff",
+        "describe": "\u666e\u901a\u51fb\u4e2d\u65f6\u589e\u52a0buff",
+        "triggerTimeType": 3,
+        "triggerTargetType": 3,
+        "triggerChance": 1000,
+        "triggerEffectList": "4002021",
+        "triggerCD": 0,
+        "triggerEffectResId": 0
+    },
+    {
+        "id": 18001002,
+        "name": "\u666e\u901a\u51fb\u4e2d\u65f6\u6709\u6982\u7387\u56de\u590d\u751f\u547d\u503c",
+        "describe": "\u666e\u901a\u51fb\u4e2d\u65f6\u6709\u6982\u7387\u56de\u590d\u751f\u547d\u503c",
+        "triggerTimeType": 3,
+        "triggerTargetType": 1,
+        "triggerChance": 500,
+        "triggerEffectList": "4002022",
+        "triggerCD": 0,
+        "triggerEffectResId": 0
+    }
+]

@@ -73,6 +73,7 @@ namespace Battle_Client
 
         //move
         Vector3 moveTargetPos;
+        Vector3 dirTarget;
         //float moveSpeed;
 
         //应该在 load temp obj 上加这个 ， 现在这里加上
@@ -115,6 +116,11 @@ namespace Battle_Client
             isFinishLoad = false;
 
             //this.StartLoadModel();
+        }
+
+        internal void SetToward(Vector3 dir)
+        {
+            this.dirTarget = dir;
         }
 
         //开始自行加载(主要用于创建 entity 的时候自己自行异步加载 )
@@ -178,14 +184,17 @@ namespace Battle_Client
 
         }
 
-        internal void StartMove(Vector3 targetPos, float moveSpeed)
+        internal void StartMove(Vector3 targetPos, Vector3 dir, float moveSpeed)
         {
             //Logx.Log("moveTest : battleClient : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
             state = BattleEntityState.Move;
 
             this.moveTargetPos = targetPos;
+            //this.gameObject.transform.forward = dir;
             this.attr.moveSpeed = moveSpeed;
             PlayAnimation("walk");
+
+            dirTarget = dir;
         }
 
         //根据消息来真实的终止移动
@@ -213,7 +222,7 @@ namespace Battle_Client
         public bool CheckPosIsForcePullBack(Vector3 checkPos)
         {
             var len = (checkPos - this.GetPosition()).magnitude;
-            
+
             if (len <= 0.1)
             {
                 return false;
@@ -233,11 +242,11 @@ namespace Battle_Client
         }
 
 
-        internal void ReleaseSkill()
+        internal void ReleaseSkill(int skillConfigId)
         {
             //play animation
-            PlayAnimation("skill");
-            Logx.Log("entity release skill : " + this.guid);
+            PlayAnimation("attack");
+            Logx.Log(this.guid + " release skill : " + skillConfigId);
         }
 
         internal int GetSkillIdByIndex(int index)
@@ -341,6 +350,9 @@ namespace Battle_Client
 
         public void Update(float timeDelta)
         {
+
+            this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
+
             if (state == BattleEntityState.Move)
             {
                 var moveVector = moveTargetPos - this.gameObject.transform.position;
@@ -361,21 +373,14 @@ namespace Battle_Client
                 {
                     //到达
                     this.FakeStopMove(moveTargetPos);
+                    //this.gameObject.transform.forward = dirTarget;
                 }
                 else
                 {
                     moveDelta = dir * speed * timeDelta;
                     //Logx.Log("moveTest : battleClient : moveDis : " + moveDelta.x + " " + moveDelta.z);
                     this.gameObject.transform.position = currPos + moveDelta;
-                }
-
-
-
-                if (this.configId == 1200001)
-                {
-                   
-                    var pos = this.gameObject.transform.position;
-                    //Logx.Log("moveTest : battleClient : now pos : " + pos.x + " " + pos.z);
+                    //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
                 }
 
             }
@@ -384,7 +389,7 @@ namespace Battle_Client
         {
             if (isFinishLoad && animation != null)
             {
-                animation.Play(aniName);
+                animation.CrossFade(aniName);
             }
         }
 

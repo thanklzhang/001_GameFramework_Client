@@ -98,10 +98,17 @@ namespace Battle_Client
 
             var battleSettingId = battleTb.BattleConfigId;
             var settingTb = Table.TableManager.Instance.GetById<Table.BattleConfig>(battleSettingId);
-            var settingPath = Const.buildPath + "/Battle/" + settingTb.ConfigFilePath;
+            var settingPath = Const.buildPath + "/BattleConfig/" + settingTb.ConfigFilePath;
             var settingJson = FileOperate.GetTextFromFile(settingPath);
             var configNode = LitJson.JsonMapper.ToObject(settingJson);
             var configPlayerInfoList = configNode["playerInitInfo"]["infoList"];
+
+            //地图尺寸
+            var mapSizeX = int.Parse(configNode["mapSizeX"].ToString());
+            var mapSizeZ = int.Parse(configNode["mapSizeZ"].ToString());
+            battleArg.mapInitArg = new MapInitArg();
+            battleArg.mapInitArg.mapSizeX = mapSizeX;
+            battleArg.mapInitArg.mapSizeZ = mapSizeZ;
 
             for (int i = 0; i < configPlayerInfoList.Count; i++)
             {

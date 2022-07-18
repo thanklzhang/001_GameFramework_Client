@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1693213313
+CRC: 1315485500
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ffc5cde858015e0bd3338d0e58342233
+    Hash: 49feab0bef55d26b152840971d8e700c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0b73033da3dfdc5a030ca1cd01c06e31
@@ -31,4 +31,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/BuildRes/Prefabs/Scene/battle_scene_001.prefab
-Dependencies: []
+Dependencies:
+- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/sourceres/models/build/model.ab

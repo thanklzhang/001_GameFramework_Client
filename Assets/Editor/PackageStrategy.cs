@@ -71,6 +71,12 @@ public class PackageStrategy
             type = StrategyType.OneByOneFile
         });
 
+        strategyList.Add(new StrategyInfo()
+        {
+            path = Const.projectRootPath + "/" + "SourceRes/Models/Build/Model",
+            type = StrategyType.AllInOneByFolder
+        });
+
 
         List<AssetBundleBuild> buildList = new List<AssetBundleBuild>();
         for (int i = 0; i < strategyList.Count; i++)

@@ -39,6 +39,12 @@ namespace Battle
         public SkillReleaseTargeType SkillReleaseTargeType => (SkillReleaseTargeType)tableConfig.SkillReleaseTargeType;
 
         public int Id => tableConfig.Id;
+
+        public int ReleaserEffectResId => tableConfig.ReleaserEffectResId;
+
+        public SkillTargeType SkillTargetType => (SkillTargeType)tableConfig.SkillTargetType;
+
+        public bool IsPassive => 1 == tableConfig.IsPassiveSkill;
     }
 
 }

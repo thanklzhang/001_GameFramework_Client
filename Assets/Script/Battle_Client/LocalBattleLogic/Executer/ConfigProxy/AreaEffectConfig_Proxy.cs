@@ -19,7 +19,7 @@ namespace Battle
         {
             tableConfig = Table.TableManager.Instance.GetById<Table.AreaEffect>(id);
 
-            effectList = StringConvert.ToIntList(tableConfig.EffectList,',');
+            effectList = StringConvert.ToIntList(tableConfig.EffectList, ',');
         }
 
         public CenterType CenterType => (CenterType)tableConfig.CenterType;
@@ -31,6 +31,8 @@ namespace Battle
         public int Id => tableConfig.Id;
 
         public List<int> EffectList => effectList;
+
+        public int EffectResId => tableConfig.EffectResId;
     }
 
 }

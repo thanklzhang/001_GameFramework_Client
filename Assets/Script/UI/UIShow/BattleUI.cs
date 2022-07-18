@@ -21,6 +21,8 @@ public class HpUIShowObj
 
     public Transform bgRoot;
     public Transform hp;
+    public Text valueText;
+
 
     BaseUI parentUI;
     RectTransform parentTranRect;
@@ -34,6 +36,7 @@ public class HpUIShowObj
 
         bgRoot = this.transform.Find("bg");
         hp = this.transform.Find("bg/hp");
+        valueText = this.transform.Find("bg/valueText").GetComponent<Text>();
 
     }
 
@@ -51,6 +54,7 @@ public class HpUIShowObj
         var rect = hp.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(currLen, rect.sizeDelta.y);
 
+        valueText.text = "" + currHp + "/" + maxHp;
     }
 
     public void Update(float timeDelta)

@@ -250,6 +250,10 @@ namespace Battle_Client
                 battleClientArgs.clientPlayers.Add(player);
             }
 
+            //地图尺寸
+            battleClientArgs.mapSizeX = _battle.GetMapSizeX();
+            battleClientArgs.mapSizeZ = _battle.GetMapSizeZ();
+
 
             battleClientArgs.entityList = new List<BattleClientMsg_Entity>();
             var entities = _battle.GetAllEntities();
@@ -267,17 +271,18 @@ namespace Battle_Client
                 //netEntity.MaxHp = (int)entity.MaxHealth;
                 //netEntity.CurrHp = netEntity.MaxHp;
 
-                ////技能
-                //var skills = entity.GetAllSkills();
-                //foreach (var skillKV in skills)
-                //{
-                //    var skill = skillKV.Value;
+                //技能
+                var skills = _entity.GetAllSkills();
+                entity.skills = new List<BattleClientMsg_Skill>();
+                foreach (var skillKV in skills)
+                {
+                    var skill = skillKV.Value;
 
-                //    NetProto.BattleSkillProto netSkill = new BattleSkillProto();
-                //    netSkill.ConfigId = skill.configId;
-                //    netSkill.Level = skill.level;
-                //    netEntity.SkillInitList.Add(netSkill);
-                //}
+                    BattleClientMsg_Skill skillInfo = new BattleClientMsg_Skill();
+                    skillInfo.configId = skill.configId;
+                    skillInfo.level = skill.level;
+                    entity.skills.Add(skillInfo);
+                }
                 battleClientArgs.entityList.Add(entity);
             }
 

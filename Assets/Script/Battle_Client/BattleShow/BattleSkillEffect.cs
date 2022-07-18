@@ -77,10 +77,12 @@ namespace Battle_Client
             });
         }
 
+        int followEntityGuid;
         //设置该特效为一直跟随实体
         internal void SetFollowEntityGuid(int followEntityGuid)
         {
-            StartMove(Vector3.zero, followEntityGuid, 9999999.0f);
+            //StartMove(Vector3.zero, followEntityGuid, 9999999.0f);
+            this.followEntityGuid = followEntityGuid;
         }
 
         public void OnLoadModelFinish(GameObject obj)
@@ -133,6 +135,7 @@ namespace Battle_Client
             {
                 var targetPos = moveTargetPos;
 
+                var moveVector = Vector3.one;
                 if (targetGuid > 0)
                 {
                     //跟随
@@ -140,11 +143,17 @@ namespace Battle_Client
                     if (entity != null)
                     {
                         targetPos = entity.GetPosition();
+                        moveVector = targetPos - this.gameObject.transform.position;
                     }
 
                 }
+                else
+                {
+                    //非跟随 一直飞行
+                    moveVector = initDir;
+                }
 
-                var moveVector = targetPos - this.gameObject.transform.position;
+
                 var speed = this.moveSpeed;
                 var dir = moveVector.normalized;
                 //var dis = moveVector.magnitude;
@@ -155,18 +164,35 @@ namespace Battle_Client
 
             }
 
+            if (this.followEntityGuid > 0)
+            {
+                var followEntity = BattleEntityManager.Instance.FindEntity(this.followEntityGuid);
+                if (followEntity != null)
+                {
+                    this.gameObject.transform.position = followEntity.gameObject.transform.position;
+                }
+            }
+
             if (isFinishLoad)
             {
 
-                if (!isLoop)
+                //if (!isLoop)
+                //{
+                //    currLastTime = currLastTime + timeDelta;
+                //    if (currLastTime >= this.totalTotalTime)
+                //    {
+                //        this.SetWillDestoryState();
+                //        //BattleSkillEffectManager.Instance.DestorySkillEffect(this.guid);
+                //    }
+                //}
+
+                currLastTime = currLastTime + timeDelta;
+                if (currLastTime >= this.totalTotalTime)
                 {
-                    currLastTime = currLastTime + timeDelta;
-                    if (currLastTime >= this.totalTotalTime)
-                    {
-                        this.SetWillDestoryState();
-                        //BattleSkillEffectManager.Instance.DestorySkillEffect(this.guid);
-                    }
+                    this.SetWillDestoryState();
+                    //BattleSkillEffectManager.Instance.DestorySkillEffect(this.guid);
                 }
+
             }
         }
 
@@ -189,6 +215,7 @@ namespace Battle_Client
 
         }
 
+        public Vector3 initDir;
         internal void StartMove(Vector3 targetPos, int targetGuid, float moveSpeed)
         {
             Logx.Log("skill effect start move : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
@@ -197,6 +224,13 @@ namespace Battle_Client
             this.moveTargetPos = targetPos;
             this.moveSpeed = moveSpeed;
             this.targetGuid = targetGuid;
+
+            if (this.targetGuid <= 0)
+            {
+                //非跟随
+                initDir = (targetPos - this.gameObject.transform.position).normalized;
+            }
+
 
 
 

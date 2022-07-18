@@ -20,6 +20,10 @@ namespace BattleTrigger.Editor
         Vector3CalculateExpression = 2,
         [EnumLabel("实体点")]
         EntityPoint = 10,
+        [EnumLabel("矩形内随机点")]
+        Vector3RectRand = 20,
+        [EnumLabel("圆形内随机点")]
+        Vector3CircleRand = 21,
     }
 
     public class Vector3VarField : BaseVarField
@@ -68,7 +72,7 @@ namespace BattleTrigger.Editor
         public Type GetNumberClassType(Vector3_GetValueFromType enumType)
         {
             var enumName = enumType.ToString();
-            Logx.Log("aEnumName:" + enumName);
+            //Logx.Log("aEnumName:" + enumName);
             var enumfullName = NameSpaceName + "." + enumName + "Var";
             var numberType = Type.GetType(enumfullName);
             if (null == numberType)

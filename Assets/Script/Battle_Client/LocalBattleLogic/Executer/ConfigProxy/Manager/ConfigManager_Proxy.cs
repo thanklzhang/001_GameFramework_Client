@@ -45,12 +45,12 @@ namespace Battle
                 Type parentType = Type.GetType(parentResultName);
                 if (null == proxyType)
                 {
-                    Console.WriteLine("the type of proxyType is not found : " + proxyResultName);
+                    _Battle_Log.LogError("the type of proxyType is not found : " + proxyResultName);
                     continue;
                 }
                 if (null == parentType)
                 {
-                    Console.WriteLine("the type of parentType is not found : " + parentType);
+                    _Battle_Log.LogError("the type of parentType is not found : " + parentType);
                     continue;
                 }
                 List<IConfig> newList = new List<IConfig>();
@@ -85,12 +85,12 @@ namespace Battle
                 }
                 else
                 {
-                    Console.Write("ConfigManager_Proxy", "the id is not found : " + id);
+                    _Battle_Log.LogWarning("ConfigManager_Proxy : the id is not found : " + id);
                 }
             }
             else
             {
-                Console.Write("ConfigManager_Proxy", "the type is not found : " + type);
+                _Battle_Log.LogWarning("ConfigManager_Proxy : the type is not found : " + type);
             }
             return default(T);
         }

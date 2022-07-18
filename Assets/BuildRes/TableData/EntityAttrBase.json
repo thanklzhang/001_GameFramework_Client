@@ -3,10 +3,10 @@
         "id": 10001001,
         "describe": "\u4e0a\u5b98\u7fce",
         "attack": 80,
-        "defence": 15,
-        "health": 400,
+        "defence": 10,
+        "health": 500,
         "magic": 100,
-        "attackSpeed": 800,
+        "attackSpeed": 900,
         "moveSpeed": 3500,
         "attackRange": 1500
     },
@@ -19,17 +19,17 @@
         "magic": 125,
         "attackSpeed": 850,
         "moveSpeed": 4000,
-        "attackRange": 5000
+        "attackRange": 6000
     },
     {
         "id": 10003001,
         "describe": "\u602a\u72691",
-        "attack": 70,
-        "defence": 10,
-        "health": 1200,
+        "attack": 35,
+        "defence": 5,
+        "health": 4000,
         "magic": 125,
-        "attackSpeed": 850,
-        "moveSpeed": 2800,
+        "attackSpeed": 750,
+        "moveSpeed": 1500,
         "attackRange": 1500
     }
 ]

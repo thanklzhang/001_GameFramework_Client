@@ -109,5 +109,17 @@ namespace BattleTrigger.Editor
                 item.SetFloorIncludeChildren(floor);
             }
         }
+
+        internal void Select(int index)
+        {
+            if (index < triggerNodeGraphList.Count)
+            {
+                var first = triggerNodeGraphList[index];
+
+                first.OnSelect();
+            }
+            GUIUtility.keyboardControl = 0;
+
+        }
     }
 }

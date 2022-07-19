@@ -50,7 +50,7 @@ namespace BattleTrigger.Editor
                 //Logx.Log("TriggerWindow.instance.isRightClick : " + TriggerWindow.instance.isRightClick);
                 if (TriggerWindow.instance.isRightClick)
                 {
-                    //右键带年纪
+                    //右键点击
                     this.OnRightClick();
                 }
                 else
@@ -58,6 +58,9 @@ namespace BattleTrigger.Editor
                     // 左键点击（也包括中键）
                     this.OnLeftClick();
                 }
+
+
+                GUIUtility.keyboardControl = 0;
             }
 
             GUILayout.EndHorizontal();

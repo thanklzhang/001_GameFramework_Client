@@ -275,6 +275,8 @@ namespace BattleTrigger.Editor
             rootGroupGraph = new TriggerGroupGraph();
             var nodeGraphList = ParseTriggerNodeList(actionJsonData, 0);
             rootGroupGraph.Init(nodeGraphList, 0);
+
+            rootGroupGraph.Select(0);
             //string json = JsonTool.LoadObjectFromFile(path);
 
             //currPlot = JsonTool.LoadObjectFromFile<Plot>(path);

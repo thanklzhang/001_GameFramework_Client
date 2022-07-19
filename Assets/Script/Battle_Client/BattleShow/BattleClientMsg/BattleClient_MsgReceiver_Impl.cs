@@ -40,9 +40,10 @@ namespace Battle_Client
 
         }
 
-        public void On_CreateSkillEffect(int skillGuid, int resId, UnityEngine.Vector3 pos, int followEntityGuid)
+        public void On_CreateSkillEffect(int skillGuid, int resId, UnityEngine.Vector3 pos, int followEntityGuid, int lastTimeInt)
         {
-            BattleSkillEffectManager.Instance.CreateSkillEffect(skillGuid, resId, pos, followEntityGuid);
+            var lastTime = lastTimeInt / 1000.0f;
+            BattleSkillEffectManager.Instance.CreateSkillEffect(skillGuid, resId, pos, followEntityGuid, lastTime);
         }
 
         public void On_DestroySkillEffect(int effectGuid)
@@ -67,7 +68,7 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(guid);
             if (entity != null)
             {
-                entity.StartMove(targetPos, dir,moveSpeed);
+                entity.StartMove(targetPos, dir, moveSpeed);
             }
         }
 
@@ -92,7 +93,7 @@ namespace Battle_Client
             }
         }
 
-        public void On_EntityUseSkill(int entityGuid,int skillConfig)
+        public void On_EntityUseSkill(int entityGuid, int skillConfig)
         {
             var guid = entityGuid;
             var entity = BattleEntityManager.Instance.FindEntity(guid);

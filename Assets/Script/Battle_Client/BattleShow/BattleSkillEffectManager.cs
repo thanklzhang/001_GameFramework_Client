@@ -26,9 +26,9 @@ namespace Battle_Client
         }
 
         //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-        internal void CreateSkillEffect(int guid, int resId, Vector3 pos, int followEntityGuid)
+        internal void CreateSkillEffect(int guid, int resId, Vector3 pos, int followEntityGuid, float lastTime)
         {
-            var skillEffect = CreateSkillEffectInfo(guid, resId, pos, followEntityGuid);
+            var skillEffect = CreateSkillEffectInfo(guid, resId, pos, followEntityGuid, lastTime);
             skillEffect.StartSelfLoadModel();
         }
 
@@ -41,7 +41,7 @@ namespace Battle_Client
         //}
 
         //只创建技能信息 , 是创建一个技能实体的一个步骤
-        internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos, int followEntityGuid)
+        internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos, int followEntityGuid, float lastTime)
         {
             //var guid = serverEntity.Guid;
             //var configId = serverEntity.ConfigId;
@@ -56,6 +56,7 @@ namespace Battle_Client
             skillEffect.Init(guid, resId);
             skillEffect.SetPosition(pos);
             skillEffect.SetFollowEntityGuid(followEntityGuid);
+            skillEffect.SetLastTime(lastTime);
 
             skillEffectDic.Add(guid, skillEffect);
 

@@ -48,10 +48,11 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_CreateEntities(entityList);
         }
 
-        public void NotifyAll_CreateSkillEffect(int guid, int resId, Vector3 position, int followEntityGuid)
+        public void NotifyAll_CreateSkillEffect(int guid, int resId, Vector3 position, int followEntityGuid,float lastTime)
         {
             var pos = new UnityEngine.Vector3(position.x, position.y, position.z);
-            BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(guid, resId, pos, followEntityGuid);
+            var lastTimeInt = (int)(lastTime * 1000);
+            BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(guid, resId, pos, followEntityGuid, lastTimeInt);
         }
 
         public void NotifyAll_EntityAddBuff(int guid, BuffEffect buff)

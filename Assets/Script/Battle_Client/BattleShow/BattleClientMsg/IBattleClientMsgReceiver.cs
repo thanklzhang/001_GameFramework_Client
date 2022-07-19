@@ -23,7 +23,7 @@ namespace Battle_Client
         void On_EntityStopMove(int Guid, UnityEngine.Vector3 EndPos);
         void On_EntitySyncDir(int Guid, UnityEngine.Vector3 dir);
         void On_EntityUseSkill(int entityGuid,int skillConfig);
-        void On_CreateSkillEffect(int skillGuid, int resId, UnityEngine.Vector3 pos, int followEntityGuid);
+        void On_CreateSkillEffect(int skillGuid, int resId, UnityEngine.Vector3 pos, int followEntityGuid, int lastTimeInt);
         void On_SkillEffectStartMove(int EffectGuid, UnityEngine.Vector3 TargetPos,int TargetGuid, float moveSpeed);
         void On_DestroySkillEffect(int effectGuid);
         void On_SyncEntityAttr(int entityGuid, List<BattleClientMsg_BattleAttr> atts);

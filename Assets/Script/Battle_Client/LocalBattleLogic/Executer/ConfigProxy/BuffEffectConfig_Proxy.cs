@@ -19,6 +19,7 @@ namespace Battle
         List<int> entityColliderEffectList;
         List<EntityAttrType> addedAttrGroup;
         List<BuffAddedValueConfig> addedValueGroup;
+        List<int> maxLayerTriggerEffectList;
         public void Init(int id)
         {
             tableConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(id);
@@ -27,6 +28,7 @@ namespace Battle
             intervalEffectList = StringConvert.ToIntList(tableConfig.IntervalEffectList, ',');
             entityColliderEffectList = StringConvert.ToIntList(tableConfig.EntityColliderEffectList, ',');
             addedAttrGroup = StringConvert.ToIntList(tableConfig.AddedAttrGroup, ',').Select((v) => (EntityAttrType)v).ToList();
+            maxLayerTriggerEffectList = StringConvert.ToIntList(tableConfig.MaxLayerTriggerEffectList, ',');
 
             addedValueGroup = new List<BuffAddedValueConfig>();
             var valueGroupStr = tableConfig.AddedValueGroup.Split('|');
@@ -73,6 +75,18 @@ namespace Battle
         public int EffectResId => tableConfig.EffectResId;
 
         public EffectTargetType effectTargetType => (EffectTargetType)tableConfig.EffectTargetType;
+
+        public bool IsCanBeClear => 1 == tableConfig.IsCanBeClear;
+
+        public int MaxLayerCount => tableConfig.MaxLayerCount;
+
+        public AddLayerType AddLayerType => (AddLayerType)tableConfig.AddLayerType;
+
+        public bool IsMaxLayerRemove => 1 == tableConfig.IsMaxLayerRemove;
+
+        public List<int> MaxLayerTriggerEffectList => maxLayerTriggerEffectList;
+
+        public BuffEffectTargetType MaxLayerTriggerTargetType => (BuffEffectTargetType)tableConfig.MaxLayerTriggerTargetType;
     }
 
 }

@@ -78,6 +78,12 @@ namespace Battle_Client
         }
 
         int followEntityGuid;
+
+        internal void SetLastTime(float lastTime)
+        {
+            totalTotalTime = lastTime;
+        }
+
         //设置该特效为一直跟随实体
         internal void SetFollowEntityGuid(int followEntityGuid)
         {
@@ -186,12 +192,14 @@ namespace Battle_Client
                 //    }
                 //}
 
-                currLastTime = currLastTime + timeDelta;
-                if (currLastTime >= this.totalTotalTime)
-                {
-                    this.SetWillDestoryState();
-                    //BattleSkillEffectManager.Instance.DestorySkillEffect(this.guid);
-                }
+
+                //应该没有持续时间的概念 等待消息才销毁 这个时间可以做倒计时
+                //currLastTime = currLastTime + timeDelta;
+                //if (currLastTime >= this.totalTotalTime)
+                //{
+                //    this.SetWillDestoryState();
+                //    //BattleSkillEffectManager.Instance.DestorySkillEffect(this.guid);
+                //}
 
             }
         }

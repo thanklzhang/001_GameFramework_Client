@@ -37,7 +37,10 @@ namespace Battle_Client
             return battle;
         }
 
-
+        public Map GetMap()
+        {
+            return this.battle.GetMap();
+        }
 
         public void StartBattleLogic()
         {
@@ -75,6 +78,11 @@ namespace Battle_Client
                 }
             }
         
+        }
+
+        internal Battle.Battle GetBattle()
+        {
+            return this.battle;
         }
 
         //根据战斗 id 来开始运行战斗逻辑  在本地跑战斗逻辑

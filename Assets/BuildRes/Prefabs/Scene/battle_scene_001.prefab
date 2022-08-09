@@ -102,8 +102,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2500782276229477613}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 50, y: 0, z: 50}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 50, y: -25, z: 50}
+  m_LocalScale: {x: 565.99, y: 565.99, z: 565.99}
   m_Children: []
   m_Father: {fileID: 63942309218620640}
   m_RootOrder: 0
@@ -410,6 +410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8321016587955666013}
+  - component: {fileID: 693911799466405025}
   m_Layer: 0
   m_Name: battle_scene_001
   m_TagString: Untagged
@@ -433,6 +434,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &693911799466405025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868237673714733366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff071da9bba47a4382e2dd6909c99c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4951227229551772660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3506751583286667236
 Transform:
   m_ObjectHideFlags: 0

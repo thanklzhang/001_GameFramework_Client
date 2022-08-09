@@ -90,7 +90,7 @@ public class BattleCtrl : BaseCtrl
 
 
     public Quaternion cameraRotationOffset;
-
+    MapCellView mapCellView;
     public void OnSceneLoadFinish(HashSet<GameObject> gameObjects)
     {
         //先这样去 之后增加 scene 读取的接口
@@ -103,6 +103,14 @@ public class BattleCtrl : BaseCtrl
         camera3D.SetPosition(tempCameraTran.position);
         camera3D.SetRotation(tempCameraTran.rotation);
         cameraRotationOffset = tempCameraTran.rotation;
+
+        //地图 cell 视图工具查看器(目前只限本地战斗)
+        mapCellView = sceneObj.GetComponent<MapCellView>();
+       
+        var map = BattleManager.Instance.GetLocalBattleMap();
+        mapCellView.SetMap(map);
+        //mapCellView.SetRenderPath(new List<Pos>());
+
     }
 
     public void OnEntityLoadFinish(BattleEntity viewEntity, GameObject obj)
@@ -363,7 +371,7 @@ public class BattleCtrl : BaseCtrl
                 {
                     Logx.Log("battle entity not null");
                     targetGuid = battleEntity.guid;
-                 
+
 
                     //先排除自己
                     if (localEntity.collider.gameObject.GetInstanceID() != battleEntity.collider.gameObject.GetInstanceID())

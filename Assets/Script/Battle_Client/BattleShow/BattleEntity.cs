@@ -348,11 +348,37 @@ namespace Battle_Client
 
         }
 
+        float rotateSpeed = 540;
         public void Update(float timeDelta)
         {
+            //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward.normalized, dirTarget.normalized, timeDelta * 15);
 
-            this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
+           //控制朝向
+            var an = Vector3.Angle(this.gameObject.transform.forward, dirTarget);
+            var cross = Vector3.Cross(this.gameObject.transform.forward, dirTarget);
+            if (an <= 5f)
+            {
+                this.gameObject.transform.forward = dirTarget;
+            }
+            else
+            {
+                int dir = 0;
+                if (cross.y > 0)
+                {
+                    dir = 1;
+                }
+                else
+                {
+                    dir = -1;
+                }
+                this.gameObject.transform.Rotate(new Vector3(0, dir * rotateSpeed * timeDelta, 0));
+            }
 
+            
+            
+
+            //this.gameObject.transform.forward = dirTarget;
+            //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
             if (state == BattleEntityState.Move)
             {
                 var moveVector = moveTargetPos - this.gameObject.transform.position;

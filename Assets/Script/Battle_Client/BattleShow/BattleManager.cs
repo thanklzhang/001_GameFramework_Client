@@ -76,6 +76,11 @@ namespace Battle_Client
             //EventDispatcher.AddListener<BattleEntityInfo>(EventIDs.OnCreateBattle, OnCreateEntity);
         }
 
+        internal Battle.Battle GetBattle()
+        {
+            return this.localBattleExecuter.GetBattle();
+        }
+
 
 
 
@@ -189,6 +194,11 @@ namespace Battle_Client
 
             //进入战斗状态
             CtrlManager.Instance.Enter<BattleCtrl>();
+        }
+
+        public Map GetLocalBattleMap()
+        {
+            return localBattleExecuter.GetMap();
         }
 
         public void CreateLocalBattle(int battleConfigId)

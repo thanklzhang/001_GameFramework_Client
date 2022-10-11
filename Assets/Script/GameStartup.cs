@@ -23,18 +23,17 @@ public class GameStartup : MonoBehaviour
         var gameInitPrefab = Resources.Load("GameInit") as GameObject;
         var go = Instantiate(gameInitPrefab);
         var gameMain = go.GetComponent<GameMain>();
-        gameMain.GameInit();
-
-        if (!isLocalBattle)
+        StartCoroutine(gameMain.GameInit(()=>
         {
-            gameMain.StartToLogin();
-        }
-        else
-        {
-            gameMain.StartLocalBattle();
-        }
-        
-
+            if (!isLocalBattle)
+            {
+                gameMain.StartToLogin();
+            }
+            else
+            {
+                gameMain.StartLocalBattle();
+            }
+        }));
 
     }
 }

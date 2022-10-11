@@ -24,6 +24,13 @@ namespace BattleTrigger.Editor
         GreaterEqual = 5
     }
 
+    public enum ConditionCompareType_Bool
+    {
+        Equal = 0,
+        NotEqual = 1,
+    }
+
+
     public class ConditionNodeGraph : TriggerNodeGraph
     {
         //条件判断
@@ -71,6 +78,23 @@ namespace BattleTrigger.Editor
             return str;
         }
 
+        public static string GetCompareTypeStr_Bool(ConditionCompareType_Bool compareType)
+        {
+            string str = "";
+            if (compareType == ConditionCompareType_Bool.Equal)
+            {
+                str = "等于";
+            }
+            else if (compareType == ConditionCompareType_Bool.NotEqual)
+            {
+                str = "不等于";
+            }
+
+
+            return str;
+        }
+
+
         public override void Draw()//Rect childRect
         {
             base.Draw();
@@ -116,7 +140,7 @@ namespace BattleTrigger.Editor
         public override void OnCreate()
         {
             //条件判断
-            conditionCheck = new Number_ConditionCheck();
+            conditionCheck = new Number_Check();
             conditionCheck.Create();
 
             //执行行为
@@ -214,10 +238,36 @@ namespace BattleTrigger.Editor
         {
             conditionCheckType = (ConditionCheckType)EditorGUILayout.EnumPopup(conditionCheckType, new GUILayoutOption[] { GUILayout.Width(100) });
 
+            //根据选择的 nType 来进行各自的输入显示
+            var checkType = GetNumberClassType(conditionCheckType);
+            if (null != checkType)
+            {
+                //if (!a.GetType().IsSubclassOf(numberType))
+                if (checkType != conditionCheck.GetType())
+                {
+                    conditionCheck = null;
+                    conditionCheck = Activator.CreateInstance(checkType) as ConditionCheck;
+                    conditionCheck.Create();
+                }
+            }
+
             this.conditionCheck.DrawSelectInfo();
         }
 
-
+        public static string NameSpaceName = "BattleTrigger.Editor";
+        public Type GetNumberClassType(ConditionCheckType enumType)
+        {
+            var enumName = enumType.ToString();
+            //Logx.Log("aEnumName:" + enumName);
+            var enumfullName = NameSpaceName + "." + enumName + "";
+            var numberType = Type.GetType(enumfullName);
+            if (null == numberType)
+            {
+                Logx.LogError("the type of ConditionCheckType is not found : " + enumfullName);
+                return null;
+            }
+            return numberType;
+        }
     }
 
 

@@ -91,7 +91,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public void SendMsg(ProtoIDs cmd, byte[] data)
     {
-        Logx.Log("Network Mgr : SendMsg : cmd : " + cmd);
+        Logx.Log("Network Mgr : SendMsg : cmd : " + cmd + ":" + (int)cmd);
         lastSendTimeStamp = CommonFunction.GetTimeStamp();
         //Logx.Log("send timeStamp : " + lastSendTimeStamp);
         tcpNetClient.Send((int)cmd, data);

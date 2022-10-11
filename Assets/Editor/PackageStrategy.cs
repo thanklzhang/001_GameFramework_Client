@@ -77,6 +77,12 @@ public class PackageStrategy
             type = StrategyType.AllInOneByFolder
         });
 
+        strategyList.Add(new StrategyInfo()
+        {
+            path = Const.projectRootPath + "/" + "BuildRes/TableData",
+            type = StrategyType.OneByOneFile
+        });
+
 
         List<AssetBundleBuild> buildList = new List<AssetBundleBuild>();
         for (int i = 0; i < strategyList.Count; i++)

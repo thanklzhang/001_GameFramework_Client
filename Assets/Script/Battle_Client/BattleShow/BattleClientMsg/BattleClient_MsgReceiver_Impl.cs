@@ -40,10 +40,10 @@ namespace Battle_Client
 
         }
 
-        public void On_CreateSkillEffect(int skillGuid, int resId, UnityEngine.Vector3 pos, int followEntityGuid, int lastTimeInt)
+        public void On_CreateSkillEffect(int skillGuid, int resId, UnityEngine.Vector3 pos, int followEntityGuid, bool isAutoDestroy)
         {
-            var lastTime = lastTimeInt / 1000.0f;
-            BattleSkillEffectManager.Instance.CreateSkillEffect(skillGuid, resId, pos, followEntityGuid, lastTime);
+            //var lastTime = lastTimeInt / 1000.0f;
+            BattleSkillEffectManager.Instance.CreateSkillEffect(skillGuid, resId, pos, followEntityGuid, isAutoDestroy);
         }
 
         public void On_DestroySkillEffect(int effectGuid)
@@ -60,7 +60,20 @@ namespace Battle_Client
             }
         }
 
-        public void On_EntityStartMove(int Guid, UnityEngine.Vector3 EndPos, UnityEngine.Vector3 dir, float MoveSpeed)
+        //public void On_EntityStartMove(int Guid, UnityEngine.Vector3 EndPos, UnityEngine.Vector3 dir, float MoveSpeed)
+        //{
+        //    var guid = Guid;
+        //    var targetPos = EndPos;
+        //    var moveSpeed = MoveSpeed;
+        //    var entity = BattleEntityManager.Instance.FindEntity(guid);
+        //    if (entity != null)
+        //    {
+        //        entity.StartMove(targetPos, dir, moveSpeed);
+        //    }
+        //}
+
+
+        public void On_EntityStartMoveByPath(int Guid, List<UnityEngine.Vector3> EndPos, float MoveSpeed)
         {
             var guid = Guid;
             var targetPos = EndPos;
@@ -68,10 +81,10 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(guid);
             if (entity != null)
             {
-                entity.StartMove(targetPos, dir, moveSpeed);
+                entity.StartMoveByPath(EndPos, moveSpeed);
             }
         }
-
+        
         public void On_EntityStopMove(int Guid, UnityEngine.Vector3 EndPos)
         {
             var guid = Guid;
@@ -158,9 +171,9 @@ namespace Battle_Client
 
         public void On_BattleEnd(bool isWin)
         {
-            BattleManager.Instance.BattleState = BattleState.End;
+            //BattleManager.Instance.BattleState = BattleState.End;
 
-            EventDispatcher.Broadcast<bool>(EventIDs.OnBattleEnd, isWin);
+            //EventDispatcher.Broadcast<bool>(EventIDs.OnBattleEnd, isWin);
         }
 
     }

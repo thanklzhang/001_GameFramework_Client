@@ -79,7 +79,9 @@ public class PackageTool
                 }
                 else
                 {
-                    assetToAbDic.Add(assetName, buildBundle.assetBundleName);
+                    var lowStr = assetName.ToLower();
+                    assetToAbDic.Add(lowStr, buildBundle.assetBundleName);
+                    //assetToAbDic.Add(assetName, buildBundle.assetBundleName);
                 }
 
             }

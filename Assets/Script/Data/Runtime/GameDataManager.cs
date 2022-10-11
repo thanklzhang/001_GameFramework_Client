@@ -32,6 +32,9 @@ namespace GameData
         BagGameDataStore bagGameDataStore = new BagGameDataStore();
         public BagGameDataStore BagStore { get => bagGameDataStore; }
 
+        TeamGameDataStore teamGameDataStore = new TeamGameDataStore();
+        public TeamGameDataStore TeamStore { get => teamGameDataStore; }
+
         internal void Init()
         {
             HeroStore.Init();
@@ -39,6 +42,7 @@ namespace GameData
             UserStore.Init();
             MainTaskStore.Init();
             BagStore.Init();
+            TeamStore.Init();
         }
 
     }

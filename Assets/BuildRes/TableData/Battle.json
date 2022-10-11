@@ -6,6 +6,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -16,6 +17,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -26,6 +28,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -36,6 +39,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -46,6 +50,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -56,6 +61,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0|-1"
     },
@@ -66,6 +72,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -76,6 +83,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -86,6 +94,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|4,5,6,7"
     },
@@ -96,6 +105,7 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -106,7 +116,19 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
+        "initPos": "4,0,4",
         "battleConfigId": 8001001,
+        "teamInfo": "0,1,2,3|-1"
+    },
+    {
+        "id": 5002001,
+        "name": "\u7ec4\u961f\u526f\u672c 1",
+        "describe": "\u7ec4\u961f\u526f\u672c 1",
+        "activityId": 10,
+        "mapId": 7001001,
+        "triggerId": 6002001,
+        "initPos": "4,0,4|4,0,6|6,0,6|4,0,8|8,0,8",
+        "battleConfigId": 8002001,
         "teamInfo": "0,1,2,3|-1"
     }
 ]

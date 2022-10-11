@@ -26,7 +26,7 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
         EventDispatcher.AddListener<BattleEntity>(EventIDs.OnEntityDestroy, OnEntityDestroy);
-        EventDispatcher.AddListener<bool>(EventIDs.OnBattleEnd, OnOnBattleEnd);
+        EventDispatcher.AddListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, OnOnBattleEnd);
         EventDispatcher.AddListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
 
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
@@ -105,12 +105,13 @@ public class BattleCtrl : BaseCtrl
         cameraRotationOffset = tempCameraTran.rotation;
 
         //地图 cell 视图工具查看器(目前只限本地战斗)
-        mapCellView = sceneObj.GetComponent<MapCellView>();
-       
-        var map = BattleManager.Instance.GetLocalBattleMap();
-        mapCellView.SetMap(map);
-        //mapCellView.SetRenderPath(new List<Pos>());
-
+        if (BattleManager.Instance.IsLocalBattle())
+        {
+            mapCellView = sceneObj.GetComponent<MapCellView>();
+            var map = BattleManager.Instance.GetLocalBattleMap();
+            mapCellView.SetMap(map);
+            //mapCellView.SetRenderPath(new List<Pos>());
+        }
     }
 
     public void OnEntityLoadFinish(BattleEntity viewEntity, GameObject obj)
@@ -415,12 +416,14 @@ public class BattleCtrl : BaseCtrl
         hpModule.DestroyEntityHp(entity);
     }
 
-    public void OnOnBattleEnd(bool isWin)
+    public void OnOnBattleEnd(BattleResultDataArgs battleResultArgs)
     {
         var args = new BattleResultUIArgs()
         {
-            isWin = isWin
+            isWin = battleResultArgs.isWin,
+            //reward
         };
+
         this.resultUI.Refresh(args);
         this.resultUI.Show();
     }
@@ -453,15 +456,14 @@ public class BattleCtrl : BaseCtrl
         UIManager.Instance.ReleaseUI<BattleResultUI>();
         ResourceManager.Instance.ReturnObject(scenePath, this.sceneObj);
         BattleEntityManager.Instance.ReleaseAllEntities();
+        BattleSkillEffectManager.Instance.ReleaseAll();
 
         EventDispatcher.RemoveListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
-
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
         EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
         EventDispatcher.RemoveListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
-        EventDispatcher.RemoveListener<bool>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
-
+        EventDispatcher.RemoveListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
 

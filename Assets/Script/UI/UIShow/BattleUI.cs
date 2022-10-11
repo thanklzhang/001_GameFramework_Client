@@ -108,6 +108,7 @@ public class BattleUI : BaseUI
 
         hpRoot = this.transform.Find("HpShow/root");
         hpTemp = hpRoot.Find("hpItem").gameObject;
+        hpTemp.SetActive(false);
 
         closeBtn.onClick.AddListener(() =>
          {

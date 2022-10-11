@@ -6,40 +6,49 @@ using UnityEngine.UI;
 
 public class LobbyUI : BaseUI
 {
-    public Action onCloseBtnClick;
-    public Action onHeroListBtnClick;
-    public Action onMainTaskBtnClick;
+    public Action onClickCloseBtn;
+    public Action onClickHeroListBtn;
+    public Action onClickMainTaskBtn;
+    public Action onClickTeamBtn;
 
     Button closeBtn;
     Button heroListBtn;
     Button mainTaskBtn;
+    Button teamBtn;
 
     protected override void OnInit()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         heroListBtn = this.transform.Find("heroListBtn").GetComponent<Button>();
         mainTaskBtn = this.transform.Find("mainTaskBtn").GetComponent<Button>();
+        teamBtn = this.transform.Find("teamBtn").GetComponent<Button>();
 
         closeBtn.onClick.AddListener(() =>
         {
-            onCloseBtnClick?.Invoke();
+            onClickCloseBtn?.Invoke();
         });
 
         heroListBtn.onClick.AddListener(() =>
         {
-            onHeroListBtnClick?.Invoke();
+            onClickHeroListBtn?.Invoke();
         });
 
         mainTaskBtn.onClick.AddListener(() =>
         {
-            onMainTaskBtnClick?.Invoke();
+            onClickMainTaskBtn?.Invoke();
+        });
+
+        teamBtn.onClick.AddListener(() =>
+        {
+            onClickTeamBtn?.Invoke();
         });
     }
     protected override void OnRelease()
     {
-        onCloseBtnClick = null;
-        onHeroListBtnClick = null;
-        onMainTaskBtnClick = null;
+        onClickCloseBtn = null;
+        onClickHeroListBtn = null;
+        onClickMainTaskBtn = null;
+        onClickTeamBtn = null;
     }
 }
 

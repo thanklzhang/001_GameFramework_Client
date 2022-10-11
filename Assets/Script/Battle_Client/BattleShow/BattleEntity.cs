@@ -49,9 +49,9 @@ namespace Battle_Client
 
     public class BattleEntityAttr
     {
-        public int attack;
-        public int defence;
-        public int maxHealth;
+        public float attack;
+        public float defence;
+        public float maxHealth;
         public float moveSpeed;
     }
 
@@ -80,8 +80,8 @@ namespace Battle_Client
         public Collider collider;
 
         public int level;
-        public int CurrHealth;
-        public int MaxHealth
+        public float CurrHealth;
+        public float MaxHealth
         {
             get
             {
@@ -118,6 +118,7 @@ namespace Battle_Client
             //this.StartLoadModel();
         }
 
+
         internal void SetToward(Vector3 dir)
         {
             this.dirTarget = dir;
@@ -144,7 +145,9 @@ namespace Battle_Client
 
             model = obj;
             model.transform.SetParent(this.gameObject.transform);
+
             model.transform.localPosition = Vector3.zero;
+            model.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             //gameObject.transform.position = position;
             //gameObject = 
@@ -184,17 +187,38 @@ namespace Battle_Client
 
         }
 
-        internal void StartMove(Vector3 targetPos, Vector3 dir, float moveSpeed)
+        //internal void StartMove(Vector3 targetPos, Vector3 dir, float moveSpeed)
+        //{
+        //    //Logx.Log("moveTest : battleClient : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
+        //    state = BattleEntityState.Move;
+
+        //    this.moveTargetPos = targetPos;
+        //    //this.gameObject.transform.forward = dir;
+        //    this.attr.moveSpeed = moveSpeed;
+        //    PlayAnimation("walk");
+
+        //    dirTarget = dir;
+        //}
+
+        public List<Vector3> movePosList;
+        int movePosIndex;
+        internal void StartMoveByPath(List<Vector3> pathList, float moveSpeed)
         {
-            //Logx.Log("moveTest : battleClient : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
-            state = BattleEntityState.Move;
+            if (pathList.Count > 0)
+            {
+                state = BattleEntityState.Move;
 
-            this.moveTargetPos = targetPos;
-            //this.gameObject.transform.forward = dir;
-            this.attr.moveSpeed = moveSpeed;
-            PlayAnimation("walk");
+                this.movePosList = pathList;
+                this.attr.moveSpeed = moveSpeed;
 
-            dirTarget = dir;
+                PlayAnimation("walk");
+
+                movePosIndex = 0;
+                this.moveTargetPos = pathList[0];
+
+                //设置朝向
+                dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
+            }
         }
 
         //根据消息来真实的终止移动
@@ -223,7 +247,7 @@ namespace Battle_Client
         {
             var len = (checkPos - this.GetPosition()).magnitude;
 
-            if (len <= 0.1)
+            if (len <= 0.5)
             {
                 return false;
             }
@@ -294,16 +318,16 @@ namespace Battle_Client
                 var type = (EntityAttrType)item.type;
                 if (type == EntityAttrType.Attack)
                 {
-                    this.attr.attack = item.value;
+                    this.attr.attack = (int)item.value;
                 }
                 else if (type == EntityAttrType.MaxHealth)
                 {
-                    this.attr.maxHealth = item.value;
+                    this.attr.maxHealth = (int)item.value;
                 }
                 else if (type == EntityAttrType.MoveSpeed)
                 {
                     // /1000
-                    this.attr.moveSpeed = item.value / 1000.0f;
+                    this.attr.moveSpeed = item.value;
                 }
 
                 Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
@@ -353,7 +377,7 @@ namespace Battle_Client
         {
             //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward.normalized, dirTarget.normalized, timeDelta * 15);
 
-           //控制朝向
+            //控制朝向
             var an = Vector3.Angle(this.gameObject.transform.forward, dirTarget);
             var cross = Vector3.Cross(this.gameObject.transform.forward, dirTarget);
             if (an <= 5f)
@@ -374,8 +398,8 @@ namespace Battle_Client
                 this.gameObject.transform.Rotate(new Vector3(0, dir * rotateSpeed * timeDelta, 0));
             }
 
-            
-            
+
+
 
             //this.gameObject.transform.forward = dirTarget;
             //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
@@ -397,8 +421,21 @@ namespace Battle_Client
                 var dotValue = Vector3.Dot(currFramePos - moveTargetPos, moveTargetPos - nextFramePos);
                 if (dotValue >= 0)
                 {
-                    //到达
-                    this.FakeStopMove(moveTargetPos);
+                    this.movePosIndex = this.movePosIndex + 1;
+                    if (this.movePosIndex >= this.movePosList.Count)
+                    {
+                        //所有路径走完了
+                        this.FakeStopMove(moveTargetPos);
+                    }
+                    else
+                    {
+                        //前往下一个路径点
+                        this.moveTargetPos = this.movePosList[this.movePosIndex];
+
+                        //设置朝向
+                        dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
+                    }
+
                     //this.gameObject.transform.forward = dirTarget;
                 }
                 else

@@ -38,9 +38,12 @@ namespace Battle_Client
         ////技能信息
         //List<BattleSkillInfo> skills;
 
-        float currLastTime = 0.0f;
-        float totalTotalTime;
+        bool isAutoDestroy;
+        float currAutoDestroyLastTime = 0.0f;
+        float totalAutoDestroyTime;
         bool isLoop;
+
+       
 
 
 
@@ -79,9 +82,10 @@ namespace Battle_Client
 
         int followEntityGuid;
 
-        internal void SetLastTime(float lastTime)
+        
+        internal void SetIsAutoDestroy(bool isAutoDestroy)
         {
-            totalTotalTime = lastTime;
+            this.isAutoDestroy = isAutoDestroy;
         }
 
         //设置该特效为一直跟随实体
@@ -112,7 +116,7 @@ namespace Battle_Client
             {
                 var particle = particles[0];
                 this.isLoop = particle.main.loop;
-                totalTotalTime = particle.main.duration;
+                totalAutoDestroyTime = particle.main.duration;
                 particle.Play();
             }
 
@@ -191,6 +195,16 @@ namespace Battle_Client
                 //        //BattleSkillEffectManager.Instance.DestorySkillEffect(this.guid);
                 //    }
                 //}
+
+                if (this.isAutoDestroy)
+                {
+                    currAutoDestroyLastTime += timeDelta;
+
+                    if (currAutoDestroyLastTime >= this.totalAutoDestroyTime)
+                    {
+                        this.SetWillDestoryState();
+                    }
+                }
 
 
                 //应该没有持续时间的概念 等待消息才销毁 这个时间可以做倒计时

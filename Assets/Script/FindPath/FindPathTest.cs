@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battle;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -77,7 +78,7 @@ public class FindPathTest : MonoBehaviour
 
         player0 = playerList[0];
 
-        player0.transform.position = new Vector3(3.5f, 0, 3.5f);
+        player0.transform.position = new UnityEngine.Vector3(3.5f, 0, 3.5f);
 
         for (int i = 0; i < playerList.Count; i++)
         {
@@ -120,7 +121,7 @@ public class FindPathTest : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Vector3 resultPos;
+            UnityEngine.Vector3 resultPos;
             if (TryToGetRayOnGroundPos(out resultPos))
             {
                 this.OnPlayerClickGround(resultPos);
@@ -128,9 +129,9 @@ public class FindPathTest : MonoBehaviour
         }
     }
 
-    public bool TryToGetRayOnGroundPos(out Vector3 pos)
+    public bool TryToGetRayOnGroundPos(out UnityEngine.Vector3 pos)
     {
-        pos = Vector3.zero;
+        pos = UnityEngine.Vector3.zero;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //Debug.DrawRay(ray.origin, ray.direction, Color.red);
@@ -154,7 +155,7 @@ public class FindPathTest : MonoBehaviour
         return false;
     }
 
-    void OnPlayerClickGround(Vector3 resultPos)
+    void OnPlayerClickGround(UnityEngine.Vector3 resultPos)
     {
         //Logx.Log("hit ground : " + resultPos);
 
@@ -176,7 +177,7 @@ public class FindPathTest : MonoBehaviour
 
     }
 
-    public List<Pos> FindPath(TestEntity player, Pos startPos, Pos endPos, List<Pos> dynamicList)
+    public List<Battle.Pos> FindPath(TestEntity player, Pos startPos, Pos endPos, List<Pos> dynamicList)
     {
         var start = startPos;
         //if (player.isMove)
@@ -195,9 +196,9 @@ public class FindPathTest : MonoBehaviour
         return currFindNodes;
     }
 
-    Vector3 GetMapPos(Vector3 resultPos)
+    UnityEngine.Vector3 GetMapPos(UnityEngine.Vector3 resultPos)
     {
-        var intPos = new Vector3((int)resultPos.x, (int)resultPos.y, (int)resultPos.z);
+        var intPos = new UnityEngine.Vector3((int)resultPos.x, (int)resultPos.y, (int)resultPos.z);
         return intPos;
     }
 
@@ -268,7 +269,7 @@ public class FindPathTest : MonoBehaviour
 
                 GL.Color(color);
 
-                Vector3 pos0 = new Vector3(node.x, 0, node.y);
+                UnityEngine.Vector3 pos0 = new UnityEngine.Vector3(node.x, 0, node.y);
                 GL.Vertex(pos0);
 
                 pos0.x += 1;
@@ -293,16 +294,16 @@ public class FindPathTest : MonoBehaviour
 
         for (int i = 0; i < mapNodes.Count + 1; i++)
         {
-            var pos = new Vector3(i * 1, 0, 0);
-            var pos2 = new Vector3(i * 1, 0, mapNodes[0].Count * 1);
+            var pos = new UnityEngine.Vector3(i * 1, 0, 0);
+            var pos2 = new UnityEngine.Vector3(i * 1, 0, mapNodes[0].Count * 1);
             GL.Vertex(pos);
             GL.Vertex(pos2);
         }
 
         for (int i = 0; i < mapNodes[0].Count + 1; i++)
         {
-            var pos = new Vector3(0, 0, i);
-            var pos2 = new Vector3(mapNodes.Count, 0, i);
+            var pos = new UnityEngine.Vector3(0, 0, i);
+            var pos2 = new UnityEngine.Vector3(mapNodes.Count, 0, i);
             GL.Vertex(pos);
             GL.Vertex(pos2);
         }

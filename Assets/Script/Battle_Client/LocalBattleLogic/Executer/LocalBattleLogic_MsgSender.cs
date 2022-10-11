@@ -42,17 +42,30 @@ namespace Battle_Client
                     level = item.level,
                     position = new UnityEngine.Vector3(item.position.x, item.position.y, item.position.z)
                 };
+
+                entityArg.skills = new List<BattleClientMsg_Skill>();
+                foreach (var netSkill in item.GetAllSkills())
+                {
+                    var skill = new BattleClientMsg_Skill()
+                    {
+                        configId = netSkill.Value.configId,
+                        level = netSkill.Value.level
+                    };
+                    entityArg.skills.Add(skill);
+
+                }
+
                 entityList.Add(entityArg);
             }
 
             BattleManager.Instance.MsgReceiver.On_CreateEntities(entityList);
         }
 
-        public void NotifyAll_CreateSkillEffect(int guid, int resId, Vector3 position, int followEntityGuid,float lastTime)
+        public void NotifyAll_CreateSkillEffect(int guid, int resId, Vector3 position, int followEntityGuid, bool isAutoDestroy)
         {
             var pos = new UnityEngine.Vector3(position.x, position.y, position.z);
-            var lastTimeInt = (int)(lastTime * 1000);
-            BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(guid, resId, pos, followEntityGuid, lastTimeInt);
+            //var lastTimeInt = (int)(lastTime * 1000);
+            BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(guid, resId, pos, followEntityGuid, isAutoDestroy);
         }
 
         public void NotifyAll_EntityAddBuff(int guid, BuffEffect buff)
@@ -65,11 +78,22 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_EntityDead(battleEntity.guid);
         }
 
-        public void NotifyAll_EntityStartMove(int guid, Vector3 targetPos, Vector3 dir, float finalMoveSpeed)
+        //public void NotifyAll_EntityStartMove(int guid, Vector3 targetPos, Vector3 dir, float finalMoveSpeed)
+        //{
+        //    var pos = new UnityEngine.Vector3(targetPos.x, targetPos.y, targetPos.z);
+        //    var uDir = new UnityEngine.Vector3(dir.x, dir.y, dir.z);
+        //    BattleManager.Instance.MsgReceiver.On_EntityStartMove(guid, pos, uDir, finalMoveSpeed);
+        //}
+
+        public void NotifyAll_EntityStartMoveByPath(int guid, List<Vector3> pathList, float finalMoveSpeed)
         {
-            var pos = new UnityEngine.Vector3(targetPos.x, targetPos.y, targetPos.z);
-            var uDir = new UnityEngine.Vector3(dir.x, dir.y, dir.z);
-            BattleManager.Instance.MsgReceiver.On_EntityStartMove(guid, pos, uDir,finalMoveSpeed);
+            List<UnityEngine.Vector3> unityPosList = new List<UnityEngine.Vector3>();
+            foreach (var pos in pathList)
+            {
+                var resultPos = new UnityEngine.Vector3(pos.x, pos.y, pos.z);
+                unityPosList.Add(resultPos);
+            }
+            BattleManager.Instance.MsgReceiver.On_EntityStartMoveByPath(guid, unityPosList, finalMoveSpeed);
         }
 
         public void NotifyAll_EntityStopMove(int guid, Vector3 position)
@@ -124,15 +148,16 @@ namespace Battle_Client
                 attr.type = (Battle_Client.EntityAttrType)(int)option.attrType;
                 if (option.attrType == Battle.EntityAttrType.AttackSpeed)
                 {
-                    attr.value = (int)(option.value * 1000.0f);
+                    //attr.value = (int)(option.value * 1000.0f);
+                    attr.value = option.value;
                 }
                 else if (option.attrType == Battle.EntityAttrType.MoveSpeed)
                 {
-                    attr.value = (int)(option.value * 1000.0f);
+                    attr.value = option.value;
                 }
                 else if (option.attrType == Battle.EntityAttrType.AttackRange)
                 {
-                    attr.value = (int)(option.value * 1000.0f);
+                    attr.value = option.value;
                 }
                 else
                 {
@@ -156,7 +181,7 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_SyncEntityValue(guid, values);
         }
 
-        
+
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {

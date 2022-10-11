@@ -33,27 +33,66 @@ public class MapCellView : MonoBehaviour
     }
 
     Map map;
-    List<Pos> currPosList;
+    List<Battle.Pos> currPosList = new List<Battle.Pos>();
     public void SetMap(Map map)
     {
         this.map = map;
     }
-    public void SetRenderPath(List<Pos> currPosList)
+    public void SetRenderPath(List<Battle.Pos> currPosList)
     {
         this.currPosList = currPosList;
     }
 
     void OnRenderObject()
     {
-        var battle = Battle_Client.BattleManager.Instance.GetBattle();
-        var player0 = battle.FindPlayerByPlayerIndex(0);
-        var entityGuid = player0.ctrlHeroGuid;
-        var entity = battle.FindEntity(entityGuid);
-        var ai = (Battle.PlayerAI)battle.FindAI(entity.guid);
-        SetRenderPath(ai.GetCurrPathPosList());
+        List<List<PathNode>> mapNodes = null;
 
-        var mapNodes = map.mapNodes;
+        //TODO : 兼容本地和远端战斗
+        if (Battle_Client.BattleManager.Instance.IsLocalBattle())
+        {
+            var battle = Battle_Client.BattleManager.Instance.GetBattle();
+            var player0 = battle.FindPlayerByPlayerIndex(0);
+            var entityGuid = player0.ctrlHeroGuid;
+            var entity = battle.FindEntity(entityGuid);
+            var ai = (Battle.PlayerAI)battle.FindAI(entity.guid);
+            SetRenderPath(ai.GetCurrPathPosList());
+            mapNodes = map.mapNodes;
+        }
+        else
+        {
+            //test
+            map = new Map();
 
+          
+            var mapInfo = new int[][]
+            {
+                new int[]{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+                new int[]{ 1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,},
+                new int[]{ 1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,},
+                new int[]{ 1,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,},
+                new int[]{ 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,},
+                new int[]{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+            };
+
+            map.Init(mapInfo);
+
+            mapNodes = map.mapNodes;
+        }
+      
         lineMaterial.SetPass(0);
 
         GL.PushMatrix();

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2465117180
+CRC: 1681561678
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -72,42 +72,117 @@ AssetBundleManifest:
       Name: assets/buildres/prefabs/ui/maintaskui.ab
       Dependencies: {}
     Info_20:
-      Name: assets/buildres/prefabs/ui/titlebarui.ab
+      Name: assets/buildres/prefabs/ui/teamroominfoui.ab
       Dependencies: {}
     Info_21:
-      Name: assets/buildres/prefabs/ui/titleui_del.ab
+      Name: assets/buildres/prefabs/ui/teamroomlistui.ab
       Dependencies: {}
     Info_22:
+      Name: assets/buildres/prefabs/ui/titlebarui.ab
+      Dependencies: {}
+    Info_23:
+      Name: assets/buildres/prefabs/ui/titleui_del.ab
+      Dependencies: {}
+    Info_24:
       Name: assets/buildres/prefabs/scene/battle_scene_001.ab
       Dependencies:
         Dependency_0: assets/sourceres/models/build/model.ab
-    Info_23:
+    Info_25:
       Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
       Dependencies: {}
-    Info_24:
+    Info_26:
       Name: assets/buildres/prefabs/effects/eft_skill_cal_001.ab
       Dependencies: {}
-    Info_25:
+    Info_27:
       Name: assets/buildres/prefabs/effects/eft_skill_cal_002.ab
       Dependencies: {}
-    Info_26:
+    Info_28:
       Name: assets/buildres/prefabs/effects/eft_skill_projectile_001.ab
       Dependencies: {}
-    Info_27:
+    Info_29:
       Name: assets/buildres/textures/bg/login_bg.ab
       Dependencies: {}
-    Info_28:
+    Info_30:
       Name: assets/buildres/textures/bg/main_bg.ab
       Dependencies: {}
-    Info_29:
+    Info_31:
       Name: assets/buildres/textures/item/item0.ab
       Dependencies: {}
-    Info_30:
+    Info_32:
       Name: assets/buildres/textures/item/item1.ab
       Dependencies: {}
-    Info_31:
+    Info_33:
       Name: assets/buildres/textures/item/item2.ab
       Dependencies: {}
-    Info_32:
+    Info_34:
       Name: assets/sourceres/models/build/model.ab
+      Dependencies: {}
+    Info_35:
+      Name: assets/buildres/tabledata/areaeffect.ab
+      Dependencies: {}
+    Info_36:
+      Name: assets/buildres/tabledata/battle.ab
+      Dependencies: {}
+    Info_37:
+      Name: assets/buildres/tabledata/battleconfig.ab
+      Dependencies: {}
+    Info_38:
+      Name: assets/buildres/tabledata/battlemap.ab
+      Dependencies: {}
+    Info_39:
+      Name: assets/buildres/tabledata/battlestagelogic.ab
+      Dependencies: {}
+    Info_40:
+      Name: assets/buildres/tabledata/battletrigger.ab
+      Dependencies: {}
+    Info_41:
+      Name: assets/buildres/tabledata/buffeffect.ab
+      Dependencies: {}
+    Info_42:
+      Name: assets/buildres/tabledata/calculateeffect.ab
+      Dependencies: {}
+    Info_43:
+      Name: assets/buildres/tabledata/collisiongroupeffect.ab
+      Dependencies: {}
+    Info_44:
+      Name: assets/buildres/tabledata/entityattrbase.ab
+      Dependencies: {}
+    Info_45:
+      Name: assets/buildres/tabledata/entityattrlevel.ab
+      Dependencies: {}
+    Info_46:
+      Name: assets/buildres/tabledata/entityattrstar.ab
+      Dependencies: {}
+    Info_47:
+      Name: assets/buildres/tabledata/entityinfo.ab
+      Dependencies: {}
+    Info_48:
+      Name: assets/buildres/tabledata/heroinfo.ab
+      Dependencies: {}
+    Info_49:
+      Name: assets/buildres/tabledata/item.ab
+      Dependencies: {}
+    Info_50:
+      Name: assets/buildres/tabledata/maintaskchapter.ab
+      Dependencies: {}
+    Info_51:
+      Name: assets/buildres/tabledata/maintaskstage.ab
+      Dependencies: {}
+    Info_52:
+      Name: assets/buildres/tabledata/moveeffect.ab
+      Dependencies: {}
+    Info_53:
+      Name: assets/buildres/tabledata/passiveeffect.ab
+      Dependencies: {}
+    Info_54:
+      Name: assets/buildres/tabledata/projectileeffect.ab
+      Dependencies: {}
+    Info_55:
+      Name: assets/buildres/tabledata/resourceconfig.ab
+      Dependencies: {}
+    Info_56:
+      Name: assets/buildres/tabledata/skill.ab
+      Dependencies: {}
+    Info_57:
+      Name: assets/buildres/tabledata/teamstage.ab
       Dependencies: {}

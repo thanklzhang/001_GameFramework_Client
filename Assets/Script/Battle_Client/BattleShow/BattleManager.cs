@@ -24,14 +24,8 @@ namespace Battle_Client
         public int playerIndex;
         public int team;
         public int uid;
-
         public int ctrlHeroGuid;
-
-
     }
-
-
-
 
     public class BattleManager : Singleton<BattleManager>
     {
@@ -196,19 +190,35 @@ namespace Battle_Client
             CtrlManager.Instance.Enter<BattleCtrl>();
         }
 
+        public bool IsLocalBattle()
+        {
+            return localBattleExecuter != null;
+        }
+
         public Map GetLocalBattleMap()
         {
             return localBattleExecuter.GetMap();
         }
 
-        public void CreateLocalBattle(int battleConfigId)
+        //创建远端战斗
+        public void CreateRemoteBattle(BattleClient_CreateBattleArgs battleClientArgs)
+        {
+            //填充客户端所需组件
+            msgSender = new BattleClient_MsgSender_Remote();
+            msgReceiver = new BattleClient_MsgReceiver_Impl();
+
+            BattleManager.Instance.CreateBattle(battleClientArgs);
+        }
+
+        //创建本地战斗
+        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg)
         {
             //填充数据
 
             //初始化本地战斗后台逻辑
             localBattleExecuter = new LocalBattleLogic_Executer();
             localBattleExecuter.Init();
-            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(battleConfigId);
+            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg);
             var battleClientArgs = GetBattleClientArgs(battleLogic);
 
             //填充客户端所需组件
@@ -221,10 +231,10 @@ namespace Battle_Client
             ////启动本地战斗后台逻辑
             //localBattleExecuter.StartBattleLogic();
 
-            GameMain.Instance.StartCoroutine(StartBattle(battleClientArgs));
+            GameMain.Instance.StartCoroutine(StartLocalBattle(battleClientArgs));
         }
 
-        IEnumerator StartBattle(BattleClient_CreateBattleArgs battleClientArgs)
+        IEnumerator StartLocalBattle(BattleClient_CreateBattleArgs battleClientArgs)
         {
             yield return new WaitForSeconds(0.1f);
 
@@ -301,6 +311,10 @@ namespace Battle_Client
             return battleClientArgs;
         }
 
+        public void BattleEnd(BattleResultDataArgs battleResultDataArgs)
+        {
+            EventDispatcher.Broadcast(EventIDs.OnBattleEnd, battleResultDataArgs);
+        }
 
         //public void AllPlayerLoadFinish()
         //{
@@ -497,6 +511,11 @@ namespace Battle_Client
         public void Update(float timeDelta)
         {
             localBattleExecuter?.Update(timeDelta);
+        }
+
+        public void FixedUpdate(float fixedTime)
+        {
+            localBattleExecuter?.FixedUpdate(fixedTime);
         }
 
         public void RemoveListener()

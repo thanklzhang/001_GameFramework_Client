@@ -26,9 +26,9 @@ namespace Battle_Client
         }
 
         //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-        internal void CreateSkillEffect(int guid, int resId, Vector3 pos, int followEntityGuid, float lastTime)
+        internal void CreateSkillEffect(int guid, int resId, Vector3 pos, int followEntityGuid, bool isAutoDestroy)
         {
-            var skillEffect = CreateSkillEffectInfo(guid, resId, pos, followEntityGuid, lastTime);
+            var skillEffect = CreateSkillEffectInfo(guid, resId, pos, followEntityGuid, isAutoDestroy);
             skillEffect.StartSelfLoadModel();
         }
 
@@ -41,7 +41,7 @@ namespace Battle_Client
         //}
 
         //只创建技能信息 , 是创建一个技能实体的一个步骤
-        internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos, int followEntityGuid, float lastTime)
+        internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos, int followEntityGuid, bool isAutoDestroy)
         {
             //var guid = serverEntity.Guid;
             //var configId = serverEntity.ConfigId;
@@ -56,7 +56,8 @@ namespace Battle_Client
             skillEffect.Init(guid, resId);
             skillEffect.SetPosition(pos);
             skillEffect.SetFollowEntityGuid(followEntityGuid);
-            skillEffect.SetLastTime(lastTime);
+            //skillEffect.SetLastTime(lastTime);
+            skillEffect.SetIsAutoDestroy(isAutoDestroy);
 
             skillEffectDic.Add(guid, skillEffect);
 
@@ -182,9 +183,18 @@ namespace Battle_Client
             //EventDispatcher.RemoveListener<BattleEntityInfo>(EventIDs.OnCreateBattle, CreateEntity);
         }
 
-        public void Clear()
+        public void ReleaseAll()
         {
-            this.RemoveListener();
+            var kvs = skillEffectDic.ToList();
+            for (int i = 0; i < kvs.Count; i++)
+            {
+                var kv = kvs[i];
+                var key = kv.Key;
+                var effect = kv.Value;
+
+                effect.Destroy();
+                skillEffectDic.Remove(key);
+            }
         }
     }
 }

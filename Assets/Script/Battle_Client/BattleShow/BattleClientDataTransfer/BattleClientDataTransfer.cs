@@ -71,13 +71,13 @@ namespace Battle_Client
     public class BattleClientMsg_BattleAttr
     {
         public EntityAttrType type;
-        public int value;
+        public float value;
     }
 
     public class BattleClientMsg_BattleValue
     {
         public EntityCurrValueType type;
-        public int value;
+        public float value;
     }
 
 

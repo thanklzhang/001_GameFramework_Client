@@ -19,6 +19,8 @@ public class GameMain : MonoBehaviour
 
     public GameObject tempModelAsset;
 
+    bool isLoadFinish;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -42,7 +44,7 @@ public class GameMain : MonoBehaviour
     //    var go = Instantiate(gameInitPrefab);
     //}
 
-    public void GameInit()
+    public IEnumerator GameInit(Action finishCallback)
     {
         Logx.Log("!!!game startup ... ");
 
@@ -68,27 +70,33 @@ public class GameMain : MonoBehaviour
 
         CtrlManager.Instance.Init();
 
-        //读取表数据 这里可能换成异步操作
-        TableManager.Instance.Init();
-        TableManager.Instance.LoadAllTableData();
-
         AssetBundleManager.Instance.Init();
         AssetManager.Instance.Init();
         LoadTaskManager.Instance.Init();
 
-        GameDataManager.Instance.Init();
-        ServiceManager.Instance.Init();
 
         BattleEntityManager.Instance.Init();
         BattleSkillEffectManager.Instance.Init();
         PlotManager.Instance.Init();
+
+
+        //读取表数据 这里可能换成异步操作
+        TableManager.Instance.Init();
+        yield return TableManager.Instance.LoadAllTableData();
+
+        GameDataManager.Instance.Init();
+        ServiceManager.Instance.Init();
+
+     
+        
 
         Logx.Log("!!!finish init game");
 
 
         ////test
         //PlotManager.Instance.Test();
-
+        isLoadFinish = true;
+        finishCallback?.Invoke();
 
     }
 
@@ -115,8 +123,10 @@ public class GameMain : MonoBehaviour
 
     public void StartLocalBattle()
     {
-        int battleConfigId = 5001011;
-        BattleManager.Instance.CreateLocalBattle(battleConfigId);
+
+        //TODO: 纯本地战斗 里面的英雄是配置的 结算也是本地的
+        //int battleConfigId = 5001011;
+        //BattleManager.Instance.CreatePureLocalBattle(battleConfigId);
     }
 
     //void StartToEnterGame(NetProto.scCheckLogin result)
@@ -170,6 +180,11 @@ public class GameMain : MonoBehaviour
 
         currBattleFrameNum = currBattleFrameNum + 1;
 
+    }
+
+    private void FixedUpdate()
+    {
+        BattleManager.Instance.FixedUpdate(Time.fixedDeltaTime);
     }
 
     private void LateUpdate()

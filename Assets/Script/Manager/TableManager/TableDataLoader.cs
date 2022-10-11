@@ -20,33 +20,92 @@ namespace Table
     {
         //-----------------------------以下是用动态泛型读取文件 在 ios 可能会出问题
 
+
+        IEnumerator LoadFromAB(Action<List<TableInfo>> finishCallback)
+        {
+            List<TableInfo> infoList = new List<TableInfo>();
+
+            var tablePath = "TableData";
+            var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + tablePath;
+
+            var files = System.IO.Directory.GetFiles(loadPath);
+            foreach (var filePath in files)
+            {
+                bool isLoadFinish = false;
+                string loadText = "";
+                var ext = Path.GetExtension(filePath);
+                if (ext == ".ab")
+                {
+                    var strIndex = filePath.IndexOf(Const.buildPath + "/" + tablePath);
+                    var resultPath = filePath.Substring(strIndex).Replace("\\", "/").Replace(".ab", ".json").ToLower();
+                    //Logx.Log("start load : resultPath :  " + resultPath);
+                    ResourceManager.Instance.GetObject<TextAsset>(resultPath, (textAsset) =>
+                    {
+                        //Logx.Log("load text finish: " + textAsset.text);
+                        loadText = textAsset.text;
+                        isLoadFinish = true;
+                    });
+
+                    while (true)
+                    {
+                        yield return null;
+
+                        if (isLoadFinish)
+                        {
+                            TableInfo info = new TableInfo();
+                            info.name = Path.GetFileNameWithoutExtension(filePath);
+                            info.json = loadText;
+                            infoList.Add(info);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            finishCallback?.Invoke(infoList);
+        }
+
         /// <summary>
         /// 根据动态泛型来一次性读取 Config 
         /// </summary>
         /// <returns></returns>
-        public Dictionary<Type, System.Collections.IList> LoadFromFile()
+        public IEnumerator LoadFromFile(Action<Dictionary<Type, IList>> finishCallback)
         {
-            //临时路径 之后要打成 ab 
-            string[] files = System.IO.Directory.GetFiles(Application.dataPath + "/BuildRes/TableData");
 
-            List<TableInfo> infoList = new List<TableInfo>();
-            files.ToList().ForEach(file =>
+            if (Const.isUseAB)
             {
-                string jsonStr = FileOperate.GetTextFromFile(file);
-
-                TableInfo info = new TableInfo();
-                var ext = Path.GetExtension(file);
-                if (ext == ".json")
+                //AB 加载
+                yield return LoadFromAB((list) =>
                 {
-                    info.name = Path.GetFileNameWithoutExtension(file);
-                    info.json = jsonStr;
-                    infoList.Add(info);
-                }
+                    var dic = LoadAllDataByField(list);
+                    finishCallback?.Invoke(dic);
+                });
+            }
+            else
+            {
+                //非 AB 加载 之后可能改成 AssetDatabase 的加载
+                var loadPath = Application.dataPath + "/BuildRes/TableData";
+                string[] files = System.IO.Directory.GetFiles(loadPath);
+                List<TableInfo> infoList = new List<TableInfo>();
+                files.ToList().ForEach(file =>
+                {
+                    string jsonStr = FileOperate.GetTextFromFile(file);
 
-            });
+                    TableInfo info = new TableInfo();
+                    var ext = Path.GetExtension(file);
+                    if (ext == ".json")
+                    {
+                        info.name = Path.GetFileNameWithoutExtension(file);
+                        info.json = jsonStr;
+                        infoList.Add(info);
+                    }
 
-            //return LoadAllData(infoList);
-            return LoadAllDataByField(infoList);
+                });
+
+                //return LoadAllData(infoList);
+                var dic = LoadAllDataByField(infoList);
+                finishCallback?.Invoke(dic);
+            }
         }
 
         /// <summary>
@@ -54,7 +113,7 @@ namespace Table
         /// </summary>
         /// <param name="infos"></param>
         /// <returns></returns>
-        public Dictionary<Type, System.Collections.IList> LoadAllDataByField(List<TableInfo> infos)
+        Dictionary<Type, System.Collections.IList> LoadAllDataByField(List<TableInfo> infos)
         {
             Dictionary<Type, System.Collections.IList> configDic = new Dictionary<Type, System.Collections.IList>();
 
@@ -63,7 +122,7 @@ namespace Table
                 string typeName = "Table." + info.name;
                 try
                 {
-                    Type type = Type.GetType(typeName, true);
+                    Type type = Type.GetType(typeName, true,true);
                     Type listType = typeof(List<>).MakeGenericType(type);
 
 
@@ -117,7 +176,7 @@ namespace Table
                 {
 
                 }
-              
+
 
             });
 

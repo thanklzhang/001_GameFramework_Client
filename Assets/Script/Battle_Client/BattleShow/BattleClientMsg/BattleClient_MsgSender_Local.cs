@@ -26,7 +26,8 @@ namespace Battle_Client
         IEnumerator DelayLoadProgress(int progress)
         {
             yield return new WaitForSeconds(0.5f);
-            battle.PlayerMsgReceiver.On_PlayerLoadProgress(0, progress);
+            var myUid = GameDataManager.Instance.UserStore.Uid;
+            battle.PlayerMsgReceiver.On_PlayerLoadProgress((long)myUid, progress);
         }
 
         public void Send_PlayerLoadProgress(int progress)
@@ -38,7 +39,8 @@ namespace Battle_Client
         IEnumerator DelayBattleReadyFinish()
         {
             yield return new WaitForSeconds(0.1f);
-            battle.PlayerMsgReceiver.On_BattleReadyFinish(0);
+            var myUid = GameDataManager.Instance.UserStore.Uid;
+            battle.PlayerMsgReceiver.On_BattleReadyFinish((long)myUid);
         }
         public void Send_BattleReadyFinish()
         {
@@ -48,7 +50,8 @@ namespace Battle_Client
 
         public void Send_ClientPlotEnd()
         {
-            battle.PlayerMsgReceiver.On_ClientPlotEnd(0);
+            var myUid = GameDataManager.Instance.UserStore.Uid;
+            battle.PlayerMsgReceiver.On_ClientPlotEnd((long)myUid);
         }
 
         public void Send_MoveEntity(int guid, UnityEngine.Vector3 targetPos)

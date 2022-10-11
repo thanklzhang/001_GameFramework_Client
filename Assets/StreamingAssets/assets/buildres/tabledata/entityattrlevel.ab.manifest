@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2655890456
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8365f02f8e2eb6eb16d18199dc589f9c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/TableData/EntityAttrLevel.json
+Dependencies: []

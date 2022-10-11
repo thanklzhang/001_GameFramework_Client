@@ -5,11 +5,6 @@ using Table;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleResultUIArgs : UIArgs
-{
-    public bool isWin;
-}
-
 public class BattleResultUI : BaseUI
 {
     public Action onClickConfirmBtn;
@@ -31,7 +26,8 @@ public class BattleResultUI : BaseUI
 
     public override void Refresh(UIArgs args)
     {
-        var isWin = ((BattleResultUIArgs)args).isWin;
+        var resultArgs = (BattleResultUIArgs)args;
+        var isWin = resultArgs.isWin;
         var showStr = isWin ? "you win" : "you fail";
         winContent.text = showStr;
     }
@@ -41,6 +37,10 @@ public class BattleResultUI : BaseUI
         onClickConfirmBtn = null;
         this.confirmBtn.onClick.RemoveAllListeners();
     }
+}
 
-
+public class BattleResultUIArgs : UIArgs
+{
+    public bool isWin;
+    public List<CommonItemUIArgs> uiItem;
 }

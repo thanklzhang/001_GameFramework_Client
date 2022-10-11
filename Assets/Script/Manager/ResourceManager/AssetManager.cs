@@ -73,6 +73,7 @@ public class AssetManager : Singleton<AssetManager>
     //--------------------------------
     public void LoadAsync(string assetPath, Action<UnityEngine.Object> finishCallback)
     {
+        assetPath = assetPath.ToLower();
         if (!this.assetToAbDic.ContainsKey(assetPath))
         {
             Logx.LogError("Asset", "LoadAsync : the asset doesnt exist in assetToAbDic : " + assetPath);

@@ -17,22 +17,25 @@ namespace Table
             //HeroInfoStore.Init();
         }
 
-        public void LoadAllTableData()
+        public IEnumerator LoadAllTableData()
         {
-            typeToListConfigDic = TableDataLoader.Instance.LoadFromFile();
-
-            foreach (var configKV in typeToListConfigDic)
+            yield return TableDataLoader.Instance.LoadFromFile((dic) =>
             {
-                var iDic = new Dictionary<int, Table.BaseTable>();
-                foreach (var tableData in configKV.Value)
+                //º”‘ÿÕÍ≥…
+                typeToListConfigDic = dic;
+
+                foreach (var configKV in typeToListConfigDic)
                 {
-                    Table.BaseTable convertTableData = tableData as Table.BaseTable;
-                    iDic.Add(convertTableData.Id, convertTableData);
+                    var iDic = new Dictionary<int, Table.BaseTable>();
+                    foreach (var tableData in configKV.Value)
+                    {
+                        Table.BaseTable convertTableData = tableData as Table.BaseTable;
+                        iDic.Add(convertTableData.Id, convertTableData);
+                    }
+
+                    typeToDicConfigDic.Add(configKV.Key, iDic);
                 }
-
-                typeToDicConfigDic.Add(configKV.Key, iDic);
-            }
-
+            });
         }
 
 

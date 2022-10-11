@@ -121,8 +121,8 @@
     },
     {
         "id": 2002030,
-        "name": "\u65e5\u708e",
-        "describe": "\u65e5\u708e \u6bcf\u9694\u4e00\u6bb5\u65f6\u95f4\u5bf9\u5468\u56f4\u9020\u6210\u4f24\u5bb3",
+        "name": "\u65e5\u708ebuff",
+        "describe": "\u9644\u52a0\u65e5\u708ebuff \u6bcf\u9694\u4e00\u6bb5\u65f6\u95f4\u5bf9\u5468\u56f4\u9020\u6210\u4f24\u5bb3",
         "skillReleaseTargeType": 0,
         "skillReleaseType": 0,
         "isPassiveSkill": 0,

@@ -11,15 +11,19 @@ using UnityEngine;
 public enum EventIDs
 {
     Null = 0,
-    
+
     //自定义事件--------------
     OnUpgradeHeroLevel = 100001,
     OnRefreshAllMainTaskData = 100051,
     OnPlotEnd = 100071,
     OnRefreshHeroListData = 100101,
     OnRefreshBagData = 100102,
+    //team
+    OnPlayerEnterTeamRoom = 100131,
+    OnPlayerChangeInfoInTeamRoom = 100132,
+    OnPlayerLeaveTeamRoom = 100133,
 
-    //battle
+    //battle-------------
     OnCreateBattle = 101001,
     OnAllPlayerLoadFinish = 1010002,
     OnBattleStart = 1010003,
@@ -32,6 +36,6 @@ public enum EventIDs
 
     OnSetEntityPosition = 101201,
     //
-  
+
 
 }

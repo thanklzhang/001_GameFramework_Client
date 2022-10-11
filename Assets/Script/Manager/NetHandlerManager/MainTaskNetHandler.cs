@@ -71,14 +71,14 @@ public class MainTaskNetHandler : NetHandler
 
     }
 
-    //申请 主线 战斗
-    public void SendApplyMainTaskBattle(int chapterId, int stageId, Action action)
-    {
-        csApplyMainTaskBattle apply = new csApplyMainTaskBattle();
-        apply.ChapterId = chapterId;
-        apply.StageId = stageId;
-        NetworkManager.Instance.SendMsg(ProtoIDs.ApplyMainTaskBattle, apply.ToByteArray());
-    }
+    ////申请 主线 战斗
+    //public void SendApplyMainTaskBattle(int chapterId, int stageId, Action action)
+    //{
+    //    csApplyMainTaskBattle apply = new csApplyMainTaskBattle();
+    //    apply.ChapterId = chapterId;
+    //    apply.StageId = stageId;
+    //    NetworkManager.Instance.SendMsg(ProtoIDs.ApplyMainTaskBattle, apply.ToByteArray());
+    //}
 
     public void OnApplyMainTaskBattle(MsgPack msgPack)
     {

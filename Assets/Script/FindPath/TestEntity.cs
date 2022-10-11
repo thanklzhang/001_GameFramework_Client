@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battle;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,7 +46,7 @@ public class TestEntity : MonoBehaviour
         //按照路径走
         if (currIndex < currPosList.Count)
         {
-            var targetPos = new Vector3();
+            var targetPos = new UnityEngine.Vector3();
             var pos = currPosList[currIndex];
             targetPos = GetPosCenter(pos);
 
@@ -58,7 +59,7 @@ public class TestEntity : MonoBehaviour
             var moveDelta = dir * speed * Time.deltaTime;
             var nextFramePos = currPos + moveDelta;
 
-            var dotValue = Vector3.Dot(currFramePos - targetPos, targetPos - nextFramePos);
+            var dotValue = UnityEngine.Vector3.Dot(currFramePos - targetPos, targetPos - nextFramePos);
             if (dotValue >= 0 || moveVector.sqrMagnitude < 0.001f)
             {
                 //到达
@@ -157,33 +158,33 @@ public class TestEntity : MonoBehaviour
     }
 
 
-    bool IsCollisionCircle(Vector3 pos0, float r0, Vector3 pos1, float r1)
+    bool IsCollisionCircle(UnityEngine.Vector3 pos0, float r0, UnityEngine.Vector3 pos1, float r1)
     {
         var centerLength = (pos0 - pos1).sqrMagnitude;
         var rLengh = (r0 + r1) * (r0 + r1);
         return centerLength < rLengh;
     }
 
-    public Vector3 GetPosCenter(int x, int y)
+    public UnityEngine.Vector3 GetPosCenter(int x, int y)
     {
-        var v = new Vector3(x, 0, y);
+        var v = new UnityEngine.Vector3(x, 0, y);
         float width = 0.5f;
         float height = 0.5f;
-        return v + new Vector3(width, 0, height);
+        return v + new UnityEngine.Vector3(width, 0, height);
     }
 
-    public Vector3 GetPosCenter(Pos pos)
+    public UnityEngine.Vector3 GetPosCenter(Pos pos)
     {
         return GetPosCenter(pos.x, pos.y);
     }
 
-    public Vector3 GetPosCenter(Vector3 pos)
+    public UnityEngine.Vector3 GetPosCenter(UnityEngine.Vector3 pos)
     {
         return GetPosCenter((int)pos.x, (int)pos.z);
     }
 
 
-    public Pos GetIntPos(Vector3 vec)
+    public Pos GetIntPos(UnityEngine.Vector3 vec)
     {
         var x = (int)vec.x;
         //var y = (int)vec.y;
@@ -201,7 +202,7 @@ public class TestEntity : MonoBehaviour
 
     public List<Pos> cachePosList = new List<Pos>();
 
-    public string GetPosStr(Vector3 pos)
+    public string GetPosStr(UnityEngine.Vector3 pos)
     {
         return ("(" + pos.x + "," + pos.z + ")");
     }

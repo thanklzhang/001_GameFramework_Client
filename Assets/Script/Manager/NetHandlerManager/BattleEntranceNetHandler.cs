@@ -8,34 +8,71 @@ using UnityEngine;
 using NetProto;
 public class BattleEntranceNetHandler : NetHandler
 {
-    public Action<scApplyHeroExamBattle> applyHeroExamBattleAction;
+    public Action applyTeamBattleAction;
+    //public Action<scApplyHeroExamBattle> applyHeroExamBattleAction;
     //public Action<scEnterGame> enterGameResultAction;
     public override void Init()
     {
-
-        AddListener((int)ProtoIDs.ApplyHeroExamBattle, OnApplyHeroExamBattle);
+        //AddListener((int)ProtoIDs.ApplyHeroExamBattle, OnApplyHeroExamBattle);
+        AddListener((int)ProtoIDs.ApplyEnterBattle, OnApplyEnterBattle);
         //AddListener((int)ProtoIDs.EnterGame, OnEnterGame);
 
     }
 
-
-    //申请英雄试炼战斗
-    public void SendApplyHeroExamBattle(Action<scApplyHeroExamBattle> action)
+    //申请进入主线战斗
+    public void ApplyMainTaskBattle(int chapterId, int stageId, Action action)
     {
-        csApplyHeroExamBattle appy = new csApplyHeroExamBattle();
-        applyHeroExamBattleAction = action;
-        NetworkManager.Instance.SendMsg(ProtoIDs.ApplyHeroExamBattle, appy.ToByteArray());
-        //TransitionBattleMsg(ProtoIDs.ApplyHeroExamBattle, start);
+        csApplyEnterBattle apply = new csApplyEnterBattle();
+        apply.FuncId = (int)FunctionIds.MainTask;
+        apply.MainTaskArgs = new MainTaskEnterBattleArgs()
+        {
+            ChapterId = chapterId,
+            StageId = stageId
+        };
+
+        applyTeamBattleAction = action;
+        NetworkManager.Instance.SendMsg(ProtoIDs.ApplyEnterBattle, apply.ToByteArray());
     }
 
-    public void OnApplyHeroExamBattle(MsgPack msgPack)
+
+    //申请组队战斗
+    public void ApplyTeamBattle(int teamRoomId, Action action)
     {
-        scApplyHeroExamBattle scApply = scApplyHeroExamBattle.Parser.ParseFrom(msgPack.data);
+        csApplyEnterBattle apply = new csApplyEnterBattle();
+        apply.FuncId = (int)FunctionIds.Team;
+        apply.TeamArgs = new TeamEnterBattleArgs()
+        {
+            TeamRoomId = teamRoomId
+        };
 
-        applyHeroExamBattleAction?.Invoke(scApply);
-        applyHeroExamBattleAction = null;
-
+        applyTeamBattleAction = action;
+        NetworkManager.Instance.SendMsg(ProtoIDs.ApplyEnterBattle, apply.ToByteArray());
     }
+
+    public void OnApplyEnterBattle(MsgPack msgPack)
+    {
+        scApplyEnterBattle scApply = scApplyEnterBattle.Parser.ParseFrom(msgPack.data);
+        var funcId = scApply.FuncId;
+    }
+
+
+    ////申请英雄试炼战斗
+    //public void SendApplyHeroExamBattle(Action<scApplyHeroExamBattle> action)
+    //{
+    //    csApplyHeroExamBattle appy = new csApplyHeroExamBattle();
+    //    applyHeroExamBattleAction = action;
+    //    NetworkManager.Instance.SendMsg(ProtoIDs.ApplyHeroExamBattle, appy.ToByteArray());
+    //    //TransitionBattleMsg(ProtoIDs.ApplyHeroExamBattle, start);
+    //}
+
+    //public void OnApplyHeroExamBattle(MsgPack msgPack)
+    //{
+    //    scApplyHeroExamBattle scApply = scApplyHeroExamBattle.Parser.ParseFrom(msgPack.data);
+
+    //    applyHeroExamBattleAction?.Invoke(scApply);
+    //    applyHeroExamBattleAction = null;
+
+    //}
 
 
 }

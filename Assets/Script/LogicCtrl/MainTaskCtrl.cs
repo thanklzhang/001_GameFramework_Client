@@ -194,10 +194,17 @@ public class MainTaskCtrl : BaseCtrl
 
     public void onClickStageStartBtn(int stageId)
     {
-        var netHandler = NetHandlerManager.Instance.GetHandler<MainTaskNetHandler>();
-        //netHandler.SendFinishStage(this.currSelectChapterId, stageId, null);
-        netHandler.SendApplyMainTaskBattle(this.currSelectChapterId, stageId, null);
-        
+        //var netHandler = NetHandlerManager.Instance.GetHandler<MainTaskNetHandler>();
+        ////netHandler.SendFinishStage(this.currSelectChapterId, stageId, null);
+        //netHandler.SendApplyMainTaskBattle(this.currSelectChapterId, stageId, null);
+
+        var net = NetHandlerManager.Instance.GetHandler<BattleEntranceNetHandler>();
+        net.ApplyMainTaskBattle(this.currSelectChapterId, stageId, () =>
+         {
+
+         });
+
+
     }
 
     public void onClickStageReceiveBtn(int stageId)

@@ -16,6 +16,7 @@ namespace BattleTrigger.Editor
     {
         Number_Check,
         Bool_Check,
+        EntityType_Check
     }
 
     public class ConditionCheck

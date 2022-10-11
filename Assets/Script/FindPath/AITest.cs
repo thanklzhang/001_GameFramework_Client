@@ -101,13 +101,13 @@ public class AITest : MonoBehaviour
         var startPos = this.transform.position;
         var endPos = GetRandPos();
 
-        var pos0 = new Pos()
+        var pos0 = new Battle.Pos()
         {
             x = (int)startPos.x,
             y = (int)startPos.z
         };
 
-        var pos1 = new Pos()
+        var pos1 = new Battle.Pos()
         {
             x = (int)endPos.x,
             y = (int)endPos.z

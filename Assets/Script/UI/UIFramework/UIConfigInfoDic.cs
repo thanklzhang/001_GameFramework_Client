@@ -21,8 +21,10 @@ public class UIConfigInfoDic
         {typeof(ConfirmUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/ConfirmUI.prefab" }},
         {typeof(MainTaskUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/MainTaskUI.prefab" }},
         {typeof(MainTaskStageUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/MainTaskStageUI.prefab" }},
-         {typeof(BattleResultUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/BattleResultUI.prefab" }},
-         {typeof(TitleBarUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TitleBarUI.prefab" }},
+        {typeof(BattleResultUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/BattleResultUI.prefab" }},
+        {typeof(TitleBarUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TitleBarUI.prefab" }},
+        {typeof(TeamRoomListUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TeamRoomListUI.prefab" }},
+        {typeof(TeamRoomInfoUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TeamRoomInfoUI.prefab" }},
 
     };
 

@@ -26,10 +26,10 @@
         "describe": "\u602a\u72691",
         "attack": 35,
         "defence": 5,
-        "health": 4000,
+        "health": 300,
         "magic": 125,
         "attackSpeed": 750,
-        "moveSpeed": 1500,
+        "moveSpeed": 1000,
         "attackRange": 1500
     }
 ]

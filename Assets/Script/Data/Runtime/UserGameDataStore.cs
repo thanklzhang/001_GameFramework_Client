@@ -15,4 +15,6 @@ namespace GameData
 
         public ulong Uid { get => uid; set => uid = value; }
     }
+
+
 }

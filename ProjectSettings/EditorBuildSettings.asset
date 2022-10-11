@@ -7,11 +7,5 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Startup.unity
-    guid: f855e056a0806db439f25be9635105b9
-  - enabled: 1
-    path: Assets/Scenes/LocalBattleTest.unity
-    guid: 6da02dbac8513da47aa6850a87299d64
-  - enabled: 1
-    path: Assets/Scenes/Download.unity
-    guid: 7581f4b4726acd542a486ae8c2143779
+    guid: 7586cba785680e244bcb3ec3f37eb3a0
   m_configObjects: {}

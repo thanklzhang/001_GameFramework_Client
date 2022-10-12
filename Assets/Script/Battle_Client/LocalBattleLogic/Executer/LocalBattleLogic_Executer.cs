@@ -40,6 +40,25 @@ namespace Battle_Client
             return battle;
         }
 
+
+        public void OnEnterBattle()
+        {
+            battle.OnBattleEnd += OnBattleLogicEnd;
+        }
+
+        public void OnBattleLogicEnd(Battle.Battle battle, int winTeam)
+        {
+            //本地战斗结算是在 center server
+            var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, winTeam);
+            var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+            battleNet.SendApplyBattleEnd(arg);
+        }
+
+        public void OnExitBattle()
+        {
+            battle.OnBattleEnd -= OnBattleLogicEnd;
+        }
+
         public Map GetMap()
         {
             return this.battle.GetMap();
@@ -80,7 +99,7 @@ namespace Battle_Client
                 //    currTimer = 0;
                 //}
             }
-        
+
         }
 
         public void FixedUpdate(float fixedTime)
@@ -100,84 +119,6 @@ namespace Battle_Client
             var battleArg = ApplyBattleUtil.ToBattleArg(applyArg);
             return battleArg;
 
-            //Table.Battle battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
-
-            //Battle.BattleArg battleArg = new BattleArg();
-            //battleArg.guid = 0;
-            //battleArg.roomId = 0;
-            //battleArg.configId = battleConfigId;
-            //battleArg.battleType = BattleType.MainTask;
-
-            ////填充玩家信息 和 填充实体信息
-            //battleArg.battlePlayerInitArg = new Battle.BattlePlayerInitArg();
-            //var playerArg = battleArg.battlePlayerInitArg;
-            //playerArg.battlePlayerInitList = new List<BattlePlayerInit>();
-            //battleArg.entityInitArg = new Battle.BattleEntityInitArg();
-            //var entityArg = battleArg.entityInitArg;
-            //entityArg.entityInitList = new List<EntityInit>();
-
-            //var battleSettingId = battleTb.BattleConfigId;
-            //var settingTb = Table.TableManager.Instance.GetById<Table.BattleConfig>(battleSettingId);
-            //var settingPath = Const.buildPath + "/BattleConfig/" + settingTb.ConfigFilePath;
-            //var settingJson = FileOperate.GetTextFromFile(settingPath);
-            //var configNode = LitJson.JsonMapper.ToObject(settingJson);
-            //var configPlayerInfoList = configNode["playerInitInfo"]["infoList"];
-
-            ////地图尺寸
-            //var mapSizeX = int.Parse(configNode["mapSizeX"].ToString());
-            //var mapSizeZ = int.Parse(configNode["mapSizeZ"].ToString());
-            //battleArg.mapInitArg = new MapInitArg();
-            //battleArg.mapInitArg.mapSizeX = mapSizeX;
-            //battleArg.mapInitArg.mapSizeZ = mapSizeZ;
-
-            //for (int i = 0; i < configPlayerInfoList.Count; i++)
-            //{
-            //    var playerInfoJd = configPlayerInfoList[i];
-
-            //    BattlePlayerInit playerInfo = new BattlePlayerInit();
-            //    playerInfo.playerIndex = int.Parse(playerInfoJd["playerIndex"].ToString());
-            //    playerInfo.team = int.Parse(playerInfoJd["team"].ToString());
-            //    playerInfo.uid = 0;
-
-            //    playerArg.battlePlayerInitList.Add(playerInfo);
-
-
-            //    //填充控制的实体 目前一个玩家只控制一个实体
-            //    Battle.EntityInit entityInit = new EntityInit();
-            //    entityInit.configId = int.Parse(playerInfoJd["forceUseEntityConfigId"].ToString());
-
-            //    var entityTb = Table.TableManager.Instance.GetById<Table.EntityInfo>(entityInit.configId);
-
-            //    entityInit.isHeroCtrl = true;
-            //    //TODO：可以取真正玩家控制的实体 level
-            //    entityInit.level = entityTb.Level;
-            //    entityInit.playerIndex = playerInfo.playerIndex;
-            //    entityInit.position = new Battle.Vector3();
-            //    entityInit.position.x = int.Parse(playerInfoJd["initPos"]["x"].ToString());
-            //    entityInit.position.y = int.Parse(playerInfoJd["initPos"]["y"].ToString());
-            //    entityInit.position.z = int.Parse(playerInfoJd["initPos"]["z"].ToString());
-            //    entityInit.skillInitList = new List<SkillInit>();
-
-            //    //技能填充
-            //    entityInit.skillInitList = new List<SkillInit>();
-
-            //    var skillsStr = entityTb.SkillIds.Split(',');
-            //    foreach (var skillIdStr in skillsStr)
-            //    {
-            //        var skillConfigId = int.Parse(skillIdStr);
-
-            //        SkillInit skillInit = new SkillInit();
-            //        skillInit.configId = skillConfigId;
-            //        //TODO：可以取真正玩家控制的实体技能 level
-            //        skillInit.level = 1;
-
-            //        entityInit.skillInitList.Add(skillInit);
-
-            //    }
-            //    entityArg.entityInitList.Add(entityInit);
-            //}
-
-            //return battleArg;
         }
 
 

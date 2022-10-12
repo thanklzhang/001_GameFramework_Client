@@ -85,12 +85,15 @@ namespace NetProto {
             "ChJzY05vdGlmeUVudGl0eURlYWQSEgoKZW50aXR5R3VpZBgBIAEoBSIkChBz",
             "Y05vdGlmeVBsYXlQbG90EhAKCHBsb3ROYW1lGAEgASgJIhEKD3NjTm90aWZ5",
             "UGxvdEVuZCI7ChpzY05vdGlmeVNldEVudGl0eVNob3dTdGF0ZRINCgVndWlk",
-            "cxgBIAMoBRIOCgZpc1Nob3cYAiABKAgiQwoRc2NOb3RpZnlCYXR0bGVFbmQS",
-            "DQoFaXNXaW4YASABKAUSHwoHcmV3YXJkcxgCIAMoCzIOLk5ldFByb3RvLkl0",
-            "ZW0iLwoSY3NUcmFuc2l0aW9uQmF0dGxlEgsKA2NtZBgBIAEoBRIMCgRkYXRh",
-            "GAIgASgMIiEKEnNjVHJhbnNpdGlvbkJhdHRsZRILCgNlcnIYASABKAUiGwoZ",
-            "Y3NUcmFuc2l0aW9uQmF0dGxlMlBsYXllciI2ChlzY1RyYW5zaXRpb25CYXR0",
-            "bGUyUGxheWVyEgsKA2NtZBgBIAEoBRIMCgRkYXRhGAIgASgMYgZwcm90bzM="));
+            "cxgBIAMoBRIOCgZpc1Nob3cYAiABKAgiSgoQY3NBcHBseUJhdHRsZUVuZBI2",
+            "ChFhcHBseUJhdHRsZUVuZEFyZxgBIAEoCzIbLk5ldFByb3RvLkFwcGx5QmF0",
+            "dGxlRW5kQXJnIh8KEHNjQXBwbHlCYXR0bGVFbmQSCwoDZXJyGAEgASgFIkMK",
+            "EXNjTm90aWZ5QmF0dGxlRW5kEg0KBWlzV2luGAEgASgFEh8KB3Jld2FyZHMY",
+            "AiADKAsyDi5OZXRQcm90by5JdGVtIi8KEmNzVHJhbnNpdGlvbkJhdHRsZRIL",
+            "CgNjbWQYASABKAUSDAoEZGF0YRgCIAEoDCIhChJzY1RyYW5zaXRpb25CYXR0",
+            "bGUSCwoDZXJyGAEgASgFIhsKGWNzVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIi",
+            "NgoZc2NUcmFuc2l0aW9uQmF0dGxlMlBsYXllchILCgNjbWQYASABKAUSDAoE",
+            "ZGF0YRgCIAEoDGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -134,6 +137,8 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlayPlot), global::NetProto.scNotifyPlayPlot.Parser, new[]{ "PlotName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlotEnd), global::NetProto.scNotifyPlotEnd.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySetEntityShowState), global::NetProto.scNotifySetEntityShowState.Parser, new[]{ "Guids", "IsShow" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csApplyBattleEnd), global::NetProto.csApplyBattleEnd.Parser, new[]{ "ApplyBattleEndArg" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scApplyBattleEnd), global::NetProto.scApplyBattleEnd.Parser, new[]{ "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyBattleEnd), global::NetProto.scNotifyBattleEnd.Parser, new[]{ "IsWin", "Rewards" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csTransitionBattle), global::NetProto.csTransitionBattle.Parser, new[]{ "Cmd", "Data" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scTransitionBattle), global::NetProto.scTransitionBattle.Parser, new[]{ "Err" }, null, null, null),
@@ -5990,6 +5995,249 @@ namespace NetProto {
   }
 
   /// <summary>
+  /// 主动发起计算 一般是本地战斗的结算
+  /// </summary>
+  public sealed partial class csApplyBattleEnd : pb::IMessage<csApplyBattleEnd> {
+    private static readonly pb::MessageParser<csApplyBattleEnd> _parser = new pb::MessageParser<csApplyBattleEnd>(() => new csApplyBattleEnd());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<csApplyBattleEnd> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[40]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public csApplyBattleEnd() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public csApplyBattleEnd(csApplyBattleEnd other) : this() {
+      ApplyBattleEndArg = other.applyBattleEndArg_ != null ? other.ApplyBattleEndArg.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public csApplyBattleEnd Clone() {
+      return new csApplyBattleEnd(this);
+    }
+
+    /// <summary>Field number for the "applyBattleEndArg" field.</summary>
+    public const int ApplyBattleEndArgFieldNumber = 1;
+    private global::NetProto.ApplyBattleEndArg applyBattleEndArg_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.ApplyBattleEndArg ApplyBattleEndArg {
+      get { return applyBattleEndArg_; }
+      set {
+        applyBattleEndArg_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as csApplyBattleEnd);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(csApplyBattleEnd other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(ApplyBattleEndArg, other.ApplyBattleEndArg)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (applyBattleEndArg_ != null) hash ^= ApplyBattleEndArg.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (applyBattleEndArg_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ApplyBattleEndArg);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (applyBattleEndArg_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ApplyBattleEndArg);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(csApplyBattleEnd other) {
+      if (other == null) {
+        return;
+      }
+      if (other.applyBattleEndArg_ != null) {
+        if (applyBattleEndArg_ == null) {
+          applyBattleEndArg_ = new global::NetProto.ApplyBattleEndArg();
+        }
+        ApplyBattleEndArg.MergeFrom(other.ApplyBattleEndArg);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (applyBattleEndArg_ == null) {
+              applyBattleEndArg_ = new global::NetProto.ApplyBattleEndArg();
+            }
+            input.ReadMessage(applyBattleEndArg_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class scApplyBattleEnd : pb::IMessage<scApplyBattleEnd> {
+    private static readonly pb::MessageParser<scApplyBattleEnd> _parser = new pb::MessageParser<scApplyBattleEnd>(() => new scApplyBattleEnd());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scApplyBattleEnd> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[41]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scApplyBattleEnd() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scApplyBattleEnd(scApplyBattleEnd other) : this() {
+      err_ = other.err_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scApplyBattleEnd Clone() {
+      return new scApplyBattleEnd(this);
+    }
+
+    /// <summary>Field number for the "err" field.</summary>
+    public const int ErrFieldNumber = 1;
+    private int err_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Err {
+      get { return err_; }
+      set {
+        err_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scApplyBattleEnd);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scApplyBattleEnd other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Err != other.Err) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Err != 0) hash ^= Err.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Err != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Err);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Err != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Err);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scApplyBattleEnd other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Err != 0) {
+        Err = other.Err;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Err = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   /// 通知战斗结束
   /// </summary>
   public sealed partial class scNotifyBattleEnd : pb::IMessage<scNotifyBattleEnd> {
@@ -5999,7 +6247,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[40]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[42]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6139,7 +6387,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[41]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[43]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6284,7 +6532,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[42]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[44]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6404,7 +6652,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[43]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[45]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6493,7 +6741,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[44]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[46]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

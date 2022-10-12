@@ -186,8 +186,25 @@ namespace Battle_Client
 
             battleState = BattleState.Loading;
 
+            this.OnEnterBattle();
+
             //进入战斗状态
             CtrlManager.Instance.Enter<BattleCtrl>();
+        }
+
+        public void OnEnterBattle()
+        {
+            this.localBattleExecuter?.OnEnterBattle();
+        }
+
+        public void OnExitBattle()
+        {
+            this.localBattleExecuter?.OnExitBattle();
+
+
+            this.Clear();
+            
+
         }
 
         public bool IsLocalBattle()
@@ -203,6 +220,7 @@ namespace Battle_Client
         //创建远端战斗
         public void CreateRemoteBattle(BattleClient_CreateBattleArgs battleClientArgs)
         {
+            Logx.Log("battle manager : CreateRemoteBattle");
             //填充客户端所需组件
             msgSender = new BattleClient_MsgSender_Remote();
             msgReceiver = new BattleClient_MsgReceiver_Impl();
@@ -213,6 +231,7 @@ namespace Battle_Client
         //创建本地战斗
         public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg)
         {
+            Logx.Log("battle manager : CreateLocalBattle");
             //填充数据
 
             //初始化本地战斗后台逻辑
@@ -314,6 +333,8 @@ namespace Battle_Client
         public void BattleEnd(BattleResultDataArgs battleResultDataArgs)
         {
             EventDispatcher.Broadcast(EventIDs.OnBattleEnd, battleResultDataArgs);
+            this.OnExitBattle();
+           
         }
 
         //public void AllPlayerLoadFinish()

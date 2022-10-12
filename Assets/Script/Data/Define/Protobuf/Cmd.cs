@@ -22,7 +22,7 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKqMLCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKrgLCghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSEwoPUmVnaXN0",
             "QWNjb3VudDJTEGcSGAoTQXBwbHlDcmVhdGVCYXR0bGUyUxDJARIXChJUcmFu",
             "c2l0aW9uQmF0dGxlMlMQrQISHgoZVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIy",
@@ -50,11 +50,12 @@ namespace NetProto {
             "hRkSHwoaTm90aWZ5U2tpbGxFZmZlY3RTdGFydE1vdmUQhhkSHQoYTm90aWZ5",
             "U2tpbGxFZmZlY3REZXN0cm95EIcZEhkKFE5vdGlmeVN5bmNFbnRpdHlBdHRy",
             "EIgZEhoKFU5vdGlmeVN5bmNFbnRpdHlWYWx1ZRCJGRIVChBOb3RpZnlFbnRp",
-            "dHlEZWFkEIoZEhQKD05vdGlmeUJhdHRsZUVuZBCLGRITCg5Ob3RpZnlQbGF5",
-            "UGxvdBCMGRISCg1Ob3RpZnlQbG90RW5kEI0ZEh0KGE5vdGlmeVNldEVudGl0",
-            "eVNob3dTdGF0ZRCOGRIUCg9Ob3RpZnlFbnRpdHlEaXIQjxkSGwoWTm90aWZ5",
-            "RW50aXR5TW92ZUJ5UGF0aBCQGRIVChBUcmFuc2l0aW9uQmF0dGxlEOUZEhwK",
-            "F1RyYW5zaXRpb25CYXR0bGUyUGxheWVyEOYZYgZwcm90bzM="));
+            "dHlEZWFkEIoZEhMKDk5vdGlmeVBsYXlQbG90EIwZEhIKDU5vdGlmeVBsb3RF",
+            "bmQQjRkSHQoYTm90aWZ5U2V0RW50aXR5U2hvd1N0YXRlEI4ZEhQKD05vdGlm",
+            "eUVudGl0eURpchCPGRIbChZOb3RpZnlFbnRpdHlNb3ZlQnlQYXRoEJAZEhUK",
+            "EFRyYW5zaXRpb25CYXR0bGUQ5RkSHAoXVHJhbnNpdGlvbkJhdHRsZTJQbGF5",
+            "ZXIQ5hkSEwoOQXBwbHlCYXR0bGVFbmQQ+BkSFAoPTm90aWZ5QmF0dGxlRW5k",
+            "EPkZYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -140,7 +141,7 @@ namespace NetProto {
     [pbr::OriginalName("UseSkill")] UseSkill = 3102,
     [pbr::OriginalName("ClientPlotEnd")] ClientPlotEnd = 3130,
     /// <summary>
-    /// 服务端发来的关键战斗事件
+    /// 服务端发来的关键战斗事件(转发)
     /// </summary>
     [pbr::OriginalName("NotifyCreateEntities")] NotifyCreateEntities = 3201,
     /// <summary>
@@ -154,7 +155,6 @@ namespace NetProto {
     [pbr::OriginalName("NotifySyncEntityAttr")] NotifySyncEntityAttr = 3208,
     [pbr::OriginalName("NotifySyncEntityValue")] NotifySyncEntityValue = 3209,
     [pbr::OriginalName("NotifyEntityDead")] NotifyEntityDead = 3210,
-    [pbr::OriginalName("NotifyBattleEnd")] NotifyBattleEnd = 3211,
     [pbr::OriginalName("NotifyPlayPlot")] NotifyPlayPlot = 3212,
     [pbr::OriginalName("NotifyPlotEnd")] NotifyPlotEnd = 3213,
     [pbr::OriginalName("NotifySetEntityShowState")] NotifySetEntityShowState = 3214,
@@ -165,6 +165,11 @@ namespace NetProto {
     /// </summary>
     [pbr::OriginalName("TransitionBattle")] TransitionBattle = 3301,
     [pbr::OriginalName("TransitionBattle2Player")] TransitionBattle2Player = 3302,
+    /// <summary>
+    /// 主动申请战斗结束(一般是本地战斗)
+    /// </summary>
+    [pbr::OriginalName("ApplyBattleEnd")] ApplyBattleEnd = 3320,
+    [pbr::OriginalName("NotifyBattleEnd")] NotifyBattleEnd = 3321,
   }
 
   #endregion

@@ -41,7 +41,11 @@ namespace NetProto {
             "dFByb3RvLlZlY3RvcjNQcm90byKDAQoOQXBwbHlCYXR0bGVBcmcSFAoMYmF0",
             "dGxlUm9vbUlkGAEgASgFEhUKDWJhdHRsZVRhYmxlSWQYAiABKAUSMAoOcGxh",
             "eWVySW5mb0xpc3QYAyADKAsyGC5OZXRQcm90by5QbGF5ZXJJbml0SW5mbxIS",
-            "CgpmdW5jdGlvbklkGAQgASgFYgZwcm90bzM="));
+            "CgpmdW5jdGlvbklkGAQgASgFIjEKE1BsYXllckJhdHRsZUVuZEluZm8SCwoD",
+            "dWlkGAEgASgFEg0KBWlzV2luGAIgASgFInQKEUFwcGx5QmF0dGxlRW5kQXJn",
+            "Eg4KBnJvb21JZBgBIAEoBRIVCg1iYXR0bGVUYWJsZUlkGAIgASgFEjgKEXBs",
+            "YXllckVuZEluZm9MaXN0GAMgAygLMh0uTmV0UHJvdG8uUGxheWVyQmF0dGxl",
+            "RW5kSW5mb2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -53,7 +57,9 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SkillInitInfo), global::NetProto.SkillInitInfo.Parser, new[]{ "ConfigId", "Level" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.EntityInitInfo), global::NetProto.EntityInitInfo.Parser, new[]{ "ConfigId", "Attr", "Level", "PlayerIndex", "SkillList", "IsHeroCtrl" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.PlayerInitInfo), global::NetProto.PlayerInitInfo.Parser, new[]{ "Uid", "PlayerIndex", "Team", "EntityInitInfo", "Level", "InitPos" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ApplyBattleArg), global::NetProto.ApplyBattleArg.Parser, new[]{ "BattleRoomId", "BattleTableId", "PlayerInfoList", "FunctionId" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ApplyBattleArg), global::NetProto.ApplyBattleArg.Parser, new[]{ "BattleRoomId", "BattleTableId", "PlayerInfoList", "FunctionId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.PlayerBattleEndInfo), global::NetProto.PlayerBattleEndInfo.Parser, new[]{ "Uid", "IsWin" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ApplyBattleEndArg), global::NetProto.ApplyBattleEndArg.Parser, new[]{ "RoomId", "BattleTableId", "PlayerEndInfoList" }, null, null, null)
           }));
     }
     #endregion
@@ -1809,6 +1815,316 @@ namespace NetProto {
           }
           case 32: {
             FunctionId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class PlayerBattleEndInfo : pb::IMessage<PlayerBattleEndInfo> {
+    private static readonly pb::MessageParser<PlayerBattleEndInfo> _parser = new pb::MessageParser<PlayerBattleEndInfo>(() => new PlayerBattleEndInfo());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PlayerBattleEndInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.CommonReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PlayerBattleEndInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PlayerBattleEndInfo(PlayerBattleEndInfo other) : this() {
+      uid_ = other.uid_;
+      isWin_ = other.isWin_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PlayerBattleEndInfo Clone() {
+      return new PlayerBattleEndInfo(this);
+    }
+
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 1;
+    private int uid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Uid {
+      get { return uid_; }
+      set {
+        uid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isWin" field.</summary>
+    public const int IsWinFieldNumber = 2;
+    private int isWin_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int IsWin {
+      get { return isWin_; }
+      set {
+        isWin_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PlayerBattleEndInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PlayerBattleEndInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Uid != other.Uid) return false;
+      if (IsWin != other.IsWin) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Uid != 0) hash ^= Uid.GetHashCode();
+      if (IsWin != 0) hash ^= IsWin.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Uid != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Uid);
+      }
+      if (IsWin != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(IsWin);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Uid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Uid);
+      }
+      if (IsWin != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(IsWin);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PlayerBattleEndInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Uid != 0) {
+        Uid = other.Uid;
+      }
+      if (other.IsWin != 0) {
+        IsWin = other.IsWin;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Uid = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            IsWin = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ApplyBattleEndArg : pb::IMessage<ApplyBattleEndArg> {
+    private static readonly pb::MessageParser<ApplyBattleEndArg> _parser = new pb::MessageParser<ApplyBattleEndArg>(() => new ApplyBattleEndArg());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ApplyBattleEndArg> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.CommonReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ApplyBattleEndArg() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ApplyBattleEndArg(ApplyBattleEndArg other) : this() {
+      roomId_ = other.roomId_;
+      battleTableId_ = other.battleTableId_;
+      playerEndInfoList_ = other.playerEndInfoList_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ApplyBattleEndArg Clone() {
+      return new ApplyBattleEndArg(this);
+    }
+
+    /// <summary>Field number for the "roomId" field.</summary>
+    public const int RoomIdFieldNumber = 1;
+    private int roomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RoomId {
+      get { return roomId_; }
+      set {
+        roomId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "battleTableId" field.</summary>
+    public const int BattleTableIdFieldNumber = 2;
+    private int battleTableId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int BattleTableId {
+      get { return battleTableId_; }
+      set {
+        battleTableId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "playerEndInfoList" field.</summary>
+    public const int PlayerEndInfoListFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::NetProto.PlayerBattleEndInfo> _repeated_playerEndInfoList_codec
+        = pb::FieldCodec.ForMessage(26, global::NetProto.PlayerBattleEndInfo.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.PlayerBattleEndInfo> playerEndInfoList_ = new pbc::RepeatedField<global::NetProto.PlayerBattleEndInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NetProto.PlayerBattleEndInfo> PlayerEndInfoList {
+      get { return playerEndInfoList_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ApplyBattleEndArg);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ApplyBattleEndArg other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RoomId != other.RoomId) return false;
+      if (BattleTableId != other.BattleTableId) return false;
+      if(!playerEndInfoList_.Equals(other.playerEndInfoList_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RoomId != 0) hash ^= RoomId.GetHashCode();
+      if (BattleTableId != 0) hash ^= BattleTableId.GetHashCode();
+      hash ^= playerEndInfoList_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (RoomId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(RoomId);
+      }
+      if (BattleTableId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(BattleTableId);
+      }
+      playerEndInfoList_.WriteTo(output, _repeated_playerEndInfoList_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RoomId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
+      }
+      if (BattleTableId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(BattleTableId);
+      }
+      size += playerEndInfoList_.CalculateSize(_repeated_playerEndInfoList_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ApplyBattleEndArg other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RoomId != 0) {
+        RoomId = other.RoomId;
+      }
+      if (other.BattleTableId != 0) {
+        BattleTableId = other.BattleTableId;
+      }
+      playerEndInfoList_.Add(other.playerEndInfoList_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            RoomId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            BattleTableId = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            playerEndInfoList_.AddEntriesFrom(input, _repeated_playerEndInfoList_codec);
             break;
           }
         }

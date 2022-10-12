@@ -24,6 +24,7 @@ public class BattleNetHandler : NetHandler
         AddListener((int)ProtoIDs.NotifyCreateBattle, OnNotifyCreateBattle);
         AddListener((int)ProtoIDs.TransitionBattle2Player, OnTransitionBattle2Player);
         AddListener((int)ProtoIDs.NotifyBattleEnd, OnNotifyBattleEnd);
+        AddListener((int)ProtoIDs.ApplyBattleEnd, OnApplyBattleEnd);
 
         //AddListener((int)ProtoIDs.EnterGame, OnEnterGame);
 
@@ -181,6 +182,19 @@ public class BattleNetHandler : NetHandler
         }
 
         return battleArgs;
+    }
+
+    //主动战斗结束(一般是本地战斗)
+    public void SendApplyBattleEnd(NetProto.ApplyBattleEndArg arg)
+    {
+        csApplyBattleEnd applyEnd = new csApplyBattleEnd();
+        applyEnd.ApplyBattleEndArg = arg;
+        NetworkManager.Instance.SendMsg(ProtoIDs.ApplyBattleEnd, applyEnd.ToByteArray());
+    }
+
+    public void OnApplyBattleEnd(MsgPack msgPack)
+    {
+
     }
 
     private void OnNotifyBattleEnd(MsgPack msgPack)

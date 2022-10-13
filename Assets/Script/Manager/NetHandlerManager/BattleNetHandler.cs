@@ -128,7 +128,7 @@ public class BattleNetHandler : NetHandler
 
     }
 
-    //协议的创建战斗信息 转化为 战斗所用战斗信息
+    //协议的创建战斗信息 转化为 战斗所用战斗初始信息
     public BattleClient_CreateBattleArgs GetBattleInitArgsByProto(scNotifyCreateBattle netBattle)
     {
         BattleClient_CreateBattleArgs battleArgs = new BattleClient_CreateBattleArgs();

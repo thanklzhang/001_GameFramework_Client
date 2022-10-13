@@ -203,7 +203,7 @@ namespace Battle_Client
 
 
             this.Clear();
-            
+
 
         }
 
@@ -228,8 +228,21 @@ namespace Battle_Client
             BattleManager.Instance.CreateBattle(battleClientArgs);
         }
 
+
+        //创建纯本地战斗
+        public void CreatePureLocalBattle(int battleConfigId)
+        {
+            Logx.Log("battle manager : CreatePureLocalBattle");
+
+            GameDataManager.Instance.UserStore.Uid = 1;
+            var uid = GameDataManager.Instance.UserStore.Uid;
+            var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
+
+            CreateLocalBattle(applyArg, true);
+        }
+
         //创建本地战斗
-        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg)
+        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, bool isPureLocal = false)
         {
             Logx.Log("battle manager : CreateLocalBattle");
             //填充数据
@@ -237,7 +250,7 @@ namespace Battle_Client
             //初始化本地战斗后台逻辑
             localBattleExecuter = new LocalBattleLogic_Executer();
             localBattleExecuter.Init();
-            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg);
+            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, isPureLocal);
             var battleClientArgs = GetBattleClientArgs(battleLogic);
 
             //填充客户端所需组件
@@ -334,7 +347,7 @@ namespace Battle_Client
         {
             EventDispatcher.Broadcast(EventIDs.OnBattleEnd, battleResultDataArgs);
             this.OnExitBattle();
-           
+
         }
 
         //public void AllPlayerLoadFinish()

@@ -116,7 +116,7 @@
         "skillIds": "2001001,2001002,2001003,2001004,2001005,2002031",
         "level": 5,
         "star": 2,
-        "skillLevels": "1",
+        "skillLevels": "1,1,1,1,1,1",
         "aiScript": "BaseAI"
     },
     {
@@ -131,7 +131,7 @@
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
         "level": 6,
         "star": 2,
-        "skillLevels": "1",
+        "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
     },
     {
@@ -146,7 +146,7 @@
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
         "level": 7,
         "star": 2,
-        "skillLevels": "1",
+        "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
     },
     {
@@ -161,7 +161,7 @@
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
         "level": 8,
         "star": 2,
-        "skillLevels": "1",
+        "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
     },
     {
@@ -176,7 +176,7 @@
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
         "level": 9,
         "star": 3,
-        "skillLevels": "1",
+        "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
     },
     {
@@ -191,7 +191,7 @@
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
         "level": 10,
         "star": 3,
-        "skillLevels": "1",
+        "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
     }
 ]

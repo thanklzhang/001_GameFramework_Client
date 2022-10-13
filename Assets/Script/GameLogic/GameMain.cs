@@ -123,10 +123,9 @@ public class GameMain : MonoBehaviour
 
     public void StartLocalBattle()
     {
-
         //TODO: 纯本地战斗 里面的英雄是配置的 结算也是本地的
-        //int battleConfigId = 5001011;
-        //BattleManager.Instance.CreatePureLocalBattle(battleConfigId);
+        int battleConfigId = 5900001;
+        BattleManager.Instance.CreatePureLocalBattle(battleConfigId);
     }
 
     //void StartToEnterGame(NetProto.scCheckLogin result)

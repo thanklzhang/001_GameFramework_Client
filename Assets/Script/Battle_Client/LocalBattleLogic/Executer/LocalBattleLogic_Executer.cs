@@ -14,11 +14,12 @@ namespace Battle_Client
 
         }
 
+        bool isPureLocal;
         //创建本地战斗
-        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg)
+        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg,bool isPureLocal = false)
         {
+            this.isPureLocal = isPureLocal;
             //创建战斗逻辑参数
-            //TODO:要根据 center server 传来的玩家参数进行创建
             var logicArgs = GetBattleLogicArgs(applyArg);
 
             battle = new Battle.Battle();
@@ -50,13 +51,29 @@ namespace Battle_Client
         {
             //本地战斗结算是在 center server
             var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, winTeam);
-            var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-            battleNet.SendApplyBattleEnd(arg);
+
+
+            //判断是否是服务端结算
+            if (!isPureLocal)
+            {
+                //本地战斗 在服务端结算
+                var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+                battleNet.SendApplyBattleEnd(arg);
+               
+            }
+            else
+            {
+                //纯本地战斗
+                Logx.Log("pure battle : battle result");
+            }
+
+        
         }
 
         public void OnExitBattle()
         {
             battle.OnBattleEnd -= OnBattleLogicEnd;
+            isPureLocal = false;
         }
 
         public Map GetMap()
@@ -112,15 +129,13 @@ namespace Battle_Client
             return this.battle;
         }
 
-        //根据战斗 id 来开始运行战斗逻辑  在本地跑战斗逻辑
-        //TODO:center server 中的 player info 转换为战斗初始参数
+        //根据战斗服务端发来的战斗参数来开始运行战斗逻辑  在本地跑战斗逻辑 服务端结算
         public Battle.BattleArg GetBattleLogicArgs(NetProto.ApplyBattleArg applyArg)
         {
             var battleArg = ApplyBattleUtil.ToBattleArg(applyArg);
             return battleArg;
 
         }
-
 
     }
 

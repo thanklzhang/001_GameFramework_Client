@@ -256,4 +256,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18bf6044c44a104fb2103e4424c31ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocalBattle: 0
+  isLocalBattle: 1

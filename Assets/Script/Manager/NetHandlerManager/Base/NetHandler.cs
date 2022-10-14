@@ -52,6 +52,9 @@ public class NetHandler
     {
         var str = "receive msg err : " + cmd + "(" + (int)cmd + ") , errCode : " + err;
         Logx.LogError(str);
+
+        CtrlManager.Instance.globalCtrl.ShowTips(str);
+
     }
 }
 

@@ -18,6 +18,7 @@ public class LoginNetHandler : NetHandler
 
         AddListener((int)ProtoIDs.CheckLogin, OnCheckLogin);
         AddListener((int)ProtoIDs.EnterGame, OnEnterGame);
+        AddListener((int)ProtoIDs.RegistAccount, OnRegistAccount);
 
     }
 
@@ -81,6 +82,10 @@ public class LoginNetHandler : NetHandler
     public void OnEnterGame(MsgPack msgPack)
     {
         scEnterGame enterGame = scEnterGame.Parser.ParseFrom(msgPack.data);
+
+        var userDataStore = GameDataManager.Instance.UserStore;
+        userDataStore.PlayerInfo = PlayerConvert.ToPlayerInfo(enterGame.PlayerInfo);
+
         enterGameResultAction?.Invoke(enterGame);
         enterGameResultAction = null;
     }

@@ -68,20 +68,29 @@ public class LoginCtrl : BaseCtrl
             {
                 Logx.Log("StartToLogin : check login success !!!");
                 ui.SetStateText("check login success !!!");
+                CtrlManager.Instance.globalCtrl.ShowTips("登录成功");
+                this.SaveLoginSuccessInfo(account, password);
                 this.StartToEnterGame(result);
-                LocalDataTools.SetString("currAccount", account);
-                LocalDataTools.SetString("currPassword", password);
+
             }
             else
             {
                 Logx.Log("StartToLogin : check login fail");
+                CtrlManager.Instance.globalCtrl.ShowTips("登录失败");
                 ui.SetStateText("check login fail");
             }
 
         });
     }
 
-    public void OnRegisteBtnClick(string account, string password,string againPassword)
+    public void SaveLoginSuccessInfo(string account, string password)
+    {
+        LocalDataTools.SetString("currAccount", account);
+        LocalDataTools.SetString("currPassword", password);
+    }
+
+
+    public void OnRegisteBtnClick(string account, string password, string againPassword)
     {
         if (password != againPassword)
         {
@@ -94,11 +103,22 @@ public class LoginCtrl : BaseCtrl
         {
             if (0 == result.Err)
             {
-                Logx.Log("regist success !!! " + result.Account);
+                var str = ("注册成功 点击登录即可登录");
+                Logx.Log(str);
+                CtrlManager.Instance.globalCtrl.ShowTips(str);
+
+                this.SaveLoginSuccessInfo(account, password);
+
+                this.ui.RefreshSaveLoginSuccessShow();
+
+                this.ui.SwitchToLoginView();
+
             }
             else
             {
-                Logx.Log("regist fail !!! " + result.Account);
+                var str = ("注册失败 可能账号已经存在");
+                Logx.Log(str);
+                CtrlManager.Instance.globalCtrl.ShowTips(str);
             }
 
         });
@@ -132,14 +152,19 @@ public class LoginCtrl : BaseCtrl
                         Logx.Log("enter game success !!!");
 
                         ui.SetStateText("enter game success !!!");
+
+                        CtrlManager.Instance.globalCtrl.ShowTips("进入游戏成功");
+
                         OnGateConnectResult();
                     }
                     else
                     {
                         Logx.Log("enter game fail !!!");
                         ui.SetStateText("enter game fail !!!");
+
+                        CtrlManager.Instance.globalCtrl.ShowTips("进入游戏失败");
                     }
-                    
+
                 });
             }
             else
@@ -147,6 +172,8 @@ public class LoginCtrl : BaseCtrl
                 ui.SetStateText("connect gate server fail");
 
                 Logx.Log("StartToEnterGame : fail");
+
+                CtrlManager.Instance.globalCtrl.ShowTips("连接 网关服务器 失败");
             }
         });
     }
@@ -168,7 +195,7 @@ public class LoginCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
-       
+
     }
 
     public override void OnActive()

@@ -53,14 +53,12 @@ public class LoginUI : BaseUI
 
         loginOptionBtn.onClick.AddListener(() =>
         {
-            loginRootObj.SetActive(true);
-            registRootObj.SetActive(false);
+           this.SwitchToLoginView();
         });
 
         registOptionBtn.onClick.AddListener(() =>
         {
-            loginRootObj.SetActive(false);
-            registRootObj.SetActive(true);
+            this.SwitchToRegisterView();
         });
 
         loginConfirmBtn.onClick.AddListener(() =>
@@ -77,7 +75,25 @@ public class LoginUI : BaseUI
             onRegisteBtnClick?.Invoke(account, password, againPassword);
         });
 
-        //默认值
+        this.RefreshSaveLoginSuccessShow();
+
+
+    }
+
+    public void SwitchToLoginView()
+    {
+        loginRootObj.SetActive(true);
+        registRootObj.SetActive(false);
+    }
+
+    public void SwitchToRegisterView()
+    {
+        loginRootObj.SetActive(false);
+        registRootObj.SetActive(true);
+    }
+
+    public void RefreshSaveLoginSuccessShow()
+    {
         var preAccount = LocalDataTools.GetString("currAccount");
         var preAassword = LocalDataTools.GetString("currPassword");
         accountInput.text = preAccount;

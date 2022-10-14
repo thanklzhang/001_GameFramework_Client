@@ -87,8 +87,8 @@ public class GameMain : MonoBehaviour
         GameDataManager.Instance.Init();
         ServiceManager.Instance.Init();
 
-     
-        
+        //全局 ctrl
+        yield return CtrlManager.Instance.EnterGlobalCtrl();
 
         Logx.Log("!!!finish init game");
 
@@ -128,6 +128,15 @@ public class GameMain : MonoBehaviour
         BattleManager.Instance.CreatePureLocalBattle(battleConfigId);
     }
 
+    IEnumerator sss()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.50f);
+            CtrlManager.Instance.globalCtrl.ShowTips("tips 1");
+        }
+    }
+
     //void StartToEnterGame(NetProto.scCheckLogin result)
     //{
     //    var ip = result.Ip;
@@ -164,7 +173,7 @@ public class GameMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         LoadTaskManager.Instance.Update(Time.deltaTime);
         ResourceManager.Instance.Update(Time.deltaTime);
         CtrlManager.Instance.Update(Time.deltaTime);

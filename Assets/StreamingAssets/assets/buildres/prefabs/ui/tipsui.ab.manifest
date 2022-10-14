@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2067570456
+CRC: 2732906550
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d25167f3dd14de51b8ffbbf5f2913b4d
+    Hash: 666117a20de10f308cdcdd7a9aae6996
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1d972ccdc30985e603877c06e11f0be1
+    Hash: 78ef2eff7ff8a03535c4f303d4f9145a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -17,8 +17,6 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
@@ -32,5 +30,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildRes/Prefabs/UI/LobbyUI.prefab
+- Assets/BuildRes/Prefabs/UI/TipsUI.prefab
 Dependencies: []

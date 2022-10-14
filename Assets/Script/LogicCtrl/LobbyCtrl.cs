@@ -78,7 +78,16 @@ public class LobbyCtrl : BaseCtrl
 
     public void RefreshAll()
     {
+        //title
         RefreshTitleBarUI();
+
+        //lobby
+        var playerInfo = GameDataManager.Instance.UserStore.PlayerInfo;
+        LobbyUIArg arg = new LobbyUIArg()
+        {
+            playerName = playerInfo.name
+        };
+        this.ui.Refresh(arg);
     }
 
     public void RefreshTitleBarUI()

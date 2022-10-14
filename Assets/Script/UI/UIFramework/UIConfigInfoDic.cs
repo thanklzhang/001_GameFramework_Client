@@ -11,6 +11,7 @@ public class UIConfigInfo
 
 public class UIConfigInfoDic
 {
+    //TODO:抽取出来 用表格数据来驱动
     public static Dictionary<Type, UIConfigInfo> configDic = new Dictionary<Type, UIConfigInfo>()
     {
         {typeof(LoginUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/LoginUI.prefab" }},
@@ -25,7 +26,7 @@ public class UIConfigInfoDic
         {typeof(TitleBarUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TitleBarUI.prefab" }},
         {typeof(TeamRoomListUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TeamRoomListUI.prefab" }},
         {typeof(TeamRoomInfoUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TeamRoomInfoUI.prefab" }},
-
+        {typeof(TipsUI), new UIConfigInfo() { path = "Assets/BuildRes/Prefabs/UI/TipsUI.prefab" }},
     };
 
     public static UIConfigInfo GetInfo<T>()

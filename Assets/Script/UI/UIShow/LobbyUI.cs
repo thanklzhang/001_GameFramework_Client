@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class LobbyUIArg : UIArgs
+{
+    public string playerName;
+}
+
 public class LobbyUI : BaseUI
 {
     public Action onClickCloseBtn;
@@ -15,6 +20,7 @@ public class LobbyUI : BaseUI
     Button heroListBtn;
     Button mainTaskBtn;
     Button teamBtn;
+    Text playerNameText;
 
     protected override void OnInit()
     {
@@ -22,6 +28,7 @@ public class LobbyUI : BaseUI
         heroListBtn = this.transform.Find("heroListBtn").GetComponent<Button>();
         mainTaskBtn = this.transform.Find("mainTaskBtn").GetComponent<Button>();
         teamBtn = this.transform.Find("teamBtn").GetComponent<Button>();
+        playerNameText = this.transform.Find("playerNameRoot/name").GetComponent<Text>();
 
         closeBtn.onClick.AddListener(() =>
         {
@@ -43,6 +50,14 @@ public class LobbyUI : BaseUI
             onClickTeamBtn?.Invoke();
         });
     }
+
+    public override void Refresh(UIArgs args)
+    {
+        var lobbyArg = (LobbyUIArg)args;
+        var playerNameStr = lobbyArg.playerName;
+        this.playerNameText.text = playerNameStr;
+    }
+
     protected override void OnRelease()
     {
         onClickCloseBtn = null;

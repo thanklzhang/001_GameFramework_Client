@@ -22,23 +22,24 @@ namespace NetProto {
     static LoginReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtMb2dpbi5wcm90bxIITmV0UHJvdG8iMQoMY3NDaGVja0xvZ2luEg8KB2Fj",
-            "Y291bnQYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiUQoMc2NDaGVja0xvZ2lu",
-            "EgsKA2VychgBIAEoBRIKCgJpcBgCIAEoCRIMCgRwb3J0GAMgASgFEgsKA3Vp",
-            "ZBgEIAEoBRINCgV0b2tlbhgFIAEoCSI0Cg9jc1JlZ2lzdEFjY291bnQSDwoH",
-            "YWNjb3VudBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSIvCg9zY1JlZ2lzdEFj",
-            "Y291bnQSCwoDZXJyGAEgASgFEg8KB2FjY291bnQYAiABKAkiKQoLY3NFbnRl",
-            "ckdhbWUSCwoDdWlkGAEgASgFEg0KBXRva2VuGAIgASgJIhoKC3NjRW50ZXJH",
-            "YW1lEgsKA2VychgBIAEoBWIGcHJvdG8z"));
+            "CgtMb2dpbi5wcm90bxIITmV0UHJvdG8aDENvbW1vbi5wcm90byIxCgxjc0No",
+            "ZWNrTG9naW4SDwoHYWNjb3VudBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJR",
+            "CgxzY0NoZWNrTG9naW4SCwoDZXJyGAEgASgFEgoKAmlwGAIgASgJEgwKBHBv",
+            "cnQYAyABKAUSCwoDdWlkGAQgASgFEg0KBXRva2VuGAUgASgJIjQKD2NzUmVn",
+            "aXN0QWNjb3VudBIPCgdhY2NvdW50GAEgASgJEhAKCHBhc3N3b3JkGAIgASgJ",
+            "Ii8KD3NjUmVnaXN0QWNjb3VudBILCgNlcnIYASABKAUSDwoHYWNjb3VudBgC",
+            "IAEoCSIpCgtjc0VudGVyR2FtZRILCgN1aWQYASABKAUSDQoFdG9rZW4YAiAB",
+            "KAkiSQoLc2NFbnRlckdhbWUSCwoDZXJyGAEgASgFEi0KCnBsYXllckluZm8Y",
+            "AiABKAsyGS5OZXRQcm90by5QbGF5ZXJJbmZvUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csCheckLogin), global::NetProto.csCheckLogin.Parser, new[]{ "Account", "Password" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scCheckLogin), global::NetProto.scCheckLogin.Parser, new[]{ "Err", "Ip", "Port", "Uid", "Token" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csRegistAccount), global::NetProto.csRegistAccount.Parser, new[]{ "Account", "Password" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scRegistAccount), global::NetProto.scRegistAccount.Parser, new[]{ "Err", "Account" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csEnterGame), global::NetProto.csEnterGame.Parser, new[]{ "Uid", "Token" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scEnterGame), global::NetProto.scEnterGame.Parser, new[]{ "Err" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scEnterGame), global::NetProto.scEnterGame.Parser, new[]{ "Err", "PlayerInfo" }, null, null, null)
           }));
     }
     #endregion
@@ -882,6 +883,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public scEnterGame(scEnterGame other) : this() {
       err_ = other.err_;
+      PlayerInfo = other.playerInfo_ != null ? other.PlayerInfo.Clone() : null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -900,6 +902,17 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "playerInfo" field.</summary>
+    public const int PlayerInfoFieldNumber = 2;
+    private global::NetProto.PlayerInfoProto playerInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PlayerInfoProto PlayerInfo {
+      get { return playerInfo_; }
+      set {
+        playerInfo_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as scEnterGame);
@@ -914,6 +927,7 @@ namespace NetProto {
         return true;
       }
       if (Err != other.Err) return false;
+      if (!object.Equals(PlayerInfo, other.PlayerInfo)) return false;
       return true;
     }
 
@@ -921,6 +935,7 @@ namespace NetProto {
     public override int GetHashCode() {
       int hash = 1;
       if (Err != 0) hash ^= Err.GetHashCode();
+      if (playerInfo_ != null) hash ^= PlayerInfo.GetHashCode();
       return hash;
     }
 
@@ -935,6 +950,10 @@ namespace NetProto {
         output.WriteRawTag(8);
         output.WriteInt32(Err);
       }
+      if (playerInfo_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(PlayerInfo);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -942,6 +961,9 @@ namespace NetProto {
       int size = 0;
       if (Err != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Err);
+      }
+      if (playerInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfo);
       }
       return size;
     }
@@ -953,6 +975,12 @@ namespace NetProto {
       }
       if (other.Err != 0) {
         Err = other.Err;
+      }
+      if (other.playerInfo_ != null) {
+        if (playerInfo_ == null) {
+          playerInfo_ = new global::NetProto.PlayerInfoProto();
+        }
+        PlayerInfo.MergeFrom(other.PlayerInfo);
       }
     }
 
@@ -966,6 +994,13 @@ namespace NetProto {
             break;
           case 8: {
             Err = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (playerInfo_ == null) {
+              playerInfo_ = new global::NetProto.PlayerInfoProto();
+            }
+            input.ReadMessage(playerInfo_);
             break;
           }
         }

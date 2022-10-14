@@ -6,11 +6,14 @@ using UnityEngine;
 public class CtrlManager : Singleton<CtrlManager>
 {
     public List<BaseCtrl> ctrlCacheList = new List<BaseCtrl>();
+
+    public GlobalCtrl globalCtrl = new GlobalCtrl();
+
     //public Dictionary<Type, BaseCtrl> ctrlCacheDic = new Dictionary<Type, BaseCtrl>();
     public BaseCtrl currMainCtrl;
     public void Init()
     {
-
+        globalCtrl.Init();
     }
 
     public void Enter<T>(CtrlArgs args = null) where T : BaseCtrl, new()
@@ -99,6 +102,20 @@ public class CtrlManager : Singleton<CtrlManager>
                 ctrl.Update(deltaTime);
             }
         }
+
+        //global ctrl TODO:抽象出来 和上面走一套
+        if (this.globalCtrl.state == CtrlState.Loading)
+        {
+            if (globalCtrl.CheckLoadFinish())
+            {
+                globalCtrl.LoadFinish();
+            }
+        }
+        if (globalCtrl.state == CtrlState.Active)
+        {
+            globalCtrl.Update(deltaTime);
+        }
+
     }
 
     public void LateUpdate(float deltaTime)
@@ -111,102 +128,45 @@ public class CtrlManager : Singleton<CtrlManager>
                 ctrl.LateUpdate(deltaTime);
             }
         }
+
+
+        //global ctrl TODO:抽象出来 和上面走一套
+        if (this.globalCtrl.state == CtrlState.Loading)
+        {
+            if (globalCtrl.state == CtrlState.Active)
+            {
+                globalCtrl.LateUpdate(deltaTime);
+            }
+        }
     }
 
-    //public void Enter<T>(CtrlArgs args = null) where T : BaseCtrl, new()
-    //{
-    //    var findCtrl = FindCtrl<T>();
-    //    if (findCtrl != null)
-    //    {
-    //        //已经存在 目前的方案是 ：直接把 ctrl 提到最前面
-    //        ctrlCacheList.Remove(findCtrl);
-    //        ctrlCacheList.Add(findCtrl);
-    //        //这里应该是刷新 而不是再次进入
-    //        findCtrl.ReEnter(args);
-    //        if (!findCtrl.isParallel)
-    //        {
-    //            currMainCtrl = findCtrl;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        //没找到 开始一个新的 ctrl
-    //        BaseCtrl newCtrl = new T();
-    //        newCtrl.Init();
+    public IEnumerator EnterGlobalCtrl()
+    {
+        bool isLoadFinish = false;
+        globalCtrl.StartLoad(() =>
+        {
+            globalCtrl.Enter(new CtrlArgs());
+            globalCtrl.Active();
+            isLoadFinish = true;
+        });
 
-    //        ctrlCacheList.Add(newCtrl);
+        while (true)
+        {
+            yield return null;
 
-    //        if (!newCtrl.isParallel)
-    //        {
-    //            currMainCtrl = newCtrl;
-    //        }
+            if (isLoadFinish)
+            {
+                break;
+            }
+        }
+    }
 
-    //        //这里的回调需要 ctrl 自行在加载完之后调用 ctrl 中的 LoadFinish
-    //        newCtrl.StartLoad(() =>
-    //        {
-    //            newCtrl.Enter(args);
+    public void ExitGlobalCtrl()
+    {
+        globalCtrl.Inactive();
+        globalCtrl.Exit();
+    }
 
-    //            for (int i = ctrlCacheList.Count - 2; i >= 0; i--)
-    //            {
-    //                BaseCtrl currCtrl = ctrlCacheList[i];
-
-    //                currCtrl.Exit();
-    //                if (!currCtrl.isParallel)
-    //                {
-    //                    break;
-    //                }
-    //            }
-    //        });
-    //    }
-
-    //}
-
-    //public void Exit<T>() where T : BaseCtrl
-    //{
-    //    var findCtrl = FindCtrl<T>();
-    //    if (null == findCtrl)
-    //    {
-    //        //Logx.LogError("the findCtrl is null : " + typeof(T));
-    //        return;
-    //    }
-
-    //    if (findCtrl.isParallel)
-    //    {
-    //        findCtrl.Exit();
-    //        ctrlCacheList.Remove(findCtrl);
-    //        findCtrl.Release();
-    //    }
-    //    else
-    //    {
-    //        //如果不是并行的 ctrl
-
-    //        //需要判断是不是当前的主 ctrl 
-    //        if (findCtrl == currMainCtrl)
-    //        {
-    //            //先打开上一组 ctrl 之后也改成异步回调之后再关闭
-    //            currMainCtrl = null;
-    //            for (int i = ctrlCacheList.Count - 2; i >= 0; i--)
-    //            {
-    //                BaseCtrl currCtrl = ctrlCacheList[i];
-    //                currCtrl.Enter(null);
-    //                if (!currCtrl.isParallel)
-    //                {
-    //                    currMainCtrl = currCtrl;
-    //                    break;
-    //                }
-    //            }
-
-    //            findCtrl.Exit();
-    //            ctrlCacheList.Remove(findCtrl);
-    //            findCtrl.Release();
-    //        }
-    //        else
-    //        {
-    //            //Logx.LogError("findCtrl == ctrl : " + typeof(T) + " != " + currMainCtrl?.GetType());
-    //            return;
-    //        }
-    //    }
-    //}
 
     public BaseCtrl FindCtrl<T>() where T : BaseCtrl
     {

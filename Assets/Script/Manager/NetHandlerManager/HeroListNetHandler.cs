@@ -55,7 +55,7 @@ public class HeroListNetHandler : NetHandler
         var err = upgrade.Err;
         if (0 == err)
         {
-            //
+            CtrlManager.Instance.globalCtrl.ShowTips("升级成功");
         }
         else
         {

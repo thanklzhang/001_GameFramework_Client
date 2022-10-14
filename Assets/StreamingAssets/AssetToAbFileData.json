@@ -17,6 +17,7 @@
     "assets/buildres/prefabs/ui/maintaskui.prefab"                        : "Assets/BuildRes/Prefabs/UI/MainTaskUI.ab",
     "assets/buildres/prefabs/ui/teamroominfoui.prefab"                    : "Assets/BuildRes/Prefabs/UI/TeamRoomInfoUI.ab",
     "assets/buildres/prefabs/ui/teamroomlistui.prefab"                    : "Assets/BuildRes/Prefabs/UI/TeamRoomListUI.ab",
+    "assets/buildres/prefabs/ui/tipsui.prefab"                            : "Assets/BuildRes/Prefabs/UI/TipsUI.ab",
     "assets/buildres/prefabs/ui/titlebarui.prefab"                        : "Assets/BuildRes/Prefabs/UI/TitleBarUI.ab",
     "assets/buildres/prefabs/ui/titleui_del.prefab"                       : "Assets/BuildRes/Prefabs/UI/TitleUI_del.ab",
     "assets/buildres/prefabs/scene/battle_scene_001.prefab"               : "Assets/BuildRes/Prefabs/Scene/battle_scene_001.ab",

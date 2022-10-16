@@ -15,11 +15,15 @@ public class GameStartup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Startup();
+        //Startup();
     }
 
     public void Startup()
     {
+
+
+        //TODO : 热更
+
         var gameInitPrefab = Resources.Load("GameInit") as GameObject;
         var go = Instantiate(gameInitPrefab);
         var gameMain = go.GetComponent<GameMain>();

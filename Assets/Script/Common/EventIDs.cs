@@ -23,6 +23,9 @@ public enum EventIDs
     OnPlayerChangeInfoInTeamRoom = 100132,
     OnPlayerLeaveTeamRoom = 100133,
 
+    //title
+    OnTitleBarClickCloseBtn = 100900,
+
     //battle-------------
     OnCreateBattle = 101001,
     OnAllPlayerLoadFinish = 1010002,

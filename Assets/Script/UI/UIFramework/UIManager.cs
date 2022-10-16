@@ -6,9 +6,30 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     Transform uiRoot;
+    public Dictionary<UIShowLayer, Transform> layerRootDic;
+
+
+    public static Dictionary<UIShowLayer, string> uiShowLayerDic = new Dictionary<UIShowLayer, string>()
+    {
+        { UIShowLayer.Floor_0,"FloorUIRoot/layer" },
+        { UIShowLayer.Middle_0,"MiddleUIRoot/layer" },
+        { UIShowLayer.Top_0,"TopUIRoot/layer" },
+    };
+
     internal void Init(Transform uiRoot)
     {
         this.uiRoot = uiRoot;
+
+        layerRootDic = new Dictionary<UIShowLayer, Transform>();
+        foreach (var kv in uiShowLayerDic)
+        {
+            var type = kv.Key;
+            var tranPath = kv.Value;
+
+            var layerRoot = this.uiRoot.Find(tranPath);
+            layerRootDic.Add(type, layerRoot);
+        }
+
     }
 
     public Dictionary<Type, BaseUI> uiCacheDic = new Dictionary<Type, BaseUI>();
@@ -35,7 +56,9 @@ public class UIManager : Singleton<UIManager>
             }
             ResourceManager.Instance.GetObject<GameObject>(uiConfigInfo.path, (gameObject) =>
             {
-                gameObject.transform.SetParent(this.uiRoot, false);
+                var layerRoot = layerRootDic[uiConfigInfo.showLayer];
+                gameObject.transform.SetParent(layerRoot, false);
+                gameObject.transform.SetAsLastSibling();
                 T t = new T();
                 t.Init(gameObject, uiConfigInfo.path);
                 uiCacheDic.Add(t.GetType(), t);
@@ -62,5 +85,21 @@ public class UIManager : Singleton<UIManager>
             //Logx.LogWarning("the ui is not exist in cache dic : " + type);
         }
     }
+
+}
+
+public enum UIShowLayer
+{
+    Floor_0 = 0,
+    Floor_1 = 1,
+    Floor_2 = 2,
+
+    Middle_0 = 10,
+    Middle_1 = 11,
+    Middle_2 = 12,
+
+    Top_0 = 20,
+    Top_1 = 21,
+    Top_2 = 22,
 
 }

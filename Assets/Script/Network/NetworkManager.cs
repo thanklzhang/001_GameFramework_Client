@@ -21,12 +21,14 @@ public class NetworkManager : Singleton<NetworkManager>
         tcpNetClient = new TcpNetClient();
     }
 
-    public void ConnectToLoginServer(Action<bool> connectCallback)
+    public void ConnectToLoginServer(string ip,int port,Action<bool> connectCallback)
     {
         this.connectCallback = connectCallback;
         //tcpNetClient = new TcpNetClient();
+        //var ip = "192.168.3.13";
+        //var ip = "120.245.26.19";
         tcpNetClient.connectAction += this.OnConnectToLoginServerFinish;
-        tcpNetClient.Connect("127.0.0.1", 5556);
+        tcpNetClient.Connect(ip, port);
         tcpNetClient.ReceiveMsgAction += this.OnReceveMsg;
     }
 

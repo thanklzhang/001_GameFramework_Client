@@ -140,6 +140,23 @@ public class CtrlManager : Singleton<CtrlManager>
         }
     }
 
+
+    public BaseCtrl FindCtrl<T>() where T : BaseCtrl
+    {
+        for (int i = 0; i < ctrlCacheList.Count; i++)
+        {
+            var ctrl = ctrlCacheList[i];
+            if (ctrl.GetType() == typeof(T))
+            {
+                return ctrl;
+            }
+        }
+        return null;
+    }
+
+
+    //global ctrl---------------------------------------
+
     public IEnumerator EnterGlobalCtrl()
     {
         bool isLoadFinish = false;
@@ -167,18 +184,21 @@ public class CtrlManager : Singleton<CtrlManager>
         globalCtrl.Exit();
     }
 
-
-    public BaseCtrl FindCtrl<T>() where T : BaseCtrl
+    public void ShowTips(string str)
     {
-        for (int i = 0; i < ctrlCacheList.Count; i++)
-        {
-            var ctrl = ctrlCacheList[i];
-            if (ctrl.GetType() == typeof(T))
-            {
-                return ctrl;
-            }
-        }
-        return null;
+        this.globalCtrl.ShowTips(str);
     }
 
+    //TODO: 刷新标题栏的话可以在 ctrl 中用监听实现 ， 金币等资源变更了就刷新标题栏 待定
+    public void ShowTitleBar()
+    {
+        this.globalCtrl.ShowTitleBar();
+    }
+
+    public void HideTitleBar()
+    {
+        this.globalCtrl.HideTitleBar();
+    }
+
+    //------------------------------------
 }

@@ -70,8 +70,23 @@ public class MainTaskCtrl : BaseCtrl
 
     }
 
+    public void OnClickTitleCloseBtn()
+    {
+        if (stageUI.IsShow())
+        {
+            this.OnClickStageCloseBtn();
+        }
+        else
+        {
+            this.OnClickCloseBtn();
+        }
+    }
+
     public override void OnActive()
     {
+        CtrlManager.Instance.ShowTitleBar();
+
+        EventDispatcher.AddListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.AddListener(EventIDs.OnRefreshAllMainTaskData, OnRefreshAllMainTaskData);
 
         mainUI.Show();
@@ -110,6 +125,7 @@ public class MainTaskCtrl : BaseCtrl
 
     public override void OnInactive()
     {
+        EventDispatcher.RemoveListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.RemoveListener(EventIDs.OnRefreshAllMainTaskData, OnRefreshAllMainTaskData);
 
         mainUI.Hide();

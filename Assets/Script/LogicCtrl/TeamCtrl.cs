@@ -173,9 +173,24 @@ public class TeamCtrl : BaseCtrl
             action?.Invoke();
         });
     }
+    public void OnClickTitleCloseBtn()
+    {
+        if (roomInfoUI.IsShow())
+        {
+            this.OnRoomInfoUIClickCloseBtn();
+        }
+        else
+        {
+            this.OnRoomListUIClickCloseBtn();
+        }
+    }
 
     public override void OnActive()
     {
+
+        CtrlManager.Instance.ShowTitleBar();
+
+
 
         this.roomListUI.Show();
         this.roomInfoUI.Hide();
@@ -189,7 +204,7 @@ public class TeamCtrl : BaseCtrl
         roomInfoUI.event_onClickSinglePlayerReadyBtn += OnRoomInfoUIClickSinglePlayerReadyBtn;
         roomInfoUI.event_onStartBattleeBtn += OnRoomInfoUIClickStartBattleBtn;
 
-
+        EventDispatcher.AddListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.AddListener(EventIDs.OnPlayerChangeInfoInTeamRoom, OnPlayerChangeInfoInTamRoom);
         EventDispatcher.AddListener<int>(EventIDs.OnPlayerLeaveTeamRoom, OnPlayerLeaveTeamRoom);
 
@@ -197,7 +212,7 @@ public class TeamCtrl : BaseCtrl
         {
             RefreshAll();
         });
-        
+
 
 
     }
@@ -268,6 +283,8 @@ public class TeamCtrl : BaseCtrl
 
     public override void OnInactive()
     {
+
+
         roomListUI.Hide();
         roomInfoUI.Hide();
 
@@ -279,6 +296,7 @@ public class TeamCtrl : BaseCtrl
         roomInfoUI.event_onClickSinglePlayerReadyBtn -= OnRoomInfoUIClickSinglePlayerReadyBtn;
         roomInfoUI.event_onStartBattleeBtn -= OnRoomInfoUIClickStartBattleBtn;
 
+        EventDispatcher.RemoveListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.RemoveListener(EventIDs.OnPlayerChangeInfoInTeamRoom, OnPlayerChangeInfoInTamRoom);
         EventDispatcher.RemoveListener<int>(EventIDs.OnPlayerLeaveTeamRoom, OnPlayerLeaveTeamRoom);
     }

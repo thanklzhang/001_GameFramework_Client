@@ -74,6 +74,8 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnActive()
     {
+        CtrlManager.Instance.ShowTitleBar();
+
         ui.Show();
 
         ui.onCloseBtnClick += OnClickCloseBtn;
@@ -81,13 +83,21 @@ public class HeroListCtrl : BaseCtrl
         ui.onClickOneHeroUpgradeLevelBtn += OnClickOneHeroUpgradeLevelBtn;
 
         //EventDispatcher.AddListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+        EventDispatcher.AddListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.AddListener(EventIDs.OnRefreshHeroListData, OnRefreshHeroListData);
 
         this.RefreshInfo();
     }
 
+    public void OnClickTitleCloseBtn()
+    {
+        this.OnClickCloseBtn();
+    }
+
     public void RefreshInfo()
     {
+      
+
         //组装数据并传递给 UI 层数据
         HeroListUIArgs uiArgs = ConvertToUIArgs();
         ui.Refresh(uiArgs);
@@ -103,6 +113,7 @@ public class HeroListCtrl : BaseCtrl
         ui.onClickOneHeroUpgradeLevelBtn -= OnClickOneHeroUpgradeLevelBtn;
 
         //EventDispatcher.RemoveListener<HeroData>(EventIDs.OnUpgradeHeroLevel, OnUpgradeHeroLevel);
+        EventDispatcher.RemoveListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.RemoveListener(EventIDs.OnRefreshHeroListData, OnRefreshHeroListData);
     }
 

@@ -33,25 +33,45 @@ public class LoginCtrl : BaseCtrl
     {
         ui.onLoginBtnClick += OnClickLoginBtn;
         ui.onRegisteBtnClick += OnRegisteBtnClick;
+        ui.onClickConnectBtn += OnclickConnectBtn;
 
         ui.SetStateText("no login");
-        ui.SetStateText("start to connect to login server ...");
-        NetworkManager.Instance.ConnectToLoginServer((isSuccess) =>
+
+
+    }
+
+    public void OnclickConnectBtn(string ip, int port)
+    {
+        var isLocal = Const.isLocalServer;
+        if (isLocal)
         {
+            ui.SetConnectTips("start to connect to login server ...");
+            ui.SetStateText("start to connect to login server ...");
+            port = 5556;
+            NetworkManager.Instance.ConnectToLoginServer(ip, port, (isSuccess) =>
+              {
 
-            if (isSuccess)
-            {
-                ui.SetStateText("connect to login server success !!!");
+                  if (isSuccess)
+                  {
+                      ui.SetStateText("connect to login server success !!!");
+                      ui.SetConnectTips("connect to login server success !!!");
+                      Logx.Log("StartToLogin : login success");
+                      ui.SetConnectUIShow(false);
+                  }
+                  else
+                  {
+                      Logx.Log("StartToLogin : login fail");
+                      ui.SetStateText("connect login server fail");
+                      this.ui.SetConnectTips("connect login server fail");
+                  }
+              });
 
-                Logx.Log("StartToLogin : login success");
-            }
-            else
-            {
-                Logx.Log("StartToLogin : login fail");
-                ui.SetStateText("connect login server fail");
-            }
-        });
 
+        }
+        else
+        {
+            this.ui.SetConnectTips("暂不支持远端服务器");
+        }
     }
 
     public void OnClickLoginBtn(string account, string password)
@@ -200,6 +220,7 @@ public class LoginCtrl : BaseCtrl
 
     public override void OnActive()
     {
+        CtrlManager.Instance.HideTitleBar();
         ui.Show();
     }
 
@@ -211,6 +232,10 @@ public class LoginCtrl : BaseCtrl
     public override void OnExit()
     {
         //UIManager.Instance.ReleaseUI<LoginUI>();
+
+        ui.onLoginBtnClick -= OnClickLoginBtn;
+        ui.onRegisteBtnClick -= OnRegisteBtnClick;
+        ui.onClickConnectBtn -= OnclickConnectBtn;
     }
 
 }

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class LobbyCtrl : BaseCtrl
 {
     LobbyUI ui;
-    TitleBarUI titleBarUI;
+    //TitleBarUI titleBarUI;
     public override void OnInit()
     {
         //this.isParallel = false;
@@ -19,7 +19,7 @@ public class LobbyCtrl : BaseCtrl
         this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
             new LoadUIRequest<LobbyUI>(){selfFinishCallback = OnUILoadFinish},
-            new LoadUIRequest<TitleBarUI>(){selfFinishCallback = OnTitleUILoadFinish},
+            //new LoadUIRequest<TitleBarUI>(){selfFinishCallback = OnTitleUILoadFinish},
         });
     }
 
@@ -29,10 +29,10 @@ public class LobbyCtrl : BaseCtrl
     }
 
 
-    public void OnTitleUILoadFinish(TitleBarUI titleBarUI)
-    {
-        this.titleBarUI = titleBarUI;
-    }
+    //public void OnTitleUILoadFinish(TitleBarUI titleBarUI)
+    //{
+    //    this.titleBarUI = titleBarUI;
+    //}
 
     public override void OnLoadFinish()
     {
@@ -70,16 +70,21 @@ public class LobbyCtrl : BaseCtrl
 
     public override void OnActive()
     {
+
+        CtrlManager.Instance.ShowTitleBar();
+
+
         ui.Show();
-        titleBarUI.Show();
+        //titleBarUI.Show();
 
         RefreshAll();
     }
 
     public void RefreshAll()
     {
-        //title
-        RefreshTitleBarUI();
+        ////title
+        //RefreshTitleBarUI();
+        
 
         //lobby
         var playerInfo = GameDataManager.Instance.UserStore.PlayerInfo;
@@ -90,27 +95,27 @@ public class LobbyCtrl : BaseCtrl
         this.ui.Refresh(arg);
     }
 
-    public void RefreshTitleBarUI()
-    {
-        //给标题栏 ui 提供数据
-        TitleBarUIArgs titleArgs = new TitleBarUIArgs();
-        titleArgs.optionList = new List<TitleOptionUIData>();
+    //public void RefreshTitleBarUI()
+    //{ //给标题栏 ui 提供数据
+    //    TitleBarUIArgs titleArgs = new TitleBarUIArgs();
+    //    titleArgs.optionList = new List<TitleOptionUIData>();
 
-        //先就显示一个
-        var bagStore = GameDataManager.Instance.BagStore;
-        TitleOptionUIData optionData = new TitleOptionUIData();
-        optionData.configId = 22000001;
-        optionData.count = bagStore.GetCountByConfigId(optionData.configId);
+    //    //先就显示一个
+    //    var bagStore = GameDataManager.Instance.BagStore;
+    //    TitleOptionUIData optionData = new TitleOptionUIData();
+    //    optionData.configId = 22000001;
+    //    optionData.count = bagStore.GetCountByConfigId(optionData.configId);
 
-        titleArgs.optionList.Add(optionData);
+    //    titleArgs.optionList.Add(optionData);
 
-        titleBarUI.Refresh(titleArgs);
-    }
+    //    titleBarUI.Refresh(titleArgs);
+       
+    //}
 
     public override void OnInactive()
     {
         ui.Hide();
-        titleBarUI.Hide();
+        //titleBarUI.Hide();
     }
 
     public override void OnExit()

@@ -8,6 +8,7 @@ public class LoginUI : BaseUI
 {
     public Action<string, string> onLoginBtnClick;
     public Action<string, string, string> onRegisteBtnClick;
+    public Action<string, int> onClickConnectBtn;
 
     Button loginConfirmBtn;
     Button registConfirmBtn;
@@ -19,6 +20,14 @@ public class LoginUI : BaseUI
     InputField registAccountInput;
     InputField registPasswordInput;
     InputField registPasswordAgainInput;
+
+    Transform connectRoot;
+    Transform remoteServerRoot;
+    Transform localServerRoot;
+    public InputField localServerIpInput;
+    public InputField localServerPortInput;
+    Button connectBtn;
+    public Text connectTipsText;
 
     Button loginOptionBtn;
     Button registOptionBtn;
@@ -46,6 +55,23 @@ public class LoginUI : BaseUI
 
         registConfirmBtn = registRootObj.transform.Find("registBtn").GetComponent<Button>();
 
+        //连接相关
+        connectRoot = transform.Find("connect");
+        remoteServerRoot = connectRoot.Find("remoteRoot");
+        localServerRoot = connectRoot.Find("localRoot");
+        localServerIpInput = localServerRoot.Find("Ip").GetComponent<InputField>();
+        localServerPortInput = localServerRoot.Find("port").GetComponent<InputField>();
+        connectBtn = connectRoot.Find("connectBtn").GetComponent<Button>();
+        connectTipsText = connectRoot.Find("tips").GetComponent<Text>();
+        connectBtn.onClick.AddListener(() =>
+        {
+            var ip = localServerIpInput.text;
+            var port = int.Parse(localServerPortInput.text);
+            onClickConnectBtn?.Invoke(ip, port);
+        });
+        this.localServerIpInput.text = "192.168.3.13";
+        this.localServerPortInput.text = "5556";
+    
 
         //------------------------------
 
@@ -53,7 +79,7 @@ public class LoginUI : BaseUI
 
         loginOptionBtn.onClick.AddListener(() =>
         {
-           this.SwitchToLoginView();
+            this.SwitchToLoginView();
         });
 
         registOptionBtn.onClick.AddListener(() =>
@@ -78,6 +104,18 @@ public class LoginUI : BaseUI
         this.RefreshSaveLoginSuccessShow();
 
 
+
+
+    }
+
+    internal void SetConnectUIShow(bool isShow)
+    {
+        connectRoot.gameObject.SetActive(isShow);
+    }
+
+    public void SetConnectTips(string str)
+    {
+        this.connectTipsText.text = str;
     }
 
     public void SwitchToLoginView()
@@ -108,6 +146,9 @@ public class LoginUI : BaseUI
     protected override void OnRelease()
     {
         onLoginBtnClick = null;
+
+        connectBtn.onClick.RemoveAllListeners();
+        this.onClickConnectBtn = null;
     }
 }
 

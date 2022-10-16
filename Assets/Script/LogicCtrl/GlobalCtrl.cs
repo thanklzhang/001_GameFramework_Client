@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GlobalCtrl : BaseCtrl
 {
     TipsUI tipsUI;
+    TitleBarUI titleUI;
     //TitleBarUI titleBarUI;
     public override void OnInit()
     {
@@ -20,6 +21,7 @@ public class GlobalCtrl : BaseCtrl
         this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
             new LoadUIRequest<TipsUI>(){selfFinishCallback = OnTipsUILoadFinish},
+             new LoadUIRequest<TitleBarUI>(){selfFinishCallback = OnTitleUILoadFinish},
         });
     }
 
@@ -29,6 +31,10 @@ public class GlobalCtrl : BaseCtrl
 
     }
 
+    public void OnTitleUILoadFinish(TitleBarUI titleUI)
+    {
+        this.titleUI = titleUI;
+    }
 
     public override void OnLoadFinish()
     {
@@ -42,12 +48,31 @@ public class GlobalCtrl : BaseCtrl
 
     public override void OnActive()
     {
+        tipsUI.Show();
+        titleUI.Show();
 
+        titleUI.clickCloseBtnAction += OnClickTitleUICloseBtn;
 
+        EventDispatcher.AddListener(EventIDs.OnRefreshBagData, OnRefreshBagData);
+    }
+
+    public void OnRefreshBagData()
+    {
+        this.ShowTitleBar();
+    }
+
+    public void OnClickTitleUICloseBtn()
+    {
+        EventDispatcher.Broadcast(EventIDs.OnTitleBarClickCloseBtn);
     }
 
     public override void OnInactive()
     {
+        tipsUI.Hide();
+        titleUI.Hide();
+
+        EventDispatcher.RemoveListener(EventIDs.OnRefreshBagData, OnRefreshBagData);
+        titleUI.clickCloseBtnAction -= OnClickTitleUICloseBtn;
     }
 
     public override void OnExit()
@@ -58,6 +83,7 @@ public class GlobalCtrl : BaseCtrl
     public override void OnUpdate(float deltaTime)
     {
         tipsUI.Update(deltaTime);
+        titleUI.Update(deltaTime);
     }
 
     //------------------------------
@@ -69,6 +95,29 @@ public class GlobalCtrl : BaseCtrl
         {
             tipStr = tipStr
         });
+    }
+
+    public void ShowTitleBar()
+    {
+        //给标题栏 ui 提供数据
+        TitleBarUIArgs titleArgs = new TitleBarUIArgs();
+        titleArgs.optionList = new List<TitleOptionUIData>();
+
+        //先就显示一个
+        var bagStore = GameDataManager.Instance.BagStore;
+        TitleOptionUIData optionData = new TitleOptionUIData();
+        optionData.configId = 22000001;
+        optionData.count = bagStore.GetCountByConfigId(optionData.configId);
+
+        titleArgs.optionList.Add(optionData);
+
+        titleUI.Show();
+        titleUI.Refresh(titleArgs);
+    }
+
+    public void HideTitleBar()
+    {
+        titleUI.Hide();
     }
 
 

@@ -35,7 +35,7 @@ namespace NetProto {
             "KAUSDgoGcm9vbUlkGAMgASgFEjoKE2JhdHRsZVBsYXllckluaXRBcmcYBCAB",
             "KAsyHS5OZXRQcm90by5CYXR0bGVQbGF5ZXJJbml0QXJnEjQKDWVudGl0eUlu",
             "aXRBcmcYBSABKAsyHS5OZXRQcm90by5CYXR0bGVFbnRpdHlJbml0QXJnEhIK",
-            "CmFjdGl2aXR5SWQYByABKAUiWQoRQmF0dGxlUGxheWVyUHJvdG8SEwoLcGxh",
+            "CmZ1bmN0aW9uSWQYByABKAUiWQoRQmF0dGxlUGxheWVyUHJvdG8SEwoLcGxh",
             "eWVySW5kZXgYASABKAUSDAoEdGVhbRgCIAEoBRILCgN1aWQYAyABKAUSFAoM",
             "Y3RybEhlcm9HdWlkGAQgASgFIkYKE0JhdHRsZVBsYXllckluaXRBcmcSLwoK",
             "cGxheWVyTGlzdBgBIAMoCzIbLk5ldFByb3RvLkJhdHRsZVBsYXllclByb3Rv",
@@ -100,7 +100,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityProto), global::NetProto.BattleEntityProto.Parser, new[]{ "Guid", "ConfigId", "PlayerIndex", "SkillInitList", "Position", "Level", "MaxHp", "CurrHp" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csNotifyCreateBattle), global::NetProto.csNotifyCreateBattle.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateBattle), global::NetProto.scNotifyCreateBattle.Parser, new[]{ "BattleInitArg", "LocalApplyBattleArg" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleInitArg), global::NetProto.BattleInitArg.Parser, new[]{ "Guid", "TableId", "RoomId", "BattlePlayerInitArg", "EntityInitArg", "ActivityId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleInitArg), global::NetProto.BattleInitArg.Parser, new[]{ "Guid", "TableId", "RoomId", "BattlePlayerInitArg", "EntityInitArg", "FunctionId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattlePlayerProto), global::NetProto.BattlePlayerProto.Parser, new[]{ "PlayerIndex", "Team", "Uid", "CtrlHeroGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattlePlayerInitArg), global::NetProto.BattlePlayerInitArg.Parser, new[]{ "PlayerList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleMapInitArg), global::NetProto.BattleMapInitArg.Parser, null, null, null, null),
@@ -745,7 +745,7 @@ namespace NetProto {
       roomId_ = other.roomId_;
       BattlePlayerInitArg = other.battlePlayerInitArg_ != null ? other.BattlePlayerInitArg.Clone() : null;
       EntityInitArg = other.entityInitArg_ != null ? other.EntityInitArg.Clone() : null;
-      activityId_ = other.activityId_;
+      functionId_ = other.functionId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -823,19 +823,19 @@ namespace NetProto {
       }
     }
 
-    /// <summary>Field number for the "activityId" field.</summary>
-    public const int ActivityIdFieldNumber = 7;
-    private int activityId_;
+    /// <summary>Field number for the "functionId" field.</summary>
+    public const int FunctionIdFieldNumber = 7;
+    private int functionId_;
     /// <summary>
     /// 地图信息(暂时不用)
     /// BattleMapInitArg mapInitArg = 6;
-    /// 活动 id
+    /// 所属功能 id
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int ActivityId {
-      get { return activityId_; }
+    public int FunctionId {
+      get { return functionId_; }
       set {
-        activityId_ = value;
+        functionId_ = value;
       }
     }
 
@@ -857,7 +857,7 @@ namespace NetProto {
       if (RoomId != other.RoomId) return false;
       if (!object.Equals(BattlePlayerInitArg, other.BattlePlayerInitArg)) return false;
       if (!object.Equals(EntityInitArg, other.EntityInitArg)) return false;
-      if (ActivityId != other.ActivityId) return false;
+      if (FunctionId != other.FunctionId) return false;
       return true;
     }
 
@@ -869,7 +869,7 @@ namespace NetProto {
       if (RoomId != 0) hash ^= RoomId.GetHashCode();
       if (battlePlayerInitArg_ != null) hash ^= BattlePlayerInitArg.GetHashCode();
       if (entityInitArg_ != null) hash ^= EntityInitArg.GetHashCode();
-      if (ActivityId != 0) hash ^= ActivityId.GetHashCode();
+      if (FunctionId != 0) hash ^= FunctionId.GetHashCode();
       return hash;
     }
 
@@ -900,9 +900,9 @@ namespace NetProto {
         output.WriteRawTag(42);
         output.WriteMessage(EntityInitArg);
       }
-      if (ActivityId != 0) {
+      if (FunctionId != 0) {
         output.WriteRawTag(56);
-        output.WriteInt32(ActivityId);
+        output.WriteInt32(FunctionId);
       }
     }
 
@@ -924,8 +924,8 @@ namespace NetProto {
       if (entityInitArg_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(EntityInitArg);
       }
-      if (ActivityId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ActivityId);
+      if (FunctionId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FunctionId);
       }
       return size;
     }
@@ -956,8 +956,8 @@ namespace NetProto {
         }
         EntityInitArg.MergeFrom(other.EntityInitArg);
       }
-      if (other.ActivityId != 0) {
-        ActivityId = other.ActivityId;
+      if (other.FunctionId != 0) {
+        FunctionId = other.FunctionId;
       }
     }
 
@@ -996,7 +996,7 @@ namespace NetProto {
             break;
           }
           case 56: {
-            ActivityId = input.ReadInt32();
+            FunctionId = input.ReadInt32();
             break;
           }
         }

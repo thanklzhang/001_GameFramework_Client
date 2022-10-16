@@ -32,6 +32,11 @@ public abstract class BaseUI
         gameObject.SetActive(true);
     }
 
+    public bool IsShow()
+    {
+        return this.gameObject.activeSelf;
+    }
+
     public virtual void Refresh(UIArgs args)
     {
 

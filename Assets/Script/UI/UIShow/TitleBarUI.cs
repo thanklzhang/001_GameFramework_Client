@@ -5,6 +5,57 @@ using Table;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public class TitleBarUI : BaseUI
+{
+    public Transform optionRoot;
+    public Button closeBtn;
+
+    List<TitleOptionUIData> optionDataList = new List<TitleOptionUIData>();
+    List<TitleOptionShowObj> optionShowList = new List<TitleOptionShowObj>();
+
+    public Action clickCloseBtnAction;
+
+    protected override void OnInit()
+    {
+        this.optionRoot = this.transform.Find("root");
+        this.closeBtn = transform.Find("close").GetComponent<Button>();
+
+        this.closeBtn.onClick.AddListener(() =>
+        {
+            clickCloseBtnAction?.Invoke();
+        });
+    }
+
+    public override void Refresh(UIArgs args)
+    {
+        TitleBarUIArgs titleBarListArgs = (TitleBarUIArgs)args;
+
+        this.optionDataList = titleBarListArgs.optionList;
+
+        this.RefreshOptionList();
+    }
+
+    void RefreshOptionList()
+    {
+        UIListArgs<TitleOptionShowObj, TitleBarUI> args = new
+            UIListArgs<TitleOptionShowObj, TitleBarUI>();
+        args.dataList = optionDataList;
+        args.showObjList = optionShowList;
+        args.root = optionRoot;
+        args.parentObj = this;
+        UIFunc.DoUIList(args);
+
+    }
+
+    protected override void OnRelease()
+    {
+        clickCloseBtnAction = null;
+        this.closeBtn.onClick.RemoveAllListeners();
+    }
+}
+
+
 public class TitleBarUIArgs : UIArgs
 {
     public List<TitleOptionUIData> optionList;
@@ -61,47 +112,9 @@ public class TitleOptionShowObj : BaseUIShowObj<TitleBarUI>
         {
             ResourceManager.Instance.ReturnObject<Texture>(currIconResId, currIconTex);
         }
-       
+
     }
 
 }
 
-
-public class TitleBarUI : BaseUI
-{
-    public Transform optionRoot;
-    List<TitleOptionUIData> optionDataList = new List<TitleOptionUIData>();
-    List<TitleOptionShowObj> optionShowList = new List<TitleOptionShowObj>();
-
-    protected override void OnInit()
-    {
-        this.optionRoot = this.transform.Find("root");
-    }
-
-    public override void Refresh(UIArgs args)
-    {
-        TitleBarUIArgs titleBarListArgs = (TitleBarUIArgs)args;
-
-        this.optionDataList = titleBarListArgs.optionList;
-
-        this.RefreshOptionList();
-    }
-
-    void RefreshOptionList()
-    {
-        UIListArgs<TitleOptionShowObj, TitleBarUI> args = new
-            UIListArgs<TitleOptionShowObj, TitleBarUI>();
-        args.dataList = optionDataList;
-        args.showObjList = optionShowList;
-        args.root = optionRoot;
-        args.parentObj = this;
-        UIFunc.DoUIList(args);
-
-    }
-
-    protected override void OnRelease()
-    {
-        
-    }
-}
 

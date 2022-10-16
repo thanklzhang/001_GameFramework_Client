@@ -21,6 +21,8 @@ public class Const
         return colorDic[index];
     }
 
+    public static bool isLocalServer = false;
+
 
     //path
     public const string AppName = "Jeko";

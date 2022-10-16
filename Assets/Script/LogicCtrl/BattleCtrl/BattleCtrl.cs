@@ -139,6 +139,8 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnActive()
     {
+        CtrlManager.Instance.HideTitleBar();
+
         ui.onCloseBtnClick += OnClickCloseBtn;
         ui.onReadyStartBtnClick += OnClickReadyStartBtn;
 
@@ -423,6 +425,17 @@ public class BattleCtrl : BaseCtrl
             isWin = battleResultArgs.isWin,
             //reward
         };
+        args.uiItem = new List<CommonItemUIArgs>();
+
+        foreach (var item in battleResultArgs.rewardDataList)
+        {
+            var _item = new CommonItemUIArgs()
+            {
+                configId = item.configId,
+                count = item.count
+            };
+            args.uiItem.Add(_item);
+        }
 
         this.resultUI.Refresh(args);
         this.resultUI.Show();

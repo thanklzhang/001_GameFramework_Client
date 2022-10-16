@@ -28,8 +28,6 @@ public class TipsUI : BaseUI
         TipsUIArgs tipsArgs = (TipsUIArgs)args;
         var tipStr = tipsArgs.tipStr;
         this.ShowTips(tipStr);
-
-        this.transform.SetAsLastSibling();
     }
 
     void ShowTips(string tipStr)

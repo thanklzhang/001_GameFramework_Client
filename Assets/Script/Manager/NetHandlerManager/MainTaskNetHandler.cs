@@ -165,6 +165,8 @@ public class MainTaskNetHandler : NetHandler
             {
                 //chapter
             }
+
+            CtrlManager.Instance.ShowTips("领取奖励成功");
         }
         else
         {

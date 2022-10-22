@@ -107,6 +107,7 @@ namespace Battle_Client
 
             BattleEntity entity = new BattleEntity();
             entity.Init(guid, configId);
+            entity.SetPlayerIndex(msgEntity.playerIndex);
             entity.SetPosition(msgEntity.position);
 
             //填充技能

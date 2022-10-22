@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum EntityRelationType
+{
+    Self = 0,
+    Friend = 1,
+    Enemy = 2
+}
+
 public class HpUIData : UIArgs
 {
     public int entityGuid;
@@ -11,6 +18,9 @@ public class HpUIData : UIArgs
     public float nowCurrHp;
     public float maxHp;
     public GameObject entityObj;
+
+    public EntityRelationType relationType;
+
 }
 
 public class HpUIShowObj
@@ -26,7 +36,8 @@ public class HpUIShowObj
 
     BaseUI parentUI;
     RectTransform parentTranRect;
-
+    EntityHpColorSelector colorSelector;
+    public Image hpBg;
     public void Init(GameObject gameObject, BaseUI parentUI)
     {
         this.gameObject = gameObject;
@@ -36,7 +47,9 @@ public class HpUIShowObj
 
         bgRoot = this.transform.Find("bg");
         hp = this.transform.Find("bg/hp");
+        hpBg = hp.GetComponent<Image>();
         valueText = this.transform.Find("bg/valueText").GetComponent<Text>();
+        colorSelector = hp.GetComponent<EntityHpColorSelector>();
 
     }
 
@@ -55,6 +68,27 @@ public class HpUIShowObj
         rect.sizeDelta = new Vector2(currLen, rect.sizeDelta.y);
 
         valueText.text = "" + currHp + "/" + maxHp;
+
+        //背景颜色和字体颜色
+        var relationType = this.data.relationType;
+
+        if (relationType == EntityRelationType.Self)
+        {
+            hpBg.color = this.colorSelector.selfBgColor;
+            valueText.color = this.colorSelector.selfTextColor;
+
+        }
+        else if (relationType == EntityRelationType.Enemy)
+        {
+            hpBg.color = this.colorSelector.enemyBgColor;
+            valueText.color = this.colorSelector.enemyTextColor;
+        }
+        else if (relationType == EntityRelationType.Friend)
+        {
+            hpBg.color = this.colorSelector.friendBgColor;
+            valueText.color = this.colorSelector.friendTextColor;
+        }
+
     }
 
     public void Update(float timeDelta)

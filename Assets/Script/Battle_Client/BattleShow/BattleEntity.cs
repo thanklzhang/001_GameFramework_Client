@@ -60,6 +60,8 @@ namespace Battle_Client
         public int guid;
         public int configId;
 
+        public int playerIndex;
+
         public GameObject gameObject;
 
         public GameObject tempModel;
@@ -153,6 +155,11 @@ namespace Battle_Client
             //gameObject = 
             collider = gameObject.GetComponentInChildren<Collider>();
             animation = gameObject.GetComponentInChildren<Animation>();
+        }
+       
+        internal void SetPlayerIndex(int playerIndex)
+        {
+            this.playerIndex = playerIndex;
         }
 
         internal void SetSkillList(List<BattleSkillInfo> skills)

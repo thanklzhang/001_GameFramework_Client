@@ -12,6 +12,8 @@ public class ServerTypeUI : MonoBehaviour
     
     public Text tips;
 
+    public GameStartup startUp;
+
     private void Awake()
     {
         remoteStartBtn = transform.Find("remote").GetComponent<Button>();
@@ -33,7 +35,7 @@ public class ServerTypeUI : MonoBehaviour
             Const.isLocalServer = true;
             this.gameObject.SetActive(false);
 
-            var startUp = GameObject.Find("GameStartup").GetComponent<GameStartup>();
+            //var startUp = GameObject.Find("GameStartup").GetComponent<GameStartup>();
             startUp.Startup();
         });
     }

@@ -55,7 +55,11 @@ public class MapCellView : MonoBehaviour
             var entityGuid = player0.ctrlHeroGuid;
             var entity = battle.FindEntity(entityGuid);
             var ai = (Battle.PlayerAI)battle.FindAI(entity.guid);
-            SetRenderPath(ai.GetCurrPathPosList());
+            if (null == ai)
+            {
+                return;
+            }
+            SetRenderPath(ai?.GetCurrPathPosList());
             mapNodes = map.mapNodes;
         }
         else

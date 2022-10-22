@@ -46,6 +46,7 @@ public class PackageTool
 
     public static void StartBuildProgress()
     {
+        //打包清理 persistent 目录
         var deletePath = Const.AppStreamingAssetPath;
         FileTool.DeleteAllFile(deletePath);
 
@@ -109,14 +110,24 @@ public class PackageTool
 
         //var deletePath = Const.AssetBundlePath;
 
-        AssetDatabase.Refresh();
-        //拷贝 assetBundle 到 persistentDataPath 路径中
-        FileTool.DeleteAllFile(Const.AssetBundlePath);
 
-        var copySrcPath = Path.GetFullPath(outPath);
-        var copyDesPath = Path.GetFullPath(Const.AssetBundlePath);
-        FileTool.CopyFolder(copySrcPath, copyDesPath);
+
         AssetDatabase.Refresh();
+
+        if (Directory.Exists(Const.AssetBundlePath))
+        {
+            Directory.Delete(Const.AssetBundlePath, true);
+        }
+
+        //FileTool.DeleteAllFile(Const.AssetBundlePath);
+
+        ////拷贝 assetBundle 到 persistentDataPath 路径中
+        //FileTool.DeleteAllFile(Const.AssetBundlePath);
+
+        //var copySrcPath = Path.GetFullPath(outPath);
+        //var copyDesPath = Path.GetFullPath(Const.AssetBundlePath);
+        //FileTool.CopyFolder(copySrcPath, copyDesPath);
+        //AssetDatabase.Refresh();
     }
 
 

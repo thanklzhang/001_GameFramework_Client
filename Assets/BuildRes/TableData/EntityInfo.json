@@ -114,7 +114,7 @@
         "levelAttrId": 1,
         "starAttrId": 1,
         "skillIds": "2001001,2001002,2001003,2001004,2001005,2002031",
-        "level": 5,
+        "level": 1,
         "star": 2,
         "skillLevels": "1,1,1,1,1,1",
         "aiScript": "BaseAI"
@@ -129,7 +129,7 @@
         "levelAttrId": 1,
         "starAttrId": 1,
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
-        "level": 6,
+        "level": 2,
         "star": 2,
         "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
@@ -144,7 +144,7 @@
         "levelAttrId": 1,
         "starAttrId": 1,
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
-        "level": 7,
+        "level": 2,
         "star": 2,
         "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
@@ -159,7 +159,7 @@
         "levelAttrId": 1,
         "starAttrId": 1,
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
-        "level": 8,
+        "level": 2,
         "star": 2,
         "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
@@ -174,7 +174,7 @@
         "levelAttrId": 1,
         "starAttrId": 1,
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
-        "level": 9,
+        "level": 2,
         "star": 3,
         "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"
@@ -189,7 +189,7 @@
         "levelAttrId": 1,
         "starAttrId": 1,
         "skillIds": "2001001,2001002,2001003,2001004,2001005",
-        "level": 10,
+        "level": 2,
         "star": 3,
         "skillLevels": "1,1,1,1,1",
         "aiScript": "BaseAI"

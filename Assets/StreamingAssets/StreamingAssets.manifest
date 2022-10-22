@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 842735893
+CRC: 2843602719
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -188,4 +188,22 @@ AssetBundleManifest:
       Dependencies: {}
     Info_58:
       Name: assets/buildres/tabledata/teamstage.ab
+      Dependencies: {}
+    Info_59:
+      Name: assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/battle_end.ab
+      Dependencies: {}
+    Info_60:
+      Name: assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_001.ab
+      Dependencies: {}
+    Info_61:
+      Name: assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_002.ab
+      Dependencies: {}
+    Info_62:
+      Name: assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/battle_end.ab
+      Dependencies: {}
+    Info_63:
+      Name: assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/create_entity_001.ab
+      Dependencies: {}
+    Info_64:
+      Name: assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/create_entity_002.ab
       Dependencies: {}

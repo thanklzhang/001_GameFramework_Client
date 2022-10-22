@@ -6,8 +6,8 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
-        "forceUseHeroList": "0",
-        "initPos": "4,0,4",
+        "forceUseHeroList": "0,0|1,1200001|2,1200001",
+        "initPos": "4,0,4|4,0,6|6,0,6",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -18,8 +18,8 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
-        "forceUseHeroList": "0",
-        "initPos": "4,0,4",
+        "forceUseHeroList": "0,0|1,1200001|2,1200001",
+        "initPos": "4,0,4|4,0,6|6,0,6",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -30,8 +30,8 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
-        "forceUseHeroList": "0",
-        "initPos": "4,0,4",
+        "forceUseHeroList": "0,0|1,1200001|2,1200001",
+        "initPos": "4,0,4|4,0,6|6,0,6",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -42,8 +42,8 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
-        "forceUseHeroList": "0",
-        "initPos": "4,0,4",
+        "forceUseHeroList": "0,0|1,1200001|2,1200001",
+        "initPos": "4,0,4|4,0,6|6,0,6",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -54,8 +54,8 @@
         "activityId": 1,
         "mapId": 7001001,
         "triggerId": 6001001,
-        "forceUseHeroList": "0",
-        "initPos": "4,0,4",
+        "forceUseHeroList": "0,0|1,1200001|2,1200001",
+        "initPos": "4,0,4|4,0,6|6,0,6",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     },
@@ -138,7 +138,7 @@
         "activityId": 10,
         "mapId": 7001001,
         "triggerId": 6002001,
-        "forceUseHeroList": "0",
+        "forceUseHeroList": "0,0|1,0|2,1200001",
         "initPos": "4,0,4|4,0,6|6,0,6|4,0,8|8,0,8",
         "battleConfigId": 8002001,
         "teamInfo": "0,1,2,3|-1"
@@ -150,8 +150,8 @@
         "activityId": 0,
         "mapId": 7001001,
         "triggerId": 6001001,
-        "forceUseHeroList": "0,1200001",
-        "initPos": "4,0,4",
+        "forceUseHeroList": "0,1200001|1,1200002|2,1200003",
+        "initPos": "4,0,4|4,0,6|6,0,6",
         "battleConfigId": 8001001,
         "teamInfo": "0,1,2,3|-1"
     }

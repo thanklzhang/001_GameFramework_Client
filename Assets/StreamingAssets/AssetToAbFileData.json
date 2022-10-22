@@ -170,5 +170,11 @@
     "assets/buildres/tabledata/projectileeffect.json"                                                  : "Assets/BuildRes/TableData/ProjectileEffect.ab",
     "assets/buildres/tabledata/resourceconfig.json"                                                    : "Assets/BuildRes/TableData/ResourceConfig.ab",
     "assets/buildres/tabledata/skill.json"                                                             : "Assets/BuildRes/TableData/Skill.ab",
-    "assets/buildres/tabledata/teamstage.json"                                                         : "Assets/BuildRes/TableData/TeamStage.ab"
+    "assets/buildres/tabledata/teamstage.json"                                                         : "Assets/BuildRes/TableData/TeamStage.ab",
+    "assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/battle_end.json" : "Assets/BuildRes/BattleTriggerConfig/MainTaskBattle/MainTaskBattle_001/TriggerScript/battle_end.ab",
+    "assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_001.json" : "Assets/BuildRes/BattleTriggerConfig/MainTaskBattle/MainTaskBattle_001/TriggerScript/create_entity_001.ab",
+    "assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_002.json" : "Assets/BuildRes/BattleTriggerConfig/MainTaskBattle/MainTaskBattle_001/TriggerScript/create_entity_002.ab",
+    "assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/battle_end.json"                : "Assets/BuildRes/BattleTriggerConfig/TeamBattle/TeamBattle_001/TriggerScript/battle_end.ab",
+    "assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/create_entity_001.json"         : "Assets/BuildRes/BattleTriggerConfig/TeamBattle/TeamBattle_001/TriggerScript/create_entity_001.ab",
+    "assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/create_entity_002.json"         : "Assets/BuildRes/BattleTriggerConfig/TeamBattle/TeamBattle_001/TriggerScript/create_entity_002.ab"
 }

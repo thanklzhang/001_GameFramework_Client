@@ -58,13 +58,34 @@ public class HpModule
 
         hpData.Refresh(entity);
 
+        var selfPlayerIndex = BattleManager.Instance.GetLocalPlayer().playerIndex;
+        var currEntityPlayerIndex = entity.playerIndex;
+        bool isSelf = selfPlayerIndex == currEntityPlayerIndex;
+        bool isEnemy = currEntityPlayerIndex < 0;
+        EntityRelationType relationType = EntityRelationType.Friend;
+        if (isSelf)
+        {
+            relationType = EntityRelationType.Self;
+        }
+        else if (isEnemy)
+        {
+            relationType = EntityRelationType.Enemy;
+        }
+        else
+        {
+            relationType = EntityRelationType.Friend;
+        }
+
+        Logx.Log("lll : " + selfPlayerIndex + " " + currEntityPlayerIndex + " " + relationType);
+
         HpUIData args = new HpUIData()
         {
             entityGuid = entity.guid,
             preCurrHp = entity.CurrHealth,
             nowCurrHp = entity.CurrHealth,
             maxHp = entity.MaxHealth,
-            entityObj = entity.gameObject
+            entityObj = entity.gameObject,
+            relationType = relationType
         };
 
         battleUI?.RefreshHpShow(args);
@@ -105,6 +126,6 @@ public class HpModule
 
     internal void ChangeShowState(BattleEntity entity, bool isShow)
     {
-        
+
     }
 }

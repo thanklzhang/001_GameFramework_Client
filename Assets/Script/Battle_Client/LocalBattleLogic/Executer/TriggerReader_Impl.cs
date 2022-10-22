@@ -13,7 +13,6 @@ using Battle.BattleTrigger.Runtime;
 using Battle;
 namespace Battle_Client
 {
-
     public class TriggerReader_Impl : ITriggerReader
     {
         Battle.Battle battle;
@@ -24,29 +23,38 @@ namespace Battle_Client
         }
 
         //override
-        public List<Trigger> GetTriggers(int battleConfigId)
+        public List<Trigger> GetTriggers(TriggerSourceResData triggerSrcData)
         {
-            Table.Battle battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
-            var triggerId = battleTb.TriggerId;
-            Table.BattleTrigger striggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(triggerId);
-            var jsonFileRootPath = striggerTb.ScriptPath;
+            //json 解析
 
-            //这里文件应该是一开始都加载好 这里先这么读取
-            string Battle_Config_Path = Const.buildPath + "/BattleTriggerConfig";
-            string triggerPath = Battle_Config_Path + "/" + jsonFileRootPath;
-            string[] files = System.IO.Directory.GetFiles(triggerPath);
 
-            List<string> triggerJsonStrs = new List<string>();
-            files.ToList().ForEach(file =>
-            {
-                //string jsonStr = battle.FileReader.GetTextFromFile(file);
-                string jsonStr = FileOperate.GetTextFromFile(file);
-                var ext = Path.GetExtension(file);
-                if (ext == ".json")
-                {
-                    triggerJsonStrs.Add(jsonStr);
-                }
-            });
+            //Table.Battle battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+            //var triggerId = battleTb.TriggerId;
+            //Table.BattleTrigger striggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(triggerId);
+            //var jsonFileRootPath = striggerTb.ScriptPath;
+
+            ////这里文件应该是一开始都加载好 这里先这么读取
+            //string Battle_Config_Path = Const.buildPath + "/BattleTriggerConfig";
+            //string triggerPath = Battle_Config_Path + "/" + jsonFileRootPath;
+            //string[] files = System.IO.Directory.GetFiles(triggerPath, "*.json", SearchOption.AllDirectories);
+
+
+
+            //List<string> triggerJsonStrs = new List<string>();
+            //files.ToList().ForEach(file =>
+            //{
+            //    //string jsonStr = battle.FileReader.GetTextFromFile(file);
+            //    string jsonStr = FileOperate.GetTextFromFile(file);
+            //    var ext = Path.GetExtension(file);
+            //    if (ext == ".json")
+            //    {
+            //        triggerJsonStrs.Add(jsonStr);
+            //    }
+            //});
+
+            //List<string> triggerJsonStrs = files.ToList();
+
+            List<string> triggerJsonStrs = triggerSrcData.dataStrList;
 
             List<Trigger> triggers = new List<Trigger>();
             foreach (var jsonStr in triggerJsonStrs)

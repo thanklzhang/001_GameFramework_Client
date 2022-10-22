@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Battle;
+using Battle.BattleTrigger.Runtime;
 using Battle_Client;
 using GameData;
 using NetProto;
@@ -39,6 +40,11 @@ namespace Battle_Client
         ClientPlayer localPlayer;
         //本地玩家控制的英雄
         BattleEntity localCtrlEntity;
+
+        public ClientPlayer GetLocalPlayer()
+        {
+            return this.localPlayer;
+        }
 
         private BattleState battleState;
         public BattleState BattleState { get => battleState; set => battleState = value; }
@@ -183,6 +189,10 @@ namespace Battle_Client
 
             //设置本地玩家控制的英雄
             this.localCtrlEntity = BattleEntityManager.Instance.FindEntity(this.localPlayer.ctrlHeroGuid);
+            if (null == this.localCtrlEntity)
+            {
+                Logx.LogError("the localCtrlEntity is not found : ctrlHeroGuid : " + this.localPlayer.ctrlHeroGuid);
+            }
 
             battleState = BattleState.Loading;
 
@@ -236,13 +246,72 @@ namespace Battle_Client
 
             GameDataManager.Instance.UserStore.Uid = 1;
             var uid = GameDataManager.Instance.UserStore.Uid;
-            var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
 
-            CreateLocalBattle(applyArg, true);
+            CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
+             {
+                 var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
+
+                 CreateLocalBattle(applyArg, sourceData, true);
+             }));
         }
 
+        //创建远端结算的本地战斗
+        public void CreateLocalButRemoteResultBattle(ApplyBattleArg applyArg)
+        {
+            var battleConfigId = applyArg.BattleTableId;
+            CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
+            {
+                CreateLocalBattle(applyArg, sourceData, false);
+            }));
+        }
+
+
+        public IEnumerator LoadTriggerResource(int battleConfigId, Action<TriggerSourceResData> finishCallback)
+        {
+            Logx.Log("BattleManager : LoadTriggerResource ");
+
+            TriggerSourceResData source = new TriggerSourceResData();
+            source.dataStrList = new List<string>();
+
+            var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+            var triggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleConfigTb.TriggerId);
+
+            var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + triggerTb.ScriptPath;
+            var files = System.IO.Directory.GetFiles(loadPath, "*.ab", System.IO.SearchOption.AllDirectories);
+
+            foreach (var filePath in files)
+            {
+                bool isLoadFinish = false;
+                string loadText = "";
+                //Logx.Log("local execute : start load : filePath :  " + filePath);
+                var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
+                ResourceManager.Instance.GetObject<TextAsset>(partPath, (textAsset) =>
+                {
+                    Logx.Log("local execute : load text finish: " + textAsset.text);
+                    loadText = textAsset.text;
+                    isLoadFinish = true;
+                });
+
+                while (true)
+                {
+                    yield return null;
+
+                    if (isLoadFinish)
+                    {
+                        source.dataStrList.Add(loadText);
+                        break;
+                    }
+                }
+            }
+
+            Logx.Log("local execute : finish all ");
+            finishCallback?.Invoke(source);
+        }
+
+
+
         //创建本地战斗
-        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, bool isPureLocal = false)
+        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source, bool isPureLocal)
         {
             Logx.Log("battle manager : CreateLocalBattle");
             //填充数据
@@ -250,7 +319,9 @@ namespace Battle_Client
             //初始化本地战斗后台逻辑
             localBattleExecuter = new LocalBattleLogic_Executer();
             localBattleExecuter.Init();
-            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, isPureLocal);
+
+            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, source, isPureLocal);
+
             var battleClientArgs = GetBattleClientArgs(battleLogic);
 
             //填充客户端所需组件
@@ -264,6 +335,8 @@ namespace Battle_Client
             //localBattleExecuter.StartBattleLogic();
 
             GameMain.Instance.StartCoroutine(StartLocalBattle(battleClientArgs));
+
+
         }
 
         IEnumerator StartLocalBattle(BattleClient_CreateBattleArgs battleClientArgs)

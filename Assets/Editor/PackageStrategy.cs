@@ -83,6 +83,12 @@ public class PackageStrategy
             type = StrategyType.OneByOneFile
         });
 
+        strategyList.Add(new StrategyInfo()
+        {
+            path = Const.projectRootPath + "/" + "BuildRes/BattleTriggerConfig",
+            type = StrategyType.OneByOneFile
+        });
+
 
         List<AssetBundleBuild> buildList = new List<AssetBundleBuild>();
         for (int i = 0; i < strategyList.Count; i++)

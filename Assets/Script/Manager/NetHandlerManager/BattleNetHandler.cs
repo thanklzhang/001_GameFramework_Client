@@ -115,9 +115,8 @@ public class BattleNetHandler : NetHandler
         bool isLocal = netBattleInit.LocalApplyBattleArg != null;
         if (isLocal)
         {
-            //本地战斗的话是取服务端的
-            //TODO: 战斗通用结构 ApplyBattleArgs 转换为 战斗逻辑所需的 BattleArgs
-            BattleManager.Instance.CreateLocalBattle(netBattleInit.LocalApplyBattleArg);
+            //本地战斗的话是取服务端的申请战斗参数
+            BattleManager.Instance.CreateLocalButRemoteResultBattle(netBattleInit.LocalApplyBattleArg);
         }
         else
         {

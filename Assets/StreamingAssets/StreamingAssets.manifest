@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2843602719
+CRC: 1760614632
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -121,89 +121,83 @@ AssetBundleManifest:
       Name: assets/sourceres/models/build/model.ab
       Dependencies: {}
     Info_36:
-      Name: assets/buildres/tabledata/areaeffect.ab
+      Name: assets/buildres/table/areaeffect.ab
       Dependencies: {}
     Info_37:
-      Name: assets/buildres/tabledata/battle.ab
+      Name: assets/buildres/table/battle.ab
       Dependencies: {}
     Info_38:
-      Name: assets/buildres/tabledata/battleconfig.ab
+      Name: assets/buildres/table/battleconfig.ab
       Dependencies: {}
     Info_39:
-      Name: assets/buildres/tabledata/battlemap.ab
+      Name: assets/buildres/table/battlemap.ab
       Dependencies: {}
     Info_40:
-      Name: assets/buildres/tabledata/battlestagelogic.ab
+      Name: assets/buildres/table/battletrigger.ab
       Dependencies: {}
     Info_41:
-      Name: assets/buildres/tabledata/battletrigger.ab
+      Name: assets/buildres/table/buffeffect.ab
       Dependencies: {}
     Info_42:
-      Name: assets/buildres/tabledata/buffeffect.ab
+      Name: assets/buildres/table/calculateeffect.ab
       Dependencies: {}
     Info_43:
-      Name: assets/buildres/tabledata/calculateeffect.ab
+      Name: assets/buildres/table/collisiongroupeffect.ab
       Dependencies: {}
     Info_44:
-      Name: assets/buildres/tabledata/collisiongroupeffect.ab
+      Name: assets/buildres/table/entityattrbase.ab
       Dependencies: {}
     Info_45:
-      Name: assets/buildres/tabledata/entityattrbase.ab
+      Name: assets/buildres/table/entityattrlevel.ab
       Dependencies: {}
     Info_46:
-      Name: assets/buildres/tabledata/entityattrlevel.ab
+      Name: assets/buildres/table/entityattrstar.ab
       Dependencies: {}
     Info_47:
-      Name: assets/buildres/tabledata/entityattrstar.ab
+      Name: assets/buildres/table/entityinfo.ab
       Dependencies: {}
     Info_48:
-      Name: assets/buildres/tabledata/entityinfo.ab
+      Name: assets/buildres/table/item.ab
       Dependencies: {}
     Info_49:
-      Name: assets/buildres/tabledata/heroinfo.ab
+      Name: assets/buildres/table/maintaskchapter.ab
       Dependencies: {}
     Info_50:
-      Name: assets/buildres/tabledata/item.ab
+      Name: assets/buildres/table/maintaskstage.ab
       Dependencies: {}
     Info_51:
-      Name: assets/buildres/tabledata/maintaskchapter.ab
+      Name: assets/buildres/table/moveeffect.ab
       Dependencies: {}
     Info_52:
-      Name: assets/buildres/tabledata/maintaskstage.ab
+      Name: assets/buildres/table/passiveeffect.ab
       Dependencies: {}
     Info_53:
-      Name: assets/buildres/tabledata/moveeffect.ab
+      Name: assets/buildres/table/projectileeffect.ab
       Dependencies: {}
     Info_54:
-      Name: assets/buildres/tabledata/passiveeffect.ab
+      Name: assets/buildres/table/resourceconfig.ab
       Dependencies: {}
     Info_55:
-      Name: assets/buildres/tabledata/projectileeffect.ab
+      Name: assets/buildres/table/skill.ab
       Dependencies: {}
     Info_56:
-      Name: assets/buildres/tabledata/resourceconfig.ab
+      Name: assets/buildres/table/teamstage.ab
       Dependencies: {}
     Info_57:
-      Name: assets/buildres/tabledata/skill.ab
+      Name: assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/battle_end.ab
       Dependencies: {}
     Info_58:
-      Name: assets/buildres/tabledata/teamstage.ab
+      Name: assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_001.ab
       Dependencies: {}
     Info_59:
-      Name: assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/battle_end.ab
+      Name: assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_002.ab
       Dependencies: {}
     Info_60:
-      Name: assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_001.ab
+      Name: assets/buildres/battletrigger/teambattle/teambattle_001/triggerscript/battle_end.ab
       Dependencies: {}
     Info_61:
-      Name: assets/buildres/battletriggerconfig/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_002.ab
+      Name: assets/buildres/battletrigger/teambattle/teambattle_001/triggerscript/create_entity_001.ab
       Dependencies: {}
     Info_62:
-      Name: assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/battle_end.ab
-      Dependencies: {}
-    Info_63:
-      Name: assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/create_entity_001.ab
-      Dependencies: {}
-    Info_64:
-      Name: assets/buildres/battletriggerconfig/teambattle/teambattle_001/triggerscript/create_entity_002.ab
+      Name: assets/buildres/battletrigger/teambattle/teambattle_001/triggerscript/create_entity_002.ab
       Dependencies: {}

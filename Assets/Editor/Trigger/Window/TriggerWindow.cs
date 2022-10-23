@@ -49,7 +49,7 @@ namespace BattleTrigger.Editor
 
         public void Init()
         {
-            triggerConfigFolderPath = Application.dataPath + "/BuildRes/BattleTriggerConfig";
+            triggerConfigFolderPath = Application.dataPath + "/BuildRes/BattleTrigger";
 
             ReadFiles();
 

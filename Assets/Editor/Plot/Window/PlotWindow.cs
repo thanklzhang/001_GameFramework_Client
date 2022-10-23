@@ -51,7 +51,7 @@ namespace PlotDesigner.Editor
 
         public void Init()
         {
-            plotConfigFolderPath = Application.dataPath + "/BuildRes/PlotConfig";
+            plotConfigFolderPath = Application.dataPath + "/BuildRes/Plot";
 
             //读取所有剧情文件
             var path = plotConfigFolderPath;
@@ -122,7 +122,8 @@ namespace PlotDesigner.Editor
             preTime = EditorApplication.timeSinceStartup;
 
             Table.TableManager.Instance.Clear();
-            Table.TableManager.Instance.LoadAllTableData();
+            
+            Table.TableManager.Instance.LoadAllTableDataByEditor();
 
             var gameInitPath = "Assets/Resources/GameInit.prefab";
             var gameInitPrefab = ResourceManager.Instance.GetObjectByEditor<GameObject>(gameInitPath);

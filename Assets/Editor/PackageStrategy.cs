@@ -79,13 +79,13 @@ public class PackageStrategy
 
         strategyList.Add(new StrategyInfo()
         {
-            path = Const.projectRootPath + "/" + "BuildRes/TableData",
+            path = Const.projectRootPath + "/" + "BuildRes/Table",
             type = StrategyType.OneByOneFile
         });
 
         strategyList.Add(new StrategyInfo()
         {
-            path = Const.projectRootPath + "/" + "BuildRes/BattleTriggerConfig",
+            path = Const.projectRootPath + "/" + "BuildRes/BattleTrigger",
             type = StrategyType.OneByOneFile
         });
 

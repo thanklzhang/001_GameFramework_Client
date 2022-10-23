@@ -25,7 +25,7 @@ namespace Table
         {
             List<TableInfo> infoList = new List<TableInfo>();
 
-            var tablePath = "TableData";
+            var tablePath = "Table";
             var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + tablePath;
 
             var files = System.IO.Directory.GetFiles(loadPath);
@@ -84,7 +84,7 @@ namespace Table
             else
             {
                 //非 AB 加载 之后可能改成 AssetDatabase 的加载
-                var loadPath = Application.dataPath + "/BuildRes/TableData";
+                var loadPath = Application.dataPath + "/BuildRes/Table";
                 string[] files = System.IO.Directory.GetFiles(loadPath);
                 List<TableInfo> infoList = new List<TableInfo>();
                 files.ToList().ForEach(file =>
@@ -108,6 +108,34 @@ namespace Table
             }
         }
 
+        public Dictionary<Type, IList> LoadFromFileByEditor()
+        {
+            //非 AB 加载 之后可能改成 AssetDatabase 的加载
+            var loadPath = Application.dataPath + "/BuildRes/Table";
+            string[] files = System.IO.Directory.GetFiles(loadPath);
+            List<TableInfo> infoList = new List<TableInfo>();
+            files.ToList().ForEach(file =>
+            {
+                string jsonStr = FileOperate.GetTextFromFile(file);
+
+                TableInfo info = new TableInfo();
+                var ext = Path.GetExtension(file);
+                if (ext == ".json")
+                {
+                    info.name = Path.GetFileNameWithoutExtension(file);
+                    info.json = jsonStr;
+                    infoList.Add(info);
+                }
+
+            });
+
+            //return LoadAllData(infoList);
+            var dic = LoadAllDataByField(infoList);
+
+            return dic;
+        }
+
+
         /// <summary>
         /// 根据 json 按字段赋值 反射出数据 为了 使 Fix 配合表
         /// </summary>
@@ -122,7 +150,7 @@ namespace Table
                 string typeName = "Table." + info.name;
                 try
                 {
-                    Type type = Type.GetType(typeName, true,true);
+                    Type type = Type.GetType(typeName, true, true);
                     Type listType = typeof(List<>).MakeGenericType(type);
 
 

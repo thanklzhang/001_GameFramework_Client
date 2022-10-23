@@ -70,7 +70,7 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
         this.uiData = (HeroCardUIData)data;
 
         var configId = this.uiData.configId;
-        var heroInfoTable = TableManager.Instance.GetById<Table.HeroInfo>(configId);
+        var heroInfoTable = TableManager.Instance.GetById<Table.EntityInfo>(configId);
         levelText.text = "Lv." + this.uiData.level;
         nameText.text = "" + heroInfoTable.Name;
         unlockFlagObj.SetActive(!this.uiData.isUnlock);

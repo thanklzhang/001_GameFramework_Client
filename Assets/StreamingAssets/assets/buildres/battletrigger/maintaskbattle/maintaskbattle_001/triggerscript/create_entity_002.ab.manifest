@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1002476046
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 50d299964029931c0101b787d43a0961
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/BattleTrigger/MainTaskBattle/MainTaskBattle_001/TriggerScript/create_entity_002.json
+Dependencies: []

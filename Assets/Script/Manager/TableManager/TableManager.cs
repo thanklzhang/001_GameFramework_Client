@@ -23,21 +23,60 @@ namespace Table
             {
                 //加载完成
                 typeToListConfigDic = dic;
+                typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
+                //foreach (var configKV in typeToListConfigDic)
+                //{
+                //    var iDic = new Dictionary<int, Table.BaseTable>();
+                //    foreach (var tableData in configKV.Value)
+                //    {
+                //        Table.BaseTable convertTableData = tableData as Table.BaseTable;
+                //        iDic.Add(convertTableData.Id, convertTableData);
+                //    }
 
-                foreach (var configKV in typeToListConfigDic)
-                {
-                    var iDic = new Dictionary<int, Table.BaseTable>();
-                    foreach (var tableData in configKV.Value)
-                    {
-                        Table.BaseTable convertTableData = tableData as Table.BaseTable;
-                        iDic.Add(convertTableData.Id, convertTableData);
-                    }
-
-                    typeToDicConfigDic.Add(configKV.Key, iDic);
-                }
+                //    typeToDicConfigDic.Add(configKV.Key, iDic);
+                //}
             });
         }
 
+        public void LoadAllTableDataByEditor()
+        {
+            var dic = TableDataLoader.Instance.LoadFromFileByEditor();
+            //加载完成
+            typeToListConfigDic = dic;
+
+            typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
+
+            //foreach (var configKV in typeToListConfigDic)
+            //{
+            //    var iDic = new Dictionary<int, Table.BaseTable>();
+            //    foreach (var tableData in configKV.Value)
+            //    {
+            //        Table.BaseTable convertTableData = tableData as Table.BaseTable;
+            //        iDic.Add(convertTableData.Id, convertTableData);
+            //    }
+
+            //    typeToDicConfigDic.Add(configKV.Key, iDic);
+            //}
+        }
+
+        //type list 转换为 type dic
+        public Dictionary<Type, Dictionary<int, Table.BaseTable>> TypeListToDic(Dictionary<Type, IList> list)
+        {
+            var dic = new Dictionary<Type, Dictionary<int, Table.BaseTable>>();
+            foreach (var configKV in list)
+            {
+                var iDic = new Dictionary<int, Table.BaseTable>();
+                foreach (var tableData in configKV.Value)
+                {
+                    Table.BaseTable convertTableData = tableData as Table.BaseTable;
+                    iDic.Add(convertTableData.Id, convertTableData);
+                }
+
+                dic.Add(configKV.Key, iDic);
+            }
+
+            return dic;
+        }
 
         public T GetById<T>(int id) where T : Table.BaseTable
         {
@@ -65,6 +104,12 @@ namespace Table
 
         public List<T> GetList<T>() where T : Table.BaseTable
         {
+            var type = typeof(T);
+            if (!typeToDicConfigDic.ContainsKey(type))
+            {
+                Logx.LogError("Table", "the type is not found : " + type);
+                return null;
+            }
             var data = (typeToListConfigDic[typeof(T)]);
             return data.Cast<T>().ToList();//Select(d => (T)d).ToList();
         }

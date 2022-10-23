@@ -148,7 +148,7 @@ public class HeroListCtrl : BaseCtrl
     public HeroListUIArgs ConvertToUIArgs()
     {
         var heroDataStore = GameDataManager.Instance.HeroStore;
-        var heroTbList = TableManager.Instance.GetList<Table.HeroInfo>();
+        var heroTbList = TableManager.Instance.GetList<Table.EntityInfo>();
 
         //开始填充
         HeroListUIArgs uiArgs = new HeroListUIArgs();

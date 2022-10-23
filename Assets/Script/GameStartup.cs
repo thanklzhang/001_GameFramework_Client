@@ -21,7 +21,7 @@ public class GameStartup : MonoBehaviour
     void Start()
     {
         //Startup();
-
+        initUIRoot.gameObject.SetActive(true);
         var formal = false;
         if (formal)
         {

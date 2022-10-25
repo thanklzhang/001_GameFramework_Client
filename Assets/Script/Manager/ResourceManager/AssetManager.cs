@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using LitJson;
 
+
 //asset 资源缓存
 public class AssetCache
 {
@@ -74,7 +75,7 @@ public class AssetManager : Singleton<AssetManager>
     public void LoadAsync(string assetPath, Action<UnityEngine.Object> finishCallback)
     {
         assetPath = assetPath.ToLower();
-        if (!this.assetToAbDic.ContainsKey(assetPath))
+        if (Const.isUseAB && !this.assetToAbDic.ContainsKey(assetPath))
         {
             Logx.LogError("Asset", "LoadAsync : the asset doesnt exist in assetToAbDic : " + assetPath);
             return;
@@ -86,18 +87,33 @@ public class AssetManager : Singleton<AssetManager>
         {
             assetCache.RefCount += 1;
 
-            AddAssetBundleReferenceByAssetPath(assetPath);
+            if (Const.isUseAB)
+            {
+                AddAssetBundleReferenceByAssetPath(assetPath);
+            }
 
             finishCallback?.Invoke(assetCache.asset);
         }
         else
         {
-            var abPath = this.assetToAbDic[assetPath];
-            AssetBundleManager.Instance.Load(abPath, (abCache) =>
+            if (Const.isUseAB)
             {
-                //ab 加载完 需要检测下 asset 是否已经有了 因为有可能已经在别处先加载完
-                this.LoadAssetBundleFinish(abCache, assetPath, finishCallback);
-            }, false);
+                var abPath = this.assetToAbDic[assetPath];
+                AssetBundleManager.Instance.Load(abPath, (abCache) =>
+                {
+                    //ab 加载完 需要检测下 asset 是否已经有了 因为有可能已经在别处先加载完
+                    this.LoadAssetBundleFinish(abCache, assetPath, finishCallback);
+                }, false);
+            }
+            else
+            {
+#if UNITY_EDITOR
+                //var obj =UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+                this.LoadAssetBundleFinish(null, assetPath, finishCallback);
+#endif 
+
+            }
+
 
         }
 
@@ -121,18 +137,45 @@ public class AssetManager : Singleton<AssetManager>
         {
             finishCallback?.Invoke(assetCache.asset);
             assetCache.RefCount += 1;
-            AddAssetBundleReferenceByAssetPath(assetPath);
+            if (Const.isUseAB)
+            {
+                AddAssetBundleReferenceByAssetPath(assetPath);
+            }
+
         }
         else
         {
-            var loader = new AssetLoader();
-            loader.path = assetPath;
-            loader.finishLoadCallback = (backAssetCache) =>
+            if (Const.isUseAB)
             {
-                //触发业务层回调
-                finishCallback?.Invoke(backAssetCache.asset);
-            };
-            LoadTaskManager.Instance.StartAssetLoader(loader);
+                var loader = new AssetLoader();
+                loader.path = assetPath;
+                loader.finishLoadCallback = (backAssetCache) =>
+                {
+                    //触发业务层回调
+                    finishCallback?.Invoke(backAssetCache.asset);
+                };
+                LoadTaskManager.Instance.StartAssetLoader(loader);
+            }
+            else
+            {
+#if UNITY_EDITOR
+                var obj = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+                AssetCache ac = new AssetCache()
+                {
+                    asset = obj,
+                    finishLoadCallback = (backAssetCache) =>
+                    {
+                        //触发业务层回调
+                        finishCallback?.Invoke(backAssetCache.asset);
+                    },
+                    path = assetPath
+                };
+                OnLoadAssetFinish(ac);
+
+
+#endif
+            }
+
         }
     }
 

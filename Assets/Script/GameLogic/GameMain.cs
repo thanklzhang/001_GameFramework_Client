@@ -70,7 +70,11 @@ public class GameMain : MonoBehaviour
 
         CtrlManager.Instance.Init();
 
-        AssetBundleManager.Instance.Init();
+        if (Const.isUseAB)
+        {
+            AssetBundleManager.Instance.Init();
+        }
+       
         AssetManager.Instance.Init();
         LoadTaskManager.Instance.Init();
 

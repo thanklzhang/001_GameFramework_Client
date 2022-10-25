@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Table;
 using UnityEngine;
 
 public class UIArgs
@@ -12,10 +13,12 @@ public abstract class BaseUI
 {
     public GameObject gameObject;
     public Transform transform;
-    string path;
-    public void Init(GameObject obj, string path)
+    public ResIds resId;
+    //string path;
+    public void Init(GameObject obj, ResIds resId)
     {
-        this.path = path;
+        //this.path = path;
+        this.resId = resId;
         gameObject = obj;
         transform = gameObject.transform;
         this.OnInit();
@@ -61,7 +64,7 @@ public abstract class BaseUI
 
     protected virtual void OnUpdate(float timeDelta)
     {
-        
+
     }
 
     protected virtual void OnRelease()

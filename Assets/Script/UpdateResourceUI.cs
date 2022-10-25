@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class UpdateResourceUI : MonoBehaviour
 {
     public Text progressText;
-  
+
     void Awake()
     {
         progressText = transform.Find("progress").GetComponent<Text>();
@@ -27,8 +27,13 @@ public class UpdateResourceUI : MonoBehaviour
 
     public IEnumerator CheckPersistentResource()
     {
+
+        if (!Const.isUseAB)
+        {
+            yield break;
+        }
         yield return null;
-      
+
         var persistentPath = Const.AssetBundlePath;
         //目前值判断根目录 之后热更的话需要判断 file 列表文件其中的文件列表等
         var isExist = Directory.Exists(persistentPath);
@@ -97,7 +102,7 @@ public class UpdateResourceUI : MonoBehaviour
         }
 
 
-       
+
     }
 
 

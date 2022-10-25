@@ -54,13 +54,16 @@ public class UIManager : Singleton<UIManager>
                 Logx.LogError("GetUICache : the type is not found : " + typeof(T));
                 return;
             }
-            ResourceManager.Instance.GetObject<GameObject>(uiConfigInfo.path, (gameObject) =>
+
+            //var fullPath = Table.ResDefine.ResIdDic[uiConfigInfo.resId];
+            var resId = (int)uiConfigInfo.resId;
+            ResourceManager.Instance.GetObject<GameObject>(resId, (gameObject) =>
             {
                 var layerRoot = layerRootDic[uiConfigInfo.showLayer];
                 gameObject.transform.SetParent(layerRoot, false);
                 gameObject.transform.SetAsLastSibling();
                 T t = new T();
-                t.Init(gameObject, uiConfigInfo.path);
+                t.Init(gameObject, uiConfigInfo.resId);
                 uiCacheDic.Add(t.GetType(), t);
                 finishCallback?.Invoke(t);
             });
@@ -75,9 +78,10 @@ public class UIManager : Singleton<UIManager>
             var ui = uiCacheDic[type];
             uiCacheDic.Remove(type);
             ui.Release();
+            
 
             var uiConfigInfo = UIConfigInfoDic.GetInfo<T>();
-            ResourceManager.Instance.ReturnObject<GameObject>(uiConfigInfo.path, ui.gameObject);
+            ResourceManager.Instance.ReturnObject<GameObject>((int)uiConfigInfo.resId, ui.gameObject);
             //AssetManager.Instance.Release(uiConfigInfo.path);
         }
         else

@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameStartup : MonoBehaviour
 {
     public bool isLocalBattle = false;
+    public bool isUseAB = false;
     public ServerTypeUI serverTypeUI;
     public UpdateResourceUI updateResourceUI;
     public GameObject initUIRoot;
@@ -20,6 +21,7 @@ public class GameStartup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Const.isUseAB = this.isUseAB;
         //Startup();
         initUIRoot.gameObject.SetActive(true);
         var formal = false;

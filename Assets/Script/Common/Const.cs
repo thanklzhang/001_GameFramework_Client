@@ -32,7 +32,7 @@ public class Const
     //public static string AssetBundlePath = Application.streamingAssetsPath;//方便测试
     public const string ExtName = ".ab";
     //public static bool isUpdateMode = false;//是否开启更新模式(需要开启资源服务端)
-    public static bool isUseAB = true;//资源是否从 AB 中读取 不是的话 从 Resource 目录读取
+    public static bool isUseAB = false;//资源是否从 AB 中读取 不是的话 从 项目中 Assets 目录读取
 
     public static string projectRootPath = "Assets";
     //不用了

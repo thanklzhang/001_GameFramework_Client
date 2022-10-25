@@ -83,28 +83,43 @@ namespace Table
             }
             else
             {
-                //非 AB 加载 之后可能改成 AssetDatabase 的加载
-                var loadPath = Application.dataPath + "/BuildRes/Table";
-                string[] files = System.IO.Directory.GetFiles(loadPath);
+#if UNITY_EDITOR
+
                 List<TableInfo> infoList = new List<TableInfo>();
-                files.ToList().ForEach(file =>
+                var loadPath = Const.buildPath + "/Table";
+
+                string[] files = System.IO.Directory.GetFiles(loadPath, "*.json", SearchOption.AllDirectories);
+                foreach (var filePath in files)
                 {
-                    string jsonStr = FileOperate.GetTextFromFile(file);
-
-                    TableInfo info = new TableInfo();
-                    var ext = Path.GetExtension(file);
-                    if (ext == ".json")
+                    bool isLoadFinish = false;
+                    string loadText = "";
+                    ResourceManager.Instance.GetObject<TextAsset>(filePath, (textAsset) =>
                     {
-                        info.name = Path.GetFileNameWithoutExtension(file);
-                        info.json = jsonStr;
-                        infoList.Add(info);
+                        Logx.Log("table manager : LoadFromFile : (not ab) load text finish: " + textAsset.text);
+                        loadText = textAsset.text;
+                        isLoadFinish = true;
+                    });
+
+                    while (true)
+                    {
+                        yield return null;
+
+                        if (isLoadFinish)
+                        {
+                            break;
+                        }
                     }
+                    string jsonStr = FileOperate.GetTextFromFile(filePath);
+                    TableInfo info = new TableInfo();
+                    info.name = Path.GetFileNameWithoutExtension(filePath);
+                    info.json = jsonStr;
+                    infoList.Add(info);
 
-                });
+                }
 
-                //return LoadAllData(infoList);
                 var dic = LoadAllDataByField(infoList);
                 finishCallback?.Invoke(dic);
+#endif
             }
         }
 

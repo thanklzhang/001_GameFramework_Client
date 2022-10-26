@@ -21,49 +21,49 @@ namespace Table
         //-----------------------------以下是用动态泛型读取文件 在 ios 可能会出问题
 
 
-        IEnumerator LoadFromAB(Action<List<TableInfo>> finishCallback)
-        {
-            List<TableInfo> infoList = new List<TableInfo>();
+        //IEnumerator LoadFromAB(Action<List<TableInfo>> finishCallback)
+        //{
+        //    List<TableInfo> infoList = new List<TableInfo>();
 
-            var tablePath = "Table";
-            var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + tablePath;
+        //    var tablePath = "Table";
+        //    var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + tablePath;
 
-            var files = System.IO.Directory.GetFiles(loadPath);
-            foreach (var filePath in files)
-            {
-                bool isLoadFinish = false;
-                string loadText = "";
-                var ext = Path.GetExtension(filePath);
-                if (ext == ".ab")
-                {
-                    var strIndex = filePath.IndexOf(Const.buildPath + "/" + tablePath);
-                    var resultPath = filePath.Substring(strIndex).Replace("\\", "/").Replace(".ab", ".json").ToLower();
-                    //Logx.Log("start load : resultPath :  " + resultPath);
-                    ResourceManager.Instance.GetObject<TextAsset>(resultPath, (textAsset) =>
-                    {
-                        //Logx.Log("load text finish: " + textAsset.text);
-                        loadText = textAsset.text;
-                        isLoadFinish = true;
-                    });
+        //    var files = System.IO.Directory.GetFiles(loadPath);
+        //    foreach (var filePath in files)
+        //    {
+        //        bool isLoadFinish = false;
+        //        string loadText = "";
+        //        var ext = Path.GetExtension(filePath);
+        //        if (ext == ".ab")
+        //        {
+        //            var strIndex = filePath.IndexOf(Const.buildPath + "/" + tablePath);
+        //            var resultPath = filePath.Substring(strIndex).Replace("\\", "/").Replace(".ab", ".json").ToLower();
+        //            //Logx.Log("start load : resultPath :  " + resultPath);
+        //            ResourceManager.Instance.GetObject<TextAsset>(resultPath, (textAsset) =>
+        //            {
+        //                //Logx.Log("load text finish: " + textAsset.text);
+        //                loadText = textAsset.text;
+        //                isLoadFinish = true;
+        //            });
 
-                    while (true)
-                    {
-                        yield return null;
+        //            while (true)
+        //            {
+        //                yield return null;
 
-                        if (isLoadFinish)
-                        {
-                            TableInfo info = new TableInfo();
-                            info.name = Path.GetFileNameWithoutExtension(filePath);
-                            info.json = loadText;
-                            infoList.Add(info);
-                            break;
-                        }
-                    }
-                }
-            }
+        //                if (isLoadFinish)
+        //                {
+        //                    TableInfo info = new TableInfo();
+        //                    info.name = Path.GetFileNameWithoutExtension(filePath);
+        //                    info.json = loadText;
+        //                    infoList.Add(info);
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            finishCallback?.Invoke(infoList);
-        }
+        //    finishCallback?.Invoke(infoList);
+        //}
 
         /// <summary>
         /// 根据动态泛型来一次性读取 Config 
@@ -71,56 +71,42 @@ namespace Table
         /// <returns></returns>
         public IEnumerator LoadFromFile(Action<Dictionary<Type, IList>> finishCallback)
         {
+            List<TableInfo> infoList = new List<TableInfo>();
 
-            if (Const.isUseAB)
+            var files = TablePathDefine.GetTablePathList();
+            //string[] files = System.IO.Directory.GetFiles(loadPath, "*.json", SearchOption.AllDirectories);
+            foreach (var filePath in files)
             {
-                //AB 加载
-                yield return LoadFromAB((list) =>
+                bool isLoadFinish = false;
+                string loadText = "";
+
+                var loadPath = Path.Combine(Const.buildPath, Const.tablePath, filePath);
+                ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
                 {
-                    var dic = LoadAllDataByField(list);
-                    finishCallback?.Invoke(dic);
+                    Logx.Log("table manager : LoadFromFile : load text finish: " + textAsset.text);
+                    loadText = textAsset.text;
+                    isLoadFinish = true;
                 });
-            }
-            else
-            {
-#if UNITY_EDITOR
 
-                List<TableInfo> infoList = new List<TableInfo>();
-                var loadPath = Const.buildPath + "/Table";
-
-                string[] files = System.IO.Directory.GetFiles(loadPath, "*.json", SearchOption.AllDirectories);
-                foreach (var filePath in files)
+                while (true)
                 {
-                    bool isLoadFinish = false;
-                    string loadText = "";
-                    ResourceManager.Instance.GetObject<TextAsset>(filePath, (textAsset) =>
-                    {
-                        Logx.Log("table manager : LoadFromFile : (not ab) load text finish: " + textAsset.text);
-                        loadText = textAsset.text;
-                        isLoadFinish = true;
-                    });
+                    yield return null;
 
-                    while (true)
+                    if (isLoadFinish)
                     {
-                        yield return null;
-
-                        if (isLoadFinish)
-                        {
-                            break;
-                        }
+                        break;
                     }
-                    string jsonStr = FileOperate.GetTextFromFile(filePath);
-                    TableInfo info = new TableInfo();
-                    info.name = Path.GetFileNameWithoutExtension(filePath);
-                    info.json = jsonStr;
-                    infoList.Add(info);
-
                 }
+                string jsonStr = loadText;
+                TableInfo info = new TableInfo();
+                info.name = Path.GetFileNameWithoutExtension(filePath);
+                info.json = jsonStr;
+                infoList.Add(info);
 
-                var dic = LoadAllDataByField(infoList);
-                finishCallback?.Invoke(dic);
-#endif
             }
+
+            var dic = LoadAllDataByField(infoList);
+            finishCallback?.Invoke(dic);
         }
 
         public Dictionary<Type, IList> LoadFromFileByEditor()

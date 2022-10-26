@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 4016094274
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a55d2424c4096c61f567a722ab5873c0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/BattleTrigger/MainTaskBattle/MainTaskBattle_001/test.json
+Dependencies: []

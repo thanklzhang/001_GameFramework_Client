@@ -24,6 +24,7 @@ namespace Table
                 //加载完成
                 typeToListConfigDic = dic;
                 typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
+             
                 //foreach (var configKV in typeToListConfigDic)
                 //{
                 //    var iDic = new Dictionary<int, Table.BaseTable>();
@@ -46,6 +47,7 @@ namespace Table
 
             typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
 
+          
             //foreach (var configKV in typeToListConfigDic)
             //{
             //    var iDic = new Dictionary<int, Table.BaseTable>();
@@ -59,6 +61,7 @@ namespace Table
             //}
         }
 
+     
         //type list 转换为 type dic
         public Dictionary<Type, Dictionary<int, Table.BaseTable>> TypeListToDic(Dictionary<Type, IList> list)
         {

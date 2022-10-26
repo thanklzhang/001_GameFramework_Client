@@ -9,7 +9,7 @@ public class GameStartup : MonoBehaviour
     public bool isUseAB = false;
     public ServerTypeUI serverTypeUI;
     public UpdateResourceUI updateResourceUI;
-    public GameObject initUIRoot;
+    public GameObject initOperateRoot;
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -23,7 +23,7 @@ public class GameStartup : MonoBehaviour
     {
         Const.isUseAB = this.isUseAB;
         //Startup();
-        initUIRoot.gameObject.SetActive(true);
+        initOperateRoot.gameObject.SetActive(true);
         var formal = false;
         if (formal)
         {
@@ -51,7 +51,7 @@ public class GameStartup : MonoBehaviour
         //yield break;
 
         //资源更新完成
-        initUIRoot.gameObject.SetActive(false);
+        initOperateRoot.gameObject.SetActive(false);
 
         //正式开始游戏 开始加载游戏资源
         var gameInitPrefab = Resources.Load("GameInit") as GameObject;

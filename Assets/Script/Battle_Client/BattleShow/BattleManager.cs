@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Battle.BattleTrigger.Runtime;
 using Battle_Client;
 using GameData;
 using NetProto;
+using Table;
 using UnityEditor;
 using UnityEngine;
 namespace Battle_Client
@@ -277,69 +279,39 @@ namespace Battle_Client
             var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
             var triggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleConfigTb.TriggerId);
 
+            var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
 
-            if (Const.isUseAB)
+
+            //var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + triggerTb.ScriptPath;
+            //var files = System.IO.Directory.GetFiles(loadPath, "*.ab", System.IO.SearchOption.AllDirectories);
+
+            foreach (var filePath in files)
             {
-                var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + triggerTb.ScriptPath;
-                var files = System.IO.Directory.GetFiles(loadPath, "*.ab", System.IO.SearchOption.AllDirectories);
-
-                foreach (var filePath in files)
+                bool isLoadFinish = false;
+                string loadText = "";
+                //Logx.Log("local execute : start load : filePath :  " + filePath);
+                //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
+                var loadPath = Path.Combine(Const.buildPath, filePath);
+                //里面已经判断 是否AB 模式了 所以这里通用
+                ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
                 {
-                    bool isLoadFinish = false;
-                    string loadText = "";
-                    //Logx.Log("local execute : start load : filePath :  " + filePath);
-                    var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
-                    ResourceManager.Instance.GetObject<TextAsset>(partPath, (textAsset) =>
-                    {
-                        Logx.Log("local execute : load text finish: " + textAsset.text);
-                        loadText = textAsset.text;
-                        isLoadFinish = true;
-                    });
+                    //Logx.Log("local execute : load text finish: " + textAsset.text);
+                    loadText = textAsset.text;
+                    isLoadFinish = true;
+                });
 
-                    while (true)
-                    {
-                        yield return null;
+                while (true)
+                {
+                    yield return null;
 
-                        if (isLoadFinish)
-                        {
-                            source.dataStrList.Add(loadText);
-                            break;
-                        }
+                    if (isLoadFinish)
+                    {
+                        source.dataStrList.Add(loadText);
+                        break;
                     }
                 }
             }
-            else
-            {
-#if UNITY_EDITOR
-                var loadPath = Const.buildPath + "/" + triggerTb.ScriptPath;
-                var files = System.IO.Directory.GetFiles(loadPath, "*.json", System.IO.SearchOption.AllDirectories);
 
-                foreach (var filePath in files)
-                {
-                    bool isLoadFinish = false;
-                    string loadText = "";
-                    ResourceManager.Instance.GetObject<TextAsset>(filePath, (textAsset) =>
-                    {
-                        Logx.Log("local execute : load text finish: " + textAsset.text);
-                        loadText = textAsset.text;
-                        isLoadFinish = true;
-                    });
-
-                    while (true)
-                    {
-                        yield return null;
-
-                        if (isLoadFinish)
-                        {
-                            source.dataStrList.Add(loadText);
-                            break;
-                        }
-                    }
-                }
-#endif
-
-
-            }
 
             Logx.Log("local execute : finish all ");
             finishCallback?.Invoke(source);

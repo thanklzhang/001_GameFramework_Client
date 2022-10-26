@@ -40,6 +40,8 @@ public class Const
     //public static string ProjectResPath = "Assets/Resources";
     //public static string AssetsPath = "Assets";
 
+    public static string tablePath = "Table";
+
     public const string WebUrl = "http://127.0.0.1:8080/";
     public const string ip = "196.168.1.100";
     public const int port = 9595;

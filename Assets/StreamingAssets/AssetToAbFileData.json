@@ -169,6 +169,7 @@
     "assets/buildres/table/resourceconfig.json"                                                        : "Assets/BuildRes/Table/ResourceConfig.ab",
     "assets/buildres/table/skill.json"                                                                 : "Assets/BuildRes/Table/Skill.ab",
     "assets/buildres/table/teamstage.json"                                                             : "Assets/BuildRes/Table/TeamStage.ab",
+    "assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/test.json"                        : "Assets/BuildRes/BattleTrigger/MainTaskBattle/MainTaskBattle_001/test.ab",
     "assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/battle_end.json"    : "Assets/BuildRes/BattleTrigger/MainTaskBattle/MainTaskBattle_001/TriggerScript/battle_end.ab",
     "assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_001.json" : "Assets/BuildRes/BattleTrigger/MainTaskBattle/MainTaskBattle_001/TriggerScript/create_entity_001.ab",
     "assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_002.json" : "Assets/BuildRes/BattleTrigger/MainTaskBattle/MainTaskBattle_001/TriggerScript/create_entity_002.ab",

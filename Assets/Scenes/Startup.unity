@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalBattle: 0
-  isUseAB: 0
+  isUseAB: 1
   serverTypeUI: {fileID: 2115276800}
   updateResourceUI: {fileID: 3849844732760189556}
   initOperateRoot: {fileID: 1633507926}

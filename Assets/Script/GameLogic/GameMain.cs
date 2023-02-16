@@ -11,7 +11,7 @@ using Table;
 using GameData;
 using PlotDesigner.Runtime;
 using Battle_Client;
-
+using XLua;
 
 public class GameMain : MonoBehaviour
 {
@@ -74,7 +74,7 @@ public class GameMain : MonoBehaviour
         {
             AssetBundleManager.Instance.Init();
         }
-       
+
         AssetManager.Instance.Init();
         LoadTaskManager.Instance.Init();
 
@@ -94,6 +94,14 @@ public class GameMain : MonoBehaviour
         //全局 ctrl
         yield return CtrlManager.Instance.EnterGlobalCtrl();
 
+
+        //lua start
+        LuaEnv luaEnv = new LuaEnv();
+        luaEnv.AddLoader(MyLoader);
+        luaEnv.DoString("require 'main.lua'");
+        //
+
+
         Logx.Log("!!!finish init game");
 
 
@@ -104,21 +112,14 @@ public class GameMain : MonoBehaviour
 
     }
 
-    //IEnumerator XXX()
-    //{
-    //    var img = GameObject.Find("Image__").GetComponent<RawImage>();
-    //    var path = Const.AppStreamingAssetPath + "/" + "Assets/BuildRes/Textures/BG/main_bg.ab";
-
-    //    var abCreateReq = AssetBundle.LoadFromFileAsync(path);
-
-    //    yield return abCreateReq;
-
-    //    var ab = abCreateReq.assetBundle;
-    //    var assetName = "Assets/BuildRes/Textures/BG/main_bg.png";
-    //    var asset = ab.LoadAsset<Texture>(assetName);
-    //    img.texture = asset;
-
-    //}
+    //test loader
+    static byte[] MyLoader(ref string filePath)
+    {
+        //PC
+        Debug.Log("Application.dataPath : " + Application.dataPath);
+        var path = Application.dataPath.Replace("/Assets", "") + "/LuaProject/" + filePath + "";
+        return System.Text.Encoding.UTF8.GetBytes(File.ReadAllText(path));
+    }
 
     public void StartToLogin()
     {

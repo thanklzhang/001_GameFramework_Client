@@ -40,9 +40,9 @@ public class FileTool
 
     }
 
-    public static void CopyFile(string srcFilePath,string desFilePath)
+    public static void CopyFile(string srcFilePath, string desFilePath)
     {
-       
+
         System.IO.File.Copy(srcFilePath, desFilePath);//复制文件
     }
 
@@ -87,6 +87,72 @@ public class FileTool
 
     }
 
-   
+
+    public static string ReadAllText(string filePath)
+    {
+        var str = GetTextFromFile(filePath, true);
+        return str;
+    }
+
+    /// <summary>
+    /// 简单的获取文本
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
+    public static string GetTextFromFile(string filePath, bool isSaveEnter = false)
+    {
+        // 从文件中读取并显示每行
+        string line = "";
+        //Logx.Log("zxy : file : " + file);
+        using (StreamReader sr = new StreamReader(filePath))
+        {
+            var str = "";
+            while ((str = sr.ReadLine()) != null)
+            {
+                line = line + str;
+                if (isSaveEnter)
+                {
+                    line = line + "\n";
+                }
+            }
+
+            if (isSaveEnter)
+            {
+                line = line.Substring(0, line.Length - 1);
+            }
+        }
+
+        return line;
+    }
+
+    /// <summary>
+    /// 读文件
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
+    public static byte[] ReadAllBytes(string filePath)
+    {
+        using (FileStream fs = new FileStream(filePath, FileMode.Open))
+        {
+            byte[] byteArray = new byte[fs.Length];
+            fs.Read(byteArray, 0, byteArray.Length);
+
+            return byteArray;
+        }
+    }
+
+
+    public static void SaveToFile(string path, string str)
+    {
+        FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+        using (StreamWriter sw = new StreamWriter(fs))
+        {
+            sw.Write(str);
+        }
+
+    }
+
+
 
 }

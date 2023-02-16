@@ -69,7 +69,7 @@ public class LoginUI : BaseUI
             var port = int.Parse(localServerPortInput.text);
             onClickConnectBtn?.Invoke(ip, port);
         });
-        this.localServerIpInput.text = "192.168.3.13";
+        this.localServerIpInput.text = NetTool.GetHostIp();// "192.168.3.13";
         this.localServerPortInput.text = "5556";
     
 

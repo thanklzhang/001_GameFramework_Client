@@ -39,8 +39,8 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
 
     public override void OnInit()
     {
-        levelText = this.transform.Find("level").GetComponent<Text>();
-        nameText = this.transform.Find("name").GetComponent<Text>();
+        levelText = this.transform.Find("levelBg/level").GetComponent<Text>();
+        nameText = this.transform.Find("nameBg/name").GetComponent<Text>();
         unlockFlagObj = this.transform.Find("lockFlag").gameObject;
         upgradeLevelBtn = this.transform.Find("upgradeLevelBtn").GetComponent<Button>();
 
@@ -102,9 +102,9 @@ public class HeroListUI : BaseUI
 
     protected override void OnInit()
     {
-        goInfoUIBtn = this.transform.Find("root/HeroCard/enterInfoBtn").GetComponent<Button>();
+        goInfoUIBtn = this.transform.Find("cardScroll/mask/root/HeroCard/enterInfoBtn").GetComponent<Button>();
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
-        heroListRoot = this.transform.Find("root");
+        heroListRoot = this.transform.Find("cardScroll/mask/root");
 
         goInfoUIBtn.onClick.AddListener(() =>
         {

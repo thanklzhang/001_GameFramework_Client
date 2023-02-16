@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3946535164
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 21026f0228fe11c2a85f295c162d6e62
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7859cd501ea75098bcf7e53f1b477c26
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildRes/Textures/Item/icon_money.png
+Dependencies: []

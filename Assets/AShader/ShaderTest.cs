@@ -15,7 +15,6 @@ public class ShaderTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var image = this.GetComponent<Image>();
-        Debug.Log("depth: " + image.gameObject.name + " " + image.depth);
+        Logx.Log( "aspect : " + Camera.main.aspect);
     }
 }

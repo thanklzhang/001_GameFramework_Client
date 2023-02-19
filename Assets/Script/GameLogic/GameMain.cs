@@ -96,9 +96,9 @@ public class GameMain : MonoBehaviour
 
 
         //lua start
-        LuaEnv luaEnv = new LuaEnv();
-        luaEnv.AddLoader(MyLoader);
-        luaEnv.DoString("require 'main.lua'");
+        //LuaEnv luaEnv = new LuaEnv();
+        //luaEnv.AddLoader(MyLoader);
+        //luaEnv.DoString("require 'main.lua'");
         //
 
 

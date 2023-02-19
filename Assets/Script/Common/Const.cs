@@ -30,7 +30,7 @@ public class Const
                                                                                  //public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "/Resource";
     public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "";///Resources
     //public static string AssetBundlePath = Application.streamingAssetsPath;//方便测试
-    public const string ExtName = ".ab";
+    public const string ABExtName = ".ab";
     //public static bool isUpdateMode = false;//是否开启更新模式(需要开启资源服务端)
     public static bool isUseAB = false;//资源是否从 AB 中读取 不是的话 从 项目中 Assets 目录读取
 

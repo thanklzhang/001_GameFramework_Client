@@ -118,7 +118,11 @@ public class FileTool
 
             if (isSaveEnter)
             {
-                line = line.Substring(0, line.Length - 1);
+                if (line.Length > 0)
+                {
+                    line = line.Substring(0, line.Length - 1);
+                }
+               
             }
         }
 
@@ -142,6 +146,14 @@ public class FileTool
         }
     }
 
+
+    public static void SaveBytesToFile(string path, byte[] bytes)
+    {
+        using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+        {
+            fs.Write(bytes, 0, bytes.Length);
+        }
+    }
 
     public static void SaveToFile(string path, string str)
     {

@@ -136,7 +136,7 @@ public class PackageStrategy
 
             AssetBundleBuild build = new AssetBundleBuild();
 
-            var abName = file.Replace(ext, Const.ExtName).Replace("\\", "/");
+            var abName = file.Replace(ext, Const.ABExtName).Replace("\\", "/");
 
             build.assetBundleName = abName;
             var assetName = file.Replace("\\", "/");
@@ -158,7 +158,7 @@ public class PackageStrategy
         AssetBundleBuild build = new AssetBundleBuild();
         var bundleName = path.Replace("\\", "/");
         List<string> assetNameList = new List<string>();
-        build.assetBundleName = bundleName + Const.ExtName;
+        build.assetBundleName = bundleName + Const.ABExtName;
 
         for (int i = 0; i < files.Length; i++)
         {

@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using LitJson;
+using System.Threading.Tasks;
+using System.Threading;
+using UnityEngine.Networking;
 
 public class PackageTool
 {
@@ -35,6 +38,7 @@ public class PackageTool
         BuildAssetResource(BuildTarget.StandaloneWindows64);
     }
 
+
     public static void BuildAssetResource(BuildTarget target)
     {
         StartBuildProgress();
@@ -46,9 +50,11 @@ public class PackageTool
 
     public static void StartBuildProgress()
     {
-        //打包清理 persistent 目录
-        //var deletePath = Const.AppStreamingAssetPath;
-        //FileTool.DeleteAllFile(deletePath);
+#if UNITY_EDITOR
+        //unity 系统路径只能再主线程访问 所以先储存
+        Const.AppStreamingAssetPath = Application.streamingAssetsPath;
+        Const.AssetBundlePath = Application.persistentDataPath + "/" + Const.AppName + "";
+#endif
 
         CollectAssetInfo();
 
@@ -194,41 +200,72 @@ public class PackageTool
         return dic.Select((v) => v.Value).ToList();
     }
 
-    public static List<ResInfo> GetAllFileResInfo(string sourceFolder)
+    //获得目标下所有文件
+    public static List<ResInfo> GetAllFilesInfo(string sourceFolder)
     {
-        ////如果目标路径不存在,则创建目标路径
-        //if (!System.IO.Directory.Exists(destFolder))
-        //{
-        //    System.IO.Directory.CreateDirectory(destFolder);
-        //}
-
         List<ResInfo> resList = new List<ResInfo>();
-        //得到原文件根目录下的所有文件
-        string[] files = System.IO.Directory.GetFiles(sourceFolder, "*" + Const.ExtName, SearchOption.AllDirectories);
+        //得到目录下的所有文件
+        string[] files = System.IO.Directory.GetFiles(sourceFolder, "*", SearchOption.AllDirectories);
         foreach (string file in files)
         {
-            ResInfo resInfo = new ResInfo();
-            resInfo.path = file.Replace(Const.AppStreamingAssetPath + "\\", "").Replace("\\", "/").ToLower();
-            resInfo.md5 = EncryptionTool.GetMD5HashFromFile(file);
+            var ext = Path.GetExtension(file);
+            if (!ext.Equals(".meta"))
+            {
+                ResInfo resInfo = new ResInfo();
+                var _path = file.Replace(Const.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
+                resInfo.path = _path;
+                resList.Add(resInfo);
+            }
+        }
 
-            resList.Add(resInfo);
+        return resList;
+    }
 
-            //string name = System.IO.Path.GetFileName(file);
-            //string dest = System.IO.Path.Combine(destFolder, name);
-            //System.IO.File.Copy(file, dest);//复制文件
+    //获得目标下所有资源(ab)文件
+    public static List<ResInfo> GetAllFileResInfo(string sourceFolder)
+    {
+        List<ResInfo> resList = new List<ResInfo>();
+        //得到目录下的所有文件
+        string[] files = System.IO.Directory.GetFiles(sourceFolder, "*", SearchOption.AllDirectories);
+        foreach (string file in files)
+        {
+            var isAB = Path.GetExtension(file).Equals(Const.ABExtName);
+            List<string> depPathList = new List<string>()
+            {
+                "StreamingAssets","AssetToAbFileData.json"
+            };
+
+            var isDepPath = false;
+            foreach (var depPath in depPathList)
+            {
+                if (Path.GetFileName(file).Equals(depPath))
+                {
+                    isDepPath = true;
+                    break;
+                }
+            }
+
+            //if (isDepPath)
+            //{
+            //    Logx.Log("isDepPath true : " + file);
+            //}
+
+            var ext = Path.GetExtension(file);
+            var isIgnore = ext.Equals(".manifest") || ext.Equals(".meta");
+
+            if ((isAB || isDepPath) && !isIgnore)
+            {
+                ResInfo resInfo = new ResInfo();
+                resInfo.path = file.Replace(Const.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
+                resInfo.md5 = EncryptionTool.GetMD5HashFromFile(file);
+
+                resList.Add(resInfo);
+            }
 
 
         }
 
         return resList;
-        ////得到原文件根目录下的所有文件夹
-        //string[] folders = System.IO.Directory.GetDirectories(sourceFolder);
-        //foreach (string folder in folders)
-        //{
-        //    string name = System.IO.Path.GetFileName(folder);
-        //    string dest = System.IO.Path.Combine(destFolder, name);
-        //    CopyFolder(folder, dest);//构建目标路径,递归复制文件
-        //}
     }
 
     public static List<ResInfo> GetDifferentResList(List<ResInfo> oldResList, List<ResInfo> newResList)
@@ -240,7 +277,7 @@ public class PackageTool
 
             var oldRes = oldResList.Find((_oldRes) =>
             {
-                return _oldRes.path == newRes.path;
+                return _oldRes.path.ToLower() == newRes.path.ToLower();
             });
 
 
@@ -287,7 +324,7 @@ public class PackageTool
             filelistStr = FileTool.ReadAllText(fileListPath);
             List<VersionInfo> verList = StringToDic(filelistStr);
 
-            //获得当前版本最新资源列表
+            //获得本地当前版本资源列表
             oldResList = GetResList(verList);
             //oldResList.ForEach(d =>
             //{
@@ -308,7 +345,7 @@ public class PackageTool
         //是否全量更新 如果全量 那么所有资源全部替换最新的
         bool isFullUpdate = false;
         //var filelistStr = "";
-
+        var difList = new List<ResInfo>();
         //Logx.Log("versionPath : " + versionPath);
         if (File.Exists(versionPath))
         {
@@ -317,15 +354,18 @@ public class PackageTool
 
             //获取打包后的资源
             List<ResInfo> newestResList = GetAllFileResInfo(Const.AppStreamingAssetPath);
+            //oldResList.ForEach(d =>
+            //{
+            //    Logx.Log("old : " + d.path + " " + d.md5);
+            //});
             //newestResList.ForEach(d =>
             //{
             //    Logx.Log("new : " + d.path + " " + d.md5);
             //});
 
 
-
             //比对资源文件
-            var difList = GetDifferentResList(oldResList, newestResList);
+            difList = GetDifferentResList(oldResList, newestResList);
 
             difList.ForEach(d =>
             {
@@ -382,11 +422,23 @@ public class PackageTool
 
             //file_list.txt
             var fileListStr = versionStr + "\n";
-            for (int i = 0; i < bundleBuildList.Count; i++)
+            List<string> pathList = new List<string>();
+            bundleBuildList.ForEach((b) =>
             {
-                var build = bundleBuildList[i];
-                var path = build.assetBundleName;
-                var abPath = path.ToLower();
+                pathList.Add(b.assetBundleName.ToLower());
+            });
+
+            //资源引用文件 特殊加入
+            string[] depInfoPathList = new string[]
+            {
+                "StreamingAssets","AssetToAbFileData.json"
+            };
+            pathList.AddRange(depInfoPathList);
+
+            for (int i = 0; i < pathList.Count; i++)
+            {
+                var path = pathList[i];
+                var abPath = path;
 
                 //var filePath = Application.dataPath.Replace("/Assets", "") + "/" + path;
                 var filePath = Const.AppStreamingAssetPath + "/" + path;
@@ -395,39 +447,169 @@ public class PackageTool
                 var md5 = EncryptionTool.GetMD5HashFromFile(filePath);
                 fileListStr += abPath + "|" + md5;
 
-                if (i < bundleBuildList.Count - 1)
+                if (i < pathList.Count - 1)
                 {
                     fileListStr += "\n";
                 }
+
+                difList.Add(new ResInfo()
+                {
+                    path = abPath,
+                    md5 = md5
+                });
             }
 
+
+            //foreach (var depPath in depInfoPathList)
+            //{
+            //    var filePath = Const.AppStreamingAssetPath + "/" + depPath;
+            //    var md5 = EncryptionTool.GetMD5HashFromFile(filePath);
+
+            //    difList.Add(new ResInfo()
+            //    {
+            //        path = depPath,
+            //        md5 = md5
+            //    });
+            //}
+
+            //更新 file_list.txt
             var saveFileListPath = Const.AppStreamingAssetPath + "/" + "file_list.txt";
             FileTool.SaveToFile(saveFileListPath, fileListStr);
         }
 
-        //update resource to resource server
         //include res,fileList.txt,version.txt
 
         AssetDatabase.Refresh();
 
-        //-------------------------------------------------------
-        //if (Directory.Exists(Const.AssetBundlePath))
-        //{
-        //    Directory.Delete(Const.AssetBundlePath, true);
-        //}
+        //打资源后 更改过的或者新的的资源会上传到 ftp 服务器
+        if (difList.Count > 0)
+        {
+            UploadUpdateRes(difList);
+        }
+        //
 
-        //FileTool.DeleteAllFile(Const.AssetBundlePath);
+    }
 
-        ////拷贝 assetBundle 到 persistentDataPath 路径中
-        //FileTool.DeleteAllFile(Const.AssetBundlePath);
+    public static async void UploadUpdateRes(List<ResInfo> difList)
+    {
+        await Task.Run(() =>
+        {
+            Logx.Log("有资源更改 开始资源上传");
 
-        //var copySrcPath = Path.GetFullPath(outPath);
-        //var copyDesPath = Path.GetFullPath(Const.AssetBundlePath);
-        //FileTool.CopyFolder(copySrcPath, copyDesPath);
-        //AssetDatabase.Refresh();
+            UploadByResInfoList(difList);
+            UploadResFlagInfo();
+
+
+            Logx.Log("完成 更新资源上传");
+
+        });
+    }
+
+    public static void UploadResFlagInfo()
+    {
+        List<string> strs = new List<string>();
+        strs.Add("version.txt");
+        strs.Add("file_list.txt");
+
+        //strs.Add("AssetToAbFileData.json");
+        //strs.Add("StreamingAssets");
+
+        //这个不用
+        //strs.Add("StreamingAssets.manifest");
+
+        List<ResInfo> resList = new List<ResInfo>();
+        foreach (var str in strs)
+        {
+            resList.Add(new ResInfo()
+            {
+                path = str,
+                md5 = ""
+            });
+        }
+
+
+        UploadByResInfoList(resList);
+
+    }
+
+    [MenuItem("BuildResource/upload res to ftp server", false, 104)]
+    public static async void UploadToFtp()
+    {
+#if UNITY_EDITOR
+        //unity 系统路径只能再主线程访问 所以先储存
+        Const.AppStreamingAssetPath = Application.streamingAssetsPath;
+        Const.AssetBundlePath = Application.persistentDataPath + "/" + Const.AppName + "";
+#endif
+        await Task.Run(() =>
+        {
+            Logx.Log("开始 所有资源上传");
+
+            List<ResInfo> newestResList = GetAllFilesInfo(Const.AppStreamingAssetPath);
+            UploadByResInfoList(newestResList);
+            UploadResFlagInfo();
+
+            Logx.Log("完成 所有资源上传");
+        });
+
+
     }
 
 
+
+    public static void UploadByResInfoList(List<ResInfo> newestResList)
+    {
+        FTPHelper helper = new FTPHelper();
+        helper.Init("ftp://127.0.0.1", "thanklzhang", "zhang425");
+
+        for (int i = 0; i < newestResList.Count; i++)
+        {
+            var resInfo = newestResList[i];
+            var localPath = Const.AppStreamingAssetPath + "/" + resInfo.path;
+            var remotePath = resInfo.path;
+            Debug.Log("start upload res : " + localPath + " , remote res : " + remotePath);
+            helper.UpLoadFile(localPath, remotePath);
+        }
+    }
+
+    static string tssss;
+    [MenuItem("BuildResource/test", false, 105)]
+    public static void test()
+    {
+       
+
+        //string json = "{'ss':[1,2,3]}";
+
+        //var jd = LitJson.JsonMapper.ToObject(json);
+
+        //var oo = jd["ss"];
+
+
+
+
+        ////var ss = LitJson.JsonMapper.ToObject(jd["ss"]);
+
+        //var obj = LitJson.JsonMapper.ToObject<byte[]>(jd["ss"].ToJson());
+        ////var sss = jd["ss"].ToString();
+        //Debug.Log("ss : " + obj.Length);
+
+
+        //tssss = Const.AppStreamingAssetPath;
+
+
+        //test2();
+    }
+
+
+
+    public static async void test2()
+    {
+        await Task.Run(() =>
+        {
+            var xx = tssss;
+            Debug.Log(xx);
+
+        }); ;
+    }
 
 
 }

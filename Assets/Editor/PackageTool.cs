@@ -12,18 +12,10 @@ using UnityEngine.Networking;
 
 public class PackageTool
 {
-    //static List<AssetBundleBuild> bundleList = new List<AssetBundleBuild>();
-
     [MenuItem("BuildResource/Build iPhone Resource", false, 100)]
     public static void BuildiPhoneResource()
     {
-        BuildTarget target;
-#if UNITY_5
-        target = BuildTarget.iOS;
-#else
-        target = BuildTarget.iOS;
-#endif
-        BuildAssetResource(target);
+        BuildAssetResource(BuildTarget.iOS);
     }
 
     [MenuItem("BuildResource/Build Android Resource", false, 101)]
@@ -69,6 +61,7 @@ public class PackageTool
         bundleBuildList = packStrategy.StartParse();
     }
 
+    //生成 asset 和 ab 的对应关系文件
     public static void GenerateAssetToAbDicFileData()
     {
         //收集 asset ab 对应 
@@ -107,24 +100,114 @@ public class PackageTool
         }
     }
 
-    public class VersionInfo
+    //开始打 AB 包
+    public static void BuildAssetBundle()
     {
-        public int bigVer;
-        public int smallVer;
-        public List<ResInfo> resList;
+        //先取出当前的版本资源信息
+        var versionPath = Const.AppStreamingAssetPath + "/" + "version.txt";
+        var fileListPath = Const.AppStreamingAssetPath + "/" + "file_list.txt";
+        var oldBigVer = 0;
+        var oldSmallVer = 0;
+        var filelistStr = "";
+        List<ResInfo> oldResList = new List<ResInfo>();
+        var isFirst = !File.Exists(versionPath);
+        if (!isFirst)
+        {
+            var oldVersionStr = FileTool.ReadAllText(versionPath);
+            var optionsStr = oldVersionStr.Split('v');
+            var verStr = optionsStr[1].Split('.');
+            oldBigVer = int.Parse(verStr[0]);
+            oldSmallVer = int.Parse(verStr[1]);
+
+            //读取 file_list.txt 
+            filelistStr = FileTool.ReadAllText(fileListPath);
+
+            //获得本地当前版本资源列表
+            oldResList = StringToResInfoList(filelistStr);
+        }
+        else
+        {
+            Logx.Log("第一次打资源包");
+        }
+
+        //开始 bundle 打包到 streamingAsset 路径中
+        var outPath = Const.AppStreamingAssetPath;
+        var abManifest = BuildPipeline.BuildAssetBundles(outPath, bundleBuildList.ToArray(), BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
+
+        AssetDatabase.Refresh();
+
+        var difList = new List<ResInfo>();
+        //获取打包后的资源
+        List<ResInfo> newestResList = GenerateFileResWithMD5(Const.AppStreamingAssetPath);
+
+        //比对资源文件
+        difList = GetNeedUpdateResList(oldResList, newestResList);
+
+        difList.ForEach(d =>
+        {
+            Logx.Log("有更新的资源路径 : " + d.path + "   |   md5 : " + d.md5);
+        });
+
+        bool isUpperVer = difList.Count > 0;
+        if (isUpperVer)
+        {
+            var newBigVer = 1;
+            var newSmallVer = 0;
+
+            if (!isFirst)
+            {
+                newBigVer = oldBigVer;
+                newSmallVer = oldSmallVer + 1;
+
+                var oldVerStr = "v" + oldBigVer + "." + oldSmallVer;
+                var newVerStr = "v" + newBigVer + "." + newSmallVer;
+                Logx.Log(string.Format("有新资源 升级资源版本 ：{0} -> {1}", oldVerStr, newVerStr));
+            }
+            else
+            {
+                //第一次打包
+                Logx.Log(string.Format("第一次打资源包的资源版本 ：{0}", "v1.0"));
+            }
+
+            var newStr = "";
+            for (int i = 0; i < newestResList.Count; i++)
+            {
+                var res = newestResList[i];
+                newStr += res.path + "|" + res.md5;
+
+                if (i < newestResList.Count - 1)
+                {
+                    newStr += "\n";
+                }
+            }
+
+            FileTool.SaveToFile(fileListPath, newStr);
+
+            var verStr = "v" + newBigVer + "." + newSmallVer;
+            FileTool.SaveToFile(versionPath, verStr);
+        }
+        else
+        {
+            Logx.Log("当前没有变化的资源 无需升级资源版本");
+        }
+
+        AssetDatabase.Refresh();
+
+        //打资源后 更改过的或者新的的资源会上传到 ftp 服务器
+        //TODO : 变成可配置操作 : 1 自动更新到服务器
+        //2 不更新到服务器(需要将更新的文件路径输出到控制台或者文件中 , 让其手动更新 , 或者手动全量更新)
+        if (difList.Count > 0)
+        {
+            UploadRes(difList);
+        }
+        
     }
 
-    public class ResInfo
-    {
-        public string path;
-        public string md5;
-    }
-
-    //资源文本 变为 内存中的 dic 
-    public static List<VersionInfo> StringToDic(string resStr)
+    //资源列表文本读取
+    public static List<ResInfo> StringToResInfoList(string resStr)
     {
         var strs = resStr.Split('\n');
-        List<VersionInfo> verInfoList = new List<VersionInfo>();
+        List<ResInfo> resInfoList = new List<ResInfo>();
         for (int i = 0; i < strs.Length; i++)
         {
             var lineStr = strs[i];
@@ -132,97 +215,23 @@ public class PackageTool
             {
                 continue;
             }
-            var resIndex = lineStr.IndexOf('|');
-            bool isVer = resIndex < 0;
-            if (isVer)
+            //资源行
+            var resOptionStr = lineStr.Split('|');
+            var path = resOptionStr[0];
+            var md5 = resOptionStr[1];
+            ResInfo resInfo = new ResInfo()
             {
-                //版本行
-                var verStr = lineStr.Split('v')[1];
-                var optionStr = verStr.Split('.');
-                int bigVer = int.Parse(optionStr[0]);
-                int smallVer = int.Parse(optionStr[1]);
-
-                VersionInfo verInfo = new VersionInfo()
-                {
-                    bigVer = bigVer,
-                    smallVer = smallVer,
-                    resList = new List<ResInfo>()
-                };
-                verInfoList.Add(verInfo);
-            }
-            else
-            {
-                //资源行
-                var resOptionStr = lineStr.Split('|');
-                var path = resOptionStr[0];
-                var md5 = resOptionStr[1];
-
-                var newestVerInfo = verInfoList[verInfoList.Count - 1];
-
-                ResInfo resInfo = new ResInfo()
-                {
-                    path = path,
-                    md5 = md5
-                };
-                newestVerInfo.resList.Add(resInfo);
-            }
+                path = path,
+                md5 = md5
+            };
+            resInfoList.Add(resInfo);
         }
 
-        return verInfoList;
+        return resInfoList;
     }
 
-    public static List<ResInfo> GetResList(List<VersionInfo> verInfoList)
-    {
-        //每次将最新资源列表再储存成另一个文件 这里不用每次收集(待定)
-        //这里先按照每次打包来计算
-
-        Dictionary<string, ResInfo> dic = new Dictionary<string, ResInfo>();
-        for (int i = 0; i < verInfoList.Count; i++)
-        {
-            var verInfo = verInfoList[i];
-            for (int j = 0; j < verInfo.resList.Count; j++)
-            {
-                var resInfo = verInfo.resList[j];
-                var path = resInfo.path;
-                var md5 = resInfo.md5;
-                if (dic.ContainsKey(path))
-                {
-                    dic[path].md5 = md5;
-                }
-                else
-                {
-                    dic.Add(path, resInfo);
-                }
-            }
-
-        }
-
-        return dic.Select((v) => v.Value).ToList();
-    }
-
-    //获得目标下所有文件
-    public static List<ResInfo> GetAllFilesInfo(string sourceFolder)
-    {
-        List<ResInfo> resList = new List<ResInfo>();
-        //得到目录下的所有文件
-        string[] files = System.IO.Directory.GetFiles(sourceFolder, "*", SearchOption.AllDirectories);
-        foreach (string file in files)
-        {
-            var ext = Path.GetExtension(file);
-            if (!ext.Equals(".meta"))
-            {
-                ResInfo resInfo = new ResInfo();
-                var _path = file.Replace(Const.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
-                resInfo.path = _path;
-                resList.Add(resInfo);
-            }
-        }
-
-        return resList;
-    }
-
-    //获得目标下所有资源(ab)文件
-    public static List<ResInfo> GetAllFileResInfo(string sourceFolder)
+    //返回目录下所有需要热更的资源 并计算md5
+    public static List<ResInfo> GenerateFileResWithMD5(string sourceFolder)
     {
         List<ResInfo> resList = new List<ResInfo>();
         //得到目录下的所有文件
@@ -244,12 +253,6 @@ public class PackageTool
                     break;
                 }
             }
-
-            //if (isDepPath)
-            //{
-            //    Logx.Log("isDepPath true : " + file);
-            //}
-
             var ext = Path.GetExtension(file);
             var isIgnore = ext.Equals(".manifest") || ext.Equals(".meta");
 
@@ -261,14 +264,13 @@ public class PackageTool
 
                 resList.Add(resInfo);
             }
-
-
         }
 
         return resList;
     }
 
-    public static List<ResInfo> GetDifferentResList(List<ResInfo> oldResList, List<ResInfo> newResList)
+    //资源对比 得到需要更新的资源
+    public static List<ResInfo> GetNeedUpdateResList(List<ResInfo> oldResList, List<ResInfo> newResList)
     {
         List<ResInfo> difList = new List<ResInfo>();
         for (int i = 0; i < newResList.Count; i++)
@@ -300,197 +302,8 @@ public class PackageTool
         return difList;
     }
 
-    public static void BuildAssetBundle()
-    {
-
-        //先取出当前的版本资源信息
-        var versionPath = Const.AppStreamingAssetPath + "/" + "version.txt";
-        var fileListPath = Const.AppStreamingAssetPath + "/" + "file_list.txt";
-        var oldBigVer = 0;
-        var oldSmallVer = 0;
-        var filelistStr = "";
-        List<ResInfo> oldResList = new List<ResInfo>();
-        if (File.Exists(versionPath))
-        {
-            var oldVersionStr = FileTool.ReadAllText(versionPath);
-            var optionsStr = oldVersionStr.Split('v');
-            var verStr = optionsStr[1].Split('.');
-            oldBigVer = int.Parse(verStr[0]);
-            oldSmallVer = int.Parse(verStr[1]);
-            //Logx.Log("oldBigVer : " + oldBigVer);
-            //Logx.Log("oldSmallVer : " + oldSmallVer);
-
-            //读取 file_list.txt 
-            filelistStr = FileTool.ReadAllText(fileListPath);
-            List<VersionInfo> verList = StringToDic(filelistStr);
-
-            //获得本地当前版本资源列表
-            oldResList = GetResList(verList);
-            //oldResList.ForEach(d =>
-            //{
-            //    Logx.Log("old : " + d.path + " " + d.md5);
-            //});
-
-        }
-
-        //开始 bundle 打包到 streamingAsset 路径中
-        var outPath = Const.AppStreamingAssetPath;
-        var abManifest = BuildPipeline.BuildAssetBundles(outPath, bundleBuildList.ToArray(), BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
-
-        //var deletePath = Const.AssetBundlePath;
-
-        AssetDatabase.Refresh();
-
-        //比对 生成 fileList.txt 和 version.txt
-        //是否全量更新 如果全量 那么所有资源全部替换最新的
-        bool isFullUpdate = false;
-        //var filelistStr = "";
-        var difList = new List<ResInfo>();
-        //Logx.Log("versionPath : " + versionPath);
-        if (File.Exists(versionPath))
-        {
-            //存在 本本文件 开始比对资源 升级资源版本
-
-
-            //获取打包后的资源
-            List<ResInfo> newestResList = GetAllFileResInfo(Const.AppStreamingAssetPath);
-            //oldResList.ForEach(d =>
-            //{
-            //    Logx.Log("old : " + d.path + " " + d.md5);
-            //});
-            //newestResList.ForEach(d =>
-            //{
-            //    Logx.Log("new : " + d.path + " " + d.md5);
-            //});
-
-
-            //比对资源文件
-            difList = GetDifferentResList(oldResList, newestResList);
-
-            difList.ForEach(d =>
-            {
-                Logx.Log("diffrent : path : " + d.path + "   |   md5 : " + d.md5);
-            });
-
-            bool isUpperVer = difList.Count > 0;
-            if (isUpperVer)
-            {
-                Logx.Log("有新资源 升级资源版本");
-                var newBigVer = oldBigVer;
-                var newSmallVer = oldSmallVer + 1;
-                //fileListDic save to fileList.txt , update version.txt
-
-                var oldStr = filelistStr;
-                var newStr = oldStr;
-
-                var verStr = "v" + newBigVer + "." + newSmallVer;
-
-                newStr += "\n";
-                newStr += verStr;
-                newStr += "\n";
-                for (int i = 0; i < difList.Count; i++)
-                {
-                    var res = difList[i];
-                    newStr += res.path + "|" + res.md5;
-
-                    if (i < difList.Count - 1)
-                    {
-                        newStr += "\n";
-                    }
-                }
-
-                FileTool.SaveToFile(fileListPath, newStr);
-
-                FileTool.SaveToFile(versionPath, verStr);
-            }
-            else
-            {
-                Logx.Log("当前没有变化的资源 无需升级资源版本");
-            }
-        }
-        else
-        {
-            Logx.Log("version.txt 没有找到 将进行第一次打资源包");
-            //不存在 版本文件 那么当作第一次的包
-            var newBigVer = 1;
-            var newsmallVer = 0;
-            string versionStr = "v" + newBigVer + "." + newsmallVer;
-
-            //version.txt
-            var saveVerPath = Const.AppStreamingAssetPath + "/" + "version.txt";
-            FileTool.SaveToFile(saveVerPath, versionStr);
-
-            //file_list.txt
-            var fileListStr = versionStr + "\n";
-            List<string> pathList = new List<string>();
-            bundleBuildList.ForEach((b) =>
-            {
-                pathList.Add(b.assetBundleName.ToLower());
-            });
-
-            //资源引用文件 特殊加入
-            string[] depInfoPathList = new string[]
-            {
-                "StreamingAssets","AssetToAbFileData.json"
-            };
-            pathList.AddRange(depInfoPathList);
-
-            for (int i = 0; i < pathList.Count; i++)
-            {
-                var path = pathList[i];
-                var abPath = path;
-
-                //var filePath = Application.dataPath.Replace("/Assets", "") + "/" + path;
-                var filePath = Const.AppStreamingAssetPath + "/" + path;
-                //var bytes = FileTool.ReadAllBytes(filePath);
-
-                var md5 = EncryptionTool.GetMD5HashFromFile(filePath);
-                fileListStr += abPath + "|" + md5;
-
-                if (i < pathList.Count - 1)
-                {
-                    fileListStr += "\n";
-                }
-
-                difList.Add(new ResInfo()
-                {
-                    path = abPath,
-                    md5 = md5
-                });
-            }
-
-
-            //foreach (var depPath in depInfoPathList)
-            //{
-            //    var filePath = Const.AppStreamingAssetPath + "/" + depPath;
-            //    var md5 = EncryptionTool.GetMD5HashFromFile(filePath);
-
-            //    difList.Add(new ResInfo()
-            //    {
-            //        path = depPath,
-            //        md5 = md5
-            //    });
-            //}
-
-            //更新 file_list.txt
-            var saveFileListPath = Const.AppStreamingAssetPath + "/" + "file_list.txt";
-            FileTool.SaveToFile(saveFileListPath, fileListStr);
-        }
-
-        //include res,fileList.txt,version.txt
-
-        AssetDatabase.Refresh();
-
-        //打资源后 更改过的或者新的的资源会上传到 ftp 服务器
-        if (difList.Count > 0)
-        {
-            UploadUpdateRes(difList);
-        }
-        //
-
-    }
-
-    public static async void UploadUpdateRes(List<ResInfo> difList)
+    //上传资源
+    public static async void UploadRes(List<ResInfo> difList)
     {
         await Task.Run(() =>
         {
@@ -505,17 +318,12 @@ public class PackageTool
         });
     }
 
+    //上传版本资源信息标记的文件
     public static void UploadResFlagInfo()
     {
         List<string> strs = new List<string>();
         strs.Add("version.txt");
         strs.Add("file_list.txt");
-
-        //strs.Add("AssetToAbFileData.json");
-        //strs.Add("StreamingAssets");
-
-        //这个不用
-        //strs.Add("StreamingAssets.manifest");
 
         List<ResInfo> resList = new List<ResInfo>();
         foreach (var str in strs)
@@ -527,14 +335,35 @@ public class PackageTool
             });
         }
 
-
         UploadByResInfoList(resList);
 
     }
 
-    [MenuItem("BuildResource/upload res to ftp server", false, 104)]
-    public static async void UploadToFtp()
+    //获得路径下需要上传的所有文件
+    public static List<ResInfo> GetCanUploadAllFilesInfo(string sourceFolder)
     {
+        List<ResInfo> resList = new List<ResInfo>();
+        //得到目录下的所有文件
+        string[] files = System.IO.Directory.GetFiles(sourceFolder, "*", SearchOption.AllDirectories);
+        foreach (string file in files)
+        {
+            var ext = Path.GetExtension(file);
+            if (!ext.Equals(".meta"))
+            {
+                ResInfo resInfo = new ResInfo();
+                var _path = file.Replace(Const.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
+                resInfo.path = _path;
+                resList.Add(resInfo);
+            }
+        }
+        return resList;
+    }
+
+    [MenuItem("BuildResource/upload all res to ftp server", false, 104)]
+    public static async void UploadAllResToFtp()
+    {
+        //强行更新所有资源到 ftp 服务器
+        //注意这里没有增加版本号 所以客户端不会更新 这里只是更新资源
 #if UNITY_EDITOR
         //unity 系统路径只能再主线程访问 所以先储存
         Const.AppStreamingAssetPath = Application.streamingAssetsPath;
@@ -544,7 +373,7 @@ public class PackageTool
         {
             Logx.Log("开始 所有资源上传");
 
-            List<ResInfo> newestResList = GetAllFilesInfo(Const.AppStreamingAssetPath);
+            List<ResInfo> newestResList = GetCanUploadAllFilesInfo(Const.AppStreamingAssetPath);
             UploadByResInfoList(newestResList);
             UploadResFlagInfo();
 
@@ -554,8 +383,7 @@ public class PackageTool
 
     }
 
-
-
+    //通过 ftp 上传资源文件
     public static void UploadByResInfoList(List<ResInfo> newestResList)
     {
         FTPHelper helper = new FTPHelper();
@@ -571,44 +399,17 @@ public class PackageTool
         }
     }
 
-    static string tssss;
-    [MenuItem("BuildResource/test", false, 105)]
-    public static void test()
+    public class VersionInfo
     {
-       
-
-        //string json = "{'ss':[1,2,3]}";
-
-        //var jd = LitJson.JsonMapper.ToObject(json);
-
-        //var oo = jd["ss"];
-
-
-
-
-        ////var ss = LitJson.JsonMapper.ToObject(jd["ss"]);
-
-        //var obj = LitJson.JsonMapper.ToObject<byte[]>(jd["ss"].ToJson());
-        ////var sss = jd["ss"].ToString();
-        //Debug.Log("ss : " + obj.Length);
-
-
-        //tssss = Const.AppStreamingAssetPath;
-
-
-        //test2();
+        public int bigVer;
+        public int smallVer;
+        public List<ResInfo> resList;
     }
 
-
-
-    public static async void test2()
+    public class ResInfo
     {
-        await Task.Run(() =>
-        {
-            var xx = tssss;
-            Debug.Log(xx);
-
-        }); ;
+        public string path;
+        public string md5;
     }
 
 

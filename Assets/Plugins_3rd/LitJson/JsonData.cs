@@ -527,7 +527,7 @@ namespace LitJson
         #region IEnumerable Methods
         IEnumerator IEnumerable.GetEnumerator ()
         {
-            return EnsureCollection ().GetEnumerator ();
+            return EnsureCollection ().GetEnumerator (); 
         }
         #endregion
 

@@ -1,11 +1,5 @@
-v1.0
-assets/buildres/prefabs/models/role/monster1_battle.ab|5dbcae02e832624874e48550f2cd5eb2
-assets/buildres/prefabs/models/role/shangguanling_battle_001.ab|6aae0e01f270876b71610c39b99b24e3
-StreamingAssets|24bd16d406ca2067e39e1adb407b02a2
-AssetToAbFileData.json|5b16473a812aa6d6d57e6b83ad997f94
-v1.1
 AssetToAbFileData.json|deaf23c16abd5f3a76ea40ef5e5fcd8b
-StreamingAssets|5f5e86eb9e96492ed9ade8cbbc20f4a3
+StreamingAssets|e57ddbdb3d6679a859608ec72e6458de
 assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/test.ab|9904dfdf4e8f6f3975c8e843f10b0cec
 assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/battle_end.ab|ab584d7e882baaa137ced0679e0c8c57
 assets/buildres/battletrigger/maintaskbattle/maintaskbattle_001/triggerscript/create_entity_001.ab|b54319f88051712bb1575ad9749b8c95
@@ -17,7 +11,7 @@ assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab|27fb3e0bf635
 assets/buildres/prefabs/effects/eft_skill_cal_001.ab|fcfd8905a2bba3c993254f68d40e6748
 assets/buildres/prefabs/effects/eft_skill_cal_002.ab|4d2daec1c878b17632b32697a7a26a8a
 assets/buildres/prefabs/effects/eft_skill_projectile_001.ab|df83ffc8db77c258e01cc5d42273abe5
-assets/buildres/prefabs/models/role/monster1_battle.ab|221c19af1642c405a69f09df37db560d
+assets/buildres/prefabs/models/role/monster1_battle.ab|1b8f0a5d81acad19a05716af8616d400
 assets/buildres/prefabs/models/role/shangguanling_battle_001.ab|079472bddf4ceeb2f5029e5fbfa1bd62
 assets/buildres/prefabs/scene/battle_scene_001.ab|9958e5aaadb9af486333e16b09837d89
 assets/buildres/prefabs/ui/aui.ab|b07f6638d5f75a20b830c4a966470941
@@ -71,6 +65,3 @@ assets/sourceres/models/role/jing_ling_nan_001_ty.ab|5e05231c3940a8175407558d91b
 assets/sourceres/models/role/jing_ling_zhu_jian_zhu_001.ab|48e7bef7cb170e8f1a851e3a4258533b
 assets/sourceres/models/role/jlxb_yc_001_ty.ab|060716445106bf9c835bb6ab4c215b6e
 assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab|9b54a63d750cabdcc6c0be7800c6f678
-v1.2
-StreamingAssets|d7e60228f988e72e8e8edde65aefba15
-assets/buildres/prefabs/models/role/monster1_battle.ab|296608ffbb4f540d201b19e4f5ab6122

@@ -45,7 +45,8 @@ public class BattleCtrl : BaseCtrl
         var battleTriggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleTb.TriggerId);
 
         //scene
-        var sceneResId = 15010001;
+        var mapConfig = Table.TableManager.Instance.GetById<Table.BattleMap>(battleTb.MapId);
+        var sceneResId = mapConfig.ResId;
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(sceneResId);
         scenePath = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
@@ -109,7 +110,7 @@ public class BattleCtrl : BaseCtrl
         {
             mapCellView = sceneObj.GetComponent<MapCellView>();
             var map = BattleManager.Instance.GetLocalBattleMap();
-            mapCellView.SetMap(map);
+            mapCellView?.SetMap(map);
             //mapCellView.SetRenderPath(new List<Pos>());
         }
     }

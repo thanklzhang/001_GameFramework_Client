@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2515032561
+CRC: 1946304224
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 54d8fff6c484b9e152b36ccf2fa45632
+    Hash: 0c664849478a7358add60b04f1c1358f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 646365b7aab8804142ab19b5e38cee89
+    Hash: 16c8c1f57db12c67ee1f8799d7c1eee7
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,6 +31,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/Models/Role/shangguanling_battle_001.prefab
 Dependencies:

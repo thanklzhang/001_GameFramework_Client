@@ -1,96 +1,94 @@
 ManifestFileVersion: 0
-CRC: 1265279860
+CRC: 3387369824
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
+      Name: assets/buildres/prefabs/models/role/monster1_battle.ab
+      Dependencies:
+        Dependency_0: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
+    Info_1:
+      Name: assets/buildres/prefabs/models/role/shangguanling_battle_001.ab
+      Dependencies:
+        Dependency_0: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
+    Info_2:
       Name: assets/buildres/prefabs/ui/aui.ab
       Dependencies:
         Dependency_0: assets/buildres/prefabs/ui/cui.ab
         Dependency_1: assets/buildres/textures/bg/login_bg.ab
-    Info_1:
+    Info_3:
+      Name: assets/buildres/prefabs/ui/battleresultui.ab
+      Dependencies: {}
+    Info_4:
+      Name: assets/buildres/prefabs/ui/battleui.ab
+      Dependencies: {}
+    Info_5:
       Name: assets/buildres/prefabs/ui/bui.ab
       Dependencies:
         Dependency_0: assets/buildres/textures/item/item0.ab
-    Info_2:
+    Info_6:
+      Name: assets/buildres/prefabs/ui/confirmui.ab
+      Dependencies: {}
+    Info_7:
       Name: assets/buildres/prefabs/ui/cui.ab
       Dependencies: {}
-    Info_3:
+    Info_8:
       Name: assets/buildres/prefabs/ui/equipmentlistui.ab
       Dependencies:
         Dependency_0: assets/buildres/prefabs/ui/aui.ab
         Dependency_1: assets/buildres/prefabs/ui/bui.ab
-        Dependency_2: assets/buildres/textures/bg/login_bg.ab
-        Dependency_3: assets/buildres/textures/item/item0.ab
-    Info_4:
+    Info_9:
       Name: assets/buildres/prefabs/ui/heroinfoui.ab
       Dependencies: {}
-    Info_5:
+    Info_10:
       Name: assets/buildres/prefabs/ui/herolistui.ab
       Dependencies: {}
-    Info_6:
-      Name: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
-      Dependencies: {}
-    Info_7:
-      Name: assets/sourceres/models/role/jing_ling_nan_001_ty.ab
-      Dependencies: {}
-    Info_8:
-      Name: assets/sourceres/models/role/jing_ling_zhu_jian_zhu_001.ab
-      Dependencies: {}
-    Info_9:
-      Name: assets/sourceres/models/role/jlxb_yc_001_ty.ab
-      Dependencies: {}
-    Info_10:
-      Name: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
-      Dependencies: {}
     Info_11:
-      Name: assets/buildres/prefabs/models/role/monster1_battle.ab
-      Dependencies:
-        Dependency_0: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
-    Info_12:
-      Name: assets/buildres/prefabs/models/role/shangguanling_battle_001.ab
-      Dependencies:
-        Dependency_0: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
-    Info_13:
-      Name: assets/buildres/prefabs/ui/battleresultui.ab
-      Dependencies: {}
-    Info_14:
-      Name: assets/buildres/prefabs/ui/battleui.ab
-      Dependencies: {}
-    Info_15:
-      Name: assets/buildres/prefabs/ui/confirmui.ab
-      Dependencies: {}
-    Info_16:
       Name: assets/buildres/prefabs/ui/lobbyui.ab
       Dependencies: {}
-    Info_17:
+    Info_12:
       Name: assets/buildres/prefabs/ui/loginui.ab
       Dependencies: {}
-    Info_18:
+    Info_13:
       Name: assets/buildres/prefabs/ui/maintaskstageui.ab
       Dependencies: {}
-    Info_19:
+    Info_14:
       Name: assets/buildres/prefabs/ui/maintaskui.ab
       Dependencies: {}
-    Info_20:
+    Info_15:
       Name: assets/buildres/prefabs/ui/teamroominfoui.ab
       Dependencies: {}
-    Info_21:
+    Info_16:
       Name: assets/buildres/prefabs/ui/teamroomlistui.ab
       Dependencies: {}
-    Info_22:
+    Info_17:
       Name: assets/buildres/prefabs/ui/tipsui.ab
       Dependencies: {}
-    Info_23:
+    Info_18:
       Name: assets/buildres/prefabs/ui/titlebarui.ab
       Dependencies:
         Dependency_0: assets/buildres/textures/item/icon_money.ab
-    Info_24:
+    Info_19:
       Name: assets/buildres/prefabs/ui/titleui_del.ab
       Dependencies: {}
-    Info_25:
+    Info_20:
       Name: assets/buildres/prefabs/scene/battle_scene_001.ab
       Dependencies:
         Dependency_0: assets/sourceres/models/build/model.ab
+    Info_21:
+      Name: assets/sourceres/models/role/gui_wu_shi_001_ty.ab
+      Dependencies: {}
+    Info_22:
+      Name: assets/sourceres/models/role/jing_ling_nan_001_ty.ab
+      Dependencies: {}
+    Info_23:
+      Name: assets/sourceres/models/role/jing_ling_zhu_jian_zhu_001.ab
+      Dependencies: {}
+    Info_24:
+      Name: assets/sourceres/models/role/jlxb_yc_001_ty.ab
+      Dependencies: {}
+    Info_25:
+      Name: assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
+      Dependencies: {}
     Info_26:
       Name: assets/buildres/prefabs/effects/eft_normal_attack_projectile_001.ab
       Dependencies: {}

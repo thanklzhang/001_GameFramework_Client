@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2169294934
+CRC: 291136320
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bf5a8c1633c95fcfc206b5ab7b35f8a5
+    Hash: 689524a12b5024c2f9218dcdef01e71b
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 646365b7aab8804142ab19b5e38cee89
+    Hash: 16c8c1f57db12c67ee1f8799d7c1eee7
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,6 +31,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/Models/Role/monster1_battle.prefab
 Dependencies:

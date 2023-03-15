@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 39044881
+CRC: 1196768423
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2345676617e11e8ad80ebd840bc7d6c1
+    Hash: ad53be6fbec650e9488474a5e4722007
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c97e9f50c5c1df1b8794131ec8596ed5
+    Hash: 469c7077f287c6bd44e6b19784f22aff
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,9 +31,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/SourceRes/Models/Role/jing_ling_zhu_jian_zhu_001/jing_ling_bao_zha_001.FBX
-- Assets/SourceRes/Models/Role/jing_ling_zhu_jian_zhu_001/jing_ling_zhu_jian_zhu_001.mat
 - Assets/SourceRes/Models/Role/jing_ling_zhu_jian_zhu_001/Materials/jing_ling_zhu_jian_zhu_001.mat
+- Assets/SourceRes/Models/Role/jing_ling_zhu_jian_zhu_001/jing_ling_zhu_jian_zhu_001.mat
 - Assets/SourceRes/Models/Role/jing_ling_zhu_jian_zhu_001/jing_ling_zhu_jian_zhu_001.tga
 Dependencies: []

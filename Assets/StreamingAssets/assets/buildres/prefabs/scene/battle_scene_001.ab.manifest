@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3232785192
+CRC: 2357780535
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8ac7a1ded431cad318655ab9d3c3f543
+    Hash: 99ea0d07d54b41579d7f252e71b3e882
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6c15bce98014045a6308484f7231c440
+    Hash: f630ca16bda9029f998e015807b3cd1a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -33,6 +33,7 @@ ClassTypes:
   Script: {fileID: 11500000, guid: aff071da9bba47a4382e2dd6909c99c3, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/Scene/battle_scene_001.prefab
 Dependencies:

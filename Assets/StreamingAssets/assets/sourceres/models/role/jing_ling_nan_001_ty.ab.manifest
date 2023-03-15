@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 104199355
+CRC: 4134456885
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e39d476d3d3b985961ee597e0af07bc7
+    Hash: 2eb4de9e3f9caa3a3e4f2155d712f638
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f91f23ff0a5dc5d1238331e2e49d3a89
+    Hash: b99b9b9ade2ceeaa1697420dd1728416
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,8 +29,9 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/SourceRes/Models/Role/jing_ling_nan_001_ty/Materials/jing_ling_nan_001_ty.mat
 - Assets/SourceRes/Models/Role/jing_ling_nan_001_ty/jing_ling_nan_001_ty.FBX
+- Assets/SourceRes/Models/Role/jing_ling_nan_001_ty/Materials/jing_ling_nan_001_ty.mat
 - Assets/SourceRes/Models/Role/jing_ling_nan_001_ty/Materials/jing_ling_nan_001_ty.tga
 Dependencies: []

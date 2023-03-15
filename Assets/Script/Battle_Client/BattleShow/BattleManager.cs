@@ -31,6 +31,7 @@ namespace Battle_Client
         public int ctrlHeroGuid;
     }
 
+
     public class BattleManager : Singleton<BattleManager>
     {
         //战斗信息
@@ -249,13 +250,20 @@ namespace Battle_Client
 
             GameDataManager.Instance.UserStore.Uid = 1;
             var uid = GameDataManager.Instance.UserStore.Uid;
-
-            CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
+            CoroutineManager.Instance.StartCoroutine(LoadMapData(battleConfigId, (mapList) =>
              {
-                 var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
 
-                 CreateLocalBattle(applyArg, sourceData, true);
+                 var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
+                 CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
+                 {
+                     //TODO : add map res 
+                     MapInitArg mapInitData = new MapInitArg();
+                     mapInitData.mapList = mapList;
+                     CreateLocalBattle(applyArg, sourceData, mapInitData, true);
+                 }));
              }));
+
+
         }
 
         //创建远端结算的本地战斗
@@ -264,10 +272,35 @@ namespace Battle_Client
             var battleConfigId = applyArg.BattleTableId;
             CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
             {
-                CreateLocalBattle(applyArg, sourceData, false);
+                //CreateLocalBattle(applyArg, sourceData, false);
             }));
         }
 
+        public IEnumerator LoadMapData(int battleConfigId, Action<List<List<int>>> finishCallback)
+        {
+            var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+            var mapConfig = Table.TableManager.Instance.GetById<Table.BattleMap>(battleConfigTb.MapId);
+
+            var isFinish = false;
+            var mapList = new List<List<int>>();
+            var path = Const.buildPath + "/" + mapConfig.MapDataPath;
+            ResourceManager.Instance.GetObject<TextAsset>(path, (textAsset) =>
+            {
+                //Logx.Log("local execute : load text finish: " + textAsset.text);
+                var json = textAsset.text;
+                mapList = LitJson.JsonMapper.ToObject<List<List<int>>>(json);
+
+                isFinish = true;
+            });
+
+            while (!isFinish)
+            {
+                yield return null;
+            }
+
+            finishCallback?.Invoke(mapList);
+
+        }
 
         public IEnumerator LoadTriggerResource(int battleConfigId, Action<TriggerSourceResData> finishCallback)
         {
@@ -279,6 +312,7 @@ namespace Battle_Client
             var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
             var triggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleConfigTb.TriggerId);
 
+            //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
             var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
 
 
@@ -320,7 +354,7 @@ namespace Battle_Client
 
 
         //创建本地战斗
-        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source, bool isPureLocal)
+        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source, MapInitArg mapInitData, bool isPureLocal)
         {
             Logx.Log("battle manager : CreateLocalBattle");
             //填充数据
@@ -329,7 +363,7 @@ namespace Battle_Client
             localBattleExecuter = new LocalBattleLogic_Executer();
             localBattleExecuter.Init();
 
-            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, source, isPureLocal);
+            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, source, mapInitData, isPureLocal);
 
             var battleClientArgs = GetBattleClientArgs(battleLogic);
 

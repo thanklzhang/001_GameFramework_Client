@@ -16,4 +16,5 @@ cd /d %~dp0
 mklink /d Table ..\..\..\001_GameFramework_Table\CommonData\Table
 mklink /d Plot ..\..\..\001_GameFramework_Table\CommonData\Plot
 mklink /d BattleTrigger ..\..\..\001_GameFramework_Table\CommonData\BattleTrigger
+mklink /d BattleMap ..\..\..\001_GameFramework_Table\CommonData\BattleMap
 pause

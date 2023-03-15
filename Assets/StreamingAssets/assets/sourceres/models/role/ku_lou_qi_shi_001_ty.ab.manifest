@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2912068217
+CRC: 2379902666
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7e33dc7ae4b1f538c55461a610c625ba
+    Hash: 8e4f6c5e13dfbe22437dde8598bb0c13
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f91f23ff0a5dc5d1238331e2e49d3a89
+    Hash: b99b9b9ade2ceeaa1697420dd1728416
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,9 +29,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/SourceRes/Models/Role/ku_lou_qi_shi_001_ty/ku_lou_qi_shi_001_ty.tga
-- Assets/SourceRes/Models/Role/ku_lou_qi_shi_001_ty/ku_lou_qi_shi_001_ty.mat
-- Assets/SourceRes/Models/Role/ku_lou_qi_shi_001_ty/ku_lou_qi_shi_001_ty.FBX
 - Assets/SourceRes/Models/Role/ku_lou_qi_shi_001_ty/Materials/ku_lou_qi_shi_001_ty.mat
+- Assets/SourceRes/Models/Role/ku_lou_qi_shi_001_ty/ku_lou_qi_shi_001_ty.FBX
+- Assets/SourceRes/Models/Role/ku_lou_qi_shi_001_ty/ku_lou_qi_shi_001_ty.mat
+- Assets/SourceRes/Models/Role/ku_lou_qi_shi_001_ty/ku_lou_qi_shi_001_ty.tga
 Dependencies: []

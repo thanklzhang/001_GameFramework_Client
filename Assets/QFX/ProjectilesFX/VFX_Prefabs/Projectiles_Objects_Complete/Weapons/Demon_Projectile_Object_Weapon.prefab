@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4638680489693412543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4638680489693412540}
+  - component: {fileID: 4638680489693412541}
+  m_Layer: 0
+  m_Name: Demon_Projectile_Object_Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4638680489693412540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4638680489693412543}
+  m_LocalRotation: {x: 0, y: 0.3420201, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 40, z: 0}
+--- !u!114 &4638680489693412541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4638680489693412543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a003eba7d11a4dc499535c91f474c76e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireRate: 0.3
+  Speed: 15
+  ImpactOffset: 0.25
+  FlashFX: {fileID: 3076614001165391053, guid: 3d80b263ef53c0a40b1f0dd0ba57a102, type: 3}
+  ProjectileFX: {fileID: 4358948454091752960, guid: b7c17bc00df0c814285f06fd014cc1e0,
+    type: 3}
+  ImpactFX: {fileID: 6608472459426803807, guid: 06fc120ee46f97040be7a506aa4d5043,
+    type: 3}
+  DestroyDelay: 2
+  FlashFXDestroyDelay: 1
+  ImpactFXDestroyDelay: 1.5

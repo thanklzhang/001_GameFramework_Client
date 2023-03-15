@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2025424922
+CRC: 1465511464
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ebcdbd778b5b7d1ee54a73d25c0a5fa6
+    Hash: 44fcf5fe38d65f5e45916ab125054791
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f91f23ff0a5dc5d1238331e2e49d3a89
+    Hash: b99b9b9ade2ceeaa1697420dd1728416
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,9 +29,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/SourceRes/Models/Role/gui_wu_shi_001_ty/gui_wu_shi_001_ty.mat
+- Assets/SourceRes/Models/Role/gui_wu_shi_001_ty/Materials/gui_wu_shi_001_ty.mat
 - Assets/SourceRes/Models/Role/gui_wu_shi_001_ty/gui_wu_shi_001_ty.FBX
 - Assets/SourceRes/Models/Role/gui_wu_shi_001_ty/gui_wu_shi_001_ty.tga
-- Assets/SourceRes/Models/Role/gui_wu_shi_001_ty/Materials/gui_wu_shi_001_ty.mat
-- Assets/SourceRes/Models/Role/gui_wu_shi_001_ty/gui_wu_shi_001_ty.mat
 Dependencies: []

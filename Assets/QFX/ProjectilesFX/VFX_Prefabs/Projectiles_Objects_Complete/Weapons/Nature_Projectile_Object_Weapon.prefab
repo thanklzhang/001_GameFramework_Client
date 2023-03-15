@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6285278271832601217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6285278271832601216}
+  - component: {fileID: 6285278271832601231}
+  m_Layer: 0
+  m_Name: Nature_Projectile_Object_Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6285278271832601216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285278271832601217}
+  m_LocalRotation: {x: 0, y: 0.3420201, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 40, z: 0}
+--- !u!114 &6285278271832601231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285278271832601217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a003eba7d11a4dc499535c91f474c76e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireRate: 0.3
+  Speed: 15
+  ImpactOffset: 0.25
+  FlashFX: {fileID: 2468108838132018201, guid: 9e81ad6fe8d55d2429c1868973c097e0, type: 3}
+  ProjectileFX: {fileID: 4112451186805225156, guid: e6d6baf2484b31a42b2c7fb52b2c2c77,
+    type: 3}
+  ImpactFX: {fileID: 747201479658055540, guid: df70ec998f6ac3c498c97bd8cc7975f6, type: 3}
+  DestroyDelay: 2
+  FlashFXDestroyDelay: 1
+  ImpactFXDestroyDelay: 1.5

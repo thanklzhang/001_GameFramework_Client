@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2732906550
+CRC: 1958043278
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 666117a20de10f308cdcdd7a9aae6996
+    Hash: 56d5a8e3c128155fe7842e14e6f15142
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 78ef2eff7ff8a03535c4f303d4f9145a
+    Hash: 9a7ac388e7deaf87ecf9b5ae862a5b06
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -18,9 +18,9 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -29,6 +29,13 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
 - Assets/BuildRes/Prefabs/UI/TipsUI.prefab
 Dependencies: []

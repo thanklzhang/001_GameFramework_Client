@@ -34,7 +34,7 @@ public class FileOperate
 
     public static void SaveToFile(string path, string str)
     {
-        FileStream fs = new FileStream(path, FileMode.Truncate, FileAccess.Write);
+        FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
         using (StreamWriter sw = new StreamWriter(fs))
         {
             sw.Write(str);

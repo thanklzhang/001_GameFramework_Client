@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4025905401
+CRC: 103600580
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 68dc7e49d6e7f95c82c4d05c1c625bf8
+    Hash: e10c556e6649a03e0089109679d41e4a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b5071d9f6a28e394e39317a17f9379da
+    Hash: 8907662ca760ac63b4e947d703c66dc0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -15,6 +15,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/UI/CUI.prefab
 Dependencies: []

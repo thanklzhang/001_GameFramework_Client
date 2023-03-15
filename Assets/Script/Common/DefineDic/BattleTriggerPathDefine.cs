@@ -52,6 +52,17 @@ namespace Table
 				
 			},
 			
+			{"BattleTrigger/TestTrigger",new List<string>()
+				{
+					
+					"BattleTrigger/TestTrigger/test_trigger_gen_boss.json",
+					
+					"BattleTrigger/TestTrigger/test_trigger_gen_monster.json",
+					
+				}		
+				
+			},
+			
 		
 		};
        

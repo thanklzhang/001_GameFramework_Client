@@ -389,6 +389,10 @@ namespace Battle_Client
             var cross = Vector3.Cross(this.gameObject.transform.forward, dirTarget);
             if (an <= 5f)
             {
+                if (dirTarget == Vector3.zero)
+                {
+                    dirTarget = new Vector3(0,0,1);
+                }
                 this.gameObject.transform.forward = dirTarget;
             }
             else

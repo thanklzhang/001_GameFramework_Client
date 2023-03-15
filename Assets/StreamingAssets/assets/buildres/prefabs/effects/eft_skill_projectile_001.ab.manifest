@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 225536282
+CRC: 1805519929
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5c68529475e4f7f9271a1489a52f63dd
+    Hash: f5761c39c8f48db1d286c625669b3dda
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c26b4a35994fd2d7b091e216a649b719
+    Hash: 80e2ce609b185efb75997dda9400e991
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -21,6 +21,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 199
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/Effects/eft_skill_projectile_001.prefab
 Dependencies: []

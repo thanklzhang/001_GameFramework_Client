@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4836760032189899064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4836760032189899065}
+  - component: {fileID: 4836760032189899066}
+  m_Layer: 0
+  m_Name: Priest_Projectile_Object_Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4836760032189899065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836760032189899064}
+  m_LocalRotation: {x: 0, y: 0.3420201, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 40, z: 0}
+--- !u!114 &4836760032189899066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836760032189899064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a003eba7d11a4dc499535c91f474c76e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireRate: 0.3
+  Speed: 15
+  ImpactOffset: 0.25
+  FlashFX: {fileID: 8403556334542210866, guid: 22f08cce9ba61744b85ab52edaeca1ec, type: 3}
+  ProjectileFX: {fileID: 4182185402502727728, guid: a22dc3191b3bd3946990aa4d89c7abf5,
+    type: 3}
+  ImpactFX: {fileID: 4532311846942503290, guid: 1d0a2427293a22149a313ed7c34939e0,
+    type: 3}
+  DestroyDelay: 2
+  FlashFXDestroyDelay: 1
+  ImpactFXDestroyDelay: 1.5

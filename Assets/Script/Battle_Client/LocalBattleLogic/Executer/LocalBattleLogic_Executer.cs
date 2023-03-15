@@ -21,14 +21,14 @@ namespace Battle_Client
 
         bool isPureLocal;
         //创建本地战斗
-        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData, bool isPureLocal)
+        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData, MapInitArg mapInitData, bool isPureLocal)
         {
             this.isPureLocal = isPureLocal;
 
             Logx.Log("local execute : CreateLocalBattleLogic");
 
             //创建战斗逻辑参数
-            var logicArgs = GetBattleLogicArgs(applyArg, sourceData);
+            var logicArgs = GetBattleLogicArgs(applyArg, sourceData, mapInitData);
 
             battle = new Battle.Battle();
             int battleGuid = 0;
@@ -179,9 +179,9 @@ namespace Battle_Client
         }
 
         //根据战斗服务端发来的战斗参数来开始运行战斗逻辑  在本地跑战斗逻辑 服务端结算
-        public Battle.BattleCreateArg GetBattleLogicArgs(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData)
+        public Battle.BattleCreateArg GetBattleLogicArgs(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData, MapInitArg mapInitData)
         {
-            var battleArg = ApplyBattleUtil.ToBattleArg(applyArg, sourceData);
+            var battleArg = ApplyBattleUtil.ToBattleArg(applyArg, sourceData, mapInitData);
             return battleArg;
 
         }

@@ -55,6 +55,8 @@ namespace Table
         
 		battle_scene_001 = 15010001,
         
+		scene_wuxia_002 = 15010002,
+        
 		shangguanling_battle_001 = 15011001,
         
 		shangguanling_battle_002 = 15011002,
@@ -63,7 +65,11 @@ namespace Table
         
 		shangguanling_battle_004 = 15011004,
         
+		tangyi_battle_003 = 15011021,
+        
 		monster1_battle = 15012001,
+        
+		daoba_battle_030 = 15013001,
         
 	
 	}  

@@ -205,7 +205,10 @@ namespace BattleTrigger.Editor
             if (GUILayout.Button("新建触发器"))
             {
                 var scrPath = Const.buildPath + "/" + "FileTemplate/BattleTriggerTemp/battle_trigger_temp.json";
-                var desName = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger";
+                //var desName = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger";
+                //var desName = Application.dataPath.Replace("/001_GameFramework_Client/Assets","");
+                var desName = Const.buildPath + @"\BattleTrigger\new_trigger";
+                Debug.Log("desName : " + desName);
                 //var desPath = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger.json";
                 var currDesName = desName;
                 for (int i = 0; i < 10000; i++)
@@ -416,6 +419,8 @@ namespace BattleTrigger.Editor
             var file = fileList[selectTriggerFileIndex];
             var path = Path.Combine(this.triggerConfigFolderPath, file);
             JsonTool.SaveJson(path, resultJson);
+
+            AssetDatabase.Refresh();
 
             EditorUtility.DisplayDialog("提示", "保存成功", "确定");
         }

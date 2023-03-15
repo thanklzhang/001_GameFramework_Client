@@ -367,18 +367,12 @@ public class UpdateResourceModule
                 error.errInfo = "download_file " + serResInfo.path + " 请求失败 : 原因 : " + request.error;
                 yield break;
             }
-            //yield return new WaitForSeconds(0.3f);
             var hasDownloadByets = request.downloadedBytes;
-
             var speedByBytes = hasDownloadByets - preDownloadBytes;
-            Debug.Log("download bytes : hasDownloadByets " + hasDownloadByets + " " );
-            Debug.Log("download bytes : speedByBytes " + speedByBytes + " ");
-
+            //Debug.Log("download bytes : hasDownloadByets " + hasDownloadByets + " " );
+            //Debug.Log("download bytes : speedByBytes " + speedByBytes + " ");
             this.event_updateDownloadBytes(speedByBytes);
-
             preDownloadBytes = hasDownloadByets;
-
-           
         }
 
         var bytes = request.downloadHandler.data;

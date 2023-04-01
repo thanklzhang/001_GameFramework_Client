@@ -10,7 +10,7 @@ using System.Linq;
 //过后抽象出来
 public class Logx
 {
-    public static bool enable = true;
+    public static bool enable = false;
     public static bool isShowFrame = true;
     public enum LogType
     {
@@ -46,17 +46,25 @@ public class Logx
         {
             Debug.Log(obj);
         }
-        
+
 
     }
 
     public static void LogWarning(object obj)
     {
+        if (!enable)
+        {
+            return;
+        }
         Debug.LogWarning(obj);
     }
 
     public static void LogError(object obj)
     {
+        if (!enable)
+        {
+            return;
+        }
         Debug.LogError(obj);
     }
 

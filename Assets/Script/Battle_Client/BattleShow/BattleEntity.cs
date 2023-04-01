@@ -120,6 +120,12 @@ namespace Battle_Client
             //this.StartLoadModel();
         }
 
+        string modelRootName = "Model";
+
+        internal Transform FindModelNode(string nodeName)
+        {
+            return this.model.transform.Find(modelRootName + "/" + nodeName);
+        }
 
         internal void SetToward(Vector3 dir)
         {
@@ -156,7 +162,7 @@ namespace Battle_Client
             collider = gameObject.GetComponentInChildren<Collider>();
             animation = gameObject.GetComponentInChildren<Animation>();
         }
-       
+
         internal void SetPlayerIndex(int playerIndex)
         {
             this.playerIndex = playerIndex;
@@ -338,8 +344,10 @@ namespace Battle_Client
                 }
 
                 Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
+
+                  EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this,0);
             }
-            EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
+          
         }
 
 
@@ -371,48 +379,38 @@ namespace Battle_Client
                 {
                     this.CurrHealth = value;
                 }
-
-
                 Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
+
+                EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, item.fromEntityGuid);
+
             }
-            EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this);
+          
 
         }
 
         float rotateSpeed = 540;
+        int lastDir = 1;
         public void Update(float timeDelta)
         {
             //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward.normalized, dirTarget.normalized, timeDelta * 15);
 
             //控制朝向
-            var an = Vector3.Angle(this.gameObject.transform.forward, dirTarget);
-            var cross = Vector3.Cross(this.gameObject.transform.forward, dirTarget);
-            if (an <= 5f)
-            {
-                if (dirTarget == Vector3.zero)
-                {
-                    dirTarget = new Vector3(0,0,1);
-                }
-                this.gameObject.transform.forward = dirTarget;
-            }
-            else
-            {
-                int dir = 0;
-                if (cross.y > 0)
-                {
-                    dir = 1;
-                }
-                else
-                {
-                    dir = -1;
-                }
-                this.gameObject.transform.Rotate(new Vector3(0, dir * rotateSpeed * timeDelta, 0));
-            }
 
-
-
-
+            //直接转向
             //this.gameObject.transform.forward = dirTarget;
+
+            //缓慢转向
+
+            if (dirTarget == Vector3.zero)
+            {
+                dirTarget = new Vector3(0, 0, 1);
+            }
+
+            dirTarget = new Vector3(dirTarget.x, 0, dirTarget.z);
+
+            this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, 30 * timeDelta);
+
+          
             //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
             if (state == BattleEntityState.Move)
             {
@@ -454,6 +452,10 @@ namespace Battle_Client
                     moveDelta = dir * speed * timeDelta;
                     //Logx.Log("moveTest : battleClient : moveDis : " + moveDelta.x + " " + moveDelta.z);
                     this.gameObject.transform.position = currPos + moveDelta;
+
+                    var prePos = this.gameObject.transform.position;
+                    this.gameObject.transform.position = new Vector3(prePos.x, 0, prePos.z);
+
                     //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
                 }
 

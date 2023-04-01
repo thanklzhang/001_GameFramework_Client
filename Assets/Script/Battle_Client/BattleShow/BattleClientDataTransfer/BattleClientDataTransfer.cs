@@ -78,6 +78,10 @@ namespace Battle_Client
     {
         public EntityCurrValueType type;
         public float value;
+
+        //来源实体 如伤害来源
+        public int fromEntityGuid;
+
     }
 
 

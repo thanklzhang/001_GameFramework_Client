@@ -35,6 +35,11 @@ namespace Battle_Client
         float moveSpeed;
         private int targetGuid;
 
+
+        int followEntityGuid;
+        Transform followEntityNode;
+
+
         ////技能信息
         //List<BattleSkillInfo> skills;
 
@@ -43,7 +48,7 @@ namespace Battle_Client
         float totalAutoDestroyTime;
         bool isLoop;
 
-       
+
 
 
 
@@ -80,19 +85,24 @@ namespace Battle_Client
             });
         }
 
-        int followEntityGuid;
 
-        
+
         internal void SetIsAutoDestroy(bool isAutoDestroy)
         {
             this.isAutoDestroy = isAutoDestroy;
         }
 
         //设置该特效为一直跟随实体
-        internal void SetFollowEntityGuid(int followEntityGuid)
+        internal void SetFollowEntityGuid(int followEntityGuid, string nodeName)
         {
             //StartMove(Vector3.zero, followEntityGuid, 9999999.0f);
+
             this.followEntityGuid = followEntityGuid;
+
+            var entity = BattleEntityManager.Instance.FindEntity(followEntityGuid);
+
+            followEntityNode = entity.FindModelNode(nodeName);
+            this.SetPosition(followEntityNode.position);
         }
 
         public void OnLoadModelFinish(GameObject obj)
@@ -172,15 +182,36 @@ namespace Battle_Client
 
                 this.gameObject.transform.position = currPos + dir * speed * timeDelta;
 
+                if (this.followEntityGuid <= 0)
+                {
+                    this.gameObject.transform.forward = dir;
+                }
             }
 
             if (this.followEntityGuid > 0)
             {
+                //完全跟随目标
                 var followEntity = BattleEntityManager.Instance.FindEntity(this.followEntityGuid);
                 if (followEntity != null)
                 {
-                    this.gameObject.transform.position = followEntity.gameObject.transform.position;
+                    var followPos = new Vector3();
+                    if (followEntityNode != null)
+                    {
+                        //跟随某一个挂点
+                        followPos = followEntityNode.position;
+                    }
+                    else
+                    {
+                        followPos = followEntity.gameObject.transform.position;
+                    }
+
+                    this.gameObject.transform.position = followPos + Vector3.up * 0.03f;
+
                 }
+            }
+            else
+            {
+
             }
 
             if (isFinishLoad)

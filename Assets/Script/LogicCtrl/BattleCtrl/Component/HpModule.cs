@@ -37,12 +37,12 @@ public class HpModule
 
     }
 
-    public void RefreshEntityData(BattleEntity entity)
+    public void RefreshEntityData(BattleEntity entity, int fromEntityGuid = 0)
     {
-        this.RefreshEntityHp(entity);
+        this.RefreshEntityHp(entity, fromEntityGuid);
     }
 
-    public void RefreshEntityHp(BattleEntity entity)
+    public void RefreshEntityHp(BattleEntity entity, int fromEntityGuid)
     {
         HpData hpData = null;
         if (hpDic.ContainsKey(entity.guid))
@@ -85,7 +85,9 @@ public class HpModule
             nowCurrHp = entity.CurrHealth,
             maxHp = entity.MaxHealth,
             entityObj = entity.gameObject,
-            relationType = relationType
+            relationType = relationType,
+            valueFromEntityGuid = fromEntityGuid
+
         };
 
         battleUI?.RefreshHpShow(args);

@@ -45,13 +45,39 @@ namespace Table
         
 		eft_select_entity_01 = 15008001,
         
-		eft_normal_attack_projectile_001 = 15008002,
+		eft_buff_fire_follow = 15008002,
         
 		eft_skill_projectile_001 = 15008003,
         
 		eft_skill_cal_001 = 15008004,
         
 		eft_skill_cal_002 = 15008005,
+        
+		eft_hit_001 = 15008006,
+        
+		eft_arrow_001 = 15008007,
+        
+		eft_ring_dart_001 = 15008008,
+        
+		eft_move_trail = 15008009,
+        
+		eft_buff_lose_health_halo = 15008010,
+        
+		eft_health_impact = 15008011,
+        
+		eft_buff_gray_halo = 15008012,
+        
+		eft_add_health = 15008013,
+        
+		eft_stun_range = 15008014,
+        
+		eft_stun_circle = 15008015,
+        
+		eft_knife_light = 15008016,
+        
+		eft_skill_director_001 = 15008101,
+        
+		eft_skill_director_002 = 15008102,
         
 		battle_scene_001 = 15010001,
         

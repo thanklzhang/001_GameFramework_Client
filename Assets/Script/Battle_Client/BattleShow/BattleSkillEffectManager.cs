@@ -1,4 +1,5 @@
-﻿using NetProto;
+﻿using Battle;
+using NetProto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,9 @@ namespace Battle_Client
         }
 
         //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-        internal void CreateSkillEffect(int guid, int resId, Vector3 pos, int followEntityGuid, bool isAutoDestroy)
+        internal void CreateSkillEffect(CreateEffectInfo createEffectInfo)
         {
-            var skillEffect = CreateSkillEffectInfo(guid, resId, pos, followEntityGuid, isAutoDestroy);
+            var skillEffect = CreateSkillEffectInfo(createEffectInfo);
             skillEffect.StartSelfLoadModel();
         }
 
@@ -41,10 +42,18 @@ namespace Battle_Client
         //}
 
         //只创建技能信息 , 是创建一个技能实体的一个步骤
-        internal BattleSkillEffect CreateSkillEffectInfo(int guid, int resId, Vector3 pos, int followEntityGuid, bool isAutoDestroy)
+        internal BattleSkillEffect CreateSkillEffectInfo(CreateEffectInfo createEffectInfo)
         {
             //var guid = serverEntity.Guid;
             //var configId = serverEntity.ConfigId;
+
+            var guid = createEffectInfo.guid;
+            var resId = createEffectInfo.resId;
+            var pos = new UnityEngine.Vector3(createEffectInfo.createPos.x, createEffectInfo.createPos.y,
+                createEffectInfo.createPos.z);
+            var followEntityGuid = createEffectInfo.followEntityGuid;
+            var isAutoDestroy = createEffectInfo.isAutoDestroy;
+
 
             if (skillEffectDic.ContainsKey(guid))
             {
@@ -54,8 +63,31 @@ namespace Battle_Client
 
             BattleSkillEffect skillEffect = new BattleSkillEffect();
             skillEffect.Init(guid, resId);
-            skillEffect.SetPosition(pos);
-            skillEffect.SetFollowEntityGuid(followEntityGuid);
+            if (createEffectInfo.effectPosType == EffectPosType.Hit_Pos)
+            {
+                skillEffect.SetPosition(pos);
+            }
+            else if (createEffectInfo.effectPosType == EffectPosType.Custom_Pos)
+            {
+                skillEffect.SetPosition(pos);
+            }
+
+            if (followEntityGuid > 0)
+            {
+                if (createEffectInfo.effectPosType == EffectPosType.Hit_Pos)
+                {
+                    skillEffect.SetFollowEntityGuid(followEntityGuid, "hit_pos");
+                }
+                else if (createEffectInfo.effectPosType == EffectPosType.Custom_Pos)
+                {
+                    skillEffect.SetFollowEntityGuid(followEntityGuid,"");
+                }
+            }
+            else
+            {
+                skillEffect.SetPosition(pos);
+            }
+
             //skillEffect.SetLastTime(lastTime);
             skillEffect.SetIsAutoDestroy(isAutoDestroy);
 
@@ -168,7 +200,7 @@ namespace Battle_Client
         {
             if (skillEffectDic.ContainsKey(guid))
             {
-                Logx.Log("WillDestorySkillEffect : " + guid);
+                //Logx.Log("WillDestorySkillEffect : " + guid);
                 BattleSkillEffect skillEffect = skillEffectDic[guid];
                 skillEffect.SetWillDestoryState();
             }

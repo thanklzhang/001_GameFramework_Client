@@ -61,11 +61,12 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_CreateEntities(entityList);
         }
 
-        public void NotifyAll_CreateSkillEffect(int guid, int resId, Vector3 position, int followEntityGuid, bool isAutoDestroy)
+        public void NotifyAll_CreateSkillEffect(CreateEffectInfo createInfo)
         {
-            var pos = new UnityEngine.Vector3(position.x, position.y, position.z);
+
+            var pos = new UnityEngine.Vector3(createInfo.createPos.x, createInfo.createPos.y, createInfo.createPos.z);
             //var lastTimeInt = (int)(lastTime * 1000);
-            BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(guid, resId, pos, followEntityGuid, isAutoDestroy);
+            BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(createInfo);
         }
 
         public void NotifyAll_EntityAddBuff(int guid, BuffEffect buff)
@@ -169,13 +170,14 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_SyncEntityAttr(guid, attrs);
         }
 
-        public void NotifyAll_SyncEntityCurrHealth(int guid, int hp)
+        public void NotifyAll_SyncEntityCurrHealth(int guid, int hp, int fromEntityGuid)
         {
             List<BattleClientMsg_BattleValue> values = new List<BattleClientMsg_BattleValue>();
             BattleClientMsg_BattleValue v = new BattleClientMsg_BattleValue()
             {
                 type = EntityCurrValueType.CurrHealth,
-                value = hp
+                value = hp,
+                fromEntityGuid = fromEntityGuid
             };
             values.Add(v);
             BattleManager.Instance.MsgReceiver.On_SyncEntityValue(guid, values);

@@ -409,7 +409,18 @@ public class BattleNetHandler : NetHandler
         var position = skillEffect.Position;
         var pos = BattleConvert.ConverToVector3(position);// new UnityEngine.Vector3(position.X, position.Y, position.Z);
         //var lastTimeInt = (int)(skillEffect.LastTime * 1000);
-        BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(skillEffect.Guid, skillEffect.ResId, pos, skillEffect.FollowEntityGuid, skillEffect.IsAutoDestroy);
+        Battle.CreateEffectInfo createInfo = new Battle.CreateEffectInfo();
+        createInfo.guid = skillEffect.Guid;
+        createInfo.resId = skillEffect.ResId;
+        createInfo.createPos = new Battle.Vector3(position.X, position.Y, position.Z);
+        createInfo.followEntityGuid = skillEffect.FollowEntityGuid;
+        createInfo.isAutoDestroy = skillEffect.IsAutoDestroy;
+        //createInfo.effectPosType = skillEffect.effectPosType;
+
+
+        //BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(skillEffect.Guid, skillEffect.ResId, pos, skillEffect.FollowEntityGuid, skillEffect.IsAutoDestroy);
+        BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(createInfo);
+
 
         //BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(skillEffect);
     }

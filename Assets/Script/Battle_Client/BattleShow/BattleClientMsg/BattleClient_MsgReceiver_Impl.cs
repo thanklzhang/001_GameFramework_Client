@@ -40,10 +40,10 @@ namespace Battle_Client
 
         }
 
-        public void On_CreateSkillEffect(int skillGuid, int resId, UnityEngine.Vector3 pos, int followEntityGuid, bool isAutoDestroy)
+        public void On_CreateSkillEffect(CreateEffectInfo createEffectInfo)
         {
             //var lastTime = lastTimeInt / 1000.0f;
-            BattleSkillEffectManager.Instance.CreateSkillEffect(skillGuid, resId, pos, followEntityGuid, isAutoDestroy);
+            BattleSkillEffectManager.Instance.CreateSkillEffect(createEffectInfo);
         }
 
         public void On_DestroySkillEffect(int effectGuid)

@@ -43,7 +43,7 @@ namespace Battle_Client
         public Dictionary<int, ClientPlayer> players;
         ClientPlayer localPlayer;
         //本地玩家控制的英雄
-        BattleEntity localCtrlEntity;
+        BattleEntity_Client localCtrlEntity;
 
         public ClientPlayer GetLocalPlayer()
         {
@@ -143,6 +143,19 @@ namespace Battle_Client
         //    //进入战斗状态
         //    CtrlManager.Instance.Enter<BattleCtrl>();
         //}
+
+        public int GetTeamByPlayerIndex(int playerIndex)
+        {
+            foreach (var item in players)
+            {
+                var player = item.Value;
+                if (player.playerIndex == playerIndex)
+                {
+                    return player.team;
+                }
+            }
+            return -1;
+        }
 
         /// <summary>
         /// 创建战斗

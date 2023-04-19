@@ -9,12 +9,12 @@ using UnityEngine.UI;
 
 public class LoadBattleViewEntityRequest : LoadObjectRequest
 {
-    public Action<BattleEntity, GameObject> selfFinishCallback;
+    public Action<BattleEntity_Client, GameObject> selfFinishCallback;
     bool isFinish;
 
-    BattleEntity battleEntity;
+    BattleEntity_Client battleEntity;
 
-    public LoadBattleViewEntityRequest(BattleEntity battleEntity)
+    public LoadBattleViewEntityRequest(BattleEntity_Client battleEntity)
     {
         this.battleEntity = battleEntity;
     }
@@ -31,7 +31,7 @@ public class LoadBattleViewEntityRequest : LoadObjectRequest
         });
     }
 
-    public void OnFinishLoadEntityObj(BattleEntity viewEntity, GameObject obj)
+    public void OnFinishLoadEntityObj(BattleEntity_Client viewEntity, GameObject obj)
     {
         Logx.Log("LoadBattleViewEntityRequest : OnFinishLoadEntityObj : guid : " + viewEntity.guid);
         isFinish = true;

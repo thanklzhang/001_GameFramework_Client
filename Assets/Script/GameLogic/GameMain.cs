@@ -20,6 +20,8 @@ public class GameMain : MonoBehaviour
     public GameObject tempModelAsset;
 
     bool isLoadFinish;
+    // public Texture2D selectCursor;
+
 
     private void Awake()
     {
@@ -101,6 +103,8 @@ public class GameMain : MonoBehaviour
         //luaEnv.DoString("require 'main.lua'");
         //
 
+        OperateViewManager.Instance.Init();
+        OperateViewManager.Instance.StartLoad();
 
         Logx.Log("!!!finish init game");
 
@@ -131,7 +135,7 @@ public class GameMain : MonoBehaviour
         //TODO: 纯本地战斗 里面的英雄是配置的 结算也是本地的
         //int battleConfigId = 5900001;
         int battleConfigId = 5900010;
-       
+
         BattleManager.Instance.CreatePureLocalBattle(battleConfigId);
     }
 

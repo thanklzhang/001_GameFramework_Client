@@ -109,7 +109,7 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_EntitySyncDir(guid, pos);
         }
 
-        public void NotifyAll_OnEntityStartSkillEffect(int guid, int skillConfig)
+        public void NotifyAll_OnEntityReleaseSkill(int guid, int skillConfig)
         {
             BattleManager.Instance.MsgReceiver.On_EntityUseSkill(guid, skillConfig);
         }
@@ -157,6 +157,10 @@ namespace Battle_Client
                     attr.value = option.value;
                 }
                 else if (option.attrType == Battle.EntityAttrType.AttackRange)
+                {
+                    attr.value = option.value;
+                }
+                else if (option.attrType == Battle.EntityAttrType.AttackSpeed)
                 {
                     attr.value = option.value;
                 }

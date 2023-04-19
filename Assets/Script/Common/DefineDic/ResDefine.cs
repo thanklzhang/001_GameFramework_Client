@@ -41,6 +41,16 @@ namespace Table
         
 		item0 = 15002001,
         
+		cursor_001 = 15003001,
+        
+		cursor_002 = 15003002,
+        
+		cursor_select_attack_001 = 15003003,
+        
+		cursor_normal_005 = 15003004,
+        
+		cursor_attack_001 = 15003005,
+        
 		click = 15006001,
         
 		eft_select_entity_01 = 15008001,

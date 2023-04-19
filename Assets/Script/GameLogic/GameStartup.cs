@@ -20,6 +20,9 @@ public class GameStartup : MonoBehaviour
     UpdateResourceModule updateResModule;
     UpdateResourceUI updateResourceUI;
 
+
+
+    //public Texture2D selectCursor;
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -112,6 +115,7 @@ public class GameStartup : MonoBehaviour
             }
         });
 
+        //gameMain.selectCursor = selectCursor;
     }
 
     private void OnDestroy()

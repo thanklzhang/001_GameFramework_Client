@@ -53,9 +53,10 @@ namespace Battle_Client
         public float defence;
         public float maxHealth;
         public float moveSpeed;
+        public float attackSpeed;
     }
 
-    public class BattleEntity
+    public class BattleEntity_Client
     {
         public int guid;
         public int configId;
@@ -163,6 +164,14 @@ namespace Battle_Client
             animation = gameObject.GetComponentInChildren<Animation>();
         }
 
+        public int Team
+        {
+            get
+            {
+                return BattleManager.Instance.GetTeamByPlayerIndex(this.playerIndex);
+            }
+        }
+
         internal void SetPlayerIndex(int playerIndex)
         {
             this.playerIndex = playerIndex;
@@ -215,6 +224,7 @@ namespace Battle_Client
 
         public List<Vector3> movePosList;
         int movePosIndex;
+        float normalAnimationMoveSpeed = 4.0f;
         internal void StartMoveByPath(List<Vector3> pathList, float moveSpeed)
         {
             if (pathList.Count > 0)
@@ -224,7 +234,9 @@ namespace Battle_Client
                 this.movePosList = pathList;
                 this.attr.moveSpeed = moveSpeed;
 
-                PlayAnimation("walk");
+                var aniScale = this.attr.moveSpeed / normalAnimationMoveSpeed;
+
+                PlayAnimation("walk", aniScale);
 
                 movePosIndex = 0;
                 this.moveTargetPos = pathList[0];
@@ -281,9 +293,30 @@ namespace Battle_Client
 
         internal void ReleaseSkill(int skillConfigId)
         {
+            var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillConfigId);
+            var normalAttackSkill = FindNormalAttackSkill();
+            if (normalAttackSkill != null && normalAttackSkill.configId == skillConfig.Id)
+            {
+                //普通攻击
+                var attackSpeed = this.attr.attackSpeed;
+                var aniScale = attackSpeed;
+                PlayAnimation("attack", aniScale);
+            }
+            else
+            {
+                PlayAnimation("attack");
+            }
             //play animation
-            PlayAnimation("attack");
             Logx.Log(this.guid + " release skill : " + skillConfigId);
+        }
+
+        public BattleSkillInfo FindNormalAttackSkill()
+        {
+            if (this.skills.Count > 0)
+            {
+                return this.skills[0];
+            }
+            return null;
         }
 
         internal int GetSkillIdByIndex(int index)
@@ -341,13 +374,35 @@ namespace Battle_Client
                 {
                     // /1000
                     this.attr.moveSpeed = item.value;
+
+                    //ani
+                    var aniScale = this.attr.moveSpeed / normalAnimationMoveSpeed;
+                    SetAnimationSpeed("walk", aniScale);
+
+                }
+                else if (type == EntityAttrType.AttackSpeed)
+                {
+                    // /1000
+                    this.attr.attackSpeed = item.value;
                 }
 
                 Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
 
-                  EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this,0);
+                EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, 0);
             }
-          
+
+        }
+
+        public void SetAnimationSpeed(string aniName, float speed)
+        {
+            if (isFinishLoad && animation != null)
+            {
+                var state = animation[aniName];
+                if (state != null)
+                {
+                    state.speed = speed;
+                }
+            }
         }
 
 
@@ -384,7 +439,7 @@ namespace Battle_Client
                 EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, item.fromEntityGuid);
 
             }
-          
+
 
         }
 
@@ -410,7 +465,7 @@ namespace Battle_Client
 
             this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, 30 * timeDelta);
 
-          
+
             //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
             if (state == BattleEntityState.Move)
             {
@@ -459,13 +514,20 @@ namespace Battle_Client
                     //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
                 }
 
+
+
             }
         }
-        public void PlayAnimation(string aniName)
+        public void PlayAnimation(string aniName, float speed = 1.0f)
         {
             if (isFinishLoad && animation != null)
             {
-                animation.CrossFade(aniName);
+                var state = animation[aniName];
+                if (state != null)
+                {
+                    state.speed = speed;
+                    animation.CrossFade(aniName, 0.1f);
+                }
             }
         }
 

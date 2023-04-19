@@ -8,14 +8,14 @@ using UnityEngine.UI;
 
 public class HpData
 {
-    public BattleEntity entity;
+    public BattleEntity_Client entity;
 
     internal void Init()
     {
 
     }
 
-    internal void Refresh(BattleEntity entity)
+    internal void Refresh(BattleEntity_Client entity)
     {
         this.entity = entity;
     }
@@ -37,12 +37,12 @@ public class HpModule
 
     }
 
-    public void RefreshEntityData(BattleEntity entity, int fromEntityGuid = 0)
+    public void RefreshEntityData(BattleEntity_Client entity, int fromEntityGuid = 0)
     {
         this.RefreshEntityHp(entity, fromEntityGuid);
     }
 
-    public void RefreshEntityHp(BattleEntity entity, int fromEntityGuid)
+    public void RefreshEntityHp(BattleEntity_Client entity, int fromEntityGuid)
     {
         HpData hpData = null;
         if (hpDic.ContainsKey(entity.guid))
@@ -93,7 +93,7 @@ public class HpModule
         battleUI?.RefreshHpShow(args);
     }
 
-    public void DestroyEntityHp(BattleEntity entity)
+    public void DestroyEntityHp(BattleEntity_Client entity)
     {
         if (hpDic.ContainsKey(entity.guid))
         {
@@ -107,7 +107,7 @@ public class HpModule
         }
     }
 
-    public HpData FindHpData(BattleEntity entity)
+    public HpData FindHpData(BattleEntity_Client entity)
     {
         HpData hpData = null;
         if (hpDic.ContainsKey(entity.guid))
@@ -126,7 +126,7 @@ public class HpModule
 
     }
 
-    internal void ChangeShowState(BattleEntity entity, bool isShow)
+    internal void ChangeShowState(BattleEntity_Client entity, bool isShow)
     {
 
     }

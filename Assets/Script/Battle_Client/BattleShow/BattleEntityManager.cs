@@ -20,11 +20,11 @@ namespace Battle_Client
 
     public class BattleEntityManager : Singleton<BattleEntityManager>
     {
-        Dictionary<int, BattleEntity> entityDic;
+        Dictionary<int, BattleEntity_Client> entityDic;
 
         public void Init()
         {
-            entityDic = new Dictionary<int, BattleEntity>();
+            entityDic = new Dictionary<int, BattleEntity_Client>();
             this.RegisterListener();
         }
 
@@ -40,7 +40,7 @@ namespace Battle_Client
         //    entity.StartSelfLoadModel();
         //    return entity;
         //}
-        internal BattleEntity CreateEntity(BattleClientMsg_Entity msg_entity)
+        internal BattleEntity_Client CreateEntity(BattleClientMsg_Entity msg_entity)
         {
             var entity = CreateViewEntityInfo(msg_entity);
             entity.StartSelfLoadModel();
@@ -94,7 +94,7 @@ namespace Battle_Client
         //    return entity;
         //}
 
-        internal BattleEntity CreateViewEntityInfo(BattleClientMsg_Entity msgEntity)
+        internal BattleEntity_Client CreateViewEntityInfo(BattleClientMsg_Entity msgEntity)
         {
             var guid = msgEntity.guid;
             var configId = msgEntity.configId;
@@ -105,9 +105,10 @@ namespace Battle_Client
                 return null;
             }
 
-            BattleEntity entity = new BattleEntity();
+            BattleEntity_Client entity = new BattleEntity_Client();
             entity.Init(guid, configId);
             entity.SetPlayerIndex(msgEntity.playerIndex);
+
             entity.SetPosition(msgEntity.position);
 
             //填充技能
@@ -142,7 +143,7 @@ namespace Battle_Client
             foreach (var item in this.entityDic)
             {
                 var entity = item.Value;
-                EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
+                EventDispatcher.Broadcast<BattleEntity_Client>(EventIDs.OnCreateEntity, entity);
             }
         }
 
@@ -151,7 +152,7 @@ namespace Battle_Client
         /// </summary>
         /// <param name="finishCallback"></param>
         /// <returns></returns>
-        public List<LoadObjectRequest> MakeCurrBattleAllEntityLoadRequests(Action<BattleEntity, GameObject> finishCallback)
+        public List<LoadObjectRequest> MakeCurrBattleAllEntityLoadRequests(Action<BattleEntity_Client, GameObject> finishCallback)
         {
             var battleEntityDic = this.entityDic;
             return this.MakeMoreBattleEntityLoadRequests(battleEntityDic, finishCallback);
@@ -159,8 +160,8 @@ namespace Battle_Client
         /// <summary>
         /// 返回多个战斗实体的加载请求
         /// </summary>
-        public List<LoadObjectRequest> MakeMoreBattleEntityLoadRequests(Dictionary<int, BattleEntity> battleEntityDic,
-            Action<BattleEntity, GameObject> finishCallback)
+        public List<LoadObjectRequest> MakeMoreBattleEntityLoadRequests(Dictionary<int, BattleEntity_Client> battleEntityDic,
+            Action<BattleEntity_Client, GameObject> finishCallback)
         {
             List<LoadObjectRequest> list = new List<LoadObjectRequest>();
             foreach (var item in battleEntityDic)
@@ -176,7 +177,7 @@ namespace Battle_Client
         /// <summary>
         /// 返回一个战斗实体的加载请求
         /// </summary>
-        public LoadObjectRequest MakeBattleEntityLoadRequest(BattleEntity battleEntity, Action<BattleEntity, GameObject> finishCallback)
+        public LoadObjectRequest MakeBattleEntityLoadRequest(BattleEntity_Client battleEntity, Action<BattleEntity_Client, GameObject> finishCallback)
         {
             var req = new LoadBattleViewEntityRequest(battleEntity)
             {
@@ -186,7 +187,7 @@ namespace Battle_Client
 
         }
 
-        public BattleEntity FindEntityByColliderInstanceId(int instanceID)
+        public BattleEntity_Client FindEntityByColliderInstanceId(int instanceID)
         {
             foreach (var item in entityDic)
             {
@@ -204,7 +205,48 @@ namespace Battle_Client
             return null;
         }
 
-        public BattleEntity FindEntityByInstanceId(int instanceID)
+        public BattleEntity_Client FindNearestEntity(BattleEntity_Client originEntity, float dis)
+        {
+            var excludeInsId = originEntity.gameObject.GetInstanceID();
+            var pos = originEntity.gameObject.transform.position;
+            float minDis = 9999999;
+            BattleEntity_Client battleEntity = null;
+
+            foreach (var item in entityDic)
+            {
+                var entity = item.Value;
+                if (entity.collider != null)
+                {
+                    var currGo = entity.collider.gameObject;
+
+                    var vector = currGo.transform.position - pos;
+                    vector = new Vector3(vector.x, 0, vector.z);
+                    var currDis = vector.sqrMagnitude;
+
+                    if (excludeInsId != entity.gameObject.GetInstanceID())
+                    {
+                        // TODO: 这里应该根据筛选目标来进行判断 先按照只选择敌对关系来判断
+                        if (entity.Team != originEntity.Team)
+                        {
+                            if (currDis <= dis * dis)
+                            {
+                                if (currDis <= minDis)
+                                {
+                                    minDis = currDis;
+                                    battleEntity = entity;
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+            return battleEntity;
+        }
+
+        public BattleEntity_Client FindEntityByInstanceId(int instanceID)
         {
             foreach (var item in entityDic)
             {
@@ -241,7 +283,7 @@ namespace Battle_Client
 
         //}
 
-        public BattleEntity FindEntity(int guid)
+        public BattleEntity_Client FindEntity(int guid)
         {
             if (entityDic.ContainsKey(guid))
             {
@@ -295,7 +337,7 @@ namespace Battle_Client
         {
             if (entityDic.ContainsKey(guid))
             {
-                BattleEntity entity = entityDic[guid];
+                BattleEntity_Client entity = entityDic[guid];
                 entity.Destroy();
                 entityDic.Remove(guid);
             }

@@ -35,7 +35,7 @@ namespace Battle_Client
             {
                 var msgEntity = entityList[i];
                 var entity = BattleEntityManager.Instance.CreateEntity(msgEntity);
-                EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
+                EventDispatcher.Broadcast<BattleEntity_Client>(EventIDs.OnCreateEntity, entity);
             }
 
         }

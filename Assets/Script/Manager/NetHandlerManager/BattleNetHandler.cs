@@ -467,6 +467,10 @@ public class BattleNetHandler : NetHandler
             {
                 attr.value = BattleConvert.GetValue(option.Value);
             }
+            else if (option.Type == (int)Battle.EntityAttrType.AttackSpeed)
+            {
+                attr.value = BattleConvert.GetValue(option.Value);
+            }
             else
             {
                 attr.value = (int)option.Value;

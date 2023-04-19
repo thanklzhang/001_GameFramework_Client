@@ -25,11 +25,11 @@ public class BattleCtrl : BaseCtrl
 
         //生命周期好像有点不对
         EventDispatcher.AddListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
-        EventDispatcher.AddListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
-        EventDispatcher.AddListener<BattleEntity, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
-        EventDispatcher.AddListener<BattleEntity>(EventIDs.OnEntityDestroy, OnEntityDestroy);
+        EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnCreateEntity, OnCreateEntity);
+        EventDispatcher.AddListener<BattleEntity_Client, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
+        EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, OnEntityDestroy);
         EventDispatcher.AddListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, OnOnBattleEnd);
-        EventDispatcher.AddListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
+        EventDispatcher.AddListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
 
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
@@ -120,7 +120,7 @@ public class BattleCtrl : BaseCtrl
         }
     }
 
-    public void OnEntityLoadFinish(BattleEntity viewEntity, GameObject obj)
+    public void OnEntityLoadFinish(BattleEntity_Client viewEntity, GameObject obj)
     {
         viewEntity.OnLoadModelFinish(obj);
     }
@@ -300,39 +300,108 @@ public class BattleCtrl : BaseCtrl
 
         if (isSelectSkillState)
         {
+            var index = willReleaserSkillIndex;
+            var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
+            var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+            var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
+            var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+            var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
+            var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
             if (isMouseLeftButtonDown)
             {
-                //确定选择技能目标
-
-                Vector3 resultPos;
-                if (TryToGetRayOnGroundPos(out resultPos))
+                if (releaseTargetType == SkillReleaseTargeType.Point)
                 {
+                    Vector3 resultPos;
+                    var isColliderGround = TryToGetRayOnGroundPos(out resultPos);
+                    //确定选择技能目标
+                    if (isColliderGround)
+                    {
+                        skillDirectModule.FinishSelect();
 
-                    int targetGuid = 0;
-                    Vector3 targetPos = Vector3.zero;
-                    var index = willReleaserSkillIndex;
-                    var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
+                        int targetGuid = 0;
+                        Vector3 targetPos = resultPos;
 
-                    var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+                        BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
 
-                    var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+                    }
+                    skillDirectModule.FinishSelect();
 
-                    var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
-                    var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
-                    var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
-
-
-                    targetPos = resultPos;
-                    //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
-                    BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
                 }
+                else if (releaseTargetType == SkillReleaseTargeType.Entity)
+                {
+                    //-----------------------
 
+                    GameObject gameObject = null;
+                    BattleEntity_Client battleEntity = null;
+                    if (TryToGetRayOnEntity(out gameObject))
+                    {
+
+                        //遍历寻找 效率低下 之后更改
+                        battleEntity = BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
+                    }
+                    else
+                    {
+                        //没有目标 那么就选择最近一段距离的某个单位
+                        float dis = 10.0f;
+                        battleEntity = BattleEntityManager.Instance.FindNearestEntity(localEntity, dis);
+                    }
+
+                    if (battleEntity != null)
+                    {
+                        Logx.Log("battle entity not null");
+                        var targetGuid = battleEntity.guid;
+
+                        var targetPos = Vector3.right;
+                        //先排除自己
+                        if (localEntity.collider.gameObject.GetInstanceID() != battleEntity.collider.gameObject.GetInstanceID())
+                        {
+                            //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+                            BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
+                        }
+                    }
+
+
+                    skillDirectModule.FinishSelect();
+                }
 
             }
             else if (isMouseRightButtonDown)
             {
                 //取消技能选择操作 
                 skillDirectModule.FinishSelect();
+            }
+            else
+            {
+                //技能目标选择中
+                Vector3 resultPos;
+                var isColliderGround = TryToGetRayOnGroundPos(out resultPos);
+                skillDirectModule.UpdateMousePosition(resultPos);
+
+                GameObject gameObject = null;
+                BattleEntity_Client battleEntity = null;
+                if (TryToGetRayOnEntity(out gameObject))
+                {
+                    var entityModelRootGo = gameObject.transform.parent.gameObject;
+                    //判断当前鼠标是否检测到是敌人
+                    var isEnemy = true;
+                    if (isEnemy)
+                    {
+                        OperateViewManager.Instance.cursorModule.SetCursor(CursorType.SelectAttack);
+                    }
+                    else
+                    {
+                        OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Select);
+                    }
+
+                    OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, true);
+                }
+                else
+                {
+                    OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Select);
+
+                    OperateViewManager.Instance.modelOutlineModule.CloseAllModelOutline();
+                }
+
             }
         }
         else
@@ -348,6 +417,36 @@ public class BattleCtrl : BaseCtrl
                 if (TryToGetRayOnGroundPos(out resultPos))
                 {
                     this.OnPlayerClickGround(resultPos);
+                }
+            }
+            else
+            {
+                GameObject gameObject = null;
+                BattleEntity_Client battleEntity = null;
+                if (TryToGetRayOnEntity(out gameObject))
+                {
+                    //遍历寻找 效率低下 之后更改
+                    battleEntity = BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
+
+                    var entityModelRootGo = gameObject.transform.parent.gameObject;
+                    //判断当前鼠标是否检测到是敌人
+                    var isEnemy = true;
+                    if (isEnemy)
+                    {
+                        OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Attack);
+                    }
+                    else
+                    {
+                        OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Normal);
+                    }
+
+                    OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, true);
+                }
+                else
+                {
+                    OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Normal);
+
+                    OperateViewManager.Instance.modelOutlineModule.CloseAllModelOutline();
                 }
             }
         }
@@ -442,26 +541,31 @@ public class BattleCtrl : BaseCtrl
         }
         else if (releaseTargetType == SkillReleaseTargeType.Entity)
         {
-            GameObject gameObject = null;
-            if (TryToGetRayOnEntity(out gameObject))
-            {
-                //遍历寻找 效率低下 之后更改
-                var battleEntity = BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
-                if (battleEntity != null)
-                {
-                    Logx.Log("battle entity not null");
-                    targetGuid = battleEntity.guid;
+
+            this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
 
 
-                    //先排除自己
-                    if (localEntity.collider.gameObject.GetInstanceID() != battleEntity.collider.gameObject.GetInstanceID())
-                    {
-                        //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
-                        BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
-                    }
+            //GameObject gameObject = null;
+            //if (TryToGetRayOnEntity(out gameObject))
+            //{
 
-                }
-            }
+            //    //遍历寻找 效率低下 之后更改
+            //    var battleEntity = BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
+            //    if (battleEntity != null)
+            //    {
+            //        Logx.Log("battle entity not null");
+            //        targetGuid = battleEntity.guid;
+
+
+            //        //先排除自己
+            //        if (localEntity.collider.gameObject.GetInstanceID() != battleEntity.collider.gameObject.GetInstanceID())
+            //        {
+            //            //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+            //            BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
+            //        }
+
+            //    }
+            //}
         }
         else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
         {
@@ -478,19 +582,19 @@ public class BattleCtrl : BaseCtrl
     }
 
     //当创建了 entity 的时候
-    public void OnCreateEntity(BattleEntity entity)
+    public void OnCreateEntity(BattleEntity_Client entity)
     {
         hpModule.RefreshEntityData(entity);
     }
 
 
     //当实体战斗数据改变了
-    public void OnChangeEntityBattleData(BattleEntity entity, int fromEntityGuid)
+    public void OnChangeEntityBattleData(BattleEntity_Client entity, int fromEntityGuid)
     {
         hpModule.RefreshEntityData(entity, fromEntityGuid);
     }
 
-    public void OnEntityDestroy(BattleEntity entity)
+    public void OnEntityDestroy(BattleEntity_Client entity)
     {
         hpModule.DestroyEntityHp(entity);
     }
@@ -519,7 +623,7 @@ public class BattleCtrl : BaseCtrl
     }
 
     //entity 改变显隐的时候
-    public void OnEntityChangeShowState(BattleEntity entity, bool isShow)
+    public void OnEntityChangeShowState(BattleEntity_Client entity, bool isShow)
     {
         //找到血条也要显隐
         ui.SetHpShowState(entity.guid, isShow);
@@ -550,10 +654,10 @@ public class BattleCtrl : BaseCtrl
         skillDirectModule.Release();
 
         EventDispatcher.RemoveListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
-        EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnCreateEntity, OnCreateEntity);
-        EventDispatcher.RemoveListener<BattleEntity, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
-        EventDispatcher.RemoveListener<BattleEntity>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
-        EventDispatcher.RemoveListener<BattleEntity, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
+        EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnCreateEntity, OnCreateEntity);
+        EventDispatcher.RemoveListener<BattleEntity_Client, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
+        EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
+        EventDispatcher.RemoveListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
         EventDispatcher.RemoveListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);

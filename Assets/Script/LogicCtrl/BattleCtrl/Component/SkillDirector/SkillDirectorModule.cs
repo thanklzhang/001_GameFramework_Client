@@ -7,68 +7,104 @@ using Table;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class SkillDirectorModule
 {
     BattleCtrl battleCtrl;
     bool selectState;
     private Table.Skill skillConfig;
 
-    public Dictionary<int, SkillDirector> directorDic;
-    SkillDirector currDirector;
+    public Dictionary<int, SkillDirectorGroup> directorGroupDic;
+    SkillDirectorGroup currDirectorGroup;
 
     public void Init(BattleCtrl ctrl)
     {
         this.battleCtrl = ctrl;
-        directorDic = new Dictionary<int, SkillDirector>();
+        directorGroupDic = new Dictionary<int, SkillDirectorGroup>();
     }
 
     public void StartSelect(int skillId, GameObject originGameObject)
     {
         selectState = true;
 
-        //生成指示器范围
-        if (directorDic.ContainsKey(skillId))
+        //生成投掷物指示器
+        if (directorGroupDic.ContainsKey(skillId))
         {
-            currDirector = directorDic[skillId];
+            currDirectorGroup = directorGroupDic[skillId];
         }
         else
         {
             this.skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
 
-            var skillDirector = new SkillDirector();
-            skillDirector.Init((SkillDirectorType)skillConfig.SkillDirectorType, skillConfig.SkillDirectorParam);
-            directorDic.Add(skillId, skillDirector);
-            currDirector = skillDirector;
+            var pDirector = GenNewDirector(SkillDirectorType.DirectorProjectile);
+            var rDirector = GenNewDirector(SkillDirectorType.DirectorReleaserTerminal);
+            var tDirector = GenNewDirector(SkillDirectorType.DirectorTargetTerminal);
+
+            SkillDirectorGroup group = new SkillDirectorGroup();
+            group.Init(pDirector, rDirector, tDirector);
+
+
+            directorGroupDic.Add(skillId, group);
+            currDirectorGroup = group;
         }
 
-        currDirector.Show(originGameObject);
+        currDirectorGroup.Show(originGameObject);
 
-        //生成释放者指示
+        OperateViewManager.Instance.SetCursor(CursorType.Select);
 
-        //生成目标指示
 
+    }
+
+    public BaseSkillDirector GenNewDirector(SkillDirectorType type)
+    {
+        BaseSkillDirector skillDirector = null;
+        if (type == SkillDirectorType.DirectorProjectile)
+        {
+            skillDirector = new SkillDirectorProjectile();
+            skillDirector.Init(skillConfig.SkillDirectorProjectileType, skillConfig.SkillDirectorProjectileParam);
+        }
+        else if (type == SkillDirectorType.DirectorReleaserTerminal)
+        {
+            skillDirector = new SkillDirectorTerminal();
+            skillDirector.Init(skillConfig.SkillReleaserDirectType, skillConfig.SkillReleaserDirectParam);
+        }
+        else if (type == SkillDirectorType.DirectorTargetTerminal)
+        {
+            skillDirector = new SkillDirectorTerminal();
+            skillDirector.Init(skillConfig.SkillTargetDirectType, skillConfig.SkillTargetDirectParam);
+
+        }
+
+        return skillDirector;
     }
 
     public void FinishSelect()
     {
         selectState = false;
 
-        currDirector.Hide();
+        currDirectorGroup.Hide();
+
+        OperateViewManager.Instance.SetCursor(CursorType.Normal);
 
     }
 
     public void Update(float deltaTime)
     {
-        foreach (var item in directorDic)
+        foreach (var item in directorGroupDic)
         {
-            var director = item.Value;
-            if (director.IsEnable())
-            {
-                director.Update(deltaTime);
-            }
+            var directorGroup = item.Value;
+            directorGroup.Update(deltaTime);
         }
     }
 
+    internal void UpdateMousePosition(Vector3 resultPos)
+    {
+        foreach (var item in directorGroupDic)
+        {
+            var directorGroup = item.Value;
+            directorGroup.UpdateMousePosition(resultPos);
+        }
+    }
 
     public bool GetSelectState()
     {
@@ -78,10 +114,11 @@ public class SkillDirectorModule
 
     public void Release()
     {
-        foreach (var item in directorDic)
+        foreach (var item in directorGroupDic)
         {
             item.Value.Release();
         }
     }
+
 
 }

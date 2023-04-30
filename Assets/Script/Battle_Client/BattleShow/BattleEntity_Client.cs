@@ -24,19 +24,18 @@ namespace Battle_Client
     {
         Null = 0,
 
-        //数值
         Attack = 1,
         Defence = 2,
         MaxHealth = 3,
         AttackSpeed = 4,
         MoveSpeed = 5,
-
-        //千分比
-        Attack_Permillage = 1001,
-        Defence_Permillage = 1002,
-        MaxHealth_Permillage = 1003,
-        AttackSpeed_Permillage = 1004,
-        MoveSpeed_Permillage = 1005,
+        AttackRange = 6,
+        CritRate = 7,
+        CritDamage = 8,
+        //最终伤害的比率(千分比)
+        OutputDamageRate = 9,
+        //受到伤害的比率(千分比)
+        InputDamageRate = 10,
 
     }
 
@@ -52,8 +51,41 @@ namespace Battle_Client
         public float attack;
         public float defence;
         public float maxHealth;
-        public float moveSpeed;
         public float attackSpeed;
+        public float attackRange;
+        public float moveSpeed;
+
+        public float GetValue(EntityAttrType type)
+        {
+            if (type == EntityAttrType.Attack)
+            {
+                return this.attack;
+            }
+            else if (type == EntityAttrType.Defence)
+            {
+                return this.defence;
+            }
+            else if (type == EntityAttrType.MaxHealth)
+            {
+                return this.maxHealth;
+            }
+            else if (type == EntityAttrType.AttackSpeed)
+            {
+                return this.attackSpeed;
+            }
+            else if (type == EntityAttrType.AttackRange)
+            {
+                return this.attackRange;
+            }
+            else if (type == EntityAttrType.MoveSpeed)
+            {
+                return this.moveSpeed;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 
     public class BattleEntity_Client
@@ -93,6 +125,10 @@ namespace Battle_Client
 
         }
         List<BattleSkillInfo> skills;
+        public List<BattleSkillInfo> GetSkills()
+        {
+            return skills;
+        }
         public BattleEntityAttr attr = new BattleEntityAttr();
 
         public Animation animation;
@@ -186,6 +222,22 @@ namespace Battle_Client
         {
             //this.position = pos;
             gameObject.transform.position = pos;
+        }
+
+        public BattleSkillInfo FindSkill(int skillConfigId)
+        {
+            var skill = this.skills.Find((s) =>
+            {
+                return s.configId == skillConfigId;
+            });
+
+            return skill;
+        }
+
+        internal void UpdateSkillInfo(int skillConfigId, float currCDTime, float maxCDTime)
+        {
+            var skill = this.FindSkill(skillConfigId);
+            skill?.UpdateInfo(currCDTime, maxCDTime);
         }
 
 
@@ -366,6 +418,10 @@ namespace Battle_Client
                 {
                     this.attr.attack = (int)item.value;
                 }
+                else if (type == EntityAttrType.Defence)
+                {
+                    this.attr.defence = (int)item.value;
+                }
                 else if (type == EntityAttrType.MaxHealth)
                 {
                     this.attr.maxHealth = (int)item.value;
@@ -384,6 +440,11 @@ namespace Battle_Client
                 {
                     // /1000
                     this.attr.attackSpeed = item.value;
+                }
+                else if (type == EntityAttrType.AttackRange)
+                {
+                    // /1000
+                    this.attr.attackRange = item.value;
                 }
 
                 Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
@@ -526,7 +587,13 @@ namespace Battle_Client
                 if (state != null)
                 {
                     state.speed = speed;
-                    animation.CrossFade(aniName, 0.1f);
+                    var fixSpeed = speed;
+                    if (0 == fixSpeed)
+                    {
+                        fixSpeed = 0.01f;
+                    }
+                    //Debug.Log("speed : " + fixSpeed);
+                    animation.CrossFade(aniName, 0.065f / fixSpeed);
                 }
             }
         }

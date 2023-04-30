@@ -14,6 +14,17 @@ namespace Battle_Client
         Destroy = 3
     }
 
+    public class BuffEffectInfo_Client
+    {
+        public int guid;
+        public int targetEntityGuid;
+        public float currCDTime;
+        public float maxCDTime;
+        public int stackCount;
+        public int iconResId;
+        internal bool isRemove;
+    }
+
     public class BattleSkillEffect
     {
         public int guid;
@@ -39,6 +50,10 @@ namespace Battle_Client
         int followEntityGuid;
         Transform followEntityNode;
 
+        public int GetFollowEntityGuid()
+        {
+            return this.followEntityGuid;
+        }
 
         ////技能信息
         //List<BattleSkillInfo> skills;
@@ -49,7 +64,7 @@ namespace Battle_Client
         bool isLoop;
 
 
-
+        BuffEffectInfo_Client buffInfo;
 
 
         public void Init(int guid, int resId)
@@ -64,10 +79,17 @@ namespace Battle_Client
 
             // get path
             //var heroConfig = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.configId);
+            if (this.resId > 0)
+            {
+                var resTable = Table.TableManager.Instance.GetById<Table.ResourceConfig>(this.resId);
+                //临时组路径 之后会打进 ab 包
+                path = "Assets/BuildRes/" + resTable.Path + "/" + resTable.Name + "." + resTable.Ext;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
 
-            var resTable = Table.TableManager.Instance.GetById<Table.ResourceConfig>(this.resId);
-            //临时组路径 之后会打进 ab 包
-            path = "Assets/BuildRes/" + resTable.Path + "/" + resTable.Name + "." + resTable.Ext;
 
             isFinishLoad = false;
 
@@ -79,10 +101,18 @@ namespace Battle_Client
         {
             Logx.Log("StartLoadModel");
             isFinishLoad = false;
-            ResourceManager.Instance.GetObject<GameObject>(path, (obj) =>
+            if (this.resId > 0)
             {
-                OnLoadModelFinish(obj);
-            });
+                ResourceManager.Instance.GetObject<GameObject>(path, (obj) =>
+                {
+                    OnLoadModelFinish(obj);
+                });
+            }
+            else
+            {
+                isFinishLoad = true;
+            }
+
         }
 
 
@@ -130,6 +160,22 @@ namespace Battle_Client
                 particle.Play();
             }
 
+        }
+
+        internal void SetBuffInfo(Battle.BuffEffectInfo buffInfo)
+        {
+            this.buffInfo = new BuffEffectInfo_Client()
+            {
+                guid = buffInfo.guid,
+                targetEntityGuid = buffInfo.targetEntityGuid,
+                currCDTime = buffInfo.currCDTime / 1000.0f,
+                maxCDTime = buffInfo.maxCDTime / 1000.0f,
+                stackCount = buffInfo.statckCount,
+                iconResId = buffInfo.iconResId
+
+            };
+
+            EventDispatcher.Broadcast(EventIDs.OnBuffInfoUpdate, this.buffInfo);
         }
 
         //internal void SetSkillList(List<BattleSkillInfo> skills)
@@ -249,6 +295,11 @@ namespace Battle_Client
             }
         }
 
+        //internal void UpdateEffectInfo(float currCDTime, float maxCDTime, int stackCount)
+        //{
+
+        //}
+
         public void SetWillDestoryState()
         {
             this.state = BattleSkillEffectState.WillDestroy;
@@ -259,7 +310,14 @@ namespace Battle_Client
             this.state = BattleSkillEffectState.Destroy;
             if (isFinishLoad)
             {
-                ResourceManager.Instance.ReturnObject(path, gameObject);
+                if (this.resId > 0)
+                {
+                    ResourceManager.Instance.ReturnObject(path, gameObject);
+                }
+                else
+                {
+                    GameObject.Destroy(gameObject);
+                }
             }
             else
             {
@@ -315,5 +373,9 @@ namespace Battle_Client
         //    }
 
         //}
+
+
     }
+
+
 }

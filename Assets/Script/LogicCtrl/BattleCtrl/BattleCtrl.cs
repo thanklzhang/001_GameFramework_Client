@@ -27,6 +27,8 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.AddListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
         EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.AddListener<BattleEntity_Client, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
+        EventDispatcher.AddListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
+        EventDispatcher.AddListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
         EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, OnEntityDestroy);
         EventDispatcher.AddListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, OnOnBattleEnd);
         EventDispatcher.AddListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
@@ -151,6 +153,7 @@ public class BattleCtrl : BaseCtrl
 
         ui.onCloseBtnClick += OnClickCloseBtn;
         ui.onReadyStartBtnClick += OnClickReadyStartBtn;
+        ui.onAttrBtnClick += OnClickAttrBtn;
 
         this.resultUI.onClickConfirmBtn += OnClickResultConfirmBtn;
 
@@ -159,6 +162,108 @@ public class BattleCtrl : BaseCtrl
 
         ui.Show();
         ui.SetReadyBattleBtnShowState(false);
+
+        RefreshBattleAttrUI();
+
+        RefreshBattleSkillUI();
+
+        RefreshBattleBuffUI();
+
+    }
+
+    public void RefreshBattleAttrUI()
+    {
+        BattleAttrUIArgs attrUIArgs = new BattleAttrUIArgs();
+        attrUIArgs.battleAttrList = new List<BattleAttrUIData>();
+
+        var attr = BattleManager.Instance.GetLocalCtrlHeroAttrs();
+        List<EntityAttrType> types = new List<EntityAttrType>()
+        {
+             EntityAttrType.Attack,
+             EntityAttrType.Defence,
+             EntityAttrType.MaxHealth,
+             EntityAttrType.AttackSpeed,
+             EntityAttrType.AttackRange,
+             EntityAttrType.MoveSpeed,
+
+        };
+        //之后配置
+        List<string> typeNameList = new List<string>()
+        {
+             "攻击",
+             "防御",
+             "生命值",
+             "攻击速度",
+             "攻击距离",
+             "移动速度",
+        };
+        for (int i = 0; i < types.Count; i++)
+        {
+            var attrType = types[i];
+            string name = "" + typeNameList[i];
+            float value = attr.GetValue(attrType);
+            AttrValueShowType showType = AttrValueShowType.Int;
+            if (attrType == EntityAttrType.AttackSpeed)
+            {
+                showType = AttrValueShowType.Float_2;
+            }
+            else if (attrType == EntityAttrType.AttackRange)
+            {
+                showType = AttrValueShowType.Float_2;
+            }
+            else if (attrType == EntityAttrType.MoveSpeed)
+            {
+                showType = AttrValueShowType.Float_2;
+            }
+
+            BattleAttrUIData uiData = new BattleAttrUIData()
+            {
+                name = name,
+                value = value,
+                valueShowType = showType
+            };
+
+            attrUIArgs.battleAttrList.Add(uiData);
+
+        }
+        ui.RefreshBattleAttrUI(attrUIArgs);
+    }
+
+    void RefreshBattleSkillUI()
+    {
+        BattleSkillUIArgs skillUIArgs = new BattleSkillUIArgs();
+        skillUIArgs.battleSkillList = new List<BattleSkillUIData>();
+
+        var skills = BattleManager.Instance.GetLocalCtrlHeroSkills();
+
+        for (int i = 0; i < skills.Count; i++)
+        {
+            if (0 == i)
+            {
+                //第一个是普通攻击 不显示
+                continue;
+            }
+            var skillInfo = skills[i];
+            BattleSkillUIData skill = new BattleSkillUIData()
+            {
+                //skill.iconResId
+                skillId = skillInfo.configId,
+                maxCDTime = skillInfo.maxCDTime,
+                //iconResId = 0
+            };
+
+            skillUIArgs.battleSkillList.Add(skill);
+        }
+
+
+        ui.RefreshBattleSkillUI(skillUIArgs);
+
+    }
+
+    void RefreshBattleBuffUI()
+    {
+        //add 通过 update info 来走逻辑 ， 所以这个先空调用一下
+        ui.RefreshBattleBuffUI(new BattleBuffUIArgs());
     }
 
     void OnClickCloseBtn()
@@ -177,6 +282,11 @@ public class BattleCtrl : BaseCtrl
     void OnClickResultConfirmBtn()
     {
         CtrlManager.Instance.Exit<BattleCtrl>();
+    }
+
+    void OnClickAttrBtn()
+    {
+        this.ui.OpenAttrUI();
     }
 
     void OnAllPlayerLoadFinish()
@@ -509,6 +619,40 @@ public class BattleCtrl : BaseCtrl
         camera3D.SetRotation(this.cameraRotationOffset);
     }
 
+    public BattleSkillInfo FindLocalHeroSkill(int skillId)
+    {
+        var skills = BattleManager.Instance.GetLocalCtrlHeroSkills();
+        foreach (var skill in skills)
+        {
+            if (skill.configId == skillId)
+            {
+                return skill;
+            }
+        }
+        return null;
+    }
+
+    public bool CheckLocalHeroSkillRelease(int skillId)
+    {
+        //检测 cd
+        var skill = FindLocalHeroSkill(skillId);
+        if (skill != null)
+        {
+
+            if (skill.currCDTime <= 0)
+            {
+                return true;
+            }
+        }
+
+        //CtrlManager.Instance.globalCtrl.ShowTips("这个技能还不能释放");
+
+        var tips = "这个技能还不能释放";
+        ui.ShowSkillTipText(tips);
+        return false;
+
+    }
+
     public int willReleaserSkillIndex;
     public void OnUseSkill(int index)
     {
@@ -516,14 +660,24 @@ public class BattleCtrl : BaseCtrl
         int targetGuid = 0;
         Vector3 targetPos = Vector3.zero;
         var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
-
         var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-
         var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
 
         var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
         var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
         var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+
+        //判断释放条件 现在本地检测一下
+        //普通攻击不提示
+        var isNormalAttack = 0 == index;
+        if (!isNormalAttack)
+        {
+            var isCanRelease = CheckLocalHeroSkillRelease(skillId);
+            if (!isCanRelease)
+            {
+                return;
+            }
+        }
 
         var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
         if (releaseTargetType == SkillReleaseTargeType.Point)
@@ -531,53 +685,19 @@ public class BattleCtrl : BaseCtrl
 
             this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
 
-            //Vector3 resultPos;
-            //if (TryToGetRayOnGroundPos(out resultPos))
-            //{
-            //    targetPos = resultPos;
-            //    //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
-            //    BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
-            //}
         }
         else if (releaseTargetType == SkillReleaseTargeType.Entity)
         {
 
             this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
 
-
-            //GameObject gameObject = null;
-            //if (TryToGetRayOnEntity(out gameObject))
-            //{
-
-            //    //遍历寻找 效率低下 之后更改
-            //    var battleEntity = BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
-            //    if (battleEntity != null)
-            //    {
-            //        Logx.Log("battle entity not null");
-            //        targetGuid = battleEntity.guid;
-
-
-            //        //先排除自己
-            //        if (localEntity.collider.gameObject.GetInstanceID() != battleEntity.collider.gameObject.GetInstanceID())
-            //        {
-            //            //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
-            //            BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
-            //        }
-
-            //    }
-            //}
         }
         else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
         {
-            //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
             BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
         }
 
-
-        //var myUid = GameDataManager.Instance.UserGameDataStore.Uid;
-
         Logx.Log("use skill : skillId : " + skillId + " targetGuid : " + targetGuid + " targetPos : " + targetPos);
-
 
     }
 
@@ -592,6 +712,33 @@ public class BattleCtrl : BaseCtrl
     public void OnChangeEntityBattleData(BattleEntity_Client entity, int fromEntityGuid)
     {
         hpModule.RefreshEntityData(entity, fromEntityGuid);
+        this.RefreshBattleAttrUI();
+    }
+
+    //当技能信息改变了
+    public void OnSkillInfoUpdate(int entityGuid, BattleSkillInfo skillInfo)
+    {
+        var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+        this.ui.RefreshSkillInfo(skillInfo.configId, skillInfo.currCDTime);
+    }
+
+    //当 buff 信息改变了
+    public void OnBuffInfoUpdate(BuffEffectInfo_Client buffInfo)
+    {
+        if (BattleManager.Instance.GetLocalPlayer().ctrlHeroGuid == buffInfo.targetEntityGuid)
+        {
+            //Debug.Log("zxy : OnBuffInfoUpdate : ");
+            BattleBuffUIData buff = new BattleBuffUIData();
+            buff.guid = buffInfo.guid;
+            buff.maxCDTime = buffInfo.maxCDTime;
+            buff.currCDTime = buffInfo.currCDTime;
+            buff.isRemove = buffInfo.isRemove;
+            buff.iconResId = buffInfo.iconResId;
+            buff.stackCount = buffInfo.stackCount;
+
+            this.ui.RefreshBuffInfo(buff);
+        }
+
     }
 
     public void OnEntityDestroy(BattleEntity_Client entity)
@@ -639,6 +786,7 @@ public class BattleCtrl : BaseCtrl
 
         ui.onReadyStartBtnClick -= OnClickReadyStartBtn;
         ui.onCloseBtnClick -= OnClickCloseBtn;
+        ui.onAttrBtnClick -= OnClickAttrBtn;
 
         resultUI.onClickConfirmBtn -= OnClickResultConfirmBtn;
     }
@@ -656,6 +804,8 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.RemoveListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
         EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.RemoveListener<BattleEntity_Client, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
+        EventDispatcher.RemoveListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
+        EventDispatcher.RemoveListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
         EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
         EventDispatcher.RemoveListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
         EventDispatcher.RemoveListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);

@@ -66,6 +66,7 @@ namespace Battle_Client
     {
         public int configId;
         public int level;
+        internal float maxCDTime;
     }
 
     public class BattleClientMsg_BattleAttr

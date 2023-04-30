@@ -14,196 +14,35 @@ public enum EntityRelationType
     Enemy = 2
 }
 
-public class HpUIData : UIArgs
-{
-    public int entityGuid;
-    public float preCurrHp;
-    public float nowCurrHp;
-    public float maxHp;
-    public int valueFromEntityGuid;
-    public GameObject entityObj;
-
-    public EntityRelationType relationType;
-
-}
-
-public class HpUIShowObj
-{
-    HpUIData data;
-    GameObject gameObject;
-    Transform transform;
-
-    public Transform bgRoot;
-    public Transform hp;
-    public Text valueText;
-
-
-    BattleUI parentUI;
-    RectTransform parentTranRect;
-    EntityHpColorSelector colorSelector;
-    public Image hpBg;
-    public void Init(GameObject gameObject, BattleUI parentUI)
-    {
-        this.gameObject = gameObject;
-        this.parentUI = parentUI;
-        parentTranRect = parentUI.transform.GetComponent<RectTransform>();
-        this.transform = this.gameObject.transform;
-
-        bgRoot = this.transform.Find("bg");
-        hp = this.transform.Find("bg/hp");
-        hpBg = hp.GetComponent<Image>();
-        valueText = this.transform.Find("bg/valueText").GetComponent<Text>();
-        colorSelector = hp.GetComponent<EntityHpColorSelector>();
-
-    }
-
-    public void Refresh(HpUIData hpData)
-    {
-        var preCurrHp = -1f;
-        if (this.data != null)
-        {
-            preCurrHp = this.data.preCurrHp;
-        }
-
-        this.data = hpData;
-
-        var currHp = this.data.nowCurrHp;
-        var maxHp = this.data.maxHp;
-        var ratio = currHp / maxHp;
-
-        if (preCurrHp >= 0)
-        {
-            //飘字
-            var changeHp = currHp - preCurrHp;
-
-            var word = "" + changeHp;
-            if (changeHp > 0)
-            {
-                word = "+" + changeHp;
-            }
-            var go = this.data.entityObj;
-            int floatStyle = 0;
-            var fromEntityGuid = this.data.valueFromEntityGuid;
-            if (fromEntityGuid > 0)
-            {
-                var currEntityPos = go.transform.position;
-                var fromEntity = BattleEntityManager.Instance.FindEntity(this.data.valueFromEntityGuid);
-                if (fromEntity != null)
-                {
-                    var fromEntityPos = fromEntity.gameObject.transform.position;
-                    var dir = (fromEntityPos - currEntityPos).normalized;
-                    if (dir.x > 0)
-                    {
-                        //受到来自左边敌人的攻击 那么飘字向右
-                        floatStyle = 1;
-                    }
-                    else
-                    {
-                        floatStyle = 0;
-                    }
-                }
-
-                Color color = normalDamageColor;
-                if (changeHp > 0)
-                {
-                    color = addHpColor;
-                }
-
-                parentUI.ShowFloatWord(word, go, floatStyle, color);
-            }
-         
-
-        }
-
-        var width = bgRoot.GetComponent<RectTransform>().rect.width;
-        var currLen = width * ratio;
-
-        var rect = hp.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(currLen, rect.sizeDelta.y);
-
-        valueText.text = "" + currHp + "/" + maxHp;
-
-        //背景颜色和字体颜色
-        var relationType = this.data.relationType;
-
-        if (relationType == EntityRelationType.Self)
-        {
-            hpBg.color = this.colorSelector.selfBgColor;
-            valueText.color = this.colorSelector.selfTextColor;
-
-        }
-        else if (relationType == EntityRelationType.Enemy)
-        {
-            hpBg.color = this.colorSelector.enemyBgColor;
-            valueText.color = this.colorSelector.enemyTextColor;
-        }
-        else if (relationType == EntityRelationType.Friend)
-        {
-            hpBg.color = this.colorSelector.friendBgColor;
-            valueText.color = this.colorSelector.friendTextColor;
-        }
-
-
-    }
-
-    Color normalDamageColor = new Color(1, 0.744f, 0.108f);
-    Color addHpColor = new Color(0, 1, 0, 1);
-
-    public void Update(float timeDelta)
-    {
-        var entityObj = this.data.entityObj;
-        var camera3D = CameraManager.Instance.GetCamera3D();
-        var cameraUI = CameraManager.Instance.GetCameraUI();
-        var screenPos = RectTransformUtility.WorldToScreenPoint(camera3D.camera, entityObj.transform.position);
-
-        Vector2 uiPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentTranRect, screenPos, cameraUI.camera, out uiPos);
-
-        //这里可以换成实体上的血条挂点
-        this.transform.localPosition = uiPos + Vector2.up * 100;
-    }
-
-    public void Destroy()
-    {
-        GameObject.Destroy(this.gameObject);
-    }
-
-    internal void SetShowState(bool isShow)
-    {
-        gameObject.SetActive(isShow);
-    }
-}
-
-
-
 public class BattleUI : BaseUI
 {
     public Action onCloseBtnClick;
     public Action onReadyStartBtnClick;
+    public Action onAttrBtnClick;
 
     Button closeBtn;
     Button readyStartBtn;
+    Button attrBtn;
 
     public Text stateText;
 
-    //hp
-    public Transform hpRoot;
-    public GameObject hpTemp;
-    Dictionary<int, HpUIShowObj> hpShowObjDic = new Dictionary<int, HpUIShowObj>();
-    Dictionary<int, GameObject> poolObjs = new Dictionary<int, GameObject>();
-
+    //血条
+    HpUIMgr hpUIMgr;
     //飘字
     FloatWordMgr floatWordMgr;
+    //属性面板
+    BattleAttrUI attrUI;
+    //技能显示面板
+    BattleSkillUI skillUI;
+    //buff 显示面板
+    BattleBuffUI buffUI;
 
     protected override void OnInit()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         readyStartBtn = this.transform.Find("readyStartBtn").GetComponent<Button>();
         stateText = this.transform.Find("stateText").GetComponent<Text>();
-
-        hpRoot = this.transform.Find("HpShow/root");
-        hpTemp = hpRoot.Find("hpItem").gameObject;
-        hpTemp.SetActive(false);
+        attrBtn = this.transform.Find("attrBtn").GetComponent<Button>();
 
         closeBtn.onClick.AddListener(() =>
         {
@@ -213,26 +52,49 @@ public class BattleUI : BaseUI
         {
             onReadyStartBtnClick?.Invoke();
         });
-
-        poolObjs.Clear();
-        for (int i = 0; i < hpRoot.childCount; i++)
+        attrBtn.onClick.AddListener(() =>
         {
-            var currObj = hpRoot.GetChild(i).gameObject;
-            poolObjs.Add(currObj.GetInstanceID(), currObj);
+            onAttrBtnClick?.Invoke();
+        });
 
-        }
+        //血条管理
+        this.hpUIMgr = new HpUIMgr();
+        var hpUIRoot = this.transform.Find("HpShow");
+        this.hpUIMgr.Init(hpUIRoot.gameObject, this);
 
+        //飘字管理
         floatWordMgr = new FloatWordMgr();
         var floatRoot = this.transform.Find("float_word_root");
         floatWordMgr.Init(floatRoot);
 
+        //属性面板
+        attrUI = new BattleAttrUI();
+        var attrUIRoot = this.transform.Find("attrBar");
+        attrUI.Init(attrUIRoot.gameObject, this);
+        attrUI.Hide();
+
+        //技能面板
+        var skillUIRoot = this.transform.Find("skillBar");
+        skillUI = new BattleSkillUI();
+        skillUI.Init(skillUIRoot.gameObject, this);
+
+        //buff 面板
+        var buffUIRoot = this.transform.Find("buffBar");
+        buffUI = new BattleBuffUI();
+        buffUI.Init(buffUIRoot.gameObject, this);
 
     }
-
-    internal void ShowFloatWord(string word, GameObject go, int floatStyle, Color color)
+    protected override void OnUpdate(float timeDelta)
     {
-        floatWordMgr.ShowFloatWord(word, go, floatStyle, color);
+        this.hpUIMgr.Update(timeDelta);
+
+        this.floatWordMgr.Update(timeDelta);
+
+        this.skillUI.Update(timeDelta);
+
+        this.buffUI.Update(timeDelta);
     }
+
 
     public void SetReadyBattleBtnShowState(bool isShow)
     {
@@ -244,74 +106,79 @@ public class BattleUI : BaseUI
         stateText.text = stateStr;
     }
 
+
+    #region 血条相关
     public void RefreshHpShow(UIArgs args)
     {
-        HpUIData hpData = (HpUIData)args;
-
-        HpUIShowObj showObj = null;
-        if (hpShowObjDic.ContainsKey(hpData.entityGuid))
-        {
-            showObj = hpShowObjDic[hpData.entityGuid];
-        }
-        else
-        {
-            showObj = new HpUIShowObj();
-            GameObject newObj = GameObject.Instantiate(hpTemp, this.hpRoot, false);
-            newObj.SetActive(true);
-            poolObjs.Add(newObj.GetInstanceID(), newObj);
-            showObj.Init(newObj, this);
-            hpShowObjDic.Add(hpData.entityGuid, showObj);
-        }
-
-        showObj.Refresh(hpData);
+        this.hpUIMgr.RefreshHpShow(args);
     }
 
-    public void DestoryHpUI(int entityGuid)
+    public void DestoryHpUI(int guid)
     {
-        if (hpShowObjDic.ContainsKey(entityGuid))
-        {
-            var hpShowObj = hpShowObjDic[entityGuid];
-            hpShowObj.Destroy();
-            hpShowObjDic.Remove(entityGuid);
-        }
-        else
-        {
-            Logx.LogWarning("BattleUI DestoryHpUI : the entityGuid is not found : " + entityGuid);
-        }
-    }
-
-    public HpUIShowObj FindHpUI(int entityGuid)
-    {
-        HpUIShowObj showObj = null;
-        if (hpShowObjDic.ContainsKey(entityGuid))
-        {
-            showObj = hpShowObjDic[entityGuid];
-        }
-        else
-        {
-            Logx.LogWarning("BattleUI DestoryHpUI : the entityGuid is not found : " + entityGuid);
-        }
-        return showObj;
+        this.hpUIMgr.DestoryHpUI(guid);
     }
 
     public void SetHpShowState(int entityGuid, bool isShow)
     {
-        var hpUI = FindHpUI(entityGuid);
-        if (hpUI != null)
-        {
-            hpUI.SetShowState(isShow);
-        }
+        this.hpUIMgr.SetHpShowState(entityGuid, isShow);
     }
+    #endregion
 
-    protected override void OnUpdate(float timeDelta)
+    #region 飘字相关
+    internal void ShowFloatWord(string word, GameObject go, int floatStyle, Color color)
     {
-        foreach (var item in hpShowObjDic)
-        {
-            item.Value.Update(timeDelta);
-        }
-
-        this.floatWordMgr.Update(timeDelta);
+        floatWordMgr.ShowFloatWord(word, go, floatStyle, color);
     }
+    #endregion
+
+    #region 属性面板相关
+    public void OpenAttrUI()
+    {
+        this.attrUI.Show();
+    }
+
+    public void CloseAttrUI()
+    {
+        this.attrUI.Hide();
+    }
+
+    public void RefreshBattleAttrUI(UIArgs args)
+    {
+        this.attrUI.Refresh(args);
+    }
+    #endregion
+
+
+    #region 技能面板相关
+    internal void RefreshBattleSkillUI(UIArgs args)
+    {
+        this.skillUI.Refresh(args);
+    }
+
+    public void RefreshSkillInfo(int skillConfigId, float currCDTime)
+    {
+        this.skillUI.UpdateSkillInfo(skillConfigId, currCDTime);
+    }
+
+    public void ShowSkillTipText(string str)
+    {
+        this.skillUI.SetSkillTipText(str);
+    }
+    #endregion
+
+    #region buff 面板相关
+    internal void RefreshBattleBuffUI(UIArgs args)
+    {
+        this.buffUI.Refresh(args);
+    }
+
+    public void RefreshBuffInfo(BattleBuffUIData buffInfo)
+    {
+        this.buffUI.UpdateBuffInfo(buffInfo);
+    }
+
+
+    #endregion
 
     protected override void OnRelease()
     {

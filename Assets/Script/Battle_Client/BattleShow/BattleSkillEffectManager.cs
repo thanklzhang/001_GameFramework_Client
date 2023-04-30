@@ -80,7 +80,7 @@ namespace Battle_Client
                 }
                 else if (createEffectInfo.effectPosType == EffectPosType.Custom_Pos)
                 {
-                    skillEffect.SetFollowEntityGuid(followEntityGuid,"");
+                    skillEffect.SetFollowEntityGuid(followEntityGuid, "");
                 }
             }
             else
@@ -90,6 +90,11 @@ namespace Battle_Client
 
             //skillEffect.SetLastTime(lastTime);
             skillEffect.SetIsAutoDestroy(isAutoDestroy);
+
+            if (createEffectInfo.buffInfo != null && createEffectInfo.buffInfo.guid > 0)
+            {
+                skillEffect.SetBuffInfo(createEffectInfo.buffInfo);
+            }
 
             skillEffectDic.Add(guid, skillEffect);
 

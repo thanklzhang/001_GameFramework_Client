@@ -43,34 +43,34 @@ namespace Battle_Client
             return value / 1000.0f;
         }
 
-        public static List<BattleClientMsg_BattleAttr> MakeEntityAttr(Battle.EntityAttrGroup finalAttrGroup)
-        {
-            List<BattleClientMsg_BattleAttr> attrs = new List<BattleClientMsg_BattleAttr>();
-            foreach (var kv in finalAttrGroup.OptionDic)
-            {
-                var option = kv.Value;
-                BattleClientMsg_BattleAttr attr = new BattleClientMsg_BattleAttr();
-                attr.type = (Battle_Client.EntityAttrType)(int)option.attrType;
-                if (option.attrType == Battle.EntityAttrType.AttackSpeed)
-                {
-                    attr.value = (int)(option.value * 1000.0f);
-                }
-                else if (option.attrType == Battle.EntityAttrType.MoveSpeed)
-                {
-                    attr.value = (int)(option.value * 1000.0f);
-                }
-                else if (option.attrType == Battle.EntityAttrType.AttackRange)
-                {
-                    attr.value = (int)(option.value * 1000.0f);
-                }
-                else
-                {
-                    attr.value = (int)option.value;
-                }
-                attrs.Add(attr);
-            }
-            return attrs;
-        }
+        //public static List<BattleClientMsg_BattleAttr> MakeEntityAttr(Battle.EntityAttrGroup finalAttrGroup)
+        //{
+        //    List<BattleClientMsg_BattleAttr> attrs = new List<BattleClientMsg_BattleAttr>();
+        //    foreach (var kv in finalAttrGroup.OptionDic)
+        //    {
+        //        var option = kv.Value;
+        //        BattleClientMsg_BattleAttr attr = new BattleClientMsg_BattleAttr();
+        //        attr.type = (Battle_Client.EntityAttrType)(int)option.attrType;
+        //        if (option.attrType == Battle.EntityAttrType.AttackSpeed)
+        //        {
+        //            attr.value = (int)(option.value * 1000.0f);
+        //        }
+        //        else if (option.attrType == Battle.EntityAttrType.MoveSpeed)
+        //        {
+        //            attr.value = (int)(option.value * 1000.0f);
+        //        }
+        //        else if (option.attrType == Battle.EntityAttrType.AttackRange)
+        //        {
+        //            attr.value = (int)(option.value * 1000.0f);
+        //        }
+        //        else
+        //        {
+        //            attr.value = (int)option.value;
+        //        }
+        //        attrs.Add(attr);
+        //    }
+        //    return attrs;
+        //}
 
     }
 

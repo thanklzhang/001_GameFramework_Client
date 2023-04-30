@@ -139,34 +139,35 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_SkillEffectStartMove(guid, targetPos, targetGuid, moveSpeed);
         }
 
-        public void NotifyAll_SyncEntityAttr(int guid, EntityAttrGroup finalAttrGroup)
+        public void NotifyAll_SyncEntityAttr(int guid, Dictionary<Battle.EntityAttrType, float> dic)
         {
             List<BattleClientMsg_BattleAttr> attrs = new List<BattleClientMsg_BattleAttr>();
-            foreach (var kv in finalAttrGroup.OptionDic)
+            foreach (var kv in dic)
             {
-                var option = kv.Value;
+                var value = kv.Value;
                 BattleClientMsg_BattleAttr attr = new BattleClientMsg_BattleAttr();
-                attr.type = (Battle_Client.EntityAttrType)(int)option.attrType;
-                if (option.attrType == Battle.EntityAttrType.AttackSpeed)
+                var type = kv.Key;
+                attr.type = (Battle_Client.EntityAttrType)(int)kv.Key;
+                if (type == Battle.EntityAttrType.AttackSpeed)
                 {
                     //attr.value = (int)(option.value * 1000.0f);
-                    attr.value = option.value;
+                    attr.value = value;
                 }
-                else if (option.attrType == Battle.EntityAttrType.MoveSpeed)
+                else if (type == Battle.EntityAttrType.MoveSpeed)
                 {
-                    attr.value = option.value;
+                    attr.value = value;
                 }
-                else if (option.attrType == Battle.EntityAttrType.AttackRange)
+                else if (type == Battle.EntityAttrType.AttackRange)
                 {
-                    attr.value = option.value;
+                    attr.value = value;
                 }
-                else if (option.attrType == Battle.EntityAttrType.AttackSpeed)
+                else if (type == Battle.EntityAttrType.AttackSpeed)
                 {
-                    attr.value = option.value;
+                    attr.value = value;
                 }
                 else
                 {
-                    attr.value = (int)option.value;
+                    attr.value = (int)value;
                 }
                 attrs.Add(attr);
             }
@@ -187,11 +188,25 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_SyncEntityValue(guid, values);
         }
 
+        public void NotifyAll_NotifySkillInfoUpdate(Skill skill)
+        {
+            var entityGuid = skill.releser.guid;
+            var skillConfigId = skill.configId;
+            var currCDTime = skill.GetCurrCDTimer();
+            var maxCDTime = skill.GetCDMaxTime();
+            BattleManager.Instance.MsgReceiver.On_SkillInfoUpdate(entityGuid, skillConfigId, currCDTime, maxCDTime);
+        }
 
+        public void NotifyAll_NotifyUpdateBuffInfo(BuffEffectInfo buffInfo)
+        {
+            BattleManager.Instance.MsgReceiver.On_BuffInfoUpdate(buffInfo);
+        }
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {
             throw new System.NotImplementedException();
         }
+
+       
     }
 }

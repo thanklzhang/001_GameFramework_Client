@@ -51,6 +51,16 @@ namespace Table
         
 		cursor_attack_001 = 15003005,
         
+		icon_buff_hero_0014 = 15003101,
+        
+		icon_buff_hero_0022 = 15003102,
+        
+		icon_buff_common_08 = 15003103,
+        
+		icon_buff_common_10 = 15003104,
+        
+		icon_buff_common_11 = 15003105,
+        
 		click = 15006001,
         
 		eft_select_entity_01 = 15008001,

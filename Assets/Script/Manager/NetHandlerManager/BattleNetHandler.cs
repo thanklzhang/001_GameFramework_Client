@@ -171,7 +171,8 @@ public class BattleNetHandler : NetHandler
                 BattleClientMsg_Skill skill = new BattleClientMsg_Skill()
                 {
                     configId = netSkill.ConfigId,
-                    level = netSkill.Level
+                    level = netSkill.Level,
+                    maxCDTime = netSkill.MaxCDTime
                 };
                 entity.skills.Add(skill);
             }
@@ -308,7 +309,8 @@ public class BattleNetHandler : NetHandler
                 var skill = new BattleClientMsg_Skill()
                 {
                     configId = netSkill.ConfigId,
-                    level = netSkill.Level
+                    level = netSkill.Level,
+                    maxCDTime = netSkill.MaxCDTime
                 };
                 entity.skills.Add(skill);
 
@@ -468,6 +470,10 @@ public class BattleNetHandler : NetHandler
                 attr.value = BattleConvert.GetValue(option.Value);
             }
             else if (option.Type == (int)Battle.EntityAttrType.AttackSpeed)
+            {
+                attr.value = BattleConvert.GetValue(option.Value);
+            }
+            else if (option.Type == (int)Battle.EntityAttrType.AttackRange)
             {
                 attr.value = BattleConvert.GetValue(option.Value);
             }

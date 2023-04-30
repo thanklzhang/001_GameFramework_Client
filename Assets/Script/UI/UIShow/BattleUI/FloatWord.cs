@@ -84,6 +84,11 @@ public class FloatWord
 
     public void Update(float deltaTime)
     {
+        if (null == this.followGo)
+        {
+            //这里应该和 entity 同步
+            return;
+        }
         var entityObj = this.followGo;
         var camera3D = CameraManager.Instance.GetCamera3D();
         var cameraUI = CameraManager.Instance.GetCameraUI();

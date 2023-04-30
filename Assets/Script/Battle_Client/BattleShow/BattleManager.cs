@@ -462,6 +462,7 @@ namespace Battle_Client
                     BattleClientMsg_Skill skillInfo = new BattleClientMsg_Skill();
                     skillInfo.configId = skill.configId;
                     skillInfo.level = skill.level;
+                    skillInfo.maxCDTime = skill.GetCDMaxTime();
                     entity.skills.Add(skillInfo);
                 }
                 battleClientArgs.entityList.Add(entity);
@@ -700,6 +701,16 @@ namespace Battle_Client
         public GameObject GetLocalCtrlHeroGameObject()
         {
             return this.localCtrlEntity.gameObject;
+        }
+
+        public BattleEntityAttr GetLocalCtrlHeroAttrs()
+        {
+            return this.localCtrlEntity.attr;
+        }
+
+        public List<BattleSkillInfo> GetLocalCtrlHeroSkills()
+        {
+            return this.localCtrlEntity.GetSkills();
         }
 
     }

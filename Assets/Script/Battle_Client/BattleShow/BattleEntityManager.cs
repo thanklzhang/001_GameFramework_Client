@@ -13,8 +13,19 @@ namespace Battle_Client
 
     public class BattleSkillInfo
     {
+        public int releaserGuid;
         public int configId;
         public int level;
+        public float maxCDTime;
+        public float currCDTime;
+
+        internal void UpdateInfo(float currCDTime, float maxCDTime)
+        {
+            this.currCDTime = currCDTime;
+            this.maxCDTime = maxCDTime;
+
+            EventDispatcher.Broadcast(EventIDs.OnSkillInfoUpdate, releaserGuid, this);
+        }
     }
 
 
@@ -119,7 +130,9 @@ namespace Battle_Client
                 BattleSkillInfo skill = new BattleSkillInfo()
                 {
                     configId = serverSkill.configId,
-                    level = serverSkill.level
+                    level = serverSkill.level,
+                    maxCDTime = serverSkill.maxCDTime,
+                    releaserGuid = guid
                 };
                 skills.Add(skill);
             }

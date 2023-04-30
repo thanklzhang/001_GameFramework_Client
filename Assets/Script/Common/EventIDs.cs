@@ -33,11 +33,13 @@ public enum EventIDs
 
     OnCreateEntity = 101101,
     OnChangeEntityBattleData = 101102,
-    OnEntityDestroy = 101103,//实体销毁(死亡之后)
+    OnEntityDestroy = 101103,           //实体销毁(死亡之后)
     OnBattleEnd = 101104,
-    OnEntityChangeShowState = 101105,//实体改变了显隐时
+    OnEntityChangeShowState = 101105,   //实体改变了显隐时
 
     OnSetEntityPosition = 101201,
+    OnSkillInfoUpdate = 101202,         //当有技能信息改变的时候
+    OnBuffInfoUpdate = 101203,         //当有buff信息改变的时候
     //
 
 

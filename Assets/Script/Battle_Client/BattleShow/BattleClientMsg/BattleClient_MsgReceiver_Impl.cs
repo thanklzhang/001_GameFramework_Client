@@ -48,6 +48,32 @@ namespace Battle_Client
 
         public void On_DestroySkillEffect(int effectGuid)
         {
+            //如果是 buff 先处理 UI 显示
+            var effect = BattleSkillEffectManager.Instance.FindSkillEffect(effectGuid);
+            if (effect != null)
+            {
+                var targetEntityGuid = effect.GetFollowEntityGuid();
+
+                if (targetEntityGuid > 0)
+                {
+                    //var entity = BattleEntityManager.Instance.FindEntity(targetEntityGuid);
+                    //if (entity != null)
+                    //{
+
+                    //}
+                    BuffEffectInfo_Client buffUIData = new BuffEffectInfo_Client()
+                    {
+                        targetEntityGuid = targetEntityGuid,
+                        guid = effectGuid,
+                        isRemove = true
+                    };
+                    EventDispatcher.Broadcast(EventIDs.OnBuffInfoUpdate, buffUIData);
+
+                }
+
+            }
+
+
             BattleSkillEffectManager.Instance.DestorySkillEffect(effectGuid);
         }
 
@@ -84,7 +110,7 @@ namespace Battle_Client
                 entity.StartMoveByPath(EndPos, moveSpeed);
             }
         }
-        
+
         public void On_EntityStopMove(int Guid, UnityEngine.Vector3 EndPos)
         {
             var guid = Guid;
@@ -176,5 +202,21 @@ namespace Battle_Client
             //EventDispatcher.Broadcast<bool>(EventIDs.OnBattleEnd, isWin);
         }
 
+        public void On_SkillInfoUpdate(int entityGuid, int skillConfigId, float currCDTime, float maxCDTime)
+        {
+            var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+            entity.UpdateSkillInfo(skillConfigId, currCDTime, maxCDTime);
+        }
+
+        public void On_BuffInfoUpdate(BuffEffectInfo buffInfo)
+        {
+            var effect = BattleSkillEffectManager.Instance.FindSkillEffect(buffInfo.guid);
+
+            if (effect != null)
+            {
+                effect.SetBuffInfo(buffInfo);
+
+            }
+        }
     }
 }

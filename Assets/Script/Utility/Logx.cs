@@ -10,13 +10,16 @@ using System.Linq;
 //过后抽象出来
 public class Logx
 {
-    public static bool enable = false;
+    public static bool enable = true;
     public static bool isShowFrame = true;
     public enum LogType
     {
         Normal = 1,
         Error = 2,
         Warning = 3,
+
+        Net = 50,
+        ClientBattle = 51,
 
         Zxy = 100,
         AB = 200,
@@ -52,10 +55,10 @@ public class Logx
 
     public static void LogWarning(object obj)
     {
-        if (!enable)
-        {
-            return;
-        }
+        //if (!enable)
+        //{
+        //    return;
+        //}
         Debug.LogWarning(obj);
     }
 
@@ -87,9 +90,20 @@ public class Logx
         LogError(flag + ":" + obj);
     }
 
-    public static void Zxy(object obj)
+    public static void LogNet(string obj)
     {
-        Log(LogType.Zxy.ToString(), obj);
+        Log(LogType.Net.ToString(), obj);
+    }
+
+
+    public static void LogBattle(string obj)
+    {
+        Log(LogType.ClientBattle.ToString(), obj);
+    }
+
+    public static void LogException(Exception e)
+    {
+        Logx.LogError(e.Message + "\n" + e.StackTrace);
     }
 
     //-------------

@@ -106,7 +106,7 @@ public class BaseLoadProcess
     //添加一个新的 loader 的时候
     public virtual void AddLoader(BaseLoader loader)
     {
-        Logx.Log("base : process AddLoader");
+        //Logx.Log("base : process AddLoader");
 
         preparingList.Add(loader);
         loader.Start();

@@ -15,7 +15,7 @@ public class AssetBundleLoadProcess : BaseLoadProcess
 
     public override void AddLoader(BaseLoader loader)
     {
-        Logx.Log("assetBundle : AddLoader");
+        //Logx.Log("assetBundle : AddLoader");
 
         var assetBundleLoader = (AssetBundleLoader)loader;
 
@@ -24,7 +24,7 @@ public class AssetBundleLoadProcess : BaseLoadProcess
         AssetBundleLoader abLoader = null;
         if (!abLoaderDic.TryGetValue(assetBundleLoader.path, out abLoader))
         {
-            Logx.Log("assetBundle : AddLoader 1 assetBundleLoader.path : " + assetBundleLoader.path);
+            //Logx.Log("assetBundle : AddLoader 1 assetBundleLoader.path : " + assetBundleLoader.path);
 
             abLoaderDic.Add(assetBundleLoader.path, assetBundleLoader);
             ////Logx.Logz("AssetBundleLoadProcess AddLoader : no loader cache and start a new loader : " + assetBundleLoader.path);
@@ -32,7 +32,7 @@ public class AssetBundleLoadProcess : BaseLoadProcess
         }
         else
         {
-            Logx.Log("assetBundle : AddLoader 2");
+            //Logx.Log("assetBundle : AddLoader 2");
             ////Logx.Logz("AssetBundleLoadProcess AddLoader : have loader cache " + assetBundleLoader.path);
             abLoader.finishLoadCallback += assetBundleLoader.finishLoadCallback;
             abLoader.refCount += 1;
@@ -41,7 +41,7 @@ public class AssetBundleLoadProcess : BaseLoadProcess
 
     public override void OnLoadFinish(BaseLoader loader)
     {
-        Logx.Log("assetBundle : OnLoadFinish ");
+        //Logx.Log("assetBundle : OnLoadFinish ");
         var assetBundleLoader = (AssetBundleLoader)loader;
         ////Logx.Logz("AssetBundleLoadProcess OnLoadFinish : " + assetBundleLoader.path);
       

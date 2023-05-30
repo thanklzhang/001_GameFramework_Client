@@ -37,6 +37,8 @@ namespace Table
         
 		TipsUI = 15000014,
         
+		SelectHeroUI = 15000015,
+        
 		hero_100 = 15001001,
         
 		item0 = 15002001,
@@ -98,6 +100,8 @@ namespace Table
 		eft_skill_director_001 = 15008101,
         
 		eft_skill_director_002 = 15008102,
+        
+		eft_skill_track_001 = 15008201,
         
 		battle_scene_001 = 15010001,
         

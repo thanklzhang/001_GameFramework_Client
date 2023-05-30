@@ -334,7 +334,7 @@ namespace Battle_Client
             var str = strs[strs.Length - 1];
 
             var fullName = NameSpaceName + "." + str;
-            Logx.Log("ParseTriggerActionNode fullName : " + fullName);
+            //Logx.Log("ParseTriggerActionNode fullName : " + fullName);
             var type = Type.GetType(fullName);
             if (type != null)
             {

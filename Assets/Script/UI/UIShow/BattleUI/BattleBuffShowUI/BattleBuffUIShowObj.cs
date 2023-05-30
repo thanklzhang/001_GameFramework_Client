@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Table;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
@@ -15,7 +16,7 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
 
 
     public BattleBuffUIData uiData;
-
+    UIEventTrigger evetnTrigger;
     float currCDTimer = 0;
 
     public override void OnInit()
@@ -27,8 +28,13 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
         cdImg = this.transform.Find("CDRoot/CDShow").GetComponent<Image>();
         icon = this.transform.Find("icon").GetComponent<RawImage>();
         stackCountText = this.transform.Find("count_text").GetComponent<Text>();
-    }
 
+        evetnTrigger = icon.GetComponent<UIEventTrigger>();
+
+        evetnTrigger.OnPointEnterEvent += OnPointEnter;
+        evetnTrigger.OnPointerExitEvent += OnPointExit;
+    }
+    public bool isPointEnter = false;
     public override void OnRefresh(object data, int index)
     {
         this.uiData = (BattleBuffUIData)data;
@@ -49,6 +55,7 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
             //-1 时 为没有时间概念的的 buff 例：目前时永久性 buff
             cdRootGo.SetActive(false);
             canUseMaskGo.SetActive(false);
+           
         }
         else
         {
@@ -58,7 +65,8 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
             canUseMaskGo.SetActive(true);
         }
 
-        ResourceManager.Instance.GetObject<Texture>(uiData.iconResId, (tex) =>
+        var buffConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(this.uiData.configId);
+        ResourceManager.Instance.GetObject<Texture>(buffConfig.IconResId, (tex) =>
         {
             icon.texture = tex;
         });
@@ -72,6 +80,13 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
         if (currCDTimer < 0)
         {
             currCDTimer = 0;
+
+            if (isPointEnter)
+            {
+                EventDispatcher.Broadcast<int>(EventIDs.On_UIBuffOption_PointExit, this.uiData.configId);
+                isPointEnter = false;
+            }
+
         }
 
         if (currCDTimer > 0)
@@ -99,11 +114,37 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
 
     }
 
+    public void OnPointEnter(PointerEventData e)
+    {
+        //转换成点在 BattleUI 中的 localPosition
+
+        var camera3D = CameraManager.Instance.GetCamera3D();
+        var cameraUI = CameraManager.Instance.GetCameraUI();
+
+        var screenPos = e.position;
+
+        Vector2 uiPos;
+        var battleUIRect = parentObj.battleUI.gameObject.GetComponent<RectTransform>();
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(battleUIRect, screenPos, cameraUI.camera, out uiPos);
+
+        isPointEnter = true;
+
+        EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UIBuffOption_PointEnter, this.uiData.configId, uiPos);
+
+    }
+
+    public void OnPointExit(PointerEventData e)
+    {
+        isPointEnter = false;
+        EventDispatcher.Broadcast<int>(EventIDs.On_UIBuffOption_PointExit, this.uiData.configId);
+    }
+
     internal int Guid => this.uiData.guid;
 
     public override void OnRelease()
     {
-
+        evetnTrigger.OnPointEnterEvent -= OnPointEnter;
+        evetnTrigger.OnPointerExitEvent -= OnPointExit;
     }
 
 }
@@ -117,7 +158,8 @@ public class BattleBuffUIArgs : UIArgs
 public class BattleBuffUIData
 {
     public int guid;
-    public int iconResId;
+    public int configId;
+    //public int iconResId;
     public float currCDTime;
     public float maxCDTime;
     public int stackCount;

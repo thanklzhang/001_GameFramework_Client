@@ -64,14 +64,19 @@ public class TeamNetHandler : NetHandler
             localRoom.playerList = new List<TeamRoomPlayerData>();
             foreach (var netPlayer in netTeamRoom.PlayerList)
             {
-                TeamRoomPlayerData localPlayer = new TeamRoomPlayerData()
-                {
-                    playerInfo = PlayerConvert.ToPlayerInfo(netPlayer.PlayerInfo),
-                    isMaster = netPlayer.IsRoomMaster,
-                    isHasReady = netPlayer.IsHasReady,
-                    selectHeroGuid = netPlayer.SelectHeroGuid
-                };
-                localRoom.playerList.Add(localPlayer);
+
+                //TeamRoomPlayerData localPlayer = new TeamRoomPlayerData()
+                //{
+                //    playerInfo = PlayerConvert.ToPlayerInfo(netPlayer.PlayerInfo),
+                //    isMaster = netPlayer.IsRoomMaster,
+                //    isHasReady = netPlayer.IsHasReady,
+                //    selectHeroGuid =  netPlayer.Hero
+                //};
+                //localRoom.playerList.Add(localPlayer);
+
+                var teamPlayer = TeamConvert.ToTeamPlayer(netPlayer);
+                localRoom.playerList.Add(teamPlayer);
+
             }
             localRoomList.Add(localRoom);
         }
@@ -189,6 +194,16 @@ public class TeamNetHandler : NetHandler
         event_leaveTeamRoom = null;
     }
 
+    public void SendSelectUseHeroInTeamRoom(int teamRoomId, int currSelectHeroGuid)
+    {
+        NetProto.csSelectUseHeroInTeamRoom csSelect = new NetProto.csSelectUseHeroInTeamRoom();
+      
+        csSelect.TeamRoomId = teamRoomId;
+        csSelect.HeroGuid = currSelectHeroGuid;
+
+        NetworkManager.Instance.SendMsg(ProtoIDs.SelectUseHeroInTeamRoom, csSelect.ToByteArray());
+
+    }
 
     //notify------------------------
 
@@ -215,7 +230,7 @@ public class TeamNetHandler : NetHandler
 
         //data handler
         var resultPlayer = TeamConvert.ToTeamPlayer(player);
-        Logx.Log("log test : isHasReady : " + resultPlayer.isHasReady);
+        //Logx.Log("log test : isHasReady : " + resultPlayer.isHasReady);
         var room = GameDataManager.Instance.TeamStore.currEnterRoomData;
         room.UpdateRoomPlayerData(resultPlayer);
 

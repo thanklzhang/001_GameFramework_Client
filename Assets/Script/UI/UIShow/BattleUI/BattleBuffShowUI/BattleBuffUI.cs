@@ -15,7 +15,7 @@ public class BattleBuffUI
     //Text skillTipText;
     //float skillTipShowTimer;
     //float skillTipMaxShowTime = 1.6f;
-
+    public BattleUI battleUI;
     List<BattleBuffUIData> buffDataList = new List<BattleBuffUIData>();
     List<BattleBuffUIShowObj> buffShowObjList = new List<BattleBuffUIShowObj>();
 
@@ -25,6 +25,8 @@ public class BattleBuffUI
         this.transform = this.gameObject.transform;
 
         buffListRoot = this.transform.Find("group");
+
+        this.battleUI = battleUI;
 
         buffDataList = new List<BattleBuffUIData>();
         //this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();

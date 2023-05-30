@@ -98,7 +98,7 @@ namespace PlotDesigner.Runtime
             var nameSpaceName = "PlotDesigner.Runtime";
             var fullName = nameSpaceName + "." + trackPlayerName;
             PlotTrackPlayer trackPlayer = null;
-            Logx.Log("CreateInstance : " + assembleName + " : " + fullName);
+            //Logx.Log("CreateInstance : " + assembleName + " : " + fullName);
             trackPlayer = Assembly.Load(assembleName).CreateInstance(fullName) as PlotTrackPlayer;
             return trackPlayer;
         }
@@ -180,7 +180,7 @@ namespace PlotDesigner.Runtime
 
         public void StartLoadRes()
         {
-            Logx.Log("plot : StartLoadRes , gameObjectResIdToCountDic count : " + gameObjectResIdToCountDic.Count);
+            //Logx.Log("plot : StartLoadRes , gameObjectResIdToCountDic count : " + gameObjectResIdToCountDic.Count);
 
             var objsRequestList = new List<LoadObjectRequest>();
 

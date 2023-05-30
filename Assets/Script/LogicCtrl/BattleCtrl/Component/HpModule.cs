@@ -76,7 +76,7 @@ public class HpModule
             relationType = EntityRelationType.Friend;
         }
 
-        Logx.Log("lll : " + selfPlayerIndex + " " + currEntityPlayerIndex + " " + relationType);
+        //Logx.Log("lll : " + selfPlayerIndex + " " + currEntityPlayerIndex + " " + relationType);
 
         HpUIData args = new HpUIData()
         {

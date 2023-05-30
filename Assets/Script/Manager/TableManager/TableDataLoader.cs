@@ -83,7 +83,7 @@ namespace Table
                 var loadPath = Path.Combine(Const.buildPath, Const.tablePath, filePath);
                 ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
                 {
-                    Logx.Log("table manager : LoadFromFile : load text finish: " + textAsset.text);
+                    //Logx.Log("table manager : LoadFromFile : load text finish: " + textAsset.text);
                     loadText = textAsset.text;
                     isLoadFinish = true;
                 });

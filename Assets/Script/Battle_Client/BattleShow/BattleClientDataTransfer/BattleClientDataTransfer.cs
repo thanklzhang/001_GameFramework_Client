@@ -85,5 +85,13 @@ namespace Battle_Client
 
     }
 
+    public class BattleClientMsg_CreateSkillTrack
+    {
+        //public List<int> strackIdList;
+        public int trackConfigId;
+        public int releaserEntityGuid;
+        public Vector3 targetPos;
+        public int targetEntityGuid;
 
+    }
 }

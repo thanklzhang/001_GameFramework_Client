@@ -50,8 +50,10 @@ public class BattleNetHandler : NetHandler
         AddBattleMsg(ProtoIDs.NotifyPlotEnd, this.OnNotifyPlotEnd);
         AddBattleMsg(ProtoIDs.NotifySetEntityShowState, this.OnNotifySetEntityShowState);
 
-    }
+        AddBattleMsg(ProtoIDs.NotifySkillInfoUpdate, this.OnNotifySkillInfoUpdate);
+        AddBattleMsg(ProtoIDs.NotifyNotifyUpdateBuffInfo, this.OnNotifyNotifyUpdateBuffInfo);
 
+    }
 
     void AddBattleMsg(ProtoIDs cmd, Action<byte[]> action)
     {
@@ -91,7 +93,8 @@ public class BattleNetHandler : NetHandler
         var clientMsg = ProtoMsgUtil.GetClientMsg(clientTrueData.ToByteArray());
         var clientCmd = (ProtoIDs)clientMsg.head.cmd;
 
-        Logx.Log("OnTransitionBattle2Player , receive the true cmd : " + clientCmd);
+        Logx.LogBattle("OnTransitionBattle2Player , receive the battle cmd : " + clientMsg.head.cmd + " : " + clientCmd);
+        //Debug.Log("zxy : OnTransitionBattle2Player , receive the true cmd : " + clientCmd);
 
         var battleMsgData = clientMsg.data;
 
@@ -111,7 +114,6 @@ public class BattleNetHandler : NetHandler
         Logx.Log("OnNotifyCreateBattle");
         var netBattleInit = NetProto.scNotifyCreateBattle.Parser.ParseFrom(msgPack.data);
 
-        //TODO：本地战斗（在服务端结算的本地战斗）
         bool isLocal = netBattleInit.LocalApplyBattleArg != null;
         if (isLocal)
         {
@@ -172,7 +174,7 @@ public class BattleNetHandler : NetHandler
                 {
                     configId = netSkill.ConfigId,
                     level = netSkill.Level,
-                    maxCDTime = netSkill.MaxCDTime
+                    maxCDTime = netSkill.MaxCDTime / 1000.0f
                 };
                 entity.skills.Add(skill);
             }
@@ -310,7 +312,7 @@ public class BattleNetHandler : NetHandler
                 {
                     configId = netSkill.ConfigId,
                     level = netSkill.Level,
-                    maxCDTime = netSkill.MaxCDTime
+                    maxCDTime = netSkill.MaxCDTime / 1000.0f
                 };
                 entity.skills.Add(skill);
 
@@ -385,7 +387,7 @@ public class BattleNetHandler : NetHandler
     private void OnNotifyEntityUseSkill(byte[] byteData)
     {
         scNotifyEntityUseSkill releaseSkill = scNotifyEntityUseSkill.Parser.ParseFrom(byteData);
-        BattleManager.Instance.MsgReceiver.On_EntityUseSkill(releaseSkill.Guid, releaseSkill.ResId);
+        BattleManager.Instance.MsgReceiver.On_EntityUseSkill(releaseSkill.Guid, releaseSkill.SkillConfigId);
     }
 
     public void SendClientPlotEnd()
@@ -403,9 +405,13 @@ public class BattleNetHandler : NetHandler
     {
         BattleManager.Instance.MsgReceiver.On_PlotEnd();
     }
+  
+    int count = 0;
 
+   
     private void OnNotifyCreateSkillEffect(byte[] byteData)
     {
+
         scNotifyCreateSkillEffect skillEffect = scNotifyCreateSkillEffect.Parser.ParseFrom(byteData);
 
         var position = skillEffect.Position;
@@ -413,11 +419,13 @@ public class BattleNetHandler : NetHandler
         //var lastTimeInt = (int)(skillEffect.LastTime * 1000);
         Battle.CreateEffectInfo createInfo = new Battle.CreateEffectInfo();
         createInfo.guid = skillEffect.Guid;
+        Logx.LogNet("create skillEffect.Guid : " + skillEffect.Guid);
         createInfo.resId = skillEffect.ResId;
-        createInfo.createPos = new Battle.Vector3(position.X, position.Y, position.Z);
+        createInfo.createPos = new Battle.Vector3(pos.x, pos.y, pos.z);
         createInfo.followEntityGuid = skillEffect.FollowEntityGuid;
         createInfo.isAutoDestroy = skillEffect.IsAutoDestroy;
         //createInfo.effectPosType = skillEffect.effectPosType;
+
 
 
         //BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(skillEffect.Guid, skillEffect.ResId, pos, skillEffect.FollowEntityGuid, skillEffect.IsAutoDestroy);
@@ -443,6 +451,8 @@ public class BattleNetHandler : NetHandler
     private void OnNotifySkillEffectDestroy(byte[] byteData)
     {
         scNotifySkillEffectDestroy skillEffectDestroy = scNotifySkillEffectDestroy.Parser.ParseFrom(byteData);
+
+
         BattleManager.Instance.MsgReceiver.On_DestroySkillEffect(skillEffectDestroy.EffectGuid);
     }
 
@@ -484,6 +494,8 @@ public class BattleNetHandler : NetHandler
             attrs.Add(attr);
         }
 
+        //Debug.Log("zxy : hh : notify attr");
+
         BattleManager.Instance.MsgReceiver.On_SyncEntityAttr(sync.EntityGuid, attrs);
     }
 
@@ -497,7 +509,8 @@ public class BattleNetHandler : NetHandler
             BattleClientMsg_BattleValue battleValue = new BattleClientMsg_BattleValue()
             {
                 type = (EntityCurrValueType)item.Type,
-                value = item.Value
+                value = item.Value,
+                fromEntityGuid = item.FromEntityGuid
             };
             values.Add(battleValue);
 
@@ -519,6 +532,24 @@ public class BattleNetHandler : NetHandler
         BattleManager.Instance.MsgReceiver.On_PlayPlot(sync.PlotName);
     }
 
+
+    private void OnNotifyNotifyUpdateBuffInfo(byte[] byteData)
+    {
+        scNotifyUpdateBuffInfo info = scNotifyUpdateBuffInfo.Parser.ParseFrom(byteData);
+        var buffProto = info.BuffInfoList[0];
+
+        var buff = BattleConvert.ToBuffInfo(buffProto);
+        BattleManager.Instance.MsgReceiver.On_BuffInfoUpdate(buff);
+    }
+
+    private void OnNotifySkillInfoUpdate(byte[] byteData)
+    {
+        scNotifySkillInfoUpdate info = scNotifySkillInfoUpdate.Parser.ParseFrom(byteData);
+        var currCDTime = info.SkillInfo.CurrCDTime / 1000.0f;
+        var maxCDTime = info.SkillInfo.MaxCDTime / 1000.0f;
+        //Debug.LogError("currCDTime + " + currCDTime + " , " + maxCDTime);
+        BattleManager.Instance.MsgReceiver.On_SkillInfoUpdate(info.EntityGuid, info.SkillConfigId, currCDTime, maxCDTime);
+    }
 
 
     public void OnNotifyPlotEnd(byte[] byteData)

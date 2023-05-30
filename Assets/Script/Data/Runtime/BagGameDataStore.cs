@@ -30,7 +30,7 @@ namespace GameData
             for (int i = serverItems.Count - 1; i >= 0; --i)
             {
                 var serverItem = serverItems[i];
-                Logx.Log("bag : serverItem " + serverItem.ConfigId + " " + serverItem.Count);
+                //Logx.Log("bag : serverItem " + serverItem.ConfigId + " " + serverItem.Count);
                 UpdateItem(serverItem);
             }
 
@@ -61,7 +61,7 @@ namespace GameData
                 bagItemList.RemoveAll(it => it.configId == configId);
                 BagItemDic.Remove(configId);
 
-                Logx.Log("bag : del " + bagItemList.Count + " " + BagItemDic.Count);
+                //Logx.Log("bag : del " + bagItemList.Count + " " + BagItemDic.Count);
             }
 
         }

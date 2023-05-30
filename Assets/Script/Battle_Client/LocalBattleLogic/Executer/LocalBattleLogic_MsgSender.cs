@@ -109,9 +109,9 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_EntitySyncDir(guid, pos);
         }
 
-        public void NotifyAll_OnEntityReleaseSkill(int guid, int skillConfig)
+        public void NotifyAll_OnEntityReleaseSkill(int guid, int skillConfigId)
         {
-            BattleManager.Instance.MsgReceiver.On_EntityUseSkill(guid, skillConfig);
+            BattleManager.Instance.MsgReceiver.On_EntityUseSkill(guid, skillConfigId);
         }
 
         public void NotifyAll_PlayPlot(string name)
@@ -202,11 +202,32 @@ namespace Battle_Client
             BattleManager.Instance.MsgReceiver.On_BuffInfoUpdate(buffInfo);
         }
 
+        public void NotifyAll_NotifySkillTrackStart(Skill skill, int skillTrackId)
+        {
+            BattleClientMsg_CreateSkillTrack create = new BattleClientMsg_CreateSkillTrack();
+            //var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skill.configId);
+            ////var ids = StringConvert.ToIntList(skillConfig.SkillTrackList, ',');
+            create.trackConfigId = skillTrackId;
+            create.releaserEntityGuid = skill.releser.guid;
+            create.targetPos = BattleConvert.ConvertToVector3(skill.targetPos);
+            create.targetEntityGuid = skill.targetGuid;
+            BattleManager.Instance.MsgReceiver.On_SkillTrackStart(create);
+        }
+
+        public void NotifyAll_NotifySkillTrackEnd(Skill skill, int skillTrackId)
+        {
+            var releaserGuid = skill.releser.guid;
+         
+            BattleManager.Instance.MsgReceiver.On_SkillTrackEnd(releaserGuid, skillTrackId);
+        }
+
+
+
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {
             throw new System.NotImplementedException();
         }
 
-       
+
     }
 }

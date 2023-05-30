@@ -90,7 +90,7 @@ namespace BattleTrigger.Editor
             var str = strs[strs.Length - 1];
 
             var fullName = NameSpaceName + "." + str;
-            Logx.Log("ParseConditionJudge fullName : " + fullName);
+            //Logx.Log("ParseConditionJudge fullName : " + fullName);
             var resultClassName = fullName;
             var type = Type.GetType(resultClassName);
             if (type != null)

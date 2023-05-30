@@ -17,6 +17,7 @@ public class BattleCtrl : BaseCtrl
     HpModule hpModule;
 
     SkillDirectorModule skillDirectModule;
+    SkillTrackModule skillTrackModule;
 
     string scenePath;
     public override void OnInit()
@@ -29,6 +30,8 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.AddListener<BattleEntity_Client, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
         EventDispatcher.AddListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
         EventDispatcher.AddListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
+        EventDispatcher.AddListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
+        EventDispatcher.AddListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
         EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, OnEntityDestroy);
         EventDispatcher.AddListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, OnOnBattleEnd);
         EventDispatcher.AddListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
@@ -36,10 +39,20 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
+        EventDispatcher.AddListener<EntityAttrType, Vector2>(EventIDs.On_UIAttrOption_PointEnter, OnUIAttrOptionPointEnter);
+        EventDispatcher.AddListener<EntityAttrType>(EventIDs.On_UIAttrOption_PointExit, OnUIAttrOptionPointExit);
+        EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, OnUISkillOptionPointEnter);
+        EventDispatcher.AddListener<int>(EventIDs.On_UISkillOption_PointExit, OnUISkillOptionPointExit);
+        EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UIBuffOption_PointEnter, OnUIBuffOptionPointEnter);
+        EventDispatcher.AddListener<int>(EventIDs.On_UIBuffOption_PointExit, OnUIBuffOptionPointExit);
+
+
+
 
         hpModule = new HpModule();
 
         skillDirectModule = new SkillDirectorModule();
+        skillTrackModule = new SkillTrackModule();
 
 
     }
@@ -129,9 +142,10 @@ public class BattleCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-        Logx.Log("battle ctrl : OnLoadFinish");
+        Logx.Log("battle ctrl : battle res OnLoadFinish");
 
         skillDirectModule.Init(this);
+        skillTrackModule.Init(this);
     }
 
     public override void OnEnter(CtrlArgs args)
@@ -187,20 +201,23 @@ public class BattleCtrl : BaseCtrl
              EntityAttrType.MoveSpeed,
 
         };
-        //之后配置
-        List<string> typeNameList = new List<string>()
-        {
-             "攻击",
-             "防御",
-             "生命值",
-             "攻击速度",
-             "攻击距离",
-             "移动速度",
-        };
+        ////之后配置
+        //List<string> typeNameList = new List<string>()
+        //{
+        //     "攻击",
+        //     "防御",
+        //     "生命值",
+        //     "攻击速度",
+        //     "攻击距离",
+        //     "移动速度",
+        //};
         for (int i = 0; i < types.Count; i++)
         {
             var attrType = types[i];
-            string name = "" + typeNameList[i];
+
+            var attrOption = AttrInfoHelper.Instance.GetAttrInfo(attrType);
+
+            string name = "" + attrOption.name;
             float value = attr.GetValue(attrType);
             AttrValueShowType showType = AttrValueShowType.Int;
             if (attrType == EntityAttrType.AttackSpeed)
@@ -218,6 +235,8 @@ public class BattleCtrl : BaseCtrl
 
             BattleAttrUIData uiData = new BattleAttrUIData()
             {
+                type = attrType,
+                describe = attrOption.describe,
                 name = name,
                 value = value,
                 valueShowType = showType
@@ -307,7 +326,7 @@ public class BattleCtrl : BaseCtrl
     //用户点击地面的时候(右键)
     void OnPlayerClickGround(Vector3 clickPos)
     {
-        Logx.Log("OnPlayerClickGround : clickPos : " + clickPos);
+        //Logx.Log("OnPlayerClickGround : clickPos : " + clickPos);
         var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
 
         var myUid = GameDataManager.Instance.UserStore.Uid;
@@ -333,7 +352,7 @@ public class BattleCtrl : BaseCtrl
                 var tag = currHit.collider.tag;
                 if (tag == "Ground")
                 {
-                    Logx.Log("hit ground : " + currHit.collider.gameObject.name);
+                    //Logx.Log("hit ground : " + currHit.collider.gameObject.name);
                     pos = currHit.point;
                     return true;
 
@@ -360,7 +379,7 @@ public class BattleCtrl : BaseCtrl
                 var tag = currHit.collider.tag;
                 if (tag == "EntityCollider")
                 {
-                    Logx.Log("hit entity : " + currHit.collider.gameObject.name);
+                    //Logx.Log("hit entity : " + currHit.collider.gameObject.name);
                     gameObject = currHit.collider.gameObject;
                     return true;
                 }
@@ -383,6 +402,7 @@ public class BattleCtrl : BaseCtrl
     {
         this.ui.Update(timeDelta);
         this.skillDirectModule.Update(timeDelta);
+        skillTrackModule.Update(timeDelta);
 
         var battleState = BattleManager.Instance.BattleState;
         if (battleState == BattleState.End)
@@ -458,7 +478,7 @@ public class BattleCtrl : BaseCtrl
 
                     if (battleEntity != null)
                     {
-                        Logx.Log("battle entity not null");
+                        //Logx.Log("battle entity not null");
                         var targetGuid = battleEntity.guid;
 
                         var targetPos = Vector3.right;
@@ -697,7 +717,7 @@ public class BattleCtrl : BaseCtrl
             BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
         }
 
-        Logx.Log("use skill : skillId : " + skillId + " targetGuid : " + targetGuid + " targetPos : " + targetPos);
+        //Logx.Log("use skill : skillId : " + skillId + " targetGuid : " + targetGuid + " targetPos : " + targetPos);
 
     }
 
@@ -718,8 +738,15 @@ public class BattleCtrl : BaseCtrl
     //当技能信息改变了
     public void OnSkillInfoUpdate(int entityGuid, BattleSkillInfo skillInfo)
     {
-        var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
-        this.ui.RefreshSkillInfo(skillInfo.configId, skillInfo.currCDTime);
+        //var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+
+        var myEntityGuid = BattleManager.Instance.GetLocalCtrlHerGuid();
+
+        if (myEntityGuid == entityGuid)
+        {
+            this.ui.RefreshSkillInfo(skillInfo.configId, skillInfo.currCDTime);
+        }
+
     }
 
     //当 buff 信息改变了
@@ -733,13 +760,75 @@ public class BattleCtrl : BaseCtrl
             buff.maxCDTime = buffInfo.maxCDTime;
             buff.currCDTime = buffInfo.currCDTime;
             buff.isRemove = buffInfo.isRemove;
-            buff.iconResId = buffInfo.iconResId;
+            //buff.iconResId = buffInfo.iconResId;
+            buff.configId = buffInfo.configId;
             buff.stackCount = buffInfo.stackCount;
 
             this.ui.RefreshBuffInfo(buff);
         }
 
     }
+
+    public void OnUIAttrOptionPointEnter(EntityAttrType type, Vector2 pos)
+    {
+        //这里应该通过属性 key 来进行寻找文本
+        var attrOption = AttrInfoHelper.Instance.GetAttrInfo(type);
+        UIArgs args = new DescribeUIArgs()
+        {
+            name = attrOption.name,
+            content = attrOption.describe,
+            pos = pos + Vector2.right * 50
+
+        };
+        this.ui.ShowDescribeUI(args);
+    }
+
+    public void OnUIAttrOptionPointExit(EntityAttrType type)
+    {
+        this.ui.HideDescribeUI();
+    }
+
+    public void OnUISkillOptionPointEnter(int skillId, Vector2 pos)
+    {
+        var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+
+        var des = skillConfig.Describe;
+        UIArgs args = new DescribeUIArgs()
+        {
+            name = skillConfig.Name,
+            content = des,
+            pos = pos + Vector2.right * 50
+
+        };
+        this.ui.ShowDescribeUI(args);
+    }
+
+    public void OnUISkillOptionPointExit(int skillId)
+    {
+        this.ui.HideDescribeUI();
+    }
+
+    public void OnUIBuffOptionPointEnter(int buffConfigId, Vector2 pos)
+    {
+        var skillConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(buffConfigId);
+
+        var des = skillConfig.Describe;
+        UIArgs args = new DescribeUIArgs()
+        {
+            name = skillConfig.Name,
+            content = des,
+            pos = pos + Vector2.right * 50
+
+        };
+        this.ui.ShowDescribeUI(args);
+    }
+
+    public void OnUIBuffOptionPointExit(int OnUIBuffOptionPointEnter)
+    {
+        this.ui.HideDescribeUI();
+    }
+
+
 
     public void OnEntityDestroy(BattleEntity_Client entity)
     {
@@ -776,6 +865,16 @@ public class BattleCtrl : BaseCtrl
         ui.SetHpShowState(entity.guid, isShow);
     }
 
+    public void OnSkillTrackStart(TrackBean trackBean)
+    {
+        this.skillTrackModule.AddTrack(trackBean);
+    }
+
+    public void OnSkillTrackEnd(int entityGuid, int trackId)
+    {
+        this.skillTrackModule.DeleteTrack(entityGuid, trackId);
+    }
+
     public override void OnInactive()
     {
         //EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
@@ -800,17 +899,26 @@ public class BattleCtrl : BaseCtrl
         BattleEntityManager.Instance.ReleaseAllEntities();
         BattleSkillEffectManager.Instance.ReleaseAll();
         skillDirectModule.Release();
+        skillTrackModule.Release();
 
         EventDispatcher.RemoveListener<string>(EventIDs.OnPlotEnd, OnPlayPlotEnd);
         EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.RemoveListener<BattleEntity_Client, int>(EventIDs.OnChangeEntityBattleData, OnChangeEntityBattleData);
         EventDispatcher.RemoveListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
         EventDispatcher.RemoveListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
+        EventDispatcher.RemoveListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
+        EventDispatcher.RemoveListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
         EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
         EventDispatcher.RemoveListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState, this.OnEntityChangeShowState);
         EventDispatcher.RemoveListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
+        EventDispatcher.RemoveListener<EntityAttrType, Vector2>(EventIDs.On_UIAttrOption_PointEnter, OnUIAttrOptionPointEnter);
+        EventDispatcher.RemoveListener<EntityAttrType>(EventIDs.On_UIAttrOption_PointExit, OnUIAttrOptionPointExit);
+        EventDispatcher.RemoveListener<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, OnUISkillOptionPointEnter);
+        EventDispatcher.RemoveListener<int>(EventIDs.On_UISkillOption_PointExit, OnUISkillOptionPointExit);
+        EventDispatcher.RemoveListener<int, Vector2>(EventIDs.On_UIBuffOption_PointEnter, OnUIBuffOptionPointEnter);
+        EventDispatcher.RemoveListener<int>(EventIDs.On_UIBuffOption_PointExit, OnUIBuffOptionPointExit);
 
 
     }

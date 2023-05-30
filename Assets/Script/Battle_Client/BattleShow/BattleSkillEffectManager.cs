@@ -58,6 +58,7 @@ namespace Battle_Client
             if (skillEffectDic.ContainsKey(guid))
             {
                 Logx.LogWarning("BattleSkillEffectManager : CreateSkillEffectInfo : the guid is exist : " + guid);
+                Debug.LogWarning("BattleSkillEffectManager : CreateSkillEffectInfo : the guid is exist : " + guid + " resId : " + resId);
                 return null;
             }
 
@@ -89,6 +90,8 @@ namespace Battle_Client
             }
 
             //skillEffect.SetLastTime(lastTime);
+
+            //test
             skillEffect.SetIsAutoDestroy(isAutoDestroy);
 
             if (createEffectInfo.buffInfo != null && createEffectInfo.buffInfo.guid > 0)
@@ -96,6 +99,7 @@ namespace Battle_Client
                 skillEffect.SetBuffInfo(createEffectInfo.buffInfo);
             }
 
+            //Logx.Log("add skill effect : guid : " + guid);
             skillEffectDic.Add(guid, skillEffect);
 
             //entity.StartLoadModel(loadFinishCallback);

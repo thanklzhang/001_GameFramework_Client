@@ -19,10 +19,14 @@ public class BattleSkillUI
     List<BattleSkillUIData> skillDataList = new List<BattleSkillUIData>();
     List<BattleSkillUIShowObj> skillShowObjList = new List<BattleSkillUIShowObj>();
 
+    public BattleUI battleUI;
+
     public void Init(GameObject gameObject, BattleUI battleUI)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
+
+        this.battleUI = battleUI;
 
         skillListRoot = this.transform.Find("group");
         this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
@@ -61,7 +65,7 @@ public class BattleSkillUI
         }
         else
         {
-            Logx.LogWarning("BattleSkillUI : UpdateSkillInfo : the skillId is not found : " + skillId);
+            //Logx.LogWarning("BattleSkillUI : UpdateSkillInfo : the skillId is not found : " + skillId);
         }
     }
 

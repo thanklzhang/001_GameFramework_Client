@@ -49,6 +49,7 @@ public class HpUIShowObj
 
         var currHp = this.data.nowCurrHp;
         var maxHp = this.data.maxHp;
+     
         var ratio = currHp / maxHp;
 
         if (preCurrHp >= 0)

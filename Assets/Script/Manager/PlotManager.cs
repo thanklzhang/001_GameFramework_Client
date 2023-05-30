@@ -31,7 +31,7 @@ public class PlotManager : Singleton<PlotManager>
         var plotConfigFolderPath = Application.dataPath + "/BuildRes/PlotConfig";
         var path = Path.Combine(plotConfigFolderPath, file);
         var plot = JsonTool.LoadObjectFromFile<Plot>(path);
-        Logx.Log("path : " + path);
+        //Logx.Log("path : " + path);
         plotPlayer.StartPlot(plot,(name)=>
         {
             OnPlotShowEnd();

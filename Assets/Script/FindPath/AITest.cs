@@ -42,7 +42,7 @@ public class AITest : MonoBehaviour
             var randX = Battle.MyRandom.Next(0, mapWidth - 1, r);
             var randY = Battle.MyRandom.Next(0, mapHeight - 1, r);
 
-            Logx.Log("rand x : " + randX + " randY : " + randY);
+            //Logx.Log("rand x : " + randX + " randY : " + randY);
             
             var isObstacle = FindPathTest.instance.IsStaticObstacle(randX, randY);
             if (!isObstacle)

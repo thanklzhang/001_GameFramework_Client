@@ -32,6 +32,18 @@ namespace Battle_Client
             return vector3;
         }
 
+        public static Vector3 ConvertToVector3(Battle.Vector3 position)
+        {
+            UnityEngine.Vector3 v = new Vector3()
+            {
+                x = position.x,
+                y = position.y,
+                z = position.z
+            };
+
+            return v;
+        }
+
         public static int ToValue(float value)
         {
             int v = (int)(value * 1000);
@@ -41,6 +53,19 @@ namespace Battle_Client
         public static float GetValue(int value)
         {
             return value / 1000.0f;
+        }
+
+        public static Battle.BuffEffectInfo ToBuffInfo(BuffInfoProto buffProto)
+        {
+            Battle.BuffEffectInfo buff = new Battle.BuffEffectInfo();
+            buff.guid = buffProto.Guid;
+            buff.configId = buffProto.BuffConfigId;
+            buff.currCDTime = buffProto.CurrCDTime;
+            buff.maxCDTime = buffProto.MaxCDTime;
+            buff.statckCount = buffProto.StackCount;
+            buff.targetEntityGuid = buffProto.TargetEntityGuid;
+
+            return buff;
         }
 
         //public static List<BattleClientMsg_BattleAttr> MakeEntityAttr(Battle.EntityAttrGroup finalAttrGroup)

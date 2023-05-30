@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Battle_Client;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Table;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -19,9 +21,11 @@ public enum AttrValueShowType
 }
 public class BattleAttrUIData
 {
+    public EntityAttrType type;
     public string name;
     public int iconResId;
     public float value;
+    public string describe;
     public AttrValueShowType valueShowType;
 }
 
@@ -31,11 +35,17 @@ public class BattleAttrUIShowObj : BaseUIShowObj<BattleAttrUI>
     Text valueText;
     Texture icon;
     public BattleAttrUIData uiData;
+    UIEventTrigger evetnTrigger;
 
     public override void OnInit()
     {
         nameText = this.transform.Find("name_text").GetComponent<Text>();
         valueText = this.transform.Find("value_text").GetComponent<Text>();
+        evetnTrigger = nameText.GetComponent<UIEventTrigger>();
+
+        evetnTrigger.OnPointEnterEvent += OnPointEnter;
+        evetnTrigger.OnPointerExitEvent += OnPointExit;
+
         //icon
     }
 
@@ -56,9 +66,34 @@ public class BattleAttrUIShowObj : BaseUIShowObj<BattleAttrUI>
         }
     }
 
+
+    public void OnPointEnter(PointerEventData e)
+    {
+        //转换成点在 BattleUI 中的 localPosition
+
+        var camera3D = CameraManager.Instance.GetCamera3D();
+        var cameraUI = CameraManager.Instance.GetCameraUI();
+
+        var screenPos = e.position;
+
+        Vector2 uiPos;
+        var battleUIRect = parentObj.battleUI.gameObject.GetComponent<RectTransform>();
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(battleUIRect, screenPos, cameraUI.camera, out uiPos);
+
+        EventDispatcher.Broadcast<EntityAttrType,Vector2>(EventIDs.On_UIAttrOption_PointEnter, this.uiData.type, uiPos);
+
+    }
+
+    public void OnPointExit(PointerEventData e)
+    {
+        EventDispatcher.Broadcast<EntityAttrType>(EventIDs.On_UIAttrOption_PointExit, this.uiData.type);
+    }
+
+
     public override void OnRelease()
     {
-
+        evetnTrigger.OnPointEnterEvent -= OnPointEnter;
+        evetnTrigger.OnPointerExitEvent -= OnPointExit;
     }
 
 }
@@ -76,9 +111,10 @@ public class BattleAttrUI
 
     List<BattleAttrUIData> attrDataList = new List<BattleAttrUIData>();
     List<BattleAttrUIShowObj> attrShowObjList = new List<BattleAttrUIShowObj>();
-
+    public BattleUI battleUI;
     public void Init(GameObject gameObject, BattleUI battleUI)
     {
+        this.battleUI = battleUI;
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
 

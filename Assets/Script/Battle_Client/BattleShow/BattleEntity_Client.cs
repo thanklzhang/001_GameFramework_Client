@@ -172,7 +172,7 @@ namespace Battle_Client
         //开始自行加载(主要用于创建 entity 的时候自己自行异步加载 )
         public void StartSelfLoadModel()
         {
-            Logx.Log("StartLoadModel");
+            //Logx.Log("StartLoadModel");
             isFinishLoad = false;
             ResourceManager.Instance.GetObject<GameObject>(path, (obj) =>
             {
@@ -182,7 +182,7 @@ namespace Battle_Client
 
         public void OnLoadModelFinish(GameObject obj)
         {
-            Logx.Log("BattleEntity : OnLoadModelFinish");
+            //Logx.Log("BattleEntity : OnLoadModelFinish");
             isFinishLoad = true;
             //var position = gameObject.transform.position;
             //GameObject.Destroy(gameObject);
@@ -340,6 +340,7 @@ namespace Battle_Client
             PlayAnimation("free");
 
             this.SetPosition(endPos);
+            
         }
 
 
@@ -359,7 +360,8 @@ namespace Battle_Client
                 PlayAnimation("attack");
             }
             //play animation
-            Logx.Log(this.guid + " release skill : " + skillConfigId);
+            //Logx.Log(this.guid + " release skill : " + skillConfigId);
+           
         }
 
         public BattleSkillInfo FindNormalAttackSkill()
@@ -447,7 +449,7 @@ namespace Battle_Client
                     this.attr.attackRange = item.value;
                 }
 
-                Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
+                //Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
 
                 EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, 0);
             }
@@ -495,7 +497,7 @@ namespace Battle_Client
                 {
                     this.CurrHealth = value;
                 }
-                Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
+                //Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
 
                 EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, item.fromEntityGuid);
 
@@ -581,6 +583,7 @@ namespace Battle_Client
         }
         public void PlayAnimation(string aniName, float speed = 1.0f)
         {
+          
             if (isFinishLoad && animation != null)
             {
                 var state = animation[aniName];

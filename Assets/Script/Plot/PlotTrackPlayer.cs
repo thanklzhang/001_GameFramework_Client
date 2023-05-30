@@ -52,7 +52,7 @@ namespace PlotDesigner.Runtime
             var nameSpaceName = "PlotDesigner.Runtime";
             var fullName = nameSpaceName + "." + trackPlayerName;
             PlotTrackNodePlayer trackPlayer = null;
-            Logx.Log("CreateInstance : " + assembleName + " : " + fullName);
+            //Logx.Log("CreateInstance : " + assembleName + " : " + fullName);
             trackPlayer = Assembly.Load(assembleName).CreateInstance(fullName) as PlotTrackNodePlayer;
             return trackPlayer;
         }

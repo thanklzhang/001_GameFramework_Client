@@ -703,6 +703,11 @@ namespace Battle_Client
             return this.localCtrlEntity.gameObject;
         }
 
+        public int GetLocalCtrlHerGuid()
+        {
+            return this.localCtrlEntity.guid;
+        }
+
         public BattleEntityAttr GetLocalCtrlHeroAttrs()
         {
             return this.localCtrlEntity.attr;

@@ -21,7 +21,7 @@ public class LoadBattleViewEntityRequest : LoadObjectRequest
 
     public override void Start()
     {
-        Logx.Log("LoadBattleViewEntityRequest : start load");
+        //Logx.Log("LoadBattleViewEntityRequest : start load");
         var path = battleEntity.path;
 
         ResourceManager.Instance.GetObject<GameObject>(path, (gameObject) =>
@@ -33,7 +33,7 @@ public class LoadBattleViewEntityRequest : LoadObjectRequest
 
     public void OnFinishLoadEntityObj(BattleEntity_Client viewEntity, GameObject obj)
     {
-        Logx.Log("LoadBattleViewEntityRequest : OnFinishLoadEntityObj : guid : " + viewEntity.guid);
+        //Logx.Log("LoadBattleViewEntityRequest : OnFinishLoadEntityObj : guid : " + viewEntity.guid);
         isFinish = true;
         selfFinishCallback?.Invoke(viewEntity, obj);
     }

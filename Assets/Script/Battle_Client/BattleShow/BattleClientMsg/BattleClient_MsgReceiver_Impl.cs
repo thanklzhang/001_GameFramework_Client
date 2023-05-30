@@ -218,5 +218,24 @@ namespace Battle_Client
 
             }
         }
+
+        public void On_SkillTrackStart(BattleClientMsg_CreateSkillTrack create)
+        {
+            TrackBean trackBean = new TrackBean()
+            {
+                trackConfigId = create.trackConfigId,
+                releaserGuid = create.releaserEntityGuid,
+                targetPos = create.targetPos,
+                targetEntityGuid = create.targetEntityGuid
+
+            };
+
+            EventDispatcher.Broadcast<TrackBean>(EventIDs.OnSkillTrackStart, trackBean);
+        }
+
+        public void On_SkillTrackEnd(int entityGuid,int skillTrackConfigId)
+        {
+            EventDispatcher.Broadcast<int,int>(EventIDs.OnSkillTrackEnd, entityGuid, skillTrackConfigId);
+        }
     }
 }

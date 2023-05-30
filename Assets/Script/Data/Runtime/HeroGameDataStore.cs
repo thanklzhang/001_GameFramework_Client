@@ -11,13 +11,6 @@ namespace GameData
 {
 
 
-    public class HeroData
-    {
-        public int guid;
-        public int configId;
-        public int level;
-    }
-
     public class HeroGameDataStore : GameDataStore
     {
         //public int flag;//待定
@@ -53,6 +46,8 @@ namespace GameData
             if (null == currLocalHero)
             {
                 currLocalHero = new HeroData();
+
+                currLocalHero = HeroConvert.ToHeroData(serverHero);
                 this.heroList.Add(currLocalHero);
                 this.heroDic.Add(serverHero.Guid, currLocalHero);
                 //add
@@ -60,10 +55,14 @@ namespace GameData
             else
             {
                 //update
+
+                currLocalHero.guid = serverHero.Guid;
+                currLocalHero.configId = serverHero.ConfigId;
+                currLocalHero.level = serverHero.Level;
             }
-            currLocalHero.guid = serverHero.Guid;
-            currLocalHero.configId = serverHero.ConfigId;
-            currLocalHero.level = serverHero.Level;
+
+
+
         }
 
         public HeroData GetDataByGuid(int guid)
@@ -90,5 +89,6 @@ namespace GameData
             }
             return null;
         }
+       
     }
 }

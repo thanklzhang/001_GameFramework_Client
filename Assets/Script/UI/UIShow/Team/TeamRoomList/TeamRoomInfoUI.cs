@@ -10,10 +10,11 @@ public class TeamRoomInfoUI : BaseUI
 {
     //this callback
     public Action event_onClickCloseBtn;
-    public Action event_onStartBattleeBtn;
+    public Action event_onClickStartBattleBtn;
 
     //single item callback
     public Action<int> event_onClickSinglePlayerReadyBtn;
+    public Action<int> event_onClickSinglePlayerChangeHeroBtn;
 
     //ui component
     Button closeBtn;
@@ -36,6 +37,7 @@ public class TeamRoomInfoUI : BaseUI
         closeBtn = transform.Find("closeBtn").GetComponent<Button>();
         startBattleBtn = transform.Find("battleBtn").GetComponent<Button>();
 
+
         roomNameText = transform.Find("roomName").GetComponent<Text>();
         stageNameText = transform.Find("stageName").GetComponent<Text>();
 
@@ -45,7 +47,7 @@ public class TeamRoomInfoUI : BaseUI
         });
         startBattleBtn.onClick.AddListener(() =>
         {
-            event_onStartBattleeBtn?.Invoke();
+            event_onClickStartBattleBtn?.Invoke();
         });
 
         roomPlayerDataList = new List<TeamRoomPlayerUIData>();
@@ -87,8 +89,9 @@ public class TeamRoomInfoUI : BaseUI
     protected override void OnRelease()
     {
         event_onClickCloseBtn = null;
-        event_onStartBattleeBtn = null;
+        event_onClickStartBattleBtn = null;
         event_onClickSinglePlayerReadyBtn = null;
+        event_onClickSinglePlayerChangeHeroBtn = null;
 
         foreach (var item in roomPlayerShowObjList)
         {
@@ -111,8 +114,7 @@ public class TeamRoomPlayerUIData
 
     public bool isMaster;
     public bool isHasReady;
-    public int selectHeroGuid;
-
+    public HeroCardUIData heroUIData;
     public bool isSelf;
 }
 
@@ -131,7 +133,12 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
     Text nameText;
     Text levelText;
 
-    RawImage avatarImg;
+    RawImage playerAvatarImg;
+
+    RawImage heroAvatarImg;
+    Text heroLevelText;
+    Text heroNameText;
+    Button changeHeroBtn;
 
     Button readyBtn;
     Text readyBtnText;
@@ -156,12 +163,22 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
         hasReadyText = showRoot.Find("hasReadyText").GetComponent<Text>();
         readyBtn = showRoot.Find("readyBtn").GetComponent<Button>();
         readyBtnText = readyBtn.transform.Find("Text").GetComponent<Text>();
+        changeHeroBtn = showRoot.Find("changeHeroBtn").GetComponent<Button>();
 
         //avatarImg = transform.Find("joinBtn").GetComponent<RawImage>();
+
+        heroAvatarImg = showRoot.Find("selectHeroIcon").GetComponent<RawImage>();
+        heroLevelText = showRoot.Find("heroLevelText").GetComponent<Text>();
+        heroNameText = showRoot.Find("heroNameText").GetComponent<Text>();
 
         readyBtn.onClick.AddListener(() =>
         {
             this.parentObj.OnClickSinglePlayerReadyBtn(this.uiPlayerData.uid);
+        });
+
+        changeHeroBtn.onClick.AddListener(() =>
+        {
+            this.parentObj.event_onClickSinglePlayerChangeHeroBtn(this.uiPlayerData.uid);
         });
 
     }
@@ -175,6 +192,15 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
         idText.text = "" + uiPlayerData.uid;
         nameText.text = uiPlayerData.name;
         levelText.text = "" + uiPlayerData.level;
+
+        var heroConfigId = uiPlayerData.heroUIData.configId;
+        var heroConfig = TableManager.Instance.GetById<Table.EntityInfo>(heroConfigId);
+        heroLevelText.text = "" + uiPlayerData.heroUIData.level;
+        heroNameText.text = "" + heroConfig.Name;
+
+        var userStore = GameData.GameDataManager.Instance.UserStore;
+        var isShowChangeHeroBtn = (int)userStore.Uid == this.uiPlayerData.uid;
+        changeHeroBtn.gameObject.SetActive(isShowChangeHeroBtn);
 
         if (uiPlayerData.isSelf)
         {
@@ -216,6 +242,7 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
     public override void OnRelease()
     {
         readyBtn.onClick.RemoveAllListeners();
+        changeHeroBtn.onClick.RemoveAllListeners();
     }
 }
 

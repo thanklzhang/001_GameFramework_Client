@@ -40,7 +40,17 @@ public enum EventIDs
     OnSetEntityPosition = 101201,
     OnSkillInfoUpdate = 101202,         //当有技能信息改变的时候
     OnBuffInfoUpdate = 101203,         //当有buff信息改变的时候
+    OnSkillTrackStart = 101204,         //当有技能轨迹开始的时候
+    OnSkillTrackEnd = 101205,         //当有技能轨迹结束的时候
     //
 
+    //UI-------------
+    On_UIAttrOption_PointEnter = 101501,
+    On_UIAttrOption_PointExit = 101502,
+    On_UISkillOption_PointEnter = 101503,
+    On_UISkillOption_PointExit = 101504,
+    On_UIBuffOption_PointEnter = 101505,
+    On_UIBuffOption_PointExit = 101506,
+    //
 
 }

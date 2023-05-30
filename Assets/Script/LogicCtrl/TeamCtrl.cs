@@ -21,6 +21,7 @@ public class TeamCtrl : BaseCtrl
         {
             new LoadUIRequest<TeamRoomListUI>(){selfFinishCallback = OnRoomListUILoadFinish},
             new LoadUIRequest<TeamRoomInfoUI>(){selfFinishCallback = OnRoomInfoUILoadFinish},
+
         });
     }
 
@@ -33,7 +34,6 @@ public class TeamCtrl : BaseCtrl
     {
         this.roomInfoUI = roomInfoUI;
     }
-
 
     public override void OnLoadFinish()
     {
@@ -101,7 +101,7 @@ public class TeamCtrl : BaseCtrl
             name = player.playerInfo.name,
             level = player.playerInfo.level,
             avatarURL = player.playerInfo.avatarURL,
-            selectHeroGuid = player.selectHeroGuid,
+            heroUIData = HeroCardUIConvert.GetUIData(player.selectHeroData),
             isHasReady = player.isHasReady,
             isMaster = player.isMaster,
             isSelf = player.playerInfo.uid == (int)selfUid
@@ -150,6 +150,60 @@ public class TeamCtrl : BaseCtrl
 
          });
     }
+    int currSelectHeroGuid;
+    public void OnRoomInfoUIClickSinglePlayerChangeHeroBtn(int uid)
+    {
+
+
+        if (uid == (int)GameData.GameDataManager.Instance.UserStore.Uid)
+        {
+            SelectHeroUIArgs args = new SelectHeroUIArgs();
+
+            args.heroCardUIDataList = new List<HeroCardUIData>();
+            var heroList = GameData.GameDataManager.Instance.HeroStore.HeroList;
+
+            for (int i = 0; i < heroList.Count; i++)
+            {
+                var hero = heroList[i];
+
+                HeroCardUIData uiData = HeroCardUIConvert.GetUIData(hero);
+                args.heroCardUIDataList.Add(uiData);
+            }
+
+            //默认选择第一个
+            if (0 == currSelectHeroGuid)
+            {
+                currSelectHeroGuid = heroList[0].guid;
+            }
+
+            args.event_ClickConfirmBtn = () =>
+            {
+                //send net
+                CtrlManager.Instance.globalCtrl.HideSelectHeroUI();
+
+                NetProto.csSelectUseHeroInTeamRoom csSelect = new NetProto.csSelectUseHeroInTeamRoom();
+                var enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+
+                var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
+                net.SendSelectUseHeroInTeamRoom(enterRoomData.id, currSelectHeroGuid);
+
+            };
+
+            args.event_ClickOneHeroOption = (uid) =>
+            {
+                currSelectHeroGuid = uid;
+                CtrlManager.Instance.globalCtrl.SelectHero(currSelectHeroGuid);
+
+            };
+
+            args.currSelectHeroGuid = currSelectHeroGuid;
+
+            CtrlManager.Instance.globalCtrl.ShowSelectHeroUI(args);
+        }
+
+
+    }
+
     public void OnRoomInfoUIClickStartBattleBtn()
     {
         var net = NetHandlerManager.Instance.GetHandler<BattleEntranceNetHandler>();
@@ -202,7 +256,8 @@ public class TeamCtrl : BaseCtrl
 
         roomInfoUI.event_onClickCloseBtn += OnRoomInfoUIClickCloseBtn;
         roomInfoUI.event_onClickSinglePlayerReadyBtn += OnRoomInfoUIClickSinglePlayerReadyBtn;
-        roomInfoUI.event_onStartBattleeBtn += OnRoomInfoUIClickStartBattleBtn;
+        roomInfoUI.event_onClickSinglePlayerChangeHeroBtn += OnRoomInfoUIClickSinglePlayerChangeHeroBtn;
+        roomInfoUI.event_onClickStartBattleBtn += OnRoomInfoUIClickStartBattleBtn;
 
         EventDispatcher.AddListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.AddListener(EventIDs.OnPlayerChangeInfoInTeamRoom, OnPlayerChangeInfoInTamRoom);
@@ -294,7 +349,8 @@ public class TeamCtrl : BaseCtrl
 
         roomInfoUI.event_onClickCloseBtn -= OnRoomInfoUIClickCloseBtn;
         roomInfoUI.event_onClickSinglePlayerReadyBtn -= OnRoomInfoUIClickSinglePlayerReadyBtn;
-        roomInfoUI.event_onStartBattleeBtn -= OnRoomInfoUIClickStartBattleBtn;
+        roomInfoUI.event_onClickSinglePlayerChangeHeroBtn -= OnRoomInfoUIClickSinglePlayerChangeHeroBtn;
+        roomInfoUI.event_onClickStartBattleBtn -= OnRoomInfoUIClickStartBattleBtn;
 
         EventDispatcher.RemoveListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.RemoveListener(EventIDs.OnPlayerChangeInfoInTeamRoom, OnPlayerChangeInfoInTamRoom);

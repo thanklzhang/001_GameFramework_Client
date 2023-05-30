@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Battle_Client;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Table;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 {
-    Texture icon;
+    RawImage icon;
     GameObject canUseMaskGo;
     GameObject cdRootGo;
     Image cdImg;
     Text cdTimeText;
-
+    UIEventTrigger evetnTrigger;
     public BattleSkillUIData uiData;
 
     float currCDTimer = 0;
@@ -24,7 +26,13 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
         cdRootGo = this.transform.Find("CDRoot").gameObject;
         cdTimeText = this.transform.Find("CDRoot/CDShow/cd_text").GetComponent<Text>();
         cdImg = this.transform.Find("CDRoot/CDShow").GetComponent<Image>();
-        //icon
+        icon = this.transform.Find("icon").GetComponent<RawImage>();
+
+        evetnTrigger = icon.GetComponent<UIEventTrigger>();
+
+        evetnTrigger.OnPointEnterEvent += OnPointEnter;
+        evetnTrigger.OnPointerExitEvent += OnPointExit;
+
     }
 
     public override void OnRefresh(object data, int index)
@@ -35,7 +43,7 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
     internal void UpdateInfo(float cdTime)
     {
         currCDTimer = cdTime;
-
+       
         if (cdTime <= 0)
         {
             //可以使用技能了
@@ -55,6 +63,7 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 
     public void Update(float deltaTime)
     {
+     
         if (currCDTimer < 0)
         {
             currCDTimer = 0;
@@ -62,6 +71,8 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 
         if (currCDTimer > 0)
         {
+            currCDTimer -= deltaTime;
+
             float showTime = 0.0f;
             var showStr = "";
             if (currCDTimer >= 0.50f)
@@ -76,9 +87,15 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
                 showStr = string.Format("{0:F}", showTime);
             }
 
-            currCDTimer -= deltaTime;
+         
+
+            //Debug.LogError("currCDTimer " + currCDTimer + " " + uiData.maxCDTime);
             cdTimeText.text = showStr;
+            //Debug.Log("currCDTimer" + currCDTimer);
+            //Debug.Log("uiData.maxCDTime" + uiData.maxCDTime);
             cdImg.fillAmount = currCDTimer / uiData.maxCDTime;
+
+          
         }
 
     }
@@ -88,9 +105,33 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
         return this.uiData.skillId;
     }
 
+    public void OnPointEnter(PointerEventData e)
+    {
+        //转换成点在 BattleUI 中的 localPosition
+
+        var camera3D = CameraManager.Instance.GetCamera3D();
+        var cameraUI = CameraManager.Instance.GetCameraUI();
+
+        var screenPos = e.position;
+
+        Vector2 uiPos;
+        var battleUIRect = parentObj.battleUI.gameObject.GetComponent<RectTransform>();
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(battleUIRect, screenPos, cameraUI.camera, out uiPos);
+
+        EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, this.uiData.skillId, uiPos);
+
+    }
+
+    public void OnPointExit(PointerEventData e)
+    {
+        EventDispatcher.Broadcast<int>(EventIDs.On_UISkillOption_PointExit, this.uiData.skillId);
+    }
+
+
     public override void OnRelease()
     {
-
+        evetnTrigger.OnPointEnterEvent -= OnPointEnter;
+        evetnTrigger.OnPointerExitEvent -= OnPointExit;
     }
 
 }

@@ -150,7 +150,7 @@ public class LoginCtrl : BaseCtrl
         var ip = result.Ip;
         var port = result.Port;
         var uid = result.Uid;
-        Logx.Log("get uid : " + uid);
+        Logx.Log("StartToEnterGame : get uid : " + uid);
 
         ui.SetStateText("start to connect gate server ...");
 

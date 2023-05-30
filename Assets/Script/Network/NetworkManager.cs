@@ -77,7 +77,8 @@ public class NetworkManager : Singleton<NetworkManager>
 
         if (msg != null)
         {
-            Logx.Log("Network Mgr : ReceiveMsg : cmd : " + (ProtoIDs)msg.cmdId);
+            //Logx.Log("Network Mgr : ReceiveMsg : cmd : " + (ProtoIDs)msg.cmdId);
+            //Debug.Log("zxy : Network Mgr : ReceiveMsg : cmd : " + (ProtoIDs)msg.cmdId);
 
             NetMsgManager.Instance.OnReceiveMsg(msg);
         }
@@ -93,7 +94,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public void SendMsg(ProtoIDs cmd, byte[] data)
     {
-        Logx.Log("Network Mgr : SendMsg : cmd : " + cmd + ":" + (int)cmd);
+        Logx.Log("Network : SendMsg : cmd : " + cmd + ":" + (int)cmd);
         lastSendTimeStamp = CommonFunction.GetTimeStamp();
         //Logx.Log("send timeStamp : " + lastSendTimeStamp);
         tcpNetClient.Send((int)cmd, data);

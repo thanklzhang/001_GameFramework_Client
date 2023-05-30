@@ -141,6 +141,8 @@ namespace Battle_Client
 
             entityDic.Add(guid, entity);
 
+            //Debug.Log("zxy : hh : add entity guid : " + guid );
+
             //EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
 
             //entity.StartLoadModel(loadFinishCallback);
@@ -230,6 +232,10 @@ namespace Battle_Client
                 var entity = item.Value;
                 if (entity.collider != null)
                 {
+                    if (entity.CurrHealth <= 0)
+                    {
+                        continue;
+                    }
                     var currGo = entity.collider.gameObject;
 
                     var vector = currGo.transform.position - pos;

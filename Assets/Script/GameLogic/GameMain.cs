@@ -93,6 +93,8 @@ public class GameMain : MonoBehaviour
         GameDataManager.Instance.Init();
         ServiceManager.Instance.Init();
 
+        InitHelper();
+
         //全局 ctrl
         yield return CtrlManager.Instance.EnterGlobalCtrl();
 
@@ -114,6 +116,11 @@ public class GameMain : MonoBehaviour
         isLoadFinish = true;
         finishCallback?.Invoke();
 
+    }
+
+    public void InitHelper()
+    {
+        AttrInfoHelper.Instance.Init();
     }
 
     //test loader

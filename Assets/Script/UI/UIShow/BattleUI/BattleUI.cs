@@ -36,6 +36,9 @@ public class BattleUI : BaseUI
     BattleSkillUI skillUI;
     //buff 显示面板
     BattleBuffUI buffUI;
+    //通用描述面板
+    DescribeUI describeUI;
+
 
     protected override void OnInit()
     {
@@ -83,6 +86,12 @@ public class BattleUI : BaseUI
         buffUI = new BattleBuffUI();
         buffUI.Init(buffUIRoot.gameObject, this);
 
+        //通用描述面板
+        var describeUIRoot = this.transform.Find("DescribeBar");
+        describeUI = new DescribeUI();
+        describeUI.Init(describeUIRoot.gameObject, this);
+        describeUI.Hide();
+
     }
     protected override void OnUpdate(float timeDelta)
     {
@@ -93,6 +102,8 @@ public class BattleUI : BaseUI
         this.skillUI.Update(timeDelta);
 
         this.buffUI.Update(timeDelta);
+
+        this.describeUI.Update(timeDelta);
     }
 
 
@@ -148,7 +159,6 @@ public class BattleUI : BaseUI
     }
     #endregion
 
-
     #region 技能面板相关
     internal void RefreshBattleSkillUI(UIArgs args)
     {
@@ -180,10 +190,29 @@ public class BattleUI : BaseUI
 
     #endregion
 
+    #region 描述面板相关
+    public void ShowDescribeUI(UIArgs arg)
+    {
+        this.describeUI.Refresh(arg);
+        this.describeUI.Show();
+    }
+
+    public void HideDescribeUI()
+    {
+        this.describeUI.Hide();
+    }
+
+    #endregion
+
     protected override void OnRelease()
     {
         onCloseBtnClick = null;
         onReadyStartBtnClick = null;
+
+        this.attrUI.Release();
+        this.skillUI.Release();
+        this.buffUI.Release();
+        this.describeUI.Release();
     }
 
 

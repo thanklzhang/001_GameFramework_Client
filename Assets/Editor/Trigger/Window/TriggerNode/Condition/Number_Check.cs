@@ -56,7 +56,7 @@ namespace BattleTrigger.Editor
         public Type GetNumberClassType(Number_GetValueFromType enumType)
         {
             var enumName = enumType.ToString();
-            Logx.Log("aEnumName:" + enumName);
+            //Logx.Log("aEnumName:" + enumName);
             var enumfullName = NameSpaceName + "." + enumName + "Var";
             var numberType = Type.GetType(enumfullName);
             if (null == numberType)

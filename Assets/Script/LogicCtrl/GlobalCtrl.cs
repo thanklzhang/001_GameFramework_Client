@@ -10,6 +10,7 @@ public class GlobalCtrl : BaseCtrl
 {
     TipsUI tipsUI;
     TitleBarUI titleUI;
+    SelectHeroUI selectHeroUI;
     //TitleBarUI titleBarUI;
     public override void OnInit()
     {
@@ -22,6 +23,7 @@ public class GlobalCtrl : BaseCtrl
         {
             new LoadUIRequest<TipsUI>(){selfFinishCallback = OnTipsUILoadFinish},
              new LoadUIRequest<TitleBarUI>(){selfFinishCallback = OnTitleUILoadFinish},
+              new LoadUIRequest<SelectHeroUI>(){ selfFinishCallback = OnSelectHeroUILoadFinish }
         });
     }
 
@@ -36,9 +38,14 @@ public class GlobalCtrl : BaseCtrl
         this.titleUI = titleUI;
     }
 
+    public void OnSelectHeroUILoadFinish(SelectHeroUI ui)
+    {
+        selectHeroUI = ui;
+    }
+
     public override void OnLoadFinish()
     {
-
+        this.selectHeroUI.Hide();
     }
 
     public override void OnEnter(CtrlArgs args)
@@ -50,6 +57,7 @@ public class GlobalCtrl : BaseCtrl
     {
         tipsUI.Show();
         titleUI.Show();
+        selectHeroUI.Show();
 
         titleUI.clickCloseBtnAction += OnClickTitleUICloseBtn;
 
@@ -70,6 +78,7 @@ public class GlobalCtrl : BaseCtrl
     {
         tipsUI.Hide();
         titleUI.Hide();
+        selectHeroUI.Hide();
 
         EventDispatcher.RemoveListener(EventIDs.OnRefreshBagData, OnRefreshBagData);
         titleUI.clickCloseBtnAction -= OnClickTitleUICloseBtn;
@@ -120,5 +129,24 @@ public class GlobalCtrl : BaseCtrl
         titleUI.Hide();
     }
 
+    //通用选英雄界面------
+
+    //这里可以改 CtrlManager ， 添加新 Ctrl 不会打断之前的 Ctrl 即可
+    public void ShowSelectHeroUI(SelectHeroUIArgs args)
+    {
+        this.selectHeroUI.Refresh(args);
+        this.selectHeroUI.Show();
+    }
+
+    public void HideSelectHeroUI()
+    {
+        this.selectHeroUI.Hide();
+    }
+
+    public void SelectHero(int guid)
+    {
+        this.selectHeroUI.SelectHero(guid);
+    }
+    //---------------
 
 }

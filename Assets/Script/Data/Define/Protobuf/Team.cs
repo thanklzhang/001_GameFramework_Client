@@ -25,38 +25,39 @@ namespace NetProto {
             "CgpUZWFtLnByb3RvEghOZXRQcm90bxoMQ29tbW9uLnByb3RvIn4KCFRlYW1S",
             "b29tEg4KBnJvb21JZBgBIAEoBRITCgt0ZWFtU3RhZ2VJZBgCIAEoBRIQCghy",
             "b29tTmFtZRgDIAEoCRINCgVzdGF0ZRgEIAEoBRIsCgpwbGF5ZXJMaXN0GAUg",
-            "AygLMhguTmV0UHJvdG8uVGVhbVJvb21QbGF5ZXIijwEKDlRlYW1Sb29tUGxh",
+            "AygLMhguTmV0UHJvdG8uVGVhbVJvb21QbGF5ZXIimgEKDlRlYW1Sb29tUGxh",
             "eWVyEi0KCnBsYXllckluZm8YASABKAsyGS5OZXRQcm90by5QbGF5ZXJJbmZv",
             "UHJvdG8SFAoMaXNSb29tTWFzdGVyGAIgASgIEhIKCmlzSGFzUmVhZHkYAyAB",
-            "KAgSFgoOc2VsZWN0SGVyb0d1aWQYBCABKAUSDAoEc2VhdBgFIAEoBSITChFj",
-            "c0dldFRlYW1Sb29tTGlzdCJKChFzY0dldFRlYW1Sb29tTGlzdBILCgNlcnIY",
-            "ASABKAUSKAoMdGVhbVJvb21MaXN0GAIgAygLMhIuTmV0UHJvdG8uVGVhbVJv",
-            "b20iJwoQY3NDcmVhdGVUZWFtUm9vbRITCgt0ZWFtU3RhZ2VJZBgBIAEoBSJF",
-            "ChBzY0NyZWF0ZVRlYW1Sb29tEgsKA2VychgBIAEoBRIkCgh0ZWFtUm9vbRgC",
-            "IAEoCzISLk5ldFByb3RvLlRlYW1Sb29tIiUKD2NzTGVhdmVUZWFtUm9vbRIS",
-            "Cgp0ZWFtUm9vbUlkGAEgASgFIh4KD3NjTGVhdmVUZWFtUm9vbRILCgNlcnIY",
-            "ASABKAUiKgoVc2NOb3RpZnlMZWF2ZVRlYW1Sb29tEhEKCXBsYXllclVpZBgB",
-            "IAEoBSIlCg9jc0VudGVyVGVhbVJvb20SEgoKdGVhbVJvb21JZBgBIAEoBSJE",
-            "Cg9zY0VudGVyVGVhbVJvb20SCwoDZXJyGAEgASgFEiQKCHRlYW1Sb29tGAIg",
-            "ASgLMhIuTmV0UHJvdG8uVGVhbVJvb20iRwobc2NOb3RpZnlQbGF5ZXJFbnRl",
-            "clRlYW1Sb29tEigKBnBsYXllchgBIAEoCzIYLk5ldFByb3RvLlRlYW1Sb29t",
-            "UGxheWVyIjIKG2NzU2VsZWN0VGVhbVN0YWdlSW5UZWFtUm9vbRITCgt0ZWFt",
-            "U3RhZ2VJZBgBIAEoBSI/ChtzY1NlbGVjdFRlYW1TdGFnZUluVGVhbVJvb20S",
-            "CwoDZXJyGAEgASgFEhMKC3RlYW1TdGFnZUlkGAIgASgFIjEKGnNjTm90aWZ5",
-            "Q2hhbmdlVGVhbVJvb21JbmZvEhMKC3RlYW1TdGFnZUlkGAEgASgFIi0KGWNz",
-            "U2VsZWN0VXNlSGVyb0luVGVhbVJvb20SEAoIaGVyb0d1aWQYASABKAUiOgoZ",
-            "c2NTZWxlY3RVc2VIZXJvSW5UZWFtUm9vbRILCgNlcnIYASABKAUSEAoIaGVy",
-            "b0d1aWQYAiABKAUiQwocY3NDaGFuZ2VSZWFkeVN0YXRlSW5UZWFtUm9vbRIS",
-            "Cgp0ZWFtUm9vbUlkGAEgASgFEg8KB2lzUmVhZHkYAiABKAgiKwocc2NDaGFu",
-            "Z2VSZWFkeVN0YXRlSW5UZWFtUm9vbRILCgNlcnIYASABKAUiTgoic2NOb3Rp",
-            "ZnlDaGFuZ2VQbGF5ZXJJbmZvSW5UZWFtUm9vbRIoCgZwbGF5ZXIYASABKAsy",
-            "GC5OZXRQcm90by5UZWFtUm9vbVBsYXllciITChFjc1N0YXJ0VGVhbUJhdHRs",
-            "ZSIgChFzY1N0YXJ0VGVhbUJhdHRsZRILCgNlcnIYASABKAViBnByb3RvMw=="));
+            "KAgSDAoEc2VhdBgEIAEoBRIhCgRoZXJvGAUgASgLMhMuTmV0UHJvdG8uSGVy",
+            "b1Byb3RvIhMKEWNzR2V0VGVhbVJvb21MaXN0IkoKEXNjR2V0VGVhbVJvb21M",
+            "aXN0EgsKA2VychgBIAEoBRIoCgx0ZWFtUm9vbUxpc3QYAiADKAsyEi5OZXRQ",
+            "cm90by5UZWFtUm9vbSInChBjc0NyZWF0ZVRlYW1Sb29tEhMKC3RlYW1TdGFn",
+            "ZUlkGAEgASgFIkUKEHNjQ3JlYXRlVGVhbVJvb20SCwoDZXJyGAEgASgFEiQK",
+            "CHRlYW1Sb29tGAIgASgLMhIuTmV0UHJvdG8uVGVhbVJvb20iJQoPY3NMZWF2",
+            "ZVRlYW1Sb29tEhIKCnRlYW1Sb29tSWQYASABKAUiHgoPc2NMZWF2ZVRlYW1S",
+            "b29tEgsKA2VychgBIAEoBSIqChVzY05vdGlmeUxlYXZlVGVhbVJvb20SEQoJ",
+            "cGxheWVyVWlkGAEgASgFIiUKD2NzRW50ZXJUZWFtUm9vbRISCgp0ZWFtUm9v",
+            "bUlkGAEgASgFIkQKD3NjRW50ZXJUZWFtUm9vbRILCgNlcnIYASABKAUSJAoI",
+            "dGVhbVJvb20YAiABKAsyEi5OZXRQcm90by5UZWFtUm9vbSJHChtzY05vdGlm",
+            "eVBsYXllckVudGVyVGVhbVJvb20SKAoGcGxheWVyGAEgASgLMhguTmV0UHJv",
+            "dG8uVGVhbVJvb21QbGF5ZXIiMgobY3NTZWxlY3RUZWFtU3RhZ2VJblRlYW1S",
+            "b29tEhMKC3RlYW1TdGFnZUlkGAEgASgFIj8KG3NjU2VsZWN0VGVhbVN0YWdl",
+            "SW5UZWFtUm9vbRILCgNlcnIYASABKAUSEwoLdGVhbVN0YWdlSWQYAiABKAUi",
+            "MQoac2NOb3RpZnlDaGFuZ2VUZWFtUm9vbUluZm8SEwoLdGVhbVN0YWdlSWQY",
+            "ASABKAUiQQoZY3NTZWxlY3RVc2VIZXJvSW5UZWFtUm9vbRISCgp0ZWFtUm9v",
+            "bUlkGAEgASgFEhAKCGhlcm9HdWlkGAIgASgFIjoKGXNjU2VsZWN0VXNlSGVy",
+            "b0luVGVhbVJvb20SCwoDZXJyGAEgASgFEhAKCGhlcm9HdWlkGAIgASgFIkMK",
+            "HGNzQ2hhbmdlUmVhZHlTdGF0ZUluVGVhbVJvb20SEgoKdGVhbVJvb21JZBgB",
+            "IAEoBRIPCgdpc1JlYWR5GAIgASgIIisKHHNjQ2hhbmdlUmVhZHlTdGF0ZUlu",
+            "VGVhbVJvb20SCwoDZXJyGAEgASgFIk4KInNjTm90aWZ5Q2hhbmdlUGxheWVy",
+            "SW5mb0luVGVhbVJvb20SKAoGcGxheWVyGAEgASgLMhguTmV0UHJvdG8uVGVh",
+            "bVJvb21QbGF5ZXIiEwoRY3NTdGFydFRlYW1CYXR0bGUiIAoRc2NTdGFydFRl",
+            "YW1CYXR0bGUSCwoDZXJyGAEgASgFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.TeamRoom), global::NetProto.TeamRoom.Parser, new[]{ "RoomId", "TeamStageId", "RoomName", "State", "PlayerList" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.TeamRoomPlayer), global::NetProto.TeamRoomPlayer.Parser, new[]{ "PlayerInfo", "IsRoomMaster", "IsHasReady", "SelectHeroGuid", "Seat" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.TeamRoomPlayer), global::NetProto.TeamRoomPlayer.Parser, new[]{ "PlayerInfo", "IsRoomMaster", "IsHasReady", "Seat", "Hero" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csGetTeamRoomList), global::NetProto.csGetTeamRoomList.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scGetTeamRoomList), global::NetProto.scGetTeamRoomList.Parser, new[]{ "Err", "TeamRoomList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csCreateTeamRoom), global::NetProto.csCreateTeamRoom.Parser, new[]{ "TeamStageId" }, null, null, null),
@@ -70,7 +71,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csSelectTeamStageInTeamRoom), global::NetProto.csSelectTeamStageInTeamRoom.Parser, new[]{ "TeamStageId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scSelectTeamStageInTeamRoom), global::NetProto.scSelectTeamStageInTeamRoom.Parser, new[]{ "Err", "TeamStageId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyChangeTeamRoomInfo), global::NetProto.scNotifyChangeTeamRoomInfo.Parser, new[]{ "TeamStageId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csSelectUseHeroInTeamRoom), global::NetProto.csSelectUseHeroInTeamRoom.Parser, new[]{ "HeroGuid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csSelectUseHeroInTeamRoom), global::NetProto.csSelectUseHeroInTeamRoom.Parser, new[]{ "TeamRoomId", "HeroGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scSelectUseHeroInTeamRoom), global::NetProto.scSelectUseHeroInTeamRoom.Parser, new[]{ "Err", "HeroGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csChangeReadyStateInTeamRoom), global::NetProto.csChangeReadyStateInTeamRoom.Parser, new[]{ "TeamRoomId", "IsReady" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scChangeReadyStateInTeamRoom), global::NetProto.scChangeReadyStateInTeamRoom.Parser, new[]{ "Err" }, null, null, null),
@@ -334,8 +335,8 @@ namespace NetProto {
       PlayerInfo = other.playerInfo_ != null ? other.PlayerInfo.Clone() : null;
       isRoomMaster_ = other.isRoomMaster_;
       isHasReady_ = other.isHasReady_;
-      selectHeroGuid_ = other.selectHeroGuid_;
       seat_ = other.seat_;
+      Hero = other.hero_ != null ? other.Hero.Clone() : null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -376,25 +377,25 @@ namespace NetProto {
       }
     }
 
-    /// <summary>Field number for the "selectHeroGuid" field.</summary>
-    public const int SelectHeroGuidFieldNumber = 4;
-    private int selectHeroGuid_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int SelectHeroGuid {
-      get { return selectHeroGuid_; }
-      set {
-        selectHeroGuid_ = value;
-      }
-    }
-
     /// <summary>Field number for the "seat" field.</summary>
-    public const int SeatFieldNumber = 5;
+    public const int SeatFieldNumber = 4;
     private int seat_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Seat {
       get { return seat_; }
       set {
         seat_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero" field.</summary>
+    public const int HeroFieldNumber = 5;
+    private global::NetProto.HeroProto hero_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.HeroProto Hero {
+      get { return hero_; }
+      set {
+        hero_ = value;
       }
     }
 
@@ -414,8 +415,8 @@ namespace NetProto {
       if (!object.Equals(PlayerInfo, other.PlayerInfo)) return false;
       if (IsRoomMaster != other.IsRoomMaster) return false;
       if (IsHasReady != other.IsHasReady) return false;
-      if (SelectHeroGuid != other.SelectHeroGuid) return false;
       if (Seat != other.Seat) return false;
+      if (!object.Equals(Hero, other.Hero)) return false;
       return true;
     }
 
@@ -425,8 +426,8 @@ namespace NetProto {
       if (playerInfo_ != null) hash ^= PlayerInfo.GetHashCode();
       if (IsRoomMaster != false) hash ^= IsRoomMaster.GetHashCode();
       if (IsHasReady != false) hash ^= IsHasReady.GetHashCode();
-      if (SelectHeroGuid != 0) hash ^= SelectHeroGuid.GetHashCode();
       if (Seat != 0) hash ^= Seat.GetHashCode();
+      if (hero_ != null) hash ^= Hero.GetHashCode();
       return hash;
     }
 
@@ -449,13 +450,13 @@ namespace NetProto {
         output.WriteRawTag(24);
         output.WriteBool(IsHasReady);
       }
-      if (SelectHeroGuid != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(SelectHeroGuid);
-      }
       if (Seat != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(32);
         output.WriteInt32(Seat);
+      }
+      if (hero_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Hero);
       }
     }
 
@@ -471,11 +472,11 @@ namespace NetProto {
       if (IsHasReady != false) {
         size += 1 + 1;
       }
-      if (SelectHeroGuid != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SelectHeroGuid);
-      }
       if (Seat != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Seat);
+      }
+      if (hero_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hero);
       }
       return size;
     }
@@ -497,11 +498,14 @@ namespace NetProto {
       if (other.IsHasReady != false) {
         IsHasReady = other.IsHasReady;
       }
-      if (other.SelectHeroGuid != 0) {
-        SelectHeroGuid = other.SelectHeroGuid;
-      }
       if (other.Seat != 0) {
         Seat = other.Seat;
+      }
+      if (other.hero_ != null) {
+        if (hero_ == null) {
+          hero_ = new global::NetProto.HeroProto();
+        }
+        Hero.MergeFrom(other.Hero);
       }
     }
 
@@ -529,11 +533,14 @@ namespace NetProto {
             break;
           }
           case 32: {
-            SelectHeroGuid = input.ReadInt32();
+            Seat = input.ReadInt32();
             break;
           }
-          case 40: {
-            Seat = input.ReadInt32();
+          case 42: {
+            if (hero_ == null) {
+              hero_ = new global::NetProto.HeroProto();
+            }
+            input.ReadMessage(hero_);
             break;
           }
         }
@@ -2208,6 +2215,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public csSelectUseHeroInTeamRoom(csSelectUseHeroInTeamRoom other) : this() {
+      teamRoomId_ = other.teamRoomId_;
       heroGuid_ = other.heroGuid_;
     }
 
@@ -2216,8 +2224,19 @@ namespace NetProto {
       return new csSelectUseHeroInTeamRoom(this);
     }
 
+    /// <summary>Field number for the "teamRoomId" field.</summary>
+    public const int TeamRoomIdFieldNumber = 1;
+    private int teamRoomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TeamRoomId {
+      get { return teamRoomId_; }
+      set {
+        teamRoomId_ = value;
+      }
+    }
+
     /// <summary>Field number for the "heroGuid" field.</summary>
-    public const int HeroGuidFieldNumber = 1;
+    public const int HeroGuidFieldNumber = 2;
     private int heroGuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int HeroGuid {
@@ -2240,6 +2259,7 @@ namespace NetProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (TeamRoomId != other.TeamRoomId) return false;
       if (HeroGuid != other.HeroGuid) return false;
       return true;
     }
@@ -2247,6 +2267,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (TeamRoomId != 0) hash ^= TeamRoomId.GetHashCode();
       if (HeroGuid != 0) hash ^= HeroGuid.GetHashCode();
       return hash;
     }
@@ -2258,8 +2279,12 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (HeroGuid != 0) {
+      if (TeamRoomId != 0) {
         output.WriteRawTag(8);
+        output.WriteInt32(TeamRoomId);
+      }
+      if (HeroGuid != 0) {
+        output.WriteRawTag(16);
         output.WriteInt32(HeroGuid);
       }
     }
@@ -2267,6 +2292,9 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (TeamRoomId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TeamRoomId);
+      }
       if (HeroGuid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(HeroGuid);
       }
@@ -2277,6 +2305,9 @@ namespace NetProto {
     public void MergeFrom(csSelectUseHeroInTeamRoom other) {
       if (other == null) {
         return;
+      }
+      if (other.TeamRoomId != 0) {
+        TeamRoomId = other.TeamRoomId;
       }
       if (other.HeroGuid != 0) {
         HeroGuid = other.HeroGuid;
@@ -2292,6 +2323,10 @@ namespace NetProto {
             input.SkipLastField();
             break;
           case 8: {
+            TeamRoomId = input.ReadInt32();
+            break;
+          }
+          case 16: {
             HeroGuid = input.ReadInt32();
             break;
           }

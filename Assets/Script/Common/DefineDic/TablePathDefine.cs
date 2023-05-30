@@ -19,6 +19,8 @@ namespace Table
 			
 			"AreaEffect.json",
 			
+			"Attribute.json",
+			
 			"Battle.json",
 			
 			"BattleConfig.json",
@@ -56,6 +58,8 @@ namespace Table
 			"ResourceConfig.json",
 			
 			"Skill.json",
+			
+			"SkillTrack.json",
 			
 			"TeamStage.json",
 			

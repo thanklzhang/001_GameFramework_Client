@@ -11,15 +11,6 @@ public class HeroListUIArgs : UIArgs
     public List<HeroCardUIData> cardList;
 }
 
-public class HeroCardUIData
-{
-    public int guid;
-    public int configId;
-    public int level;
-    public bool isUnlock;
-
-}
-
 public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
 {
     //GameObject gameObject;

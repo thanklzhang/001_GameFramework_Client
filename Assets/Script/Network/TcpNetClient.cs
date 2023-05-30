@@ -47,7 +47,7 @@ public class TcpNetClient
     public NetState netState;
 
     int MSG_HEAD_LEN = 22;//len 4 , msgId 2 , seq 4 , timeStamp 4 , uid 8
-    int MAX_MSG_SIZE = 1024;
+    int MAX_MSG_SIZE = 1024 * 256;
 
     //接受消息封装包的缓存队列
     public List<MsgPack> receiveMsgQueue;
@@ -96,7 +96,7 @@ public class TcpNetClient
     {
         //Loom.QueueOnMainThread(()=>
         //{
-          
+
 
         //});
 
@@ -148,7 +148,7 @@ public class TcpNetClient
 
         int length = socket.EndReceive(ar);
 
-      
+
 
         if (length == 0)
         {
@@ -170,6 +170,8 @@ public class TcpNetClient
             Array.Copy(buffer, 0, finalB, 0, length);
             dataBuffer = dataBuffer.Concat(finalB).ToArray();
         }
+
+        //Logx.LogWarning("length : " + length);
 
         while (dataBuffer.Length >= MSG_HEAD_LEN)
         {
@@ -285,7 +287,7 @@ public class TcpNetClient
     public MsgPack ParseFromMsg(byte[] msg)
     {
 
-        Logx.Log("receive ParseFromMsg ");
+        //Logx.Log("receive ParseFromMsg ");
 
         var clientMsg = ProtoMsgUtil.GetClientMsg(msg);
 
@@ -312,7 +314,11 @@ public class TcpNetClient
 
     public void AddMsgToReceiveQueue(MsgPack pack)
     {
-        receiveMsgQueue.Add(pack);
+        lock (recvObj)
+        {
+            receiveMsgQueue.Add(pack);
+        }
+
     }
 
 
@@ -321,16 +327,30 @@ public class TcpNetClient
     {
         this.UpdateReceiveQueue();
     }
-
+    object recvObj = new object();
     public void UpdateReceiveQueue()
     {
-        for (int i = 0; i < receiveMsgQueue.Count; i++)
+        lock (recvObj)
         {
-            var msgPack = receiveMsgQueue[i];
-            this.ReceiveMsgAction?.Invoke(this, msgPack);
+            for (int i = 0; i < receiveMsgQueue.Count; i++)
+            {
+                try
+                {
+                    var msgPack = receiveMsgQueue[i];
+                    this.ReceiveMsgAction?.Invoke(this, msgPack);
+                }
+                catch (Exception e)
+                {
+                    Logx.LogException(e);
+                    continue;
+                }
+
+            }
+
+            receiveMsgQueue.Clear();
+
         }
 
-        receiveMsgQueue.Clear();
     }
 
 

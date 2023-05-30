@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//简单的文件操作类
+//简单的 文本 to int 类
 public class StringConvert
 {
 
-    public static List<int> ToIntList(string str, char splitChar)
+    public static List<int> ToIntList(string str, char splitChar = ',')
     {
 
         if (string.IsNullOrEmpty(str))

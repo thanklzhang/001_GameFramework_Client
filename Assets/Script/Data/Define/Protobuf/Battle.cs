@@ -64,42 +64,45 @@ namespace NetProto {
             "eUVudGl0eVN0b3BNb3ZlEgwKBGd1aWQYASABKAUSJgoGZW5kUG9zGAIgASgL",
             "MhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvIkYKEXNjTm90aWZ5RW50aXR5RGly",
             "EgwKBGd1aWQYASABKAUSIwoDZGlyGAIgASgLMhYuTmV0UHJvdG8uVmVjdG9y",
-            "M1Byb3RvIjUKFnNjTm90aWZ5RW50aXR5VXNlU2tpbGwSDAoEZ3VpZBgBIAEo",
-            "BRINCgVyZXNJZBgCIAEoBSLQAQoZc2NOb3RpZnlDcmVhdGVTa2lsbEVmZmVj",
-            "dBIMCgRndWlkGAEgASgFEg0KBXJlc0lkGAIgASgFEigKCHBvc2l0aW9uGAMg",
-            "ASgLMhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvEhgKEGZvbGxvd0VudGl0eUd1",
-            "aWQYBCABKAUSEAoIbGFzdFRpbWUYBSABKAUSFQoNaXNBdXRvRGVzdHJveRgG",
-            "IAEoCBIpCghidWZmSW5mbxgHIAEoCzIXLk5ldFByb3RvLkJ1ZmZJbmZvUHJv",
-            "dG8iYAoNQnVmZkluZm9Qcm90bxIUCgxidWZmQ29uZmlnSWQYASABKAUSEgoK",
-            "c3RhY2tDb3VudBgCIAEoBRISCgpjdXJyQ0RUaW1lGAMgASgFEhEKCW1heENE",
-            "VGltZRgEIAEoBSJHChZzY05vdGlmeVVwZGF0ZUJ1ZmZJbmZvEi0KDGJ1ZmZJ",
-            "bmZvTGlzdBgBIAMoCzIXLk5ldFByb3RvLkJ1ZmZJbmZvUHJvdG8iwAEKHHNj",
-            "Tm90aWZ5U2tpbGxFZmZlY3RTdGFydE1vdmUSEgoKZWZmZWN0R3VpZBgBIAEo",
-            "BRIoCghzdGFydFBvcxgCIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90bxIp",
-            "Cgl0YXJnZXRQb3MYAyABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEgoK",
-            "dGFyZ2V0R3VpZBgEIAEoBRIQCghpc0ZvbGxvdxgFIAEoCBIRCgltb3ZlU3Bl",
-            "ZWQYBiABKAUiMAoac2NOb3RpZnlTa2lsbEVmZmVjdERlc3Ryb3kSEgoKZWZm",
-            "ZWN0R3VpZBgBIAEoBSJzChdzY05vdGlmeVNraWxsSW5mb1VwZGF0ZRISCgpl",
-            "bnRpdHlHdWlkGAEgASgFEhUKDXNraWxsQ29uZmlnSWQYAiABKAUSLQoJc2tp",
-            "bGxJbmZvGAMgASgLMhouTmV0UHJvdG8uQmF0dGxlU2tpbGxQcm90byI1ChZC",
-            "YXR0bGVFbnRpdHlWYWx1ZVByb3RvEgwKBHR5cGUYASABKAUSDQoFdmFsdWUY",
-            "AiABKAUiXwoXc2NOb3RpZnlTeW5jRW50aXR5VmFsdWUSEgoKZW50aXR5R3Vp",
-            "ZBgBIAEoBRIwCgZ2YWx1ZXMYAiADKAsyIC5OZXRQcm90by5CYXR0bGVFbnRp",
-            "dHlWYWx1ZVByb3RvIjQKFUJhdHRsZUVudGl0eUF0dHJQcm90bxIMCgR0eXBl",
-            "GAEgASgFEg0KBXZhbHVlGAIgASgFIlwKFnNjTm90aWZ5U3luY0VudGl0eUF0",
-            "dHISEgoKZW50aXR5R3VpZBgBIAEoBRIuCgVhdHRycxgCIAMoCzIfLk5ldFBy",
-            "b3RvLkJhdHRsZUVudGl0eUF0dHJQcm90byIoChJzY05vdGlmeUVudGl0eURl",
-            "YWQSEgoKZW50aXR5R3VpZBgBIAEoBSIkChBzY05vdGlmeVBsYXlQbG90EhAK",
-            "CHBsb3ROYW1lGAEgASgJIhEKD3NjTm90aWZ5UGxvdEVuZCI7ChpzY05vdGlm",
-            "eVNldEVudGl0eVNob3dTdGF0ZRINCgVndWlkcxgBIAMoBRIOCgZpc1Nob3cY",
-            "AiABKAgiSgoQY3NBcHBseUJhdHRsZUVuZBI2ChFhcHBseUJhdHRsZUVuZEFy",
-            "ZxgBIAEoCzIbLk5ldFByb3RvLkFwcGx5QmF0dGxlRW5kQXJnIh8KEHNjQXBw",
-            "bHlCYXR0bGVFbmQSCwoDZXJyGAEgASgFIkMKEXNjTm90aWZ5QmF0dGxlRW5k",
-            "Eg0KBWlzV2luGAEgASgFEh8KB3Jld2FyZHMYAiADKAsyDi5OZXRQcm90by5J",
-            "dGVtIi8KEmNzVHJhbnNpdGlvbkJhdHRsZRILCgNjbWQYASABKAUSDAoEZGF0",
-            "YRgCIAEoDCIhChJzY1RyYW5zaXRpb25CYXR0bGUSCwoDZXJyGAEgASgFIhsK",
-            "GWNzVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIiNgoZc2NUcmFuc2l0aW9uQmF0",
-            "dGxlMlBsYXllchILCgNjbWQYASABKAUSDAoEZGF0YRgCIAEoDGIGcHJvdG8z"));
+            "M1Byb3RvIj0KFnNjTm90aWZ5RW50aXR5VXNlU2tpbGwSDAoEZ3VpZBgBIAEo",
+            "BRIVCg1za2lsbENvbmZpZ0lkGAIgASgFIvgBChlzY05vdGlmeUNyZWF0ZVNr",
+            "aWxsRWZmZWN0EgwKBGd1aWQYASABKAUSDQoFcmVzSWQYAiABKAUSKAoIcG9z",
+            "aXRpb24YAyABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SGAoQZm9sbG93",
+            "RW50aXR5R3VpZBgEIAEoBRIQCghsYXN0VGltZRgFIAEoBRIVCg1pc0F1dG9E",
+            "ZXN0cm95GAYgASgIEhUKDWVmZmVjdFBvc1R5cGUYByABKAUSKQoIYnVmZklu",
+            "Zm8YCCABKAsyFy5OZXRQcm90by5CdWZmSW5mb1Byb3RvEg8KB3Rlc3RTZXEY",
+            "CSABKAUiiAEKDUJ1ZmZJbmZvUHJvdG8SDAoEZ3VpZBgBIAEoBRIUCgxidWZm",
+            "Q29uZmlnSWQYAiABKAUSEgoKc3RhY2tDb3VudBgDIAEoBRISCgpjdXJyQ0RU",
+            "aW1lGAQgASgFEhEKCW1heENEVGltZRgFIAEoBRIYChB0YXJnZXRFbnRpdHlH",
+            "dWlkGAYgASgFIkcKFnNjTm90aWZ5VXBkYXRlQnVmZkluZm8SLQoMYnVmZklu",
+            "Zm9MaXN0GAEgAygLMhcuTmV0UHJvdG8uQnVmZkluZm9Qcm90byLAAQocc2NO",
+            "b3RpZnlTa2lsbEVmZmVjdFN0YXJ0TW92ZRISCgplZmZlY3RHdWlkGAEgASgF",
+            "EigKCHN0YXJ0UG9zGAIgASgLMhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvEikK",
+            "CXRhcmdldFBvcxgDIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90bxISCgp0",
+            "YXJnZXRHdWlkGAQgASgFEhAKCGlzRm9sbG93GAUgASgIEhEKCW1vdmVTcGVl",
+            "ZBgGIAEoBSJBChpzY05vdGlmeVNraWxsRWZmZWN0RGVzdHJveRISCgplZmZl",
+            "Y3RHdWlkGAEgASgFEg8KB3Rlc3RTZXEYAiABKAUicwoXc2NOb3RpZnlTa2ls",
+            "bEluZm9VcGRhdGUSEgoKZW50aXR5R3VpZBgBIAEoBRIVCg1za2lsbENvbmZp",
+            "Z0lkGAIgASgFEi0KCXNraWxsSW5mbxgDIAEoCzIaLk5ldFByb3RvLkJhdHRs",
+            "ZVNraWxsUHJvdG8iTQoWQmF0dGxlRW50aXR5VmFsdWVQcm90bxIMCgR0eXBl",
+            "GAEgASgFEg0KBXZhbHVlGAIgASgFEhYKDmZyb21FbnRpdHlHdWlkGAMgASgF",
+            "Il8KF3NjTm90aWZ5U3luY0VudGl0eVZhbHVlEhIKCmVudGl0eUd1aWQYASAB",
+            "KAUSMAoGdmFsdWVzGAIgAygLMiAuTmV0UHJvdG8uQmF0dGxlRW50aXR5VmFs",
+            "dWVQcm90byI0ChVCYXR0bGVFbnRpdHlBdHRyUHJvdG8SDAoEdHlwZRgBIAEo",
+            "BRINCgV2YWx1ZRgCIAEoBSJcChZzY05vdGlmeVN5bmNFbnRpdHlBdHRyEhIK",
+            "CmVudGl0eUd1aWQYASABKAUSLgoFYXR0cnMYAiADKAsyHy5OZXRQcm90by5C",
+            "YXR0bGVFbnRpdHlBdHRyUHJvdG8iKAoSc2NOb3RpZnlFbnRpdHlEZWFkEhIK",
+            "CmVudGl0eUd1aWQYASABKAUiJAoQc2NOb3RpZnlQbGF5UGxvdBIQCghwbG90",
+            "TmFtZRgBIAEoCSIRCg9zY05vdGlmeVBsb3RFbmQiOwoac2NOb3RpZnlTZXRF",
+            "bnRpdHlTaG93U3RhdGUSDQoFZ3VpZHMYASADKAUSDgoGaXNTaG93GAIgASgI",
+            "IkoKEGNzQXBwbHlCYXR0bGVFbmQSNgoRYXBwbHlCYXR0bGVFbmRBcmcYASAB",
+            "KAsyGy5OZXRQcm90by5BcHBseUJhdHRsZUVuZEFyZyIfChBzY0FwcGx5QmF0",
+            "dGxlRW5kEgsKA2VychgBIAEoBSJDChFzY05vdGlmeUJhdHRsZUVuZBINCgVp",
+            "c1dpbhgBIAEoBRIfCgdyZXdhcmRzGAIgAygLMg4uTmV0UHJvdG8uSXRlbSIv",
+            "ChJjc1RyYW5zaXRpb25CYXR0bGUSCwoDY21kGAEgASgFEgwKBGRhdGEYAiAB",
+            "KAwiIQoSc2NUcmFuc2l0aW9uQmF0dGxlEgsKA2VychgBIAEoBSIbChljc1Ry",
+            "YW5zaXRpb25CYXR0bGUyUGxheWVyIjYKGXNjVHJhbnNpdGlvbkJhdHRsZTJQ",
+            "bGF5ZXISCwoDY21kGAEgASgFEgwKBGRhdGEYAiABKAxiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -130,14 +133,14 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityMoveByPath), global::NetProto.scNotifyEntityMoveByPath.Parser, new[]{ "Guid", "StartPos", "PathList", "MoveSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityStopMove), global::NetProto.scNotifyEntityStopMove.Parser, new[]{ "Guid", "EndPos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityDir), global::NetProto.scNotifyEntityDir.Parser, new[]{ "Guid", "Dir" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityUseSkill), global::NetProto.scNotifyEntityUseSkill.Parser, new[]{ "Guid", "ResId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateSkillEffect), global::NetProto.scNotifyCreateSkillEffect.Parser, new[]{ "Guid", "ResId", "Position", "FollowEntityGuid", "LastTime", "IsAutoDestroy", "BuffInfo" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BuffInfoProto), global::NetProto.BuffInfoProto.Parser, new[]{ "BuffConfigId", "StackCount", "CurrCDTime", "MaxCDTime" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyEntityUseSkill), global::NetProto.scNotifyEntityUseSkill.Parser, new[]{ "Guid", "SkillConfigId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyCreateSkillEffect), global::NetProto.scNotifyCreateSkillEffect.Parser, new[]{ "Guid", "ResId", "Position", "FollowEntityGuid", "LastTime", "IsAutoDestroy", "EffectPosType", "BuffInfo", "TestSeq" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BuffInfoProto), global::NetProto.BuffInfoProto.Parser, new[]{ "Guid", "BuffConfigId", "StackCount", "CurrCDTime", "MaxCDTime", "TargetEntityGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyUpdateBuffInfo), global::NetProto.scNotifyUpdateBuffInfo.Parser, new[]{ "BuffInfoList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillEffectStartMove), global::NetProto.scNotifySkillEffectStartMove.Parser, new[]{ "EffectGuid", "StartPos", "TargetPos", "TargetGuid", "IsFollow", "MoveSpeed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillEffectDestroy), global::NetProto.scNotifySkillEffectDestroy.Parser, new[]{ "EffectGuid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillEffectDestroy), global::NetProto.scNotifySkillEffectDestroy.Parser, new[]{ "EffectGuid", "TestSeq" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillInfoUpdate), global::NetProto.scNotifySkillInfoUpdate.Parser, new[]{ "EntityGuid", "SkillConfigId", "SkillInfo" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityValueProto), global::NetProto.BattleEntityValueProto.Parser, new[]{ "Type", "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityValueProto), global::NetProto.BattleEntityValueProto.Parser, new[]{ "Type", "Value", "FromEntityGuid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySyncEntityValue), global::NetProto.scNotifySyncEntityValue.Parser, new[]{ "EntityGuid", "Values" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleEntityAttrProto), global::NetProto.BattleEntityAttrProto.Parser, new[]{ "Type", "Value" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySyncEntityAttr), global::NetProto.scNotifySyncEntityAttr.Parser, new[]{ "EntityGuid", "Attrs" }, null, null, null),
@@ -4049,7 +4052,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public scNotifyEntityUseSkill(scNotifyEntityUseSkill other) : this() {
       guid_ = other.guid_;
-      resId_ = other.resId_;
+      skillConfigId_ = other.skillConfigId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4068,14 +4071,14 @@ namespace NetProto {
       }
     }
 
-    /// <summary>Field number for the "resId" field.</summary>
-    public const int ResIdFieldNumber = 2;
-    private int resId_;
+    /// <summary>Field number for the "skillConfigId" field.</summary>
+    public const int SkillConfigIdFieldNumber = 2;
+    private int skillConfigId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int ResId {
-      get { return resId_; }
+    public int SkillConfigId {
+      get { return skillConfigId_; }
       set {
-        resId_ = value;
+        skillConfigId_ = value;
       }
     }
 
@@ -4093,7 +4096,7 @@ namespace NetProto {
         return true;
       }
       if (Guid != other.Guid) return false;
-      if (ResId != other.ResId) return false;
+      if (SkillConfigId != other.SkillConfigId) return false;
       return true;
     }
 
@@ -4101,7 +4104,7 @@ namespace NetProto {
     public override int GetHashCode() {
       int hash = 1;
       if (Guid != 0) hash ^= Guid.GetHashCode();
-      if (ResId != 0) hash ^= ResId.GetHashCode();
+      if (SkillConfigId != 0) hash ^= SkillConfigId.GetHashCode();
       return hash;
     }
 
@@ -4116,9 +4119,9 @@ namespace NetProto {
         output.WriteRawTag(8);
         output.WriteInt32(Guid);
       }
-      if (ResId != 0) {
+      if (SkillConfigId != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(ResId);
+        output.WriteInt32(SkillConfigId);
       }
     }
 
@@ -4128,8 +4131,8 @@ namespace NetProto {
       if (Guid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Guid);
       }
-      if (ResId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ResId);
+      if (SkillConfigId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkillConfigId);
       }
       return size;
     }
@@ -4142,8 +4145,8 @@ namespace NetProto {
       if (other.Guid != 0) {
         Guid = other.Guid;
       }
-      if (other.ResId != 0) {
-        ResId = other.ResId;
+      if (other.SkillConfigId != 0) {
+        SkillConfigId = other.SkillConfigId;
       }
     }
 
@@ -4160,7 +4163,7 @@ namespace NetProto {
             break;
           }
           case 16: {
-            ResId = input.ReadInt32();
+            SkillConfigId = input.ReadInt32();
             break;
           }
         }
@@ -4202,7 +4205,9 @@ namespace NetProto {
       followEntityGuid_ = other.followEntityGuid_;
       lastTime_ = other.lastTime_;
       isAutoDestroy_ = other.isAutoDestroy_;
+      effectPosType_ = other.effectPosType_;
       BuffInfo = other.buffInfo_ != null ? other.BuffInfo.Clone() : null;
+      testSeq_ = other.testSeq_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4279,8 +4284,19 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "effectPosType" field.</summary>
+    public const int EffectPosTypeFieldNumber = 7;
+    private int effectPosType_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int EffectPosType {
+      get { return effectPosType_; }
+      set {
+        effectPosType_ = value;
+      }
+    }
+
     /// <summary>Field number for the "buffInfo" field.</summary>
-    public const int BuffInfoFieldNumber = 7;
+    public const int BuffInfoFieldNumber = 8;
     private global::NetProto.BuffInfoProto buffInfo_;
     /// <summary>
     /// 如果是 buff 那么这个字段就不会为空
@@ -4290,6 +4306,17 @@ namespace NetProto {
       get { return buffInfo_; }
       set {
         buffInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "testSeq" field.</summary>
+    public const int TestSeqFieldNumber = 9;
+    private int testSeq_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TestSeq {
+      get { return testSeq_; }
+      set {
+        testSeq_ = value;
       }
     }
 
@@ -4312,7 +4339,9 @@ namespace NetProto {
       if (FollowEntityGuid != other.FollowEntityGuid) return false;
       if (LastTime != other.LastTime) return false;
       if (IsAutoDestroy != other.IsAutoDestroy) return false;
+      if (EffectPosType != other.EffectPosType) return false;
       if (!object.Equals(BuffInfo, other.BuffInfo)) return false;
+      if (TestSeq != other.TestSeq) return false;
       return true;
     }
 
@@ -4325,7 +4354,9 @@ namespace NetProto {
       if (FollowEntityGuid != 0) hash ^= FollowEntityGuid.GetHashCode();
       if (LastTime != 0) hash ^= LastTime.GetHashCode();
       if (IsAutoDestroy != false) hash ^= IsAutoDestroy.GetHashCode();
+      if (EffectPosType != 0) hash ^= EffectPosType.GetHashCode();
       if (buffInfo_ != null) hash ^= BuffInfo.GetHashCode();
+      if (TestSeq != 0) hash ^= TestSeq.GetHashCode();
       return hash;
     }
 
@@ -4360,9 +4391,17 @@ namespace NetProto {
         output.WriteRawTag(48);
         output.WriteBool(IsAutoDestroy);
       }
+      if (EffectPosType != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(EffectPosType);
+      }
       if (buffInfo_ != null) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(66);
         output.WriteMessage(BuffInfo);
+      }
+      if (TestSeq != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(TestSeq);
       }
     }
 
@@ -4387,8 +4426,14 @@ namespace NetProto {
       if (IsAutoDestroy != false) {
         size += 1 + 1;
       }
+      if (EffectPosType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EffectPosType);
+      }
       if (buffInfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(BuffInfo);
+      }
+      if (TestSeq != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TestSeq);
       }
       return size;
     }
@@ -4419,11 +4464,17 @@ namespace NetProto {
       if (other.IsAutoDestroy != false) {
         IsAutoDestroy = other.IsAutoDestroy;
       }
+      if (other.EffectPosType != 0) {
+        EffectPosType = other.EffectPosType;
+      }
       if (other.buffInfo_ != null) {
         if (buffInfo_ == null) {
           buffInfo_ = new global::NetProto.BuffInfoProto();
         }
         BuffInfo.MergeFrom(other.BuffInfo);
+      }
+      if (other.TestSeq != 0) {
+        TestSeq = other.TestSeq;
       }
     }
 
@@ -4462,11 +4513,19 @@ namespace NetProto {
             IsAutoDestroy = input.ReadBool();
             break;
           }
-          case 58: {
+          case 56: {
+            EffectPosType = input.ReadInt32();
+            break;
+          }
+          case 66: {
             if (buffInfo_ == null) {
               buffInfo_ = new global::NetProto.BuffInfoProto();
             }
             input.ReadMessage(buffInfo_);
+            break;
+          }
+          case 72: {
+            TestSeq = input.ReadInt32();
             break;
           }
         }
@@ -4499,10 +4558,12 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public BuffInfoProto(BuffInfoProto other) : this() {
+      guid_ = other.guid_;
       buffConfigId_ = other.buffConfigId_;
       stackCount_ = other.stackCount_;
       currCDTime_ = other.currCDTime_;
       maxCDTime_ = other.maxCDTime_;
+      targetEntityGuid_ = other.targetEntityGuid_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4510,8 +4571,19 @@ namespace NetProto {
       return new BuffInfoProto(this);
     }
 
+    /// <summary>Field number for the "guid" field.</summary>
+    public const int GuidFieldNumber = 1;
+    private int guid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Guid {
+      get { return guid_; }
+      set {
+        guid_ = value;
+      }
+    }
+
     /// <summary>Field number for the "buffConfigId" field.</summary>
-    public const int BuffConfigIdFieldNumber = 1;
+    public const int BuffConfigIdFieldNumber = 2;
     private int buffConfigId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int BuffConfigId {
@@ -4522,7 +4594,7 @@ namespace NetProto {
     }
 
     /// <summary>Field number for the "stackCount" field.</summary>
-    public const int StackCountFieldNumber = 2;
+    public const int StackCountFieldNumber = 3;
     private int stackCount_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int StackCount {
@@ -4533,7 +4605,7 @@ namespace NetProto {
     }
 
     /// <summary>Field number for the "currCDTime" field.</summary>
-    public const int CurrCDTimeFieldNumber = 3;
+    public const int CurrCDTimeFieldNumber = 4;
     private int currCDTime_;
     /// <summary>
     ///  /1000
@@ -4547,13 +4619,24 @@ namespace NetProto {
     }
 
     /// <summary>Field number for the "maxCDTime" field.</summary>
-    public const int MaxCDTimeFieldNumber = 4;
+    public const int MaxCDTimeFieldNumber = 5;
     private int maxCDTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int MaxCDTime {
       get { return maxCDTime_; }
       set {
         maxCDTime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "targetEntityGuid" field.</summary>
+    public const int TargetEntityGuidFieldNumber = 6;
+    private int targetEntityGuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TargetEntityGuid {
+      get { return targetEntityGuid_; }
+      set {
+        targetEntityGuid_ = value;
       }
     }
 
@@ -4570,20 +4653,24 @@ namespace NetProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Guid != other.Guid) return false;
       if (BuffConfigId != other.BuffConfigId) return false;
       if (StackCount != other.StackCount) return false;
       if (CurrCDTime != other.CurrCDTime) return false;
       if (MaxCDTime != other.MaxCDTime) return false;
+      if (TargetEntityGuid != other.TargetEntityGuid) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Guid != 0) hash ^= Guid.GetHashCode();
       if (BuffConfigId != 0) hash ^= BuffConfigId.GetHashCode();
       if (StackCount != 0) hash ^= StackCount.GetHashCode();
       if (CurrCDTime != 0) hash ^= CurrCDTime.GetHashCode();
       if (MaxCDTime != 0) hash ^= MaxCDTime.GetHashCode();
+      if (TargetEntityGuid != 0) hash ^= TargetEntityGuid.GetHashCode();
       return hash;
     }
 
@@ -4594,27 +4681,38 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (BuffConfigId != 0) {
+      if (Guid != 0) {
         output.WriteRawTag(8);
+        output.WriteInt32(Guid);
+      }
+      if (BuffConfigId != 0) {
+        output.WriteRawTag(16);
         output.WriteInt32(BuffConfigId);
       }
       if (StackCount != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(24);
         output.WriteInt32(StackCount);
       }
       if (CurrCDTime != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteInt32(CurrCDTime);
       }
       if (MaxCDTime != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteInt32(MaxCDTime);
+      }
+      if (TargetEntityGuid != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(TargetEntityGuid);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Guid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Guid);
+      }
       if (BuffConfigId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(BuffConfigId);
       }
@@ -4627,6 +4725,9 @@ namespace NetProto {
       if (MaxCDTime != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxCDTime);
       }
+      if (TargetEntityGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TargetEntityGuid);
+      }
       return size;
     }
 
@@ -4634,6 +4735,9 @@ namespace NetProto {
     public void MergeFrom(BuffInfoProto other) {
       if (other == null) {
         return;
+      }
+      if (other.Guid != 0) {
+        Guid = other.Guid;
       }
       if (other.BuffConfigId != 0) {
         BuffConfigId = other.BuffConfigId;
@@ -4647,6 +4751,9 @@ namespace NetProto {
       if (other.MaxCDTime != 0) {
         MaxCDTime = other.MaxCDTime;
       }
+      if (other.TargetEntityGuid != 0) {
+        TargetEntityGuid = other.TargetEntityGuid;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4658,19 +4765,27 @@ namespace NetProto {
             input.SkipLastField();
             break;
           case 8: {
-            BuffConfigId = input.ReadInt32();
+            Guid = input.ReadInt32();
             break;
           }
           case 16: {
-            StackCount = input.ReadInt32();
+            BuffConfigId = input.ReadInt32();
             break;
           }
           case 24: {
-            CurrCDTime = input.ReadInt32();
+            StackCount = input.ReadInt32();
             break;
           }
           case 32: {
+            CurrCDTime = input.ReadInt32();
+            break;
+          }
+          case 40: {
             MaxCDTime = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            TargetEntityGuid = input.ReadInt32();
             break;
           }
         }
@@ -5097,6 +5212,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public scNotifySkillEffectDestroy(scNotifySkillEffectDestroy other) : this() {
       effectGuid_ = other.effectGuid_;
+      testSeq_ = other.testSeq_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5115,6 +5231,17 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "testSeq" field.</summary>
+    public const int TestSeqFieldNumber = 2;
+    private int testSeq_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TestSeq {
+      get { return testSeq_; }
+      set {
+        testSeq_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as scNotifySkillEffectDestroy);
@@ -5129,6 +5256,7 @@ namespace NetProto {
         return true;
       }
       if (EffectGuid != other.EffectGuid) return false;
+      if (TestSeq != other.TestSeq) return false;
       return true;
     }
 
@@ -5136,6 +5264,7 @@ namespace NetProto {
     public override int GetHashCode() {
       int hash = 1;
       if (EffectGuid != 0) hash ^= EffectGuid.GetHashCode();
+      if (TestSeq != 0) hash ^= TestSeq.GetHashCode();
       return hash;
     }
 
@@ -5150,6 +5279,10 @@ namespace NetProto {
         output.WriteRawTag(8);
         output.WriteInt32(EffectGuid);
       }
+      if (TestSeq != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(TestSeq);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5157,6 +5290,9 @@ namespace NetProto {
       int size = 0;
       if (EffectGuid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EffectGuid);
+      }
+      if (TestSeq != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TestSeq);
       }
       return size;
     }
@@ -5168,6 +5304,9 @@ namespace NetProto {
       }
       if (other.EffectGuid != 0) {
         EffectGuid = other.EffectGuid;
+      }
+      if (other.TestSeq != 0) {
+        TestSeq = other.TestSeq;
       }
     }
 
@@ -5181,6 +5320,10 @@ namespace NetProto {
             break;
           case 8: {
             EffectGuid = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            TestSeq = input.ReadInt32();
             break;
           }
         }
@@ -5397,6 +5540,7 @@ namespace NetProto {
     public BattleEntityValueProto(BattleEntityValueProto other) : this() {
       type_ = other.type_;
       value_ = other.value_;
+      fromEntityGuid_ = other.fromEntityGuid_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5429,6 +5573,17 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "fromEntityGuid" field.</summary>
+    public const int FromEntityGuidFieldNumber = 3;
+    private int fromEntityGuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FromEntityGuid {
+      get { return fromEntityGuid_; }
+      set {
+        fromEntityGuid_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as BattleEntityValueProto);
@@ -5444,6 +5599,7 @@ namespace NetProto {
       }
       if (Type != other.Type) return false;
       if (Value != other.Value) return false;
+      if (FromEntityGuid != other.FromEntityGuid) return false;
       return true;
     }
 
@@ -5452,6 +5608,7 @@ namespace NetProto {
       int hash = 1;
       if (Type != 0) hash ^= Type.GetHashCode();
       if (Value != 0) hash ^= Value.GetHashCode();
+      if (FromEntityGuid != 0) hash ^= FromEntityGuid.GetHashCode();
       return hash;
     }
 
@@ -5470,6 +5627,10 @@ namespace NetProto {
         output.WriteRawTag(16);
         output.WriteInt32(Value);
       }
+      if (FromEntityGuid != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(FromEntityGuid);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5480,6 +5641,9 @@ namespace NetProto {
       }
       if (Value != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Value);
+      }
+      if (FromEntityGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FromEntityGuid);
       }
       return size;
     }
@@ -5494,6 +5658,9 @@ namespace NetProto {
       }
       if (other.Value != 0) {
         Value = other.Value;
+      }
+      if (other.FromEntityGuid != 0) {
+        FromEntityGuid = other.FromEntityGuid;
       }
     }
 
@@ -5511,6 +5678,10 @@ namespace NetProto {
           }
           case 16: {
             Value = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            FromEntityGuid = input.ReadInt32();
             break;
           }
         }

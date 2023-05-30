@@ -17,12 +17,14 @@ namespace Battle_Client
     public class BuffEffectInfo_Client
     {
         public int guid;
+        public int configId;
         public int targetEntityGuid;
         public float currCDTime;
         public float maxCDTime;
         public int stackCount;
-        public int iconResId;
+        //public int iconResId;
         internal bool isRemove;
+        
     }
 
     public class BattleSkillEffect
@@ -99,7 +101,7 @@ namespace Battle_Client
         //开始自行加载(主要用于创建 entity 的时候自己自行异步加载 )
         public void StartSelfLoadModel()
         {
-            Logx.Log("StartLoadModel");
+            //Logx.Log("StartLoadModel");
             isFinishLoad = false;
             if (this.resId > 0)
             {
@@ -131,8 +133,16 @@ namespace Battle_Client
 
             var entity = BattleEntityManager.Instance.FindEntity(followEntityGuid);
 
-            followEntityNode = entity.FindModelNode(nodeName);
-            this.SetPosition(followEntityNode.position);
+            if (null != entity)
+            {
+                followEntityNode = entity.FindModelNode(nodeName);
+                this.SetPosition(followEntityNode.position);
+            }
+            else
+            {
+                Debug.LogError("zxy SetFollowEntityGuid : the entity is null : followEntityGuid : " + followEntityGuid);
+            }
+           
         }
 
         public void OnLoadModelFinish(GameObject obj)
@@ -142,7 +152,7 @@ namespace Battle_Client
                 ResourceManager.Instance.ReturnObject(path, gameObject);
                 return;
             }
-            Logx.Log("BattleSkillEffect : OnLoadModelFinish");
+            //Logx.Log("BattleSkillEffect : OnLoadModelFinish");
             isFinishLoad = true;
             var position = gameObject.transform.position;
             GameObject.Destroy(gameObject);
@@ -171,7 +181,8 @@ namespace Battle_Client
                 currCDTime = buffInfo.currCDTime / 1000.0f,
                 maxCDTime = buffInfo.maxCDTime / 1000.0f,
                 stackCount = buffInfo.statckCount,
-                iconResId = buffInfo.iconResId
+                configId = buffInfo.configId,
+                //iconResId = buffInfo.iconResId
 
             };
 
@@ -230,7 +241,11 @@ namespace Battle_Client
 
                 if (this.followEntityGuid <= 0)
                 {
-                    this.gameObject.transform.forward = dir;
+                    if (dir != Vector3.zero)
+                    {
+                        this.gameObject.transform.forward = dir;
+                    }
+                   
                 }
             }
 
@@ -329,7 +344,7 @@ namespace Battle_Client
         public Vector3 initDir;
         internal void StartMove(Vector3 targetPos, int targetGuid, float moveSpeed)
         {
-            Logx.Log("skill effect start move : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
+            //Logx.Log("skill effect start move : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
             state = BattleSkillEffectState.Move;
 
             this.moveTargetPos = targetPos;

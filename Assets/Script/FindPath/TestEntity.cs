@@ -219,7 +219,7 @@ public class TestEntity : MonoBehaviour
         {
             str = str + ("(" + item.x + ",") + ("" + item.y + ")");
         }
-        Logx.Log("start move poslist : " + str);
+        //Logx.Log("start move poslist : " + str);
         //Logx.Log("start move : currPos : " + GetPosStr(this.transform.position));
 
         this.currPosList = posList;

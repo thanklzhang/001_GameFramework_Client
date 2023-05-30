@@ -61,7 +61,7 @@ namespace GameData
             if (null == findPlayer)
             {
                 //新增
-                Logx.Log("TeamGameDataStore : add new player : uid : " + player.playerInfo.uid);
+                //Logx.Log("TeamGameDataStore : add new player : uid : " + player.playerInfo.uid);
                 findPlayer = player;
                 playerList.Add(findPlayer);
                 //按照座位排序
@@ -83,7 +83,7 @@ namespace GameData
             }
             else
             {
-                findPlayer.selectHeroGuid = player.selectHeroGuid;
+                findPlayer.selectHeroData = player.selectHeroData;
                 findPlayer.isMaster = player.isMaster;
                 findPlayer.isHasReady = player.isHasReady;
                 findPlayer.seat = player.seat;
@@ -103,7 +103,7 @@ namespace GameData
         public PlayerInfo playerInfo;
         public bool isMaster;
         public bool isHasReady;
-        public int selectHeroGuid;
+        public HeroData selectHeroData;
         public int seat;
     }
 

@@ -16,7 +16,7 @@ public class NetMsgManager : Singleton<NetMsgManager>
     public void OnReceiveMsg(MsgPack msg)
     {
         var cmdId = msg.cmdId;
-        Logx.Log("broadcase event : " + cmdId);
+        //Logx.LogNet("NetMsgManager : OnReceiveMsg : cmdId : " + cmdId);
         EventManager.Broadcast(cmdId, msg);
     }
 

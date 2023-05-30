@@ -38,7 +38,7 @@ namespace GameData
             TeamRoomPlayerData player = new TeamRoomPlayerData()
             {
                 isMaster = netPlayer.IsRoomMaster,
-                selectHeroGuid = netPlayer.SelectHeroGuid,
+                selectHeroData = HeroConvert.ToHeroData(netPlayer.Hero),
                 isHasReady = netPlayer.IsHasReady,
                 playerInfo = PlayerConvert.ToPlayerInfo(netPlayer.PlayerInfo)
             };

@@ -23,7 +23,7 @@ namespace Battle_Client
 
         }
 
-        public static Vector3 ConverToVector3(Vector3Proto vector3Proto)
+        public static Vector3 ConvertToVector3(Vector3Proto vector3Proto)
         {
             var x = GetValue(vector3Proto.X);
             var y = GetValue(vector3Proto.Y);

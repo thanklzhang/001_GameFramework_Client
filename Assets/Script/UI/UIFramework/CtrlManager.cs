@@ -190,9 +190,9 @@ public class CtrlManager : Singleton<CtrlManager>
     }
 
     //TODO: 刷新标题栏的话可以在 ctrl 中用监听实现 ， 金币等资源变更了就刷新标题栏 待定
-    public void ShowTitleBar()
+    public void ShowTitleBar(TitleBarIds titleBarId)
     {
-        this.globalCtrl.ShowTitleBar();
+        this.globalCtrl.ShowTitleBar(titleBarId);
     }
 
     public void HideTitleBar()
@@ -202,3 +202,4 @@ public class CtrlManager : Singleton<CtrlManager>
 
     //------------------------------------
 }
+

@@ -63,6 +63,8 @@ namespace Table
 			
 			"TeamStage.json",
 			
+			"TitleBar.json",
+			
 		
 		};
        

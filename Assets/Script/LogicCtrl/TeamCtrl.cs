@@ -9,19 +9,21 @@ using UnityEngine.UI;
 public class TeamCtrl : BaseCtrl
 {
     TeamRoomListUI roomListUI;
+
     TeamRoomInfoUI roomInfoUI;
+
     //TitleBarUI titleBarUI;
     public override void OnInit()
     {
         //this.isParallel = false;
     }
+
     public override void OnStartLoad()
     {
         this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            new LoadUIRequest<TeamRoomListUI>(){selfFinishCallback = OnRoomListUILoadFinish},
-            new LoadUIRequest<TeamRoomInfoUI>(){selfFinishCallback = OnRoomInfoUILoadFinish},
-
+            new LoadUIRequest<TeamRoomListUI>() { selfFinishCallback = OnRoomListUILoadFinish },
+            new LoadUIRequest<TeamRoomInfoUI>() { selfFinishCallback = OnRoomInfoUILoadFinish },
         });
     }
 
@@ -37,7 +39,6 @@ public class TeamCtrl : BaseCtrl
 
     public override void OnLoadFinish()
     {
-
     }
 
     public void OnRoomListUIClickCloseBtn()
@@ -50,7 +51,6 @@ public class TeamCtrl : BaseCtrl
         var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
         net.SendCreateTeamRoom(() =>
         {
-
             var creatRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
             this.OnEnterRoomInfoUI(creatRoomData);
         });
@@ -58,6 +58,8 @@ public class TeamCtrl : BaseCtrl
 
     public void OnEnterRoomInfoUI(TeamRoomData creatRoomData)
     {
+        CtrlManager.Instance.ShowTitleBar(TitleBarIds.TeamRoomInfo);
+        
         this.roomListUI.Hide();
         this.roomInfoUI.Show();
 
@@ -129,12 +131,9 @@ public class TeamCtrl : BaseCtrl
 
         var currRoom = GameDataManager.Instance.TeamStore.currEnterRoomData;
         var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
-        net.SendLeaveTeamRoom(currRoom.id, () =>
-         {
-
-         });
-
+        net.SendLeaveTeamRoom(currRoom.id, () => { });
     }
+
     public void OnRoomInfoUIClickSinglePlayerReadyBtn(int uid)
     {
         //send net
@@ -144,17 +143,16 @@ public class TeamCtrl : BaseCtrl
         var roomId = enterRoomData.id;
         var opReady = !player.isHasReady;
         net.SendChangeReadyStateInTeamRoom(roomId, opReady, () =>
-         {
-             //enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
-             //this.OnEnterRoomInfoUI(enterRoomData);
-
-         });
+        {
+            //enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+            //this.OnEnterRoomInfoUI(enterRoomData);
+        });
     }
+
     int currSelectHeroGuid;
+
     public void OnRoomInfoUIClickSinglePlayerChangeHeroBtn(int uid)
     {
-
-
         if (uid == (int)GameData.GameDataManager.Instance.UserStore.Uid)
         {
             SelectHeroUIArgs args = new SelectHeroUIArgs();
@@ -186,22 +184,18 @@ public class TeamCtrl : BaseCtrl
 
                 var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
                 net.SendSelectUseHeroInTeamRoom(enterRoomData.id, currSelectHeroGuid);
-
             };
 
             args.event_ClickOneHeroOption = (uid) =>
             {
                 currSelectHeroGuid = uid;
                 CtrlManager.Instance.globalCtrl.SelectHero(currSelectHeroGuid);
-
             };
 
             args.currSelectHeroGuid = currSelectHeroGuid;
 
             CtrlManager.Instance.globalCtrl.ShowSelectHeroUI(args);
         }
-
-
     }
 
     public void OnRoomInfoUIClickStartBattleBtn()
@@ -209,24 +203,19 @@ public class TeamCtrl : BaseCtrl
         var net = NetHandlerManager.Instance.GetHandler<BattleEntranceNetHandler>();
         var enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
         var tamRoomId = enterRoomData.id;
-        net.ApplyTeamBattle(tamRoomId, () =>
-        {
-
-        });
+        net.ApplyTeamBattle(tamRoomId, () => { });
     }
+
     public override void OnEnter(CtrlArgs args)
     {
-
     }
 
     public void SendNet(Action action)
     {
         var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
-        net.SendGetTeamRoomList(() =>
-        {
-            action?.Invoke();
-        });
+        net.SendGetTeamRoomList(() => { action?.Invoke(); });
     }
+
     public void OnClickTitleCloseBtn()
     {
         if (roomInfoUI.IsShow())
@@ -241,9 +230,7 @@ public class TeamCtrl : BaseCtrl
 
     public override void OnActive()
     {
-
-        CtrlManager.Instance.ShowTitleBar();
-
+        CtrlManager.Instance.ShowTitleBar(TitleBarIds.TeamRoomList);
 
 
         this.roomListUI.Show();
@@ -263,13 +250,7 @@ public class TeamCtrl : BaseCtrl
         EventDispatcher.AddListener(EventIDs.OnPlayerChangeInfoInTeamRoom, OnPlayerChangeInfoInTamRoom);
         EventDispatcher.AddListener<int>(EventIDs.OnPlayerLeaveTeamRoom, OnPlayerLeaveTeamRoom);
 
-        SendNet(() =>
-        {
-            RefreshAll();
-        });
-
-
-
+        SendNet(() => { RefreshAll(); });
     }
 
     //有玩家改变状态
@@ -289,12 +270,9 @@ public class TeamCtrl : BaseCtrl
             GameDataManager.Instance.TeamStore.SetCurrEnterRoomData(null);
             this.roomInfoUI.Hide();
             this.roomListUI.Show();
-
-            SendNet(() =>
-            {
-                RefreshAll();
-            });
-
+            CtrlManager.Instance.ShowTitleBar(TitleBarIds.TeamRoomList);
+            
+            SendNet(() => { RefreshAll(); });
         }
         else
         {
@@ -319,6 +297,7 @@ public class TeamCtrl : BaseCtrl
         {
             roomList = new List<TeamRoomData>();
         }
+
         foreach (var roomData in roomList)
         {
             var teamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(roomData.teamStageId);
@@ -338,8 +317,6 @@ public class TeamCtrl : BaseCtrl
 
     public override void OnInactive()
     {
-
-
         roomListUI.Hide();
         roomInfoUI.Hide();
 
@@ -362,6 +339,13 @@ public class TeamCtrl : BaseCtrl
         UIManager.Instance.ReleaseUI<TeamRoomListUI>();
         UIManager.Instance.ReleaseUI<TeamRoomInfoUI>();
     }
+}
 
-
+public enum TitleBarIds
+{
+    Null = 0,
+    Lobby = 1,
+    HeroList = 2,
+    TeamRoomList = 3,
+    TeamRoomInfo = 4
 }

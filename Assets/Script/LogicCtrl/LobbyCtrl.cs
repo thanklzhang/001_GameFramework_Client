@@ -9,16 +9,18 @@ using UnityEngine.UI;
 public class LobbyCtrl : BaseCtrl
 {
     LobbyUI ui;
+
     //TitleBarUI titleBarUI;
     public override void OnInit()
     {
         //this.isParallel = false;
     }
+
     public override void OnStartLoad()
     {
         this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            new LoadUIRequest<LobbyUI>(){selfFinishCallback = OnUILoadFinish},
+            new LoadUIRequest<LobbyUI>() { selfFinishCallback = OnUILoadFinish },
             //new LoadUIRequest<TitleBarUI>(){selfFinishCallback = OnTitleUILoadFinish},
         });
     }
@@ -49,7 +51,6 @@ public class LobbyCtrl : BaseCtrl
     public void OnClickMainTaskBtn()
     {
         CtrlManager.Instance.Enter<MainTaskCtrl>();
-
     }
 
     public void OnClickTeamBtn()
@@ -65,13 +66,11 @@ public class LobbyCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
-
     }
 
     public override void OnActive()
     {
-
-        CtrlManager.Instance.ShowTitleBar();
+        CtrlManager.Instance.ShowTitleBar(TitleBarIds.Lobby);
 
 
         ui.Show();
@@ -84,13 +83,14 @@ public class LobbyCtrl : BaseCtrl
     {
         ////title
         //RefreshTitleBarUI();
-        
+
 
         //lobby
         var playerInfo = GameDataManager.Instance.UserStore.PlayerInfo;
         LobbyUIArg arg = new LobbyUIArg()
         {
-            playerName = playerInfo.name
+            playerName = playerInfo.name,
+            playerLevel = playerInfo.level
         };
         this.ui.Refresh(arg);
     }
@@ -109,7 +109,7 @@ public class LobbyCtrl : BaseCtrl
     //    titleArgs.optionList.Add(optionData);
 
     //    titleBarUI.Refresh(titleArgs);
-       
+
     //}
 
     public override void OnInactive()
@@ -126,6 +126,4 @@ public class LobbyCtrl : BaseCtrl
 
         //UIManager.Instance.ReleaseUI<LobbyUI>();
     }
-
-
 }

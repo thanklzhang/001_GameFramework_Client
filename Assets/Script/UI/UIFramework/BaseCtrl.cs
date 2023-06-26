@@ -41,6 +41,7 @@ public class BaseCtrl
     //是否并行 并行是指不影响其他的 ctrl
     //public bool isParallel;
     Action finishCallback;
+    
 
     //public BaseView view;
     public CtrlState state = CtrlState.Null;
@@ -82,6 +83,8 @@ public class BaseCtrl
     {
         this.OnEnter(args);
     }
+ 
+
 
 
     public void Active()

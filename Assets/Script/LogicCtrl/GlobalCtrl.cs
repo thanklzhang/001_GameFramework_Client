@@ -66,7 +66,12 @@ public class GlobalCtrl : BaseCtrl
 
     public void OnRefreshBagData()
     {
-        this.ShowTitleBar();
+        if (currTitleBarId == TitleBarIds.Null)
+        {
+            return;
+        }
+
+        this.ShowTitleBar(currTitleBarId);
     }
 
     public void OnClickTitleUICloseBtn()
@@ -106,19 +111,44 @@ public class GlobalCtrl : BaseCtrl
         });
     }
 
-    public void ShowTitleBar()
+    private TitleBarIds currTitleBarId;
+    public void ShowTitleBar(TitleBarIds titleBarId)
     {
+        currTitleBarId = titleBarId;
         //给标题栏 ui 提供数据
         TitleBarUIArgs titleArgs = new TitleBarUIArgs();
         titleArgs.optionList = new List<TitleOptionUIData>();
 
-        //先就显示一个
-        var bagStore = GameDataManager.Instance.BagStore;
-        TitleOptionUIData optionData = new TitleOptionUIData();
-        optionData.configId = 22000001;
-        optionData.count = bagStore.GetCountByConfigId(optionData.configId);
+        var titleConfig = Table.TableManager.Instance.GetById<Table.TitleBar>((int)titleBarId);
 
-        titleArgs.optionList.Add(optionData);
+        if (null == titleConfig)
+        {
+            // Logx.LogWarning("the titleConfig is nil : configId : " + titleBarId);
+            titleUI.Hide();
+            return;
+        }
+
+        //资源列表
+        if (!string.IsNullOrEmpty(titleConfig.ResList))
+        {
+            var strs = titleConfig.ResList.Split(',');
+            foreach (var str in strs)
+            {
+                var resId = int.Parse(str);
+                
+                var bagStore = GameDataManager.Instance.BagStore;
+                TitleOptionUIData optionData = new TitleOptionUIData();
+                optionData.configId = resId;
+                optionData.count = bagStore.GetCountByConfigId(optionData.configId);
+                titleArgs.optionList.Add(optionData);
+            }
+        }
+
+        //标题名称
+        titleArgs.titleName = titleConfig.TitleName;
+        titleArgs.isShowCloseBtn = 1 == titleConfig.IsShowCloseBtn;
+        titleArgs.isShowBg = 1 == titleConfig.IsShowBg;
+        titleArgs.isShowLine = 1 == titleConfig.IsShowLine;
 
         titleUI.Show();
         titleUI.Refresh(titleArgs);

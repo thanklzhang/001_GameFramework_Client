@@ -56,7 +56,10 @@ public class GameStartup : MonoBehaviour
         }
         else
         {
-            serverTypeUI.gameObject.SetActive(true);
+            //目前先按照本地服务器来
+            Const.isLocalServer = true;
+            serverTypeUI.gameObject.SetActive(false);
+            this.Startup();
         }
 
     }

@@ -24,6 +24,7 @@ public class BattleUI : BaseUI
     Button readyStartBtn;
     Button attrBtn;
 
+    public GameObject readyBgGo;
     public Text stateText;
 
     //血条
@@ -43,7 +44,8 @@ public class BattleUI : BaseUI
     protected override void OnInit()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
-        readyStartBtn = this.transform.Find("readyStartBtn").GetComponent<Button>();
+        readyBgGo = this.transform.Find("readyBg").gameObject;
+        readyStartBtn = this.transform.Find("readyBg/readyStartBtn").GetComponent<Button>();
         stateText = this.transform.Find("stateText").GetComponent<Text>();
         attrBtn = this.transform.Find("attrBtn").GetComponent<Button>();
 
@@ -74,7 +76,7 @@ public class BattleUI : BaseUI
         attrUI = new BattleAttrUI();
         var attrUIRoot = this.transform.Find("attrBar");
         attrUI.Init(attrUIRoot.gameObject, this);
-        attrUI.Hide();
+        // attrUI.Hide();
 
         //技能面板
         var skillUIRoot = this.transform.Find("skillBar");
@@ -109,7 +111,8 @@ public class BattleUI : BaseUI
 
     public void SetReadyBattleBtnShowState(bool isShow)
     {
-        readyStartBtn.gameObject.SetActive(isShow);
+        readyBgGo.SetActive(isShow);
+        // readyStartBtn.gameObject.SetActive(isShow);
     }
 
     public void SetStateText(string stateStr)

@@ -8,30 +8,40 @@ using UnityEngine.UI;
 
 public class SelectHeroUI : BaseUI
 {
+    Action event_ClickCloseBtn;
     Action event_ClickConfirmBtn;
     Action<int> event_ClickOneHeroOption;
 
     Button confirmBtn;
-
+    private Button closeBtn;
+    
     Transform heroRoot;
 
     Button clickBtn;
     public List<HeroCardUIData> heroCardUIDataList;
-    public List<HeroAvatar> heroShowObjList;
+    public List<SelectHeroOptionShowObj> heroShowObjList;
 
     int currSelectHeroGuid;
     protected override void OnInit()
     {
         heroRoot = this.transform.Find("scroll/mask/content");
         confirmBtn = this.transform.Find("confirmBtn").GetComponent<Button>();
+
+        closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
       
 
         confirmBtn.onClick.AddListener(() =>
         {
             event_ClickConfirmBtn?.Invoke();
         });
+        
+        closeBtn.onClick.AddListener(() =>
+        {
+            //event_ClickCloseBtn?.Invoke();
+            this.Hide();
+        });
 
-        heroShowObjList = new List<HeroAvatar>();
+        heroShowObjList = new List<SelectHeroOptionShowObj>();
 
     }
 
@@ -44,16 +54,16 @@ public class SelectHeroUI : BaseUI
 
         currSelectHeroGuid = selectHeroUIArgs.currSelectHeroGuid;
 
-        this.RefresInfo();
+        this.RefreshInfo();
     }
 
-    void RefresInfo()
+    void RefreshInfo()
     {
         for (int i = 0; i < this.heroCardUIDataList.Count; i++)
         {
             var data = this.heroCardUIDataList[i];
             GameObject go = null;
-            HeroAvatar avater = null;
+            SelectHeroOptionShowObj heroOption = null;
             if (i < this.heroRoot.childCount)
             {
                 go = this.heroRoot.GetChild(i).gameObject;
@@ -66,20 +76,20 @@ public class SelectHeroUI : BaseUI
 
             if (i < heroShowObjList.Count)
             {
-                avater = heroShowObjList[i];
+                heroOption = heroShowObjList[i];
             }
             else
             {
-                avater = new HeroAvatar();
+                heroOption = new SelectHeroOptionShowObj();
                 //理论上不会出现加一个还是空的的情况 
-                heroShowObjList.Add(avater);
+                heroShowObjList.Add(heroOption);
 
-                avater.Init(go);
-                avater.AddClickListener(event_ClickOneHeroOption);
+                heroOption.Init(go);
+                heroOption.AddClickListener(event_ClickOneHeroOption);
             }
 
-            avater.Refresh(data);
-            avater.Show();
+            heroOption.Refresh(data);
+            heroOption.Show();
         }
 
         for (int i = this.heroRoot.childCount - 1; i >= this.heroCardUIDataList.Count; i--)
@@ -107,7 +117,7 @@ public class SelectHeroUI : BaseUI
         currSelectHeroGuid = guid;
         foreach (var showObj in heroShowObjList)
         {
-            if (showObj.uiData.guid == guid)
+            if (showObj.avatar.uiData.guid == guid)
             {
                 showObj.SetSelectState(true);
             }
@@ -121,7 +131,9 @@ public class SelectHeroUI : BaseUI
     protected override void OnRelease()
     {
         event_ClickConfirmBtn = null;
+        event_ClickCloseBtn = null;
         this.confirmBtn.onClick.RemoveAllListeners();
+        this.closeBtn.onClick.RemoveAllListeners();
 
         foreach (var item in heroShowObjList)
         {
@@ -141,4 +153,61 @@ public class SelectHeroUIArgs : UIArgs
     public Action event_ClickConfirmBtn;
     public Action<int> event_ClickOneHeroOption;
     public int currSelectHeroGuid;
+}
+
+public class SelectHeroOptionShowObj
+{
+    public HeroAvatar avatar;
+    public GameObject gameObject;
+    public Transform transform;
+    
+    private Text nameText;
+    public void Init(GameObject go)
+    {
+        gameObject = go;
+        transform = gameObject.transform;
+
+        //填充 avatar
+        var avatarRootGo = this.transform.Find("HeroAvatar").gameObject;
+        avatar = new HeroAvatar();
+        avatar.Init(avatarRootGo);
+        
+        //自身
+        nameText = this.transform.Find("nameText").GetComponent<Text>();
+    }
+
+    public void AddClickListener(Action<int> eventClickOneHeroOption)
+    {
+        avatar.AddClickListener(eventClickOneHeroOption);
+    }
+
+    public void Refresh(HeroCardUIData data)
+    {
+        avatar.Refresh(data);
+        
+        var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(data.configId);
+        nameText.text = config.Name;
+    }
+
+    public void Show()
+    {
+        avatar.Show();
+    }
+    
+    public void SetSelectState(bool isShow)
+    {
+        avatar.SetSelectState(isShow);
+    }
+
+    public void Hide()
+    {
+        avatar.Hide();
+    }
+
+    public void Release()
+    {
+        avatar.Release();
+    }
+
+   
 }

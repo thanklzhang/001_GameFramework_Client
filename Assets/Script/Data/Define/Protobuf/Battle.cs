@@ -95,14 +95,19 @@ namespace NetProto {
             "CmVudGl0eUd1aWQYASABKAUiJAoQc2NOb3RpZnlQbGF5UGxvdBIQCghwbG90",
             "TmFtZRgBIAEoCSIRCg9zY05vdGlmeVBsb3RFbmQiOwoac2NOb3RpZnlTZXRF",
             "bnRpdHlTaG93U3RhdGUSDQoFZ3VpZHMYASADKAUSDgoGaXNTaG93GAIgASgI",
-            "IkoKEGNzQXBwbHlCYXR0bGVFbmQSNgoRYXBwbHlCYXR0bGVFbmRBcmcYASAB",
-            "KAsyGy5OZXRQcm90by5BcHBseUJhdHRsZUVuZEFyZyIfChBzY0FwcGx5QmF0",
-            "dGxlRW5kEgsKA2VychgBIAEoBSJDChFzY05vdGlmeUJhdHRsZUVuZBINCgVp",
-            "c1dpbhgBIAEoBRIfCgdyZXdhcmRzGAIgAygLMg4uTmV0UHJvdG8uSXRlbSIv",
-            "ChJjc1RyYW5zaXRpb25CYXR0bGUSCwoDY21kGAEgASgFEgwKBGRhdGEYAiAB",
-            "KAwiIQoSc2NUcmFuc2l0aW9uQmF0dGxlEgsKA2VychgBIAEoBSIbChljc1Ry",
-            "YW5zaXRpb25CYXR0bGUyUGxheWVyIjYKGXNjVHJhbnNpdGlvbkJhdHRsZTJQ",
-            "bGF5ZXISCwoDY21kGAEgASgFEgwKBGRhdGEYAiABKAxiBnByb3RvMw=="));
+            "IosBChdzY05vdGlmeVNraWxsVHJhY2tTdGFydBIVCg10cmFja0NvbmZpZ0lk",
+            "GAEgASgFEhQKDHJlbGVhc2VyR3VpZBgCIAEoBRIpCgl0YXJnZXRQb3MYAyAB",
+            "KAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SGAoQdGFyZ2V0RW50aXR5R3Vp",
+            "ZBgEIAEoBSJHChVzY05vdGlmeVNraWxsVHJhY2tFbmQSEgoKZW50aXR5R3Vp",
+            "ZBgBIAEoBRIaChJza2lsbFRyYWNrQ29uZmlnSWQYAiABKAUiSgoQY3NBcHBs",
+            "eUJhdHRsZUVuZBI2ChFhcHBseUJhdHRsZUVuZEFyZxgBIAEoCzIbLk5ldFBy",
+            "b3RvLkFwcGx5QmF0dGxlRW5kQXJnIh8KEHNjQXBwbHlCYXR0bGVFbmQSCwoD",
+            "ZXJyGAEgASgFIkMKEXNjTm90aWZ5QmF0dGxlRW5kEg0KBWlzV2luGAEgASgF",
+            "Eh8KB3Jld2FyZHMYAiADKAsyDi5OZXRQcm90by5JdGVtIi8KEmNzVHJhbnNp",
+            "dGlvbkJhdHRsZRILCgNjbWQYASABKAUSDAoEZGF0YRgCIAEoDCIhChJzY1Ry",
+            "YW5zaXRpb25CYXR0bGUSCwoDZXJyGAEgASgFIhsKGWNzVHJhbnNpdGlvbkJh",
+            "dHRsZTJQbGF5ZXIiNgoZc2NUcmFuc2l0aW9uQmF0dGxlMlBsYXllchILCgNj",
+            "bWQYASABKAUSDAoEZGF0YRgCIAEoDGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -148,6 +153,8 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlayPlot), global::NetProto.scNotifyPlayPlot.Parser, new[]{ "PlotName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlotEnd), global::NetProto.scNotifyPlotEnd.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySetEntityShowState), global::NetProto.scNotifySetEntityShowState.Parser, new[]{ "Guids", "IsShow" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillTrackStart), global::NetProto.scNotifySkillTrackStart.Parser, new[]{ "TrackConfigId", "ReleaserGuid", "TargetPos", "TargetEntityGuid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifySkillTrackEnd), global::NetProto.scNotifySkillTrackEnd.Parser, new[]{ "EntityGuid", "SkillTrackConfigId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csApplyBattleEnd), global::NetProto.csApplyBattleEnd.Parser, new[]{ "ApplyBattleEndArg" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scApplyBattleEnd), global::NetProto.scApplyBattleEnd.Parser, new[]{ "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyBattleEnd), global::NetProto.scNotifyBattleEnd.Parser, new[]{ "IsWin", "Rewards" }, null, null, null),
@@ -6589,6 +6596,364 @@ namespace NetProto {
   }
 
   /// <summary>
+  /// 服务器通知 有技能轨道开始
+  /// </summary>
+  public sealed partial class scNotifySkillTrackStart : pb::IMessage<scNotifySkillTrackStart> {
+    private static readonly pb::MessageParser<scNotifySkillTrackStart> _parser = new pb::MessageParser<scNotifySkillTrackStart>(() => new scNotifySkillTrackStart());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scNotifySkillTrackStart> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[42]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySkillTrackStart() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySkillTrackStart(scNotifySkillTrackStart other) : this() {
+      trackConfigId_ = other.trackConfigId_;
+      releaserGuid_ = other.releaserGuid_;
+      TargetPos = other.targetPos_ != null ? other.TargetPos.Clone() : null;
+      targetEntityGuid_ = other.targetEntityGuid_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySkillTrackStart Clone() {
+      return new scNotifySkillTrackStart(this);
+    }
+
+    /// <summary>Field number for the "trackConfigId" field.</summary>
+    public const int TrackConfigIdFieldNumber = 1;
+    private int trackConfigId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TrackConfigId {
+      get { return trackConfigId_; }
+      set {
+        trackConfigId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "releaserGuid" field.</summary>
+    public const int ReleaserGuidFieldNumber = 2;
+    private int releaserGuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ReleaserGuid {
+      get { return releaserGuid_; }
+      set {
+        releaserGuid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "targetPos" field.</summary>
+    public const int TargetPosFieldNumber = 3;
+    private global::NetProto.Vector3Proto targetPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.Vector3Proto TargetPos {
+      get { return targetPos_; }
+      set {
+        targetPos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "targetEntityGuid" field.</summary>
+    public const int TargetEntityGuidFieldNumber = 4;
+    private int targetEntityGuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TargetEntityGuid {
+      get { return targetEntityGuid_; }
+      set {
+        targetEntityGuid_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scNotifySkillTrackStart);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scNotifySkillTrackStart other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TrackConfigId != other.TrackConfigId) return false;
+      if (ReleaserGuid != other.ReleaserGuid) return false;
+      if (!object.Equals(TargetPos, other.TargetPos)) return false;
+      if (TargetEntityGuid != other.TargetEntityGuid) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TrackConfigId != 0) hash ^= TrackConfigId.GetHashCode();
+      if (ReleaserGuid != 0) hash ^= ReleaserGuid.GetHashCode();
+      if (targetPos_ != null) hash ^= TargetPos.GetHashCode();
+      if (TargetEntityGuid != 0) hash ^= TargetEntityGuid.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (TrackConfigId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(TrackConfigId);
+      }
+      if (ReleaserGuid != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(ReleaserGuid);
+      }
+      if (targetPos_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(TargetPos);
+      }
+      if (TargetEntityGuid != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(TargetEntityGuid);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TrackConfigId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TrackConfigId);
+      }
+      if (ReleaserGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ReleaserGuid);
+      }
+      if (targetPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetPos);
+      }
+      if (TargetEntityGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TargetEntityGuid);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scNotifySkillTrackStart other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TrackConfigId != 0) {
+        TrackConfigId = other.TrackConfigId;
+      }
+      if (other.ReleaserGuid != 0) {
+        ReleaserGuid = other.ReleaserGuid;
+      }
+      if (other.targetPos_ != null) {
+        if (targetPos_ == null) {
+          targetPos_ = new global::NetProto.Vector3Proto();
+        }
+        TargetPos.MergeFrom(other.TargetPos);
+      }
+      if (other.TargetEntityGuid != 0) {
+        TargetEntityGuid = other.TargetEntityGuid;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            TrackConfigId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            ReleaserGuid = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            if (targetPos_ == null) {
+              targetPos_ = new global::NetProto.Vector3Proto();
+            }
+            input.ReadMessage(targetPos_);
+            break;
+          }
+          case 32: {
+            TargetEntityGuid = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 服务器通知 有技能轨道结束
+  /// </summary>
+  public sealed partial class scNotifySkillTrackEnd : pb::IMessage<scNotifySkillTrackEnd> {
+    private static readonly pb::MessageParser<scNotifySkillTrackEnd> _parser = new pb::MessageParser<scNotifySkillTrackEnd>(() => new scNotifySkillTrackEnd());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scNotifySkillTrackEnd> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[43]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySkillTrackEnd() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySkillTrackEnd(scNotifySkillTrackEnd other) : this() {
+      entityGuid_ = other.entityGuid_;
+      skillTrackConfigId_ = other.skillTrackConfigId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifySkillTrackEnd Clone() {
+      return new scNotifySkillTrackEnd(this);
+    }
+
+    /// <summary>Field number for the "entityGuid" field.</summary>
+    public const int EntityGuidFieldNumber = 1;
+    private int entityGuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int EntityGuid {
+      get { return entityGuid_; }
+      set {
+        entityGuid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skillTrackConfigId" field.</summary>
+    public const int SkillTrackConfigIdFieldNumber = 2;
+    private int skillTrackConfigId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int SkillTrackConfigId {
+      get { return skillTrackConfigId_; }
+      set {
+        skillTrackConfigId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scNotifySkillTrackEnd);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scNotifySkillTrackEnd other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (EntityGuid != other.EntityGuid) return false;
+      if (SkillTrackConfigId != other.SkillTrackConfigId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (EntityGuid != 0) hash ^= EntityGuid.GetHashCode();
+      if (SkillTrackConfigId != 0) hash ^= SkillTrackConfigId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EntityGuid != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(EntityGuid);
+      }
+      if (SkillTrackConfigId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(SkillTrackConfigId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (EntityGuid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EntityGuid);
+      }
+      if (SkillTrackConfigId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkillTrackConfigId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scNotifySkillTrackEnd other) {
+      if (other == null) {
+        return;
+      }
+      if (other.EntityGuid != 0) {
+        EntityGuid = other.EntityGuid;
+      }
+      if (other.SkillTrackConfigId != 0) {
+        SkillTrackConfigId = other.SkillTrackConfigId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            EntityGuid = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            SkillTrackConfigId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   /// 主动发起计算 一般是本地战斗的结算
   /// </summary>
   public sealed partial class csApplyBattleEnd : pb::IMessage<csApplyBattleEnd> {
@@ -6598,7 +6963,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[42]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[44]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6721,7 +7086,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[43]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[45]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6841,7 +7206,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[44]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[46]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6981,7 +7346,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[45]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[47]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7126,7 +7491,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[46]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[48]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7246,7 +7611,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[47]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[49]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7335,7 +7700,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[48]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[50]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

@@ -84,7 +84,8 @@ public class MainTaskCtrl : BaseCtrl
 
     public override void OnActive()
     {
-        CtrlManager.Instance.ShowTitleBar();
+        //待定
+        CtrlManager.Instance.ShowTitleBar(0);
 
         EventDispatcher.AddListener(EventIDs.OnTitleBarClickCloseBtn, OnClickTitleCloseBtn);
         EventDispatcher.AddListener(EventIDs.OnRefreshAllMainTaskData, OnRefreshAllMainTaskData);

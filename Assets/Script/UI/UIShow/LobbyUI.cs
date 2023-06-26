@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LobbyUIArg : UIArgs
 {
     public string playerName;
+    public int playerLevel;
 }
 
 public class LobbyUI : BaseUI
@@ -21,6 +22,7 @@ public class LobbyUI : BaseUI
     Button mainTaskBtn;
     Button teamBtn;
     Text playerNameText;
+    Text playerLevelText;
 
     protected override void OnInit()
     {
@@ -28,27 +30,16 @@ public class LobbyUI : BaseUI
         heroListBtn = this.transform.Find("heroListBtn").GetComponent<Button>();
         mainTaskBtn = this.transform.Find("mainTaskBtn").GetComponent<Button>();
         teamBtn = this.transform.Find("teamBtn").GetComponent<Button>();
-        playerNameText = this.transform.Find("playerNameRoot/name").GetComponent<Text>();
+        playerNameText = this.transform.Find("heroInfo/playerNameRoot/name").GetComponent<Text>();
+        playerLevelText = this.transform.Find("heroInfo/level").GetComponent<Text>();
 
-        closeBtn.onClick.AddListener(() =>
-        {
-            onClickCloseBtn?.Invoke();
-        });
+        closeBtn.onClick.AddListener(() => { onClickCloseBtn?.Invoke(); });
 
-        heroListBtn.onClick.AddListener(() =>
-        {
-            onClickHeroListBtn?.Invoke();
-        });
+        heroListBtn.onClick.AddListener(() => { onClickHeroListBtn?.Invoke(); });
 
-        mainTaskBtn.onClick.AddListener(() =>
-        {
-            onClickMainTaskBtn?.Invoke();
-        });
+        mainTaskBtn.onClick.AddListener(() => { onClickMainTaskBtn?.Invoke(); });
 
-        teamBtn.onClick.AddListener(() =>
-        {
-            onClickTeamBtn?.Invoke();
-        });
+        teamBtn.onClick.AddListener(() => { onClickTeamBtn?.Invoke(); });
     }
 
     public override void Refresh(UIArgs args)
@@ -56,6 +47,7 @@ public class LobbyUI : BaseUI
         var lobbyArg = (LobbyUIArg)args;
         var playerNameStr = lobbyArg.playerName;
         this.playerNameText.text = playerNameStr;
+        this.playerLevelText.text = "" + lobbyArg.playerLevel;
     }
 
     protected override void OnRelease()
@@ -66,4 +58,3 @@ public class LobbyUI : BaseUI
         onClickTeamBtn = null;
     }
 }
-

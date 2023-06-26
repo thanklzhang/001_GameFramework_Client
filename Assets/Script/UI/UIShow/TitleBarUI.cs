@@ -10,6 +10,9 @@ public class TitleBarUI : BaseUI
 {
     public Transform optionRoot;
     public Button closeBtn;
+    public Text nameText;
+    public GameObject bgGo;
+    public GameObject lineGo;
 
     List<TitleOptionUIData> optionDataList = new List<TitleOptionUIData>();
     List<TitleOptionShowObj> optionShowList = new List<TitleOptionShowObj>();
@@ -20,6 +23,9 @@ public class TitleBarUI : BaseUI
     {
         this.optionRoot = this.transform.Find("root");
         this.closeBtn = transform.Find("close").GetComponent<Button>();
+        nameText = transform.Find("funcName").GetComponent<Text>();
+        bgGo = transform.Find("bg").gameObject;
+        lineGo = transform.Find("line01").gameObject;
 
         this.closeBtn.onClick.AddListener(() =>
         {
@@ -34,6 +40,13 @@ public class TitleBarUI : BaseUI
         this.optionDataList = titleBarListArgs.optionList;
 
         this.RefreshOptionList();
+
+        nameText.text = titleBarListArgs.titleName;
+        
+        closeBtn.gameObject.SetActive(titleBarListArgs.isShowCloseBtn);
+        bgGo.SetActive(titleBarListArgs.isShowBg);
+        lineGo.SetActive(titleBarListArgs.isShowLine);
+        
     }
 
     void RefreshOptionList()
@@ -58,7 +71,11 @@ public class TitleBarUI : BaseUI
 
 public class TitleBarUIArgs : UIArgs
 {
+    public string titleName;
     public List<TitleOptionUIData> optionList;
+    public bool isShowCloseBtn;
+    public bool isShowBg;
+    public bool isShowLine;
 }
 
 public class TitleOptionUIData

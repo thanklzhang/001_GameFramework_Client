@@ -7,135 +7,90 @@ using UnityEngine.UI;
 public class LoginUI : BaseUI
 {
     public Action<string, string> onLoginBtnClick;
-    public Action<string, string, string> onRegisteBtnClick;
-    public Action<string, int> onClickConnectBtn;
+    public Action onChangeUserBtnClick;
+    
+    public Action<string, string> onLoginOrRegisterBtnClick;
+    public Action onLoginOrRegisterCloseBtnClick;
 
-    Button loginConfirmBtn;
-    Button registConfirmBtn;
-    InputField accountInput;
-    InputField passwordInput;
+
+    //登录主界面
+    private Text userAccountText;
+    private Button btn_login;
     Text stateText;
-    GameObject loginRootObj;
-    GameObject registRootObj;
-    InputField registAccountInput;
-    InputField registPasswordInput;
-    InputField registPasswordAgainInput;
+    private Button changeUserBtn;
 
-    Transform connectRoot;
-    Transform remoteServerRoot;
-    Transform localServerRoot;
-    public InputField localServerIpInput;
-    public InputField localServerPortInput;
-    Button connectBtn;
-    public Text connectTipsText;
+    //登录/注册界面
+    private GameObject loginRootObj;
+    InputField accountInput;
 
-    Button loginOptionBtn;
-    Button registOptionBtn;
+    InputField passwordInput;
+
+    // Text statePopText;
+    Button loginRegisterConfirmBtn;
+    private Button loginRegisterCloseBtn;
 
     protected override void OnInit()
     {
-        //选项卡
-        loginOptionBtn = this.transform.Find("loginOption").GetComponent<Button>();
-        registOptionBtn = this.transform.Find("registOption").GetComponent<Button>();
-
         //登录相关
         loginRootObj = this.transform.Find("loginRoot").gameObject;
 
+        userAccountText = this.transform.Find("account/txt_name").GetComponent<Text>();
+        btn_login = this.transform.Find("btn_login").GetComponent<Button>();
+        stateText = this.transform.Find("stateText").GetComponent<Text>();
+        changeUserBtn = this.transform.Find("account/btn_change_user").GetComponent<Button>();
+
+        //登录/注册界面
         accountInput = loginRootObj.transform.Find("accountInput").GetComponent<InputField>();
         passwordInput = loginRootObj.transform.Find("passwordInput").GetComponent<InputField>();
 
-        loginConfirmBtn = loginRootObj.transform.Find("loginBtn").GetComponent<Button>();
-
-        //注册账号相关
-        registRootObj = this.transform.Find("registRoot").gameObject;
-        registAccountInput = registRootObj.transform.Find("accountInput").GetComponent<InputField>();
-        registPasswordInput = registRootObj.transform.Find("passwordInput").GetComponent<InputField>();
-        registPasswordAgainInput = registRootObj.transform.Find("passwordAgainInput").GetComponent<InputField>();
+        loginRegisterConfirmBtn = loginRootObj.transform.Find("loginBtn").GetComponent<Button>();
+        // statePopText = loginRootObj.transform.Find("statePopText").GetComponent<Text>();
+        loginRegisterCloseBtn = loginRootObj.transform.Find("btn_close").GetComponent<Button>();
+        
 
 
-        registConfirmBtn = registRootObj.transform.Find("registBtn").GetComponent<Button>();
-
-        //连接相关
-        connectRoot = transform.Find("connect");
-        remoteServerRoot = connectRoot.Find("remoteRoot");
-        localServerRoot = connectRoot.Find("localRoot");
-        localServerIpInput = localServerRoot.Find("Ip").GetComponent<InputField>();
-        localServerPortInput = localServerRoot.Find("port").GetComponent<InputField>();
-        connectBtn = connectRoot.Find("connectBtn").GetComponent<Button>();
-        connectTipsText = connectRoot.Find("tips").GetComponent<Text>();
-        connectBtn.onClick.AddListener(() =>
+        btn_login.onClick.AddListener(() =>
         {
-            var ip = localServerIpInput.text;
-            var port = int.Parse(localServerPortInput.text);
-            onClickConnectBtn?.Invoke(ip, port);
+            //主界面点击登录按钮
+            onLoginBtnClick?.Invoke("", "");
         });
-        this.localServerIpInput.text = NetTool.GetHostIp();// "192.168.3.13";
-        this.localServerPortInput.text = "5556";
-    
-
-        //------------------------------
-
-        stateText = this.transform.Find("stateText").GetComponent<Text>();
-
-        loginOptionBtn.onClick.AddListener(() =>
+        
+        changeUserBtn.onClick.AddListener(() =>
         {
-            this.SwitchToLoginView();
+            onChangeUserBtnClick?.Invoke();
         });
 
-        registOptionBtn.onClick.AddListener(() =>
+        loginRegisterConfirmBtn.onClick.AddListener(() =>
         {
-            this.SwitchToRegisterView();
-        });
-
-        loginConfirmBtn.onClick.AddListener(() =>
-        {
+            //登录/注册界面点击登录按钮
             var account = accountInput.text;
             var password = passwordInput.text;
-            onLoginBtnClick?.Invoke(account, password);
+            onLoginOrRegisterBtnClick?.Invoke(account, password);
         });
-        registConfirmBtn.onClick.AddListener(() =>
+
+        loginRegisterCloseBtn.onClick.AddListener(() =>
         {
-            var account = registAccountInput.text;
-            var password = registPasswordInput.text;
-            var againPassword = registPasswordAgainInput.text;
-            onRegisteBtnClick?.Invoke(account, password, againPassword);
+            onLoginOrRegisterCloseBtnClick?.Invoke();
         });
-
+        
+      
+        
         this.RefreshSaveLoginSuccessShow();
-
-
-
-
-    }
-
-    internal void SetConnectUIShow(bool isShow)
-    {
-        connectRoot.gameObject.SetActive(isShow);
-    }
-
-    public void SetConnectTips(string str)
-    {
-        this.connectTipsText.text = str;
-    }
-
-    public void SwitchToLoginView()
-    {
-        loginRootObj.SetActive(true);
-        registRootObj.SetActive(false);
-    }
-
-    public void SwitchToRegisterView()
-    {
-        loginRootObj.SetActive(false);
-        registRootObj.SetActive(true);
     }
 
     public void RefreshSaveLoginSuccessShow()
     {
         var preAccount = LocalDataTools.GetString("currAccount");
         var preAassword = LocalDataTools.GetString("currPassword");
+        if (string.IsNullOrEmpty(preAccount))
+        {
+            preAccount = "----";
+        }
+
         accountInput.text = preAccount;
         passwordInput.text = preAassword;
+
+        userAccountText.text = preAccount;
     }
 
     public void SetStateText(string stateStr)
@@ -143,12 +98,21 @@ public class LoginUI : BaseUI
         stateText.text = stateStr;
     }
 
+    public void SetLoginRegisterUIShow(bool isShow)
+    {
+        loginRootObj.SetActive(isShow);
+    }
+
     protected override void OnRelease()
     {
         onLoginBtnClick = null;
+        onLoginOrRegisterBtnClick = null;
+        onLoginOrRegisterCloseBtnClick = null;
+        onChangeUserBtnClick = null;
 
-        connectBtn.onClick.RemoveAllListeners();
-        this.onClickConnectBtn = null;
+        btn_login.onClick.RemoveAllListeners();
+        loginRegisterConfirmBtn.onClick.RemoveAllListeners();
+        loginRegisterCloseBtn.onClick.RemoveAllListeners();
+        changeUserBtn.onClick.RemoveAllListeners();
     }
 }
-

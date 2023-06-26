@@ -48,7 +48,7 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
         this.uiData = buffUIData;
 
         var cdTime = buffUIData.currCDTime;
-        currCDTimer = cdTime / 1000.0f;
+        currCDTimer = cdTime;/// 1000.0f;
 
         if (cdTime <= 0)
         {
@@ -107,9 +107,9 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
 
             currCDTimer -= deltaTime;
 
-            this.uiData.currCDTime = currCDTimer * 1000.0f;
+            this.uiData.currCDTime = currCDTimer;// * 1000.0f
             //cdTimeText.text = showStr;
-            cdImg.fillAmount = currCDTimer / (uiData.maxCDTime / 1000.0f);
+            cdImg.fillAmount = currCDTimer / (uiData.maxCDTime);// / 1000.0f
         }
 
     }

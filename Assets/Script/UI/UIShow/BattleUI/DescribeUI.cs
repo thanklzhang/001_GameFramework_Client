@@ -19,7 +19,7 @@ public class DescribeUI
     public GameObject gameObject;
     public Transform transform;
 
-    RawImage icon;
+    Image icon;
     Text nameText;
     Text contentText;
 
@@ -30,7 +30,7 @@ public class DescribeUI
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
 
-        icon = this.transform.Find("Layout/Up/icon").GetComponent<RawImage>();
+        icon = this.transform.Find("Layout/Up/iconBg/icon").GetComponent<Image>();
         nameText = this.transform.Find("Layout/Up/name_text").GetComponent<Text>();
         contentText = this.transform.Find("Layout/Down/content_text").GetComponent<Text>();
 

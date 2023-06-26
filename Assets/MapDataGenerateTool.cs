@@ -29,12 +29,12 @@ public class MapDataGenerateTool : MonoBehaviour
         Shader shader = Shader.Find("Hidden/Internal-Colored");
         lineMaterial = new Material(shader);
         lineMaterial.hideFlags = HideFlags.HideAndDontSave;
-        //ÉèÖÃ²ÎÊı
+        //è®¾ç½®å‚æ•°
         lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
         lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        //ÉèÖÃ²ÎÊı
+        //è®¾ç½®å‚æ•°
         lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
-        //ÉèÖÃ²ÎÊı
+        //è®¾ç½®å‚æ•°
         lineMaterial.SetInt("_ZWrite", 0);
     }
 
@@ -64,7 +64,7 @@ public class MapDataGenerateTool : MonoBehaviour
         lineMaterial.SetPass(0);
 
         GL.PushMatrix();
-        //¾ØÕóÏà³Ë£¬½«ÎïÌå×ø±ê×ª»¯ÎªÊÀ½ç×ø±ê
+        //çŸ©é˜µç›¸ä¹˜ï¼Œå°†ç‰©ä½“åæ ‡è½¬åŒ–ä¸ºä¸–ç•Œåæ ‡
         GL.MultMatrix(transform.localToWorldMatrix);
 
         //draw cell

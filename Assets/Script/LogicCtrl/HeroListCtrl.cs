@@ -74,7 +74,7 @@ public class HeroListCtrl : BaseCtrl
 
     public override void OnActive()
     {
-        CtrlManager.Instance.ShowTitleBar();
+        CtrlManager.Instance.ShowTitleBar(TitleBarIds.HeroList);
 
         ui.Show();
 

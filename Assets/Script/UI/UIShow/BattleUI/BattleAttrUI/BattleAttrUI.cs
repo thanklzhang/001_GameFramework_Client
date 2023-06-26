@@ -41,7 +41,7 @@ public class BattleAttrUIShowObj : BaseUIShowObj<BattleAttrUI>
     {
         nameText = this.transform.Find("name_text").GetComponent<Text>();
         valueText = this.transform.Find("value_text").GetComponent<Text>();
-        evetnTrigger = nameText.GetComponent<UIEventTrigger>();
+        evetnTrigger = this.transform.GetComponent<UIEventTrigger>();
 
         evetnTrigger.OnPointEnterEvent += OnPointEnter;
         evetnTrigger.OnPointerExitEvent += OnPointExit;

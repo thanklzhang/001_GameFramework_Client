@@ -13,7 +13,7 @@ public class HeroAvatar
 
     RawImage avatarImg;
     Text levelText;
-    Text nameText;
+    //Text nameText;
     Button clickBtn;
     GameObject selectGo;
 
@@ -25,10 +25,10 @@ public class HeroAvatar
         this.transform = this.gameObject.transform;
 
         avatarImg = this.transform.Find("show/selectHeroIcon").GetComponent<RawImage>();
-        nameText = this.transform.Find("show/heroNameText").GetComponent<Text>();
+        //nameText = this.transform.Find("show/heroNameText").GetComponent<Text>();
         levelText = this.transform.Find("show/heroLevelText").GetComponent<Text>();
         clickBtn = this.transform.Find("show/clickBtn").GetComponent<Button>();
-        selectGo = this.transform.Find("show/border").gameObject;
+        selectGo = this.transform.Find("show/select").gameObject;
 
 
     }
@@ -47,8 +47,8 @@ public class HeroAvatar
 
         levelText.text = "" + this.uiData.level;
 
-        var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.uiData.configId);
-        nameText.text = config.Name;
+        //var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.uiData.configId);
+        //nameText.text = config.Name;
 
     }
 

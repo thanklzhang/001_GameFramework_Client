@@ -65,7 +65,7 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
         levelText.text = "Lv." + this.uiData.level;
         nameText.text = "" + heroInfoTable.Name;
         unlockFlagObj.SetActive(!this.uiData.isUnlock);
-        upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
+        // upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
     }
 
     public override void OnRelease()

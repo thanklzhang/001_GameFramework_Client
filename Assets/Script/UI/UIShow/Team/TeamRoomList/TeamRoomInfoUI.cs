@@ -210,7 +210,7 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
                 hasReadyText.gameObject.SetActive(false);
                 readyBtn.gameObject.SetActive(true);
 
-                readyBtnText.text = "cancelReady";
+                readyBtnText.text = "取消";
             }
             else
             {
@@ -218,7 +218,7 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
                 hasReadyText.gameObject.SetActive(false);
                 readyBtn.gameObject.SetActive(true);
 
-                readyBtnText.text = "Ready";
+                readyBtnText.text = "准备";
             }
         }
         else

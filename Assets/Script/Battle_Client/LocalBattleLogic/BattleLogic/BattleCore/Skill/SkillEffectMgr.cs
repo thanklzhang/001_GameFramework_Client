@@ -6,6 +6,7 @@ namespace Battle
     {
         //受击挂点
         Hit_Pos = 0,
+
         //自定义挂点
         Custom_Pos = 1,
     }
@@ -27,6 +28,7 @@ namespace Battle
     {
         Dictionary<int, SkillEffect> skillEffectDic;
         Battle battle;
+
         public void Init(Battle battle)
         {
             this.battle = battle;
@@ -35,6 +37,7 @@ namespace Battle
 
 
         int maxGuid = 1;
+
         public int GenGuid()
         {
             return maxGuid++;
@@ -53,6 +56,7 @@ namespace Battle
                 effect.Init();
                 this.skillEffectDic.Add(effect.guid, effect);
             }
+
             willCreateEffectList.Clear();
 
             this.HandleWillStartStateEffect();
@@ -93,7 +97,7 @@ namespace Battle
                 skillEffectDic.Remove(guid);
 
                 //展示效果不通知
-                var isNotify = !effect.isAutoDestroy;//!(effect is CalculateEffect);
+                var isNotify = !effect.isAutoDestroy; //!(effect is CalculateEffect);
                 if (isNotify)
                 {
                     this.battle.OnSkillEffectDestroy(guid);
@@ -130,7 +134,16 @@ namespace Battle
                 ProjectileEffect pEffect = (ProjectileEffect)effect;
                 //var config = TableManager.Instance.GetById<Table.ProjectileEffect>(effectConfigId);
                 var config = battle.ConfigManager.GetById<IProjectileEffectConfig>(effectConfigId);
-                pEffect.targetGuid = context.fromSkill.targetGuid;
+                // pEffect.targetGuid = context.fromSkill.targetGuid;
+                if (context.selectEntities.Count > 0)
+                {
+                    pEffect.targetGuid = context.selectEntities[0].guid;
+                }
+                else
+                {
+                    pEffect.targetGuid = context.fromSkill.targetGuid;
+                }
+
                 pEffect.targetPos = context.fromSkill.targetPos;
                 pEffect.speed = config.Speed / 1000.0f;
                 //pEffect.lastTime = config.LastTime;
@@ -138,8 +151,6 @@ namespace Battle
 
                 resId = config.EffectResId;
                 position = context.fromSkill.releser.position;
-
-
             }
 
             //区域 effect
@@ -156,6 +167,7 @@ namespace Battle
                     {
                         isAutoDestroy = true;
                     }
+
                     position = context.fromSkill.releser.position;
                 }
             }
@@ -165,20 +177,19 @@ namespace Battle
             {
                 effect = new MoveEffect();
                 MoveEffect pEffect = (MoveEffect)effect;
-
             }
 
             //buff effect
             if (type == SkillEffectType.BuffEffect)
             {
-
                 if (context.selectEntities.Count > 0)
                 {
                     followEntityGuid = context.selectEntities[0].guid;
                 }
                 else
                 {
-                    _Battle_Log.LogError(" : the this.context.selectEntities of count is 0 : in buff , config : " + effectConfigId);
+                    _Battle_Log.LogError(" : the this.context.selectEntities of count is 0 : in buff , config : " +
+                                         effectConfigId);
                     return;
                 }
 
@@ -197,7 +208,7 @@ namespace Battle
                 buffInfo = new BuffEffectInfo();
                 //buffInfo.guid = 0;
                 buffInfo.targetEntityGuid = followEntityGuid;
-                
+
                 // if (0 == config.LastTime)
                 // {
                 //     buffInfo.currCDTime = -1;
@@ -215,12 +226,11 @@ namespace Battle
                 buffInfo.configId = effectConfigId;
 
 
-
                 var buff = entity.GetBuffByConfigId(effectConfigId);
                 if (buff != null)
                 {
                     var isAddLayer = buff.tableConfig.AddLayerType == AddLayerType.AddLayerAndEffect ||
-                        buff.tableConfig.AddLayerType == AddLayerType.AddLayerWithoutEffect;
+                                     buff.tableConfig.AddLayerType == AddLayerType.AddLayerWithoutEffect;
                     if (isAddLayer)
                     {
                         var stackCount = 1;
@@ -238,15 +248,12 @@ namespace Battle
                 }
                 else
                 {
-                    buffInfo.maxCDTime = (int) (config.LastTime);
+                    buffInfo.maxCDTime = (int)(config.LastTime);
                     buffInfo.currCDTime = buffInfo.maxCDTime;
-                    
                 }
 
                 effect = new BuffEffect();
                 BuffEffect pEffect = (BuffEffect)effect;
-
-
             }
 
             //结算伤害 effect
@@ -295,10 +302,8 @@ namespace Battle
                 //}
 
 
-
                 if (context.selectEntities.Count > 0)
                 {
-
                     var selectEntity = context.selectEntities[0];
 
                     effectPosType = EffectPosType.Hit_Pos;
@@ -327,7 +332,6 @@ namespace Battle
                     context.selectEntities = new List<BattleEntity>();
                     context.selectEntities.Add(context.fromSkill.releser);
                 }
-
             }
 
             if (effect != null)
@@ -341,7 +345,6 @@ namespace Battle
                 //effect.Init(fromSkill);
                 willCreateEffectList.Add(effect);
                 //skillEffectDic.Add(guid, effect);
-
 
 
                 effect.isAutoDestroy = isAutoDestroy;
@@ -368,6 +371,7 @@ namespace Battle
                 {
                     createInfo.createPos = position;
                 }
+
                 createInfo.followEntityGuid = followEntityGuid;
                 createInfo.isAutoDestroy = isAutoDestroy;
 
@@ -375,17 +379,15 @@ namespace Battle
                 {
                     buffInfo.guid = guid;
                 }
+
                 createInfo.buffInfo = buffInfo;
 
                 battle?.OnCreateSkillEffect(createInfo);
-
             }
             else
             {
                 _Battle_Log.LogError(string.Format("the type is not found : {0}", type));
             }
-
-
         }
 
         public void DeleteAllBuffsFromEntity(int entityGuid)
@@ -399,7 +401,6 @@ namespace Battle
                     item.Value.ForceDelete();
                 }
             }
-
         }
 
         public void DeleteBuffFromEntity(int entityGuid, int effectConfigId)
@@ -428,5 +429,3 @@ namespace Battle
         //public int iconResId;
     }
 }
-
-

@@ -13,6 +13,7 @@ using NetProto;
 using Table;
 using UnityEditor;
 using UnityEngine;
+
 namespace Battle_Client
 {
     public enum BattleState
@@ -41,7 +42,9 @@ namespace Battle_Client
 
         //玩家信息
         public Dictionary<int, ClientPlayer> players;
+
         ClientPlayer localPlayer;
+
         //本地玩家控制的英雄
         BattleEntity_Client localCtrlEntity;
 
@@ -51,7 +54,12 @@ namespace Battle_Client
         }
 
         private BattleState battleState;
-        public BattleState BattleState { get => battleState; set => battleState = value; }
+
+        public BattleState BattleState
+        {
+            get => battleState;
+            set => battleState = value;
+        }
 
         LocalBattleLogic_Executer localBattleExecuter;
         //public BattleEntityInfo LocalCtrlEntity
@@ -64,10 +72,20 @@ namespace Battle_Client
         //}
 
         IBattleClientMsgSender msgSender;
-        public IBattleClientMsgSender MsgSender { get => msgSender; set => msgSender = value; }
+
+        public IBattleClientMsgSender MsgSender
+        {
+            get => msgSender;
+            set => msgSender = value;
+        }
 
         private IBattleClientMsgReceiver msgReceiver;
-        public IBattleClientMsgReceiver MsgReceiver { get => msgReceiver; set => msgReceiver = value; }
+
+        public IBattleClientMsgReceiver MsgReceiver
+        {
+            get => msgReceiver;
+            set => msgReceiver = value;
+        }
 
         public void Init()
         {
@@ -84,8 +102,6 @@ namespace Battle_Client
         {
             return this.localBattleExecuter.GetBattle();
         }
-
-
 
 
         ///// <summary>
@@ -154,6 +170,7 @@ namespace Battle_Client
                     return player.team;
                 }
             }
+
             return -1;
         }
 
@@ -230,8 +247,6 @@ namespace Battle_Client
 
 
             this.Clear();
-
-
         }
 
         public bool IsLocalBattle()
@@ -264,19 +279,16 @@ namespace Battle_Client
             GameDataManager.Instance.UserStore.Uid = 1;
             var uid = GameDataManager.Instance.UserStore.Uid;
             CoroutineManager.Instance.StartCoroutine(LoadMapData(battleConfigId, (mapList) =>
-             {
-
-                 var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
-                 CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
-                 {
-                     //TODO : add map res 
-                     MapInitArg mapInitData = new MapInitArg();
-                     mapInitData.mapList = mapList;
-                     CreateLocalBattle(applyArg, sourceData, mapInitData, true);
-                 }));
-             }));
-
-
+            {
+                var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
+                CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
+                {
+                    //TODO : add map res 
+                    MapInitArg mapInitData = new MapInitArg();
+                    mapInitData.mapList = mapList;
+                    CreateLocalBattle(applyArg, sourceData, mapInitData, true);
+                }));
+            }));
         }
 
         //创建远端结算的本地战斗
@@ -312,7 +324,6 @@ namespace Battle_Client
             }
 
             finishCallback?.Invoke(mapList);
-
         }
 
         public IEnumerator LoadTriggerResource(int battleConfigId, Action<TriggerSourceResData> finishCallback)
@@ -328,9 +339,19 @@ namespace Battle_Client
             //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
             var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
 
+#if UNITY_EDITOR
+            var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
+            var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories).ToList();
+          
+            files = new List<string>();
+            for (int i = 0; i < files2.Count; i++)
+            {
+                var f = files2[i];
+                var f2 =  f.Replace(Const.buildPath + "/", "");
+                files.Add(f2);
+            }
+#endif
 
-            //var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + triggerTb.ScriptPath;
-            //var files = System.IO.Directory.GetFiles(loadPath, "*.ab", System.IO.SearchOption.AllDirectories);
 
             foreach (var filePath in files)
             {
@@ -339,6 +360,9 @@ namespace Battle_Client
                 //Logx.Log("local execute : start load : filePath :  " + filePath);
                 //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
                 var loadPath = Path.Combine(Const.buildPath, filePath);
+                
+                Debug.Log("zxy : loadPath " + loadPath);
+                
                 //里面已经判断 是否AB 模式了 所以这里通用
                 ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
                 {
@@ -365,9 +389,9 @@ namespace Battle_Client
         }
 
 
-
         //创建本地战斗
-        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source, MapInitArg mapInitData, bool isPureLocal)
+        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source,
+            MapInitArg mapInitData, bool isPureLocal)
         {
             Logx.Log("battle manager : CreateLocalBattle");
             //填充数据
@@ -391,8 +415,6 @@ namespace Battle_Client
             //localBattleExecuter.StartBattleLogic();
 
             GameMain.Instance.StartCoroutine(StartLocalBattle(battleClientArgs));
-
-
         }
 
         IEnumerator StartLocalBattle(BattleClient_CreateBattleArgs battleClientArgs)
@@ -447,7 +469,8 @@ namespace Battle_Client
                 entity.configId = _entity.configId;
                 entity.playerIndex = _entity.playerIndex;
 
-                entity.position = new UnityEngine.Vector3(_entity.position.x, _entity.position.y, _entity.position.z); ;
+                entity.position = new UnityEngine.Vector3(_entity.position.x, _entity.position.y, _entity.position.z);
+                ;
 
                 //netEntity.MaxHp = (int)entity.MaxHealth;
                 //netEntity.CurrHp = netEntity.MaxHp;
@@ -465,9 +488,9 @@ namespace Battle_Client
                     skillInfo.maxCDTime = skill.GetCDMaxTime();
                     entity.skills.Add(skillInfo);
                 }
+
                 battleClientArgs.entityList.Add(entity);
             }
-
 
 
             return battleClientArgs;
@@ -477,7 +500,6 @@ namespace Battle_Client
         {
             EventDispatcher.Broadcast(EventIDs.OnBattleEnd, battleResultDataArgs);
             this.OnExitBattle();
-
         }
 
         //public void AllPlayerLoadFinish()
@@ -500,7 +522,6 @@ namespace Battle_Client
         //    var entity = BattleEntityManager.Instance.CreateEntity(serverEntity);
         //    EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
         //}
-
 
 
         ////logic 直接调用
@@ -667,7 +688,6 @@ namespace Battle_Client
 
         public void GetSkillByIndex()
         {
-
         }
 
         //
@@ -717,6 +737,5 @@ namespace Battle_Client
         {
             return this.localCtrlEntity.GetSkills();
         }
-
     }
 }

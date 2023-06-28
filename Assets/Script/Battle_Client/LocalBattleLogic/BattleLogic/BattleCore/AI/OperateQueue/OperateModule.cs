@@ -18,12 +18,16 @@ namespace Battle
         }
 
         public void AddOperate(OperateNode node)
-        {
+        { 
+          
             AddOperate(new List<OperateNode>() { node });
         }
 
         public void AddOperate(List<OperateNode> addedNodeList)
         {
+         
+            
+            
             foreach (var item in addedNodeList)
             {
                 item.Init(this.entity, this);
@@ -62,6 +66,8 @@ namespace Battle
                 }
 
             }
+            
+         
         }
 
         public void Update()
@@ -72,10 +78,6 @@ namespace Battle
         OperateNode currNode;
         public void Handle()
         {
-            for (int i = 0; i < nodeList.Count; i++)
-            {
-                //Debug.Log("zxy : test : " + nodeList[i].type);
-            }
             if (nodeList.Count > 0)
             {
                 currNode = nodeList[0];
@@ -96,6 +98,8 @@ namespace Battle
 
         public void OnNodeExecuteFinish(int operateKey)
         {
+        
+            
             if (nodeList.Count > 0)
             {
                 var currNode = nodeList[0];
@@ -110,6 +114,8 @@ namespace Battle
                 }
 
             }
+            
+         
 
         }
 

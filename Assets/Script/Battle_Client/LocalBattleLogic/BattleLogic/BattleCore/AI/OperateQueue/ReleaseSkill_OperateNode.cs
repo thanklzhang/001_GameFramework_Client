@@ -24,6 +24,12 @@ namespace Battle
             {
                 
             }
+
+            var findEntity = this.battle.FindEntity(releaseSkill.targetGuid);
+            if (null == findEntity)
+            {
+                this.operateModule.OnNodeExecuteFinish(releaseSkill.skillId);
+            }
         }
 
         public override int GenKey()

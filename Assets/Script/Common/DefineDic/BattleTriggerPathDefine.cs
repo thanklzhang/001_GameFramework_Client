@@ -27,14 +27,6 @@ namespace Table
 			{"BattleTrigger/MainTaskBattle/MainTaskBattle_001",new List<string>()
 				{
 					
-					"BattleTrigger/MainTaskBattle/MainTaskBattle_001/test.json",
-					
-					"BattleTrigger/MainTaskBattle/MainTaskBattle_001/TriggerScript/battle_end.json",
-					
-					"BattleTrigger/MainTaskBattle/MainTaskBattle_001/TriggerScript/create_entity_001.json",
-					
-					"BattleTrigger/MainTaskBattle/MainTaskBattle_001/TriggerScript/create_entity_002.json",
-					
 				}		
 				
 			},
@@ -42,18 +34,16 @@ namespace Table
 			{"BattleTrigger/TeamBattle/TeamBattle_001",new List<string>()
 				{
 					
-					"BattleTrigger/TeamBattle/TeamBattle_001/TriggerScript/battle_end.json",
-					
-					"BattleTrigger/TeamBattle/TeamBattle_001/TriggerScript/create_entity_001.json",
-					
-					"BattleTrigger/TeamBattle/TeamBattle_001/TriggerScript/create_entity_002.json",
-					
 				}		
 				
 			},
 			
 			{"BattleTrigger/TestTrigger",new List<string>()
 				{
+					
+					"BattleTrigger/TestTrigger/new_trigger0.json",
+					
+					"BattleTrigger/TestTrigger/test_trigger_gen_boss 1.json",
 					
 					"BattleTrigger/TestTrigger/test_trigger_gen_boss.json",
 					

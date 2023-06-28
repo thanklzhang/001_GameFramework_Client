@@ -52,6 +52,7 @@ namespace Battle
         {
             battle = this.context.battle;
             tableConfig = battle.ConfigManager.GetById<IBuffEffectConfig>(this.configId);
+
         }
 
         public override void OnStart()

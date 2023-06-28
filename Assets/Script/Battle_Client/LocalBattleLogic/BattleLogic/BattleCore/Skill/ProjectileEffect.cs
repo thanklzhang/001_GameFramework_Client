@@ -130,7 +130,7 @@ namespace Battle
                     }
                     else
                     {
-                        _Battle_Log.LogError("the target is not found : " + targetGuid);
+                        // _Battle_Log.LogError("the target is not found : " + targetGuid);
                         this.SetWillEndState();
                     }
                 }

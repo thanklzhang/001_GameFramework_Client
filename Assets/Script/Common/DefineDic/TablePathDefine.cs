@@ -23,8 +23,6 @@ namespace Table
 			
 			"Battle.json",
 			
-			"BattleConfig.json",
-			
 			"BattleMap.json",
 			
 			"BattleTrigger.json",

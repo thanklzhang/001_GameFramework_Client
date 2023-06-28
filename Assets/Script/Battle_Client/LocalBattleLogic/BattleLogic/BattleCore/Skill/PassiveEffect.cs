@@ -84,34 +84,99 @@ namespace Battle
                     return;
                 }
 
-                foreach (var item in tableConfig.TriggerEffectList)
-                {
-                    var effectId = item;
-                    SkillEffectContext context = new SkillEffectContext();
-                    context.battle = this.battle;
-                    context.fromSkill = this.context.fromSkill;
-                    context.selectEntities = new List<BattleEntity>();
-                    context.damage = resultDamage;
-                    if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.NomralAttackEntity)
-                    {
-                        context.selectEntities.Add(this.context.fromSkill.releser);
-                    }
-                    else if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.BeNomralAttackEntity)
-                    {
-                        context.selectEntities.Add(other);
-                    }
+                // foreach (var item in tableConfig.TriggerEffectList)
+                // {
+                //     var effectId = item;
+                //     SkillEffectContext context = new SkillEffectContext();
+                //     context.battle = this.battle;
+                //     context.fromSkill = this.context.fromSkill;
+                //     context.selectEntities = new List<BattleEntity>();
+                //     context.damage = resultDamage;
+                //     if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.NomralAttackEntity)
+                //     {
+                //         context.selectEntities.Add(this.context.fromSkill.releser);
+                //     }
+                //     else if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.BeNomralAttackEntity)
+                //     {
+                //         context.selectEntities.Add(other);
+                //     }
+                //
+                //     battle.AddSkillEffect(effectId, context);
+                // }
 
-                    battle.AddSkillEffect(effectId, context);
+                AddSkillEffect(other,resultDamage,skill);
+                
+                AfterTrigger();
+            }
+        }
+
+        public void AddSkillEffect(BattleEntity other, float resultDamage,Skill skill)
+        {
+            foreach (var item in tableConfig.TriggerEffectList)
+            {
+                var effectId = item;
+                SkillEffectContext context = new SkillEffectContext();
+                context.battle = this.battle;
+                context.fromSkill = this.context.fromSkill;
+                context.selectEntities = new List<BattleEntity>();
+                context.damage = resultDamage;
+                if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.NomralAttackEntity)
+                {
+                    context.selectEntities.Add(this.context.fromSkill.releser);
                 }
+                else if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.BeNomralAttackEntity)
+                {
+                    context.selectEntities.Add(other);
+                }
+                else if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.CollisionEntity)
+                {
+                    context.selectEntities.Add(other);
+                }
+
+                battle.AddSkillEffect(effectId, context);
+            }
+        }
+
+        //之后需要合并
+        //当普通攻击释放出来的时候(前摇过了的那个时刻)
+        public void OnNormalAttackStartEffect(BattleEntity other)
+        {
+            if (tableConfig.TriggerTimeType == EffectTriggerTimeType.OnNormalAttack)
+            {
+                if (!CheckChance())
+                {
+                    return;
+                }
+
+                // foreach (var item in tableConfig.TriggerEffectList)
+                // {
+                //     var effectId = item;
+                //     SkillEffectContext context = new SkillEffectContext();
+                //     context.battle = this.battle;
+                //     context.fromSkill = this.context.fromSkill;
+                //     context.selectEntities = new List<BattleEntity>();
+                //     // context.damage = resultDamage;
+                //     if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.NomralAttackEntity)
+                //     {
+                //         context.selectEntities.Add(this.context.fromSkill.releser);
+                //     }
+                //     else if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.BeNomralAttackEntity)
+                //     {
+                //         context.selectEntities.Add(other);
+                //     }
+                //
+                //     battle.AddSkillEffect(effectId, context);
+                // }
+                AddSkillEffect(other,0,null);
 
                 AfterTrigger();
             }
         }
 
-
         //被别人普通攻击命中时
-        public void OnBeNormalAttackByOtherSuccess(BattleEntity other, int resultDamage, Skill skill)
+        public void OnBeNormalAttackByOtherSuccess(BattleEntity other, float resultDamage, Skill skill)
         {
+            
         }
 
         //之后需要合并
@@ -124,21 +189,23 @@ namespace Battle
                     return;
                 }
 
-                foreach (var item in tableConfig.TriggerEffectList)
-                {
-                    var effectId = item;
-                    SkillEffectContext context = new SkillEffectContext();
-                    context.battle = this.battle;
-                    context.fromSkill = this.context.fromSkill;
-                    context.selectEntities = new List<BattleEntity>();
-
-                    if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.CollisionEntity)
-                    {
-                        context.selectEntities.Add(other);
-                    }
-
-                    battle.AddSkillEffect(effectId, context);
-                }
+                AddSkillEffect(other,0,null);
+                
+                // foreach (var item in tableConfig.TriggerEffectList)
+                // {
+                //     var effectId = item;
+                //     SkillEffectContext context = new SkillEffectContext();
+                //     context.battle = this.battle;
+                //     context.fromSkill = this.context.fromSkill;
+                //     context.selectEntities = new List<BattleEntity>();
+                //
+                //     if (this.tableConfig.TriggerTargetType == EffectTriggerTargetType.CollisionEntity)
+                //     {
+                //         context.selectEntities.Add(other);
+                //     }
+                //
+                //     battle.AddSkillEffect(effectId, context);
+                // }
 
                 AfterTrigger();
             }

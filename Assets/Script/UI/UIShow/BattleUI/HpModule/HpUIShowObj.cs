@@ -106,7 +106,7 @@ public class HpUIShowObj
 
         var rect = hp.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(currLen, rect.sizeDelta.y);
-        Logx.Log("zxyzxy : " + rect.sizeDelta + " " + currLen);
+        // Logx.Log("zxyzxy : " + rect.sizeDelta + " " + currLen);
 
         valueText.text = "" + currHp + "/" + maxHp;
 

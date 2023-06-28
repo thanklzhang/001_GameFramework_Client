@@ -31,6 +31,7 @@ namespace Battle
 
         public override void AskReleaseSkill(int skillId, int targetGuid, Vector3 targetPos)
         {
+         
             var isInRange = this.entity.IsInSkillReleaseRange(skillId, targetGuid, targetPos);
 
             if (!isInRange)

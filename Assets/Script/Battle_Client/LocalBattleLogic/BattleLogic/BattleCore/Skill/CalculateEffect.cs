@@ -132,25 +132,29 @@ namespace Battle
                 }
             }
 
+
             //将伤害 施加在 实体 上
             var targets = new List<BattleEntity>();
-            var effectEntityType = this.tableConfig.EffectTargetType;
-            if (effectEntityType == EffectEntityTargetType.Selected)
-            {
-                targets = this.context.selectEntities;
-            }
-            else if (effectEntityType == EffectEntityTargetType.SkillReleaser)
-            {
-                targets = new List<BattleEntity>() { releaser };
-            }
-            else if (effectEntityType == EffectEntityTargetType.SkillTarget)
-            {
-                var skillTargetEntity = battle.FindEntity(this.context.fromSkill.targetGuid);
-                if (skillTargetEntity != null)
-                {
-                    targets = new List<BattleEntity>() { skillTargetEntity };
-                }
-            }
+
+            targets = this.context.selectEntities;
+                
+            // var effectEntityType = this.tableConfig.EffectTargetType;
+            // if (effectEntityType == EffectEntityTargetType.Selected)
+            // {
+            //     targets = this.context.selectEntities;
+            // }
+            // else if (effectEntityType == EffectEntityTargetType.SkillReleaser)
+            // {
+            //     targets = new List<BattleEntity>() { releaser };
+            // }
+            // else if (effectEntityType == EffectEntityTargetType.SkillTarget)
+            // {
+            //     var skillTargetEntity = battle.FindEntity(this.context.fromSkill.targetGuid);
+            //     if (skillTargetEntity != null)
+            //     {
+            //         targets = new List<BattleEntity>() { skillTargetEntity };
+            //     }
+            // }
 
             for (int i = 0; i < targets.Count; i++)
             {

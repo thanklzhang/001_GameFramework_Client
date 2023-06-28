@@ -20,6 +20,7 @@ namespace Battle
     public enum CenterType
     {
         SkillReleaser = 0,
+        SkillTarget = 1
     }
 
     public class AreaEffect : SkillEffect
@@ -44,11 +45,25 @@ namespace Battle
 
             //tableConfig = TableManager.Instance.GetById<Table.AreaEffect>(this.configId);
 
-            var centerType = tableConfig.CenterType;
-            if (centerType == CenterType.SkillReleaser)
+            this.centerPos = context.fromSkill.releser.position;
+            if (context.selectEntities.Count > 0)
             {
-                this.centerPos = context.fromSkill.releser.position;
+                centerPos = context.selectEntities[0].position;
             }
+
+            // var centerType = tableConfig.CenterType;
+            // if (centerType == CenterType.SkillReleaser)
+            // {
+            //     this.centerPos = context.fromSkill.releser.position;
+            // }
+            // else if (centerType == CenterType.SkillTarget)
+            // {
+            //     var centerTarget = this.battle.FindEntity(context.fromSkill.targetGuid);
+            //     if (centerTarget != null)
+            //     {
+            //         this.centerPos = centerTarget.position;
+            //     }
+            // }
 
             var battle = this.context.battle;
             var allEntities = battle.GetAllEntities();

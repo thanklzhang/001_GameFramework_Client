@@ -387,6 +387,16 @@ namespace Battle
         {
         }
 
+        //当普通攻击释放出来的时候(前摇过了的那个时刻)
+        public void OnNormalAttackStartEffect(BattleEntity other)
+        {
+            //检测被动技能
+            foreach (var item in this.passiveEffectDic)
+            {
+                item.Value.OnNormalAttackStartEffect(other);
+            }
+        }
+
         //当普通攻击别人命中时
         public void OnNormalAttackToOtehrSuccess(BattleEntity other, float resultDamage, Skill damageSrcSkill)
         {

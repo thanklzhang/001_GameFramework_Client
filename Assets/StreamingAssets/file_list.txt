@@ -1,4 +1,4 @@
-AssetToAbFileData.json|deaf23c16abd5f3a76ea40ef5e5fcd8b
+AssetToAbFileData.json|aae7cee8a3c67fa19794679393ce47fb
 StreamingAssets|294cdc7f9981b2bdfa987b05e165971f
 assets/buildres/table/areaeffect.ab|b733283d8ec973da817ec0fe2108f77f
 assets/buildres/table/battle.ab|55c68be8ad7e713ae7f0962c5fb514d6

@@ -258,7 +258,6 @@ namespace Battle
                 if (currAfterReleaseTimer <= 0)
                 {
 
-
                     //currAfterReleaseTimer = this.GetSkillAfterTotalTime();
                     this.FinishSkillRelease();
 
@@ -309,7 +308,11 @@ namespace Battle
                 battle.AddSkillEffect(id, context);
             }
 
-
+            if (this.isNormalAttack)
+            {
+                var targetEntity = this.GetBattle().FindEntity(this.targetGuid);
+                releser.OnNormalAttackStartEffect(targetEntity);
+            }
         }
 
         //改为 after 状态

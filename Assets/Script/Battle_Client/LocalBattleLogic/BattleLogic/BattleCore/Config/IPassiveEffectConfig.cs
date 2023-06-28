@@ -19,6 +19,7 @@ namespace Battle
     {
         NomralAttackEntity = 1,
         SkillReleaseEntity = 2,
+        //被普通攻击命中的单位 / 将要被普通攻击的单位
         BeNomralAttackEntity = 3,
         BeSkillEffectEntity = 4,
         CollisionEntity = 5,

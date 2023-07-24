@@ -131,8 +131,7 @@ namespace Battle
                     finalDamage += context.damage * value / 1000.0f;
                 }
             }
-
-
+         
             //将伤害 施加在 实体 上
             var targets = new List<BattleEntity>();
 

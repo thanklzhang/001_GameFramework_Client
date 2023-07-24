@@ -50,6 +50,7 @@ namespace Battle
         public int EndRedirectLastTime => tableConfig.EndRedirectLastTime;
 
         public int DeflectionAngle => tableConfig.DeflectionAngle;
+        public int CollisionRadius => tableConfig.CollisionRadius;
     }
 
 }

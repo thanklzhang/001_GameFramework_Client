@@ -45,6 +45,8 @@ namespace Battle
         public float AttackSpeed => attrMgr.GetFinalAttrValue(EntityAttrType.AttackSpeed);
         public float MoveSpeed => attrMgr.GetFinalAttrValue(EntityAttrType.MoveSpeed);
         public float AttackRange => attrMgr.GetFinalAttrValue(EntityAttrType.AttackRange);
+        
+        public float InputDamageRate => attrMgr.GetFinalAttrValue(EntityAttrType.InputDamageRate);
 
         public int CurrHealth;
 
@@ -136,7 +138,7 @@ namespace Battle
 
             this.InitAbnormalState();
 
-            CurrHealth = (int) this.MaxHealth;
+            CurrHealth = (int)this.MaxHealth;
 
             EntityState = EntityState.Idle;
 
@@ -331,7 +333,13 @@ namespace Battle
             if (damageValue > 0)
             {
                 //伤害
-                resultDamage = (int) (damageValue - Defence);
+
+                //计算护甲
+                resultDamage = (int)(damageValue - Defence);
+
+                //计算 易伤/减伤
+                var damageRate = this.GetEntityAtrrFinalValue(EntityAttrType.InputDamageRate) / 1000.0f;
+                resultDamage = (int)(resultDamage * damageRate);
             }
             else
             {
@@ -342,7 +350,7 @@ namespace Battle
             CurrHealth -= resultDamage;
 
             CurrHealth = Math.Max(0, CurrHealth);
-            CurrHealth = Math.Min((int) MaxHealth, CurrHealth);
+            CurrHealth = Math.Min((int)MaxHealth, CurrHealth);
 
             var attackerName = "NotFound_Error";
             var attacker = damageSrcSkill.releser;
@@ -716,7 +724,7 @@ namespace Battle
                 return false;
             }
 
-            var releaseTargetType = (SkillReleaseTargeType) skill.infoConfig.SkillReleaseTargeType;
+            var releaseTargetType = (SkillReleaseTargeType)skill.infoConfig.SkillReleaseTargeType;
             if (releaseTargetType == SkillReleaseTargeType.Entity || releaseTargetType == SkillReleaseTargeType.Point)
             {
                 //判断当前距离是否能够释放技能
@@ -899,7 +907,7 @@ namespace Battle
             this.EntityState = EntityState.UseSkill;
 
             //设置朝向
-            var releaseTargetType = (SkillReleaseTargeType) skill.infoConfig.SkillReleaseTargeType;
+            var releaseTargetType = (SkillReleaseTargeType)skill.infoConfig.SkillReleaseTargeType;
             if (releaseTargetType == SkillReleaseTargeType.Entity || releaseTargetType == SkillReleaseTargeType.Point)
             {
                 var dir = this.dir;
@@ -981,28 +989,31 @@ namespace Battle
             this.battle.OnEntityDead(this);
         }
 
-        public float GetEntityAtrrFinalValue(EntityAttrNumberType type)
+        public float GetEntityAtrrFinalValue(EntityAttrType type)
         {
             float resultValue = 0;
             switch (type)
             {
-                case EntityAttrNumberType.Attack:
+                case EntityAttrType.Attack:
                     resultValue = this.Attack;
                     break;
-                case EntityAttrNumberType.Defence:
+                case EntityAttrType.Defence:
                     resultValue = this.Defence;
                     break;
-                case EntityAttrNumberType.CurrHealth:
-                    resultValue = this.CurrHealth;
-                    break;
-                case EntityAttrNumberType.MaxHealth:
+                // case EntityAttrType.CurrHealth:
+                //     resultValue = this.CurrHealth;
+                //     break;
+                case EntityAttrType.MaxHealth:
                     resultValue = this.MaxHealth;
                     break;
-                case EntityAttrNumberType.AttackSpeed:
+                case EntityAttrType.AttackSpeed:
                     resultValue = this.AttackSpeed;
                     break;
-                case EntityAttrNumberType.AttackRange:
+                case EntityAttrType.AttackRange:
                     resultValue = this.AttackRange;
+                    break;
+                case EntityAttrType.InputDamageRate:
+                    resultValue = this.InputDamageRate;
                     break;
             }
 
@@ -1069,9 +1080,12 @@ namespace Battle
         public void RemoveAbnormalState(EntityAbnormalStateType type)
         {
             this.abnormalStateMgr.Remove(type);
-            if (!this.IsCanMove())
+            if (this.EntityState != EntityState.Dead)
             {
-                this.ChangeToIdle();
+                if (!this.IsCanMove())
+                {
+                    this.ChangeToIdle();
+                }
             }
         }
 

@@ -17,6 +17,8 @@ namespace Battle
         string EndRedirectParam { get; }
         int EndRedirectLastTime { get; }
         int DeflectionAngle { get; }
+
+        int CollisionRadius { get; }
     }
 
 }

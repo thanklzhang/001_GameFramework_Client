@@ -289,9 +289,9 @@ namespace Battle
         }
 
         //op func
-        public BattleEntity FindEntity(int guid)
+        public BattleEntity FindEntity(int guid,bool isIncludeDeath = false)
         {
-            return battleEntityMgr.FindEntity(guid);
+            return battleEntityMgr.FindEntity(guid,isIncludeDeath);
         }
 
         public BattlePlayer FindPlayerByUid(long uid)
@@ -774,7 +774,7 @@ namespace Battle
 
             //NotifyAllPlayerMsg(ProtoIDs.NotifyEntityDead, notifyDead);
 
-            this.aiMgr.RemoveAI(guid);
+            //this.aiMgr.RemoveAI(guid);
 
             this.skillEffectMgr.DeleteAllBuffsFromEntity(guid);
 

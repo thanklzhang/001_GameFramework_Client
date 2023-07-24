@@ -18,6 +18,7 @@
         AttackSpeed = 5,
         MoveSpeed = 6,
         AttackRange = 7,
+        InputDamageRate = 10,
 
         Level = 1000,
         Star = 1001
@@ -41,7 +42,7 @@
             var triggerEntity = context.GetEntityByTriggerType(entityType);
             if (triggerEntity != null)
             {
-                resultValue = triggerEntity.GetEntityAtrrFinalValue(attrType);
+                resultValue = triggerEntity.GetEntityAtrrFinalValue((EntityAttrType)attrType);
             }
 
             return resultValue;

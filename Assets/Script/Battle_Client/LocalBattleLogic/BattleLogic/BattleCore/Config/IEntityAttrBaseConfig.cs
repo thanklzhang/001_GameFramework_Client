@@ -8,6 +8,7 @@
         int AttackSpeed { get; }
         int MoveSpeed { get; }
         int AttackRange { get; }
+        int InputDamageRate { get; }
     }
 
 }

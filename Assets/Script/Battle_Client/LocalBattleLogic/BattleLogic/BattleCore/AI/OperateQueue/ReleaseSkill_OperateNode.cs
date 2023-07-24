@@ -25,11 +25,17 @@ namespace Battle
                 
             }
 
-            var findEntity = this.battle.FindEntity(releaseSkill.targetGuid);
-            if (null == findEntity)
+            if (releaseSkill.targetGuid > 0)
             {
-                this.operateModule.OnNodeExecuteFinish(releaseSkill.skillId);
+                //缺失目标后直接结束技能
+                var findEntity = this.battle.FindEntity(releaseSkill.targetGuid);
+                if (null == findEntity)
+                {
+                    this.operateModule.OnNodeExecuteFinish(releaseSkill.skillId);
+                }           
             }
+
+           
         }
 
         public override int GenKey()

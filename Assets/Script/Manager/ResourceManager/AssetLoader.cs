@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using LitJson;
+using UnityEngine.SceneManagement;
 
 public class AssetLoader : BaseLoader
 {
@@ -60,7 +61,6 @@ public class AssetLoader : BaseLoader
         assetCache.RefCount = refCount;
         assetCache.asset = assetRequest.asset;
 
-        
         //abCache.ab = ab
         //finishLoadCallback?.Invoke(abCache);
 

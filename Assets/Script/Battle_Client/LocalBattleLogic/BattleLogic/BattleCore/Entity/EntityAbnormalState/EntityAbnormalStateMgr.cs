@@ -97,7 +97,7 @@ public enum EntityAbnormalStateType
     CritRate_Sub = 1007,
     CritDamage_Sub = 1008,
     //降伤状态 : 降低输出伤害
-    OutputDamageRat_Sub = 1009,
+    OutputDamageRate_Sub = 1009,
     //减伤状态 : 减少受到的伤害
     InputDamageRate_Sub = 1010,
 

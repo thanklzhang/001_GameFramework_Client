@@ -160,16 +160,25 @@ namespace Battle
                 AreaEffect pEffect = (AreaEffect)effect;
                 var config = battle.ConfigManager.GetById<IAreaEffectConfig>(effectConfigId);
 
-                if (config.CenterType == CenterType.SkillReleaser)
+                // if (config.CenterType == CenterType.SkillReleaser)
+                // {
+                //     resId = config.EffectResId;
+                //     if (resId > 0)
+                //     {
+                //         isAutoDestroy = true;
+                //     }
+                //
+                //     position = context.fromSkill.releser.position;
+                // }
+                
+                resId = config.EffectResId;
+                if (resId > 0)
                 {
-                    resId = config.EffectResId;
-                    if (resId > 0)
-                    {
-                        isAutoDestroy = true;
-                    }
-
-                    position = context.fromSkill.releser.position;
+                    isAutoDestroy = true;
                 }
+
+                position = context.fromSkill.releser.position;
+                
             }
 
             //move effect
@@ -392,7 +401,7 @@ namespace Battle
 
         public void DeleteAllBuffsFromEntity(int entityGuid)
         {
-            var entity = battle.FindEntity(entityGuid);
+            var entity = battle.FindEntity(entityGuid,true);
             if (entity != null)
             {
                 var buffs = entity.GetBuffs();

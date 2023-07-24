@@ -119,10 +119,19 @@ namespace Battle
             return maxGuid++;
         }
 
-        internal BattleEntity FindEntity(int guid)
+        internal BattleEntity FindEntity(int guid,bool isIncludeDeath = false)
         {
             if (entityDic.ContainsKey(guid))
             {
+                var entity = entityDic[guid];
+                if (!isIncludeDeath)
+                {
+                    if (entity.EntityState == EntityState.Dead)
+                    {
+                        return null;
+                    }
+                }
+
                 return entityDic[guid];
             }
             return null;
@@ -147,11 +156,11 @@ namespace Battle
                 }
             }
 
-            for (int i = delList.Count - 1; i >= 0; i--)
-            {
-                var delEntity = delList[i];
-                this.RemoveEntity(delEntity.guid);
-            }
+            // for (int i = delList.Count - 1; i >= 0; i--)
+            // {
+            //     var delEntity = delList[i];
+            //     this.RemoveEntity(delEntity.guid);
+            // }
             //
 
             //update
@@ -164,7 +173,22 @@ namespace Battle
 
         internal Dictionary<int, BattleEntity> GetAllEntity(bool isIncludeDeath = false)
         {
-            return entityDic;
+            Dictionary<int, BattleEntity> dic = new Dictionary<int, BattleEntity>();
+            foreach (var kv in entityDic)
+            {
+                if (!isIncludeDeath)
+                {
+                    if (kv.Value.EntityState != EntityState.Dead)
+                    {
+                        dic.Add(kv.Key,kv.Value);
+                    }
+                }
+                else
+                {
+                    dic.Add(kv.Key,kv.Value);
+                }
+            }
+            return dic;
         }
 
         public void RemoveEntity(int guid)

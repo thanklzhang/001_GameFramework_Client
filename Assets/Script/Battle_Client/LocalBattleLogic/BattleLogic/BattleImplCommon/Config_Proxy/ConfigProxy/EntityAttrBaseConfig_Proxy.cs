@@ -31,7 +31,11 @@ namespace Battle
 
         public int AttackRange => tableConfig.AttackRange;
 
+        public int InputDamageRate => tableConfig.InputDamageRate;
+        
         public int Id => tableConfig.Id;
+        
+       
 
 
     }

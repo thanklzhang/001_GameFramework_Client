@@ -97,11 +97,33 @@ namespace Table
         
 		eft_knife_light = 15008016,
         
+		eft_buff_001 = 15008017,
+        
+		eft_buff_002 = 15008018,
+        
+		eft_impact_001 = 15008019,
+        
+		eft_impact_002 = 15008020,
+        
+		eft_skill_projectile_002 = 15008021,
+        
+		eft_buff_003 = 15008022,
+        
+		eft_buff_004 = 15008023,
+        
+		eft_buff_005 = 15008024,
+        
+		eft_buff_006 = 15008025,
+        
+		eft_buff_007 = 15008026,
+        
 		eft_skill_director_001 = 15008101,
         
 		eft_skill_director_002 = 15008102,
         
 		eft_skill_track_001 = 15008201,
+        
+		eft_skill_track_002 = 15008202,
         
 		battle_scene_001 = 15010001,
         

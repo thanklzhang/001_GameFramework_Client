@@ -26,6 +26,7 @@ public class SkillTrackModule
 {
     BattleCtrl battleCtrl;
     public Dictionary<int, SkillTrackGroup> trackGroupDic;
+
     public void Init(BattleCtrl battleCtrl)
     {
         this.battleCtrl = battleCtrl;
@@ -53,8 +54,6 @@ public class SkillTrackModule
         group.AddTrack(track);
 
         track.Start();
-
-
     }
 
     BaseSkillTrack CreateTrack(TrackBean trackBean)
@@ -66,6 +65,11 @@ public class SkillTrackModule
         if (type == SkillTrackType.Rectangle)
         {
             skillTrack = new RectangleSkillTrack();
+            skillTrack.Init(trackBean);
+        }
+        else if (type == SkillTrackType.Circle)
+        {
+            skillTrack = new CircleSkillTrack();
             skillTrack.Init(trackBean);
         }
 
@@ -103,12 +107,9 @@ public class SkillTrackModule
         {
             trackGroupDic.Remove(guid);
         }
-
-
     }
 
     public void Release()
     {
-
     }
 }

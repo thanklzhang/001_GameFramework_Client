@@ -23,18 +23,36 @@ namespace Battle
         SkillTarget = 1
     }
 
+    public enum StartPosType
+    {
+        Context = 0,
+    }
+
+    public enum AreaType
+    {
+        Circle = 0,
+        Rectangle = 1
+    }
+
+    public enum StartPosShiftDirType
+    {
+        Null = 0,
+
+        //释放技能者 到 技能目标(或技能目标点) 的方向
+        FromReleaserToTarget = 1,
+    }
+
     public class AreaEffect : SkillEffect
     {
-
         //public Table.AreaEffect tableConfig;
         public IAreaEffectConfig tableConfig;
         Vector3 centerPos;
         Battle battle;
+
         public override void OnInit()
         {
             battle = this.context.battle;
             tableConfig = battle.ConfigManager.GetById<IAreaEffectConfig>(this.configId);
-
         }
 
         public override void OnStart()
@@ -68,7 +86,10 @@ namespace Battle
             var battle = this.context.battle;
             var allEntities = battle.GetAllEntities();
             var selectType = (SelectEntityType)tableConfig.SelectEntityType;
-            var range = tableConfig.Range / 1000.0f;
+            var areaType = tableConfig.AreaType;
+            var startPosType = (StartPosType)tableConfig.StartPosType;
+            var startPosShiftType = (StartPosShiftDirType)tableConfig.StartPosShiftDirType;
+
             List<BattleEntity> selectEntities = new List<BattleEntity>();
             foreach (var item in allEntities)
             {
@@ -77,13 +98,59 @@ namespace Battle
                 {
                     if (entity.Team != this.context.fromSkill.releser.Team)
                     {
-                        var sqrtDis = Vector3.SqrtDistance(this.centerPos, entity.position);
-
-                        var calDis = range * range;
-                        //_G.Log("AreaEffect OnStart : " + sqrtDis + " ? " + calDis);
-                        if (sqrtDis <= calDis)
+                        if (areaType == AreaType.Circle)
                         {
-                            selectEntities.Add(entity);
+                            var sqrtDis = Vector3.SqrtDistance(this.centerPos, entity.position);
+
+                            var range = tableConfig.RangeParam[0] / 1000.0f;
+                            var calDis = range * range;
+                            //_G.Log("AreaEffect OnStart : " + sqrtDis + " ? " + calDis);
+                            if (sqrtDis <= calDis)
+                            {
+                                selectEntities.Add(entity);
+                            }
+                        }
+                        else if (areaType == AreaType.Rectangle)
+                        {
+                            Rect rect = new Rect();
+                            Vector3 dir = Vector3.right;
+                            if (startPosShiftType == StartPosShiftDirType.FromReleaserToTarget)
+                            {
+                                var targetPos = context.fromSkill.targetPos;
+                                if (context.fromSkill.targetGuid > 0)
+                                {
+                                    var targetEntity = battle.FindEntity(context.fromSkill.targetGuid);
+                                    if (targetEntity != null)
+                                    {
+                                        targetPos = targetEntity.position;
+                                    }
+                                }
+
+                                dir = (targetPos - context.fromSkill.releser.position);
+                                dir = new Vector3(dir.x, 0, dir.z).normalized;
+                            }
+
+                            var width = tableConfig.RangeParam[0] / 1000.0f;
+                            var height = tableConfig.RangeParam[1] / 1000.0f;
+
+                            rect.center = centerPos.ToVector2ByXZ() +
+                                          dir.ToVector2ByXZ() * (width / 2.0f + tableConfig.StartPosShiftDistance);
+                            rect.width = width;
+                            rect.height = height;
+
+                            rect.widthDir = dir.ToVector2ByXZ().normalized;
+                            rect.heightDir = (Vector3.Cross(rect.widthDir.ToVector3ByXZ(), Vector3.up).normalized)
+                                .ToVector2ByXZ();
+
+                            Circle circle = new Circle();
+                            circle.radius = entity.collisionCircle / 3.0f;
+                            circle.center = new Vector2(entity.position.x, entity.position.z);
+
+                            var isCollision = CollisionTool.CheckBoxAndCircle(rect, circle);
+                            if (isCollision)
+                            {
+                                selectEntities.Add(entity);
+                            }
                         }
                     }
                 }
@@ -102,9 +169,6 @@ namespace Battle
                 //触发下一步 effect
                 TriggerEffect(context);
             }
-
-
-
         }
 
         //触发 effect
@@ -132,11 +196,6 @@ namespace Battle
 
         public override void OnUpdate(float timeDelta)
         {
-
         }
-
-
     }
 }
-
-

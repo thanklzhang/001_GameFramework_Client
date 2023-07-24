@@ -140,7 +140,7 @@ namespace Battle_Client
             }
             else
             {
-                Debug.LogError("zxy SetFollowEntityGuid : the entity is null : followEntityGuid : " + followEntityGuid);
+                //Debug.LogWarning("zxy SetFollowEntityGuid : the entity is null : followEntityGuid : " + followEntityGuid);
             }
            
         }
@@ -161,13 +161,24 @@ namespace Battle_Client
             //gameObject = 
 
             //获取持续时长
+            var curParticle = obj.GetComponent<ParticleSystem>();
             var particles = obj.GetComponentsInChildren<ParticleSystem>();
             if (particles != null && particles.Length > 0)
             {
                 var particle = particles[0];
                 this.isLoop = particle.main.loop;
                 totalAutoDestroyTime = particle.main.duration;
-                particle.Play();
+                
+                for (int i = 0; i < particles.Length; i++)
+                {
+                    particle = particles[i];
+                    particle.Play();
+                }
+            }
+
+            if (curParticle != null)
+            {
+                curParticle.Play();                
             }
 
         }
@@ -220,8 +231,14 @@ namespace Battle_Client
                     if (entity != null)
                     {
                         targetPos = entity.GetPosition();
-                        moveVector = targetPos - this.gameObject.transform.position;
+                        moveTargetPos = targetPos;
                     }
+                    else
+                    {
+                        targetPos = moveTargetPos;
+                    }
+                    
+                    moveVector = targetPos - this.gameObject.transform.position;
 
                 }
                 else
@@ -237,7 +254,7 @@ namespace Battle_Client
 
                 var currPos = this.gameObject.transform.position;
 
-                this.gameObject.transform.position = currPos + dir * speed * timeDelta;
+                this.gameObject.transform.position = currPos + dir * (speed * timeDelta); 
 
                 if (this.followEntityGuid <= 0)
                 {

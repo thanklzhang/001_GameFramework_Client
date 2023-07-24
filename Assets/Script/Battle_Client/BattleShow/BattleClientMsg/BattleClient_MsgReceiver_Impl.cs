@@ -205,7 +205,10 @@ namespace Battle_Client
         public void On_SkillInfoUpdate(int entityGuid, int skillConfigId, float currCDTime, float maxCDTime)
         {
             var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
-            entity.UpdateSkillInfo(skillConfigId, currCDTime, maxCDTime);
+            if (entity != null)
+            {
+                entity.UpdateSkillInfo(skillConfigId, currCDTime, maxCDTime);
+            }
         }
 
         public void On_BuffInfoUpdate(BuffEffectInfo buffInfo)

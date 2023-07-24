@@ -62,6 +62,8 @@ namespace Battle
                 baseInfo.MoveSpeed / 1000.0f);
             this.AddAttrValue(EntityAttrGroupType.Base, EntityAttrType.AttackRange, (int) EntityAttrType.AttackRange,
                 baseInfo.AttackRange / 1000.0f);
+            this.AddAttrValue(EntityAttrGroupType.Base, EntityAttrType.InputDamageRate, (int) EntityAttrType.InputDamageRate,
+                baseInfo.InputDamageRate );
         }
 
         void InitEntityLevelAttr()
@@ -151,7 +153,7 @@ namespace Battle
         //    return dic;
         //}
 
-        void Calculate(EntityAttrGroupType groupType, EntityAttrType attrType) //, bool isPermillage
+        void Calculate(EntityAttrGroupType groupType, EntityAttrType attrType) //, bool  isPermillage
         {
             var sum = 0.0f;
             foreach (var item in attrGroupDic)

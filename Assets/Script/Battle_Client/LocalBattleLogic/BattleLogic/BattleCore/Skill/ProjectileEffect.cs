@@ -177,7 +177,7 @@ namespace Battle
                 if (entity.Team != this.context.fromSkill.releser.Team)
                 {
                     var sqrtDis = Vector3.SqrtDistance(this.position, entity.position);
-                    var dis = 1.5f;
+                    var dis = tableConfig.CollisionRadius / 1000.0f;
                     var calDis = dis * dis;
                     if (sqrtDis <= calDis)
                     {

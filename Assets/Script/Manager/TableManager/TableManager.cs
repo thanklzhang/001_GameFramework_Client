@@ -21,7 +21,7 @@ namespace Table
         {
             yield return TableDataLoader.Instance.LoadFromFile((dic) =>
             {
-                //╪стьмЙЁи
+                //Е┼═Х╫╫Е╝▄Ф┬░
                 typeToListConfigDic = dic;
                 typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
              
@@ -42,7 +42,7 @@ namespace Table
         public void LoadAllTableDataByEditor()
         {
             var dic = TableDataLoader.Instance.LoadFromFileByEditor();
-            //╪стьмЙЁи
+            //Е┼═Х╫╫Е╝▄Ф┬░
             typeToListConfigDic = dic;
 
             typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
@@ -62,7 +62,7 @@ namespace Table
         }
 
      
-        //type list в╙╩╩н╙ type dic
+        //type list Х╫╛Ф█╒Д╦╨ type dic
         public Dictionary<Type, Dictionary<int, Table.BaseTable>> TypeListToDic(Dictionary<Type, IList> list)
         {
             var dic = new Dictionary<Type, Dictionary<int, Table.BaseTable>>();

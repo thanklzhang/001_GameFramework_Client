@@ -177,7 +177,7 @@ namespace Battle_Client
             }
             else
             {
-                Logx.LogWarning("the guid is not found : " + guid);
+                //Logx.LogWarning("the guid is not found : " + guid);
             }
             return null;
         }

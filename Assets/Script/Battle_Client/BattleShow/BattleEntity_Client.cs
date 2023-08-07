@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+
 namespace Battle_Client
 {
-
-
     public enum BattleEntityState
     {
         Idle = 0,
@@ -32,11 +31,12 @@ namespace Battle_Client
         AttackRange = 6,
         CritRate = 7,
         CritDamage = 8,
+
         //最终伤害的比率(千分比)
         OutputDamageRate = 9,
+
         //受到伤害的比率(千分比)
         InputDamageRate = 10,
-
     }
 
     //实体当前数据值类型
@@ -108,6 +108,7 @@ namespace Battle_Client
 
         //move
         Vector3 moveTargetPos;
+
         Vector3 dirTarget;
         //float moveSpeed;
 
@@ -116,22 +117,24 @@ namespace Battle_Client
 
         public int level;
         public float CurrHealth;
+
         public float MaxHealth
         {
-            get
-            {
-                return attr.maxHealth;
-            }
-
+            get { return attr.maxHealth; }
         }
+
         List<BattleSkillInfo> skills;
+
         public List<BattleSkillInfo> GetSkills()
         {
             return skills;
         }
+
         public BattleEntityAttr attr = new BattleEntityAttr();
 
-        public Animation animation;
+        // public Animation animation;
+
+        public Animator animator;
 
         public void Init(int guid, int configId)
         {
@@ -151,6 +154,8 @@ namespace Battle_Client
             var heroResTable = Table.TableManager.Instance.GetById<Table.ResourceConfig>(heroConfig.ModelId);
             //临时组路径 之后会打进 ab 包
             path = "Assets/BuildRes/" + heroResTable.Path + "/" + heroResTable.Name + "." + heroResTable.Ext;
+
+            this.gameObject.name = heroResTable.Name;
 
             isFinishLoad = false;
 
@@ -174,10 +179,7 @@ namespace Battle_Client
         {
             //Logx.Log("StartLoadModel");
             isFinishLoad = false;
-            ResourceManager.Instance.GetObject<GameObject>(path, (obj) =>
-            {
-                OnLoadModelFinish(obj);
-            });
+            ResourceManager.Instance.GetObject<GameObject>(path, (obj) => { OnLoadModelFinish(obj); });
         }
 
         public void OnLoadModelFinish(GameObject obj)
@@ -197,15 +199,13 @@ namespace Battle_Client
             //gameObject.transform.position = position;
             //gameObject = 
             collider = gameObject.GetComponentInChildren<Collider>();
-            animation = gameObject.GetComponentInChildren<Animation>();
+            // animation = gameObject.GetComponentInChildren<Animation>();
+            animator = gameObject.GetComponentInChildren<Animator>();
         }
 
         public int Team
         {
-            get
-            {
-                return BattleManager.Instance.GetTeamByPlayerIndex(this.playerIndex);
-            }
+            get { return BattleManager.Instance.GetTeamByPlayerIndex(this.playerIndex); }
         }
 
         internal void SetPlayerIndex(int playerIndex)
@@ -226,10 +226,7 @@ namespace Battle_Client
 
         public BattleSkillInfo FindSkill(int skillConfigId)
         {
-            var skill = this.skills.Find((s) =>
-            {
-                return s.configId == skillConfigId;
-            });
+            var skill = this.skills.Find((s) => { return s.configId == skillConfigId; });
 
             return skill;
         }
@@ -258,7 +255,6 @@ namespace Battle_Client
             GameObject.Destroy(gameObject);
 
             EventDispatcher.Broadcast(EventIDs.OnEntityDestroy, this);
-
         }
 
         //internal void StartMove(Vector3 targetPos, Vector3 dir, float moveSpeed)
@@ -277,6 +273,7 @@ namespace Battle_Client
         public List<Vector3> movePosList;
         int movePosIndex;
         float normalAnimationMoveSpeed = 4.0f;
+
         internal void StartMoveByPath(List<Vector3> pathList, float moveSpeed)
         {
             if (pathList.Count > 0)
@@ -310,8 +307,7 @@ namespace Battle_Client
             //}
 
 
-
-            PlayAnimation("free");
+            PlayAnimation("idle");
 
             if (CheckPosIsForcePullBack(endPos))
             {
@@ -328,6 +324,7 @@ namespace Battle_Client
             {
                 return false;
             }
+
             return true;
         }
 
@@ -337,10 +334,9 @@ namespace Battle_Client
 
             //Logx.Log("moveTest : battleClient : fake reach : " + endPos.x + " " + endPos.y);
 
-            PlayAnimation("free");
+            PlayAnimation("idle");
 
             this.SetPosition(endPos);
-            
         }
 
 
@@ -352,16 +348,17 @@ namespace Battle_Client
             {
                 //普通攻击
                 var attackSpeed = this.attr.attackSpeed;
-                var aniScale = attackSpeed;
+                var aniScale = attackSpeed * (skillConfig.AnimationSpeedScale / 1000.0f);
+
                 PlayAnimation("attack", aniScale);
             }
             else
             {
+                //技能
                 PlayAnimation("attack");
             }
             //play animation
             //Logx.Log(this.guid + " release skill : " + skillConfigId);
-           
         }
 
         public BattleSkillInfo FindNormalAttackSkill()
@@ -370,6 +367,7 @@ namespace Battle_Client
             {
                 return this.skills[0];
             }
+
             return null;
         }
 
@@ -384,7 +382,6 @@ namespace Battle_Client
                 Logx.LogWarning("the count of skills is 0 : index : " + index);
                 return -1;
             }
-
         }
 
         //internal void SyncAttr(RepeatedField<BattleEntityAttrProto> attrs)
@@ -435,8 +432,7 @@ namespace Battle_Client
 
                     //ani
                     var aniScale = this.attr.moveSpeed / normalAnimationMoveSpeed;
-                    SetAnimationSpeed("walk", aniScale);
-
+                    SetAnimationSpeed(aniScale);
                 }
                 else if (type == EntityAttrType.AttackSpeed)
                 {
@@ -453,18 +449,22 @@ namespace Battle_Client
 
                 EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, 0);
             }
-
         }
 
-        public void SetAnimationSpeed(string aniName, float speed)
+        public void SetAnimationSpeed(float speed)
         {
-            if (isFinishLoad && animation != null)
+            // if (isFinishLoad && animator != null)
+            // {
+            //     var state = animation[aniName];
+            //     if (state != null)
+            //     {
+            //         state.speed = speed;
+            //     }
+            // }
+
+            if (isFinishLoad && animator != null)
             {
-                var state = animation[aniName];
-                if (state != null)
-                {
-                    state.speed = speed;
-                }
+                animator.speed = speed;
             }
         }
 
@@ -500,14 +500,12 @@ namespace Battle_Client
                 //Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
 
                 EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, item.fromEntityGuid);
-
             }
-
-
         }
 
         float rotateSpeed = 540;
         int lastDir = 1;
+
         public void Update(float timeDelta)
         {
             //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward.normalized, dirTarget.normalized, timeDelta * 15);
@@ -526,7 +524,8 @@ namespace Battle_Client
 
             dirTarget = new Vector3(dirTarget.x, 0, dirTarget.z);
 
-            this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, 30 * timeDelta);
+            this.gameObject.transform.forward =
+                Vector3.Lerp(this.gameObject.transform.forward, dirTarget, 30 * timeDelta);
 
 
             //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
@@ -567,7 +566,7 @@ namespace Battle_Client
                 }
                 else
                 {
-                    moveDelta = dir * speed * timeDelta;
+                    moveDelta = dir * (speed * timeDelta);
                     //Logx.Log("moveTest : battleClient : moveDis : " + moveDelta.x + " " + moveDelta.z);
                     this.gameObject.transform.position = currPos + moveDelta;
 
@@ -576,37 +575,139 @@ namespace Battle_Client
 
                     //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
                 }
+            }
 
-
-
+            if (triggerNames.Count > 0)
+            {
+                var str = triggerNames[^1];
+                this.animator.SetTrigger(str);
+                triggerNames.Clear();
             }
         }
-        public void PlayAnimation(string aniName, float speed = 1.0f)
+
+        public string currAniTriggerName;
+
+        public List<string> triggerNames = new List<string>();
+        private int aniAct = 0;
+
+        public void PlayAnimation(string aniTriggerName, float speed = 1.0f)
         {
-          
-            if (isFinishLoad && animation != null)
+            var myEntityGuid = BattleManager.Instance.GetLocalCtrlHerGuid();
+
+
+            if (isFinishLoad && animator != null)
             {
-                var state = animation[aniName];
-                if (state != null)
+                animator.speed = speed;
+                if (aniTriggerName == "attack")
                 {
-                    state.speed = speed;
-                    var fixSpeed = speed;
-                    if (0 == fixSpeed)
-                    {
-                        fixSpeed = 0.01f;
-                    }
-                    //Debug.Log("speed : " + fixSpeed);
-                    animation.CrossFade(aniName, 0.065f / fixSpeed);
                 }
+
+
+                // var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                // if (stateInfo.fullPathHash == Animator.StringToHash("Base Layer.Player_standing"))
+                // {
+                //     
+                // }
+                //
+                // stateInfo.nameHash
+                // Logx.Log("stateInfo : " + stateInfo.ToString());
+                // if (stateInfo.IsName(aniTriggerName))
+                // {
+                //     return;
+                // }
+
+                if ("idle" == aniTriggerName)
+                {
+                    aniAct = 1;
+                }
+                else if ("walk" == aniTriggerName)
+                {
+                    aniAct = 2;
+                }
+                else if ("attack" == aniTriggerName)
+                {
+                    aniAct = 3;
+                }
+                else if ("die" == aniTriggerName)
+                {
+                    aniAct = 4;
+                }
+                animator.SetInteger("Action",aniAct);
+
+
+                // if (aniTriggerName == "walk")
+                // {
+                //     if (aniTriggerName != currAniTriggerName)
+                //     {
+                //         if (this.guid == myEntityGuid)
+                //         {
+                //             Logx.LogError("zxy : play ani aniTriggerName 1 : " + aniTriggerName );    
+                //         }
+                //
+                //         triggerNames.Add(aniTriggerName);
+                //         //animator.SetTrigger(aniTriggerName);
+                //         currAniTriggerName = aniTriggerName;
+                //     }
+                //     
+                // }
+                // else
+                // {
+                //     if (this.guid == myEntityGuid)
+                //     {
+                //         Logx.LogError("zxy : play ani aniTriggerName 1 : " + aniTriggerName );    
+                //     }
+                //
+                //     triggerNames.Add(aniTriggerName);
+                //     //animator.SetTrigger(aniTriggerName);
+                //     currAniTriggerName = aniTriggerName;
+                //
+                // }
+
+
+                // // Debug.Log("aniTriggerName" + aniTriggerName + "  " + currAniTriggerName);
+                // if (aniTriggerName != currAniTriggerName)
+                // {
+                //     if (this.guid == myEntityGuid)
+                //     {
+                //         Logx.LogError("zxy : play ani aniTriggerName : 2 " + aniTriggerName );    
+                //     }
+                //     animator.SetTrigger(aniTriggerName);
+                //     currAniTriggerName = aniTriggerName;
+                // }
+                // else
+                // {
+                //     if (aniTriggerName != "walk")
+                //     {
+                //         if (this.guid == myEntityGuid)
+                //         {
+                //             Logx.LogError("zxy : play ani aniTriggerName : 3 " + aniTriggerName );    
+                //         }
+                //         animator.SetTrigger(aniTriggerName);
+                //         currAniTriggerName = aniTriggerName;
+                //     }
+                // }
+                //
+
+                // var state = animation[aniName];
+                // if (state != null)
+                // {
+                //     state.speed = speed;
+                //     var fixSpeed = speed;
+                //     if (0 == fixSpeed)
+                //     {
+                //         fixSpeed = 0.01f;
+                //     }
+                //     //Debug.Log("speed : " + fixSpeed);
+                //     animation.CrossFade(aniName, 0.065f / fixSpeed);
+                // }
             }
         }
 
         public void Dead()
         {
-            PlayAnimation("death");
+            PlayAnimation("die");
             state = BattleEntityState.Dead;
             CoroutineManager.Instance.StartCoroutine(RemoveSelf());
-
         }
 
         public IEnumerator RemoveSelf()

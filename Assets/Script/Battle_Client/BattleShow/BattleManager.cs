@@ -41,7 +41,8 @@ namespace Battle_Client
         public int battleRoomId;
 
         //玩家信息
-        public Dictionary<int, ClientPlayer> players;
+        public Dictionary<int, ClientPlayer> playerDic;
+        public List<ClientPlayer> playerList;
 
         ClientPlayer localPlayer;
 
@@ -162,7 +163,7 @@ namespace Battle_Client
 
         public int GetTeamByPlayerIndex(int playerIndex)
         {
-            foreach (var item in players)
+            foreach (var item in playerDic)
             {
                 var player = item.Value;
                 if (player.playerIndex == playerIndex)
@@ -172,6 +173,11 @@ namespace Battle_Client
             }
 
             return -1;
+        }
+
+        public List<ClientPlayer> GetAllPlayerList()
+        {
+            return this.playerList;
         }
 
         /// <summary>
@@ -188,7 +194,8 @@ namespace Battle_Client
             this.battleRoomId = battleInit.roomId;
 
             //玩家信息
-            players = new Dictionary<int, ClientPlayer>();
+            playerDic = new Dictionary<int, ClientPlayer>();
+            playerList = new List<ClientPlayer>();
             foreach (var serverPlayer in battleInit.clientPlayers)
             {
                 ClientPlayer player = new ClientPlayer()
@@ -199,15 +206,16 @@ namespace Battle_Client
                     ctrlHeroGuid = serverPlayer.ctrlHeroGuid
                 };
 
-                this.players.Add(player.uid, player);
+                this.playerDic.Add(player.uid, player);
+                this.playerList.Add(player);
             }
 
             //设置本地玩家
             var userDataStore = GameDataManager.Instance.UserStore;
             var uid = (int)userDataStore.Uid;
-            if (players.ContainsKey(uid))
+            if (playerDic.ContainsKey(uid))
             {
-                this.localPlayer = players[uid];
+                this.localPlayer = playerDic[uid];
             }
             else
             {

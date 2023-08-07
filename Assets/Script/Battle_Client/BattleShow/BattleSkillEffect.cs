@@ -168,6 +168,7 @@ namespace Battle_Client
                 var particle = particles[0];
                 this.isLoop = particle.main.loop;
                 totalAutoDestroyTime = particle.main.duration;
+                // Logx.Log(this.gameObject.name + " totalAutoDestroyTime : " + totalAutoDestroyTime);
                 
                 for (int i = 0; i < particles.Length; i++)
                 {

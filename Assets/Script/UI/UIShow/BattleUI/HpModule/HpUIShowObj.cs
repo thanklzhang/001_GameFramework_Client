@@ -30,8 +30,8 @@ public class HpUIShowObj
         this.transform = this.gameObject.transform;
 
         bgRoot = this.transform.Find("hpMain/bg");
-        hp = this.transform.Find("hpMain/bg/hpFill");
-        // hpBg = hp.GetComponent<Image>();
+        hp = this.transform.Find("hpMain/bg/hpFill/hp");
+        hpBg = hp.GetComponent<Image>();
         valueText = this.transform.Find("hpMain/valueText").GetComponent<Text>();
         colorSelector = hp.GetComponent<EntityHpColorSelector>();
 
@@ -104,31 +104,40 @@ public class HpUIShowObj
         var width = bgRoot.GetComponent<RectTransform>().rect.width;
         var currLen = width * ratio;
 
+        hpBg.fillAmount = ratio;
+
         var rect = hp.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(currLen, rect.sizeDelta.y);
-        // Logx.Log("zxyzxy : " + rect.sizeDelta + " " + currLen);
+        // rect.sizeDelta = new Vector2(currLen, rect.sizeDelta.y);
+        // // Logx.Log("zxyzxy : " + rect.sizeDelta + " " + currLen);
 
         valueText.text = "" + currHp + "/" + maxHp;
 
         //背景颜色和字体颜色
+        
+        
         var relationType = this.data.relationType;
 
-        // if (relationType == EntityRelationType.Self)
-        // {
-        //     hpBg.color = this.colorSelector.selfBgColor;
-        //     valueText.color = this.colorSelector.selfTextColor;
-        //
-        // }
-        // else if (relationType == EntityRelationType.Enemy)
-        // {
-        //     hpBg.color = this.colorSelector.enemyBgColor;
-        //     valueText.color = this.colorSelector.enemyTextColor;
-        // }
-        // else if (relationType == EntityRelationType.Friend)
-        // {
-        //     hpBg.color = this.colorSelector.friendBgColor;
-        //     valueText.color = this.colorSelector.friendTextColor;
-        // }
+        if (relationType == EntityRelationType.Self)
+        {
+            // hpBg.color = this.colorSelector.selfBgColor;
+            // valueText.color = this.colorSelector.selfTextColor;
+        
+            hpBg.sprite = this.colorSelector.selfSprite;
+        
+        }
+        else if (relationType == EntityRelationType.Friend)
+        {
+            // hpBg.color = this.colorSelector.enemyBgColor;
+            // valueText.color = this.colorSelector.enemyTextColor;
+            
+            hpBg.sprite = this.colorSelector.friendSprite;
+        }
+        else if (relationType == EntityRelationType.Enemy)
+        {
+            // hpBg.color = this.colorSelector.friendBgColor;
+            // valueText.color = this.colorSelector.friendTextColor;
+            hpBg.sprite = this.colorSelector.enemySprite;
+        }
 
 
     }

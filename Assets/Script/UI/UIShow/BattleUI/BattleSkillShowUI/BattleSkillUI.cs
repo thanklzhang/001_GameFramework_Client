@@ -19,6 +19,11 @@ public class BattleSkillUI
     List<BattleSkillUIData> skillDataList = new List<BattleSkillUIData>();
     List<BattleSkillUIShowObj> skillShowObjList = new List<BattleSkillUIShowObj>();
 
+    private BattleSkillUIData bigSkillData;
+    private BattleBigSkillUIShowObj bigSkillShowObj;
+
+    private GameObject bigSkillGo;
+    
     public BattleUI battleUI;
 
     public void Init(GameObject gameObject, BattleUI battleUI)
@@ -30,6 +35,13 @@ public class BattleSkillUI
 
         skillListRoot = this.transform.Find("group");
         this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
+
+        bigSkillGo = this.transform.Find("bigSkill").gameObject;
+        bigSkillShowObj = new BattleBigSkillUIShowObj();
+        bigSkillShowObj.Init(bigSkillGo,this);
+        
+        
+        
     }
 
     public void Show()
@@ -41,7 +53,22 @@ public class BattleSkillUI
     {
         BattleSkillUIArgs uiDataArgs = (BattleSkillUIArgs)args;
 
-        this.skillDataList = uiDataArgs.battleSkillList;
+
+        List<BattleSkillUIData> dataList = new List<BattleSkillUIData>();
+        foreach (var skillData in uiDataArgs.battleSkillList)
+        {
+            var skillConfig = Table.TableManager.Instance.GetById<Skill>(skillData.skillId);
+            if (skillConfig.IsBigSkill != 1)
+            {
+                dataList.Add(skillData);
+            }
+            else
+            {
+                this.bigSkillData = skillData;
+            }
+        }
+        this.skillDataList = dataList;
+       
 
         this.RefreshSkillList();
     }
@@ -54,6 +81,8 @@ public class BattleSkillUI
         args.root = skillListRoot;
         args.parentObj = this;
         UIFunc.DoUIList(args);
+        
+        this.bigSkillShowObj.Refresh(this.bigSkillData);
     }
 
     public void UpdateSkillInfo(int skillId, float cdTime)
@@ -83,6 +112,8 @@ public class BattleSkillUI
             item.Update(deltaTime);
         }
 
+        bigSkillShowObj.Update(deltaTime);
+        
         if (this.skillTipShowTimer > 0)
         {
             this.skillTipShowTimer -= deltaTime;
@@ -92,6 +123,7 @@ public class BattleSkillUI
             }
         }
 
+      
 
 
     }
@@ -105,6 +137,12 @@ public class BattleSkillUI
                 return skill;
             }
         }
+
+        if (this.bigSkillData != null && skillId == this.bigSkillData.skillId)
+        {
+            return this.bigSkillShowObj;
+        }
+
         return null;
     }
 

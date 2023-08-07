@@ -62,6 +62,10 @@ public class DescribeUI
         nameText.text = name;
         contentText.text = content;
         //icon
+        ResourceManager.Instance.GetObject<Sprite>(this.uiDataArgs.iconResId, (sprite) =>
+        {
+            this.icon.sprite = sprite;
+        });
 
         this.transform.localPosition = pos;
     }

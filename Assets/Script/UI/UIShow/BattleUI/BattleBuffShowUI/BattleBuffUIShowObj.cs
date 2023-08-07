@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
 {
-    RawImage icon;
+    Image icon;
     GameObject canUseMaskGo;
     GameObject cdRootGo;
     Image cdImg;
@@ -26,7 +26,7 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
         cdRootGo = this.transform.Find("CDRoot").gameObject;
         //cdTimeText = this.transform.Find("CDRoot/CDShow/cd_text").GetComponent<Text>();
         cdImg = this.transform.Find("CDRoot/CDShow").GetComponent<Image>();
-        icon = this.transform.Find("icon").GetComponent<RawImage>();
+        icon = this.transform.Find("icon").GetComponent<Image>();
         stackCountText = this.transform.Find("count_text").GetComponent<Text>();
 
         evetnTrigger = icon.GetComponent<UIEventTrigger>();
@@ -66,9 +66,10 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
         }
 
         var buffConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(this.uiData.configId);
-        ResourceManager.Instance.GetObject<Texture>(buffConfig.IconResId, (tex) =>
+        Logx.Log("zxy : buffConfig.IconResId : " + buffConfig.IconResId);
+        ResourceManager.Instance.GetObject<Sprite>(buffConfig.IconResId, (sprite) =>
         {
-            icon.texture = tex;
+            icon.sprite = sprite;
         });
 
         stackCountText.text = "" + this.uiData.stackCount;

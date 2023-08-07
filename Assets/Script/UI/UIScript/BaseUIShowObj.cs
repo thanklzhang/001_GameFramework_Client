@@ -27,7 +27,7 @@ public class BaseUIShowObj<K>
         this.OnInit();
     }
 
-    public void Refresh(object obj, int index)
+    public void Refresh(object obj, int index = 0)
     {
         this.OnRefresh(obj, index);
     }

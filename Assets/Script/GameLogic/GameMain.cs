@@ -85,6 +85,8 @@ public class GameMain : MonoBehaviour
         BattleSkillEffectManager.Instance.Init();
         PlotManager.Instance.Init();
 
+        var audioRoot = transform.Find("AudioRoot");
+        AudioManager.Instance.Init(audioRoot);
 
         //读取表数据 这里可能换成异步操作
         TableManager.Instance.Init();

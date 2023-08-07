@@ -24,20 +24,6 @@ namespace Table
 		static Dictionary<string,List<string>> triggerPathDic = new Dictionary<string,List<string>>()
 		{
 			
-			{"BattleTrigger/MainTaskBattle/MainTaskBattle_001",new List<string>()
-				{
-					
-				}		
-				
-			},
-			
-			{"BattleTrigger/TeamBattle/TeamBattle_001",new List<string>()
-				{
-					
-				}		
-				
-			},
-			
 			{"BattleTrigger/TestTrigger",new List<string>()
 				{
 					

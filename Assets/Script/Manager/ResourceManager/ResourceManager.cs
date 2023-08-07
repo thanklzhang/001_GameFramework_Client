@@ -35,12 +35,20 @@ public class ResourceManager : Singleton<ResourceManager>
             T getObj = null;
             if (!(obj is T))
             {
-                Debug.LogWarning(string.Format("GetObject : {0} is not the same as {1}", obj.GetType(), typeof(T)));
+                //Debug.LogWarning(string.Format("GetObject : {0} is not the same as {1}", obj.GetType(), typeof(T)));
 
                 //如果资源有 是有 sprite 的 texture ，那么会被视为 sprite ，所以这里进行 sprite 和 texture 的兼容
                 if (typeof(T).IsSubclassOf(typeof(Texture)) && obj.GetType() == typeof(Sprite))
                 {
                     getObj = ((Sprite)obj).texture as T;
+                }
+                else
+                {
+                    var tex = obj as Texture2D;
+                    Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+                    
+                    getObj = sprite as T;
+
                 }
             }
             else

@@ -1,9 +1,8 @@
-﻿
-
-using Battle_Client;
+﻿using Battle_Client;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Table;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,16 +28,27 @@ public class BattleUI : BaseUI
 
     //血条
     HpUIMgr hpUIMgr;
+
     //飘字
     FloatWordMgr floatWordMgr;
+
     //属性面板
     BattleAttrUI attrUI;
+
     //技能显示面板
     BattleSkillUI skillUI;
+
+    //队友英雄信息面板
+    BattleHeroInfoUI heroInfoUI;
+
     //buff 显示面板
     BattleBuffUI buffUI;
+
     //通用描述面板
     DescribeUI describeUI;
+    
+    //关卡信息界面
+    BattleStageInfoUI stageInfoUI;
 
 
     protected override void OnInit()
@@ -49,18 +59,13 @@ public class BattleUI : BaseUI
         stateText = this.transform.Find("stateText").GetComponent<Text>();
         attrBtn = this.transform.Find("attrBtn").GetComponent<Button>();
 
-        closeBtn.onClick.AddListener(() =>
-        {
-            onCloseBtnClick?.Invoke();
-        });
+        closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
         readyStartBtn.onClick.AddListener(() =>
         {
             onReadyStartBtnClick?.Invoke();
+            AudioManager.Instance.PlaySound((int)ResIds.audio_click_001);
         });
-        attrBtn.onClick.AddListener(() =>
-        {
-            onAttrBtnClick?.Invoke();
-        });
+        attrBtn.onClick.AddListener(() => { onAttrBtnClick?.Invoke(); });
 
         //血条管理
         this.hpUIMgr = new HpUIMgr();
@@ -83,6 +88,11 @@ public class BattleUI : BaseUI
         skillUI = new BattleSkillUI();
         skillUI.Init(skillUIRoot.gameObject, this);
 
+        //队友英雄信息面板
+        var heroInfoUIRoot = this.transform.Find("all_player_info");
+        heroInfoUI = new BattleHeroInfoUI();
+        heroInfoUI.Init(heroInfoUIRoot.gameObject, this);
+
         //buff 面板
         var buffUIRoot = this.transform.Find("buffBar");
         buffUI = new BattleBuffUI();
@@ -93,8 +103,14 @@ public class BattleUI : BaseUI
         describeUI = new DescribeUI();
         describeUI.Init(describeUIRoot.gameObject, this);
         describeUI.Hide();
+        
+        //关卡信息界面
+        var stageUIRoot = this.transform.Find("stageInfo");
+        stageInfoUI = new BattleStageInfoUI();
+        stageInfoUI.Init(stageUIRoot.gameObject,this);
 
     }
+
     protected override void OnUpdate(float timeDelta)
     {
         this.hpUIMgr.Update(timeDelta);
@@ -106,6 +122,11 @@ public class BattleUI : BaseUI
         this.buffUI.Update(timeDelta);
 
         this.describeUI.Update(timeDelta);
+        
+        this.heroInfoUI.Update(timeDelta);
+        
+        this.stageInfoUI.Update(timeDelta);
+        
     }
 
 
@@ -122,6 +143,7 @@ public class BattleUI : BaseUI
 
 
     #region 血条相关
+
     public void RefreshHpShow(UIArgs args)
     {
         this.hpUIMgr.RefreshHpShow(args);
@@ -136,16 +158,20 @@ public class BattleUI : BaseUI
     {
         this.hpUIMgr.SetHpShowState(entityGuid, isShow);
     }
+
     #endregion
 
     #region 飘字相关
+
     internal void ShowFloatWord(string word, GameObject go, int floatStyle, Color color)
     {
         floatWordMgr.ShowFloatWord(word, go, floatStyle, color);
     }
+
     #endregion
 
     #region 属性面板相关
+
     public void OpenAttrUI()
     {
         this.attrUI.Show();
@@ -160,9 +186,11 @@ public class BattleUI : BaseUI
     {
         this.attrUI.Refresh(args);
     }
+
     #endregion
 
     #region 技能面板相关
+
     internal void RefreshBattleSkillUI(UIArgs args)
     {
         this.skillUI.Refresh(args);
@@ -177,9 +205,30 @@ public class BattleUI : BaseUI
     {
         this.skillUI.SetSkillTipText(str);
     }
+
+    #endregion
+
+    #region 队友英雄信息, boss 信息相关
+
+    internal void RefreshHeroInfoUI(UIArgs args)
+    {
+        this.heroInfoUI.Refresh(args);
+    }
+
+    internal void RefreshSingleHeroInfo(BattleHeroInfoUIData info, int fromEntityGuid)
+    {
+        this.heroInfoUI.RefreshSingleHeroInfo(info, fromEntityGuid);
+    }
+    
+    public void StartBossLimitCountdown()
+    {
+        this.heroInfoUI.StartBossLimitCountdown();
+    }
+
     #endregion
 
     #region buff 面板相关
+
     internal void RefreshBattleBuffUI(UIArgs args)
     {
         this.buffUI.Refresh(args);
@@ -190,10 +239,10 @@ public class BattleUI : BaseUI
         this.buffUI.UpdateBuffInfo(buffInfo);
     }
 
-
     #endregion
 
     #region 描述面板相关
+
     public void ShowDescribeUI(UIArgs arg)
     {
         this.describeUI.Refresh(arg);
@@ -203,6 +252,24 @@ public class BattleUI : BaseUI
     public void HideDescribeUI()
     {
         this.describeUI.Hide();
+    }
+
+    #endregion
+    
+  
+
+    #region 关卡信息相关
+
+    public void ShowStageInfoUI(UIArgs arg)
+    {
+        this.stageInfoUI.Refresh(arg);
+        this.stageInfoUI.Show();
+    }
+
+ 
+    public void HideStageInfoUI()
+    {
+        this.stageInfoUI.Hide();
     }
 
     #endregion
@@ -217,6 +284,4 @@ public class BattleUI : BaseUI
         this.buffUI.Release();
         this.describeUI.Release();
     }
-
-
 }

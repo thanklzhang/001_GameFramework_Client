@@ -12,6 +12,7 @@ public class AttrInfoOption
     public EntityAttrType type;
     public string name;
     public string describe;
+    public int iconResId;
 
 }
 
@@ -30,6 +31,7 @@ public class AttrInfoHelper : Singleton<AttrInfoHelper>
             option.type = (EntityAttrType)attrConfig.Type;
             option.name = attrConfig.Name;
             option.describe = attrConfig.Describe;
+            option.iconResId = attrConfig.IconResId;
 
             attrInfoDic.Add(option.type, option);
         }

@@ -9,41 +9,52 @@ using UnityEngine.UI;
 
 public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 {
-    RawImage icon;
-    GameObject canUseMaskGo;
-    GameObject cdRootGo;
-    Image cdImg;
-    Text cdTimeText;
-    UIEventTrigger evetnTrigger;
+    protected Image icon;
+    protected GameObject canUseMaskGo;
+    protected GameObject cdRootGo;
+    protected Image cdImg;
+    protected Text cdTimeText;
+    protected UIEventTrigger evetnTrigger;
     public BattleSkillUIData uiData;
 
     float currCDTimer = 0;
 
     public override void OnInit()
     {
-
         canUseMaskGo = this.transform.Find("cantUse").gameObject;
         cdRootGo = this.transform.Find("CDRoot").gameObject;
         cdTimeText = this.transform.Find("CDRoot/CDShow/cd_text").GetComponent<Text>();
         cdImg = this.transform.Find("CDRoot/CDShow").GetComponent<Image>();
-        icon = this.transform.Find("icon").GetComponent<RawImage>();
+        icon = this.transform.Find("icon").GetComponent<Image>();
 
         evetnTrigger = icon.GetComponent<UIEventTrigger>();
 
+        canUseMaskGo.SetActive(false);
+        cdRootGo.SetActive(false);
+        
         evetnTrigger.OnPointEnterEvent += OnPointEnter;
         evetnTrigger.OnPointerExitEvent += OnPointExit;
-
     }
 
     public override void OnRefresh(object data, int index)
     {
+        if (null == data)
+        {
+            return;
+        }
+        
         this.uiData = (BattleSkillUIData)data;
+
+        //技能图标
+        var skillId = this.uiData.skillId;
+        var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+        ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
     }
 
     internal void UpdateInfo(float cdTime)
     {
         currCDTimer = cdTime;
-       
+
         if (cdTime <= 0)
         {
             //可以使用技能了
@@ -56,14 +67,12 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
             cdRootGo.SetActive(true);
             //mask 是代表不能用 并不是只有 cd 这个因素 尽管现在只有 cd
             canUseMaskGo.SetActive(true);
-
         }
     }
 
 
     public void Update(float deltaTime)
     {
-     
         if (currCDTimer < 0)
         {
             currCDTimer = 0;
@@ -87,17 +96,13 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
                 showStr = string.Format("{0:F}", showTime);
             }
 
-         
 
             //Debug.LogError("currCDTimer " + currCDTimer + " " + uiData.maxCDTime);
             cdTimeText.text = showStr;
             //Debug.Log("currCDTimer" + currCDTimer);
             //Debug.Log("uiData.maxCDTime" + uiData.maxCDTime);
             cdImg.fillAmount = currCDTimer / uiData.maxCDTime;
-
-          
         }
-
     }
 
     internal int GetSkillConfigId()
@@ -119,7 +124,6 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
         RectTransformUtility.ScreenPointToLocalPointInRectangle(battleUIRect, screenPos, cameraUI.camera, out uiPos);
 
         EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, this.uiData.skillId, uiPos);
-
     }
 
     public void OnPointExit(PointerEventData e)
@@ -133,7 +137,6 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
         evetnTrigger.OnPointEnterEvent -= OnPointEnter;
         evetnTrigger.OnPointerExitEvent -= OnPointExit;
     }
-
 }
 
 

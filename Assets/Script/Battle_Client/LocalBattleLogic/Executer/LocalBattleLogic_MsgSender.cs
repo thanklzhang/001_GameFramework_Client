@@ -161,10 +161,6 @@ namespace Battle_Client
                 {
                     attr.value = value;
                 }
-                else if (type == Battle.EntityAttrType.AttackSpeed)
-                {
-                    attr.value = value;
-                }
                 else
                 {
                     attr.value = (int)value;

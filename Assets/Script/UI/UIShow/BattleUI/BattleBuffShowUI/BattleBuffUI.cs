@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle_Client;
 using Table;
 using UnityEngine;
 using UnityEngine.UI;
@@ -93,8 +94,18 @@ public class BattleBuffUI
         }
         else
         {
-            buffDataList.Add(buffInfo);
-            this.RefreshBuffList();
+            var eft = BattleSkillEffectManager.Instance.FindSkillEffect(buffInfo.guid);
+            if (eft != null)
+            {
+                //如果在 技能效果中找到了 那么应该是非 buff 的显示特效 需要删除 (这块逻辑待修改)
+                BattleSkillEffectManager.Instance.DestorySkillEffect(buffInfo.guid);
+            }
+            else
+            {
+                buffDataList.Add(buffInfo);
+                this.RefreshBuffList();                
+            }
+
         }
     }
 

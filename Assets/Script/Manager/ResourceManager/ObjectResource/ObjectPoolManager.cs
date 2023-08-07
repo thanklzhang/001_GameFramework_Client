@@ -168,6 +168,12 @@ public class ObjectPool
         else
         {
             obj = this.assetObj;
+            if (null == obj)
+            {
+                Logx.LogWarning("the assetObj is null : path : " + path);
+                return null;
+            }
+
             if (!objectDic.ContainsKey(obj.GetInstanceID()))
             {
                 newPoolObj = new PoolObj();

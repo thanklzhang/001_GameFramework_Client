@@ -33,7 +33,7 @@ public class BattleAttrUIShowObj : BaseUIShowObj<BattleAttrUI>
 {
     Text nameText;
     Text valueText;
-    Texture icon;
+    Image iconImg;
     public BattleAttrUIData uiData;
     UIEventTrigger evetnTrigger;
 
@@ -47,6 +47,7 @@ public class BattleAttrUIShowObj : BaseUIShowObj<BattleAttrUI>
         evetnTrigger.OnPointerExitEvent += OnPointExit;
 
         //icon
+        iconImg = this.transform.Find("icon").GetComponent<Image>();
     }
 
     public override void OnRefresh(object data, int index)
@@ -64,6 +65,12 @@ public class BattleAttrUIShowObj : BaseUIShowObj<BattleAttrUI>
         {
             valueText.text = string.Format("{0:F}", this.uiData.value);
         }
+
+        var iconResId = this.uiData.iconResId;
+        //TODO：注意 iconResId
+        ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) => { this.iconImg.sprite = sprite; });
+
+
     }
 
 

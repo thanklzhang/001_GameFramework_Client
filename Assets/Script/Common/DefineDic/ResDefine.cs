@@ -53,17 +53,223 @@ namespace Table
         
 		cursor_attack_001 = 15003005,
         
-		icon_buff_hero_0014 = 15003101,
+		icon_buff_common_01 = 15003101,
         
-		icon_buff_hero_0022 = 15003102,
+		icon_buff_common_02 = 15003102,
         
-		icon_buff_common_08 = 15003103,
+		icon_buff_common_03 = 15003103,
         
-		icon_buff_common_10 = 15003104,
+		icon_buff_common_04 = 15003104,
         
-		icon_buff_common_11 = 15003105,
+		icon_buff_common_05 = 15003105,
         
-		click = 15006001,
+		icon_buff_common_06 = 15003106,
+        
+		icon_buff_common_07 = 15003107,
+        
+		icon_buff_common_08 = 15003108,
+        
+		icon_buff_common_09 = 15003109,
+        
+		icon_buff_common_10 = 15003110,
+        
+		icon_buff_common_11 = 15003111,
+        
+		icon_buff_common_12 = 15003112,
+        
+		icon_buff_common_13 = 15003113,
+        
+		icon_buff_common_14 = 15003114,
+        
+		icon_buff_common_15 = 15003115,
+        
+		icon_buff_common_16 = 15003116,
+        
+		icon_buff_common_17 = 15003117,
+        
+		icon_buff_common_18 = 15003118,
+        
+		icon_buff_common_19 = 15003119,
+        
+		icon_buff_common_20 = 15003120,
+        
+		icon_buff_common_21 = 15003121,
+        
+		icon_buff_common_22 = 15003122,
+        
+		icon_buff_common_23 = 15003123,
+        
+		icon_buff_common_24 = 15003124,
+        
+		icon_buff_common_25 = 15003125,
+        
+		icon_buff_common_26 = 15003126,
+        
+		icon_buff_hero_0001 = 15003201,
+        
+		icon_buff_hero_0002 = 15003202,
+        
+		icon_buff_hero_0003 = 15003203,
+        
+		icon_buff_hero_0004 = 15003204,
+        
+		icon_buff_hero_0005 = 15003205,
+        
+		icon_buff_hero_0006 = 15003206,
+        
+		icon_buff_hero_0007 = 15003207,
+        
+		icon_buff_hero_0008 = 15003208,
+        
+		icon_buff_hero_0009 = 15003209,
+        
+		icon_buff_hero_0010 = 15003210,
+        
+		icon_buff_hero_0011 = 15003211,
+        
+		icon_buff_hero_0012 = 15003212,
+        
+		icon_buff_hero_0013 = 15003213,
+        
+		icon_buff_hero_0014 = 15003214,
+        
+		icon_buff_hero_0015 = 15003215,
+        
+		icon_buff_hero_0016 = 15003216,
+        
+		icon_buff_hero_0017 = 15003217,
+        
+		icon_buff_hero_0018 = 15003218,
+        
+		icon_buff_hero_0019 = 15003219,
+        
+		icon_buff_hero_0020 = 15003220,
+        
+		icon_buff_hero_0021 = 15003221,
+        
+		icon_buff_hero_0022 = 15003222,
+        
+		icon_buff_hero_0023 = 15003223,
+        
+		icon_buff_hero_0024 = 15003224,
+        
+		icon_buff_hero_0025 = 15003225,
+        
+		icon_buff_hero_0026 = 15003226,
+        
+		icon_buff_hero_0027 = 15003227,
+        
+		icon_buff_hero_0028 = 15003228,
+        
+		icon_buff_hero_0029 = 15003229,
+        
+		icon_buff_hero_0030 = 15003230,
+        
+		icon_buff_hero_0031 = 15003231,
+        
+		icon_buff_hero_0032 = 15003232,
+        
+		icon_buff_hero_0033 = 15003233,
+        
+		icon_buff_hero_0034 = 15003234,
+        
+		icon_buff_hero_0035 = 15003235,
+        
+		icon_buff_hero_0036 = 15003236,
+        
+		icon_buff_hero_0037 = 15003237,
+        
+		icon_buff_hero_0038 = 15003238,
+        
+		icon_buff_hero_0039 = 15003239,
+        
+		icon_buff_hero_0040 = 15003240,
+        
+		icon_buff_hero_0041 = 15003241,
+        
+		icon_buff_hero_0042 = 15003242,
+        
+		icon_buff_hero_0043 = 15003243,
+        
+		icon_buff_hero_0044 = 15003244,
+        
+		icon_buff_hero_0045 = 15003245,
+        
+		icon_buff_hero_0046 = 15003246,
+        
+		icon_buff_hero_0047 = 15003247,
+        
+		icon_buff_hero_0048 = 15003248,
+        
+		icon_buff_hero_0049 = 15003249,
+        
+		icon_buff_hero_0050 = 15003250,
+        
+		icon_buff_hero_0051 = 15003251,
+        
+		icon_buff_hero_0052 = 15003252,
+        
+		icon_buff_hero_0053 = 15003253,
+        
+		icon_buff_hero_0054 = 15003254,
+        
+		icon_buff_hero_0055 = 15003255,
+        
+		icon_buff_hero_0056 = 15003256,
+        
+		icon_buff_hero_0057 = 15003257,
+        
+		icon_buff_hero_0058 = 15003258,
+        
+		icon_buff_hero_0059 = 15003259,
+        
+		icon_buff_hero_0060 = 15003260,
+        
+		icon_buff_hero_0061 = 15003261,
+        
+		img_avatar_001 = 15003501,
+        
+		img_avatar_002 = 15003502,
+        
+		img_avatar_003 = 15003503,
+        
+		img_avatar_004 = 15003504,
+        
+		img_avatar_005 = 15003505,
+        
+		img_avatar_006 = 15003506,
+        
+		img_avatar_007 = 15003507,
+        
+		img_avatar_008 = 15003508,
+        
+		img_avatar_009 = 15003509,
+        
+		img_attr_attack = 15003701,
+        
+		img_attr_defend = 15003702,
+        
+		img_attr_max_health = 15003703,
+        
+		img_attr_attack_speed = 15003704,
+        
+		img_attr_move_speed = 15003705,
+        
+		img_attr_attack_range = 15003706,
+        
+		img_skill_001 = 15003751,
+        
+		img_skill_002 = 15003752,
+        
+		img_skill_003 = 15003753,
+        
+		img_skill_004 = 15003754,
+        
+		img_skill_005 = 15003755,
+        
+		audio_click_001 = 15006001,
+        
+		bgm_battle_001 = 15006002,
         
 		eft_select_entity_01 = 15008001,
         
@@ -117,6 +323,10 @@ namespace Table
         
 		eft_buff_007 = 15008026,
         
+		eft_knife_hit_001 = 15008027,
+        
+		eft_knife_hit_002 = 15008028,
+        
 		eft_skill_director_001 = 15008101,
         
 		eft_skill_director_002 = 15008102,
@@ -129,6 +339,8 @@ namespace Table
         
 		scene_wuxia_002 = 15010002,
         
+		scene_ogre_001 = 15010003,
+        
 		shangguanling_battle_001 = 15011001,
         
 		shangguanling_battle_002 = 15011002,
@@ -138,6 +350,16 @@ namespace Table
 		shangguanling_battle_004 = 15011004,
         
 		tangyi_battle_003 = 15011021,
+        
+		role_001 = 15011030,
+        
+		role_002 = 15011031,
+        
+		monster_001 = 15011032,
+        
+		monster_002 = 15011033,
+        
+		monster_boss_101 = 15011034,
         
 		monster1_battle = 15012001,
         

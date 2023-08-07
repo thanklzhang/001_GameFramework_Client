@@ -12,11 +12,21 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5f8a7fbc5006430fa41a872fbc34844b6200/27/f33f9097/AssetBundle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/08/9bdbfad4/Texture.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/1e/f30b3717/Scene.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/56/c62e8e31/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/87/dcb497d0/Color.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/de/85ab6d25/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/f8/313dd16a/BlendMode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fc/104c4b76/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a788eca61267411daecc97d72d1696bc27800/44/2af5058f/Animator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/3f/ec3640b3/Void.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AnimationTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/zxyTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/Utils/OrganizationHandler/OrganizationProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Button.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Graphic.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,6 +43,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.30476192&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -120,6 +131,22 @@
       <workItem from="1689685570340" duration="8762000" />
       <workItem from="1689776783483" duration="2182000" />
       <workItem from="1690027807222" duration="5892000" />
+      <workItem from="1690296646436" duration="5116000" />
+      <workItem from="1690374125371" duration="16530000" />
+      <workItem from="1690461576951" duration="12997000" />
+      <workItem from="1690552736646" duration="230000" />
+      <workItem from="1690641916252" duration="4569000" />
+      <workItem from="1690653315443" duration="897000" />
+      <workItem from="1690807126126" duration="8786000" />
+      <workItem from="1690893587889" duration="13751000" />
+      <workItem from="1690982024707" duration="8801000" />
+      <workItem from="1690993021759" duration="2046000" />
+      <workItem from="1691066278485" duration="12934000" />
+      <workItem from="1691152317671" duration="7506000" />
+      <workItem from="1691226854665" duration="2880000" />
+      <workItem from="1691306086529" duration="8709000" />
+      <workItem from="1691411655602" duration="440000" />
+      <workItem from="1691412111418" duration="3477000" />
     </task>
     <servers />
   </component>
@@ -136,18 +163,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <condition expression="operateKey == 2002002" language="C#" />
-          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/AI/OperateQueue/OperateModule.cs</url>
-          <line>102</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\AI\OperateQueue\OperateModule.cs" initialLine="102" containingFunctionPresentation="Method 'OnNodeExecuteFinish'">
+          <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleStageInfoUI.cs</url>
+          <line>88</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleStageInfoUI.cs" initialLine="89" containingFunctionPresentation="Method 'RefreshBossLimitTimeShow'">
             <startOffsets>
-              <option value="2635" />
+              <option value="2287" />
             </startOffsets>
             <endOffsets>
-              <option value="2658" />
+              <option value="2344" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="28" />
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -29,6 +29,8 @@ public class BaseLoader
     //public Action prepareFinishCallback;
     //public Action loadFinishCallback;
 
+    public Type resType;
+
     public LoaderState loaderState = LoaderState.Null;
 
     public void Start()
@@ -87,5 +89,10 @@ public class BaseLoader
     public virtual bool IsLoadFinish()
     {
         return false;
+    }
+
+    public virtual string GetPath()
+    {
+        return "";
     }
 }

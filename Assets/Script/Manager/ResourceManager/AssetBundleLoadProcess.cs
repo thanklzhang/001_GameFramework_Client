@@ -13,6 +13,8 @@ public class AssetBundleLoadProcess : BaseLoadProcess
 {
     public Dictionary<string, AssetBundleLoader> abLoaderDic = new Dictionary<string, AssetBundleLoader>();
 
+    
+    
     public override void AddLoader(BaseLoader loader)
     {
         //Logx.Log("assetBundle : AddLoader");
@@ -26,12 +28,24 @@ public class AssetBundleLoadProcess : BaseLoadProcess
         {
             //Logx.Log("assetBundle : AddLoader 1 assetBundleLoader.path : " + assetBundleLoader.path);
 
+            if (assetBundleLoader.path.Contains("img_skill_001"))
+            {
+                Logx.LogWarning("img_skill_001.ab abLoaderProcess no : add  AddLoader");
+            }
+            
             abLoaderDic.Add(assetBundleLoader.path, assetBundleLoader);
             ////Logx.Logz("AssetBundleLoadProcess AddLoader : no loader cache and start a new loader : " + assetBundleLoader.path);
             base.AddLoader(loader);
         }
         else
         {
+            if (assetBundleLoader.path.Contains("img_skill_001"))
+            {
+                Logx.LogWarning("img_skill_001.ab abLoaderProcess has : added  AddLoader");
+            }
+            
+          
+            
             //Logx.Log("assetBundle : AddLoader 2");
             ////Logx.Logz("AssetBundleLoadProcess AddLoader : have loader cache " + assetBundleLoader.path);
             abLoader.finishLoadCallback += assetBundleLoader.finishLoadCallback;

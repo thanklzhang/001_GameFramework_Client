@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3341398354
+CRC: 1908213699
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f5887553b67a3c9025320ed5dd73df0e
+    Hash: 36d17a946d71170fcfaf61eeeb36a60e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0c48b4679256828f2f032b41ebd21e62
+    Hash: 96c498640aceadc69cfb2a1bbfcb04ee
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -18,13 +18,19 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  Script: {fileID: 11500000, guid: 20700c4ad6bd72347bf45660f5a68a91, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -60,4 +66,6 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.SpriteState
 Assets:
 - Assets/BuildRes/Prefabs/UI/LoginUI.prefab
-Dependencies: []
+Dependencies:
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/atlas/common/other.ab
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/atlas/loginui.ab

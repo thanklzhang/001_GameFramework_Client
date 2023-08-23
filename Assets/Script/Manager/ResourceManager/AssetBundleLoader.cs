@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -31,13 +30,25 @@ public class AssetBundleLoader : BaseLoader
         //这里应该抽出来
 
         deps = AssetBundleManager.Instance.GetDependPaths(this.path).ToList();
+        // Logx.LogError("AB", "--dep start : " + path);
+        // foreach (var VARIABLE in deps)
+        // {
+        //     Logx.LogError("AB", "dep :            " + VARIABLE);
+        // }
+        //
+        // Logx.LogError("AB", "--dep end : " + path);
     }
 
     public override void OnPrepareFinish()
     {
-        //Logx.Log("OnPrepareFinish : " + this.path);
+        //Logx.Log("ab loader OnPrepareFinish : " + this.path);
         ////Logx.Logz("AssetBundleLoader OnPrepareFinish : " + this.path);
         //准备好了 开始加载
+        if (this.path.Contains("img_skill_001.ab"))
+        {
+            Logx.LogWarning("img_skill_001.ab OnPrepareFinish");
+        }
+
         var resultPath = GetABLoadPath(this.path);
         //Logx.Log("resultPath : " + resultPath);
         abCreateReq = AssetBundle.LoadFromFileAsync(resultPath);
@@ -46,7 +57,7 @@ public class AssetBundleLoader : BaseLoader
 
     internal override void OnLoadFinish()
     {
-        //Logx.Log("ab loader OnLoadFinish : " + path);
+       // Logx.Log("ab loader OnLoadFinish : " + path);
 
         ////Logx.Logz("AssetBundleLoader OnLoadFinish : " + this.path);
         //ab 加载完成
@@ -58,8 +69,14 @@ public class AssetBundleLoader : BaseLoader
         //abCache.ab = ab
         //finishLoadCallback?.Invoke(abCache);
 
+        
+        if (path.Contains("img_skill_001"))
+        {
+            Logx.LogWarning("img_skill_001.ab abloader OnLoadFinish");
+        }
+        
+        
         AssetBundleManager.Instance.OnLoadFinish(abCache);
-
     }
 
     internal void OnLoadOtherABFinish(string path)
@@ -75,6 +92,16 @@ public class AssetBundleLoader : BaseLoader
 
     public override bool IsPrepareFinish()
     {
+        for (int i = deps.Count - 1; i >= 0; i--)
+        {
+            var dep = deps[i];
+            var abCache = AssetBundleManager.Instance.GetCacheByPath(dep);
+            if (abCache != null)
+            {
+                deps.RemoveAt(i);
+            }
+        }
+
         return 0 == deps.Count;
     }
 
@@ -83,14 +110,19 @@ public class AssetBundleLoader : BaseLoader
         if (null == abCreateReq)
         {
             return false;
-
         }
+
         //Logx.Log("abCreateReq progress : " + abCreateReq.progress);
         return abCreateReq.progress >= 1;
     }
 
     string GetABLoadPath(string path)
     {
-        return Const.AssetBundlePath + "/" + path;// + Const.ExtName;
+        return Const.AssetBundlePath + "/" + path; // + Const.ExtName;
+    }
+
+    public override string GetPath()
+    {
+        return this.path;
     }
 }

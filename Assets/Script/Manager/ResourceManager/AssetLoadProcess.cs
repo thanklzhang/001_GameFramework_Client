@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using LitJson;
+using Object = UnityEngine.Object;
 
 public class AssetLoadProcess : BaseLoadProcess
 {
     public Dictionary<string, AssetLoader> assetLoaderDic = new Dictionary<string, AssetLoader>();
 
-    public override void AddLoader(BaseLoader loader)
+    public override void AddLoader(BaseLoader loader) 
     {
         //Logx.Log("asset load  AddLoader ");
         var assetLoader = (AssetLoader)loader;
@@ -33,8 +34,9 @@ public class AssetLoadProcess : BaseLoadProcess
         {
             //Logx.Log("asset load  AddLoader 2");
             //Logx.Logz("AssetLoadProcess AddLoader : have loader cache " + assetLoader.path);
-            currAssetLoader.finishLoadCallback += assetLoader.finishLoadCallback;
-            currAssetLoader.refCount += 1;
+            var tempLoader = (AssetLoader)currAssetLoader;
+            tempLoader.finishLoadCallback += assetLoader.finishLoadCallback;
+            tempLoader.refCount += 1;
         }
     }
 

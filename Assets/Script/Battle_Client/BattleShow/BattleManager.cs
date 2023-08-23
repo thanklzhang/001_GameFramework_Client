@@ -347,18 +347,43 @@ namespace Battle_Client
             //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
             var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
 
-#if UNITY_EDITOR
-            var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
-            var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories).ToList();
-          
-            files = new List<string>();
-            for (int i = 0; i < files2.Count; i++)
+
+            if (!Const.isUseAB)
             {
-                var f = files2[i];
-                var f2 =  f.Replace(Const.buildPath + "/", "");
-                files.Add(f2);
+                var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
+                var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories).ToList();
+          
+                files = new List<string>();
+                for (int i = 0; i < files2.Count; i++)
+                {
+                    var f = files2[i];
+                    var f2 =  f.Replace(Const.buildPath + "/", "");
+                    files.Add(f2);
+                }
+
             }
-#endif
+            else
+            {  
+               
+                var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
+                var abPath = loadPath2 + ".ab";
+                if (AssetManager.Instance.abToAssetsDic.ContainsKey(abPath))
+                {
+                    files = new List<string>();
+                    var assets = AssetManager.Instance.abToAssetsDic[abPath];
+                    foreach (var assetPath in assets)
+                    {
+                        var resultPath = assetPath.Replace(Const.buildPath.ToLower() + "/","");
+                        files.Add(resultPath);
+                    }
+                }
+                else
+                {
+                    Logx.LogError("the ab is not found : abPath : " + abPath);
+                }
+            }
+
+          
 
 
             foreach (var filePath in files)
@@ -369,7 +394,7 @@ namespace Battle_Client
                 //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
                 var loadPath = Path.Combine(Const.buildPath, filePath);
                 
-                Debug.Log("zxy : loadPath " + loadPath);
+                //Debug.Log("zxy : loadPath " + loadPath);
                 
                 //里面已经判断 是否AB 模式了 所以这里通用
                 ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>

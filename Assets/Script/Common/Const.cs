@@ -9,15 +9,41 @@ public class Const
 
     //path
     public const string AppName = "Jeko";
-    public static string AppStreamingAssetPath = Application.streamingAssetsPath;//游戏第一次安装的游戏内部包
-                                                                                 //public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "/Resource";
-    public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "";///Resources
+
+    public static string AppStreamingAssetPath = Application.streamingAssetsPath; //游戏第一次安装的游戏内部包
+    //public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "/Resource";
+    // public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "";///Resources
+
+    public static string AssetBundlePath
+    {
+        get
+        {
+            if (!isUseInternalAB)
+            {
+                return Application.persistentDataPath + "/" + AppName + "";
+            }
+            else
+            {
+                return AppStreamingAssetPath;
+            }
+        }
+    }
+
+
+    ///
+    /// 
     //public static string AssetBundlePath = Application.streamingAssetsPath;//方便测试
     public const string ABExtName = ".ab";
+
     //public static bool isUpdateMode = false;//是否开启更新模式(需要开启资源服务端)
-    public static bool isUseAB = false;//资源是否从 AB 中读取 不是的话 从 项目中 Assets 目录读取
+    public static bool isUseAB = false; //资源是否从 AB 中读取 不是的话 从 项目中 Assets 目录读取
+    // public static bool isUpdateResFromServer = false; //是否从服务器更新资源(需要开启资源服务端)
+    public static bool isUseInternalAB = false;//是否使用内部的 AB  （StreamingAssets）
+
+    public static string ABPackageStrategyPath = "Assets/Editor/BuildPackage/ABPackageStrategy.asset";
 
     public static string projectRootPath = "Assets";
+
     //不用了
     public static string buildPath = "Assets/BuildRes";
 
@@ -42,5 +68,4 @@ public class Const
     public const int floatMul = 10000;
 
     public static Fix timeDelta = Fix.Ratio(frameTime, 1000);
-
 }

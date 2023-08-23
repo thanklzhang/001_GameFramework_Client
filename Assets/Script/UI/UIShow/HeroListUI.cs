@@ -21,11 +21,11 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
     GameObject unlockFlagObj;
 
     Button upgradeLevelBtn;
+    private Image heroIconImg;
 
     //Action<int> clickUpgradeLevelCallback;
 
     public HeroCardUIData uiData;
-
 
 
     public override void OnInit()
@@ -34,7 +34,7 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
         nameText = this.transform.Find("nameBg/name").GetComponent<Text>();
         unlockFlagObj = this.transform.Find("lockFlag").gameObject;
         upgradeLevelBtn = this.transform.Find("upgradeLevelBtn").GetComponent<Button>();
-
+        heroIconImg = this.transform.Find("bg/rolePic").GetComponent<Image>();
 
         upgradeLevelBtn.onClick.AddListener(() =>
         {
@@ -57,7 +57,6 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
 
     public override void OnRefresh(object data, int index)
     {
-
         this.uiData = (HeroCardUIData)data;
 
         var configId = this.uiData.configId;
@@ -66,6 +65,12 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
         nameText.text = "" + heroInfoTable.Name;
         unlockFlagObj.SetActive(!this.uiData.isUnlock);
         // upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
+
+        ResourceManager.Instance.GetObject<Sprite>(heroInfoTable.AllBodyResId, (sprite)
+            =>
+        {
+            heroIconImg.sprite = sprite;
+        });
     }
 
     public override void OnRelease()
@@ -73,7 +78,6 @@ public class HeroCardShowObj : BaseUIShowObj<HeroListUI>
         //clickUpgradeLevelCallback = null;
         upgradeLevelBtn.onClick.RemoveAllListeners();
     }
-
 }
 
 public class HeroListUI : BaseUI
@@ -97,15 +101,9 @@ public class HeroListUI : BaseUI
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         heroListRoot = this.transform.Find("cardScroll/mask/root");
 
-        goInfoUIBtn.onClick.AddListener(() =>
-        {
-            onGoInfoUIBtnClick?.Invoke();
-        });
+        goInfoUIBtn.onClick.AddListener(() => { onGoInfoUIBtnClick?.Invoke(); });
 
-        closeBtn.onClick.AddListener(() =>
-        {
-            onCloseBtnClick?.Invoke();
-        });
+        closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
     }
 
     public void OnClickUpgradeLevelCallback(int guid, int level)
@@ -179,7 +177,6 @@ public class HeroListUI : BaseUI
         args.root = heroListRoot;
         args.parentObj = this;
         UIFunc.DoUIList(args);
-
     }
 
     protected override void OnRelease()
@@ -194,6 +191,5 @@ public class HeroListUI : BaseUI
 
         showDataObjList = null;
         cardDataList = null;
-
     }
 }

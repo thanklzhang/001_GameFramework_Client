@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 291136320
+CRC: 2836971822
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 689524a12b5024c2f9218dcdef01e71b
+    Hash: a8693e1891d6d65247f660736fea0f3a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 16c8c1f57db12c67ee1f8799d7c1eee7
+    Hash: f2d3d89c670d107a5446dcfca3c5af2d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -16,6 +16,8 @@ ClassTypes:
 - Class: 21
   Script: {instanceID: 0}
 - Class: 23
+  Script: {instanceID: 0}
+- Class: 28
   Script: {instanceID: 0}
 - Class: 33
   Script: {instanceID: 0}
@@ -34,5 +36,4 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/Models/Role/monster1_battle.prefab
-Dependencies:
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/sourceres/models/role/ku_lou_qi_shi_001_ty.ab
+Dependencies: []

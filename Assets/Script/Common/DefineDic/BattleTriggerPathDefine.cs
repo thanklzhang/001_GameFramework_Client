@@ -27,7 +27,11 @@ namespace Table
 			{"BattleTrigger/TestTrigger",new List<string>()
 				{
 					
-					"BattleTrigger/TestTrigger/new_trigger0.json",
+					"BattleTrigger/TestTrigger/gen.json",
+					
+					"BattleTrigger/TestTrigger/test_trigger_battle_fail.json",
+					
+					"BattleTrigger/TestTrigger/test_trigger_battle_win.json",
 					
 					"BattleTrigger/TestTrigger/test_trigger_gen_boss 1.json",
 					

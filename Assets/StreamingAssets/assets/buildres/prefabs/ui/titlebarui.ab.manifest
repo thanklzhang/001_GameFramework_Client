@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 958869075
+CRC: 1775666472
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5192b75fea0dbfc325b805da913282d2
+    Hash: 7e6474198459a28e3d210b6a61250057
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 107e9b69eb3c92c602247c1728ded75d
+    Hash: fff005704d8ad7210f4b87b735a9c993
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -18,13 +18,11 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
 - Class: 114
@@ -61,4 +59,6 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/BuildRes/Prefabs/UI/TitleBarUI.prefab
 Dependencies:
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/textures/item/icon_money.ab
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/atlas/common/other.ab
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/atlas/lobbyui.ab
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/atlas/titlebarui.ab

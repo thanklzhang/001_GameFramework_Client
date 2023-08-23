@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using UnityEngine;
 using LitJson;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 public class AssetLoader : BaseLoader
 {
     public string path;
     public Action<AssetCache> finishLoadCallback;
 
+    // public Type type;
     public UnityEngine.Object asset;
 
     public AssetBundleRequest assetRequest;
@@ -49,7 +51,15 @@ public class AssetLoader : BaseLoader
             return;
         }
         var ab = assetBundleCache.assetBundle;
-        assetRequest = ab.LoadAssetAsync(path);
+
+        if (resType != null)
+        {
+            assetRequest = ab.LoadAssetAsync(path,resType);
+        }
+        else
+        {
+            assetRequest = ab.LoadAssetAsync(path);
+        }
     }
 
     internal override void OnLoadFinish()

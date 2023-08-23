@@ -85,6 +85,7 @@ namespace BattleTrigger.Editor
         public override NumberVar OnClone()
         {
             EntityAttrVar numVar = new EntityAttrVar();
+            numVar.entityType = this.entityType;
             numVar.attrType = this.attrType;
             return numVar;
         }

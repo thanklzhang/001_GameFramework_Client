@@ -22,6 +22,10 @@ namespace BattleTrigger.Editor
         CalculateExpression = 2,
         [EnumLabel("实体属性")]
         EntityAttr = 10,
+        [EnumLabel("队伍索引")]
+        EntityTeamIndex = 11,
+        [EnumLabel("队伍中英雄的存活数量")]
+        TeamHeroAliveCount = 12,
     }
 
     public class NumberVarField : BaseVarField

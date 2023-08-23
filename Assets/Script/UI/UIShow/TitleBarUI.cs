@@ -88,17 +88,17 @@ public class TitleOptionShowObj : BaseUIShowObj<TitleBarUI>
 {
     Text nameText;
     Text countText;
-    RawImage iconRawImg;
+    Image iconImg;
     public TitleOptionUIData uiData;
 
     int currIconResId;
-    Texture currIconTex;
+    Sprite currIconSprite;
 
     public override void OnInit()
     {
         nameText = this.transform.Find("name").GetComponent<Text>();
         countText = this.transform.Find("count").GetComponent<Text>();
-        iconRawImg = this.transform.Find("icon").GetComponent<RawImage>();
+        iconImg = this.transform.Find("icon").GetComponent<Image>();
     }
 
     public override void OnRefresh(object data, int index)
@@ -112,22 +112,22 @@ public class TitleOptionShowObj : BaseUIShowObj<TitleBarUI>
         countText.text = "" + this.uiData.count;
 
         currIconResId = itemTb.IconResId;
-        ResourceManager.Instance.GetObject<Texture>(currIconResId, (tex) =>
+        ResourceManager.Instance.GetObject<Sprite>(currIconResId, (sprite) =>
         {
             //TODO
             //注意 这里界面关闭了还会再次执行
             //这里应该判断是否界面界面关闭了等状态
-            currIconTex = tex;
-            iconRawImg.texture = tex;
+            currIconSprite = sprite;
+            iconImg.sprite = sprite;
         });
 
     }
 
     public override void OnRelease()
     {
-        if (currIconTex != null)
+        if (currIconSprite != null)
         {
-            ResourceManager.Instance.ReturnObject<Texture>(currIconResId, currIconTex);
+            ResourceManager.Instance.ReturnObject<Sprite>(currIconResId, currIconSprite);
         }
 
     }

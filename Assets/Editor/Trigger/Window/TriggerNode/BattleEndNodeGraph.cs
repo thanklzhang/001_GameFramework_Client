@@ -15,23 +15,25 @@ namespace BattleTrigger.Editor
     [Serializable]
     public class BattleEndNodeGraph : TriggerNodeGraph
     {
-        public NumberVarField winTeam;
+        public NumberVarField teamIndex;
+        public BattleEndType endType;
 
         public override void OnParse(JsonData nodeJsonData)
         {
             //delayTime = (float.Parse(nodeJsonData["delayTime"]["value"].ToString()));
-            winTeam = NumberVarField.ParseNumberVarField(nodeJsonData["winTeam"]);
+            teamIndex = NumberVarField.ParseNumberVarField(nodeJsonData["teamIndex"]);
+            endType = (BattleEndType)int.Parse(nodeJsonData["endType"].ToString());
         }
 
         public override void OnCreate()
         {
-            winTeam = new NumberVarField();
-            winTeam.Create();
+            teamIndex = new NumberVarField();
+            teamIndex.Create();
         }
 
         public override string GetDrawContentStr()//Rect childRect
         {
-            var str = "队伍 " + winTeam.GetDrawContentStr() + " 获胜";
+            var str = "队伍 " + teamIndex.GetDrawContentStr() + " " + endType.ToString();
             return str;
         }
 
@@ -44,9 +46,11 @@ namespace BattleTrigger.Editor
             GUILayout.BeginHorizontal();
             GUILayout.Label("队伍 ", style);
 
-            winTeam.DrawSelectInfo();
+            teamIndex.DrawSelectInfo();
+           
+           endType = (BattleEndType)EditorGUILayout_Ex.EnumPopup(endType, new GUILayoutOption[] { GUILayout.Width(100) });
 
-            GUILayout.Label(" 获胜", style);
+            //GUILayout.Label(" 获胜", style);
             GUILayout.EndHorizontal();
         }
 
@@ -54,14 +58,16 @@ namespace BattleTrigger.Editor
         {
             TriggerNodeGraph node = new BattleEndNodeGraph();
             var _node = node as BattleEndNodeGraph;
-            _node.winTeam = (NumberVarField)this.winTeam.Clone();
+            _node.teamIndex = (NumberVarField)this.teamIndex.Clone();
+            _node.endType = this.endType;
 
             return _node;
         }
 
         public override JsonData OnToJson(JsonData jd)
         {
-            jd["winTeam"] = winTeam.ToJson();
+            jd["teamIndex"] = teamIndex.ToJson();
+            jd["endType"] = (int)endType;
             return jd;
         }
 

@@ -11,7 +11,8 @@ using Table;
 using GameData;
 using PlotDesigner.Runtime;
 using Battle_Client;
-using XLua;
+using UnityEditor;
+
 
 public class GameMain : MonoBehaviour
 {

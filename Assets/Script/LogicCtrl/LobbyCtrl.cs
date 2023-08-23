@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Table;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,6 +67,8 @@ public class LobbyCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
+        //play bgm
+        AudioManager.Instance.PlayBGM((int)ResIds.bgm_002);
     }
 
     public override void OnActive()
@@ -73,6 +76,8 @@ public class LobbyCtrl : BaseCtrl
         CtrlManager.Instance.ShowTitleBar(TitleBarIds.Lobby);
 
 
+      
+        
         ui.Show();
         //titleBarUI.Show();
 
@@ -90,7 +95,8 @@ public class LobbyCtrl : BaseCtrl
         LobbyUIArg arg = new LobbyUIArg()
         {
             playerName = playerInfo.name,
-            playerLevel = playerInfo.level
+            playerLevel = playerInfo.level,
+            avatarURL = playerInfo.avatarURL
         };
         this.ui.Refresh(arg);
     }

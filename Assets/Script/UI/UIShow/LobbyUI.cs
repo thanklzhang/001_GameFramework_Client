@@ -8,6 +8,7 @@ public class LobbyUIArg : UIArgs
 {
     public string playerName;
     public int playerLevel;
+    public string avatarURL;
 }
 
 public class LobbyUI : BaseUI
@@ -23,6 +24,7 @@ public class LobbyUI : BaseUI
     Button teamBtn;
     Text playerNameText;
     Text playerLevelText;
+    private Image playerIconImg;
 
     protected override void OnInit()
     {
@@ -32,6 +34,7 @@ public class LobbyUI : BaseUI
         teamBtn = this.transform.Find("teamBtn").GetComponent<Button>();
         playerNameText = this.transform.Find("heroInfo/playerNameRoot/name").GetComponent<Text>();
         playerLevelText = this.transform.Find("heroInfo/level").GetComponent<Text>();
+        playerIconImg = this.transform.Find("heroInfo/avatarBg/avatar").GetComponent<Image>();
 
         closeBtn.onClick.AddListener(() => { onClickCloseBtn?.Invoke(); });
 
@@ -48,6 +51,11 @@ public class LobbyUI : BaseUI
         var playerNameStr = lobbyArg.playerName;
         this.playerNameText.text = playerNameStr;
         this.playerLevelText.text = "" + lobbyArg.playerLevel;
+        var iconResId = int.Parse(lobbyArg.avatarURL);
+        ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) =>
+        {
+            playerIconImg.sprite = sprite;
+        });
     }
 
     protected override void OnRelease()

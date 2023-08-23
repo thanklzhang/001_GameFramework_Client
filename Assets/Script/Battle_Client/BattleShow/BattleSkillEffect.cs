@@ -160,9 +160,15 @@ namespace Battle_Client
             gameObject.transform.position = position;
             //gameObject = 
 
+            
             //获取持续时长
             var curParticle = obj.GetComponent<ParticleSystem>();
             var particles = obj.GetComponentsInChildren<ParticleSystem>();
+            if (gameObject.name.Contains("eft_skill_projectile"))
+            {
+                Logx.Log(" particles : " + particles.Length);
+            }
+
             if (particles != null && particles.Length > 0)
             {
                 var particle = particles[0];

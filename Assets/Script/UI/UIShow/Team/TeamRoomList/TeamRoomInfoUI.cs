@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Table;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,9 @@ public class TeamRoomInfoUI : BaseUI
 
     Text roomNameText;
     Text stageNameText;
+    private Text stageDesText;
+
+    private Image stageIconImg;
 
 
     //data
@@ -37,18 +41,13 @@ public class TeamRoomInfoUI : BaseUI
         closeBtn = transform.Find("closeBtn").GetComponent<Button>();
         startBattleBtn = transform.Find("battleBtn").GetComponent<Button>();
 
-
+        stageIconImg = transform.Find("stagePic").GetComponent<Image>();
         roomNameText = transform.Find("roomName").GetComponent<Text>();
         stageNameText = transform.Find("stageName").GetComponent<Text>();
+        stageDesText = transform.Find("stageDes").GetComponent<Text>();
 
-        closeBtn.onClick.AddListener(() =>
-        {
-            event_onClickCloseBtn?.Invoke();
-        });
-        startBattleBtn.onClick.AddListener(() =>
-        {
-            event_onClickStartBattleBtn?.Invoke();
-        });
+        closeBtn.onClick.AddListener(() => { event_onClickCloseBtn?.Invoke(); });
+        startBattleBtn.onClick.AddListener(() => { event_onClickStartBattleBtn?.Invoke(); });
 
         roomPlayerDataList = new List<TeamRoomPlayerUIData>();
         roomPlayerShowObjList = new List<TeamRoomPlayerUIShowObj>();
@@ -58,9 +57,14 @@ public class TeamRoomInfoUI : BaseUI
     {
         TeamRoomInfoUIArgs roomInfoArgs = (TeamRoomInfoUIArgs)args;
 
+
+        var stageConfig = TableManager.Instance.GetById<Table.TeamStage>(roomInfoArgs.stageConfigId);
         roomPlayerDataList = roomInfoArgs.playerUIDataList;
         roomName = roomInfoArgs.roomName;
-        stageName = roomInfoArgs.stageName;
+        stageName = stageConfig.Name;
+        stageDesText.text = stageConfig.Describe;
+        ResourceManager.Instance.GetObject<Sprite>(stageConfig.IconResId,
+            (sprite) => { stageIconImg.sprite = sprite; });
 
         this.RefreshRoomInfo();
     }
@@ -68,7 +72,8 @@ public class TeamRoomInfoUI : BaseUI
     void RefreshRoomInfo()
     {
         //玩家列表
-        UIListArgs<TeamRoomPlayerUIShowObj, TeamRoomInfoUI> args = new UIListArgs<TeamRoomPlayerUIShowObj, TeamRoomInfoUI>();
+        UIListArgs<TeamRoomPlayerUIShowObj, TeamRoomInfoUI> args =
+            new UIListArgs<TeamRoomPlayerUIShowObj, TeamRoomInfoUI>();
         args.dataList = roomPlayerDataList;
         args.showObjList = roomPlayerShowObjList;
         args.root = playerRoot;
@@ -122,7 +127,9 @@ public class TeamRoomPlayerUIData
 public class TeamRoomInfoUIArgs : UIArgs
 {
     public int id;
-    public string stageName;
+
+    // public string stageName;
+    public int stageConfigId;
     public string roomName;
     public List<TeamRoomPlayerUIData> playerUIDataList;
 }
@@ -133,9 +140,9 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
     Text nameText;
     Text levelText;
 
-    RawImage playerAvatarImg;
+    Image playerAvatarImg;
 
-    RawImage heroAvatarImg;
+    Image heroAvatarImg;
     Text heroLevelText;
     Text heroNameText;
     Button changeHeroBtn;
@@ -145,6 +152,7 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
     Text noReadyText;
     Text hasReadyText;
 
+    public GameObject masterFlagGo;
 
     Transform showRoot;
     Transform noShowRoot;
@@ -165,22 +173,19 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
         readyBtnText = readyBtn.transform.Find("Text").GetComponent<Text>();
         changeHeroBtn = showRoot.Find("changeHeroBtn").GetComponent<Button>();
 
-        //avatarImg = transform.Find("joinBtn").GetComponent<RawImage>();
-
-        heroAvatarImg = showRoot.Find("selectHeroIcon").GetComponent<RawImage>();
+        playerAvatarImg = showRoot.Find("playerIcon").GetComponent<Image>();
+        heroAvatarImg = showRoot.Find("selectHeroIcon").GetComponent<Image>();
         heroLevelText = showRoot.Find("heroLevelText").GetComponent<Text>();
         heroNameText = showRoot.Find("heroNameText").GetComponent<Text>();
 
-        readyBtn.onClick.AddListener(() =>
-        {
-            this.parentObj.OnClickSinglePlayerReadyBtn(this.uiPlayerData.uid);
-        });
+        masterFlagGo = showRoot.Find("masterFlag").gameObject;
+
+        readyBtn.onClick.AddListener(() => { this.parentObj.OnClickSinglePlayerReadyBtn(this.uiPlayerData.uid); });
 
         changeHeroBtn.onClick.AddListener(() =>
         {
             this.parentObj.event_onClickSinglePlayerChangeHeroBtn(this.uiPlayerData.uid);
         });
-
     }
 
     public override void OnRefresh(object data, int index)
@@ -237,6 +242,17 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
             }
         }
 
+        //玩家图标
+        var playerAvatarResId = int.Parse(uiPlayerData.avatarURL);
+        ResourceManager.Instance.GetObject<Sprite>(playerAvatarResId, (sprite) => { playerAvatarImg.sprite = sprite; });
+        
+        //英雄图标
+        ResourceManager.Instance.GetObject<Sprite>( heroConfig.AllBodyResId, (sprite) => { heroAvatarImg.sprite = sprite; });
+
+        var isMaster = this.uiPlayerData.isMaster;
+        masterFlagGo.SetActive(isMaster);
+        
+        
     }
 
     public override void OnRelease()
@@ -245,4 +261,3 @@ public class TeamRoomPlayerUIShowObj : BaseUIShowObj<TeamRoomInfoUI>
         changeHeroBtn.onClick.RemoveAllListeners();
     }
 }
-

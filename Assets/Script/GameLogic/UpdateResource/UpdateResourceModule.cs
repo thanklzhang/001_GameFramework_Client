@@ -42,23 +42,34 @@ public class UpdateResourceModule
         {
             //有本地资源文件 开始检测资源版本
 
-            //step 1 : 检查当前版本资源是否正确(待定)
+             if (!Const.isUseInternalAB)
+            {
+                //从服务端更新资源
 
-            //step 2 : 检查版本
-            yield return CheckResourceVersion(error);
-            if (error.err == UpdateResErrorType.ResHasNewest) yield break;
-            if (error.IsError()) yield break;
+                //step 1 : 检查当前版本资源是否正确(待定)
 
-            //step 3 : 获得服务端最新资源列表
-            yield return GetResourceList(error);
-            if (error.IsError()) yield break;
+                //step 2 : 检查版本
+                yield return CheckResourceVersion(error);
+                if (error.err == UpdateResErrorType.ResHasNewest) yield break;
+                if (error.IsError()) yield break;
 
-            //step 4 ：对比资源
-            CompareResouce(error);
-            if (error.IsError()) yield break;
+                //step 3 : 获得服务端最新资源列表
+                yield return GetResourceList(error);
+                if (error.IsError()) yield break;
 
-            //step 5 : 下载需要更新的资源
-            yield return DownloadResource(error);
+                //step 4 ：对比资源
+                CompareResouce(error);
+                if (error.IsError()) yield break;
+
+                //step 5 : 下载需要更新的资源
+                yield return DownloadResource(error);
+            }
+             else
+             {
+                 //使用本地资源
+                 yield return null;
+             }
+
 
             this.TriggerStateEvent(UpdateResStateType.Finish);
         }
@@ -107,6 +118,7 @@ public class UpdateResourceModule
                 {
                     File.Create(persistentFullPath).Dispose();
                 }
+
                 var downBytes = request.downloadHandler.data;
 
                 File.WriteAllBytes(persistentFullPath, downBytes);
@@ -116,7 +128,6 @@ public class UpdateResourceModule
             }
         }
 
-       
 
         var verPath = streamingPath + "/" + "version.txt";
         if (!File.Exists(verPath))
@@ -291,6 +302,7 @@ public class UpdateResourceModule
                         //找到了 但是 md5 一样 不用下载
                         isNeedDownload = false;
                     }
+
                     break;
                 }
             }
@@ -340,7 +352,9 @@ public class UpdateResourceModule
         FileTool.SaveToFile(localVersionFileListPath, str);
         Logx.Log("完成更新 version.txt 文件");
     }
+
     ulong preDownloadBytes = 0;
+
     public IEnumerator DownloadSingleFile(ResInfo serResInfo, UpdateResError error)
     {
         //得到服务端资源版本信息
@@ -367,6 +381,7 @@ public class UpdateResourceModule
                 error.errInfo = "download_file " + serResInfo.path + " 请求失败 : 原因 : " + request.error;
                 yield break;
             }
+
             var hasDownloadByets = request.downloadedBytes;
             var speedByBytes = hasDownloadByets - preDownloadBytes;
             //Debug.Log("download bytes : hasDownloadByets " + hasDownloadByets + " " );
@@ -385,6 +400,7 @@ public class UpdateResourceModule
         {
             Directory.CreateDirectory(tempDir);
         }
+
         FileTool.SaveBytesToFile(savePath, serFileData);
 
         //判断是否保存到 file_list.txt 中
@@ -408,7 +424,6 @@ public class UpdateResourceModule
         {
             error.err = UpdateResErrorType.Error;
             error.errInfo = "更新 file_list.txt 失败 : 缺少 file_list.txt 文件";
-
         }
     }
 
@@ -437,14 +452,13 @@ public class UpdateResourceModule
         public string path;
         public string md5;
     }
-
-
 }
 
 public enum UpdateResErrorType
 {
     Success = 0,
     Error = 1,
+
     //资源已经是最新的了
     ResHasNewest = 10
 }
@@ -464,12 +478,16 @@ public enum UpdateResStateType
 {
     //复制游戏资源中
     CopyRes = 1,
+
     //检查资源版本中
     CheckVersion = 2,
+
     //获取最新资源文件列表中
     GetNewestResFileList = 3,
+
     //下载资源中
     DownloadRes = 4,
+
     //完成整个更新资源过程
     Finish = 5,
 

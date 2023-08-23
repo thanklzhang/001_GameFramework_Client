@@ -36864,7 +36864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5308738432481683583}
-  - component: {fileID: 5092060210431420660}
+  - component: {fileID: 2816402514738121337}
   m_Layer: 0
   m_Name: Generate
   m_TagString: Untagged
@@ -36887,7 +36887,7 @@ Transform:
   m_Father: {fileID: 400428}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5092060210431420660
+--- !u!114 &2816402514738121337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -36900,8 +36900,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionRoot: {fileID: 838438899566230018}
-  maxMapX: 32
-  maxMapZ: 32
+  maxMapX: 33
+  maxMapZ: 33
 --- !u!1 &6529922082602292302
 GameObject:
   m_ObjectHideFlags: 0
@@ -37488,7 +37488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3691266606825865297
 Transform:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ public class LoadResGroupRequest
         {
             var req = requestList[i];
             req.Start();
+           
         }
         //for (int i = 0; i < loadOptions.Count; i++)
         //{

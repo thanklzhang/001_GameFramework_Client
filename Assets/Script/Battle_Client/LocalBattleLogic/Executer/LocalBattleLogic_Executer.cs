@@ -96,10 +96,10 @@ namespace Battle_Client
             battle.OnBattleEnd += OnBattleLogicEnd;
         }
 
-        public void OnBattleLogicEnd(Battle.Battle battle, int winTeam)
+        public void OnBattleLogicEnd(Battle.Battle battle, int teamIndex,BattleEndType endType)
         {
             //本地战斗结算是在 center server
-            var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, winTeam);
+            var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, teamIndex,endType);
 
 
             //判断是否是服务端结算

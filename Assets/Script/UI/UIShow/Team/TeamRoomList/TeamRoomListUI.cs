@@ -91,6 +91,8 @@ public class TeamRoomUIData
     public string roomName;
     public int currPlayerCount;
     public int totalPlayerCount;
+    public string masterName;
+    public string masterAvatarURL;
 }
 
 
@@ -105,6 +107,9 @@ public class TeamRoomUIShowObj : BaseUIShowObj<TeamRoomListUI>
     Text roomNameText;
     Text stageNameText;
     Text roomPlayerCountText;
+    private Text roomMasterName;
+    private Image stageBgImg;
+    private Image roomMasterAvatarImg;
 
     Button joinBtn;
 
@@ -116,13 +121,17 @@ public class TeamRoomUIShowObj : BaseUIShowObj<TeamRoomListUI>
         roomNameText = transform.Find("name").GetComponent<Text>();
         stageNameText = transform.Find("stageName").GetComponent<Text>();
         roomPlayerCountText = transform.Find("playerCount").GetComponent<Text>();
-
+        roomMasterName = transform.Find("roomMasterName").GetComponent<Text>();
+        roomMasterAvatarImg = transform.Find("roomMasterAvatarBg/avatar").GetComponent<Image>();
+        stageBgImg = transform.Find("stagePic").GetComponent<Image>();
         joinBtn = transform.Find("joinBtn").GetComponent<Button>();
 
         joinBtn.onClick.AddListener(() =>
         {
             this.parentObj.OnClickSingleRoomJoinBtn(this.uiData.id);
         });
+        
+     
     }
 
     public override void OnRefresh(object data, int index)
@@ -133,8 +142,24 @@ public class TeamRoomUIShowObj : BaseUIShowObj<TeamRoomListUI>
 
         idText.text = "" + uiData.id;
         roomNameText.text = uiData.roomName;
+
+        roomMasterName.text = this.uiData.masterName;
+        
         stageNameText.text = currTeamStageTb.Name;
         roomPlayerCountText.text = uiData.currPlayerCount + "/" + uiData.totalPlayerCount;
+        
+        var stageTb = TableManager.Instance.GetById<Table.TeamStage>(this.uiData.teamStageId);
+        ResourceManager.Instance.GetObject<Sprite>(stageTb.IconResId,(sprite) =>
+        {
+            stageBgImg.sprite = sprite;
+        });
+        var masterAvatarResId = int.Parse(this.uiData.masterAvatarURL);
+        
+        ResourceManager.Instance.GetObject<Sprite>(masterAvatarResId,(sprite) =>
+        {
+            roomMasterAvatarImg.sprite = sprite;
+        });
+        
     }
 
     public override void OnRelease()

@@ -80,8 +80,8 @@ public class TeamCtrl : BaseCtrl
 
         TeamRoomInfoUIArgs args = new TeamRoomInfoUIArgs();
         args.id = roomData.id;
-        var teamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(roomData.teamStageId);
-        args.stageName = teamStageTb.Name;
+        //var teamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(roomData.teamStageId);
+        args.stageConfigId = roomData.teamStageId;
         args.roomName = roomData.roomName;
         args.playerUIDataList = new List<TeamRoomPlayerUIData>();
 
@@ -159,20 +159,26 @@ public class TeamCtrl : BaseCtrl
 
             args.heroCardUIDataList = new List<HeroCardUIData>();
             var heroList = GameData.GameDataManager.Instance.HeroStore.HeroList;
-
+            var enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+            var playerInfo = enterRoomData.playerList.Find(p => p.playerInfo.uid == uid);
             for (int i = 0; i < heroList.Count; i++)
             {
                 var hero = heroList[i];
 
                 HeroCardUIData uiData = HeroCardUIConvert.GetUIData(hero);
                 args.heroCardUIDataList.Add(uiData);
+
+                if (playerInfo.selectHeroData.guid == hero.guid)
+                {
+                    currSelectHeroGuid = hero.guid;
+                }
             }
 
-            //默认选择第一个
-            if (0 == currSelectHeroGuid)
-            {
-                currSelectHeroGuid = heroList[0].guid;
-            }
+            // //默认选择第一个
+            // if (0 == currSelectHeroGuid)
+            // {
+            //     currSelectHeroGuid = heroList[0].guid;
+            // }
 
             args.event_ClickConfirmBtn = () =>
             {
@@ -307,8 +313,15 @@ public class TeamCtrl : BaseCtrl
                 teamStageId = roomData.teamStageId,
                 roomName = roomData.roomName,
                 currPlayerCount = roomData.playerList.Count,
-                totalPlayerCount = teamStageTb.MaxPlayerCount
+                totalPlayerCount = teamStageTb.MaxPlayerCount,
+                
             };
+            
+            //房主信息
+            var master = roomData.playerList.Find((pData) => { return pData.isMaster; });
+            uiRoomData.masterName = master.playerInfo.name;
+            uiRoomData.masterAvatarURL = master.playerInfo.avatarURL;
+            
             args.roomDataList.Add(uiRoomData);
         }
 

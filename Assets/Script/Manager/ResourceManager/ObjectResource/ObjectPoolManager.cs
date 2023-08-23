@@ -60,7 +60,7 @@ public class ObjectPool
     //Action<UnityEngine.Object> getObjCallbackList;
     List<Action<UnityEngine.Object>> getObjCallbackList = new List<Action<UnityEngine.Object>>();
     Type type;
-    internal void GetObject<T>(Action<UnityEngine.Object> callback)
+    internal void GetObject<T>(Action<UnityEngine.Object> callback) where T: UnityEngine.Object
     {
         this.type = typeof(T);
         if (null == assetObj)
@@ -79,7 +79,7 @@ public class ObjectPool
                 isLoadingAsset = true;
                 getObjCallbackList.Add(callback);
 
-                AssetManager.Instance.Load(path, (asset) =>
+                AssetManager.Instance.Load<T>(path, (asset) =>
                 {
                     this.OnAssetLoadFinish(asset);
                 });
@@ -229,7 +229,7 @@ public class ObjectPoolGroup
 {
     public Dictionary<string, ObjectPool> objectPoolDic = new Dictionary<string, ObjectPool>();
 
-    internal void GetObject<T>(string path, Action<UnityEngine.Object> callback)
+    internal void GetObject<T>(string path, Action<UnityEngine.Object> callback)where T : UnityEngine.Object
     {
         ObjectPool pool = null;
         if (objectPoolDic.ContainsKey(path))
@@ -267,7 +267,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     //gameObject texture sprite material
     public Dictionary<Type, ObjectPoolGroup> objectPoolGroupDic = new Dictionary<Type, ObjectPoolGroup>();
 
-    public void GetObject<T>(string path, Action<UnityEngine.Object> callback)
+    public void GetObject<T>(string path, Action<UnityEngine.Object> callback) where T : UnityEngine.Object
     {
         var type = typeof(T);
         ObjectPoolGroup group = null;

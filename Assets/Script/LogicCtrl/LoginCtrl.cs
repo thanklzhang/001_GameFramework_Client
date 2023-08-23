@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Table;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +46,8 @@ public class LoginCtrl : BaseCtrl
         string ip = NetTool.GetHostIp();
         int port = 5556;
         OnclickConnectBtn(ip, port);
+        
+       
     }
 
     public void OnclickConnectBtn(string ip, int port)
@@ -248,6 +251,9 @@ public class LoginCtrl : BaseCtrl
         CtrlManager.Instance.HideTitleBar();
 
         ui.Show();
+        
+        //play bgm
+        AudioManager.Instance.PlayBGM((int)ResIds.bgm_001);
     }
 
     public override void OnInactive()

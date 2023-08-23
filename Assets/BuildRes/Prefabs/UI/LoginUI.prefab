@@ -1744,7 +1744,7 @@ GameObject:
   - component: {fileID: 6547402244177428343}
   - component: {fileID: 1656135486278395330}
   - component: {fileID: 988638722522070697}
-  - component: {fileID: 8493051873721950685}
+  - component: {fileID: 8052747427501013322}
   m_Layer: 5
   m_Name: btn_close
   m_TagString: Untagged
@@ -1810,7 +1810,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8493051873721950685
+--- !u!114 &8052747427501013322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1819,7 +1819,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1943641330703192455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 20700c4ad6bd72347bf45660f5a68a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1854,6 +1854,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  clickAudioResId: 15006001
 --- !u!1 &2026630047582370035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,7 +1951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4701951494079902081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2727,7 +2728,7 @@ GameObject:
   - component: {fileID: 1378266505303785266}
   - component: {fileID: 2085556887040490687}
   - component: {fileID: 8497552293065008553}
-  - component: {fileID: 8611794763327809790}
+  - component: {fileID: 1616594644106794922}
   m_Layer: 5
   m_Name: btn_login
   m_TagString: Untagged
@@ -2794,7 +2795,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8611794763327809790
+--- !u!114 &1616594644106794922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2803,7 +2804,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3635562208221503673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 20700c4ad6bd72347bf45660f5a68a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2838,6 +2839,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  clickAudioResId: 15006001
 --- !u!1 &3759337505113461610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,7 +2987,7 @@ GameObject:
   - component: {fileID: 6037144444375894673}
   - component: {fileID: 6080142516586607494}
   - component: {fileID: 3911929150776940940}
-  - component: {fileID: 5059875009510763009}
+  - component: {fileID: 4893296864693427812}
   m_Layer: 5
   m_Name: btn_change_user
   m_TagString: Untagged
@@ -3052,7 +3054,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5059875009510763009
+--- !u!114 &4893296864693427812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3061,7 +3063,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4325456386287639920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 20700c4ad6bd72347bf45660f5a68a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3071,7 +3073,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3096,6 +3098,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  clickAudioResId: 15006001
 --- !u!1 &4381240393740972389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3527,7 +3530,7 @@ GameObject:
   - component: {fileID: 1151479016311883093}
   - component: {fileID: 1008788084605410059}
   - component: {fileID: 6066279335984552855}
-  - component: {fileID: 1391863520938930205}
+  - component: {fileID: 7142776194612681463}
   m_Layer: 5
   m_Name: loginBtn
   m_TagString: Untagged
@@ -3594,7 +3597,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1391863520938930205
+--- !u!114 &7142776194612681463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3603,7 +3606,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4717840669442776713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 20700c4ad6bd72347bf45660f5a68a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3638,6 +3641,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  clickAudioResId: 15006001
 --- !u!1 &4742677105336540547
 GameObject:
   m_ObjectHideFlags: 0

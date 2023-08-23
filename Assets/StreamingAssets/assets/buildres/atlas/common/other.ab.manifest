@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 2750909007
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c858cb4d04477ff3e869810c16f1582a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2d8df09e698f722ada1caa03d3413830
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/BuildRes/Atlas/Common/Other/img_pop_bg_01.png
+- Assets/BuildRes/Atlas/Common/Other/btn_style_001.png
+- Assets/BuildRes/Atlas/Common/Other/img_bg_01.png
+- Assets/BuildRes/Atlas/Common/Other/img_hero_avatar_bg.png
+- Assets/BuildRes/Atlas/Common/Other/img_hero_select_border.png
+- Assets/BuildRes/Atlas/Common/Other/btn_style_002.png
+- Assets/BuildRes/Atlas/Common/Other/img_close_btn.png
+- Assets/BuildRes/Atlas/Common/Other/btn_back.png
+Dependencies: []

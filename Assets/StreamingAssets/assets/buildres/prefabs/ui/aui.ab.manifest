@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4135767612
+CRC: 2219913723
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 12f8bcd4e1f2d791d5de4900b5305bc6
+    Hash: b92713983e76635b94ed562909443c0a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 7295cfe991b63bbc196d541e40a60473
+    Hash: 540ef429cd76146a0ffa5d5a3e4d2a6b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,6 +26,4 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
 - Assets/BuildRes/Prefabs/UI/AUI.prefab
-Dependencies:
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/cui.ab
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/textures/bg/login_bg.ab
+Dependencies: []

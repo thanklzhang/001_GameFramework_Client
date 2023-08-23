@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 734744464
+CRC: 1111293777
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c2b81b205cf6634623623cf72cb6bb10
+    Hash: 9ab7c0ee0c66cfdcd17a393133b2e28c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9d50accc9d92b394c509734257488147
+    Hash: c29c85bb1ec03b363ee001bf8b2d3839
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -18,11 +18,11 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -52,6 +52,4 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.SpriteState
 Assets:
 - Assets/BuildRes/Prefabs/UI/EquipmentListUI.prefab
-Dependencies:
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/aui.ab
-- E:/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/prefabs/ui/bui.ab
+Dependencies: []

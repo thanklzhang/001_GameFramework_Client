@@ -1,0 +1,45 @@
+ManifestFileVersion: 0
+CRC: 4253843484
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: be14bee88c4661a7ee3924863563b5d3
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2d8df09e698f722ada1caa03d3413830
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_03.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_item_bar_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_describ_bar_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_small_map_friend.png
+- Assets/BuildRes/Atlas/BattleUI/img_skill_cd_mask.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_bg_01.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_exp_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_04.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_avatar_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_chat_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_exp.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_02.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_06.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_small_map_self.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_chat_input_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_big_skill_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_01.png
+- Assets/BuildRes/Atlas/BattleUI/battleTemp.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_skill_option_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_attr_bar_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_item_option_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_05.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_skill_bar_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_small_map_enemy.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_small_map_bg.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_bg_02.png
+- Assets/BuildRes/Atlas/BattleUI/img_battle_hp_bg_03.png
+Dependencies: []

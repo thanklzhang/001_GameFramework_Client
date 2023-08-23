@@ -10,6 +10,7 @@ public class GameStartup : MonoBehaviour
 {
     public bool isLocalBattle = false;
     public bool isUseAB = false;
+    public bool isUseInternalAB;
 
     public ServerTypeUI serverTypeUI;
 
@@ -46,6 +47,7 @@ public class GameStartup : MonoBehaviour
         ////
 
         Const.isUseAB = this.isUseAB;
+        Const.isUseInternalAB = this.isUseInternalAB;
         //Startup();
         initOperateRoot.gameObject.SetActive(true);
         var formal = false;

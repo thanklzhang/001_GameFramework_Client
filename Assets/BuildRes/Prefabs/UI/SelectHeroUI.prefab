@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 268751915355884580}
   - component: {fileID: 98235767406365468}
   - component: {fileID: 2446027057687195600}
-  - component: {fileID: 6179909518158538041}
+  - component: {fileID: 6560067587431973473}
   m_Layer: 5
   m_Name: closeBtn
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6179909518158538041
+--- !u!114 &6560067587431973473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1003304562875583874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 20700c4ad6bd72347bf45660f5a68a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  clickAudioResId: 15006001
 --- !u!1 &1513620478788900031
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,7 +982,7 @@ GameObject:
   - component: {fileID: 3481020184463947905}
   - component: {fileID: 2420402671276537466}
   - component: {fileID: 1356894151022456545}
-  - component: {fileID: 1946705053032418066}
+  - component: {fileID: 3179779967179477223}
   m_Layer: 5
   m_Name: confirmBtn
   m_TagString: Untagged
@@ -1048,7 +1049,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1946705053032418066
+--- !u!114 &3179779967179477223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1057,7 +1058,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4499154464626954439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 20700c4ad6bd72347bf45660f5a68a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1092,6 +1093,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  clickAudioResId: 15006001
 --- !u!1 &4609740314449248653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,14 +1657,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 036290635dab62542bc616742000bc1e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

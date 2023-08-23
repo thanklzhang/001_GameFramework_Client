@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using LitJson;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 
 //asset 资源缓存
@@ -26,27 +27,48 @@ public class AssetCache
             //Logx.Logz("asset : change ref : " + path + " : " + refCount + " -> " + value);
             refCount = value;
         }
-
     }
 }
 
 public class AssetManager : Singleton<AssetManager>
 {
-
     public Dictionary<string, AssetCache> assetCacheDic = new Dictionary<string, AssetCache>();
     public Dictionary<string, string> assetToAbDic = new Dictionary<string, string>();
+    public Dictionary<string, List<string>> abToAssetsDic = new Dictionary<string, List<string>>();
 
     public void Init()
     {
-
         //Logx.Logzxy("Asset", "init");
 
         //读取 asset 和 ab 对应关系表
-        var assetFileStr = File.ReadAllText(Const.AppStreamingAssetPath + "/" + "AssetToAbFileData.json");
-        this.assetToAbDic = JsonMapper.ToObject<Dictionary<string, string>>(assetFileStr);
+        if (Const.isUseAB)
+        {
+            var assetFileStr = File.ReadAllText(Const.AppStreamingAssetPath + "/" + "AssetToAbFileData.json");
+            this.assetToAbDic = JsonMapper.ToObject<Dictionary<string, string>>(assetFileStr);
+
+            foreach (var kv in this.assetToAbDic)
+            {
+                var assetPath = kv.Key;
+                var abPath = kv.Value;
+
+
+                if (abToAssetsDic.ContainsKey(abPath))
+                {
+                    abToAssetsDic[abPath].Add(assetPath);
+                }
+                else
+                {
+                    abToAssetsDic.Add(abPath,new List<string>()
+                    {
+                        assetPath
+                    });
+                    
+                }
+            }
+        }
+
 
         //EventManager.AddListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
-
     }
 
 
@@ -57,22 +79,26 @@ public class AssetManager : Singleton<AssetManager>
         {
             Logx.LogWarning("AssetManager", "the abPath is not found by assetPath : " + assetPath);
         }
+
         return abPath;
     }
 
-    public void Load(string assetPath, Action<UnityEngine.Object> finishCallback, bool isSync = false)
+    public void Load<T>(string assetPath, Action<UnityEngine.Object> finishCallback, bool isSync = false)
+        where T : UnityEngine.Object
     {
+        Logx.Log("res : start load : " + assetPath);
         if (isSync)
         {
             //LoadSync(assetPath, finishCallback);
         }
         else
         {
-            LoadAsync(assetPath, finishCallback);
+            LoadAsync<T>(assetPath, finishCallback);
         }
     }
+
     //--------------------------------
-    public void LoadAsync(string assetPath, Action<UnityEngine.Object> finishCallback)
+    public void LoadAsync<T>(string assetPath, Action<UnityEngine.Object> finishCallback) where T : UnityEngine.Object
     {
         assetPath = assetPath.ToLower().Replace('\\', '/');
         if (Const.isUseAB && !this.assetToAbDic.ContainsKey(assetPath))
@@ -101,22 +127,23 @@ public class AssetManager : Singleton<AssetManager>
                 var abPath = this.assetToAbDic[assetPath];
                 AssetBundleManager.Instance.Load(abPath, (abCache) =>
                 {
+                    if (abPath.Contains("BattleUI") || abPath.Contains("battleui"))
+                    {
+                        Logx.Log("res battleUI : ab load finish");       
+                    }
+
                     //ab 加载完 需要检测下 asset 是否已经有了 因为有可能已经在别处先加载完
-                    this.LoadAssetBundleFinish(abCache, assetPath, finishCallback);
+                    this.LoadAssetBundleFinish<T>(abCache, assetPath, finishCallback);
                 }, false);
             }
             else
             {
 #if UNITY_EDITOR
                 //var obj =UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-                this.LoadAssetBundleFinish(null, assetPath, finishCallback);
-#endif 
-
+                this.LoadAssetBundleFinish<T>(null, assetPath, finishCallback);
+#endif
             }
-
-
         }
-
     }
 
     public void AddAssetBundleReferenceByAssetPath(string assetPath)
@@ -124,14 +151,18 @@ public class AssetManager : Singleton<AssetManager>
         string abPath = "";
         if (!assetToAbDic.TryGetValue(assetPath, out abPath))
         {
-            Logx.LogWarning("Asset", "AddAssetBundleReferenceByAssetPath : the abPath is not found by assetPath : " + assetPath);
+            Logx.LogWarning("Asset",
+                "AddAssetBundleReferenceByAssetPath : the abPath is not found by assetPath : " + assetPath);
             return;
         }
+
         AssetBundleManager.Instance.AddAssetBundleReference(abPath);
     }
 
-    public void LoadAssetBundleFinish(AssetBundleCache abCache, string assetPath, Action<UnityEngine.Object> finishCallback)
+    public void LoadAssetBundleFinish<T>(AssetBundleCache abCache, string assetPath,
+        Action<UnityEngine.Object> finishCallback) where T : UnityEngine.Object
     {
+        Logx.Log("res : load finish : " + assetPath);
         AssetCache assetCache = null;
         if (assetCacheDic.TryGetValue(assetPath, out assetCache))
         {
@@ -141,7 +172,6 @@ public class AssetManager : Singleton<AssetManager>
             {
                 AddAssetBundleReferenceByAssetPath(assetPath);
             }
-
         }
         else
         {
@@ -154,12 +184,19 @@ public class AssetManager : Singleton<AssetManager>
                     //触发业务层回调
                     finishCallback?.Invoke(backAssetCache.asset);
                 };
+                if (typeof(T) == typeof(Sprite))
+                {
+                    loader.resType = typeof(Sprite);
+                }
+                
                 LoadTaskManager.Instance.StartAssetLoader(loader);
+              
             }
             else
             {
 #if UNITY_EDITOR
-                var obj = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+                T obj = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPath);
+
                 AssetCache ac = new AssetCache()
                 {
                     asset = obj,
@@ -170,12 +207,12 @@ public class AssetManager : Singleton<AssetManager>
                     },
                     path = assetPath
                 };
+               
                 OnLoadAssetFinish(ac);
 
 
 #endif
             }
-
         }
     }
 
@@ -245,14 +282,10 @@ public class AssetManager : Singleton<AssetManager>
         }
 
         AssetBundleManager.Instance.ReduceAssetBundleReference(abPath);
-
-
     }
 
     //void Release()
     //{
     //    //EventManager.RemoveListener<AssetCache>((int)GameEvent.LoadAssetTaskFinish, this.OnLoadAssetFinish);
     //}
-
-
 }

@@ -14,7 +14,11 @@ public class SelectHeroUI : BaseUI
 
     Button confirmBtn;
     private Button closeBtn;
-    
+
+    private Text currHeroNameText;
+    private Image currHeroAvatarImg;
+    private Text currHeroDesText;
+
     Transform heroRoot;
 
     Button clickBtn;
@@ -22,19 +26,21 @@ public class SelectHeroUI : BaseUI
     public List<SelectHeroOptionShowObj> heroShowObjList;
 
     int currSelectHeroGuid;
+
     protected override void OnInit()
     {
         heroRoot = this.transform.Find("scroll/mask/content");
         confirmBtn = this.transform.Find("confirmBtn").GetComponent<Button>();
 
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
-      
 
-        confirmBtn.onClick.AddListener(() =>
-        {
-            event_ClickConfirmBtn?.Invoke();
-        });
-        
+        currHeroNameText = this.transform.Find("selectRoleNameText").GetComponent<Text>();
+        currHeroAvatarImg = this.transform.Find("selectRolePic").GetComponent<Image>();
+        currHeroDesText = this.transform.Find("describeText").GetComponent<Text>();
+
+
+        confirmBtn.onClick.AddListener(() => { event_ClickConfirmBtn?.Invoke(); });
+
         closeBtn.onClick.AddListener(() =>
         {
             //event_ClickCloseBtn?.Invoke();
@@ -42,7 +48,6 @@ public class SelectHeroUI : BaseUI
         });
 
         heroShowObjList = new List<SelectHeroOptionShowObj>();
-
     }
 
     public override void Refresh(UIArgs args)
@@ -59,6 +64,7 @@ public class SelectHeroUI : BaseUI
 
     void RefreshInfo()
     {
+        //选择英雄项
         for (int i = 0; i < this.heroCardUIDataList.Count; i++)
         {
             var data = this.heroCardUIDataList[i];
@@ -114,18 +120,29 @@ public class SelectHeroUI : BaseUI
 
     public void SelectHero(int guid)
     {
+        SelectHeroOptionShowObj currShowObj = null;
         currSelectHeroGuid = guid;
         foreach (var showObj in heroShowObjList)
         {
             if (showObj.avatar.uiData.guid == guid)
             {
                 showObj.SetSelectState(true);
+                currShowObj = showObj;
             }
             else
             {
                 showObj.SetSelectState(false);
             }
         }
+
+        var heroConfigId = currShowObj.data.configId;
+        var heroTb = TableManager.Instance.GetById<Table.EntityInfo>(heroConfigId);
+
+        currHeroNameText.text = heroTb.Name;
+        ResourceManager.Instance.GetObject<Sprite>(heroTb.AllBodyResId,
+            (sprite) => { currHeroAvatarImg.sprite = sprite; });
+
+        currHeroDesText.text = heroTb.Describe;
     }
 
     protected override void OnRelease()
@@ -160,8 +177,10 @@ public class SelectHeroOptionShowObj
     public HeroAvatar avatar;
     public GameObject gameObject;
     public Transform transform;
-    
+
+    public HeroCardUIData data;
     private Text nameText;
+
     public void Init(GameObject go)
     {
         gameObject = go;
@@ -171,7 +190,7 @@ public class SelectHeroOptionShowObj
         var avatarRootGo = this.transform.Find("HeroAvatar").gameObject;
         avatar = new HeroAvatar();
         avatar.Init(avatarRootGo);
-        
+
         //自身
         nameText = this.transform.Find("nameText").GetComponent<Text>();
     }
@@ -183,8 +202,9 @@ public class SelectHeroOptionShowObj
 
     public void Refresh(HeroCardUIData data)
     {
+        this.data = data;
         avatar.Refresh(data);
-        
+
         var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(data.configId);
         nameText.text = config.Name;
     }
@@ -193,7 +213,7 @@ public class SelectHeroOptionShowObj
     {
         avatar.Show();
     }
-    
+
     public void SetSelectState(bool isShow)
     {
         avatar.SetSelectState(isShow);
@@ -208,6 +228,4 @@ public class SelectHeroOptionShowObj
     {
         avatar.Release();
     }
-
-   
 }

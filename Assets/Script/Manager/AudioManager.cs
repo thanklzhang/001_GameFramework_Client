@@ -38,6 +38,7 @@ public class AudioManager : Singleton<AudioManager>
         var clip = obj as AudioClip;
 
         bgmAduioSource.clip = clip;
+        bgmAduioSource.loop = true;
         bgmAduioSource.Play();
     }
 

@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1972690469
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bcddd7ba33cf6a0213051fdca4ea00e7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5e762ccb57c4caaabbb5a4199ac82c23
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/BuildRes/Material/OutlineEffect.mat
+Dependencies: []

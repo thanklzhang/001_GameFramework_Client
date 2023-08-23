@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 1679475804
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0b7b2a52cf9d8ddc783c860259192d6c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/BuildRes/BattleTrigger/TestTrigger/test_trigger_gen_boss 1.json
+- Assets/BuildRes/BattleTrigger/TestTrigger/test_trigger_battle_fail.json
+- Assets/BuildRes/BattleTrigger/TestTrigger/test_trigger_gen_monster.json
+- Assets/BuildRes/BattleTrigger/TestTrigger/gen.json
+- Assets/BuildRes/BattleTrigger/TestTrigger/test_trigger_battle_win.json
+- Assets/BuildRes/BattleTrigger/TestTrigger/test_trigger_gen_boss.json
+Dependencies: []

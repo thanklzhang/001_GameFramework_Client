@@ -41,7 +41,7 @@ namespace Table
         
 		hero_100 = 15001001,
         
-		item0 = 15002001,
+		icon_money = 15002001,
         
 		cursor_001 = 15003001,
         
@@ -245,6 +245,14 @@ namespace Table
         
 		img_avatar_009 = 15003509,
         
+		img_all_body_001 = 15003601,
+        
+		img_all_body_002 = 15003602,
+        
+		img_all_body_003 = 15003603,
+        
+		img_all_body_004 = 15003604,
+        
 		img_attr_attack = 15003701,
         
 		img_attr_defend = 15003702,
@@ -267,9 +275,21 @@ namespace Table
         
 		img_skill_005 = 15003755,
         
+		bg_01 = 15005000,
+        
+		bg_02 = 15005001,
+        
+		bg_03 = 15005002,
+        
+		bg_04 = 15005003,
+        
 		audio_click_001 = 15006001,
         
 		bgm_battle_001 = 15006002,
+        
+		bgm_001 = 15006003,
+        
+		bgm_002 = 15006004,
         
 		eft_select_entity_01 = 15008001,
         

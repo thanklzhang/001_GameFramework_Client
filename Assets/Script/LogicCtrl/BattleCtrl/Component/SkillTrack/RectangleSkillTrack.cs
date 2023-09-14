@@ -59,18 +59,20 @@ public class RectangleSkillTrack : BaseSkillTrack
         showTran.forward = dir;
         progressTran.forward = dir;
 
+       
         //开始点位置
         var startPosType = (SkillStartPosType)this.config.StartPosType;
         if (startPosType == SkillStartPosType.ReleaserPos)
         {
-            showTran.position = releaser.GetPosition();
-            progressTran.position = releaser.GetPosition();
+
+            showTran.position = new Vector3(releaser.GetPosition().x, showTran.position.y, releaser.GetPosition().z);
+            progressTran.position = new Vector3(releaser.GetPosition().x, showTran.position.y, releaser.GetPosition().z);
         }
         else if (startPosType == SkillStartPosType.TargetPos)
         {
             var targetPos = GetTargetPos();
-            showTran.position = targetPos;
-            progressTran.position = targetPos;
+            showTran.position = new Vector3(targetPos.x, showTran.position.y, targetPos.z);;
+            progressTran.position = new Vector3(targetPos.x, showTran.position.y, targetPos.z);;
         }
     }
 

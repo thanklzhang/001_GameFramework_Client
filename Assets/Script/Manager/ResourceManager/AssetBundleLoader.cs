@@ -44,11 +44,7 @@ public class AssetBundleLoader : BaseLoader
         //Logx.Log("ab loader OnPrepareFinish : " + this.path);
         ////Logx.Logz("AssetBundleLoader OnPrepareFinish : " + this.path);
         //准备好了 开始加载
-        if (this.path.Contains("img_skill_001.ab"))
-        {
-            Logx.LogWarning("img_skill_001.ab OnPrepareFinish");
-        }
-
+       
         var resultPath = GetABLoadPath(this.path);
         //Logx.Log("resultPath : " + resultPath);
         abCreateReq = AssetBundle.LoadFromFileAsync(resultPath);
@@ -69,13 +65,6 @@ public class AssetBundleLoader : BaseLoader
         //abCache.ab = ab
         //finishLoadCallback?.Invoke(abCache);
 
-        
-        if (path.Contains("img_skill_001"))
-        {
-            Logx.LogWarning("img_skill_001.ab abloader OnLoadFinish");
-        }
-        
-        
         AssetBundleManager.Instance.OnLoadFinish(abCache);
     }
 

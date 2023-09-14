@@ -49,6 +49,7 @@ public class UIConfigInfoDic
         {typeof(TeamRoomInfoUI), new UIConfigInfo() { resId =  ResIds.TeamRoomInfoUI , showLayer = UIShowLayer.Floor_0}},
         {typeof(TipsUI), new UIConfigInfo() { resId =  ResIds.TipsUI , showLayer = UIShowLayer.Top_0}},
         {typeof(SelectHeroUI), new UIConfigInfo() { resId =  ResIds.SelectHeroUI , showLayer = UIShowLayer.Top_0}},
+        {typeof(LoadingUI), new UIConfigInfo() { resId =  ResIds.LoadingUI , showLayer = UIShowLayer.Top_0}},
     };
 
 

@@ -63,6 +63,9 @@ public class UIManager : Singleton<UIManager>
                 gameObject.transform.SetParent(layerRoot, false);
                 gameObject.transform.SetAsLastSibling();
                 T t = new T();
+                
+                Logx.Log(LogxType.UI,"ui init : " + type.ToString());
+                
                 t.Init(gameObject, uiConfigInfo.resId);
                 uiCacheDic.Add(t.GetType(), t);
                 finishCallback?.Invoke(t);
@@ -77,6 +80,9 @@ public class UIManager : Singleton<UIManager>
         {
             var ui = uiCacheDic[type];
             uiCacheDic.Remove(type);
+            
+            Logx.Log(LogxType.UI,"ui release : " + type.ToString());
+            
             ui.Release();
             
 

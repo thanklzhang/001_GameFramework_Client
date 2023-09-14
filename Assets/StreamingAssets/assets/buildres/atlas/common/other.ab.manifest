@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2750909007
+CRC: 2965528778
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c858cb4d04477ff3e869810c16f1582a
+    Hash: 7261c064a6a0a949e42de08360de9c54
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
@@ -22,5 +22,6 @@ Assets:
 - Assets/BuildRes/Atlas/Common/Other/img_hero_select_border.png
 - Assets/BuildRes/Atlas/Common/Other/btn_style_002.png
 - Assets/BuildRes/Atlas/Common/Other/img_close_btn.png
+- Assets/BuildRes/Atlas/Common/Other/img_tip_bg.png
 - Assets/BuildRes/Atlas/Common/Other/btn_back.png
 Dependencies: []

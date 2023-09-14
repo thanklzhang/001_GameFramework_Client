@@ -74,12 +74,6 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         var abCache = GetCacheByPath(path);
         if (abCache != null)
         {
-            if (path.Contains("img_skill_001"))
-            {
-                Logx.LogWarning("img_skill_001.ab LoadAsync has : ");
-            }
-
-            
             ////Logx.Logz("LoadAsync : have ab cache");
             //判断是否在 ab 缓存中 
             //有的话直接拿走
@@ -94,10 +88,6 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             ////Logx.Logz("LoadAsync : no ab cache");
             //可能没在缓存中 可能正在加载中 也可能第一次加载
             
-            if (path.Contains("img_skill_001"))
-            {
-                Logx.LogWarning("img_skill_001.ab LoadAsync no : " + path);
-            }
             
             LoadTrueAssetBundle(path, finishCallback);
         }
@@ -140,10 +130,6 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         loader.path = path.ToLower();
         loader.finishLoadCallback = finishCallback;
 
-        if (path.Contains("img_skill_001"))
-        {
-            Logx.LogWarning("img_skill_001.ab LoadTrueAssetBundle");
-        }
 
         //依赖
         var deps = GetDependPaths(path).ToList();
@@ -154,7 +140,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         }
         //Logx.Log("LoadTaskManager.Instance.StartAssetBundleLoader , loader.path : " + loader.path);
         //加载任务交给加载管理器去执行
-        Logx.Log("AssetBundleManager : LoadTrueAssetBundle : start LoadTrueAssetBundle : " + path);
+        // Logx.Log("AssetBundleManager : LoadTrueAssetBundle : start LoadTrueAssetBundle : " + path);
         //这里会判断 是否有相同 path 的 loader
         LoadTaskManager.Instance.StartAssetBundleLoader(loader);
 
@@ -164,15 +150,11 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     //有 AB 加载完成
     public void OnLoadFinish(AssetBundleCache ab)
     {
-        Logx.Log("AssetBundleManager : OnLoadFinish : " + ab.path);
+        // Logx.Log("AssetBundleManager : OnLoadFinish : " + ab.path);
         //判断缓存中是否有 没有的话添加到缓存中
         AssetBundleCache abCache = null;
         if (!abCacheDic.TryGetValue(ab.path, out abCache))
         {
-            if (ab.path.Contains("img_skill_001"))
-            {
-                Logx.LogWarning("img_skill_001.ab abMgr addDic OnLoadFinish " + ab.path);
-            }
             abCacheDic.Add(ab.path, ab);
             abCache = abCacheDic[ab.path];
         }

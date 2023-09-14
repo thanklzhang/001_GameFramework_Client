@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class ServerTypeUI : MonoBehaviour
     public Button localStartBtn;
     public InputField localServerIp;
     public InputField localServerPort;
-    
+
     public Text tips;
 
     public GameStartup startUp;
@@ -25,20 +26,31 @@ public class ServerTypeUI : MonoBehaviour
         remoteStartBtn.onClick.AddListener(() =>
         {
             tips.text = "暂未开放";
-            Const.isLocalServer = false;
+            Const.isLANServer = false;
         });
 
         localStartBtn.onClick.AddListener(() =>
         {
             //var ip = localServerIp.text;
             //var port = int.Parse(localServerPort.text);
-            Const.isLocalServer = true;
+
+
+            //check ip
+            if (!NetTool.IsIpFormat(localServerIp.text))
+            {
+                this.tips.text = "不是 ip 地址";
+                return;
+            }
+
+            Const.isLANServer = true;
             this.gameObject.SetActive(false);
 
+            GameValue.LANServerIP = localServerIp.text;
             //var startUp = GameObject.Find("GameStartup").GetComponent<GameStartup>();
             startUp.Startup();
         });
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +59,14 @@ public class ServerTypeUI : MonoBehaviour
         //localServerPort.text = "" + 5556;
     }
 
+
+    private void OnEnable()
+    {
+        localServerIp.text = NetTool.GetHostIp();
+    }
+
     // Update is called once per frame
     void Update()
     {
-
     }
 }

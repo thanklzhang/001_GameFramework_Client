@@ -22,7 +22,7 @@ namespace NetProto {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglDbWQucHJvdG8SCE5ldFByb3RvKsMMCghQcm90b0lEcxIJCgVGaXJzdBAA",
+            "CglDbWQucHJvdG8SCE5ldFByb3RvKuAMCghQcm90b0lEcxIJCgVGaXJzdBAA",
             "EhAKDENoZWNrTG9naW4yUxBlEg8KC0VudGVyR2FtZTJTEGYSEwoPUmVnaXN0",
             "QWNjb3VudDJTEGcSFgoSUmVnaXN0ZXJHYXRlQWRkcjJTEGgSGAoTQXBwbHlD",
             "cmVhdGVCYXR0bGUyUxDJARIXChJUcmFuc2l0aW9uQmF0dGxlMlMQrQISHgoZ",
@@ -43,22 +43,22 @@ namespace NetProto {
             "eUhlcm9FeGFtQmF0dGxlELUQEhgKE0FwcGx5TWFpblRhc2tCYXR0bGUQthAS",
             "FwoSTm90aWZ5Q3JlYXRlQmF0dGxlELkXEhcKElBsYXllckxvYWRQcm9ncmVz",
             "cxC6FxIeChlOb3RpZnlBbGxQbGF5ZXJMb2FkRmluaXNoELsXEhYKEUJhdHRs",
-            "ZVJlYWR5RmluaXNoELwXEhYKEU5vdGlmeUJhdHRsZVN0YXJ0EL0XEg8KCk1v",
-            "dmVFbnRpdHkQnRgSDQoIVXNlU2tpbGwQnhgSEgoNQ2xpZW50UGxvdEVuZBC6",
-            "GBIZChROb3RpZnlDcmVhdGVFbnRpdGllcxCBGRIZChROb3RpZnlFbnRpdHlT",
-            "dG9wTW92ZRCDGRIdChhOb3RpZnlFbnRpdHlSZWxlYXNlU2tpbGwQhBkSHAoX",
-            "Tm90aWZ5Q3JlYXRlU2tpbGxFZmZlY3QQhRkSHwoaTm90aWZ5U2tpbGxFZmZl",
-            "Y3RTdGFydE1vdmUQhhkSHQoYTm90aWZ5U2tpbGxFZmZlY3REZXN0cm95EIcZ",
-            "EhkKFE5vdGlmeVN5bmNFbnRpdHlBdHRyEIgZEhoKFU5vdGlmeVN5bmNFbnRp",
-            "dHlWYWx1ZRCJGRIVChBOb3RpZnlFbnRpdHlEZWFkEIoZEhMKDk5vdGlmeVBs",
-            "YXlQbG90EIwZEhIKDU5vdGlmeVBsb3RFbmQQjRkSHQoYTm90aWZ5U2V0RW50",
-            "aXR5U2hvd1N0YXRlEI4ZEhQKD05vdGlmeUVudGl0eURpchCPGRIbChZOb3Rp",
-            "ZnlFbnRpdHlNb3ZlQnlQYXRoEJAZEhoKFU5vdGlmeVNraWxsSW5mb1VwZGF0",
-            "ZRCRGRIfChpOb3RpZnlOb3RpZnlVcGRhdGVCdWZmSW5mbxCSGRIaChVOb3Rp",
-            "ZnlTa2lsbFRyYWNrU3RhcnQQkxkSGAoTTm90aWZ5U2tpbGxUcmFja0VuZBCU",
-            "GRIVChBUcmFuc2l0aW9uQmF0dGxlEOUZEhwKF1RyYW5zaXRpb25CYXR0bGUy",
-            "UGxheWVyEOYZEhMKDkFwcGx5QmF0dGxlRW5kEPgZEhQKD05vdGlmeUJhdHRs",
-            "ZUVuZBD5GWIGcHJvdG8z"));
+            "ZVJlYWR5RmluaXNoELwXEhsKFk5vdGlmeVBsYXllclJlYWR5U3RhdGUQvRcS",
+            "FgoRTm90aWZ5QmF0dGxlU3RhcnQQvhcSDwoKTW92ZUVudGl0eRCdGBINCghV",
+            "c2VTa2lsbBCeGBISCg1DbGllbnRQbG90RW5kELoYEhkKFE5vdGlmeUNyZWF0",
+            "ZUVudGl0aWVzEIEZEhkKFE5vdGlmeUVudGl0eVN0b3BNb3ZlEIMZEh0KGE5v",
+            "dGlmeUVudGl0eVJlbGVhc2VTa2lsbBCEGRIcChdOb3RpZnlDcmVhdGVTa2ls",
+            "bEVmZmVjdBCFGRIfChpOb3RpZnlTa2lsbEVmZmVjdFN0YXJ0TW92ZRCGGRId",
+            "ChhOb3RpZnlTa2lsbEVmZmVjdERlc3Ryb3kQhxkSGQoUTm90aWZ5U3luY0Vu",
+            "dGl0eUF0dHIQiBkSGgoVTm90aWZ5U3luY0VudGl0eVZhbHVlEIkZEhUKEE5v",
+            "dGlmeUVudGl0eURlYWQQihkSEwoOTm90aWZ5UGxheVBsb3QQjBkSEgoNTm90",
+            "aWZ5UGxvdEVuZBCNGRIdChhOb3RpZnlTZXRFbnRpdHlTaG93U3RhdGUQjhkS",
+            "FAoPTm90aWZ5RW50aXR5RGlyEI8ZEhsKFk5vdGlmeUVudGl0eU1vdmVCeVBh",
+            "dGgQkBkSGgoVTm90aWZ5U2tpbGxJbmZvVXBkYXRlEJEZEh8KGk5vdGlmeU5v",
+            "dGlmeVVwZGF0ZUJ1ZmZJbmZvEJIZEhoKFU5vdGlmeVNraWxsVHJhY2tTdGFy",
+            "dBCTGRIYChNOb3RpZnlTa2lsbFRyYWNrRW5kEJQZEhUKEFRyYW5zaXRpb25C",
+            "YXR0bGUQ5RkSHAoXVHJhbnNpdGlvbkJhdHRsZTJQbGF5ZXIQ5hkSEwoOQXBw",
+            "bHlCYXR0bGVFbmQQ+BkSFAoPTm90aWZ5QmF0dGxlRW5kEPkZYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoIDs), }, null));
@@ -137,7 +137,8 @@ namespace NetProto {
     [pbr::OriginalName("PlayerLoadProgress")] PlayerLoadProgress = 3002,
     [pbr::OriginalName("NotifyAllPlayerLoadFinish")] NotifyAllPlayerLoadFinish = 3003,
     [pbr::OriginalName("BattleReadyFinish")] BattleReadyFinish = 3004,
-    [pbr::OriginalName("NotifyBattleStart")] NotifyBattleStart = 3005,
+    [pbr::OriginalName("NotifyPlayerReadyState")] NotifyPlayerReadyState = 3005,
+    [pbr::OriginalName("NotifyBattleStart")] NotifyBattleStart = 3006,
     /// <summary>
     /// 玩家操作
     /// </summary>

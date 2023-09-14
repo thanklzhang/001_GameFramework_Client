@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Const
 {
-    public static bool isLocalServer = false;
+    //是否局域网服务器
+    public static bool isLANServer = false;
 
     //path
     public const string AppName = "Jeko";
@@ -38,8 +39,12 @@ public class Const
     //public static bool isUpdateMode = false;//是否开启更新模式(需要开启资源服务端)
     public static bool isUseAB = false; //资源是否从 AB 中读取 不是的话 从 项目中 Assets 目录读取
     // public static bool isUpdateResFromServer = false; //是否从服务器更新资源(需要开启资源服务端)
-    public static bool isUseInternalAB = false;//是否使用内部的 AB  （StreamingAssets）
+    public static bool isUseInternalAB = false; //是否使用内部的 AB  （StreamingAssets）
+    public static bool isLocalBattleTest = false;   //纯本地战斗模式
 
+    //本地资源管理器作为上传 ab 的资源服务端地址(热更时资源会从这里下载)
+    public static string localUploadABResPath = "D:\\_LocalABPath";
+    
     public static string ABPackageStrategyPath = "Assets/Editor/BuildPackage/ABPackageStrategy.asset";
 
     public static string projectRootPath = "Assets";

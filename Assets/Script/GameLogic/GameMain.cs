@@ -49,9 +49,7 @@ public class GameMain : MonoBehaviour
 
     public IEnumerator GameInit(Action finishCallback)
     {
-        Logx.Log("!!!game startup ... ");
-
-        Logx.Log("!!!start to init game");
+        Logx.Log(LogxType.Game,"game init start ...");
 
         NetworkManager.Instance.Init();
         NetMsgManager.Instance.Init();
@@ -83,7 +81,7 @@ public class GameMain : MonoBehaviour
 
 
         BattleEntityManager.Instance.Init();
-        BattleSkillEffectManager.Instance.Init();
+        BattleSkillEffect_Client_Manager.Instance.Init();
         PlotManager.Instance.Init();
 
         var audioRoot = transform.Find("AudioRoot");
@@ -111,7 +109,7 @@ public class GameMain : MonoBehaviour
         OperateViewManager.Instance.Init();
         OperateViewManager.Instance.StartLoad();
 
-        Logx.Log("!!!finish init game");
+        Logx.Log(LogxType.Game,"game init finish");
 
 
         ////test
@@ -137,6 +135,8 @@ public class GameMain : MonoBehaviour
 
     public void StartToLogin()
     {
+        Logx.Log(LogxType.Game,"enter login logic");
+        
         CtrlManager.Instance.Enter<LoginCtrl>();
     }
 
@@ -145,7 +145,9 @@ public class GameMain : MonoBehaviour
         //TODO: 纯本地战斗 里面的英雄是配置的 结算也是本地的
         //int battleConfigId = 5900001;
         int battleConfigId = 5900010;
-
+        
+        Logx.Log(LogxType.Game,"create local battle test");
+        
         BattleManager.Instance.CreatePureLocalBattle(battleConfigId);
     }
 
@@ -186,7 +188,7 @@ public class GameMain : MonoBehaviour
     //真正开始游戏
     void StartGame()
     {
-        Logx.Log("StartGame !!!");
+        // Logx.Log("StartGame !!!");
     }
 
     public int currBattleFrameNum = 0;
@@ -201,7 +203,7 @@ public class GameMain : MonoBehaviour
 
         BattleManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
-        BattleSkillEffectManager.Instance.Update(Time.deltaTime);
+        BattleSkillEffect_Client_Manager.Instance.Update(Time.deltaTime);
 
         PlotManager.Instance.Update(Time.deltaTime);
 

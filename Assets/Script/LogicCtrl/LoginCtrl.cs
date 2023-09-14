@@ -43,7 +43,9 @@ public class LoginCtrl : BaseCtrl
         ui.SetLoginRegisterUIShow(false);
 
         //目前直接当作局域网进行连接
-        string ip = NetTool.GetHostIp();
+        // string ip = NetTool.GetHostIp();
+
+        string ip = GameValue.LANServerIP;
         int port = 5556;
         OnclickConnectBtn(ip, port);
         
@@ -52,32 +54,35 @@ public class LoginCtrl : BaseCtrl
 
     public void OnclickConnectBtn(string ip, int port)
     {
-        var isLocal = Const.isLocalServer;
+        var isLocal = Const.isLANServer;
         if (isLocal)
         {
             // ui.SetConnectTips("start to connect to login server ...");
-            ui.SetStateText("开始连接到登录服务器 ...");
+            ui.SetStateText("开始连接登录服务器 ... " + ip + ":" + port);
+            
+            Logx.Log(LogxType.Game,"start to connect login server ...");
+            
             port = 5556;
             NetworkManager.Instance.ConnectToLoginServer(ip, port, (isSuccess) =>
             {
                 if (isSuccess)
                 {
-                    ui.SetStateText("连接登录服务器成功 !!!");
+                    ui.SetStateText("连接登录服务器成功");
                     // ui.SetConnectTips("connect to login server success !!!");
-                    Logx.Log("StartToLogin : login success");
+                    Logx.Log(LogxType.Game," connect login server success");
                     // ui.SetConnectUIShow(false);
                 }
                 else
                 {
-                    Logx.Log("StartToLogin : login fail");
                     ui.SetStateText("连接登录服务器失败");
                     // this.ui.SetConnectTips("connect login server fail");
+                    Logx.Log(LogxType.Game," connect login server fail");
                 }
             });
         }
         else
         {
-            // this.ui.SetConnectTips("暂不支持远端服务器");
+            // this.ui.SetConnectTips("暂不支持远程服务器");
         }
     }
 
@@ -94,8 +99,8 @@ public class LoginCtrl : BaseCtrl
         else
         {
             //没有账号 弹出登录/注册界面
-            var str = ("无账号 请注册账号");
-            Logx.Log(str);
+            var str = ("无账号,请注册账号");
+            // Logx.Log(str);
             CtrlManager.Instance.globalCtrl.ShowTips(str);
 
             ui.SetLoginRegisterUIShow(true);
@@ -114,21 +119,25 @@ public class LoginCtrl : BaseCtrl
         //ui.SetStateText("start to connect to login server ...");
         var loginHandler = NetHandlerManager.Instance.GetHandler<LoginNetHandler>();
         ui.SetStateText("开始登录 ...");
-        Logx.Log("account : " + account);
-        Logx.Log("password : " + password);
+        
+        Logx.Log(LogxType.Game," start login ...");
+        
+        // Logx.Log("account : " + account);
+        // Logx.Log("password : " + password);
         loginHandler.SendCheckLogin(account, password, (result) =>
         {
             if (0 == result.Err)
             {
-                Logx.Log("StartToLogin : check login success !!!");
-                ui.SetStateText("登录成功 !!!");
+                Logx.Log(LogxType.Game," login success ...");
+                ui.SetStateText("登录成功");
                 CtrlManager.Instance.globalCtrl.ShowTips("登录成功");
                 this.SaveLoginSuccessInfo(account, password);
                 this.StartToEnterGame(result);
             }
             else
             {
-                Logx.Log("StartToLogin : check login fail , err : " + result.Err);
+                Logx.Log(LogxType.Game," login fail , err : " + result.Err);
+                
                 var tips = "未知错误";
                 if (1 == result.Err)
                 {
@@ -140,7 +149,7 @@ public class LoginCtrl : BaseCtrl
                 }
 
                 CtrlManager.Instance.globalCtrl.ShowTips(tips + " , 错误码：" + result.Err);
-                ui.SetStateText("登录失败 ");
+                ui.SetStateText("登录失败");
             }
         });
     }
@@ -186,28 +195,32 @@ public class LoginCtrl : BaseCtrl
         var ip = result.Ip;
         var port = result.Port;
         var uid = result.Uid;
-        Logx.Log("StartToEnterGame : get uid : " + uid);
+        // Logx.Log("StartToEnterGame : get uid : " + uid);
 
         ui.SetStateText("开始连接网关服务器 ...");
+        
+        Logx.Log(LogxType.Game,"start to connect gate server ...");
 
         NetworkManager.Instance.ConnectToGateServer(ip, port, (isSuccess) =>
         {
             if (isSuccess)
             {
-                ui.SetStateText("连接网关服务器成功 !!!!");
-                Logx.Log("connect gate server success !!!!");
-
+                ui.SetStateText("连接网关服务器成功");
+                
+                Logx.Log(LogxType.Game,"connect gate server success");
+                
                 var loginHandler = NetHandlerManager.Instance.GetHandler<LoginNetHandler>();
 
                 ui.SetStateText("开始进入游戏 ...");
 
+                Logx.Log(LogxType.Game,"request enter game");
                 loginHandler.SendEnterGame(uid, "", (enterResult) =>
                 {
                     if (0 == enterResult.Err)
                     {
-                        Logx.Log("进入游戏成功 !!!");
-
-                        ui.SetStateText("enter game success !!!");
+                        Logx.Log(LogxType.Game,"enter game success");
+                        
+                        ui.SetStateText("进入游戏成功");
 
                         CtrlManager.Instance.globalCtrl.ShowTips("进入游戏成功");
 
@@ -215,9 +228,10 @@ public class LoginCtrl : BaseCtrl
                     }
                     else
                     {
-                        Logx.Log("enter game fail !!!");
-                        ui.SetStateText("进入游戏失败 !!!");
+                        ui.SetStateText("进入游戏失败");
 
+                        Logx.Log(LogxType.Game,"enter game fail");
+                        
                         CtrlManager.Instance.globalCtrl.ShowTips("进入游戏失败");
                     }
                 });
@@ -226,7 +240,7 @@ public class LoginCtrl : BaseCtrl
             {
                 ui.SetStateText("连接网关服务器失败");
 
-                Logx.Log("StartToEnterGame : fail");
+                Logx.Log(LogxType.Game,"connect gate server fail");
 
                 CtrlManager.Instance.globalCtrl.ShowTips("连接 网关服务器 失败");
             }
@@ -235,7 +249,7 @@ public class LoginCtrl : BaseCtrl
 
     public void OnGateConnectResult()
     {
-        Logx.Log("StartGame !!! enter lobby !!!");
+        Logx.Log(LogxType.Game,"start enter game lobby ...");
 
         //前往大厅
         CtrlManager.Instance.Enter<LobbyCtrl>();
@@ -249,7 +263,8 @@ public class LoginCtrl : BaseCtrl
     public override void OnActive()
     {
         CtrlManager.Instance.HideTitleBar();
-
+        
+        
         ui.Show();
         
         //play bgm

@@ -13,7 +13,7 @@ class GUILog : MonoBehaviour
     {
         public string message;
         public string stackTrace;
-        public LogType type;
+        public UnityEngine.LogType type;
     }
 
     #region Inspector Settings
@@ -53,13 +53,13 @@ class GUILog : MonoBehaviour
     bool collapse;
 
     // Visual elements:
-    static readonly Dictionary<LogType, Color> logTypeColors = new Dictionary<LogType, Color>
+    static readonly Dictionary<UnityEngine.LogType, Color> logTypeColors = new Dictionary<UnityEngine.LogType, Color>
         {
-            { LogType.Assert, Color.white },
-            { LogType.Error, Color.red },
-            { LogType.Exception, Color.red },
-            { LogType.Log, Color.white },
-            { LogType.Warning, Color.yellow },
+            { UnityEngine.LogType.Assert, Color.white },
+            { UnityEngine.LogType.Error, Color.red },
+            { UnityEngine.LogType.Exception, Color.red },
+            { UnityEngine.LogType.Log, Color.white },
+            { UnityEngine.LogType.Warning, Color.yellow },
         };
 
     const string windowTitle = "Console";
@@ -187,7 +187,7 @@ class GUILog : MonoBehaviour
     /// <param name="message">Message.</param>
     /// <param name="stackTrace">Trace of where the message came from.</param>
     /// <param name="type">Type of message (error, exception, warning, assert).</param>
-    void HandleLog(string message, string stackTrace, LogType type)
+    void HandleLog(string message, string stackTrace, UnityEngine.LogType type)
     {
         logs.Add(new Log
         {

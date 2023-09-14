@@ -38,6 +38,8 @@ public class BaseSkillTrack
 
     public bool isWillDelete;
     protected TrackBean trackBean;
+
+    private bool isBattleEnd;
     public void Init(TrackBean trackBean)
     {
         this.trackBean = trackBean;
@@ -93,6 +95,14 @@ public class BaseSkillTrack
     {
         if (isFinish)
         {
+            
+            if (isBattleEnd)
+            {
+                //只有战斗结束的时候 本地 track 完成后直接删除
+                //否则正常情况下是服务端通知删除
+                isWillDelete = true;
+            }
+            
             return;
         }
 
@@ -115,7 +125,7 @@ public class BaseSkillTrack
     {
         isFinish = true;
         OnFinish();
-        //isWillDelete = true;
+      
     }
     protected virtual void OnFinish()
     {
@@ -131,6 +141,7 @@ public class BaseSkillTrack
             }
             trackResGo = null;
         }
+       
         OnRelease();
     }
     protected virtual void OnRelease()
@@ -155,4 +166,8 @@ public class BaseSkillTrack
     }
 
     //-------------------------------
+    public void OnBattleEnd()
+    {
+        isBattleEnd = true;
+    }
 }

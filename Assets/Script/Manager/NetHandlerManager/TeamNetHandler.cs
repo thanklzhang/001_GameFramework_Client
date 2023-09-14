@@ -102,7 +102,7 @@ public class TeamNetHandler : NetHandler
     public void OnCreateTeamRoom(MsgPack msgPack)
     {
         scCreateTeamRoom scCreate = scCreateTeamRoom.Parser.ParseFrom(msgPack.data);
-        Logx.Log("OnCreateTeamRoom : " + scCreate.ToString());
+        // Logx.Log("OnCreateTeamRoom : " + scCreate.ToString());
 
         var resultRoom = TeamConvert.ToTeamRoom(scCreate.TeamRoom);
         GameDataManager.Instance.TeamStore.SetCurrEnterRoomData(resultRoom);
@@ -188,7 +188,7 @@ public class TeamNetHandler : NetHandler
     public void OnLeaveTeamRoom(MsgPack msgPack)
     {
         scLeaveTeamRoom scLeave = scLeaveTeamRoom.Parser.ParseFrom(msgPack.data);
-        Logx.Log("OnLeaveTeamRoom : " + scLeave.ToString());
+        // Logx.Log("OnLeaveTeamRoom : " + scLeave.ToString());
         var err = scLeave.Err;
         event_leaveTeamRoom?.Invoke();
         event_leaveTeamRoom = null;
@@ -225,7 +225,7 @@ public class TeamNetHandler : NetHandler
     public void OnNotifyChangePlayerInfoInTeamRoom(MsgPack msgPack)
     {
         scNotifyChangePlayerInfoInTeamRoom sc = scNotifyChangePlayerInfoInTeamRoom.Parser.ParseFrom(msgPack.data);
-        Logx.Log("OnNotifyChangePlayerInfoInTeamRoom : " + sc.ToString());
+        // Logx.Log("OnNotifyChangePlayerInfoInTeamRoom : " + sc.ToString());
         var player = sc.Player;
 
         //data handler
@@ -241,7 +241,7 @@ public class TeamNetHandler : NetHandler
     public void OnNotiyRoomLeaveRoom(MsgPack msgPack)
     {
         scNotifyLeaveTeamRoom leave = scNotifyLeaveTeamRoom.Parser.ParseFrom(msgPack.data);
-        Logx.Log("OnNotiyRoomLeaveRoom : " + leave.ToString());
+        // Logx.Log("OnNotiyRoomLeaveRoom : " + leave.ToString());
         var uid = leave.PlayerUid;
 
         GameDataManager.Instance.TeamStore.RemovePlayer(uid);

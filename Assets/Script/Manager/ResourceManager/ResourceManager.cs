@@ -31,6 +31,8 @@ public class ResourceManager : Singleton<ResourceManager>
     //get obj by pool (include : gameObject texture sprite material)
     public void GetObject<T>(string path, Action<T> callback, bool isSync = false) where T : UnityEngine.Object
     {
+        Logx.Log(LogxType.Resource,"start to get resource ... , path : " + path);
+        
         ObjectPoolManager.Instance.GetObject<T>(path, (obj) =>
         {
             T getObj = null;
@@ -58,7 +60,9 @@ public class ResourceManager : Singleton<ResourceManager>
             {
                 getObj = obj as T;
             }
-
+            
+            Logx.Log(LogxType.Resource,"get resource finish , path : " + path);
+            
             callback?.Invoke(getObj);
 
         });
@@ -66,13 +70,16 @@ public class ResourceManager : Singleton<ResourceManager>
 
     internal void ReturnObject<T>(int resId, T obj) where T : UnityEngine.Object
     {
+       
+        
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
         var fullPath = Const.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
         ReturnObject(fullPath,obj);
     }
 
     internal void ReturnObject<T>(string path, T obj) where T : UnityEngine.Object
-    {
+    { 
+        Logx.Log(LogxType.Resource,"return resource , path : " + path);
         ObjectPoolManager.Instance.ReturnObject(path, obj);
     }
 

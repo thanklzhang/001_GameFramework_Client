@@ -66,7 +66,7 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
         }
 
         var buffConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(this.uiData.configId);
-        Logx.Log("zxy : buffConfig.IconResId : " + buffConfig.IconResId);
+//        Logx.Log("zxy : buffConfig.IconResId : " + buffConfig.IconResId);
         ResourceManager.Instance.GetObject<Sprite>(buffConfig.IconResId, (sprite) =>
         {
             icon.sprite = sprite;

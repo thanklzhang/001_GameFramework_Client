@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4261915148
+CRC: 244868904
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 65b8fc5a5010c8e0a0b61faff890eaa7
+    Hash: 409c30ffdc0d719072efbe49f7d8ba7c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bdc6724e7ee4ac180bd22c4bcbedc4b7
+    Hash: 6fd0c823102241f0143c32190aa21b32
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -21,9 +21,13 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
+  Script: {instanceID: 0}
+- Class: 213
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
@@ -38,4 +42,5 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
 - Assets/BuildRes/Prefabs/UI/TipsUI.prefab
-Dependencies: []
+Dependencies:
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/atlas/common/other.ab

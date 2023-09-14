@@ -1,17 +1,19 @@
 ManifestFileVersion: 0
-CRC: 4253843484
+CRC: 387469242
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: be14bee88c4661a7ee3924863563b5d3
+    Hash: 9365c7cfb0c4dd1a354ee7e92c84cb6e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2d8df09e698f722ada1caa03d3413830
+    Hash: 033fafe2c9f6c610c3a734393882fd4c
 HashAppended: 0
 ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 - Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
@@ -32,7 +34,7 @@ Assets:
 - Assets/BuildRes/Atlas/BattleUI/img_battle_chat_input_bg.png
 - Assets/BuildRes/Atlas/BattleUI/img_battle_big_skill_bg.png
 - Assets/BuildRes/Atlas/BattleUI/img_battle_hp_01.png
-- Assets/BuildRes/Atlas/BattleUI/battleTemp.png
+- Assets/BuildRes/Atlas/BattleUI/BattleUI.spriteatlas
 - Assets/BuildRes/Atlas/BattleUI/img_battle_skill_option_bg.png
 - Assets/BuildRes/Atlas/BattleUI/img_battle_attr_bar_bg.png
 - Assets/BuildRes/Atlas/BattleUI/img_battle_item_option_bg.png

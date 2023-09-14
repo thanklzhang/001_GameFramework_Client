@@ -117,8 +117,12 @@ public class FloatWord
     {
         timer = 0;
         this.gameObject.SetActive(false);
-
         this.isUsing = false;
+    }
+
+    public void Release()
+    {
+        Finish();
     }
 
 }

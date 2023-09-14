@@ -63,7 +63,7 @@ namespace PlotDesigner.Runtime
 
         internal void StartPlot(Plot plot, Action<string> endAction = null)
         {
-            Logx.Log("plot : StartPlot");
+            // Logx.Log("plot : StartPlot");
             this.endAction = endAction;
 
             plotMain.gameObject.SetActive(true);
@@ -125,7 +125,7 @@ namespace PlotDesigner.Runtime
 
         public void StartCollectInfo()
         {
-            Logx.Log("plot : StartCollectInfo");
+            // Logx.Log("plot : StartCollectInfo");
 
             gameObjectResIdToCountDic = new Dictionary<int, int>();
             plotEntityDic = new Dictionary<int, PlotEntity>();
@@ -203,7 +203,7 @@ namespace PlotDesigner.Runtime
 
         public void OnOneRequestListFinish(int resId, HashSet<GameObject> gameObjects)
         {
-            Logx.Log("plot : OnOneRequestListFinish : " + gameObjects.Count);
+            // Logx.Log("plot : OnOneRequestListFinish : " + gameObjects.Count);
 
             foreach (var go in gameObjects)
             {
@@ -227,7 +227,7 @@ namespace PlotDesigner.Runtime
 
         public void OnLoadFinish()
         {
-            Logx.Log("plot : OnLoadFinish , load all finish");
+            // Logx.Log("plot : OnLoadFinish , load all finish");
 
             isLoading = false;
 
@@ -236,7 +236,7 @@ namespace PlotDesigner.Runtime
 
         internal void StartExecute()
         {
-            Logx.Log("plot : StartExecute");
+            // Logx.Log("plot : StartExecute");
 
             maxEndTime = GetTotalTime();
 
@@ -317,7 +317,7 @@ namespace PlotDesigner.Runtime
         //结束
         public void OnEnd()
         {
-            Logx.Log("plot : OnEnd , currTime : " + currTime);
+            // Logx.Log("plot : OnEnd , currTime : " + currTime);
             isEnd = true;
             this.endAction.Invoke("");
 
@@ -327,7 +327,7 @@ namespace PlotDesigner.Runtime
         //关闭
         public void Close()
         {
-            Logx.Log("plot : Close ");
+            // Logx.Log("plot : Close ");
 
             plotMain.gameObject.SetActive(false);
 

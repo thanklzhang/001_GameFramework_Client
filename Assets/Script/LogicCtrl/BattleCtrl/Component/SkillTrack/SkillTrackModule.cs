@@ -91,25 +91,29 @@ public class SkillTrackModule
 
     public void Update(float deltaTime)
     {
-        List<int> willDeleteGuids = new List<int>();
         foreach (var item in trackGroupDic)
         {
             var trackGroup = item.Value;
             trackGroup.Update(deltaTime);
-
-            if (trackGroup.IsEmpty())
-            {
-                willDeleteGuids.Add(item.Key);
-            }
         }
 
-        foreach (var guid in willDeleteGuids)
+    }
+
+    public void OnBattleEnd()
+    {
+        foreach (var item in trackGroupDic)
         {
-            trackGroupDic.Remove(guid);
+            var trackGroup = item.Value;
+            trackGroup.OnBattleEnd();
         }
     }
 
     public void Release()
     {
+        foreach (var item in trackGroupDic)
+        {
+            var trackGroup = item.Value;
+            trackGroup.Release();
+        }
     }
 }

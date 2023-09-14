@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -44,6 +45,13 @@ namespace Battle_Client
     {
         CurrHealth = 1,
         CurrMagic = 2,
+    }
+
+    public enum EntityRelationType
+    {
+        Me = 0,
+        Friend = 1,
+        Enemy = 2
     }
 
     public class BattleEntityAttr
@@ -112,7 +120,7 @@ namespace Battle_Client
         Vector3 dirTarget;
         //float moveSpeed;
 
-        //应该在 load temp obj 上加这个 ， 现在这里加上
+        //应该在 load temp obj 上加这个 ， 先在这里加上
         public Collider collider;
 
         public int level;
@@ -355,7 +363,8 @@ namespace Battle_Client
             else
             {
                 //技能
-                PlayAnimation("attack");
+                var aniScale = skillConfig.AnimationSpeedScale / 1000.0f;
+                PlayAnimation("attack", aniScale);
             }
             //play animation
             //Logx.Log(this.guid + " release skill : " + skillConfigId);
@@ -384,6 +393,32 @@ namespace Battle_Client
             }
         }
 
+
+        public static EntityRelationType GetRelation(BattleEntity_Client aEntity, BattleEntity_Client bEntity)
+        {
+            if (null == aEntity || null == bEntity)
+            {
+                return EntityRelationType.Me;
+            }
+
+            if (aEntity.guid == bEntity.guid)
+            {
+                return EntityRelationType.Me;
+            }
+            else
+            {
+                if (aEntity.Team == bEntity.Team)
+                {
+                    return EntityRelationType.Friend;
+                }
+                else
+                {
+                    return EntityRelationType.Enemy;
+                }
+            }
+        }
+
+
         //internal void SyncAttr(RepeatedField<BattleEntityAttrProto> attrs)
         //{
         //    foreach (var item in attrs)
@@ -393,7 +428,7 @@ namespace Battle_Client
         //        {
         //            this.attr.attack = item.Value;
         //        }
-        //        else if (type == EntityAttrType.MaxHealth)
+        //        else if (type == EntityAttrType.MaxHealth) 
         //        {
         //            this.attr.maxHealth = item.Value;
         //        }
@@ -583,8 +618,23 @@ namespace Battle_Client
                 this.animator.SetTrigger(str);
                 triggerNames.Clear();
             }
+            
+            if(this.state == BattleEntityState.Dead)
+            {
+                deadDisappearCurrTimer -= timeDelta;
+                if (deadDisappearCurrTimer <= 0)
+                {
+                    this.state = BattleEntityState.Destroy;
+                    
+                    //这里应该是设置成标志 然后删除
+                    // BattleEntityManager.Instance.DestoryEntity(this.guid);
+                }
+            }
         }
 
+        public float deadDisappearCurrTimer = 0;
+        public float deadDisappearTotalTime = 2.0f;
+        
         public string currAniTriggerName;
 
         public List<string> triggerNames = new List<string>();
@@ -632,74 +682,8 @@ namespace Battle_Client
                 {
                     aniAct = 4;
                 }
-                animator.SetInteger("Action",aniAct);
 
-
-                // if (aniTriggerName == "walk")
-                // {
-                //     if (aniTriggerName != currAniTriggerName)
-                //     {
-                //         if (this.guid == myEntityGuid)
-                //         {
-                //             Logx.LogError("zxy : play ani aniTriggerName 1 : " + aniTriggerName );    
-                //         }
-                //
-                //         triggerNames.Add(aniTriggerName);
-                //         //animator.SetTrigger(aniTriggerName);
-                //         currAniTriggerName = aniTriggerName;
-                //     }
-                //     
-                // }
-                // else
-                // {
-                //     if (this.guid == myEntityGuid)
-                //     {
-                //         Logx.LogError("zxy : play ani aniTriggerName 1 : " + aniTriggerName );    
-                //     }
-                //
-                //     triggerNames.Add(aniTriggerName);
-                //     //animator.SetTrigger(aniTriggerName);
-                //     currAniTriggerName = aniTriggerName;
-                //
-                // }
-
-
-                // // Debug.Log("aniTriggerName" + aniTriggerName + "  " + currAniTriggerName);
-                // if (aniTriggerName != currAniTriggerName)
-                // {
-                //     if (this.guid == myEntityGuid)
-                //     {
-                //         Logx.LogError("zxy : play ani aniTriggerName : 2 " + aniTriggerName );    
-                //     }
-                //     animator.SetTrigger(aniTriggerName);
-                //     currAniTriggerName = aniTriggerName;
-                // }
-                // else
-                // {
-                //     if (aniTriggerName != "walk")
-                //     {
-                //         if (this.guid == myEntityGuid)
-                //         {
-                //             Logx.LogError("zxy : play ani aniTriggerName : 3 " + aniTriggerName );    
-                //         }
-                //         animator.SetTrigger(aniTriggerName);
-                //         currAniTriggerName = aniTriggerName;
-                //     }
-                // }
-                //
-
-                // var state = animation[aniName];
-                // if (state != null)
-                // {
-                //     state.speed = speed;
-                //     var fixSpeed = speed;
-                //     if (0 == fixSpeed)
-                //     {
-                //         fixSpeed = 0.01f;
-                //     }
-                //     //Debug.Log("speed : " + fixSpeed);
-                //     animation.CrossFade(aniName, 0.065f / fixSpeed);
-                // }
+                animator.SetInteger("Action", aniAct);
             }
         }
 
@@ -707,7 +691,13 @@ namespace Battle_Client
         {
             PlayAnimation("die");
             state = BattleEntityState.Dead;
-            CoroutineManager.Instance.StartCoroutine(RemoveSelf());
+
+            deadDisappearCurrTimer = deadDisappearTotalTime;
+            
+            EventDispatcher.Broadcast(EventIDs.OnEntityDead, this);
+
+
+            // CoroutineManager.Instance.StartCoroutine(RemoveSelf());
         }
 
         public IEnumerator RemoveSelf()

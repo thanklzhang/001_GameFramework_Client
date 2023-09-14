@@ -86,7 +86,7 @@ public class AssetManager : Singleton<AssetManager>
     public void Load<T>(string assetPath, Action<UnityEngine.Object> finishCallback, bool isSync = false)
         where T : UnityEngine.Object
     {
-        Logx.Log("res : start load : " + assetPath);
+        //Logx.Log("res : start load : " + assetPath);
         if (isSync)
         {
             //LoadSync(assetPath, finishCallback);
@@ -122,16 +122,20 @@ public class AssetManager : Singleton<AssetManager>
         }
         else
         {
+            // Logx.Log(LogxType.Resource,"start load new resource , asset path : " + assetPath);
+            
             if (Const.isUseAB)
             {
                 var abPath = this.assetToAbDic[assetPath];
                 AssetBundleManager.Instance.Load(abPath, (abCache) =>
                 {
-                    if (abPath.Contains("BattleUI") || abPath.Contains("battleui"))
-                    {
-                        Logx.Log("res battleUI : ab load finish");       
-                    }
+                    // if (abPath.Contains("BattleUI") || abPath.Contains("battleui"))
+                    // {
+                    //     Logx.Log("res battleUI : ab load finish");       
+                    // }
 
+                    // Logx.Log(LogxType.Resource,"finish load new resource , asset path : " + assetPath);
+                    
                     //ab 加载完 需要检测下 asset 是否已经有了 因为有可能已经在别处先加载完
                     this.LoadAssetBundleFinish<T>(abCache, assetPath, finishCallback);
                 }, false);
@@ -162,7 +166,7 @@ public class AssetManager : Singleton<AssetManager>
     public void LoadAssetBundleFinish<T>(AssetBundleCache abCache, string assetPath,
         Action<UnityEngine.Object> finishCallback) where T : UnityEngine.Object
     {
-        Logx.Log("res : load finish : " + assetPath);
+        // Logx.Log("res : load finish : " + assetPath);
         AssetCache assetCache = null;
         if (assetCacheDic.TryGetValue(assetPath, out assetCache))
         {

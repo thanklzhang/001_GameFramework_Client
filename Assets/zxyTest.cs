@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Battle;
 using UnityEngine;
+using UnityEngine.Experimental.XR.Interaction;
 using Rect = Battle.Rect;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -19,17 +20,123 @@ public class zxyTest : MonoBehaviour
     public Vector2 circle_center;
     public float radius;
 
+
+    public class EnumerableTest : IEnumerable
+    {
+        private List<int> list = new List<int>()
+        {
+            3, 4, 5, 6, 1, 2
+        };
+
+        public IEnumerator GetEnumerator()
+        {
+            return new EnumeratorTest(list);
+        }
+    }
+
+    public class EnumeratorTest : IEnumerator
+    {
+        private List<int> list = new List<int>();
+        public int curr = -1;
+
+        public EnumeratorTest(List<int> list)
+        {
+            this.list = list;
+        }
+
+        public bool MoveNext()
+        {
+            curr = curr + 1;
+
+            if (curr >= 0 && curr <= list.Count - 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void Reset()
+        {
+            curr = -1;
+        }
+
+        public object Current
+        {
+            get { return list[curr]; }
+        }
+
+
+        public void Dispose()
+        {
+            list.Clear();
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
         m_Color = new Color(1, 1, 1, 0);
+
+        // List<int> list = new List<int>();
+        // list.Add(1);
+        // list.Add(2);
+        // list.Add(3);
+        // list.Add(7);
+        //
+        // foreach (var curr in aa())
+        // {
+        //     Debug.Log("iterator1 : " + curr);
+        // }
+
+
+        // foreach (int fib in EvenNumbersOnly(Fibs(6)))
+        // {
+        //     Debug.Log("result : " + fib);
+        // }
+
+        EnumerableTest enumTest = new EnumerableTest();
+        foreach (int curr in enumTest)
+        {
+            Debug.Log("curr :::: " + curr);
+        }
     }
+
+
+//
+//
+// IEnumerable<int> Fibs (int fibCount)
+// {
+//     for (int i = 0, prevFib = 1, curFib = 1; i < fibCount; i++)
+//     {
+//         Debug.Log("Fibs a : " + prevFib);
+//         yield return prevFib;
+//         Debug.Log("Fibs b : " + prevFib);
+//         int newFib = prevFib+curFib;
+//         prevFib = curFib;
+//         curFib = newFib;
+//     }
+// }
+// IEnumerable<int> EvenNumbersOnly (IEnumerable<int> sequence)
+// {
+//     foreach (int x in sequence)
+//         if ((x % 2) == 0)
+//         {
+//             Debug.Log("EvenNumbersOnly a : " + x);
+//             yield return x;
+//             Debug.Log("EvenNumbersOnly b : " + x);
+//         }
+//
+//    
+// }
+
 
     public bool isCollision;
 
 
     void OnDrawGizmos()
-    { 
+    {
         DrawRect();
         DrawCircle();
         //DrawTest();
@@ -37,13 +144,13 @@ public class zxyTest : MonoBehaviour
 
     public void DrawTest()
     {
-        Vector2 pos0 = new Vector2(0,0);
-        Vector2 pos1 = new Vector2(1,1);
-        Debug.DrawLine(pos0,pos1);
+        Vector2 pos0 = new Vector2(0, 0);
+        Vector2 pos1 = new Vector2(1, 1);
+        Debug.DrawLine(pos0, pos1);
 
-        var s = Vector3.Cross(pos1,new Vector3(0,0,1));
-        
-        Debug.DrawLine(pos0,s);
+        var s = Vector3.Cross(pos1, new Vector3(0, 0, 1));
+
+        Debug.DrawLine(pos0, s);
     }
 
     public UnityEngine.Vector2 ToVector2(Battle.Vector2 v)
@@ -51,7 +158,7 @@ public class zxyTest : MonoBehaviour
         return new UnityEngine.Vector2(v.x, v.y);
     }
 
-    // Update is called once per frame
+// Update is called once per frame
     void DrawRect()
     {
         Rect rect = new Rect()
@@ -90,7 +197,7 @@ public class zxyTest : MonoBehaviour
 
     public Transform m_Transform;
 
-    //public float m_Radius = 1; // 圆环的半径
+//public float m_Radius = 1; // 圆环的半径
     public float m_Theta = 0.1f; // 值越低圆环越平滑
     public Color m_Color = Color.green; // 线框颜色
 

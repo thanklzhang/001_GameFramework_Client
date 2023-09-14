@@ -25,6 +25,8 @@ public class UpdateResourceModule
     //检查游戏资源
     public IEnumerator CheckResource(UpdateResError error)
     {
+        Logx.Log(LogxType.Game,"开始检查游戏资源");
+        
         if (!Const.isUseAB)
         {
             yield break;
@@ -71,13 +73,15 @@ public class UpdateResourceModule
              }
 
 
+             Logx.Log(LogxType.Game,"完成检查游戏资源");
+             
             this.TriggerStateEvent(UpdateResStateType.Finish);
         }
     }
 
     public IEnumerator CopyGameResource(UpdateResError error)
     {
-        Logx.Log("第一次进入游戏 开始复制包内中的现有资源复制到本地");
+        Logx.Log(LogxType.CheckAndUpdateResource,"第一次进入游戏 开始复制包内中的现有资源复制到本地");
         var persistentPath = Const.AssetBundlePath;
         Directory.CreateDirectory(persistentPath);
         var streamingPath = Const.AppStreamingAssetPath;
@@ -137,7 +141,7 @@ public class UpdateResourceModule
             yield break;
         }
 
-        Logx.Log("复制游戏资源完成");
+        Logx.Log(LogxType.CheckAndUpdateResource,"复制游戏资源完成");
         yield return CheckResource(error);
     }
 
@@ -155,7 +159,7 @@ public class UpdateResourceModule
             var verParamStr = ver.Split('.');
             localBigVer = int.Parse(verParamStr[0]);
             localSmallVer = int.Parse(verParamStr[1]);
-            Logx.Log("本地当前资源版本 : v" + localBigVer + "." + localSmallVer);
+            Logx.Log(LogxType.CheckAndUpdateResource,"本地当前资源版本 : v" + localBigVer + "." + localSmallVer);
 
             //Logx.Log("localBigVer : " + localBigVer);
             //Logx.Log("localSmallVer : " + localSmallVer);
@@ -169,7 +173,7 @@ public class UpdateResourceModule
 
         var localIP = NetTool.GetHostIp();
         var url = string.Format("http://{0}:{1}/get_res_version", localIP, 8080);
-        Logx.Log("开始请求服务器 最新资源版本信息 : " + url);
+        Logx.Log(LogxType.CheckAndUpdateResource,"开始请求服务器 最新资源版本信息 : " + url);
 
         UnityWebRequest request = UnityWebRequest.Get(url);
         DownloadHandlerBuffer Download = new DownloadHandlerBuffer();
@@ -188,7 +192,7 @@ public class UpdateResourceModule
         //Logx.Log("服务端回包 资源版本 json 信息 : " + json);
         serBigVer = int.Parse(jd["big_version"].ToString());
         serSmallVer = int.Parse(jd["small_version"].ToString());
-        Logx.Log("服务端回包 服务端最新资源版本 : v" + serBigVer + "." + serSmallVer);
+        Logx.Log(LogxType.CheckAndUpdateResource,"服务端回包 服务端最新资源版本 : v" + serBigVer + "." + serSmallVer);
 
 
         if (localBigVer < serBigVer)
@@ -214,14 +218,14 @@ public class UpdateResourceModule
 
         var localVerStr = "v" + localBigVer + "." + localSmallVer;
         var serVerStr = "v" + serBigVer + "." + serSmallVer;
-        Debug.Log("当前版本 : " + localVerStr + " , 服务器版本 : " + serVerStr + " , 需要更新资源");
+        Logx.Log(LogxType.CheckAndUpdateResource,"当前版本 : " + localVerStr + " , 服务器版本 : " + serVerStr + " , 需要更新资源");
     }
 
     public IEnumerator GetResourceList(UpdateResError error)
     {
         var localIP = NetTool.GetHostIp();
         var url = string.Format("http://{0}:{1}/get_res_file", localIP, 8080);
-        Logx.Log("开始请求服务端最新资源列表 : " + url);
+        Logx.Log(LogxType.CheckAndUpdateResource,"开始请求服务端最新资源列表 : " + url);
         var request = UnityWebRequest.Get(url);
         var Download = new DownloadHandlerBuffer();
         request.downloadHandler = Download;
@@ -239,7 +243,7 @@ public class UpdateResourceModule
 
         serFileDic = new Dictionary<string, string>();
         var json = request.downloadHandler.text;
-        Logx.Log("服务端回包 : get_res_file : " + json);
+        Logx.Log(LogxType.CheckAndUpdateResource,"服务端回包 : get_res_file : " + json);
         var jd = LitJson.JsonMapper.ToObject(json);
         string pathListStr = "";
         foreach (JsonData jsonD in jd)
@@ -251,7 +255,7 @@ public class UpdateResourceModule
             pathListStr += path + "\n";
         }
 
-        Logx.Log("服务端最新资源列表为 : " + pathListStr);
+        Logx.Log(LogxType.CheckAndUpdateResource,"服务端最新资源列表为 : " + pathListStr);
     }
 
     public void CompareResouce(UpdateResError error)
@@ -273,7 +277,7 @@ public class UpdateResourceModule
         }
         else
         {
-            Debug.Log("缺少 file_list.txt 文件");
+            Logx.LogWarning(LogxType.CheckAndUpdateResource,"缺少 file_list.txt 文件");
             error.err = UpdateResErrorType.Error;
             return;
         }
@@ -322,11 +326,11 @@ public class UpdateResourceModule
 
         if (needUpdateResList.Count > 0)
         {
-            Logx.Log("需要更新的资源 文件数量为 : " + needUpdateResList.Count + " , 文件列表为 : " + pathListStr);
+            Logx.Log(LogxType.CheckAndUpdateResource,"需要更新的资源 文件数量为 : " + needUpdateResList.Count + " , 文件列表为 : \n" + pathListStr);
         }
         else
         {
-            Logx.Log("没有需要更新的资源");
+            Logx.Log(LogxType.CheckAndUpdateResource,"没有需要更新的资源");
         }
     }
 
@@ -346,11 +350,11 @@ public class UpdateResourceModule
         }
 
         //全部文件都一致了就更新 version.txt 
-        Logx.Log("开始更新 version.txt 文件");
+        Logx.Log(LogxType.CheckAndUpdateResource,"开始更新 version.txt 文件");
         var localVersionFileListPath = Const.AssetBundlePath + "/" + "version.txt";
         var str = "v" + serBigVer + "." + serSmallVer;
         FileTool.SaveToFile(localVersionFileListPath, str);
-        Logx.Log("完成更新 version.txt 文件");
+        Logx.Log(LogxType.CheckAndUpdateResource,"完成更新 version.txt 文件");
     }
 
     ulong preDownloadBytes = 0;
@@ -361,7 +365,7 @@ public class UpdateResourceModule
         var localIP = NetTool.GetHostIp();
 
         var url = string.Format("http://{0}:{1}/download_file/{2}", localIP, 8080, serResInfo.path);
-        Logx.Log("请求服务端下载文件 : " + url);
+        Logx.Log(LogxType.CheckAndUpdateResource,"请求服务端下载文件 : " + url);
 
         UnityWebRequest request = UnityWebRequest.Get(url);
 
@@ -392,7 +396,7 @@ public class UpdateResourceModule
 
         var bytes = request.downloadHandler.data;
 
-        Logx.Log("服务端回包 : bytes 长度 : " + bytes.Length);
+        Logx.Log(LogxType.CheckAndUpdateResource,"服务端回包 : bytes 长度 : " + bytes.Length);
         var serFileData = bytes;
         var savePath = Const.AssetBundlePath + "/" + serResInfo.path;
         var tempDir = Path.GetDirectoryName(savePath);

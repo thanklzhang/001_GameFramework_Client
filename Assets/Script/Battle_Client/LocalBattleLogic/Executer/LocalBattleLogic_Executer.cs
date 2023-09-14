@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using GameData;
 using UnityEngine;
 
 namespace Battle_Client
@@ -25,7 +26,7 @@ namespace Battle_Client
         {
             this.isPureLocal = isPureLocal;
 
-            Logx.Log("local execute : CreateLocalBattleLogic");
+            Logx.Log(LogxType.Battle,"local execute : CreateLocalBattleLogic");
 
             //创建战斗逻辑参数
             var logicArgs = GetBattleLogicArgs(applyArg, sourceData, mapInitData);
@@ -113,7 +114,21 @@ namespace Battle_Client
             else
             {
                 //纯本地战斗
-                Logx.Log("pure battle : battle result");
+                Logx.Log(LogxType.Battle,"pure battle : battle result");
+                
+                BattleResultDataArgs resultData = new BattleResultDataArgs();
+                resultData.isWin = endType == BattleEndType.Win;
+                resultData.rewardDataList = new List<ItemData>();
+                // foreach (var serReward in scBattleEnd.Rewards)
+                // {
+                //     ItemData item = new ItemData();
+                //     item.configId = serReward.ConfigId;
+                //     item.count = serReward.Count;
+                //     resultData.rewardDataList.Add(item);
+                // }
+
+                BattleManager.Instance.BattleEnd(resultData);
+                
             }
 
 

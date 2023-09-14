@@ -62,8 +62,20 @@ public class SkillTrackGroup
 
     public void Release()
     {
-
+        for (int i = skillTrackList.Count - 1; i >= 0; i--)
+        {
+            var track = skillTrackList[i];
+            track.Release();
+        }
     }
 
 
+    public void OnBattleEnd()
+    {
+        for (int i = skillTrackList.Count - 1; i >= 0; i--)
+        {
+            var track = skillTrackList[i];
+            track.OnBattleEnd();
+        }
+    }
 }

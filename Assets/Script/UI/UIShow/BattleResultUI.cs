@@ -31,10 +31,24 @@ public class BattleResultUI : BaseUI
     {
         var resultArgs = (BattleResultUIArgs)args;
         var isWin = resultArgs.isWin;
-        var showStr = isWin ? "you win" : "you fail";
+        var showStr = "";
+        
+
+        if (isWin)
+        {
+            showStr = "胜利";
+            winContent.color = new Color(1, (185.0f / 255), 0, 1);
+        }
+        else
+        {
+            showStr = "失败";
+
+            winContent.color = new Color(1, (0.0f / 255), 0, 1);
+        }
+
+
         winContent.text = showStr;
-
-
+        
         this.optionDataList = resultArgs.uiItem;
 
 

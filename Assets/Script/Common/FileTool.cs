@@ -42,6 +42,16 @@ public class FileTool
 
     public static void CopyFile(string srcFilePath, string desFilePath)
     {
+        var tempDir = Path.GetDirectoryName(desFilePath);
+        if (!Directory.Exists(tempDir))
+        {
+            Directory.CreateDirectory(tempDir);
+        }
+
+        if (File.Exists(desFilePath))
+        {
+            File.Delete(desFilePath);
+        }
 
         System.IO.File.Copy(srcFilePath, desFilePath);//复制文件
     }

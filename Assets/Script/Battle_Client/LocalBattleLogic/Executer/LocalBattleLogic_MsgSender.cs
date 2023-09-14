@@ -13,6 +13,11 @@ namespace Battle_Client
             throw new System.NotImplementedException();
         }
 
+        public void NotifyAll_PlayerReadyState(int uid,bool isReady)
+        {
+            BattleManager.Instance.MsgReceiver.On_PlayerReadyState(uid,isReady);
+        }
+
         public void NotifyAll_AllPlayerLoadFinish()
         {
             BattleManager.Instance.MsgReceiver.On_AllPlayerLoadFinish();

@@ -1,32 +1,45 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Linq;
 
 public class BuildArg
 {
     public bool isBuildPackage;
     public bool isBuildAB;
+    public UploadABType uploadABType;
     public string productName;
     public string version;
     public BuildTarget buildTarget;
     public string channel;
     public string resVersion = "";
+    public string preCompileDefines = "";
+}
+
+public enum UploadABType
+{
+    //不上传
+    No = 0,
+    //上传到本地
+    Local = 1,
+    //通过 ftp 上传
+    FTP = 2
 }
 
 public class BuildPackageTool
 {
-
     static BuildArg buildArgs;
-    public static List<string> commandArgs = new List<string>()
-    {
-        "is_build_package",
-        "is_build_ab",
-        "product_name",
-        "version",
-        "platform",
-        "channel",
-        "res_version"
-    };
+
+    // public static List<string> commandArgs = new List<string>()
+    // {
+    //     "is_build_package",
+    //     "is_build_ab",
+    //     "product_name",
+    //     "version",
+    //     "platform",
+    //     "channel",
+    //     "res_version"
+    // };
 
     [MenuItem("Build/Build Package")]
     public static void BuildPackage()
@@ -69,8 +82,8 @@ public class BuildPackageTool
 
     static void StartBuild()
     {
-        Logx.Log("Build 包版本 : " + buildArgs.version);
-        Logx.Log("Build 平台 : " + buildArgs.buildTarget);
+        Logx.Log(LogxType.Build,"Build 包版本 : " + buildArgs.version);
+        Logx.Log(LogxType.Build,"Build 平台 : " + buildArgs.buildTarget);
 
         BuildPlayerOptions opt = new BuildPlayerOptions();
         opt.scenes = new string[] { "Assets/Scenes/Startup.unity" };
@@ -78,11 +91,15 @@ public class BuildPackageTool
 
         if (buildArgs.buildTarget == BuildTarget.StandaloneWindows64)
         {
-            opt.locationPathName = "E:\\E_Place_For_Use\\GamePacageOutPath\\Windows\\test001.exe";
+            opt.locationPathName = "D:\\UnityPackageOutPath\\OrderOfChain\\Windows\\OrderOfChain_" + buildArgs.version +
+                                   ".exe";
+            opt.targetGroup = BuildTargetGroup.Standalone;
         }
         else if (buildArgs.buildTarget == BuildTarget.Android)
         {
-            opt.locationPathName = "E:\\E_Place_For_Use\\GamePacageOutPath\\Android\\test001.apk";
+            opt.locationPathName = "D:\\UnityPackageOutPath\\OrderOfChain\\Windows\\OrderOfChain_" + buildArgs.version +
+                                   ".apk";
+            opt.targetGroup = BuildTargetGroup.Android;
         }
         else if (buildArgs.buildTarget == BuildTarget.iOS)
         {
@@ -93,27 +110,86 @@ public class BuildPackageTool
         opt.target = buildArgs.buildTarget;
         opt.options = BuildOptions.None;
 
+
         PlayerSettings.productName = buildArgs.productName;
         PlayerSettings.bundleVersion = buildArgs.version;
 
+        opt.options |= BuildOptions.Development;
+        opt.options |= BuildOptions.AllowDebugging;
+
+        string[] preCompileDefines = buildArgs.preCompileDefines.Split(';');
+
+     
+
+        BuildTargetGroup buildTargetGroup = opt.targetGroup;
+        Debug.Log("buildTargetGroup" + buildTargetGroup);
+
+        var symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(opt.targetGroup);
+        //添加想要的宏定义
+        var symbolsStrs = symbols.Split(';').ToList();
+        
+        //清空之前的自定义预编译定义
+        string[] fixedDefines = { "IS_LOCAL_BATTLE", "IS_USE_AB", "IS_USE_INTERNAL_AB" };
+        foreach (var VARIABLE in fixedDefines)
+        {
+            symbolsStrs.Remove(VARIABLE);
+        }
+
+        // Debug.Log("原先的预编译宏 : start ");
+        // foreach (var VARIABLE in symbolsStrs)
+        // {
+        //     Debug.Log("" + VARIABLE);
+        // }
+        //
+        // Debug.Log("原先的预编译宏 : end");
+
+        // if (ss.Contains("UNITY_TEST"))
+        // {
+        //     return;
+        // }
+        // ss.Add("UNITY_TEST");
+
+        foreach (var currCompileStr in preCompileDefines)
+        {
+            // Debug.Log("symbolsStrs : start ");
+            // foreach (var VARIABLE in symbolsStrs)
+            // {
+            //     Debug.Log("symbolsStrs : " + VARIABLE);
+            // }
+            //
+            // Debug.Log("symbolsStrs : end ");
+            //
+            // Debug.Log("currCompileStr : " + currCompileStr);
+
+            if (!symbolsStrs.Contains(currCompileStr))
+            {
+                symbolsStrs.Add(currCompileStr);
+            }
+        }
+
+        symbols = string.Join(";", symbolsStrs);
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, symbols);
+        //Debug.Log("添加后的宏：" + PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup));
+
+
         if (buildArgs.isBuildAB)
         {
-            Logx.Log("开始 build AB");
-            ABPackageTool.BuildAssetResource(buildArgs.buildTarget, buildArgs.resVersion);
+            Logx.Log(LogxType.Build,"开始 build AB");
+            ABPackageTool.BuildAssetResource(buildArgs.buildTarget, buildArgs.resVersion,buildArgs.uploadABType);
         }
 
         if (buildArgs.isBuildPackage)
         {
-            Logx.Log("开始 build 包");
+            Logx.Log(LogxType.Build,"开始 build 包");
             BuildPipeline.BuildPlayer(opt);
         }
 
-        Debug.Log("Build All Done!");
+        Logx.Log(LogxType.Build,"build 完成");
     }
 
     public static void HandleCommand(string cmd, string value)
     {
-
+        // UnityEditor.WindowsStandalone.WinPlayerPostProcessor.PrepareForBuild
         if (cmd == "is_build_package")
         {
             buildArgs.isBuildPackage = bool.Parse(value);
@@ -154,6 +230,13 @@ public class BuildPackageTool
         {
             buildArgs.resVersion = value;
         }
+        else if (cmd == "pre_compile_defines")
+        {
+            buildArgs.preCompileDefines = value;
+        }
+        else if (cmd == "upload_ab_Type")
+        {
+            buildArgs.uploadABType = (UploadABType)int.Parse(value);
+        }
     }
-
 }

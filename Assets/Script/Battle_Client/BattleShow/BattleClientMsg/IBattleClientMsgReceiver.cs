@@ -8,17 +8,20 @@ using Battle_Client;
 using GameData;
 using NetProto;
 using UnityEngine;
+
 namespace Battle_Client
 {
-
     //客户端战斗消息接收
     public interface IBattleClientMsgReceiver
     {
         //void On_EntityStartMove(IBattleClientMsg battleMsg);
         //void On_CreateBattle(BattleClientMsg_InitArg initArg);
+        void On_PlayerReadyState(int uid, bool isReady);
         void On_AllPlayerLoadFinish();
         void On_StartBattle();
+
         void On_CreateEntities(List<BattleClientMsg_Entity> entity);
+
         //void On_EntityStartMove(int Guid, UnityEngine.Vector3 EndPos, UnityEngine.Vector3 uDir, float MoveSpeed);
         void On_EntityStartMoveByPath(int Guid, List<UnityEngine.Vector3> EndPos, float MoveSpeed);
         void On_EntityStopMove(int Guid, UnityEngine.Vector3 EndPos);
@@ -39,6 +42,4 @@ namespace Battle_Client
         void On_SkillTrackStart(BattleClientMsg_CreateSkillTrack buffInfo);
         void On_SkillTrackEnd(int entityGuid, int trackId);
     }
-
-
 }

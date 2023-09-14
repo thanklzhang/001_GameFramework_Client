@@ -67,6 +67,8 @@ public class LobbyCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
+        Logx.Log(LogxType.Game,"enter game lobby success");
+        
         //play bgm
         AudioManager.Instance.PlayBGM((int)ResIds.bgm_002);
     }

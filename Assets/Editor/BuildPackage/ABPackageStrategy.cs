@@ -24,7 +24,7 @@ public class ABPackageStrategy
         foreach (var option in strategySO.strategyList)
         {
             var path = AssetDatabase.GetAssetPath(option.path);
-            Logx.Log("path : " + path);
+            
             var newObj = new StrategyInfo()
             {
                 path = path,

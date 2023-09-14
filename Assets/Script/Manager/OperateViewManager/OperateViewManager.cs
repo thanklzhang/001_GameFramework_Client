@@ -26,8 +26,8 @@ public class OperateViewManager : Singleton<OperateViewManager>
     }
 
     //-------------------
-    public void OpenOutline(GameObject go)
-    {
-        modelOutlineModule.OpenOutline(go);
-    }
+    // public void OpenOutline(GameObject go)
+    // {
+    //     modelOutlineModule.OpenOutline(go);
+    // }
 }

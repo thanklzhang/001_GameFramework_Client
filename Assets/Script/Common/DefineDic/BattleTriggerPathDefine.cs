@@ -27,17 +27,17 @@ namespace Table
 			{"BattleTrigger/TestTrigger",new List<string>()
 				{
 					
-					"BattleTrigger/TestTrigger/gen.json",
+					"BattleTrigger/TestTrigger/test_trigger_battle_fail_dead.json",
 					
-					"BattleTrigger/TestTrigger/test_trigger_battle_fail.json",
+					"BattleTrigger/TestTrigger/test_trigger_battle_fail_time.json",
 					
 					"BattleTrigger/TestTrigger/test_trigger_battle_win.json",
 					
-					"BattleTrigger/TestTrigger/test_trigger_gen_boss 1.json",
-					
 					"BattleTrigger/TestTrigger/test_trigger_gen_boss.json",
 					
-					"BattleTrigger/TestTrigger/test_trigger_gen_monster.json",
+					"BattleTrigger/TestTrigger/test_trigger_gen_monster_0 1.json",
+					
+					"BattleTrigger/TestTrigger/test_trigger_gen_monster_0.json",
 					
 				}		
 				

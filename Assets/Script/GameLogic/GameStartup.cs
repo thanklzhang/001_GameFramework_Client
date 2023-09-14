@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 //正常游戏流程启动
 public class GameStartup : MonoBehaviour
 {
-    public bool isLocalBattle = false;
+    public bool isLocalBattleTest = false;
     public bool isUseAB = false;
     public bool isUseInternalAB;
 
@@ -26,6 +26,8 @@ public class GameStartup : MonoBehaviour
     //public Texture2D selectCursor;
     void Awake()
     {
+        Logx.Log(LogxType.Game,"Init");
+        
         DontDestroyOnLoad(this.gameObject);
 
         serverTypeUI.startUp = this;
@@ -36,34 +38,80 @@ public class GameStartup : MonoBehaviour
         updateResourceUI = new UpdateResourceUI();
         updateResourceUI.Init(updateResourceRootGo, updateResModule);
 
+      
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        HandlePreCompileVar();
+     
         //// test http
         //StartCoroutine(xxx());
         //return;
         ////
 
-        Const.isUseAB = this.isUseAB;
-        Const.isUseInternalAB = this.isUseInternalAB;
+      
         //Startup();
         initOperateRoot.gameObject.SetActive(true);
         var formal = false;
         if (formal)
         {
+            Logx.Log(LogxType.Game,"mode : Formal Game");
+            
             //正式环境
             Startup();
         }
         else
         {
-            //目前先按照本地服务器来
-            Const.isLocalServer = true;
-            serverTypeUI.gameObject.SetActive(false);
-            this.Startup();
+            if (Const.isLocalBattleTest)
+            {
+                //本地战斗 供测试使用
+                Logx.Log(LogxType.Game,"mode : local battle test");
+                this.Startup();
+            }
+            else
+            {
+                //局域网模式 本地需要开启所有本地服务器
+                // Const.isLANServer = true;
+                Logx.Log(LogxType.Game,"mode : LAN Game");
+                
+                serverTypeUI.gameObject.SetActive(true);
+                //this.Startup(); 
+            }
         }
+    }
 
+    //处理预编译变量
+    void HandlePreCompileVar()
+    {
+        
+        Const.isLocalBattleTest = false;
+        Const.isUseAB = false;
+        Const.isUseInternalAB = false;
+        
+        
+#if UNITY_EDITOR
+        Const.isLocalBattleTest = this.isLocalBattleTest;
+        Const.isUseAB = this.isUseAB;
+        Const.isUseInternalAB = this.isUseInternalAB;
+#else 
+    #if IS_LOCAL_BATTLE
+        Const.isLocalBattleTest = true;
+    #endif
+            
+    #if IS_USE_AB
+        Const.isUseAB = true;
+    #endif
+            
+    #if IS_USE_INTERNAL_AB
+        Const.isUseInternalAB = true;
+    #endif
+#endif
+        
+
+        
     }
 
     IEnumerator xxx()
@@ -89,6 +137,7 @@ public class GameStartup : MonoBehaviour
 
         updateResourceUI.Show();
         //检查游戏资源并更新
+        Logx.Log(LogxType.Game,"update resource start");
         UpdateResError updateResError = new UpdateResError();
         yield return updateResModule.CheckResource(updateResError);
 
@@ -98,6 +147,8 @@ public class GameStartup : MonoBehaviour
             updateResModule.TriggerStateEvent(UpdateResStateType.Error, updateResError.errInfo);
             yield break;
         }
+        
+        Logx.Log(LogxType.Game,"update resource finish");
 
         //资源更新完成
         initOperateRoot.gameObject.SetActive(false);
@@ -107,10 +158,13 @@ public class GameStartup : MonoBehaviour
         var go = Instantiate(gameInitPrefab);
         var gameMain = go.GetComponent<GameMain>();
 
+      
+        
         yield return gameMain.GameInit(() =>
         {
+          
             //游戏初始化完毕 开始游戏逻辑
-            if (!isLocalBattle)
+            if (!Const.isLocalBattleTest)
             {
                 gameMain.StartToLogin();
             }

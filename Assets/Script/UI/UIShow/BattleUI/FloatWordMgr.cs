@@ -71,4 +71,15 @@ public class FloatWordMgr
             }
         }
     }
+
+    public void Release()
+    {
+        foreach (var item in floatWordDic)
+        {
+            if (item.Value.IsUsing)
+            {
+                item.Value.Release();
+            }
+        }
+    }
 }

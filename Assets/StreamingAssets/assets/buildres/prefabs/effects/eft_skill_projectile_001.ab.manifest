@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3415202726
+CRC: 3766850621
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1c7ffff2d3c858ef0560e4e42fb207e9
+    Hash: f1fe7e2a8d14f0c391738a386b340397
   TypeTreeHash:
     serializedVersion: 2
-    Hash: dfd4d0af64049518232a7be03a0c4d78
+    Hash: 71634d11c1696d028530024ed31d6aac
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -21,11 +21,19 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
 - Class: 198
   Script: {instanceID: 0}
 - Class: 199
   Script: {instanceID: 0}
+- Class: 243
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/Effects/eft_skill_projectile_001.prefab
-Dependencies: []
+Dependencies:
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/audio/mixer/battleaudio.ab
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/audio/sound/audio_fire_001.ab

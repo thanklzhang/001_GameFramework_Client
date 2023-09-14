@@ -29,19 +29,28 @@ public class ABPackageTool
     {
         BuildAssetResource(BuildTarget.StandaloneWindows64);
     }
-
-
-    public static void BuildAssetResource(BuildTarget target, string resVersion = "")
+    
+    [MenuItem("BuildResource/Build Windows Resource(and local update)", false, 102)]
+    public static void BuildWindowsResourceByLocalUpload()
     {
-        StartBuildProgress(target, resVersion);
+        BuildAssetResource(BuildTarget.StandaloneWindows64,"", UploadABType.Local);
+    }
+
+
+    public static void BuildAssetResource(BuildTarget target, string resVersion = "",
+        UploadABType uploadAbType = UploadABType.No)
+    {
+        StartBuildProgress(target, resVersion,uploadAbType);
     }
 
 
     static Dictionary<string, string> assetToAbDic;
     static List<AssetBundleBuild> bundleBuildList;
 
-    public static void StartBuildProgress(BuildTarget target,string resVersion = "")
+    public static void StartBuildProgress(BuildTarget target, string resVersion = "", UploadABType uploadAbType = UploadABType.No)
     {
+        Logx.Log(LogxType.Build,"开始 build AB , target : " + target);
+        
 #if UNITY_EDITOR
         //unity 系统路径只能再主线程访问 所以先储存
         // Const.AppStreamingAssetPath = Application.streamingAssetsPath;
@@ -52,7 +61,7 @@ public class ABPackageTool
 
         GenerateAssetToAbDicFileData();
 
-        BuildAssetBundle(target, resVersion);
+        BuildAssetBundle(target, resVersion,uploadAbType);
     }
 
     public static void CollectAssetInfo()
@@ -101,7 +110,7 @@ public class ABPackageTool
     }
 
     //开始打 AB 包
-    public static void BuildAssetBundle(BuildTarget buildTarget, string resVersion = "")
+    public static void BuildAssetBundle(BuildTarget buildTarget, string resVersion = "", UploadABType uploadAbType = UploadABType.No)
     {
         //先取出当前的版本资源信息
         var versionPath = Const.AppStreamingAssetPath + "/" + "version.txt";
@@ -127,15 +136,20 @@ public class ABPackageTool
         }
         else
         {
-            Logx.Log("第一次打资源包");
+            Logx.Log(LogxType.Build,"第一次打资源包");
         }
 
         //开始 bundle 打包到 streamingAsset 路径中
         var outPath = Const.AppStreamingAssetPath;
         var abManifest = BuildPipeline.BuildAssetBundles(outPath, bundleBuildList.ToArray(), BuildAssetBundleOptions.None, buildTarget);
 
+        
+        Logx.Log(LogxType.Build,"Build AB 完成");
+        
         AssetDatabase.Refresh();
 
+     
+        
         var difList = new List<ResInfo>();
         //获取打包后的资源
         List<ResInfo> newestResList = GenerateFileResWithMD5(Const.AppStreamingAssetPath);
@@ -145,7 +159,7 @@ public class ABPackageTool
 
         difList.ForEach(d =>
         {
-            Logx.Log("有更新的资源路径 : " + d.path + "   |   md5 : " + d.md5);
+            Logx.Log(LogxType.Build,"有更新的资源路径 : " + d.path + "   |   md5 : " + d.md5);
         });
 
         bool isUpperVer = difList.Count > 0;
@@ -160,7 +174,7 @@ public class ABPackageTool
             newBigVer = int.Parse(strs[0]);
             newSmallVer = int.Parse(strs[1]);
 
-            Logx.Log(string.Format("强行升级资源版本 ：{0}", resVersion));
+            Logx.Log(LogxType.Build,string.Format("强行升级资源版本 ：{0}", resVersion));
 
             var newStr = ResListToString(newestResList);
             FileTool.SaveToFile(fileListPath, newStr);
@@ -169,7 +183,7 @@ public class ABPackageTool
 
             AssetDatabase.Refresh();
 
-            UploadRes(difList);
+            UploadRes(difList,uploadAbType);
         }
         else
         {
@@ -182,12 +196,12 @@ public class ABPackageTool
 
                     var oldVerStr = "v" + oldBigVer + "." + oldSmallVer;
                     var newVerStr = "v" + newBigVer + "." + newSmallVer;
-                    Logx.Log(string.Format("有新资源 升级资源版本 ：{0} -> {1}", oldVerStr, newVerStr));
+                    Logx.Log(LogxType.Build,string.Format("有新资源 升级资源版本 ：{0} -> {1}", oldVerStr, newVerStr));
                 }
                 else
                 {
                     //第一次打包
-                    Logx.Log(string.Format("第一次打资源包的资源版本 ：{0}", "v1.0"));
+                    Logx.Log(LogxType.Build,string.Format("第一次打资源包的资源版本 ：{0}", "v1.0"));
                 }
 
                 var newStr = ResListToString(newestResList);
@@ -199,12 +213,12 @@ public class ABPackageTool
 
               
                 //暂时取消自动上传机制
-                //UploadRes(difList);
+                UploadRes(difList,uploadAbType);
 
             }
             else
             {
-                Logx.Log("当前没有变化的资源 无需升级资源版本");
+                Logx.Log(LogxType.Build,"当前没有变化的资源 无需升级资源版本");
             }
         }
     }
@@ -327,7 +341,7 @@ public class ABPackageTool
     }
 
     //上传资源
-    public static async void UploadRes(List<ResInfo> difList)
+    public static async void UploadRes(List<ResInfo> difList, UploadABType uploadAbType)
     {
         //打资源后 更改过的或者新的的资源会上传到 ftp 服务器
         //TODO : 变成可配置操作 : 1 自动更新到服务器
@@ -335,23 +349,39 @@ public class ABPackageTool
 
         await Task.Run(() =>
         {
-            Logx.Log("有资源更改 开始资源上传");
+            if (uploadAbType == UploadABType.No)
+            {
+                Logx.Log(LogxType.Build, "上传模式 ：不上传资源");
+                return;
+            }
 
-            UploadByResInfoList(difList);
-            UploadResFlagInfo();
+            
+            
+            Logx.Log(LogxType.Build, "有资源更改 开始资源上传");
+
+            UploadByResInfoList(difList, uploadAbType);
+            UploadResFlagInfo(uploadAbType);
 
 
-            Logx.Log("完成 更新资源上传");
+            Logx.Log(LogxType.Build, "完成 更新资源上传");
+
+
 
         });
     }
 
     //上传版本资源信息标记的文件
-    public static void UploadResFlagInfo()
+    public static void UploadResFlagInfo(UploadABType uploadAbType)
     {
         List<string> strs = new List<string>();
-        strs.Add("version.txt");
-        strs.Add("file_list.txt");
+        if (!strs.Contains("version.txt"))
+        {
+            strs.Add("version.txt");
+        }
+        if (!strs.Contains("file_list.txt"))
+        {
+            strs.Add("file_list.txt");
+        }
 
         List<ResInfo> resList = new List<ResInfo>();
         foreach (var str in strs)
@@ -363,11 +393,11 @@ public class ABPackageTool
             });
         }
 
-        UploadByResInfoList(resList);
+        UploadByResInfoList(resList,uploadAbType);
 
     }
 
-    //获得路径下需要上传的所有文件
+    //获得路径下可以上传的格式的所有文件
     public static List<ResInfo> GetCanUploadAllFilesInfo(string sourceFolder)
     {
         List<ResInfo> resList = new List<ResInfo>();
@@ -387,7 +417,27 @@ public class ABPackageTool
         return resList;
     }
 
-    [MenuItem("BuildResource/upload all res to ftp server", false, 104)]
+    //上传所有的资源 到 本地
+    [MenuItem("BuildResource/upload all res to local", false, 104)]
+    public static async void UploadAllResToLocal()
+    {
+        //强行更新所有资源到 本地
+        //注意这里没有增加版本号 所以客户端不会更新 这里只是更新资源
+        await Task.Run(() =>
+        {
+            Logx.Log(LogxType.Build,"开始 所有资源上传");
+
+            List<ResInfo> newestResList = GetCanUploadAllFilesInfo(Const.AppStreamingAssetPath);
+            UploadByResInfoList(newestResList, UploadABType.Local);
+            UploadResFlagInfo(UploadABType.Local);
+
+            Logx.Log(LogxType.Build,"完成 所有资源上传");
+        });
+
+    }
+    
+    //上传所有的资源 到 ftp
+    [MenuItem("BuildResource/upload all res to ftp server", false, 105)]
     public static async void UploadAllResToFtp()
     {
         //强行更新所有资源到 ftp 服务器
@@ -399,32 +449,50 @@ public class ABPackageTool
 #endif
         await Task.Run(() =>
         {
-            Logx.Log("开始 所有资源上传");
+            Logx.Log(LogxType.Build,"开始 所有资源上传");
 
             List<ResInfo> newestResList = GetCanUploadAllFilesInfo(Const.AppStreamingAssetPath);
-            UploadByResInfoList(newestResList);
-            UploadResFlagInfo();
+            UploadByResInfoList(newestResList, UploadABType.FTP);
+            UploadResFlagInfo(UploadABType.FTP);
 
-            Logx.Log("完成 所有资源上传");
+            Logx.Log(LogxType.Build,"完成 所有资源上传");
         });
 
 
     }
 
-    //通过 ftp 上传资源文件
-    public static void UploadByResInfoList(List<ResInfo> newestResList)
+    //上传传入的资源文件列表
+    public static void UploadByResInfoList(List<ResInfo> newestResList, UploadABType uploadAbType)
     {
-        FTPHelper helper = new FTPHelper();
-        helper.Init("ftp://127.0.0.1", "thanklzhang", "zhang425");
-
-        for (int i = 0; i < newestResList.Count; i++)
+        if (uploadAbType == UploadABType.Local)
         {
-            var resInfo = newestResList[i];
-            var localPath = Const.AppStreamingAssetPath + "/" + resInfo.path;
-            var remotePath = resInfo.path;
-            Debug.Log("start upload res : " + localPath + " , remote res : " + remotePath);
-            helper.UpLoadFile(localPath, remotePath);
+            //本地上传
+            for (int i = 0; i < newestResList.Count; i++)
+            {
+                var resInfo = newestResList[i];
+                var localPath = Const.AppStreamingAssetPath + "/" + resInfo.path;
+                var remotePath = Const.localUploadABResPath + "/" + resInfo.path;
+                Debug.Log("start upload res (local) : " + localPath + " , remote res : " + remotePath);
+                FileTool.CopyFile(localPath,remotePath);
+                // helper.UpLoadFile(localPath, remotePath);
+            }
         }
+        else if(uploadAbType == UploadABType.FTP)
+        {
+            FTPHelper helper = new FTPHelper();
+            helper.Init("ftp://127.0.0.1", "thanklzhang", "zhang425");
+
+            for (int i = 0; i < newestResList.Count; i++)
+            {
+                var resInfo = newestResList[i];
+                var localPath = Const.AppStreamingAssetPath + "/" + resInfo.path;
+                var remotePath = resInfo.path;
+                Debug.Log("start upload res (ftp) : " + localPath + " , remote res : " + remotePath);
+                helper.UpLoadFile(localPath, remotePath);
+            }
+        }
+
+     
     }
 
     public class VersionInfo

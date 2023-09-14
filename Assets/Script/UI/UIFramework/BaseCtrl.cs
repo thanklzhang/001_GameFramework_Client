@@ -57,6 +57,8 @@ public class BaseCtrl
     //供 ctrlManager 调用
     public void StartLoad(Action finishCallback)
     {
+        Logx.Log(LogxType.Game,"this ctrl start load all resource : " + this.GetType());
+        
         this.finishCallback = finishCallback;
         state = CtrlState.Loading;
         this.OnStartLoad();
@@ -73,6 +75,7 @@ public class BaseCtrl
 
     public void LoadFinish()
     {
+        Logx.Log(LogxType.Game,"this ctrl finish load all resource : " + this.GetType());
         state = CtrlState.Inactive;
         this.finishCallback?.Invoke();
         //this.finishCallback = null;
@@ -81,6 +84,8 @@ public class BaseCtrl
 
     public void Enter(CtrlArgs args)
     {
+        Logx.Log(LogxType.Game,"enter  : " + this.GetType());
+        
         this.OnEnter(args);
     }
  
@@ -111,6 +116,8 @@ public class BaseCtrl
 
     public void Exit()
     {
+        Logx.Log(LogxType.Game,"exit  : " + this.GetType());
+        
         if (loadRequest != null)
         {
             loadRequest.Release();

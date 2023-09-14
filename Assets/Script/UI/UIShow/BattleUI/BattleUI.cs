@@ -21,10 +21,13 @@ public class BattleUI : BaseUI
 
     Button closeBtn;
     Button readyStartBtn;
+    Button hasReadyBtn;
     Button attrBtn;
 
     public GameObject readyBgGo;
     public Text stateText;
+
+    public GameObject bossComingRootGo;
 
     //血条
     HpUIMgr hpUIMgr;
@@ -46,7 +49,7 @@ public class BattleUI : BaseUI
 
     //通用描述面板
     DescribeUI describeUI;
-    
+
     //关卡信息界面
     BattleStageInfoUI stageInfoUI;
 
@@ -56,8 +59,11 @@ public class BattleUI : BaseUI
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         readyBgGo = this.transform.Find("readyBg").gameObject;
         readyStartBtn = this.transform.Find("readyBg/readyStartBtn").GetComponent<Button>();
+        hasReadyBtn = this.transform.Find("readyBg/hasReadyBtn").GetComponent<Button>();
         stateText = this.transform.Find("stateText").GetComponent<Text>();
         attrBtn = this.transform.Find("attrBtn").GetComponent<Button>();
+
+        bossComingRootGo = this.transform.Find("bossComingRoot").gameObject;
 
         closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
         readyStartBtn.onClick.AddListener(() =>
@@ -103,12 +109,11 @@ public class BattleUI : BaseUI
         describeUI = new DescribeUI();
         describeUI.Init(describeUIRoot.gameObject, this);
         describeUI.Hide();
-        
+
         //关卡信息界面
         var stageUIRoot = this.transform.Find("stageInfo");
         stageInfoUI = new BattleStageInfoUI();
-        stageInfoUI.Init(stageUIRoot.gameObject,this);
-
+        stageInfoUI.Init(stageUIRoot.gameObject, this);
     }
 
     protected override void OnUpdate(float timeDelta)
@@ -122,18 +127,35 @@ public class BattleUI : BaseUI
         this.buffUI.Update(timeDelta);
 
         this.describeUI.Update(timeDelta);
-        
+
         this.heroInfoUI.Update(timeDelta);
-        
+
         this.stageInfoUI.Update(timeDelta);
-        
     }
 
 
-    public void SetReadyBattleBtnShowState(bool isShow)
+    public void SetReadyShowState(bool isShow)
     {
         readyBgGo.SetActive(isShow);
         // readyStartBtn.gameObject.SetActive(isShow);
+        if (isShow)
+        {
+            SetReadyBtnShowState(false);
+        }
+    }
+
+    public void SetReadyBtnShowState(bool isHasReady = false)
+    {
+        if (!isHasReady)
+        {
+            readyStartBtn.gameObject.SetActive(true);
+            hasReadyBtn.gameObject.SetActive(false);
+        }
+        else
+        {
+            readyStartBtn.gameObject.SetActive(false);
+            hasReadyBtn.gameObject.SetActive(true);
+        }
     }
 
     public void SetStateText(string stateStr)
@@ -219,12 +241,25 @@ public class BattleUI : BaseUI
     {
         this.heroInfoUI.RefreshSingleHeroInfo(info, fromEntityGuid);
     }
-    
+
     public void StartBossLimitCountdown()
     {
         this.heroInfoUI.StartBossLimitCountdown();
     }
-
+    
+    #endregion
+    
+    #region boss 强敌来袭的动画效果
+    public void StartBossComingAni()
+    {
+        bossComingRootGo.gameObject.SetActive(true);
+    }
+    
+    public void HideBossComing()
+    {
+        bossComingRootGo.gameObject.SetActive(false);
+    }
+    
     #endregion
 
     #region buff 面板相关
@@ -255,8 +290,7 @@ public class BattleUI : BaseUI
     }
 
     #endregion
-    
-  
+
 
     #region 关卡信息相关
 
@@ -266,7 +300,7 @@ public class BattleUI : BaseUI
         this.stageInfoUI.Show();
     }
 
- 
+
     public void HideStageInfoUI()
     {
         this.stageInfoUI.Hide();
@@ -283,5 +317,6 @@ public class BattleUI : BaseUI
         this.skillUI.Release();
         this.buffUI.Release();
         this.describeUI.Release();
+        this.floatWordMgr.Release();
     }
 }

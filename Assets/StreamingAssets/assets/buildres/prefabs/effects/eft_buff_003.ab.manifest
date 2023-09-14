@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2727394581
+CRC: 4094542252
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 71922725f7ba263c05c458a2c2ca19de
+    Hash: 2b8bde3c0af3cea4177faa557674cb6f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 962c81cda984852b1c54d519de80b972
+    Hash: b0609e41a9429d4e4832d67f5e97f990
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -19,11 +19,19 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
 - Class: 198
   Script: {instanceID: 0}
 - Class: 199
   Script: {instanceID: 0}
+- Class: 243
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/BuildRes/Prefabs/Effects/eft_buff_003.prefab
-Dependencies: []
+Dependencies:
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/audio/mixer/battleaudio.ab
+- D:/GameProjects/KalGame/001_GameFramework_Client/Assets/StreamingAssets/assets/buildres/audio/sound/audio_gain_buff_state_001.ab

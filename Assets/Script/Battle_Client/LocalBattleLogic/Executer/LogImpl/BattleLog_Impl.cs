@@ -6,17 +6,17 @@ namespace Battle
     {
         public void Log(string str)
         {
-            Logx.Log(str);
+            Logx.Log(LogxType.Battle,str);
         }
 
         public void LogError(string str)
         {
-            Logx.LogWarning(str);
+            Logx.LogWarning(LogxType.Battle,str);
         }
 
         public void LogWarning(string str)
         {
-            Logx.LogWarning(str);
+            Logx.LogWarning(LogxType.Battle,str);
         }
     }
 

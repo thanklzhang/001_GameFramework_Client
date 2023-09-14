@@ -347,6 +347,12 @@ namespace Table
         
 		eft_knife_hit_002 = 15008028,
         
+		eft_range_001 = 15008029,
+        
+		eft_explosion_002 = 15008030,
+        
+		eft_explosion_003 = 15008031,
+        
 		eft_skill_director_001 = 15008101,
         
 		eft_skill_director_002 = 15008102,
@@ -384,6 +390,8 @@ namespace Table
 		monster1_battle = 15012001,
         
 		daoba_battle_030 = 15013001,
+        
+		OutlineEffect = 15014001,
         
 	
 	}  

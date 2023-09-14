@@ -48,66 +48,68 @@ namespace NetProto {
             "ASgFIh0KG2NzTm90aWZ5QWxsUGxheWVyTG9hZEZpbmlzaCIqChtzY05vdGlm",
             "eUFsbFBsYXllckxvYWRGaW5pc2gSCwoDZXJyGAEgASgFIhUKE2NzQmF0dGxl",
             "UmVhZHlGaW5pc2giIgoTc2NCYXR0bGVSZWFkeUZpbmlzaBILCgNlcnIYASAB",
-            "KAUiFQoTY3NOb3RpZnlCYXR0bGVTdGFydCIiChNzY05vdGlmeUJhdHRsZVN0",
-            "YXJ0EgsKA2VychgBIAEoBSJHCgxjc01vdmVFbnRpdHkSDAoEZ3VpZBgBIAEo",
-            "BRIpCgl0YXJnZXRQb3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8i",
-            "GwoMc2NNb3ZlRW50aXR5EgsKA2VychgBIAEoBSJqCgpjc1VzZVNraWxsEgwK",
-            "BGd1aWQYASABKAUSDwoHc2tpbGxJZBgCIAEoBRIpCgl0YXJnZXRQb3MYAyAB",
-            "KAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEgoKdGFyZ2V0R3VpZBgEIAEo",
-            "BSIZCgpzY1VzZVNraWxsEgsKA2VychgBIAEoBSIRCg9jc0NsaWVudFBsb3RF",
-            "bmQiHgoPc2NDbGllbnRQbG90RW5kEgsKA2VychgBIAEoBSJNChZzY05vdGlm",
-            "eUNyZWF0ZUVudGl0aWVzEjMKDmJhdHRsZUVudGl0aWVzGAEgAygLMhsuTmV0",
-            "UHJvdG8uQmF0dGxlRW50aXR5UHJvdG8ijwEKGHNjTm90aWZ5RW50aXR5TW92",
-            "ZUJ5UGF0aBIMCgRndWlkGAEgASgFEigKCHN0YXJ0UG9zGAIgASgLMhYuTmV0",
-            "UHJvdG8uVmVjdG9yM1Byb3RvEigKCHBhdGhMaXN0GAMgAygLMhYuTmV0UHJv",
-            "dG8uVmVjdG9yM1Byb3RvEhEKCW1vdmVTcGVlZBgEIAEoBSJOChZzY05vdGlm",
-            "eUVudGl0eVN0b3BNb3ZlEgwKBGd1aWQYASABKAUSJgoGZW5kUG9zGAIgASgL",
-            "MhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvIkYKEXNjTm90aWZ5RW50aXR5RGly",
-            "EgwKBGd1aWQYASABKAUSIwoDZGlyGAIgASgLMhYuTmV0UHJvdG8uVmVjdG9y",
-            "M1Byb3RvIj0KFnNjTm90aWZ5RW50aXR5VXNlU2tpbGwSDAoEZ3VpZBgBIAEo",
-            "BRIVCg1za2lsbENvbmZpZ0lkGAIgASgFIvgBChlzY05vdGlmeUNyZWF0ZVNr",
-            "aWxsRWZmZWN0EgwKBGd1aWQYASABKAUSDQoFcmVzSWQYAiABKAUSKAoIcG9z",
-            "aXRpb24YAyABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SGAoQZm9sbG93",
-            "RW50aXR5R3VpZBgEIAEoBRIQCghsYXN0VGltZRgFIAEoBRIVCg1pc0F1dG9E",
-            "ZXN0cm95GAYgASgIEhUKDWVmZmVjdFBvc1R5cGUYByABKAUSKQoIYnVmZklu",
-            "Zm8YCCABKAsyFy5OZXRQcm90by5CdWZmSW5mb1Byb3RvEg8KB3Rlc3RTZXEY",
-            "CSABKAUiiAEKDUJ1ZmZJbmZvUHJvdG8SDAoEZ3VpZBgBIAEoBRIUCgxidWZm",
-            "Q29uZmlnSWQYAiABKAUSEgoKc3RhY2tDb3VudBgDIAEoBRISCgpjdXJyQ0RU",
-            "aW1lGAQgASgFEhEKCW1heENEVGltZRgFIAEoBRIYChB0YXJnZXRFbnRpdHlH",
-            "dWlkGAYgASgFIkcKFnNjTm90aWZ5VXBkYXRlQnVmZkluZm8SLQoMYnVmZklu",
-            "Zm9MaXN0GAEgAygLMhcuTmV0UHJvdG8uQnVmZkluZm9Qcm90byLAAQocc2NO",
-            "b3RpZnlTa2lsbEVmZmVjdFN0YXJ0TW92ZRISCgplZmZlY3RHdWlkGAEgASgF",
-            "EigKCHN0YXJ0UG9zGAIgASgLMhYuTmV0UHJvdG8uVmVjdG9yM1Byb3RvEikK",
-            "CXRhcmdldFBvcxgDIAEoCzIWLk5ldFByb3RvLlZlY3RvcjNQcm90bxISCgp0",
-            "YXJnZXRHdWlkGAQgASgFEhAKCGlzRm9sbG93GAUgASgIEhEKCW1vdmVTcGVl",
-            "ZBgGIAEoBSJBChpzY05vdGlmeVNraWxsRWZmZWN0RGVzdHJveRISCgplZmZl",
-            "Y3RHdWlkGAEgASgFEg8KB3Rlc3RTZXEYAiABKAUicwoXc2NOb3RpZnlTa2ls",
-            "bEluZm9VcGRhdGUSEgoKZW50aXR5R3VpZBgBIAEoBRIVCg1za2lsbENvbmZp",
-            "Z0lkGAIgASgFEi0KCXNraWxsSW5mbxgDIAEoCzIaLk5ldFByb3RvLkJhdHRs",
-            "ZVNraWxsUHJvdG8iTQoWQmF0dGxlRW50aXR5VmFsdWVQcm90bxIMCgR0eXBl",
-            "GAEgASgFEg0KBXZhbHVlGAIgASgFEhYKDmZyb21FbnRpdHlHdWlkGAMgASgF",
-            "Il8KF3NjTm90aWZ5U3luY0VudGl0eVZhbHVlEhIKCmVudGl0eUd1aWQYASAB",
-            "KAUSMAoGdmFsdWVzGAIgAygLMiAuTmV0UHJvdG8uQmF0dGxlRW50aXR5VmFs",
-            "dWVQcm90byI0ChVCYXR0bGVFbnRpdHlBdHRyUHJvdG8SDAoEdHlwZRgBIAEo",
-            "BRINCgV2YWx1ZRgCIAEoBSJcChZzY05vdGlmeVN5bmNFbnRpdHlBdHRyEhIK",
-            "CmVudGl0eUd1aWQYASABKAUSLgoFYXR0cnMYAiADKAsyHy5OZXRQcm90by5C",
-            "YXR0bGVFbnRpdHlBdHRyUHJvdG8iKAoSc2NOb3RpZnlFbnRpdHlEZWFkEhIK",
-            "CmVudGl0eUd1aWQYASABKAUiJAoQc2NOb3RpZnlQbGF5UGxvdBIQCghwbG90",
-            "TmFtZRgBIAEoCSIRCg9zY05vdGlmeVBsb3RFbmQiOwoac2NOb3RpZnlTZXRF",
-            "bnRpdHlTaG93U3RhdGUSDQoFZ3VpZHMYASADKAUSDgoGaXNTaG93GAIgASgI",
-            "IosBChdzY05vdGlmeVNraWxsVHJhY2tTdGFydBIVCg10cmFja0NvbmZpZ0lk",
-            "GAEgASgFEhQKDHJlbGVhc2VyR3VpZBgCIAEoBRIpCgl0YXJnZXRQb3MYAyAB",
-            "KAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SGAoQdGFyZ2V0RW50aXR5R3Vp",
-            "ZBgEIAEoBSJHChVzY05vdGlmeVNraWxsVHJhY2tFbmQSEgoKZW50aXR5R3Vp",
-            "ZBgBIAEoBRIaChJza2lsbFRyYWNrQ29uZmlnSWQYAiABKAUiSgoQY3NBcHBs",
-            "eUJhdHRsZUVuZBI2ChFhcHBseUJhdHRsZUVuZEFyZxgBIAEoCzIbLk5ldFBy",
-            "b3RvLkFwcGx5QmF0dGxlRW5kQXJnIh8KEHNjQXBwbHlCYXR0bGVFbmQSCwoD",
-            "ZXJyGAEgASgFIkMKEXNjTm90aWZ5QmF0dGxlRW5kEg0KBWlzV2luGAEgASgF",
-            "Eh8KB3Jld2FyZHMYAiADKAsyDi5OZXRQcm90by5JdGVtIi8KEmNzVHJhbnNp",
-            "dGlvbkJhdHRsZRILCgNjbWQYASABKAUSDAoEZGF0YRgCIAEoDCIhChJzY1Ry",
-            "YW5zaXRpb25CYXR0bGUSCwoDZXJyGAEgASgFIhsKGWNzVHJhbnNpdGlvbkJh",
-            "dHRsZTJQbGF5ZXIiNgoZc2NUcmFuc2l0aW9uQmF0dGxlMlBsYXllchILCgNj",
-            "bWQYASABKAUSDAoEZGF0YRgCIAEoDGIGcHJvdG8z"));
+            "KAUiRQoYc2NOb3RpZnlQbGF5ZXJSZWFkeVN0YXRlEgsKA3VpZBgBIAEoBRIP",
+            "Cgdpc1JlYWR5GAIgASgIEgsKA2VychgDIAEoBSIVChNjc05vdGlmeUJhdHRs",
+            "ZVN0YXJ0IiIKE3NjTm90aWZ5QmF0dGxlU3RhcnQSCwoDZXJyGAEgASgFIkcK",
+            "DGNzTW92ZUVudGl0eRIMCgRndWlkGAEgASgFEikKCXRhcmdldFBvcxgCIAEo",
+            "CzIWLk5ldFByb3RvLlZlY3RvcjNQcm90byIbCgxzY01vdmVFbnRpdHkSCwoD",
+            "ZXJyGAEgASgFImoKCmNzVXNlU2tpbGwSDAoEZ3VpZBgBIAEoBRIPCgdza2ls",
+            "bElkGAIgASgFEikKCXRhcmdldFBvcxgDIAEoCzIWLk5ldFByb3RvLlZlY3Rv",
+            "cjNQcm90bxISCgp0YXJnZXRHdWlkGAQgASgFIhkKCnNjVXNlU2tpbGwSCwoD",
+            "ZXJyGAEgASgFIhEKD2NzQ2xpZW50UGxvdEVuZCIeCg9zY0NsaWVudFBsb3RF",
+            "bmQSCwoDZXJyGAEgASgFIk0KFnNjTm90aWZ5Q3JlYXRlRW50aXRpZXMSMwoO",
+            "YmF0dGxlRW50aXRpZXMYASADKAsyGy5OZXRQcm90by5CYXR0bGVFbnRpdHlQ",
+            "cm90byKPAQoYc2NOb3RpZnlFbnRpdHlNb3ZlQnlQYXRoEgwKBGd1aWQYASAB",
+            "KAUSKAoIc3RhcnRQb3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8S",
+            "KAoIcGF0aExpc3QYAyADKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8SEQoJ",
+            "bW92ZVNwZWVkGAQgASgFIk4KFnNjTm90aWZ5RW50aXR5U3RvcE1vdmUSDAoE",
+            "Z3VpZBgBIAEoBRImCgZlbmRQb3MYAiABKAsyFi5OZXRQcm90by5WZWN0b3Iz",
+            "UHJvdG8iRgoRc2NOb3RpZnlFbnRpdHlEaXISDAoEZ3VpZBgBIAEoBRIjCgNk",
+            "aXIYAiABKAsyFi5OZXRQcm90by5WZWN0b3IzUHJvdG8iPQoWc2NOb3RpZnlF",
+            "bnRpdHlVc2VTa2lsbBIMCgRndWlkGAEgASgFEhUKDXNraWxsQ29uZmlnSWQY",
+            "AiABKAUi+AEKGXNjTm90aWZ5Q3JlYXRlU2tpbGxFZmZlY3QSDAoEZ3VpZBgB",
+            "IAEoBRINCgVyZXNJZBgCIAEoBRIoCghwb3NpdGlvbhgDIAEoCzIWLk5ldFBy",
+            "b3RvLlZlY3RvcjNQcm90bxIYChBmb2xsb3dFbnRpdHlHdWlkGAQgASgFEhAK",
+            "CGxhc3RUaW1lGAUgASgFEhUKDWlzQXV0b0Rlc3Ryb3kYBiABKAgSFQoNZWZm",
+            "ZWN0UG9zVHlwZRgHIAEoBRIpCghidWZmSW5mbxgIIAEoCzIXLk5ldFByb3Rv",
+            "LkJ1ZmZJbmZvUHJvdG8SDwoHdGVzdFNlcRgJIAEoBSKIAQoNQnVmZkluZm9Q",
+            "cm90bxIMCgRndWlkGAEgASgFEhQKDGJ1ZmZDb25maWdJZBgCIAEoBRISCgpz",
+            "dGFja0NvdW50GAMgASgFEhIKCmN1cnJDRFRpbWUYBCABKAUSEQoJbWF4Q0RU",
+            "aW1lGAUgASgFEhgKEHRhcmdldEVudGl0eUd1aWQYBiABKAUiRwoWc2NOb3Rp",
+            "ZnlVcGRhdGVCdWZmSW5mbxItCgxidWZmSW5mb0xpc3QYASADKAsyFy5OZXRQ",
+            "cm90by5CdWZmSW5mb1Byb3RvIsABChxzY05vdGlmeVNraWxsRWZmZWN0U3Rh",
+            "cnRNb3ZlEhIKCmVmZmVjdEd1aWQYASABKAUSKAoIc3RhcnRQb3MYAiABKAsy",
+            "Fi5OZXRQcm90by5WZWN0b3IzUHJvdG8SKQoJdGFyZ2V0UG9zGAMgASgLMhYu",
+            "TmV0UHJvdG8uVmVjdG9yM1Byb3RvEhIKCnRhcmdldEd1aWQYBCABKAUSEAoI",
+            "aXNGb2xsb3cYBSABKAgSEQoJbW92ZVNwZWVkGAYgASgFIkEKGnNjTm90aWZ5",
+            "U2tpbGxFZmZlY3REZXN0cm95EhIKCmVmZmVjdEd1aWQYASABKAUSDwoHdGVz",
+            "dFNlcRgCIAEoBSJzChdzY05vdGlmeVNraWxsSW5mb1VwZGF0ZRISCgplbnRp",
+            "dHlHdWlkGAEgASgFEhUKDXNraWxsQ29uZmlnSWQYAiABKAUSLQoJc2tpbGxJ",
+            "bmZvGAMgASgLMhouTmV0UHJvdG8uQmF0dGxlU2tpbGxQcm90byJNChZCYXR0",
+            "bGVFbnRpdHlWYWx1ZVByb3RvEgwKBHR5cGUYASABKAUSDQoFdmFsdWUYAiAB",
+            "KAUSFgoOZnJvbUVudGl0eUd1aWQYAyABKAUiXwoXc2NOb3RpZnlTeW5jRW50",
+            "aXR5VmFsdWUSEgoKZW50aXR5R3VpZBgBIAEoBRIwCgZ2YWx1ZXMYAiADKAsy",
+            "IC5OZXRQcm90by5CYXR0bGVFbnRpdHlWYWx1ZVByb3RvIjQKFUJhdHRsZUVu",
+            "dGl0eUF0dHJQcm90bxIMCgR0eXBlGAEgASgFEg0KBXZhbHVlGAIgASgFIlwK",
+            "FnNjTm90aWZ5U3luY0VudGl0eUF0dHISEgoKZW50aXR5R3VpZBgBIAEoBRIu",
+            "CgVhdHRycxgCIAMoCzIfLk5ldFByb3RvLkJhdHRsZUVudGl0eUF0dHJQcm90",
+            "byIoChJzY05vdGlmeUVudGl0eURlYWQSEgoKZW50aXR5R3VpZBgBIAEoBSIk",
+            "ChBzY05vdGlmeVBsYXlQbG90EhAKCHBsb3ROYW1lGAEgASgJIhEKD3NjTm90",
+            "aWZ5UGxvdEVuZCI7ChpzY05vdGlmeVNldEVudGl0eVNob3dTdGF0ZRINCgVn",
+            "dWlkcxgBIAMoBRIOCgZpc1Nob3cYAiABKAgiiwEKF3NjTm90aWZ5U2tpbGxU",
+            "cmFja1N0YXJ0EhUKDXRyYWNrQ29uZmlnSWQYASABKAUSFAoMcmVsZWFzZXJH",
+            "dWlkGAIgASgFEikKCXRhcmdldFBvcxgDIAEoCzIWLk5ldFByb3RvLlZlY3Rv",
+            "cjNQcm90bxIYChB0YXJnZXRFbnRpdHlHdWlkGAQgASgFIkcKFXNjTm90aWZ5",
+            "U2tpbGxUcmFja0VuZBISCgplbnRpdHlHdWlkGAEgASgFEhoKEnNraWxsVHJh",
+            "Y2tDb25maWdJZBgCIAEoBSJKChBjc0FwcGx5QmF0dGxlRW5kEjYKEWFwcGx5",
+            "QmF0dGxlRW5kQXJnGAEgASgLMhsuTmV0UHJvdG8uQXBwbHlCYXR0bGVFbmRB",
+            "cmciHwoQc2NBcHBseUJhdHRsZUVuZBILCgNlcnIYASABKAUiQwoRc2NOb3Rp",
+            "ZnlCYXR0bGVFbmQSDQoFaXNXaW4YASABKAUSHwoHcmV3YXJkcxgCIAMoCzIO",
+            "Lk5ldFByb3RvLkl0ZW0iLwoSY3NUcmFuc2l0aW9uQmF0dGxlEgsKA2NtZBgB",
+            "IAEoBRIMCgRkYXRhGAIgASgMIiEKEnNjVHJhbnNpdGlvbkJhdHRsZRILCgNl",
+            "cnIYASABKAUiGwoZY3NUcmFuc2l0aW9uQmF0dGxlMlBsYXllciI2ChlzY1Ry",
+            "YW5zaXRpb25CYXR0bGUyUGxheWVyEgsKA2NtZBgBIAEoBRIMCgRkYXRhGAIg",
+            "ASgMYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -126,6 +128,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyAllPlayerLoadFinish), global::NetProto.scNotifyAllPlayerLoadFinish.Parser, new[]{ "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csBattleReadyFinish), global::NetProto.csBattleReadyFinish.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scBattleReadyFinish), global::NetProto.scBattleReadyFinish.Parser, new[]{ "Err" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyPlayerReadyState), global::NetProto.scNotifyPlayerReadyState.Parser, new[]{ "Uid", "IsReady", "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csNotifyBattleStart), global::NetProto.csNotifyBattleStart.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.scNotifyBattleStart), global::NetProto.scNotifyBattleStart.Parser, new[]{ "Err" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.csMoveEntity), global::NetProto.csMoveEntity.Parser, new[]{ "Guid", "TargetPos" }, null, null, null),
@@ -2390,6 +2393,179 @@ namespace NetProto {
 
   }
 
+  public sealed partial class scNotifyPlayerReadyState : pb::IMessage<scNotifyPlayerReadyState> {
+    private static readonly pb::MessageParser<scNotifyPlayerReadyState> _parser = new pb::MessageParser<scNotifyPlayerReadyState>(() => new scNotifyPlayerReadyState());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<scNotifyPlayerReadyState> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifyPlayerReadyState() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifyPlayerReadyState(scNotifyPlayerReadyState other) : this() {
+      uid_ = other.uid_;
+      isReady_ = other.isReady_;
+      err_ = other.err_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public scNotifyPlayerReadyState Clone() {
+      return new scNotifyPlayerReadyState(this);
+    }
+
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 1;
+    private int uid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Uid {
+      get { return uid_; }
+      set {
+        uid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isReady" field.</summary>
+    public const int IsReadyFieldNumber = 2;
+    private bool isReady_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsReady {
+      get { return isReady_; }
+      set {
+        isReady_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "err" field.</summary>
+    public const int ErrFieldNumber = 3;
+    private int err_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Err {
+      get { return err_; }
+      set {
+        err_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as scNotifyPlayerReadyState);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(scNotifyPlayerReadyState other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Uid != other.Uid) return false;
+      if (IsReady != other.IsReady) return false;
+      if (Err != other.Err) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Uid != 0) hash ^= Uid.GetHashCode();
+      if (IsReady != false) hash ^= IsReady.GetHashCode();
+      if (Err != 0) hash ^= Err.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Uid != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Uid);
+      }
+      if (IsReady != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsReady);
+      }
+      if (Err != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Err);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Uid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Uid);
+      }
+      if (IsReady != false) {
+        size += 1 + 1;
+      }
+      if (Err != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Err);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(scNotifyPlayerReadyState other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Uid != 0) {
+        Uid = other.Uid;
+      }
+      if (other.IsReady != false) {
+        IsReady = other.IsReady;
+      }
+      if (other.Err != 0) {
+        Err = other.Err;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Uid = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            IsReady = input.ReadBool();
+            break;
+          }
+          case 24: {
+            Err = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   /// <summary>
   /// 战斗开始
   /// </summary>
@@ -2400,7 +2576,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[15]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2489,7 +2665,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[16]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2609,7 +2785,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[17]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2760,7 +2936,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[18]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2880,7 +3056,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[19]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3087,7 +3263,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[20]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3207,7 +3383,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[21]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3296,7 +3472,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[22]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3416,7 +3592,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[23]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3528,7 +3704,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[24]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3733,7 +3909,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[25]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3887,7 +4063,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[26]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4041,7 +4217,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[27]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4189,7 +4365,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[28]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4548,7 +4724,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[29]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4811,7 +4987,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[30]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[31]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4923,7 +5099,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[31]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[32]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5201,7 +5377,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[32]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[33]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5349,7 +5525,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[33]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[34]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5528,7 +5704,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[34]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[35]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5707,7 +5883,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[35]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[36]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5844,7 +6020,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[36]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[37]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5992,7 +6168,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[37]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[38]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6132,7 +6308,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[38]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[39]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6252,7 +6428,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[39]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[40]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6372,7 +6548,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[40]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[41]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6464,7 +6640,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[41]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[42]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6605,7 +6781,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[42]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[43]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6815,7 +6991,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[43]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[44]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6963,7 +7139,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[44]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[45]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7086,7 +7262,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[45]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[46]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7206,7 +7382,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[46]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[47]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7346,7 +7522,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[47]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[48]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7491,7 +7667,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[48]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[49]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7611,7 +7787,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[49]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[50]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7700,7 +7876,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[50]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[51]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

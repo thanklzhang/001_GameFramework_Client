@@ -271,7 +271,7 @@ public class TeamCtrl : BaseCtrl
         var selfUid = GameDataManager.Instance.UserStore.Uid;
         if ((int)selfUid == uid)
         {
-            Logx.Log("room info : self leave room ");
+            // Logx.Log("room info : self leave room ");
             //自己退出房间 或者被 t
             GameDataManager.Instance.TeamStore.SetCurrEnterRoomData(null);
             this.roomInfoUI.Hide();
@@ -282,7 +282,7 @@ public class TeamCtrl : BaseCtrl
         }
         else
         {
-            Logx.Log("room info : other player leave room , uid : " + uid);
+            // Logx.Log("room info : other player leave room , uid : " + uid);
             //有人退出房间
             RefreshRoomInfoUI();
         }

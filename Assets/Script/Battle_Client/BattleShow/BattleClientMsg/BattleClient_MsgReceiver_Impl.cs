@@ -8,12 +8,17 @@ using Battle_Client;
 using GameData;
 using NetProto;
 using UnityEngine;
+
 namespace Battle_Client
 {
-
     //战斗客户端消息接收器
     public class BattleClient_MsgReceiver_Impl : IBattleClientMsgReceiver
     {
+        public void On_PlayerReadyState(int uid, bool isReady)
+        {
+            EventDispatcher.Broadcast<int, bool>(EventIDs.OnPlayerReadyState, uid, isReady);
+        }
+
         public void On_AllPlayerLoadFinish()
         {
             EventDispatcher.Broadcast(EventIDs.OnAllPlayerLoadFinish);
@@ -37,19 +42,18 @@ namespace Battle_Client
                 var entity = BattleEntityManager.Instance.CreateEntity(msgEntity);
                 EventDispatcher.Broadcast<BattleEntity_Client>(EventIDs.OnCreateEntity, entity);
             }
-
         }
 
         public void On_CreateSkillEffect(CreateEffectInfo createEffectInfo)
         {
             //var lastTime = lastTimeInt / 1000.0f;
-            BattleSkillEffectManager.Instance.CreateSkillEffect(createEffectInfo);
+            BattleSkillEffect_Client_Manager.Instance.CreateSkillEffect(createEffectInfo);
         }
 
         public void On_DestroySkillEffect(int effectGuid)
         {
             //如果是 buff 先处理 UI 显示
-            var effect = BattleSkillEffectManager.Instance.FindSkillEffect(effectGuid);
+            var effect = BattleSkillEffect_Client_Manager.Instance.FindSkillEffect(effectGuid);
             if (effect != null)
             {
                 var targetEntityGuid = effect.GetFollowEntityGuid();
@@ -68,13 +72,11 @@ namespace Battle_Client
                         isRemove = true
                     };
                     EventDispatcher.Broadcast(EventIDs.OnBuffInfoUpdate, buffUIData);
-
                 }
-
             }
 
 
-            BattleSkillEffectManager.Instance.DestorySkillEffect(effectGuid);
+            BattleSkillEffect_Client_Manager.Instance.DestorySkillEffect(effectGuid);
         }
 
         public void On_EntityDead(int entityGuid)
@@ -166,10 +168,11 @@ namespace Battle_Client
             BattleEntityManager.Instance.SetEntitiesShowState(isShow, entityGuids);
         }
 
-        public void On_SkillEffectStartMove(int EffectGuid, UnityEngine.Vector3 TargetPos, int TargetGuid, float moveSpeed)
+        public void On_SkillEffectStartMove(int EffectGuid, UnityEngine.Vector3 TargetPos, int TargetGuid,
+            float moveSpeed)
         {
             var guid = EffectGuid;
-            var skillEffect = BattleSkillEffectManager.Instance.FindSkillEffect(guid);
+            var skillEffect = BattleSkillEffect_Client_Manager.Instance.FindSkillEffect(guid);
             if (skillEffect != null)
             {
                 skillEffect.StartMove(TargetPos, TargetGuid, moveSpeed);
@@ -213,12 +216,11 @@ namespace Battle_Client
 
         public void On_BuffInfoUpdate(BuffEffectInfo buffInfo)
         {
-            var effect = BattleSkillEffectManager.Instance.FindSkillEffect(buffInfo.guid);
+            var effect = BattleSkillEffect_Client_Manager.Instance.FindSkillEffect(buffInfo.guid);
 
             if (effect != null)
             {
                 effect.SetBuffInfo(buffInfo);
-
             }
         }
 
@@ -230,15 +232,14 @@ namespace Battle_Client
                 releaserGuid = create.releaserEntityGuid,
                 targetPos = create.targetPos,
                 targetEntityGuid = create.targetEntityGuid
-
             };
 
             EventDispatcher.Broadcast<TrackBean>(EventIDs.OnSkillTrackStart, trackBean);
         }
 
-        public void On_SkillTrackEnd(int entityGuid,int skillTrackConfigId)
+        public void On_SkillTrackEnd(int entityGuid, int skillTrackConfigId)
         {
-            EventDispatcher.Broadcast<int,int>(EventIDs.OnSkillTrackEnd, entityGuid, skillTrackConfigId);
+            EventDispatcher.Broadcast<int, int>(EventIDs.OnSkillTrackEnd, entityGuid, skillTrackConfigId);
         }
     }
 }

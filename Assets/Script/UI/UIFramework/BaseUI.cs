@@ -32,6 +32,7 @@ public abstract class BaseUI
 
     public void Show()
     {
+        Logx.Log(LogxType.UI,"show ui  : " + this.GetType());
         gameObject.SetActive(true);
     }
 
@@ -52,6 +53,8 @@ public abstract class BaseUI
 
     public void Hide()
     {
+        Logx.Log(LogxType.UI,"hide ui  : " + this.GetType());
+        
         gameObject.SetActive(false);
     }
 
@@ -59,6 +62,9 @@ public abstract class BaseUI
     {
         //GameObject.Destroy(this.gameObject);
         //ResourceManager.Instance.ReturnGameObject(this.gameObject);
+        
+        Logx.Log(LogxType.UI,"release ui  : " + this.GetType());
+        
         this.OnRelease();
     }
 

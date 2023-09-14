@@ -104,63 +104,6 @@ namespace Battle_Client
             return this.localBattleExecuter.GetBattle();
         }
 
-
-        ///// <summary>
-        ///// 创建战斗
-        ///// </summary>
-        ///// <param name="battleInit"></param>
-        //public void CreateBattle(scNotifyCreateBattle battleInit)
-        //{
-        //    Logx.Log("battle manager : CreateBattle");
-        //    var battleInitArg = battleInit.BattleInitArg;
-        //    //战斗信息
-        //    this.battleGuid = battleInitArg.Guid;
-        //    this.battleTableId = battleInitArg.TableId;
-        //    this.battleRoomId = battleInitArg.RoomId;
-
-        //    //玩家信息
-        //    players = new Dictionary<int, ClientPlayer>();
-        //    foreach (var serverPlayer in battleInitArg.BattlePlayerInitArg.PlayerList)
-        //    {
-        //        ClientPlayer player = new ClientPlayer()
-        //        {
-        //            playerIndex = serverPlayer.PlayerIndex,
-        //            team = serverPlayer.Team,
-        //            uid = serverPlayer.Uid,
-        //            ctrlHeroGuid = serverPlayer.CtrlHeroGuid
-        //        };
-
-        //        this.players.Add(player.uid, player);
-        //    }
-
-        //    //设置本地玩家
-        //    var userDataStore = GameDataManager.Instance.UserStore;
-        //    var uid = (int)userDataStore.Uid;
-        //    if (players.ContainsKey(uid))
-        //    {
-        //        this.localPlayer = players[uid];
-        //    }
-        //    else
-        //    {
-        //        Logx.LogError("the uid of localPlayer is not found : " + uid);
-        //    }
-
-        //    //实体信息
-        //    Logx.Log("battle manager : CreateInitEntity");
-        //    foreach (var serverEntity in battleInitArg.EntityInitArg.BattleEntityInitList)
-        //    {
-        //        BattleEntityManager.Instance.CreateViewEntityInfo(serverEntity);
-        //    }
-
-        //    //设置本地玩家控制的英雄
-        //    this.localCtrlEntity = BattleEntityManager.Instance.FindEntity(this.localPlayer.ctrlHeroGuid);
-
-        //    battleState = BattleState.Loading;
-
-        //    //进入战斗状态
-        //    CtrlManager.Instance.Enter<BattleCtrl>();
-        //}
-
         public int GetTeamByPlayerIndex(int playerIndex)
         {
             foreach (var item in playerDic)
@@ -186,7 +129,8 @@ namespace Battle_Client
         /// <param name="battleInit"></param>
         public void CreateBattle(BattleClient_CreateBattleArgs battleInit)
         {
-            Logx.Log("battle manager : CreateBattle");
+            // Logx.Log("battle manager : CreateBattle");
+            Logx.Log(LogxType.Game,"create battle");
 
             //战斗信息
             this.battleGuid = battleInit.guid;
@@ -223,7 +167,7 @@ namespace Battle_Client
             }
 
             //实体信息
-            Logx.Log("battle manager : CreateInitEntity");
+            // Logx.Log(LogxType.Battle,"battle manager : CreateInitEntity");
             foreach (var serverEntity in battleInit.entityList)
             {
                 BattleEntityManager.Instance.CreateViewEntityInfo(serverEntity);
@@ -246,13 +190,16 @@ namespace Battle_Client
 
         public void OnEnterBattle()
         {
+            Logx.Log(LogxType.Game,"battle start");
+            
             this.localBattleExecuter?.OnEnterBattle();
         }
 
         public void OnExitBattle()
         {
+            Logx.Log(LogxType.Game,"battle end");
+            
             this.localBattleExecuter?.OnExitBattle();
-
 
             this.Clear();
         }
@@ -270,7 +217,8 @@ namespace Battle_Client
         //创建远端战斗
         public void CreateRemoteBattle(BattleClient_CreateBattleArgs battleClientArgs)
         {
-            Logx.Log("battle manager : CreateRemoteBattle");
+            Logx.Log(LogxType.Game,"start create a remote battle");
+            
             //填充客户端所需组件
             msgSender = new BattleClient_MsgSender_Remote();
             msgReceiver = new BattleClient_MsgReceiver_Impl();
@@ -282,7 +230,7 @@ namespace Battle_Client
         //创建纯本地战斗
         public void CreatePureLocalBattle(int battleConfigId)
         {
-            Logx.Log("battle manager : CreatePureLocalBattle");
+            Logx.Log(LogxType.Game,"start create a pure local battle");
 
             GameDataManager.Instance.UserStore.Uid = 1;
             var uid = GameDataManager.Instance.UserStore.Uid;
@@ -302,6 +250,8 @@ namespace Battle_Client
         //创建远端结算的本地战斗
         public void CreateLocalButRemoteResultBattle(ApplyBattleArg applyArg)
         {
+            Logx.Log(LogxType.Game,"start create a local battle (result at remote)");
+            
             var battleConfigId = applyArg.BattleTableId;
             CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
             {
@@ -336,7 +286,7 @@ namespace Battle_Client
 
         public IEnumerator LoadTriggerResource(int battleConfigId, Action<TriggerSourceResData> finishCallback)
         {
-            Logx.Log("BattleManager : LoadTriggerResource ");
+            Logx.Log(LogxType.Battle,"BattleManager : LoadTriggerResource ");
 
             TriggerSourceResData source = new TriggerSourceResData();
             source.dataStrList = new List<string>();
@@ -351,20 +301,19 @@ namespace Battle_Client
             if (!Const.isUseAB)
             {
                 var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
-                var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories).ToList();
-          
+                var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories)
+                    .ToList();
+
                 files = new List<string>();
                 for (int i = 0; i < files2.Count; i++)
                 {
                     var f = files2[i];
-                    var f2 =  f.Replace(Const.buildPath + "/", "");
+                    var f2 = f.Replace(Const.buildPath + "/", "");
                     files.Add(f2);
                 }
-
             }
             else
-            {  
-               
+            {
                 var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
                 var abPath = loadPath2 + ".ab";
                 if (AssetManager.Instance.abToAssetsDic.ContainsKey(abPath))
@@ -373,7 +322,7 @@ namespace Battle_Client
                     var assets = AssetManager.Instance.abToAssetsDic[abPath];
                     foreach (var assetPath in assets)
                     {
-                        var resultPath = assetPath.Replace(Const.buildPath.ToLower() + "/","");
+                        var resultPath = assetPath.Replace(Const.buildPath.ToLower() + "/", "");
                         files.Add(resultPath);
                     }
                 }
@@ -383,8 +332,6 @@ namespace Battle_Client
                 }
             }
 
-          
-
 
             foreach (var filePath in files)
             {
@@ -393,9 +340,9 @@ namespace Battle_Client
                 //Logx.Log("local execute : start load : filePath :  " + filePath);
                 //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
                 var loadPath = Path.Combine(Const.buildPath, filePath);
-                
+
                 //Debug.Log("zxy : loadPath " + loadPath);
-                
+
                 //里面已经判断 是否AB 模式了 所以这里通用
                 ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
                 {
@@ -417,7 +364,7 @@ namespace Battle_Client
             }
 
 
-            Logx.Log("local execute : finish all ");
+            Logx.Log(LogxType.Battle,"local execute : finish all ");
             finishCallback?.Invoke(source);
         }
 
@@ -426,7 +373,7 @@ namespace Battle_Client
         public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source,
             MapInitArg mapInitData, bool isPureLocal)
         {
-            Logx.Log("battle manager : CreateLocalBattle");
+            Logx.Log(LogxType.Game,"start create a local battle");
             //填充数据
 
             //初始化本地战斗后台逻辑
@@ -452,6 +399,7 @@ namespace Battle_Client
 
         IEnumerator StartLocalBattle(BattleClient_CreateBattleArgs battleClientArgs)
         {
+           
             yield return new WaitForSeconds(0.1f);
 
             //客户端开启战斗
@@ -531,191 +479,10 @@ namespace Battle_Client
 
         public void BattleEnd(BattleResultDataArgs battleResultDataArgs)
         {
+            BattleManager.Instance.BattleState = BattleState.End;
             EventDispatcher.Broadcast(EventIDs.OnBattleEnd, battleResultDataArgs);
             this.OnExitBattle();
         }
-
-        //public void AllPlayerLoadFinish()
-        //{
-        //    EventDispatcher.Broadcast(EventIDs.OnAllPlayerLoadFinish);
-        //}
-
-        //public void StartBattle()
-        //{
-        //    EventDispatcher.Broadcast(EventIDs.OnBattleStart);
-
-        //    //已经加载好的实体统一走一遍创建流程
-        //    BattleEntityManager.Instance.NotifyCreateAllEntities();
-
-        //    battleState = BattleState.Running;
-        //}
-
-        //public void CreateEntity(NetProto.BattleEntityProto serverEntity)
-        //{
-        //    var entity = BattleEntityManager.Instance.CreateEntity(serverEntity);
-        //    EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
-        //}
-
-
-        ////logic 直接调用
-        //public void EntityStartMove(BattleMsg_NotifyEntityMove entityMove)
-        //{
-        //    var guid = entityMove.Guid;
-        //    var targetPos = entityMove.EndPos;
-        //    var moveSpeed = entityMove.MoveSpeed;
-        //    var entity = BattleEntityManager.Instance.FindEntity(guid);
-        //    if (entity != null)
-        //    {
-        //        entity.StartMove(targetPos, moveSpeed);
-        //    }
-        //}
-
-        ////net 层转换一次然后调用
-        //public void EntityStartMove(scNotifyEntityMove notifyEntityMove)
-        //{
-        //    var guid = notifyEntityMove.Guid;
-        //    var targetPos = BattleConvert.ConverToVector3(notifyEntityMove.EndPos);
-        //    var moveSpeed = BattleConvert.GetValue(notifyEntityMove.MoveSpeed);
-
-        //    BattleMsg_NotifyEntityMove msg = new BattleMsg_NotifyEntityMove()
-        //    {
-        //        Guid = guid,
-        //        EndPos = targetPos,
-        //        MoveSpeed = moveSpeed
-        //    };
-
-        //    EntityStartMove(msg);
-        //}
-
-        ////public void EntityStartMove(scNotifyEntityMove notifyEntityMove)
-        ////{
-        ////    var guid = notifyEntityMove.Guid;
-        ////    var targetPos = BattleConvert.ConverToVector3(notifyEntityMove.EndPos);
-        ////    var moveSpeed = BattleConvert.GetValue(notifyEntityMove.MoveSpeed);
-        ////    var entity = BattleEntityManager.Instance.FindEntity(guid);
-        ////    if (entity != null)
-        ////    {
-        ////        entity.StartMove(targetPos, moveSpeed);
-        ////    }
-        ////}
-
-        //public void EntityStopMove(scNotifyEntityStopMove stop)
-        //{
-        //    var guid = stop.Guid;
-        //    var endPos = BattleConvert.ConverToVector3(stop.EndPos);
-        //    var entity = BattleEntityManager.Instance.FindEntity(guid);
-        //    if (entity != null)
-        //    {
-        //        entity.StopMove(endPos);
-        //    }
-        //}
-
-        //public void EntityUseSkill(scNotifyEntityUseSkill releaseSkill)
-        //{
-        //    var guid = releaseSkill.Guid;
-        //    var entity = BattleEntityManager.Instance.FindEntity(guid);
-        //    if (entity != null)
-        //    {
-        //        entity.ReleaseSkill();
-        //    }
-
-        //}
-
-        //public void CreateSkillEffect(scNotifyCreateSkillEffect createSkillEffect)
-        //{
-        //    var guid = createSkillEffect.Guid;
-        //    var resId = createSkillEffect.ResId;
-        //    var pos = BattleConvert.ConverToVector3(createSkillEffect.Position);
-        //    var followEntityGuid = createSkillEffect.FollowEntityGuid;
-        //    BattleSkillEffectManager.Instance.CreateSkillEffect(guid, resId, pos, followEntityGuid);
-        //}
-
-        //public void SkillEffectStartMove(scNotifySkillEffectStartMove effectStartMove)
-        //{
-        //    var guid = effectStartMove.EffectGuid;
-        //    var skillEffect = BattleSkillEffectManager.Instance.FindSkillEffect(guid);
-        //    if (skillEffect != null)
-        //    {
-        //        var targetPos = BattleConvert.ConverToVector3(effectStartMove.TargetPos);
-        //        var targetGuid = effectStartMove.TargetGuid;
-        //        //var isFollow = effectStartMove.IsFollow;
-        //        var moveSpeed = BattleConvert.GetValue(effectStartMove.MoveSpeed);
-        //        skillEffect.StartMove(targetPos, targetGuid, moveSpeed);
-        //    }
-        //}
-
-        //public void DestroySkillEffect(scNotifySkillEffectDestroy skillEffectDestroy)
-        //{
-        //    var effectGuid = skillEffectDestroy.EffectGuid;
-        //    BattleSkillEffectManager.Instance.DestorySkillEffect(effectGuid);
-        //}
-
-        //internal void SyncEntityAttr(scNotifySyncEntityAttr sync)
-        //{
-        //    var entityGuid = sync.EntityGuid;
-        //    var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
-        //    if (entity != null)
-        //    {
-        //        entity.SyncAttr(sync.Attrs);
-        //    }
-        //}
-
-
-        //internal void SyncEntityValue(scNotifySyncEntityValue sync)
-        //{
-        //    var entityGuid = sync.EntityGuid;
-        //    var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
-        //    if (entity != null)
-        //    {
-        //        entity.SyncValue(sync.Values);
-        //    }
-        //}
-
-        //public void EntityDead(scNotifyEntityDead entityDead)
-        //{
-        //    var entityGuid = entityDead.EntityGuid;
-        //    var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
-        //    if (entity != null)
-        //    {
-        //        entity.Dead();
-        //    }
-        //}
-
-        //public void PlayPlot(scNotifyPlayPlot playPlot)
-        //{
-        //    var name = playPlot.PlotName;
-
-        //    BattleEntityManager.Instance.SetAllEntityShowState(false);
-        //    CameraManager.Instance.GetCameraUI().SetUICameraShowState(false);
-
-        //    PlotManager.Instance.StartPlot(name);
-        //}
-
-
-        //public void BattleEnd(scNotifyBattleEnd battleEnd)
-        //{
-        //    var isWin = 1 == battleEnd.IsWin;
-
-        //    battleState = BattleState.End;
-
-        //    EventDispatcher.Broadcast<bool>(EventIDs.OnBattleEnd, isWin);
-        //}
-
-        //internal void PlotEnd(scNotifyPlotEnd sync)
-        //{
-        //    BattleEntityManager.Instance.SetAllEntityShowState(true);
-        //    CameraManager.Instance.GetCameraUI().SetUICameraShowState(true);
-
-        //    PlotManager.Instance.ClosePlot();
-        //}
-
-
-        //internal void SetEntitiesShowState(scNotifySetEntityShowState sync)
-        //{
-        //    var entityGuids = sync.Guids.ToList();
-        //    var isShow = sync.IsShow;
-        //    BattleEntityManager.Instance.SetEntitiesShowState(entityGuids, isShow);
-        //}
 
         ////get --------------------
 

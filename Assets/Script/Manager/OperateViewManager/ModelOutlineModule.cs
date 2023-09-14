@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Table;
 using UnityEngine;
 
 public class ModelOutline
@@ -11,6 +12,7 @@ public class ModelOutline
 
     public Renderer[] renderers;
     List<Material[]> materials;
+
     public void Init(GameObject gameObject, Material outlineMat)
     {
         this.gameObject = gameObject;
@@ -36,8 +38,6 @@ public class ModelOutline
             matList.Add(outlineMat);
             renderers[i].sharedMaterials = matList.ToArray();
         }
-
-
     }
 
     public void RemoveOutline()
@@ -53,7 +53,6 @@ public class ModelOutline
 
     public void Release()
     {
-
     }
 }
 
@@ -64,13 +63,16 @@ public class ModelOutlineModule
 
     public void Init()
     {
-        outlineMat = new Material(Shader.Find("MyShader/OutlineEffect"));
-        outlineMat.SetColor("_OutlineColor", new Color(0.5f,1,0.5f) );
+        ResourceManager.Instance.GetObject<Shader>((int)ResIds.OutlineEffect, (res) =>
+        {
+            outlineMat = new Material(res);
+            outlineMat.SetColor("_OutlineColor", new Color(0.5f, 1, 0.5f));
 
-        targetGoDic = new Dictionary<int, ModelOutline>();
+            targetGoDic = new Dictionary<int, ModelOutline>();
+        });
     }
 
-    public void OpenOutline(GameObject targetGo, bool isClearOther = false)
+    public void OpenOutline(GameObject targetGo, Color color, bool isClearOther = false)
     {
         var insId = targetGo.GetInstanceID();
 
@@ -87,14 +89,14 @@ public class ModelOutlineModule
             targetGoDic[insId] = modelOutline;
 
             modelOutline.AddOutline();
-
-
+            outlineMat.SetColor("_OutlineColor", color);
         }
         else
         {
             //Logx.Log("ModelOutlineModule : CloseOutline : the id is not exist : " + insId);
         }
     }
+
 
     public void CloseAllModelOutline()
     {
@@ -109,7 +111,6 @@ public class ModelOutlineModule
         {
             CloseOutline(go);
         }
-
     }
 
     public void CloseOutline(GameObject targetGo)
@@ -130,6 +131,4 @@ public class ModelOutlineModule
             //Logx.Log("ModelOutlineModule : CloseOutline : the id is not exist : " + insId);
         }
     }
-
-
 }

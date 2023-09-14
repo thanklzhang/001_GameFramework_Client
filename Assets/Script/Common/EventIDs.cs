@@ -30,18 +30,23 @@ public enum EventIDs
     OnCreateBattle = 101001,
     OnAllPlayerLoadFinish = 1010002,
     OnBattleStart = 1010003,
+    OnPlayerReadyState = 1010004,
 
     OnCreateEntity = 101101,
     OnChangeEntityBattleData = 101102,
-    OnEntityDestroy = 101103,           //实体销毁(死亡之后)
-    OnBattleEnd = 101104,
-    OnEntityChangeShowState = 101105,   //实体改变了显隐时
+    OnEntityDead = 101103,              //实体死亡的时候
+    OnEntityDestroy = 101104,           //实体销毁(死亡之后的一段时间后的销毁时间点)
+    OnBattleEnd = 101105,
+    OnEntityChangeShowState = 101106,   //实体改变了显隐时
+    
 
     OnSetEntityPosition = 101201,
     OnSkillInfoUpdate = 101202,         //当有技能信息改变的时候
     OnBuffInfoUpdate = 101203,         //当有buff信息改变的时候
     OnSkillTrackStart = 101204,         //当有技能轨迹开始的时候
     OnSkillTrackEnd = 101205,         //当有技能轨迹结束的时候
+    
+    _Battle_Flag_End = 101300,      //战斗消息的结束符号
     //
 
     //UI-------------

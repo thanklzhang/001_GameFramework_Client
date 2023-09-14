@@ -9,8 +9,6 @@ using UnityEngine;
 
 namespace Battle_Client
 {
-
-
     public class BattleSkillInfo
     {
         public int releaserGuid;
@@ -31,6 +29,7 @@ namespace Battle_Client
 
     public class BattleEntityManager : Singleton<BattleEntityManager>
     {
+        //guid => entity
         Dictionary<int, BattleEntity_Client> entityDic;
 
         public void Init()
@@ -44,13 +43,6 @@ namespace Battle_Client
             //EventDispatcher.AddListener<BattleEntityInfo>(EventIDs.OnCreateBattle, CreateEntity);
         }
 
-        //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-        //internal BattleEntity CreateEntity(BattleEntityProto serverEntity)
-        //{
-        //    var entity = CreateViewEntityInfo(serverEntity);
-        //    entity.StartSelfLoadModel();
-        //    return entity;
-        //}
         internal BattleEntity_Client CreateEntity(BattleClientMsg_Entity msg_entity)
         {
             var entity = CreateViewEntityInfo(msg_entity);
@@ -58,52 +50,6 @@ namespace Battle_Client
             return entity;
         }
 
-
-
-        ////收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-        //public void CreateEntity(BattleEntityInfo battleEntityInfo)
-        //{
-        //    var entity = CreateViewEntityInfo(battleEntityInfo);
-        //    entity.StartSelfLoadModel();
-        //}
-
-        //只创建一个简单显示实体 包括完整数据 , 是创建一个完整实体的一个步骤
-        //internal BattleEntity CreateViewEntityInfo(NetProto.BattleEntityProto serverEntity)
-        //{
-        //    var guid = serverEntity.Guid;
-        //    var configId = serverEntity.ConfigId;
-
-        //    if (entityDic.ContainsKey(guid))
-        //    {
-        //        Logx.LogWarning("BattleEntityManager : OnCreateEntity : the guid is exist : " + guid);
-        //        return null;
-        //    }
-
-        //    BattleEntity entity = new BattleEntity();
-        //    entity.Init(guid, configId);
-        //    entity.SetPosition(BattleConvert.ConverToVector3(serverEntity.Position));
-
-        //    //填充技能
-        //    List<BattleSkillInfo> skills = new List<BattleSkillInfo>();
-        //    foreach (var serverSkill in serverEntity.SkillInitList)
-        //    {
-        //        BattleSkillInfo skill = new BattleSkillInfo()
-        //        {
-        //            configId = serverSkill.ConfigId,
-        //            level = serverSkill.Level
-        //        };
-        //        skills.Add(skill);
-        //    }
-        //    entity.SetSkillList(skills);
-
-
-        //    entityDic.Add(guid, entity);
-
-        //    //EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
-
-        //    //entity.StartLoadModel(loadFinishCallback);
-        //    return entity;
-        //}
 
         internal BattleEntity_Client CreateViewEntityInfo(BattleClientMsg_Entity msgEntity)
         {
@@ -136,6 +82,7 @@ namespace Battle_Client
                 };
                 skills.Add(skill);
             }
+
             entity.SetSkillList(skills);
 
 
@@ -167,15 +114,18 @@ namespace Battle_Client
         /// </summary>
         /// <param name="finishCallback"></param>
         /// <returns></returns>
-        public List<LoadObjectRequest> MakeCurrBattleAllEntityLoadRequests(Action<BattleEntity_Client, GameObject> finishCallback)
+        public List<LoadObjectRequest> MakeCurrBattleAllEntityLoadRequests(
+            Action<BattleEntity_Client, GameObject> finishCallback)
         {
             var battleEntityDic = this.entityDic;
             return this.MakeMoreBattleEntityLoadRequests(battleEntityDic, finishCallback);
         }
+
         /// <summary>
         /// 返回多个战斗实体的加载请求
         /// </summary>
-        public List<LoadObjectRequest> MakeMoreBattleEntityLoadRequests(Dictionary<int, BattleEntity_Client> battleEntityDic,
+        public List<LoadObjectRequest> MakeMoreBattleEntityLoadRequests(
+            Dictionary<int, BattleEntity_Client> battleEntityDic,
             Action<BattleEntity_Client, GameObject> finishCallback)
         {
             List<LoadObjectRequest> list = new List<LoadObjectRequest>();
@@ -185,21 +135,21 @@ namespace Battle_Client
                 var req = MakeBattleEntityLoadRequest(entity, finishCallback);
                 list.Add(req);
             }
-            return list;
 
+            return list;
         }
 
         /// <summary>
         /// 返回一个战斗实体的加载请求
         /// </summary>
-        public LoadObjectRequest MakeBattleEntityLoadRequest(BattleEntity_Client battleEntity, Action<BattleEntity_Client, GameObject> finishCallback)
+        public LoadObjectRequest MakeBattleEntityLoadRequest(BattleEntity_Client battleEntity,
+            Action<BattleEntity_Client, GameObject> finishCallback)
         {
             var req = new LoadBattleViewEntityRequest(battleEntity)
             {
                 selfFinishCallback = finishCallback
             };
             return req;
-
         }
 
         public BattleEntity_Client FindEntityByColliderInstanceId(int instanceID)
@@ -214,9 +164,8 @@ namespace Battle_Client
                         return entity;
                     }
                 }
-
-
             }
+
             return null;
         }
 
@@ -236,6 +185,7 @@ namespace Battle_Client
                     {
                         continue;
                     }
+
                     var currGo = entity.collider.gameObject;
 
                     var vector = currGo.transform.position - pos;
@@ -256,10 +206,8 @@ namespace Battle_Client
                                 }
                             }
                         }
-
                     }
                 }
-
             }
 
             return battleEntity;
@@ -274,33 +222,11 @@ namespace Battle_Client
                 {
                     return entity;
                 }
-
-
             }
+
             return null;
         }
 
-        ////只创建实体信息 , 是创建一个完整实体的一个步骤
-        //public BattleEntity CreateViewEntityInfo(BattleEntityInfo battleEntityInfo)
-        //{
-        //    var guid = battleEntityInfo.guid;
-        //    var configId = battleEntityInfo.configId;
-
-        //    if (entityDic.ContainsKey(guid))
-        //    {
-        //        Logx.LogWarning("BattleEntityManager : OnCreateEntity : the guid is exist : " + guid);
-        //        return null;
-        //    }
-
-        //    BattleEntity entity = new BattleEntity();
-        //    entity.Init(guid, configId);
-        //    entity.SetPosition(battleEntityInfo.position);
-        //    entityDic.Add(guid, entity);
-
-        //    //entity.StartLoadModel(loadFinishCallback);
-        //    return entity;
-
-        //}
 
         public BattleEntity_Client FindEntity(int guid)
         {
@@ -312,43 +238,28 @@ namespace Battle_Client
             {
                 //Logx.LogWarning("the guid is not found : " + guid);
             }
+
             return null;
         }
 
-        //public void CreateEntity(BattleEntity battleEntity)
-        //{
-        //    if (entityDic.ContainsKey(battleEntity.guid))
-        //    {
-        //        Logx.LogWarning("the guid is exist : " + battleEntity.guid);
-        //        return;
-        //    }
-
-        //    entityDic.Add(battleEntity.guid, battleEntity);
-        //}
-
-        //public BattleEntity CreateEntity(int guid, int configId)
-        //{
-        //    if (entityDic.ContainsKey(guid))
-        //    {
-        //        Logx.LogWarning("the guid is exist : " + guid);
-        //        return null;
-        //    }
-
-        //    BattleEntity entity = new BattleEntity();
-        //    entity.Init(guid, configId);
-        //    entityDic.Add(guid, entity);
-
-        //    return entity;
-
-        //    //EventDispatcher.Broadcast(EventIDs.OnCreateEntity,guid);
-        //}
 
         public void Update(float timeDelta)
         {
+            List<BattleEntity_Client> willDeleteList = new List<BattleEntity_Client>();
             foreach (var item in entityDic)
             {
                 var entity = item.Value;
                 entity.Update(timeDelta);
+
+                if (entity.state == BattleEntityState.Destroy)
+                {
+                    willDeleteList.Add(entity);
+                }
+            }
+
+            foreach (var entity in willDeleteList)
+            {
+                BattleEntityManager.Instance.DestoryEntity(entity.guid);
             }
         }
 
@@ -363,6 +274,19 @@ namespace Battle_Client
             else
             {
                 Logx.LogWarning("the guid is not found : " + guid);
+            }
+        }
+
+        public void OnBattleEnd()
+        {
+            foreach (var item in entityDic)
+            {
+                var entity = item.Value;
+                if (entity.state != BattleEntityState.Dead)
+                {
+                    entity.state = BattleEntityState.Idle;
+                    entity.PlayAnimation("idle");
+                }
             }
         }
 

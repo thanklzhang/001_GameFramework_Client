@@ -170,16 +170,8 @@ public class BattleHeroInfoUI : BaseUI
                 heroInfo.UpdateInfo(info);
             }
             
-        }
-
-   
-
-       
-
-      
+        }      
     }
-
-    
 
     public void Update(float deltaTime)
     {

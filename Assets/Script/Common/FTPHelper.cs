@@ -38,7 +38,7 @@ public class FTPHelper
         //检测本地文件
         if (!File.Exists(localFile))
         {
-            Logx.Log("文件：“" + localFile + "” 不存在！");
+            Logx.LogWarning("文件：“" + localFile + "” 不存在！");
             return;
         }
 

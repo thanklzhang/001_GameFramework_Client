@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Table;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,11 +36,13 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.AddListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
         EventDispatcher.AddListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
         EventDispatcher.AddListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
+        EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnEntityDead, OnEntityDead);
         EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, OnEntityDestroy);
         EventDispatcher.AddListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, OnOnBattleEnd);
         EventDispatcher.AddListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState,
             this.OnEntityChangeShowState);
 
+        EventDispatcher.AddListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
@@ -57,6 +60,11 @@ public class BattleCtrl : BaseCtrl
         skillDirectModule = new SkillDirectorModule();
         skillTrackModule = new SkillTrackModule();
     }
+
+    private List<LoadObjectRequest> entityLoadReqs;
+
+    private float currProgress = 0;
+    private float maxProgress = 1;
 
     public override void OnStartLoad()
     {
@@ -79,11 +87,25 @@ public class BattleCtrl : BaseCtrl
         //scene
         objsRequestList.Add(new LoadGameObjectRequest(scenePath, 1) { selfFinishCallback = OnSceneLoadFinish });
         //entity
-        var entityLoadReqs = BattleEntityManager.Instance.MakeCurrBattleAllEntityLoadRequests(OnEntityLoadFinish);
+        entityLoadReqs = BattleEntityManager.Instance.MakeCurrBattleAllEntityLoadRequests(OnEntityLoadFinish);
         objsRequestList.AddRange(entityLoadReqs);
         //
 
+        //loading
+        currProgress = 0;
+        maxProgress = 1;
+        SetLoadingProgress();
+        CtrlManager.Instance.globalCtrl.loadingUI.Show();
+        //
+
         this.loadRequest = ResourceManager.Instance.LoadObjects(objsRequestList);
+    }
+
+    void SetLoadingProgress()
+    {
+        var curr = currProgress / (float)maxProgress;
+        // Logx.Log("curr : " + curr);
+        CtrlManager.Instance.globalCtrl.loadingUI.SetProgress(curr);
     }
 
     //初始话战斗相关资源
@@ -96,12 +118,18 @@ public class BattleCtrl : BaseCtrl
         this.ui = battleUI;
 
         hpModule.Init(ui);
+
+        currProgress += 0.15f;
+        SetLoadingProgress();
     }
 
     public void OnBattleResultUILoadFinish(BattleResultUI battleResultUI)
     {
         this.resultUI = battleResultUI;
         this.resultUI.Hide();
+
+        currProgress += 0.15f;
+        SetLoadingProgress();
     }
 
 
@@ -129,16 +157,28 @@ public class BattleCtrl : BaseCtrl
             mapCellView?.SetMap(map);
             //mapCellView.SetRenderPath(new List<Pos>());
         }
+
+        currProgress += 0.15f;
+        SetLoadingProgress();
     }
 
     public void OnEntityLoadFinish(BattleEntity_Client viewEntity, GameObject obj)
     {
         viewEntity.OnLoadModelFinish(obj);
+
+        var total = 1;
+        if (entityLoadReqs.Count > 0)
+        {
+            total = entityLoadReqs.Count;
+        }
+
+        currProgress += 0.55f * (1.0f / total);
+        SetLoadingProgress();
     }
 
     public override void OnLoadFinish()
     {
-        Logx.Log("battle ctrl : battle res OnLoadFinish");
+        // Logx.Log("battle ctrl : battle res OnLoadFinish");
 
         skillDirectModule.Init(this);
         skillTrackModule.Init(this);
@@ -171,7 +211,7 @@ public class BattleCtrl : BaseCtrl
         //EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
 
         ui.Show();
-        ui.SetReadyBattleBtnShowState(false);
+        ui.SetReadyShowState(false);
 
         RefreshBattleAttrUI();
 
@@ -182,6 +222,8 @@ public class BattleCtrl : BaseCtrl
         RefreshBattleHeroInfoUI();
 
         RefreshBattleStageInfoUI();
+
+        ui.HideBossComing();
     }
 
     public void RefreshBattleAttrUI()
@@ -367,6 +409,7 @@ public class BattleCtrl : BaseCtrl
     void OnClickCloseBtn()
     {
         CtrlManager.Instance.Exit<BattleCtrl>();
+
     }
 
     void OnClickReadyStartBtn()
@@ -380,6 +423,18 @@ public class BattleCtrl : BaseCtrl
     void OnClickResultConfirmBtn()
     {
         CtrlManager.Instance.Exit<BattleCtrl>();
+        
+        if (Const.isLocalBattleTest)
+        {
+            GameMain.Instance.StartLocalBattle();
+            // CoroutineManager.Instance.StartCoroutine(ReStartBattleTest());
+        }
+    }
+
+    IEnumerator ReStartBattleTest()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GameMain.Instance.StartLocalBattle();
     }
 
     void OnClickAttrBtn()
@@ -389,14 +444,26 @@ public class BattleCtrl : BaseCtrl
 
     void OnAllPlayerLoadFinish()
     {
-        ui.SetReadyBattleBtnShowState(true);
+        ui.SetReadyShowState(true);
 
         ui.SetStateText("wait to battle start");
+
+        CtrlManager.Instance.globalCtrl.loadingUI.Hide();
+    }
+
+    void OnPlayerReadyState(int uid, bool isReady)
+    {
+        var myUid = (int)GameDataManager.Instance.UserStore.Uid;
+
+        if (myUid == uid)
+        {
+            ui.SetReadyBtnShowState(isReady);
+        }
     }
 
     void OnBattleStart()
     {
-        ui.SetReadyBattleBtnShowState(false);
+        ui.SetReadyShowState(false);
         ui.SetStateText("OnBattleStart");
     }
 
@@ -442,9 +509,9 @@ public class BattleCtrl : BaseCtrl
     }
 
 
-    public bool TryToGetRayOnEntity(out GameObject gameObject)
+    public bool TryToGetRayOnEntity(out List<int> entityGuidList)
     {
-        gameObject = null;
+        entityGuidList = new List<int>();
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //Debug.DrawRay(ray.origin, ray.direction, Color.red);
@@ -454,17 +521,19 @@ public class BattleCtrl : BaseCtrl
             for (int i = 0; i < hits.Length; i++)
             {
                 var currHit = hits[i];
-                var tag = currHit.collider.tag;
-                if (tag == "EntityCollider")
+                var currHitGo = currHit.collider.gameObject;
+
+                // Logx.Log("currHitGo : " + currHitGo.name);
+                var entity =
+                    BattleEntityManager.Instance.FindEntityByColliderInstanceId(currHitGo.GetInstanceID());
+                if (entity != null)
                 {
-                    //Logx.Log("hit entity : " + currHit.collider.gameObject.name);
-                    gameObject = currHit.collider.gameObject;
-                    return true;
+                    entityGuidList.Add(entity.guid);
                 }
             }
         }
 
-        return false;
+        return entityGuidList.Count > 0;
     }
 
 
@@ -474,7 +543,12 @@ public class BattleCtrl : BaseCtrl
         battleNet.SendClientPlotEnd();
     }
 
+    private Color enemyOutlineColor = new Color(1, 0.2f, 0.2f, 1);
+    private Color myOutlineColor = new Color(0.5f, 1.0f, 0.5f, 1);
+    private Color friendOutlineColor = new Color(0.2f, 0.6f, 1.0f, 1);
 
+    
+    
     public override void OnUpdate(float timeDelta)
     {
         this.ui.Update(timeDelta);
@@ -482,10 +556,10 @@ public class BattleCtrl : BaseCtrl
         skillTrackModule.Update(timeDelta);
 
         var battleState = BattleManager.Instance.BattleState;
-        if (battleState == BattleState.End)
-        {
-            return;
-        }
+        // if (battleState == BattleState.End)
+        // {
+        //     return;
+        // }
 
         //这里逻辑应该再封装一层 input 
 
@@ -505,15 +579,18 @@ public class BattleCtrl : BaseCtrl
         var isMouseLeftButtonDown = Input.GetMouseButtonDown(0);
         var isMouseRightButtonDown = Input.GetMouseButtonDown(1);
 
+        var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+        var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
+        var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+        
         if (isSelectSkillState)
         {
+            //选择技能中
             var index = willReleaserSkillIndex;
             var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
             var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
             var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
-            var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
-            var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
-            var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+           
             if (isMouseLeftButtonDown)
             {
                 if (releaseTargetType == SkillReleaseTargeType.Point)
@@ -539,12 +616,15 @@ public class BattleCtrl : BaseCtrl
                     //-----------------------
 
                     GameObject gameObject = null;
+                    List<int> entityGuidList;
                     BattleEntity_Client battleEntity = null;
-                    if (TryToGetRayOnEntity(out gameObject))
+                    if (TryToGetRayOnEntity(out entityGuidList))
                     {
                         //遍历寻找 效率低下 之后更改
-                        battleEntity =
-                            BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
+                        //只找一个
+                        battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
+                        // battleEntity =
+                        //     BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
                     }
                     else
                     {
@@ -586,22 +666,39 @@ public class BattleCtrl : BaseCtrl
                 skillDirectModule.UpdateMousePosition(resultPos);
 
                 GameObject gameObject = null;
+                List<int> entityGuidList;
                 BattleEntity_Client battleEntity = null;
-                if (TryToGetRayOnEntity(out gameObject))
+                if (TryToGetRayOnEntity(out entityGuidList))
                 {
-                    var entityModelRootGo = gameObject.transform.parent.gameObject;
+                    battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
+
+                    var entityModelRootGo = battleEntity.gameObject; //.transform.parent.gameObject
                     //判断当前鼠标是否检测到是敌人
-                    var isEnemy = true;
-                    if (isEnemy)
+                    
+                    var relationType = BattleEntity_Client.GetRelation(localEntity,battleEntity);
+                    if (relationType == Battle_Client.EntityRelationType.Enemy)
                     {
                         OperateViewManager.Instance.cursorModule.SetCursor(CursorType.SelectAttack);
+                        OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, enemyOutlineColor,
+                            true);
                     }
                     else
                     {
                         OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Select);
-                    }
+                        if (relationType == Battle_Client.EntityRelationType.Me)
+                        {
+                           
+                            OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, myOutlineColor,
+                                true);
+                        }
+                        else
+                        {
+                            OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo,friendOutlineColor,
+                                true);
+                        }
 
-                    OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, true);
+                      
+                    }
                 }
                 else
                 {
@@ -613,6 +710,7 @@ public class BattleCtrl : BaseCtrl
         }
         else
         {
+            //无技能释放动作
             if (isMouseLeftButtonDown)
             {
                 //仅仅是左键点击了某处
@@ -629,26 +727,42 @@ public class BattleCtrl : BaseCtrl
             else
             {
                 GameObject gameObject = null;
+
+
+                List<int> entityGuidList;
+
                 BattleEntity_Client battleEntity = null;
-                if (TryToGetRayOnEntity(out gameObject))
+                if (TryToGetRayOnEntity(out entityGuidList))
                 {
                     //遍历寻找 效率低下 之后更改
-                    battleEntity =
-                        BattleEntityManager.Instance.FindEntityByColliderInstanceId(gameObject.GetInstanceID());
+                    battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
 
-                    var entityModelRootGo = gameObject.transform.parent.gameObject;
+                    var entityModelRootGo = battleEntity.gameObject; //.transform.parent.gameObject
                     //判断当前鼠标是否检测到是敌人
-                    var isEnemy = true;
-                    if (isEnemy)
+                    var relationType = BattleEntity_Client.GetRelation(localEntity,battleEntity);
+                   
+                    if (relationType == Battle_Client.EntityRelationType.Enemy)
                     {
                         OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Attack);
+                        OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, enemyOutlineColor,
+                            true);
                     }
                     else
                     {
+                        
                         OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Normal);
-                    }
 
-                    OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, true);
+                        if (relationType == Battle_Client.EntityRelationType.Me)
+                        {
+                            OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, myOutlineColor,
+                                true);
+                        }
+                        else
+                        {
+                            OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo, friendOutlineColor,
+                                true);
+                        }
+                    }
                 }
                 else
                 {
@@ -804,6 +918,7 @@ public class BattleCtrl : BaseCtrl
         var isBoss = 1 == entityConfig.IsBoss;
         if (isBoss)
         {
+            this.ui.StartBossComingAni();
             this.ui.StartBossLimitCountdown();
         }
 
@@ -915,6 +1030,11 @@ public class BattleCtrl : BaseCtrl
         hpModule.DestroyEntityHp(entity);
     }
 
+    public void OnEntityDead(BattleEntity_Client entity)
+    {
+        ui.SetHpShowState(entity.guid, false);
+    }
+
     public void OnOnBattleEnd(BattleResultDataArgs battleResultArgs)
     {
         var args = new BattleResultUIArgs()
@@ -936,6 +1056,10 @@ public class BattleCtrl : BaseCtrl
 
         this.resultUI.Refresh(args);
         this.resultUI.Show();
+
+        BattleEntityManager.Instance.OnBattleEnd();
+        skillTrackModule.OnBattleEnd();
+        BattleSkillEffect_Client_Manager.Instance.OnBattleEnd();
     }
 
     //entity 改变显隐的时候
@@ -978,7 +1102,7 @@ public class BattleCtrl : BaseCtrl
         UIManager.Instance.ReleaseUI<BattleResultUI>();
         ResourceManager.Instance.ReturnObject(scenePath, this.sceneObj);
         BattleEntityManager.Instance.ReleaseAllEntities();
-        BattleSkillEffectManager.Instance.ReleaseAll();
+        BattleSkillEffect_Client_Manager.Instance.ReleaseAll();
         skillDirectModule.Release();
         skillTrackModule.Release();
 
@@ -990,10 +1114,12 @@ public class BattleCtrl : BaseCtrl
         EventDispatcher.RemoveListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
         EventDispatcher.RemoveListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
         EventDispatcher.RemoveListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
+        EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnEntityDead, OnEntityDead);
         EventDispatcher.RemoveListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, this.OnEntityDestroy);
         EventDispatcher.RemoveListener<BattleEntity_Client, bool>(EventIDs.OnEntityChangeShowState,
             this.OnEntityChangeShowState);
         EventDispatcher.RemoveListener<BattleResultDataArgs>(EventIDs.OnBattleEnd, this.OnOnBattleEnd);
+        EventDispatcher.RemoveListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
         EventDispatcher.RemoveListener<EntityAttrType, Vector2>(EventIDs.On_UIAttrOption_PointEnter,

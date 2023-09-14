@@ -15,8 +15,6 @@ MonoBehaviour:
   strategyList:
   - path: {fileID: 102900000, guid: ed831ca3e9b14a54f842d6e32213332f, type: 3}
     type: 1
-  - path: {fileID: 102900000, guid: 8fcedf26ecf7bb347b3a936e18f41ed6, type: 3}
-    type: 2
   - path: {fileID: 102900000, guid: f6492aa214bc76a4fa1d7b35be739a7e, type: 3}
     type: 2
   - path: {fileID: 102900000, guid: fa4f83345608c4e47a8fe30cbd6eb504, type: 3}
@@ -70,4 +68,8 @@ MonoBehaviour:
   - path: {fileID: 102900000, guid: 38dcb0ba6c30f7948bafb7dd125bdcfe, type: 3}
     type: 1
   - path: {fileID: 102900000, guid: b011aa6128978c84b9c7654bd6d14161, type: 3}
+    type: 2
+  - path: {fileID: 102900000, guid: 8fcedf26ecf7bb347b3a936e18f41ed6, type: 3}
+    type: 2
+  - path: {fileID: 102900000, guid: f9eb2691ec664ac46bc296606742f8a5, type: 3}
     type: 2

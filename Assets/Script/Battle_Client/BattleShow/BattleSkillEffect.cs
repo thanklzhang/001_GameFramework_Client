@@ -164,10 +164,10 @@ namespace Battle_Client
             //获取持续时长
             var curParticle = obj.GetComponent<ParticleSystem>();
             var particles = obj.GetComponentsInChildren<ParticleSystem>();
-            if (gameObject.name.Contains("eft_skill_projectile"))
-            {
-                Logx.Log(" particles : " + particles.Length);
-            }
+            // if (gameObject.name.Contains("eft_skill_projectile"))
+            // {
+            //     Logx.Log(" particles : " + particles.Length);
+            // }
 
             if (particles != null && particles.Length > 0)
             {
@@ -261,7 +261,8 @@ namespace Battle_Client
 
                 var currPos = this.gameObject.transform.position;
 
-                this.gameObject.transform.position = currPos + dir * (speed * timeDelta); 
+                var dirDis = dir * (speed * timeDelta);
+                this.gameObject.transform.position = currPos + dirDis; 
 
                 if (this.followEntityGuid <= 0)
                 {
@@ -271,6 +272,21 @@ namespace Battle_Client
                     }
                    
                 }
+
+                var preDir = moveVector;
+                var nowDir = this.gameObject.transform.position - targetPos;
+                if (Vector3.Dot(preDir, nowDir) < 0)
+                {
+                    //到了目的地 此时如果战斗结束 那么直接设置删除状态
+                    //否则等待服务器删除
+                    if (isBattleEnd)
+                    {
+                        this.SetWillDestoryState();
+                    }
+                }
+
+
+
             }
 
             if (this.followEntityGuid > 0)
@@ -366,6 +382,8 @@ namespace Battle_Client
         }
 
         public Vector3 initDir;
+        private bool isBattleEnd;
+
         internal void StartMove(Vector3 targetPos, int targetGuid, float moveSpeed)
         {
             //Logx.Log("skill effect start move : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
@@ -381,9 +399,6 @@ namespace Battle_Client
                 initDir = (targetPos - this.gameObject.transform.position).normalized;
             }
 
-
-
-
         }
 
         public void StopMove(Vector3 endPos)
@@ -391,6 +406,11 @@ namespace Battle_Client
             state = BattleSkillEffectState.Idle;
 
             this.SetPosition(endPos);
+        }
+        
+        public void OnBattleEnd()
+        {
+            this.isBattleEnd = true;
         }
 
         //internal void ReleaseSkill()
@@ -414,6 +434,7 @@ namespace Battle_Client
         //}
 
 
+       
     }
 
 

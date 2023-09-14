@@ -11,29 +11,53 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/ABTest/Assets/MyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1b4ef3a7d18b40c19e89a9442d23530110000/e3/0f79767b/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/04/ee77a731/ReorderableList.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/33/a94266b6/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/39/88976a1a/NPath.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/59/b416b79e/BuildTarget.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/74/a7fb26b9/BuildPipeline.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/8a/ebb74ef8/CustomEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/92/af7938ff/BuildTargetGroup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/cc/3ee5ea2f/BuildPlayerOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/ce/5d2976e1/BuildOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/dd/3ce40af0/EditorUserBuildSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/ea/16ec940f/SerializedObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/f4/c10a728d/NamedBuildTarget.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/fb/74df2900/PlayerSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5f8a7fbc5006430fa41a872fbc34844b6200/27/f33f9097/AssetBundle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8595137a53a742a4afdf0740b33ef8ba24e00/07/efa338cb/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/05/bb0a7071/RectTransform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/08/9bdbfad4/Texture.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/1b/9ed32232/Time.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/1e/f30b3717/Scene.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/4a/edde65d1/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/51/fc0e95c6/ILogger.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/56/6ad1beb6/LogType.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/56/c62e8e31/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/69/735329a5/ILogHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/87/dcb497d0/Color.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/a1/765a12e5/DebugLogHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/aa/b1b53654/Logger.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/bf/e535cd9d/Debug.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/de/85ab6d25/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/f8/313dd16a/BlendMode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fc/104c4b76/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a788eca61267411daecc97d72d1696bc27800/44/2af5058f/Animator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b644db5258b34c95ba27d45b6ce848b06b18/10/a1a322dd/WinPlayerPostProcessor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ce12dc1aa9e14b919d8c1321c95d47fb35e718/17/bea91ef5/Dns.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d46c07da13f941aeb9b5f49c78214485173200/26/be4b0b80/Image.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/1f/6ba399f5/Path.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/26/40e97a5d/File.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/3f/ec3640b3/Void.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/69/6f59671d/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIScript/UIButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ZZTest/ABTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/zxyTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.analytics@3.8.1/Tests/Editor/GameStartTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/Utils/OrganizationHandler/OrganizationProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/ButtonEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SelectableEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -56,7 +80,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.30476192&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.30508474&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -74,6 +98,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="E:/GamePackage\001_GameFramework_Client.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\UnityPackageOutPath\OrderOfChain\Windows" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Software\UnityHubLocation\2022.3.0f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\UnityProjects\KalGame\001_GameFramework_Client -debugCodeOptimization" />
@@ -100,10 +132,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="14644">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="14644" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -177,6 +209,35 @@
       <workItem from="1692709207254" duration="13819000" />
       <workItem from="1692793934615" duration="135000" />
       <workItem from="1692794087970" duration="13690000" />
+      <workItem from="1692881432704" duration="3204000" />
+      <workItem from="1692892299905" duration="1236000" />
+      <workItem from="1692893939541" duration="324000" />
+      <workItem from="1692967574656" duration="4192000" />
+      <workItem from="1693061557795" duration="2654000" />
+      <workItem from="1693225296053" duration="4046000" />
+      <workItem from="1693232813752" duration="25000" />
+      <workItem from="1693233813829" duration="8563000" />
+      <workItem from="1693313369172" duration="7332000" />
+      <workItem from="1693322300252" duration="3535000" />
+      <workItem from="1693397040637" duration="10253000" />
+      <workItem from="1693483369785" duration="5462000" />
+      <workItem from="1693829391673" duration="12198000" />
+      <workItem from="1693916097039" duration="30000" />
+      <workItem from="1693916157316" duration="5822000" />
+      <workItem from="1693922388483" duration="4470000" />
+      <workItem from="1693927171114" duration="3603000" />
+      <workItem from="1694004071094" duration="12939000" />
+      <workItem from="1694087924551" duration="584000" />
+      <workItem from="1694094847067" duration="6491000" />
+      <workItem from="1694177954698" duration="11133000" />
+      <workItem from="1694282254978" duration="5815000" />
+      <workItem from="1694353236893" duration="4062000" />
+      <workItem from="1694365494979" duration="836000" />
+      <workItem from="1694438749083" duration="10198000" />
+      <workItem from="1694520313672" duration="4566000" />
+      <workItem from="1694613249509" duration="7028000" />
+      <workItem from="1694696840078" duration="6277000" />
+      <workItem from="1694707382394" duration="2416000" />
     </task>
     <servers />
   </component>
@@ -193,30 +254,30 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/AssetBundleLoader.cs</url>
-          <line>48</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\ResourceManager\AssetBundleLoader.cs" initialLine="48" containingFunctionPresentation="Method 'OnPrepareFinish'">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs</url>
+          <line>358</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\BattleShow\BattleEntity_Client.cs" initialLine="358" containingFunctionPresentation="Method 'ReleaseSkill'">
             <startOffsets>
-              <option value="1276" />
+              <option value="9591" />
             </startOffsets>
             <endOffsets>
-              <option value="1328" />
+              <option value="9664" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="48" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/AssetBundle/AssetBundleManager.cs</url>
-          <line>144</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\ResourceManager\AssetBundle\AssetBundleManager.cs" initialLine="130" containingFunctionPresentation="Method 'LoadTrueAssetBundle'">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Skill/SkillEffectMgr.cs</url>
+          <line>182</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Skill\SkillEffectMgr.cs" initialLine="182" containingFunctionPresentation="Method 'Add'">
             <startOffsets>
-              <option value="3917" />
+              <option value="5515" />
             </startOffsets>
             <endOffsets>
-              <option value="3917" />
+              <option value="5516" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="49" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -5128,7 +5128,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.21226418, g: 0.53384465, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.111570254, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.7165492, g: 0.24056602, b: 1, a: 1}
@@ -9792,6 +9792,7 @@ GameObject:
   - component: {fileID: 7890669497757001700}
   - component: {fileID: 7890669497757001703}
   - component: {fileID: 7890669497757001702}
+  - component: {fileID: 342375653575562184}
   m_Layer: 0
   m_Name: eft_skill_projectile_001
   m_TagString: Untagged
@@ -14689,6 +14690,103 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!82 &342375653575562184
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890669497757001697}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 2aba9047f438c6840a169b51e21a9616,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: c383bd3e3a182a94f880ef64492fcbf0, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8143260385816990443
 GameObject:
   m_ObjectHideFlags: 0
@@ -14912,7 +15010,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.2783019, g: 0.46270046, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.115990385, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19806,7 +19904,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.40079308, b: 1, a: 1}
+      maxColor: {r: 0.764151, g: 0.058385517, b: 0.010813437, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -23787,8 +23885,8 @@ ParticleSystem:
       maxColor: {r: 0, g: 0.3371172, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.10849059, g: 0.335738, b: 1, a: 0}
-        key1: {r: 0.10849059, g: 0.335738, b: 1, a: 1}
+        key0: {r: 1, g: 0.1764706, b: 0, a: 0}
+        key1: {r: 1, g: 0.16041747, b: 0.042452812, a: 1}
         key2: {r: 0, g: 0.7999997, b: 1, a: 0}
         key3: {r: 0.5590391, g: 0, b: 1, a: 0}
         key4: {r: 1, g: 1, b: 1, a: 0}
@@ -23812,7 +23910,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 3
       minGradient:

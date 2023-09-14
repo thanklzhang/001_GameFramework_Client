@@ -11,6 +11,8 @@ public class GlobalCtrl : BaseCtrl
     TipsUI tipsUI;
     TitleBarUI titleUI;
     SelectHeroUI selectHeroUI;
+    public LoadingUI loadingUI;
+
     //TitleBarUI titleBarUI;
     public override void OnInit()
     {
@@ -21,16 +23,16 @@ public class GlobalCtrl : BaseCtrl
     {
         this.loadRequest = ResourceManager.Instance.LoadObjects(new List<LoadObjectRequest>()
         {
-            new LoadUIRequest<TipsUI>(){selfFinishCallback = OnTipsUILoadFinish},
-             new LoadUIRequest<TitleBarUI>(){selfFinishCallback = OnTitleUILoadFinish},
-              new LoadUIRequest<SelectHeroUI>(){ selfFinishCallback = OnSelectHeroUILoadFinish }
+            new LoadUIRequest<TipsUI>() { selfFinishCallback = OnTipsUILoadFinish },
+            new LoadUIRequest<TitleBarUI>() { selfFinishCallback = OnTitleUILoadFinish },
+            new LoadUIRequest<SelectHeroUI>() { selfFinishCallback = OnSelectHeroUILoadFinish },
+            new LoadUIRequest<LoadingUI>() { selfFinishCallback = OnLoadingUILoadFinish }
         });
     }
 
     public void OnTipsUILoadFinish(TipsUI tipsUI)
     {
         this.tipsUI = tipsUI;
-
     }
 
     public void OnTitleUILoadFinish(TitleBarUI titleUI)
@@ -43,6 +45,13 @@ public class GlobalCtrl : BaseCtrl
         selectHeroUI = ui;
     }
 
+    public void OnLoadingUILoadFinish(LoadingUI ui)
+    {
+        loadingUI = ui;
+        
+        loadingUI.Hide();
+    }
+
     public override void OnLoadFinish()
     {
         this.selectHeroUI.Hide();
@@ -50,7 +59,6 @@ public class GlobalCtrl : BaseCtrl
 
     public override void OnEnter(CtrlArgs args)
     {
-
     }
 
     public override void OnActive()
@@ -91,7 +99,6 @@ public class GlobalCtrl : BaseCtrl
 
     public override void OnExit()
     {
-
     }
 
     public override void OnUpdate(float deltaTime)
@@ -112,6 +119,7 @@ public class GlobalCtrl : BaseCtrl
     }
 
     private TitleBarIds currTitleBarId;
+
     public void ShowTitleBar(TitleBarIds titleBarId)
     {
         currTitleBarId = titleBarId;
@@ -135,7 +143,7 @@ public class GlobalCtrl : BaseCtrl
             foreach (var str in strs)
             {
                 var resId = int.Parse(str);
-                
+
                 var bagStore = GameDataManager.Instance.BagStore;
                 TitleOptionUIData optionData = new TitleOptionUIData();
                 optionData.configId = resId;
@@ -178,5 +186,4 @@ public class GlobalCtrl : BaseCtrl
         this.selectHeroUI.SelectHero(guid);
     }
     //---------------
-
 }

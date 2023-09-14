@@ -6,61 +6,133 @@ using System.Threading;
 using System.Linq;
 
 
+public enum LogxType
+{
+    Null = 0,
 
-//过后抽象出来
+    //基本类型(100 -> 200)------------------------
+    //游戏进程节点
+    Game = 100,
+
+    //网络
+    Net = 101,
+
+    //界面
+    UI = 102,
+
+    //资源
+    Resource = 103,
+
+    //战斗
+    Battle = 104,
+    
+    //构建(Package AB 等)
+    Build = 105,
+    
+    //检查和更新资源
+    CheckAndUpdateResource = 106,
+    
+    //---------------------------------
+
+    //自定义类型(200 以上)-----------------------------
+    Zxy = 200,
+    //---------------------------------
+}
+
 public class Logx
 {
-    public static bool enable = true;
-    public static bool isShowFrame = true;
-    public enum LogType
+    public class LogxConfigInfo
     {
-        Normal = 1,
-        Error = 2,
-        Warning = 3,
-
-        Net = 50,
-        ClientBattle = 51,
-
-        Zxy = 100,
-        AB = 200,
-        Asset = 300,
-        Key = 400,//流程关键点
-
+        public bool enable = false;
     }
 
+    public static bool enable = true;
 
+    public static Dictionary<LogxType, LogxConfigInfo> logConfigDic = new Dictionary<LogxType, LogxConfigInfo>()
+    {
+        { LogxType.Null, new LogxConfigInfo() { enable = true } },
+        { LogxType.Game, new LogxConfigInfo() { enable = true } },
+        { LogxType.UI, new LogxConfigInfo() { enable = true } },
+        { LogxType.Battle, new LogxConfigInfo() { enable = true } },
+        { LogxType.Net, new LogxConfigInfo() { enable = true } },
 
-    public static void Log(object obj)
+        { LogxType.Resource, new LogxConfigInfo() { enable = false } },
+        
+        { LogxType.Build, new LogxConfigInfo() { enable = true } },
+        
+        {LogxType.CheckAndUpdateResource,new LogxConfigInfo() { enable = true }}
+    };
+
+    public static bool IsLogTypeEnable(LogxType type)
+    {
+        if (logConfigDic.ContainsKey(type))
+        {
+            var info = logConfigDic[type];
+            return info.enable;
+        }
+
+        return false;
+    }
+
+    #region Log-------------------
+
+    public static void Log(object obj = null)
     {
         if (!enable)
         {
             return;
         }
-        if (isShowFrame)
-        {
-#if UNITY_EDITOR
-            Debug.Log(obj);
-#else
-            var currBattleFrameNum = GameMain.Instance.currBattleFrameNum;
-            Debug.Log("[frame:" + currBattleFrameNum + "] " + obj);
-#endif
-        }
-        else
-        {
-            Debug.Log(obj);
-        }
 
-
+        Debug.Log(obj);
     }
+
+    public static void Log(LogxType type, object obj)
+    {
+        if (!IsLogTypeEnable(type))
+        {
+            return;
+        }
+
+        Log(type.ToString(), obj);
+    }
+
+    public static void Log(string flag, object obj)
+    {
+        Log(flag + " : " + obj);
+    }
+
+    #endregion
+
+    #region Warning-------------------
 
     public static void LogWarning(object obj)
     {
-        //if (!enable)
-        //{
-        //    return;
-        //}
+        if (!enable)
+        {
+            return;
+        }
+        
         Debug.LogWarning(obj);
     }
+
+    public static void LogWarning(LogxType type, object obj)
+    {
+        if (!IsLogTypeEnable(type))
+        {
+            return;
+        }
+        
+        LogWarning(type.ToString(), obj);
+    }
+
+    public static void LogWarning(string flag, object obj)
+    {
+        LogWarning(flag + " : " + obj);
+    }
+
+    #endregion
+
+    #region Error-------------------
 
     public static void LogError(object obj)
     {
@@ -68,102 +140,35 @@ public class Logx
         {
             return;
         }
+        
         Debug.LogError(obj);
     }
 
 
-    public static void Log(string flag, object obj)
+    public static void LogError(LogxType type, object obj)
+    {
+        if (!IsLogTypeEnable(type))
+        {
+            return;
+        }
+        
+        LogError(type.ToString(), obj);
+    }
+
+    public static void LogError(string flag, object obj)
+    {
+        LogError(flag + " : " + obj);
+    }
+
+    #endregion
+
+    public static void LogException(Exception e)
     {
         if (!enable)
         {
             return;
         }
-
-        Log(flag + ":" + obj);
-    }
-    public static void LogWarning(string flag, object obj)
-    {
-        LogWarning(flag + ":" + obj);
-    }
-    public static void LogError(string flag, object obj)
-    {
-        LogError(flag + ":" + obj);
-    }
-
-    public static void LogNet(string obj)
-    {
-        Log(LogType.Net.ToString(), obj);
-    }
-
-
-    public static void LogBattle(string obj)
-    {
-        Log(LogType.ClientBattle.ToString(), obj);
-    }
-
-    public static void LogException(Exception e)
-    {
+        
         Logx.LogError(e.Message + "\n" + e.StackTrace);
     }
-
-    //-------------
-    //Custom
-
-
-
-    //[UnityEditor.Callbacks.OnOpenAssetAttribute(0)]
-    //static bool OnOpenAsset(int instanceID, int line)
-    //{
-    //    string stackTrace = GetStackTrace();
-    //    if (!string.IsNullOrEmpty(stackTrace) && stackTrace.Contains("zxy:"))
-    //    {
-    //        System.Text.RegularExpressions.Match matches = System.Text.RegularExpressions.Regex.Match(stackTrace, @"\(at (.+)\)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-    //        string pathLine = "";
-    //        while (matches.Success)
-    //        {
-    //            pathLine = matches.Groups[1].Value;
-    //            Debug.Log("zxy : " + pathLine);
-
-    //            if (!pathLine.Contains("Logx.cs"))
-    //            {
-    //                int splitIndex = pathLine.LastIndexOf(":");
-    //                string path = pathLine.Substring(0, splitIndex);
-    //                line = System.Convert.ToInt32(pathLine.Substring(splitIndex + 1));
-    //                string fullPath = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("Assets"));
-    //                fullPath = fullPath + path;
-    //                var resultPath = fullPath.Replace('/', '\\');
-    //                var isSuccess = UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(resultPath, line);
-    //                Debug.Log(resultPath + " " + isSuccess + " " + line);
-    //                break;
-    //            }
-    //            matches = matches.NextMatch();
-    //        }
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-    //static string GetStackTrace()
-    //{
-    //    var ConsoleWindowType = typeof(UnityEditor.EditorWindow).Assembly.GetType("UnityEditor.ConsoleWindow");
-    //    var fieldInfo = ConsoleWindowType.GetField("ms_ConsoleWindow", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
-    //    var consoleInstance = fieldInfo.GetValue(null);
-    //    if (consoleInstance != null)
-    //    {
-    //        if ((object)UnityEditor.EditorWindow.focusedWindow == consoleInstance)
-    //        {
-    //            var ListViewStateType = typeof(UnityEditor.EditorWindow).Assembly.GetType("UnityEditor.ListViewState");
-    //            fieldInfo = ConsoleWindowType.GetField("m_ListView", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-    //            var listView = fieldInfo.GetValue(consoleInstance);
-    //            fieldInfo = ListViewStateType.GetField("row", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
-    //            int row = (int)fieldInfo.GetValue(listView);
-    //            fieldInfo = ConsoleWindowType.GetField("m_ActiveText", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-    //            string activeText = fieldInfo.GetValue(consoleInstance).ToString();
-    //            return activeText;
-    //        }
-    //    }
-    //    return null;
-    //}
-
-
 }

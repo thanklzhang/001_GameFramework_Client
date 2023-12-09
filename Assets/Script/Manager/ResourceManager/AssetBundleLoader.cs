@@ -11,87 +11,64 @@ using LitJson;
 public class AssetBundleLoader : BaseLoader
 {
     public string path;
-    public Action<AssetBundleCache> finishLoadCallback;
 
-    public AssetBundle assetBundle;
-
-    //加载中相同 ab 的请求引用数量
-    public int refCount;
+    public List<Action<AssetBundleCache, ContextAssetInfo>> finishLoadCallback;
 
     public List<string> deps;
 
     AssetBundleCreateRequest abCreateReq;
 
-    public override void OnStart()
+    public override void OnPrepare()
     {
-        ////Logx.Logz("AssetBundleLoader OnStart : " + this.path);
-        refCount += 1;
-        //填充 deps
-        //这里应该抽出来
-
         deps = AssetBundleManager.Instance.GetDependPaths(this.path).ToList();
-        // Logx.LogError("AB", "--dep start : " + path);
-        // foreach (var VARIABLE in deps)
-        // {
-        //     Logx.LogError("AB", "dep :            " + VARIABLE);
-        // }
-        //
-        // Logx.LogError("AB", "--dep end : " + path);
-    }
+        var finishList = new List<string>();
+        foreach (var dep in deps)
+        {
+            var abCache = AssetBundleManager.Instance.GetCacheByPath(dep);
+            if (abCache != null && abCache.isFinishLoad)
+            {
+                finishList.Add(dep);
+            }
+        }
 
-    public override void OnPrepareFinish()
-    {
-        //Logx.Log("ab loader OnPrepareFinish : " + this.path);
-        ////Logx.Logz("AssetBundleLoader OnPrepareFinish : " + this.path);
-        //准备好了 开始加载
-       
-        var resultPath = GetABLoadPath(this.path);
-        //Logx.Log("resultPath : " + resultPath);
-        abCreateReq = AssetBundle.LoadFromFileAsync(resultPath);
-        //Logx.Log("abCreateReq : " + abCreateReq);
-    }
-
-    internal override void OnLoadFinish()
-    {
-       // Logx.Log("ab loader OnLoadFinish : " + path);
-
-        ////Logx.Logz("AssetBundleLoader OnLoadFinish : " + this.path);
-        //ab 加载完成
-        AssetBundleCache abCache = new AssetBundleCache();
-        abCache.path = path;
-        abCache.finishLoadCallback = finishLoadCallback;
-        abCache.RefCount = this.refCount;
-        abCache.assetBundle = abCreateReq.assetBundle;
-        //abCache.ab = ab
-        //finishLoadCallback?.Invoke(abCache);
-
-        AssetBundleManager.Instance.OnLoadFinish(abCache);
+        foreach (var finishPath in finishList)
+        {
+            deps.Remove(finishPath);
+        }
+    
     }
 
     internal void OnLoadOtherABFinish(string path)
     {
+        Logx.Log("OnLoadOtherABFinish : " + this.path + " by " + path);
+        if (path.Contains("login.ab"))
+        {
+            Logx.Log("");
+        }
+
         //判断是否是当前 ab 所依赖的 ab
         //是的话 deps 移除该路径 相当于完成了一个加载依赖
+       
         if (deps.Contains(path))
         {
             deps.Remove(path);
         }
-
     }
-
+    
     public override bool IsPrepareFinish()
     {
-        for (int i = deps.Count - 1; i >= 0; i--)
-        {
-            var dep = deps[i];
-            var abCache = AssetBundleManager.Instance.GetCacheByPath(dep);
-            if (abCache != null)
-            {
-                deps.RemoveAt(i);
-            }
-        }
-
         return 0 == deps.Count;
+    }
+    
+    public override void OnPrepareFinish()
+    {
+      
+    }
+
+    public override void OnStartLoad()
+    {
+        var resultPath = GetABLoadPath(this.path);
+        abCreateReq = AssetBundle.LoadFromFileAsync(resultPath);
     }
 
     public override bool IsLoadFinish()
@@ -104,6 +81,17 @@ public class AssetBundleLoader : BaseLoader
         //Logx.Log("abCreateReq progress : " + abCreateReq.progress);
         return abCreateReq.progress >= 1;
     }
+    internal override void OnLoadFinish()
+    {
+        var loadFinishInfo = new AssetBundleInfo()
+        {
+            path = this.path,
+            assetBundle = abCreateReq.assetBundle
+        };
+
+        AssetBundleManager.Instance.OnLoadFinish(loadFinishInfo);
+    }
+
 
     string GetABLoadPath(string path)
     {

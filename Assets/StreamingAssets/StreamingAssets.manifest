@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1101321452
+CRC: 3249133489
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -822,4 +822,13 @@ AssetBundleManifest:
       Dependencies: {}
     Info_252:
       Name: assets/buildres/shader.ab
+      Dependencies: {}
+    Info_253:
+      Name: assets/buildres/scenes/battlescene_001.ab
+      Dependencies: {}
+    Info_254:
+      Name: assets/buildres/scenes/lobbyscene.ab
+      Dependencies: {}
+    Info_255:
+      Name: assets/buildres/scenes/loginscene.ab
       Dependencies: {}

@@ -73,3 +73,5 @@ MonoBehaviour:
     type: 2
   - path: {fileID: 102900000, guid: f9eb2691ec664ac46bc296606742f8a5, type: 3}
     type: 2
+  - path: {fileID: 102900000, guid: 222a98efba45ebf4ea4c99a64b000c48, type: 3}
+    type: 1

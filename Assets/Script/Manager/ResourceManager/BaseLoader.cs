@@ -13,8 +13,10 @@ public enum LoaderState
 {
     //初始
     Null = 0,
-    //正在准备中
+    //准备
     Prepare,
+    //准备完成 等待加载
+    WaitLoad,
     //正在加载
     Loading,
     //加载完成
@@ -33,16 +35,22 @@ public class BaseLoader
 
     public LoaderState loaderState = LoaderState.Null;
 
-    public void Start()
+    public void Prepare()
     {
         loaderState = LoaderState.Prepare;
-        this.OnStart();
+        this.OnPrepare();
     }
 
     public void PrepareFinish()
     {
-        loaderState = LoaderState.Loading;
+        loaderState = LoaderState.WaitLoad;
         this.OnPrepareFinish();
+    }
+
+    public void StartLoad()
+    {
+        loaderState = LoaderState.Loading;
+        this.OnStartLoad();
     }
 
     public void LoadFinish()
@@ -62,13 +70,18 @@ public class BaseLoader
         
     }
 
-    public virtual void OnStart()
+    public virtual void OnPrepare()
     {
 
     }
     public virtual void OnPrepareFinish()
     {
         //prepareFinishCallback?.Invoke();
+    }
+
+    public virtual void OnStartLoad()
+    {
+        
     }
 
     internal virtual void OnLoadFinish()

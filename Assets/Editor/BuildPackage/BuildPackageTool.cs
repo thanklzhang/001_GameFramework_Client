@@ -86,6 +86,7 @@ public class BuildPackageTool
         Logx.Log(LogxType.Build,"Build 平台 : " + buildArgs.buildTarget);
 
         BuildPlayerOptions opt = new BuildPlayerOptions();
+        //场景 这里只有启动项 其他场景会从 ab 加载
         opt.scenes = new string[] { "Assets/Scenes/Startup.unity" };
         //opt.locationPathName = Application.dataPath + "/../Bin/test.apk";
 
@@ -109,10 +110,14 @@ public class BuildPackageTool
 
         opt.target = buildArgs.buildTarget;
         opt.options = BuildOptions.None;
+        
 
 
         PlayerSettings.productName = buildArgs.productName;
         PlayerSettings.bundleVersion = buildArgs.version;
+        
+        PlayerSettings.defaultScreenWidth = 1920;
+        PlayerSettings.defaultScreenHeight = 1080;
 
         opt.options |= BuildOptions.Development;
         opt.options |= BuildOptions.AllowDebugging;

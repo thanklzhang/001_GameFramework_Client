@@ -32,6 +32,11 @@ public class UpdateResourceModule
             yield break;
         }
 
+        if (Const.isLocalBattleTest)
+        {
+            yield break;
+        }
+
         var persistentPath = Const.AssetBundlePath;
         var localVersionPath = Const.AssetBundlePath + "/" + "version.txt";
         var isExist = Directory.Exists(persistentPath) && File.Exists(localVersionPath);
@@ -145,6 +150,17 @@ public class UpdateResourceModule
         yield return CheckResource(error);
     }
 
+    public string GetServerIp()
+    {
+        if (Const.isLANServer)
+        {
+            //局域网服务器地址
+            return GameValue.LANServerIP;
+        }
+
+        return "";
+    }
+
     public IEnumerator CheckResourceVersion(UpdateResError error)
     {
         //得到本地资源版本信息
@@ -171,7 +187,7 @@ public class UpdateResourceModule
             yield break;
         }
 
-        var localIP = NetTool.GetHostIp();
+        var localIP = GetServerIp();
         var url = string.Format("http://{0}:{1}/get_res_version", localIP, 8080);
         Logx.Log(LogxType.CheckAndUpdateResource,"开始请求服务器 最新资源版本信息 : " + url);
 
@@ -223,7 +239,7 @@ public class UpdateResourceModule
 
     public IEnumerator GetResourceList(UpdateResError error)
     {
-        var localIP = NetTool.GetHostIp();
+        var localIP = GetServerIp();
         var url = string.Format("http://{0}:{1}/get_res_file", localIP, 8080);
         Logx.Log(LogxType.CheckAndUpdateResource,"开始请求服务端最新资源列表 : " + url);
         var request = UnityWebRequest.Get(url);
@@ -362,7 +378,7 @@ public class UpdateResourceModule
     public IEnumerator DownloadSingleFile(ResInfo serResInfo, UpdateResError error)
     {
         //得到服务端资源版本信息
-        var localIP = NetTool.GetHostIp();
+        var localIP = GetServerIp();
 
         var url = string.Format("http://{0}:{1}/download_file/{2}", localIP, 8080, serResInfo.path);
         Logx.Log(LogxType.CheckAndUpdateResource,"请求服务端下载文件 : " + url);

@@ -93,6 +93,10 @@ public class BaseLoadProcess
                     var waitLoader = waitLoadQueue[0];
                     waitLoadQueue.RemoveAt(0);
                     loadingQueue.Add(waitLoader);
+                    
+                    //加入正在加载队列 开始加载资源
+                    var loader = waitLoader;
+                    loader.StartLoad();
                 }
                 else
                 {
@@ -109,7 +113,7 @@ public class BaseLoadProcess
         //Logx.Log("base : process AddLoader");
 
         preparingList.Add(loader);
-        loader.Start();
+        loader.Prepare();
         //loaderCache.Add(loader);
     }
 

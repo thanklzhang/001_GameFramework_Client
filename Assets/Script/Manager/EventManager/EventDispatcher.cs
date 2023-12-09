@@ -47,10 +47,10 @@ static public class EventDispatcher
 
     static public void Broadcast(EventIDs eventEnums)
     {
-        if ((int)eventEnums >= 101001 && eventEnums <= EventIDs._Battle_Flag_End)
-        {
-            Logx.Log(LogxType.Battle," Broadcast id : " + eventEnums);
-        }
+        // if ((int)eventEnums >= 101001 && eventEnums <= EventIDs._Battle_Flag_End)
+        // {
+        //     Logx.Log(LogxType.Battle," Broadcast id : " + eventEnums);
+        // }
 
         var eventId = (int)eventEnums;
         EventManager.Broadcast(eventId);
@@ -58,10 +58,10 @@ static public class EventDispatcher
 
     static public void Broadcast<T>(EventIDs eventEnums, T arg1)
     {
-        if ((int)eventEnums >= 101001 && eventEnums <= EventIDs._Battle_Flag_End)
-        {
-            Logx.Log(LogxType.Battle," Broadcast id : " + eventEnums);
-        }
+        // if ((int)eventEnums >= 101001 && eventEnums <= EventIDs._Battle_Flag_End)
+        // {
+        //     Logx.Log(LogxType.Battle," Broadcast id : " + eventEnums);
+        // }
         
         var eventId = (int)eventEnums;
         EventManager.Broadcast(eventId, arg1);
@@ -69,10 +69,10 @@ static public class EventDispatcher
 
     static public void Broadcast<T,K>(EventIDs eventEnums, T arg1,K arg2)
     {
-        if ((int)eventEnums >= 101001 && eventEnums <= EventIDs._Battle_Flag_End)
-        {
-            Logx.Log(LogxType.Battle," Broadcast id : " + eventEnums);
-        }
+        // if ((int)eventEnums >= 101001 && eventEnums <= EventIDs._Battle_Flag_End)
+        // {
+        //     Logx.Log(LogxType.Battle," Broadcast id : " + eventEnums);
+        // }
         
         var eventId = (int)eventEnums;
         EventManager.Broadcast(eventId, arg1, arg2);

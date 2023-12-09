@@ -91,7 +91,7 @@ public class LoadResGroupRequest
 
         foreach (var request in requestList)
         {
-            request.Release();
+            request.Unload();
         }
     }
 }

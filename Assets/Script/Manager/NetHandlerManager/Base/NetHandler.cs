@@ -47,14 +47,14 @@ public class NetHandler
     //}
 
 
-    //log str
-    public void LogNetErrStr(int cmd, int err)
-    {
-        var str = "receive msg err : " + (NetProto.ProtoIDs)cmd + "(" + (int)cmd + ") , errCode : " + err;
-        Logx.LogError(str);
-
-        CtrlManager.Instance.globalCtrl.ShowTips(str);
-
-    }
+    // //log str
+    // public void LogNetErrStr(int cmd, int err)
+    // {
+    //     var str = "receive msg err : " + (NetProto.ProtoIDs)cmd + "(" + (int)cmd + ") , errCode : " + err;
+    //     Logx.LogError(str);
+    //
+    //     CtrlManager.Instance.GlobalCtrlPre.ShowTips(str);
+    //
+    // }
 }
 

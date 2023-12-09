@@ -20,6 +20,8 @@ public class GameMain : MonoBehaviour
 
     public GameObject tempModelAsset;
 
+    public Transform gameObjectRoot;
+    
     bool isLoadFinish;
     // public Texture2D selectCursor;
 
@@ -33,8 +35,6 @@ public class GameMain : MonoBehaviour
 
     private void Start()
     {
-
-
         //this.StartToLogin();
     }
 
@@ -47,9 +47,9 @@ public class GameMain : MonoBehaviour
     //    var go = Instantiate(gameInitPrefab);
     //}
 
-    public IEnumerator GameInit(Action finishCallback)
+    public IEnumerator GameInit()
     {
-        Logx.Log(LogxType.Game,"game init start ...");
+        Logx.Log(LogxType.Game, "game init start ...");
 
         NetworkManager.Instance.Init();
         NetMsgManager.Instance.Init();
@@ -64,12 +64,14 @@ public class GameMain : MonoBehaviour
             Debug.LogError("the uiRoot with 'Canvas' name is null");
         }
 
-        UIManager.Instance.Init(uiRoot);
+        // UIManager.Instance.Init(uiRoot);
 
         var cameraRoot = transform.Find("CameraRoot");
         CameraManager.Instance.Init(cameraRoot);
 
-        CtrlManager.Instance.Init();
+        UICtrlManager.Instance.Init(uiRoot);
+        
+      
 
         if (Const.isUseAB)
         {
@@ -87,36 +89,39 @@ public class GameMain : MonoBehaviour
         var audioRoot = transform.Find("AudioRoot");
         AudioManager.Instance.Init(audioRoot);
 
+        // yield break;
+
         //读取表数据 这里可能换成异步操作
         TableManager.Instance.Init();
         yield return TableManager.Instance.LoadAllTableData();
 
+        //全局 UI
+        GlobalUICtrlMgr.Instance.Init();
+        yield return UICtrlManager.Instance.LoadGlobalCtrlReq();
+        
         GameDataManager.Instance.Init();
         ServiceManager.Instance.Init();
 
+        SceneLoadManager.Instance.Init();
+        SceneCtrlManager.Instance.Init();
+
+        //对象池
+        var objPoolRoot = transform.Find("ObjectPoolRoot");
+        ObjectPoolManager.Instance.Init(objPoolRoot);
+        
+        gameObjectRoot = transform.Find("GameObjectRoot");
+        
         InitHelper();
 
         //全局 ctrl
-        yield return CtrlManager.Instance.EnterGlobalCtrl();
-
-
-        //lua start
-        //LuaEnv luaEnv = new LuaEnv();
-        //luaEnv.AddLoader(MyLoader);
-        //luaEnv.DoString("require 'main.lua'");
-        //
+        // yield return CtrlManager.Instance.EnterGlobalCtrl();
 
         OperateViewManager.Instance.Init();
         OperateViewManager.Instance.StartLoad();
 
-        Logx.Log(LogxType.Game,"game init finish");
+        Logx.Log(LogxType.Game, "game init finish");
 
-
-        ////test
-        //PlotManager.Instance.Test();
         isLoadFinish = true;
-        finishCallback?.Invoke();
-
     }
 
     public void InitHelper()
@@ -135,9 +140,12 @@ public class GameMain : MonoBehaviour
 
     public void StartToLogin()
     {
-        Logx.Log(LogxType.Game,"enter login logic");
-        
-        CtrlManager.Instance.Enter<LoginCtrl>();
+        Logx.Log(LogxType.Game, "enter login logic");
+
+         // UICtrlManager.Instance.Enter<LoginUICtrl>();
+         
+         
+         SceneCtrlManager.Instance.Enter<LoginSceneCtrl>();
     }
 
     public void StartLocalBattle()
@@ -145,19 +153,24 @@ public class GameMain : MonoBehaviour
         //TODO: 纯本地战斗 里面的英雄是配置的 结算也是本地的
         //int battleConfigId = 5900001;
         int battleConfigId = 5900010;
-        
-        Logx.Log(LogxType.Game,"create local battle test");
-        
+
+        Logx.Log(LogxType.Game, "create local battle test");
+
         BattleManager.Instance.CreatePureLocalBattle(battleConfigId);
     }
 
+    private GameObject assss = null;
+
     IEnumerator sss()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.50f);
-            CtrlManager.Instance.globalCtrl.ShowTips("tips 1");
-        }
+        yield return null;
+        // while (true)
+        // {
+        //     yield return new WaitForSeconds(0.50f);
+        //     CtrlManager.Instance.globalCtrl.ShowTips("tips 1");
+        // }
+
+        ResourceManager.Instance.GetObject<GameObject>(15000001, (aaa) => { assss = aaa; });
     }
 
     //void StartToEnterGame(NetProto.scCheckLogin result)
@@ -192,14 +205,13 @@ public class GameMain : MonoBehaviour
     }
 
     public int currBattleFrameNum = 0;
-
+    List<GameObject> gggg = new List<GameObject>();
     // Update is called once per frame
     void Update()
     {
-
         LoadTaskManager.Instance.Update(Time.deltaTime);
         ResourceManager.Instance.Update(Time.deltaTime);
-        CtrlManager.Instance.Update(Time.deltaTime);
+        UICtrlManager.Instance.Update(Time.deltaTime);
 
         BattleManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
@@ -208,9 +220,102 @@ public class GameMain : MonoBehaviour
         PlotManager.Instance.Update(Time.deltaTime);
 
         NetworkManager.Instance.Update();
+        
+        SceneLoadManager.Instance.Update();
 
         currBattleFrameNum = currBattleFrameNum + 1;
 
+
+        // //test ===>
+        //
+        //
+        // var path = "assets/buildres/prefabs/ui/loginui.prefab";
+        //
+        // if (Input.GetKeyDown(KeyCode.A))
+        // {
+        //     // ResourceManager.Instance.ReturnObject(15000001,assss);
+        //     // assss = null;
+        //
+        //     //start test
+        //
+        //     var uiRoot = transform.Find("Canvas");
+        //
+        //     AssetManager.Instance.Load<GameObject>(path, (asset) =>
+        //     {
+        //         var go = GameObject.Instantiate(asset, uiRoot, false);
+        //     });
+        //
+        //     // AssetManager.Instance.Load<GameObject>(path, (asset) =>
+        //     // {
+        //     //     //var go = GameObject.Instantiate(asset, uiRoot, false);
+        //     // });
+        //     //
+        //     // AssetManager.Instance.Load<GameObject>(path, (asset) =>
+        //     // {
+        //     //     //var go = GameObject.Instantiate(asset, uiRoot, false);
+        //     // });
+        //     //
+        //     //end test
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.Z))
+        // {
+        //     var uiRoot = transform.Find("Canvas");
+        //     ResourceManager.Instance.GetObject<GameObject>(path, (go) =>
+        //     {
+        //         gggg.Insert(0,go);
+        //         
+        //         go.transform.SetParent(uiRoot,false);
+        //     });
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.N))
+        // {
+        //
+        //     if (gggg.Count > 0)
+        //     {
+        //         ResourceManager.Instance.ReturnObject<GameObject>(path,gggg[0]);
+        //         gggg.RemoveAt(0);
+        //     }
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.M))
+        // {
+        //     ResourceManager.Instance.Release();
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.J))
+        // {
+        //     // Resources.UnloadUnusedAssets();
+        //     // ResourceManager.Instance.Release();
+        //
+        //     AssetManager.Instance.UnloadAsset(path);
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.K))
+        // {
+        //     // Resources.UnloadUnusedAssets();
+        //     // ResourceManager.Instance.Release();
+        //
+        //     AssetManager.Instance.ReleaseUnusedAssets();
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.L))
+        // {
+        //     // Resources.UnloadUnusedAssets();
+        //     // ResourceManager.Instance.Release();
+        //
+        //     AssetBundleManager.Instance.ReleaseAssetBundles();
+        // }
+        //
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            // GameSceneManager.Instance.Load("",()=);
+        }
+
+
+        // // <===
     }
 
     private void FixedUpdate()
@@ -220,12 +325,10 @@ public class GameMain : MonoBehaviour
 
     private void LateUpdate()
     {
-        CtrlManager.Instance.LateUpdate(Time.deltaTime);
+        UICtrlManager.Instance.LateUpdate(Time.deltaTime);
     }
 
     private void OnDestroy()
     {
-
     }
-
 }

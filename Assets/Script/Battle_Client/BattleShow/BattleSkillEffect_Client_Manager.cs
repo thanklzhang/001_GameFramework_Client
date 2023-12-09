@@ -11,7 +11,7 @@ namespace Battle_Client
 {
     public class BattleSkillEffect_Client_Manager : Singleton<BattleSkillEffect_Client_Manager>
     {
-        Dictionary<int, BattleSkillEffect> skillEffectDic;
+        Dictionary<int, BattleSkillEffect> skillEffectDic = new Dictionary<int, BattleSkillEffect>();
 
 
 

@@ -393,6 +393,12 @@ namespace Table
         
 		OutlineEffect = 15014001,
         
+		BattleScene_001 = 15015001,
+        
+		LoginScene = 15015100,
+        
+		LobbyScene = 15015101,
+        
 	
 	}  
 }

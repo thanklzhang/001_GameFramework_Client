@@ -30,7 +30,7 @@ namespace Battle_Client
     public class BattleEntityManager : Singleton<BattleEntityManager>
     {
         //guid => entity
-        Dictionary<int, BattleEntity_Client> entityDic;
+        Dictionary<int, BattleEntity_Client> entityDic = new Dictionary<int, BattleEntity_Client>();
 
         public void Init()
         {

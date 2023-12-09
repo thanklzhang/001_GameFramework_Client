@@ -32,6 +32,18 @@ public enum LogxType
     //检查和更新资源
     CheckAndUpdateResource = 106,
     
+    //asset 资源
+    Asset = 107,
+    
+    //AssetBundle
+    AB = 108,
+    
+    //Ctrl(模块控制)
+    Ctrl = 109,
+    
+    //SceneCtrl(场景控制)
+    SceneCtrl = 110,
+    
     //---------------------------------
 
     //自定义类型(200 以上)-----------------------------
@@ -60,7 +72,12 @@ public class Logx
         
         { LogxType.Build, new LogxConfigInfo() { enable = true } },
         
-        {LogxType.CheckAndUpdateResource,new LogxConfigInfo() { enable = true }}
+        {LogxType.CheckAndUpdateResource,new LogxConfigInfo() { enable = true }},
+        {LogxType.Asset,new LogxConfigInfo() { enable = false }},
+        {LogxType.AB,new LogxConfigInfo() { enable = false }},
+        // {LogxType.Ctrl,new LogxConfigInfo() { enable = true }},
+        {LogxType.SceneCtrl,new LogxConfigInfo() { enable = true }}
+        
     };
 
     public static bool IsLogTypeEnable(LogxType type)

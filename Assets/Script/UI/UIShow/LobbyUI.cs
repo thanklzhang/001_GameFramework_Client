@@ -1,23 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameData;
+using Table;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LobbyUIArg : UIArgs
-{
-    public string playerName;
-    public int playerLevel;
-    public string avatarURL;
-}
-
 public class LobbyUI : BaseUI
 {
-    public Action onClickCloseBtn;
-    public Action onClickHeroListBtn;
-    public Action onClickMainTaskBtn;
-    public Action onClickTeamBtn;
-
     Button closeBtn;
     Button heroListBtn;
     Button mainTaskBtn;
@@ -26,7 +16,7 @@ public class LobbyUI : BaseUI
     Text playerLevelText;
     private Image playerIconImg;
 
-    protected override void OnInit()
+    public override void OnLoadFinish()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         heroListBtn = this.transform.Find("heroListBtn").GetComponent<Button>();
@@ -36,33 +26,68 @@ public class LobbyUI : BaseUI
         playerLevelText = this.transform.Find("heroInfo/level").GetComponent<Text>();
         playerIconImg = this.transform.Find("heroInfo/avatarBg/avatar").GetComponent<Image>();
 
-        closeBtn.onClick.AddListener(() => { onClickCloseBtn?.Invoke(); });
-
-        heroListBtn.onClick.AddListener(() => { onClickHeroListBtn?.Invoke(); });
-
-        mainTaskBtn.onClick.AddListener(() => { onClickMainTaskBtn?.Invoke(); });
-
-        teamBtn.onClick.AddListener(() => { onClickTeamBtn?.Invoke(); });
+        // closeBtn.onClick.AddListener(() => { onClickCloseBtn?.Invoke(); });
+        // heroListBtn.onClick.AddListener(() => { onClickHeroListBtn?.Invoke(); });
+        // mainTaskBtn.onClick.AddListener(() => { onClickMainTaskBtn?.Invoke(); });
+        // teamBtn.onClick.AddListener(() => { onClickTeamBtn?.Invoke(); });
     }
 
-    public override void Refresh(UIArgs args)
+    public override void OnEnter()
     {
-        var lobbyArg = (LobbyUIArg)args;
-        var playerNameStr = lobbyArg.playerName;
+        Logx.Log(LogxType.Game,"enter game lobby success");
+ 
+        //play bgm
+        //TODO: 配表
+        AudioManager.Instance.PlayBGM((int)ResIds.bgm_002);
+    }
+
+    public override void OnActive()
+    {
+        RefreshAll();
+    }
+
+    public int iconResId;
+
+    public void RefreshAll()
+    {
+        ////title
+        //RefreshTitleBarUI();
+        //lobby
+        var playerInfo = GameDataManager.Instance.UserStore.PlayerInfo;
+
+        var playerNameStr = playerInfo.name;
         this.playerNameText.text = playerNameStr;
-        this.playerLevelText.text = "" + lobbyArg.playerLevel;
-        var iconResId = int.Parse(lobbyArg.avatarURL);
-        ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) =>
-        {
-            playerIconImg.sprite = sprite;
-        });
+        this.playerLevelText.text = "" + playerInfo.level;
+        iconResId = int.Parse(playerInfo.avatarURL);
+        
+        ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) => { playerIconImg.sprite = sprite; });
     }
 
-    protected override void OnRelease()
+    public void OnClickHeroListBtn()
     {
-        onClickCloseBtn = null;
-        onClickHeroListBtn = null;
-        onClickMainTaskBtn = null;
-        onClickTeamBtn = null;
+        //CtrlManager.Instance.Enter<HeroListCtrlPre>();
+    }
+
+    public void OnClickMainTaskBtn()
+    {
+        // CtrlManager.Instance.Enter<MainTaskCtrlPre>();
+    }
+
+    public void OnClickTeamBtn()
+    {
+        //CtrlManager.Instance.Enter<TeamCtrlPre>();
+    }
+
+    public override void OnInactive()
+    {
+        base.OnInactive();
+    }
+
+    public override void OnExit()
+    {
+        //TODO 应该由 manager 去管理
+
+        ResourceManager.Instance.ReturnObject(iconResId, playerIconImg.sprite);
+        playerIconImg.sprite = null;
     }
 }

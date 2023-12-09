@@ -49,10 +49,11 @@ public class Const
 
     public static string projectRootPath = "Assets";
 
-    //不用了
     public static string buildPath = "Assets/BuildRes";
 
     public static string tablePath = "Table";
+
+    public static string sceneRootPath = "Scenes";
 
     public const string WebUrl = "http://127.0.0.1:8080/";
     public const string ip = "196.168.1.100";

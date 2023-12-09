@@ -1,81 +1,83 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle.BattleTrigger.Runtime;
 using Table;
 using UnityEngine;
 
-public class UIArgs
-{
 
-}
-
-public abstract class BaseUI
+public class BaseUI
 {
     public GameObject gameObject;
     public Transform transform;
-    public ResIds resId;
-    //string path;
-    public void Init(GameObject obj, ResIds resId)
+
+    protected BaseUICtrl contextCtrl;
+    
+    public void Init(BaseUICtrl baseCtrl)
     {
-        //this.path = path;
-        this.resId = resId;
-        gameObject = obj;
-        transform = gameObject.transform;
+        contextCtrl = baseCtrl;
         this.OnInit();
     }
 
+    public void LoadFinish(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+        this.transform = this.gameObject.transform;
+        this.OnLoadFinish();   
+    }
 
-    protected virtual void OnInit()
+    public void Enter()
+    {
+        this.OnEnter();
+    }
+    
+    
+    public void Active()
+    {
+        this.OnActive();
+    }
+
+    public void Inactive()
+    {
+        this.OnInactive();
+    }
+
+    public void Exit()
+    {
+        this.OnExit();
+        this.gameObject = null;
+    }
+    
+
+    //拓展------------------------------
+    public virtual void OnInit()
+    {
+    }
+
+    public virtual void OnLoadFinish()
     {
 
     }
 
-    public void Show()
+    public virtual void OnEnter()
     {
-        Logx.Log(LogxType.UI,"show ui  : " + this.GetType());
-        gameObject.SetActive(true);
-    }
-
-    public bool IsShow()
-    {
-        return this.gameObject.activeSelf;
-    }
-
-    public virtual void Refresh(UIArgs args)
-    {
-
-    }
-
-    public void Update(float timeDelta)
-    {
-        this.OnUpdate(timeDelta);
-    }
-
-    public void Hide()
-    {
-        Logx.Log(LogxType.UI,"hide ui  : " + this.GetType());
         
-        gameObject.SetActive(false);
     }
 
-    public void Release()
+    public virtual void OnActive()
     {
-        //GameObject.Destroy(this.gameObject);
-        //ResourceManager.Instance.ReturnGameObject(this.gameObject);
         
-        Logx.Log(LogxType.UI,"release ui  : " + this.GetType());
+    }
+
+    public virtual void OnInactive()
+    {
         
-        this.OnRelease();
     }
 
-    protected virtual void OnUpdate(float timeDelta)
+    public virtual void OnExit()
     {
-
+        
     }
 
-    protected virtual void OnRelease()
-    {
-
-    }
 
 }

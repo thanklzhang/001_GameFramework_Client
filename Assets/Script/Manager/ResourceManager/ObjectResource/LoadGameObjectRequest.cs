@@ -84,7 +84,7 @@ public class LoadGameObjectRequest : LoadObjectRequest
 
     }
 
-    public override void Release()
+    public override void Unload()
     {
         foreach (var obj in currGameObjects)
         {

@@ -3,30 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using LitJson;
 
-public class AssetBundleCache
+public class AssetBundleLoadCallback
+{
+    //透传的 assetInfo
+    public ContextAssetInfo contextAssetInfo;   
+    //加载 ab 的完成回调
+    internal Action<AssetBundleCache, ContextAssetInfo> finishLoadABCallback;
+}
+
+public class AssetBundleInfo
 {
     public string path;
-    internal Action<AssetBundleCache> finishLoadCallback;
-    internal AssetBundle assetBundle;
-    private int refCount;
-
-    //目前这个引用计数只会在 从 assetManager 加载 asset 的流程开始的时候开始计数 
-    //其他情况暂不考虑
-    public int RefCount
-    {
-        get => refCount;
-        set
-        {
-            //Logx.Logz("ab : refCount : " + path + " : " + refCount + " -> " + value);
-            refCount = value;
-        }
-
-    }
+    public AssetBundle assetBundle;
 }
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
@@ -38,7 +28,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
     public void Init()
     {
-        //Logx.Logzxy("AB", "abLog : init");
+        Logx.Log(LogxType.AB, "AssetBundleManager : init");
         var manifestAB = AssetBundle.LoadFromFile(Const.AssetBundlePath + "/" + "StreamingAssets");
         manifest = manifestAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
 
@@ -52,7 +42,9 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     }
 
 
-    public void Load(string path, Action<AssetBundleCache> finishCallback, bool isSync)
+    //assetPath : 透传的 asset 路径，加载完成会回调回去
+    public void Load(string path, Action<AssetBundleCache,ContextAssetInfo> finishCallback, bool isSync = false,
+        ContextAssetInfo assetInfo = null)
     {
         if (isSync)
         {
@@ -60,38 +52,51 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         }
         else
         {
-            LoadAsync(path, finishCallback);
+            LoadAsync(path, finishCallback, assetInfo);
         }
     }
 
 
-    public void LoadAsync(string path, Action<AssetBundleCache> finishCallback)
+    public void LoadAsync(string path, Action<AssetBundleCache,ContextAssetInfo> finishCallback, ContextAssetInfo assetInfo = null)
     {
-
-        //Logx.Logzxy("AB", "LoadAsync : start load : " + path);
+       
+        Logx.Log(LogxType.AB, "LoadAsync ab : start load : " + path);
 
         path = path.ToLower();
         var abCache = GetCacheByPath(path);
         if (abCache != null)
-        {
-            ////Logx.Logz("LoadAsync : have ab cache");
-            //判断是否在 ab 缓存中 
-            //有的话直接拿走
-            //abCache.RefCount += 1;
-            //ChageRefCount(abCache, 1);
+        { 
+            abCache.ChangeLoadingRefCount(1);
             
-            
-            finishCallback?.Invoke(abCache);
+            AssetBundleLoadCallback callback = new AssetBundleLoadCallback();
+            callback.finishLoadABCallback = finishCallback;
+            callback.contextAssetInfo = assetInfo;
+                 
+            abCache.finishLoadCallbacksList.Add(callback);
+                
+            LoadTrueAssetBundle(abCache);//, finishCallback, assetInfo
         }
         else
         {
-            ////Logx.Logz("LoadAsync : no ab cache");
-            //可能没在缓存中 可能正在加载中 也可能第一次加载
+            //没在缓存中 加载新的ab
             
+            //先加一个 ab 缓存
+            abCache = new AssetBundleCache();
+            abCache.Init(path);
             
-            LoadTrueAssetBundle(path, finishCallback);
+            abCache.ChangeLoadingRefCount(1);
+            
+            this.abCacheDic.Add(path, abCache);
+            
+            //填充加载回调 list
+            AssetBundleLoadCallback callback = new AssetBundleLoadCallback();
+            callback.finishLoadABCallback = finishCallback;
+            callback.contextAssetInfo = assetInfo;
+            
+            abCache.finishLoadCallbacksList.Add(callback);
+            
+            LoadTrueAssetBundle(abCache);//, finishCallback, assetInfo
         }
-
     }
 
     public AssetBundleCache GetCacheByPath(string path)
@@ -102,146 +107,140 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         return abCache;
     }
 
-    public void LoadTrueAssetBundle(string path, Action<AssetBundleCache> finishCallback)
+    //开始加载 AB 资源
+    public void LoadTrueAssetBundle(AssetBundleCache abCache)//, Action<AssetBundleCache,ContextAssetInfo> finishCallback,ContextAssetInfo assetInfo = null
     {
-
-        // var abLoadList = LoadTaskManager.Instance.abLoadTask.preparingList;
-        // var loader = abLoadList.Find((abLoader) =>
-        // {
-        //     var currPath = abLoader.GetPath();
-        //     if(!path.Equals(""))
-        //     {
-        //         return path == currPath;
-        //     }
-        //
-        //     return false;
-        // });
-        //
-        // if (null == loader)
-        // {
-        //     loader = new AssetBundleLoader();
-        //     var abLoader = loader as AssetBundleLoader;
-        //     abLoader.path = path;
-        //     abLoader.finishLoadCallback = finishCallback;
-        // }
-        //
-        //
-        var loader = new AssetBundleLoader();
-        loader.path = path.ToLower();
-        loader.finishLoadCallback = finishCallback;
-
-
-        //依赖
+        //加载依赖
+        var path = abCache.path;
         var deps = GetDependPaths(path).ToList();
         for (int i = 0; i < deps.Count; i++)
         {
             var depPath = deps[i];
             Load(depPath, null, false);
         }
+        
         //Logx.Log("LoadTaskManager.Instance.StartAssetBundleLoader , loader.path : " + loader.path);
-        //加载任务交给加载管理器去执行
-        // Logx.Log("AssetBundleManager : LoadTrueAssetBundle : start LoadTrueAssetBundle : " + path);
-        //这里会判断 是否有相同 path 的 loader
-        LoadTaskManager.Instance.StartAssetBundleLoader(loader);
 
-
-    }
-
-    //有 AB 加载完成
-    public void OnLoadFinish(AssetBundleCache ab)
-    {
-        // Logx.Log("AssetBundleManager : OnLoadFinish : " + ab.path);
-        //判断缓存中是否有 没有的话添加到缓存中
-        AssetBundleCache abCache = null;
-        if (!abCacheDic.TryGetValue(ab.path, out abCache))
+        if (abCache.isFinishLoad)
         {
-            abCacheDic.Add(ab.path, ab);
-            abCache = abCacheDic[ab.path];
+            TriggerABFinishLoadCallbacks(abCache);
+            
         }
         else
         {
-            //abCache.RefCount += ab.RefCount;
-            //这里可能有问题 如果这里增加了引用计数 那么当 asset 加载好之后 ab 这边又会增加引用计数
-            //ChageRefCount(abCache, ab.RefCount);
-        }
-
-        //这个回调是加载开始的时候的时候传的回调 可以认为是相对的业务层传来的回调
-        var finishCallback = ab.finishLoadCallback;
-        finishCallback?.Invoke(abCache);
-    }
-
-    public void Release()
-    {
-        //EventManager.RemoveListener<AssetBundleCache>((int)GameEvent.LoadABTaskFinish, this.OnLoadFinish);
-    }
-
-    public void AddAssetBundleReference(string abPath)
-    {
-        AssetBundleCache abCache = null;
-        if (abCacheDic.TryGetValue(abPath, out abCache))
-        {
-            //abCache.RefCount += 1; 
-            ChageRefCount(abCache, 1);
-        }
-        else
-        {
-            //Logx.Logz("the abPath is not found : " + abPath);
-        }
-    }
-
-    internal void ReduceAssetBundleReference(string abPath)
-    {
-        AssetBundleCache abCache = null;
-        if (abCacheDic.TryGetValue(abPath, out abCache))
-        {
-            if (abCache.RefCount <= 0)
+            if (!abCache.isLoading)
             {
-                Logx.LogWarning("AB", "the refCount of abCache is 0 : " + abPath);
-                return;
-            }
-            //abCache.RefCount -= 1;
-            ChageRefCount(abCache, -1);
-        }
-        else
-        {
-            //Logx.Logz("the abPath is not found : " + abPath);
-        }
-
-    }
-
-    public void ChageRefCount(AssetBundleCache cache, int value)
-    {
-        cache.RefCount += value;
-        var deps = this.GetDependPaths(cache.path);
-        for (int i = 0; i < deps.Length; i++)
-        {
-            var depPath = deps[i];
-            if (this.abCacheDic.ContainsKey(depPath))
-            {
-                var currCache = this.abCacheDic[depPath];
-                ChageRefCount(currCache, value);
+                abCache.isLoading = true;
+                //加载任务交给加载管理器去执行
+                var loader = new AssetBundleLoader();
+                loader.path = path.ToLower();
+        
+                LoadTaskManager.Instance.StartAssetBundleLoader(loader);
             }
             else
             {
-                //Logx.Logz("the abCacheDic doesnt contain this depPath : path and depPath are : " + cache.path + " " + depPath);
+                //正在加载
             }
+        }
+
+    }
+
+    //AB 加载完成
+    public void OnLoadFinish(AssetBundleInfo loadFinishABInfo)
+    {
+        Logx.Log( LogxType.AB,"AssetBundleManager : OnLoadFinish : " + loadFinishABInfo.path);
+    
+        AssetBundleCache abCache = null;
+        if (!abCacheDic.TryGetValue(loadFinishABInfo.path, out abCache))
+        {
+            //理论上不会走到这里 因为加载的时候就有 cache 了 , 即使清理也是清理已经加载完成的 , 正在加载中是不会被清理的
+            Logx.LogWarning(LogxType.AB,"the abCache is not found : ab.path : " + loadFinishABInfo.path);
+            return;  
+        }
+        
+        abCache.isFinishLoad = true;
+        abCache.assetBundle = loadFinishABInfo.assetBundle;
+
+        TriggerABFinishLoadCallbacks(abCache);
+    }
+
+    public void TriggerABFinishLoadCallbacks(AssetBundleCache abCache)
+    {
+        //触发所有回调
+        var callbackList = abCache.finishLoadCallbacksList;
+        for (int i = 0; i < callbackList.Count; i++)
+        {
+            var callback = callbackList[i];
+            callback.finishLoadABCallback?.Invoke(abCache, callback.contextAssetInfo);
+        }
+        
+        callbackList.Clear();
+    }
+
+    public void ChangeLoadingRefCount(int count,string abPath,bool isToUp)
+    {
+        AssetBundleCache abCache = AssetBundleManager.Instance.GetCacheByPath(abPath);
+        if (abCache != null)
+        {
+            abCache.ChangeLoadingRefCount(count);
+            if (isToUp)
+            {
+                var deps = GetDependPaths(abPath).ToList();
+                for (int i = 0; i < deps.Count; i++)
+                {
+                    var depPath = deps[i];
+                    ChangeLoadingRefCount(count,depPath,isToUp);
+                }
+            }
+            
+        }
+        else
+        {
+            Logx.LogWarning(LogxType.Asset,
+                "the abCache is not found : abPath : " + abPath);
         }
     }
 
-    public void TrueReleaseAB(string abPath)
+    public void Unload(string path)
     {
-        AssetBundleCache abCache = null;
-        if (abCacheDic.TryGetValue(abPath, out abCache))
-        {
-            if (abCache.RefCount > 0)
-            {
-                Logx.LogWarning("AB", "the refCount of abCache is using(refCount > 0) : " + abPath);
-                return;
-            }
+        
+    }
 
-            var ab = abCache.assetBundle;
-            ab.Unload(true);
-            this.abCacheDic.Remove(abCache.path);
+    //清理 AB , 目前策略是：
+    //清理所有 '没在加载' 并且 '没有从该 ab 中加载 asset ' 的 ab 
+
+    //TODO:
+    //清理优先级按照 ab 引用计数值排序 ，引用计数越低清理优先级越高，
+    //即使 ab 有引用 ， 只要 ab 已经加载完毕  并且 没有 asset 资源在加载
+    //那么就可以清除
+    //清理数目为总数的一半 ， 优先清理 '清理优先级' 较高的
+    public void ReleaseAssetBundles()
+    {
+        Logx.Log(LogxType.AB, "start ReleaseAssetBundles -------> ");
+        
+        var delList = new List<AssetBundleCache>();
+        foreach (var kv in abCacheDic)
+        {
+            var abCache = kv.Value;
+
+            if (abCache.isFinishLoad)
+            {
+                if (!abCache.IsInLoadingRef)
+                {
+                    delList.Add(abCache);
+                }
+            }
         }
+
+        foreach (var abCache in delList)
+        {
+            var path = abCache.path;
+            abCache.Release();
+            this.abCacheDic.Remove(abCache.path);
+            
+            Logx.Log(LogxType.Asset, "release ab : path : " + path);
+        }
+        
+        Logx.Log(LogxType.AB, "finish ReleaseAssetBundles <------- ");
     }
 }

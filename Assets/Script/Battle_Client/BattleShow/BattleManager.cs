@@ -184,8 +184,8 @@ namespace Battle_Client
 
             this.OnEnterBattle();
 
-            //进入战斗状态
-            CtrlManager.Instance.Enter<BattleCtrl>();
+            // //进入战斗状态
+            // CtrlManager.Instance.Enter<BattleCtrlPre>();
         }
 
         public void OnEnterBattle()

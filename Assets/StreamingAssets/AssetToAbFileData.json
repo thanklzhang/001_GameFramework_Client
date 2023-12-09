@@ -330,5 +330,8 @@
     "assets/buildres/atlas/battleui/img_battle_small_map_friend.png"               : "Assets/BuildRes/Atlas/BattleUI.ab",
     "assets/buildres/atlas/battleui/img_battle_small_map_self.png"                 : "Assets/BuildRes/Atlas/BattleUI.ab",
     "assets/buildres/atlas/battleui/img_skill_cd_mask.png"                         : "Assets/BuildRes/Atlas/BattleUI.ab",
-    "assets/buildres/shader/outlineeffect.shader"                                  : "Assets/BuildRes/Shader.ab"
+    "assets/buildres/shader/outlineeffect.shader"                                  : "Assets/BuildRes/Shader.ab",
+    "assets/buildres/scenes/battlescene_001.unity"                                 : "Assets/BuildRes/Scenes/BattleScene_001.ab",
+    "assets/buildres/scenes/lobbyscene.unity"                                      : "Assets/BuildRes/Scenes/LobbyScene.ab",
+    "assets/buildres/scenes/loginscene.unity"                                      : "Assets/BuildRes/Scenes/LoginScene.ab"
 }

@@ -24,7 +24,7 @@ public class LoadObjectRequest
     {
         
     }
-    public virtual void Release()
+    public virtual void Unload()
     {
         
     }

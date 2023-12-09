@@ -41,9 +41,9 @@ def call_unity_static_func(func):
     time.sleep(1)
     print("start unity")
     cmd = 'start %s -quit -batchmode -projectpath %s -logfile %s -executemethod %s \
-    --productname:%s --version:%s --channel:%s --platform:%s --res_version:%s --is_build_package:%s --is_build_ab:%s --pre_compile_defines:%s'
+    --productname:%s --version:%s --channel:%s --platform:%s --res_version:%s --is_build_package:%s --is_build_ab:%s --pre_compile_defines:%s --upload_ab_Type:%s'
     
-    cmd = cmd%(unity_exe,project_path,log_file,func, sys.argv[1], sys.argv[2],sys.argv[3], sys.argv[4],sys.argv[5], sys.argv[6],sys.argv[7],sys.argv[8])
+    cmd = cmd%(unity_exe,project_path,log_file,func, sys.argv[1], sys.argv[2],sys.argv[3], sys.argv[4],sys.argv[5], sys.argv[6],sys.argv[7],sys.argv[8],sys.argv[9])
     print('run cmd:  ' + cmd)
     os.system(cmd)
  

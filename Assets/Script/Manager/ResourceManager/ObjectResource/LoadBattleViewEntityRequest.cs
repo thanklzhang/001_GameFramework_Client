@@ -49,7 +49,7 @@ public class LoadBattleViewEntityRequest : LoadObjectRequest
 
     }
 
-    public override void Release()
+    public override void Unload()
     {
 
     }

@@ -153,6 +153,8 @@ namespace Battle_Client
             //先拿一个简易的模型暂时放这 然后等真正模型下载好之后在替换即可
             var asset = GameMain.Instance.tempModelAsset;
             gameObject = GameObject.Instantiate(asset);
+            
+            gameObject.transform.SetParent(GameMain.Instance.gameObjectRoot,false);
 
             tempModel = gameObject.transform.Find("Cube").gameObject;
 
@@ -257,7 +259,7 @@ namespace Battle_Client
             if (isFinishLoad)
             {
                 ResourceManager.Instance.ReturnObject(path, model);
-                model.transform.SetParent(null);
+                //model.transform.SetParent(GameMain.Instance.gameObjectRoot);
             }
 
             GameObject.Destroy(gameObject);
@@ -644,6 +646,10 @@ namespace Battle_Client
         {
             var myEntityGuid = BattleManager.Instance.GetLocalCtrlHerGuid();
 
+            // if (this.configId == 1000210)
+            // {
+            //     Logx.Log("zxy : test : " + aniTriggerName);
+            // }
 
             if (isFinishLoad && animator != null)
             {

@@ -20,6 +20,9 @@ public class BaseSkillDirector
     bool isEnable;
     bool isFinishLoad;
 
+    //不考虑是否加载完成中的'是否显示'变量 , 这里应该是 state(show hide release  这样就可以根据是否加载完进行一些操作)
+    private bool isShow = false;
+    
     public void Init(int skillDirectorType, string param)
     {
         this.OnInit(skillDirectorType, param);
@@ -32,6 +35,7 @@ public class BaseSkillDirector
 
     public void Show(GameObject followGameObject)
     {
+        isShow = true;
         if (isFinishLoad)
         {
             this.OnShow();
@@ -68,14 +72,24 @@ public class BaseSkillDirector
 
     public void OnLoadFinish(GameObject go)
     {
+     
         isFinishLoad = true;
+        
         this.gameObject = go;
 
         this.transform = this.gameObject.transform;
 
         this.transform.position = followEntity.transform.position;
+        
+        if (isShow)
+        {
+            this.Show(this.followEntity);
+        }
+        else
+        {
+            //这里应该判断是否是已释放状态
+        }
 
-        this.Show(this.followEntity);
     }
 
 
@@ -112,10 +126,14 @@ public class BaseSkillDirector
 
     public void Hide()
     {
+        isShow = false;
         isEnable = false;
         if (this.resourceId > 0)
         {
-            gameObject.SetActive(false);
+            if (gameObject != null)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 
@@ -123,6 +141,7 @@ public class BaseSkillDirector
     {
         if (this.resourceId > 0)
         {
+            //这里其实也要判断 gameObject
             ResourceManager.Instance.ReturnObject(this.resourceId, this.gameObject);
         }
     }

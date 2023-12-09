@@ -160,20 +160,23 @@ public class GameStartup : MonoBehaviour
 
       
         
-        yield return gameMain.GameInit(() =>
-        {
-          
-            //游戏初始化完毕 开始游戏逻辑
-            if (!Const.isLocalBattleTest)
-            {
-                gameMain.StartToLogin();
-            }
-            else
-            {
-                gameMain.StartLocalBattle();
-            }
-        });
+        yield return gameMain.GameInit();
 
+        
+        // //tset----------
+        // yield break;
+        
+        
+        //游戏初始化完毕 开始游戏逻辑
+        if (!Const.isLocalBattleTest)
+        {
+            gameMain.StartToLogin();
+        }
+        else
+        {
+            gameMain.StartLocalBattle();
+        }
+        
         //gameMain.selectCursor = selectCursor;
     }
 

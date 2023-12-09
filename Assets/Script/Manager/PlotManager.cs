@@ -59,6 +59,6 @@ public class PlotManager : Singleton<PlotManager>
 
     public void Update(float deltaTime)
     {
-        plotPlayer.Update(deltaTime);
+        plotPlayer?.Update(deltaTime);
     }
 }

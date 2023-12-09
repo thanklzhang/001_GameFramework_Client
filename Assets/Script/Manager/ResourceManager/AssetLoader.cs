@@ -1,87 +1,70 @@
-﻿
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using LitJson;
-using UnityEngine.SceneManagement;
-using Object = UnityEngine.Object;
-
+﻿using UnityEngine;
 public class AssetLoader : BaseLoader
 {
     public string path;
-    public Action<AssetCache> finishLoadCallback;
-
-    // public Type type;
-    public UnityEngine.Object asset;
-
     public AssetBundleRequest assetRequest;
 
     string abPath;
-
-    //加载中相同 ab 的请求引用数量
-    public int refCount;
-
+    
     AssetBundle assetBundle;
 
-    public override void OnStart()
-    {
-        //加载 AB 
-        refCount += 1;
 
+    public override void OnPrepare()
+    {
         abPath = AssetManager.Instance.GetABPathByAssetPath(path);
+        if (null == abPath)
+        {
+            Logx.LogWarning(LogxType.Asset,"the abPath(have this asset) is nil , assetPath : " + path);
+            return;
+        }
+    }
+    public override bool IsPrepareFinish()
+    {
+        var assetBundle = AssetBundleManager.Instance.GetCacheByPath(abPath);
+        if (null == assetBundle)
+        {
+            Logx.LogWarning(LogxType.Asset,"the assetBundle is nil , abPath : " + abPath);
+            return false;
+        }
+
+        return assetBundle.isFinishLoad;
     }
 
     public override void OnPrepareFinish()
     {
-        var assetBundleCache = AssetBundleManager.Instance.GetCacheByPath(abPath);
+      
+
+    }
+
+    public override void OnStartLoad()
+    {
+        Logx.Log(LogxType.Asset,"AssetLoader : OnStartLoad : path : " + this.path);
+        
+        var assetBundleCache = AssetBundleManager.Instance.GetCacheByPath(this.abPath);
         if (null == assetBundleCache)
         {
-            Logx.LogError("AssetLoader", "the assetBundleCache is null : " + abPath);
+            Logx.LogWarning(LogxType.Asset, "the assetBundleCache is null : " + this.abPath);
             return;
         }
 
         if (null == assetBundleCache.assetBundle)
         {
-            Logx.LogError("AssetLoader", "the assetBundleCache.assetBundle is null : " + abPath);
+            Logx.LogWarning(LogxType.Asset, "the assetBundleCache.assetBundle is null : " + this.abPath);
             return;
         }
+
         var ab = assetBundleCache.assetBundle;
 
+        //开始加载
         if (resType != null)
         {
-            assetRequest = ab.LoadAssetAsync(path,resType);
+            assetRequest = ab.LoadAssetAsync(path, resType);
         }
         else
         {
             assetRequest = ab.LoadAssetAsync(path);
         }
-    }
-
-    internal override void OnLoadFinish()
-    {
-        //asset 加载完成
-        AssetCache assetCache = new AssetCache();
-        assetCache.path = path;
-        assetCache.finishLoadCallback = finishLoadCallback;
-        assetCache.RefCount = refCount;
-        assetCache.asset = assetRequest.asset;
-
-        //abCache.ab = ab
-        //finishLoadCallback?.Invoke(abCache);
-
-        AssetManager.Instance.OnLoadAssetFinish(assetCache);
-
-    }
-
-    public override bool IsPrepareFinish()
-    {
-        var assetBundle = AssetBundleManager.Instance.GetCacheByPath(abPath);
-        return assetBundle != null;
+       
     }
 
     public override bool IsLoadFinish()
@@ -90,7 +73,19 @@ public class AssetLoader : BaseLoader
         {
             return false;
         }
-        return assetRequest.progress >= 1;
 
+        return assetRequest.progress >= 1;
     }
+    
+    internal override void OnLoadFinish()
+    {
+        Logx.Log(LogxType.Resource, "assetLoader OnLoadFinish : " + this.path);
+        
+        AssetInfo assetInfo = new AssetInfo();
+        assetInfo.path = path;
+        assetInfo.asset = assetRequest.asset;
+        AssetManager.Instance.OnLoadAssetFinish(assetInfo);
+    }
+
+   
 }

@@ -11,6 +11,9 @@ public class ResourceManager : Singleton<ResourceManager>
 {
     List<LoadResGroupRequest> requestList = new List<LoadResGroupRequest>();
 
+    private float releaseTimer;
+    private float releaseInterval = 180f;
+    
     //batch load asset
     public LoadResGroupRequest LoadObjects(List<LoadObjectRequest> requests)
     {
@@ -24,15 +27,15 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
         var fullPath = Const.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
-         
-        GetObject(fullPath, callback,isSync);
+
+        GetObject(fullPath, callback, isSync);
     }
 
     //get obj by pool (include : gameObject texture sprite material)
     public void GetObject<T>(string path, Action<T> callback, bool isSync = false) where T : UnityEngine.Object
     {
-        Logx.Log(LogxType.Resource,"start to get resource ... , path : " + path);
-        
+        Logx.Log(LogxType.Resource, "start to get resource ... , path : " + path);
+
         ObjectPoolManager.Instance.GetObject<T>(path, (obj) =>
         {
             T getObj = null;
@@ -60,26 +63,23 @@ public class ResourceManager : Singleton<ResourceManager>
             {
                 getObj = obj as T;
             }
-            
-            Logx.Log(LogxType.Resource,"get resource finish , path : " + path);
-            
-            callback?.Invoke(getObj);
 
+            Logx.Log(LogxType.Resource, "get resource finish , path : " + path);
+
+            callback?.Invoke(getObj);
         });
     }
 
     internal void ReturnObject<T>(int resId, T obj) where T : UnityEngine.Object
     {
-       
-        
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
         var fullPath = Const.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
-        ReturnObject(fullPath,obj);
+        ReturnObject(fullPath, obj);
     }
 
     internal void ReturnObject<T>(string path, T obj) where T : UnityEngine.Object
-    { 
-        Logx.Log(LogxType.Resource,"return resource , path : " + path);
+    {
+        Logx.Log(LogxType.Resource, "return resource , path : " + path);
         ObjectPoolManager.Instance.ReturnObject(path, obj);
     }
 
@@ -92,10 +92,27 @@ public class ResourceManager : Singleton<ResourceManager>
             if (req.CheckFinish())
             {
                 req.Finish();
-               
+
                 requestList.Remove(req);
             }
         }
+        
+        releaseTimer += Time.deltaTime;
+        if (releaseTimer >= releaseInterval)
+        {
+            this.Release();
+            releaseTimer = 0;
+        }
+    }
+
+    //执行释放逻辑: 引用计数为 0 的时候会被清除
+    //目前策略：0 就清除
+    //这里可以改成根据使用量和时间来进行判断是否清除
+    public void Release()
+    {
+        ObjectPoolManager.Instance.Release();
+        AssetManager.Instance.ReleaseUnusedAssets();
+        AssetBundleManager.Instance.ReleaseAssetBundles();
     }
 
 #if UNITY_EDITOR

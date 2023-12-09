@@ -91,6 +91,8 @@ namespace Battle_Client
             {
                 gameObject.SetActive(false);
             }
+            
+            gameObject.transform.SetParent(GameMain.Instance.gameObjectRoot,false);
 
 
             isFinishLoad = false;
@@ -367,7 +369,7 @@ namespace Battle_Client
             {
                 if (this.resId > 0)
                 {
-                    ResourceManager.Instance.ReturnObject(path, gameObject);
+                    ResourceManager.Instance.ReturnObject(resId, gameObject);
                 }
                 else
                 {

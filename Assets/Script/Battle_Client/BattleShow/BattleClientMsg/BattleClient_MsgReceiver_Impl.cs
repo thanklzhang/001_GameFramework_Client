@@ -40,7 +40,7 @@ namespace Battle_Client
             {
                 var msgEntity = entityList[i];
                 var entity = BattleEntityManager.Instance.CreateEntity(msgEntity);
-                EventDispatcher.Broadcast<BattleEntity_Client>(EventIDs.OnCreateEntity, entity);
+                // EventDispatcher.Broadcast<BattleEntity_Client>(EventIDs.OnCreateEntity, entity);
             }
         }
 
@@ -226,15 +226,15 @@ namespace Battle_Client
 
         public void On_SkillTrackStart(BattleClientMsg_CreateSkillTrack create)
         {
-            //TrackBean trackBean = new TrackBean()
-            // {
-            //     trackConfigId = create.trackConfigId,
-            //     releaserGuid = create.releaserEntityGuid,
-            //     targetPos = create.targetPos,
-            //     targetEntityGuid = create.targetEntityGuid
-            // };
-            //
-            // EventDispatcher.Broadcast<TrackBean>(EventIDs.OnSkillTrackStart, trackBean);
+            TrackBean trackBean = new TrackBean()
+             {
+                 trackConfigId = create.trackConfigId,
+                 releaserGuid = create.releaserEntityGuid,
+                 targetPos = create.targetPos,
+                 targetEntityGuid = create.targetEntityGuid
+             };
+            
+             EventDispatcher.Broadcast<TrackBean>(EventIDs.OnSkillTrackStart, trackBean);
         }
 
         public void On_SkillTrackEnd(int entityGuid, int skillTrackConfigId)

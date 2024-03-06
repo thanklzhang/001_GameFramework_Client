@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Table;
 using UnityEngine;
 
 public enum UIShowLayer
@@ -40,7 +41,8 @@ public abstract class BaseUICtrl
     {
         this.state = CtrlState.Inited;
         Logx.Log(LogxType.Ctrl, " init : ctrl : " + this.GetType());
-        
+
+        uiResId = (int)ResIds.BattleUI;
         // ui = CreateUIInstance();
         // ui.Init(this);
         this.OnInit();

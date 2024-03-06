@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameData;
 using Table;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ public class HeroAvatar
     Button clickBtn;
     GameObject selectGo;
 
-    public HeroCardUIData uiData;
+    public HeroData data;
 
     public void Init(GameObject gameObject)
     {
@@ -39,13 +40,13 @@ public class HeroAvatar
         this.gameObject.SetActive(true);
     }
 
-    public void Refresh(HeroCardUIData uiData)
+    public void Refresh(HeroData uiData)
     {
-        this.uiData = uiData;
+        this.data = uiData;
 
         //avatarImg
-        var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.uiData.configId);
-        levelText.text = "" + this.uiData.level;
+        var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.data.configId);
+        levelText.text = "" + this.data.level;
         
         ResourceManager.Instance.GetObject<Sprite>(config.AvatarResId, (sprite) =>
         {
@@ -59,9 +60,10 @@ public class HeroAvatar
 
     public void AddClickListener(Action<int> action)
     {
+        clickBtn.onClick.RemoveAllListeners();
         clickBtn.onClick.AddListener(() =>
         {
-            action?.Invoke(this.uiData.guid);
+            action?.Invoke(this.data.guid);
         });
     }
 

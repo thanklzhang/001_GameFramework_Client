@@ -1,6 +1,7 @@
 ﻿using Battle_Client;
 using NetProto;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,9 @@ namespace Battle_Client
         {
             var entity = CreateViewEntityInfo(msg_entity);
             entity.StartSelfLoadModel();
+            
+            EventDispatcher.Broadcast<BattleEntity_Client>(EventIDs.OnCreateEntity, entity);
+            
             return entity;
         }
 
@@ -137,6 +141,38 @@ namespace Battle_Client
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// 加载现在所有实体 一般再战斗开始加载的时候调用
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator LoadInitEntities()
+        {
+            int total = entityDic.Count;
+            int finishCount = 0;
+            foreach (var item in entityDic)
+            {
+                var entity = item.Value;
+                var path = entity.path;
+                bool isFinish = true;
+                ResourceManager.Instance.GetObject<GameObject>(path, (gameObject) =>
+                {
+                    //viewEntity.OnLoadModelFinish(gameObject);
+                    // this.OnFinishLoadEntityObj(battleEntity, gameObject);
+                    entity.OnLoadModelFinish(gameObject);
+                    finishCount += 1;
+                });
+            }
+
+            if (total > 0)
+            {
+                while (finishCount < total)
+                {
+                    yield return null;
+                }
+            }
+            yield return null;
         }
 
         /// <summary>

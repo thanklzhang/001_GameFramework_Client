@@ -118,6 +118,8 @@ public class GameMain : MonoBehaviour
 
         OperateViewManager.Instance.Init();
         OperateViewManager.Instance.StartLoad();
+        
+        BattleManager.Instance.Init();
 
         Logx.Log(LogxType.Game, "game init finish");
 
@@ -326,6 +328,13 @@ public class GameMain : MonoBehaviour
     private void LateUpdate()
     {
         UICtrlManager.Instance.LateUpdate(Time.deltaTime);
+        
+        BattleManager.Instance.LateUpdate(Time.deltaTime);
+    }
+
+    private void Release()
+    {
+        BattleManager.Instance.Release();
     }
 
     private void OnDestroy()

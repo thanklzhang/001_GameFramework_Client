@@ -34,6 +34,7 @@ public class TitleBarUICtrl : BaseUICtrl
         bgGo = transform.Find("bg").gameObject;
         lineGo = transform.Find("line01").gameObject;
 
+        this.closeBtn.onClick.RemoveAllListeners();
         this.closeBtn.onClick.AddListener(() => { clickCloseBtnAction?.Invoke(); });
     }
 
@@ -41,6 +42,7 @@ public class TitleBarUICtrl : BaseUICtrl
 
     protected override void OnOpen(UICtrlArgs args)
     {
+        clickCloseBtnAction = null;
         TitleBarUIArgs titleBarListArgs = (TitleBarUIArgs)args;
 
         var titleBarId = titleBarListArgs.titleBarId;
@@ -54,6 +56,16 @@ public class TitleBarUICtrl : BaseUICtrl
         closeBtn.gameObject.SetActive(1 == config.IsShowCloseBtn);
         bgGo.SetActive(1 == config.IsShowBg);
         lineGo.SetActive(1 == config.IsShowLine);
+
+        if (null == clickCloseBtnAction)
+        {
+            clickCloseBtnAction = DefaultClose;
+        }
+    }
+
+    public void DefaultClose()
+    {
+        UICtrlManager.Instance.CloseTopFixedUI();
     }
 
     private List<TitleOptionShowObj> showObjList;

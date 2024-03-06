@@ -19,8 +19,15 @@ public class BaseUIShowObj<K>
 
     public K parentObj;
 
+    private bool isHasInit = false;
     public void Init(GameObject gameObject, K parentObj)
     {
+        if (isHasInit)
+        {
+            Logx.LogWarning(LogxType.UI,"BaseUIShowObj Init : isHasInit is true , " + this.GetType());
+            return;
+        }
+
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
         this.parentObj = parentObj;
@@ -34,6 +41,13 @@ public class BaseUIShowObj<K>
 
     public void Release()
     {
+        if (!isHasInit)
+        {
+            Logx.LogWarning(LogxType.UI,"BaseUIShowObj Release :  isHasInit is false , " + this.GetType());
+            return;
+        }
+
+        isHasInit = false;
         this.OnRelease();
     }
 

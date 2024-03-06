@@ -32,12 +32,12 @@ namespace Battle_Client
         public int ctrlHeroGuid;
     }
 
-
-    public class BattleManager : Singleton<BattleManager>
+    //战斗创建的管理
+    public partial class BattleManager : Singleton<BattleManager>
     {
         //战斗信息
         public int battleGuid;
-        public int battleTableId;
+        public int battleConfigId;
         public int battleRoomId;
 
         //玩家信息
@@ -63,14 +63,6 @@ namespace Battle_Client
         }
 
         LocalBattleLogic_Executer localBattleExecuter;
-        //public BattleEntityInfo LocalCtrlEntity
-        //{
-        //    get
-        //    {
-        //        var entity = battleInfo.FindEntityById(LocalPlayer.ctrlHeroGuid);
-        //        return entity;
-        //    }
-        //}
 
         IBattleClientMsgSender msgSender;
 
@@ -97,6 +89,8 @@ namespace Battle_Client
         public void RegisterListener()
         {
             //EventDispatcher.AddListener<BattleEntityInfo>(EventIDs.OnCreateBattle, OnCreateEntity);
+            EventDispatcher.AddListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
+            EventDispatcher.AddListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
         }
 
         internal Battle.Battle GetBattle()
@@ -118,23 +112,31 @@ namespace Battle_Client
             return -1;
         }
 
+        public bool IsSameTeam(int index0,int index1)
+        {
+            var team = GetTeamByPlayerIndex(index0);
+            var team2 = GetTeamByPlayerIndex(index1);
+
+            return team == team2;
+        }
+
         public List<ClientPlayer> GetAllPlayerList()
         {
             return this.playerList;
         }
 
         /// <summary>
-        /// 创建战斗
+        /// 创建战斗数据
         /// </summary>
         /// <param name="battleInit"></param>
-        public void CreateBattle(BattleClient_CreateBattleArgs battleInit)
+        public void CreateBattleData(BattleClient_CreateBattleArgs battleInit)
         {
             // Logx.Log("battle manager : CreateBattle");
-            Logx.Log(LogxType.Game,"create battle");
+            Logx.Log(LogxType.Game, "create battle");
 
             //战斗信息
             this.battleGuid = battleInit.guid;
-            this.battleTableId = battleInit.configId;
+            this.battleConfigId = battleInit.configId;
             this.battleRoomId = battleInit.roomId;
 
             //玩家信息
@@ -190,15 +192,15 @@ namespace Battle_Client
 
         public void OnEnterBattle()
         {
-            Logx.Log(LogxType.Game,"battle start");
-            
+            Logx.Log(LogxType.Game, "battle start");
+
             this.localBattleExecuter?.OnEnterBattle();
         }
 
         public void OnExitBattle()
         {
-            Logx.Log(LogxType.Game,"battle end");
-            
+            Logx.Log(LogxType.Game, "battle end");
+
             this.localBattleExecuter?.OnExitBattle();
 
             this.Clear();
@@ -214,50 +216,90 @@ namespace Battle_Client
             return localBattleExecuter.GetMap();
         }
 
+        public BattleType battleType;
+
         //创建远端战斗
         public void CreateRemoteBattle(BattleClient_CreateBattleArgs battleClientArgs)
         {
-            Logx.Log(LogxType.Game,"start create a remote battle");
+            battleType = BattleType.Remote;
             
-            //填充客户端所需组件
-            msgSender = new BattleClient_MsgSender_Remote();
-            msgReceiver = new BattleClient_MsgReceiver_Impl();
+            this.battleClientArgs = battleClientArgs;
 
-            BattleManager.Instance.CreateBattle(battleClientArgs);
+            Logx.Log(LogxType.Game, "start create a remote battle");
+
+            //进入战斗场景
+            SceneCtrlManager.Instance.Enter<BattleSceneCtrl>();
         }
 
 
         //创建纯本地战斗
         public void CreatePureLocalBattle(int battleConfigId)
         {
-            Logx.Log(LogxType.Game,"start create a pure local battle");
+            this.battleConfigId = battleConfigId;
+            
+            battleType = BattleType.PureLocal;
 
-            GameDataManager.Instance.UserStore.Uid = 1;
-            var uid = GameDataManager.Instance.UserStore.Uid;
-            CoroutineManager.Instance.StartCoroutine(LoadMapData(battleConfigId, (mapList) =>
-            {
-                var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
-                CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
-                {
-                    //TODO : add map res 
-                    MapInitArg mapInitData = new MapInitArg();
-                    mapInitData.mapList = mapList;
-                    CreateLocalBattle(applyArg, sourceData, mapInitData, true);
-                }));
-            }));
+            //进入战斗场景
+            SceneCtrlManager.Instance.Enter<BattleSceneCtrl>();
         }
 
         //创建远端结算的本地战斗
         public void CreateLocalButRemoteResultBattle(ApplyBattleArg applyArg)
         {
-            Logx.Log(LogxType.Game,"start create a local battle (result at remote)");
-            
+            //TODO 进入战斗状态机 从而进行加载
+            battleType = BattleType.LocalButRemoteResult;
+            Logx.Log(LogxType.Game, "start create a local battle (result at remote)");
+
             var battleConfigId = applyArg.BattleTableId;
             CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
             {
                 //CreateLocalBattle(applyArg, sourceData, false);
             }));
         }
+
+        private BattleClient_CreateBattleArgs battleClientArgs;
+
+        //设置本地战斗
+        public void SetLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source,
+            MapInitArg mapInitData, bool isPureLocal)
+        {
+            Logx.Log(LogxType.Game, "start create a local battle");
+            //填充数据
+
+            //初始化本地战斗后台逻辑
+            localBattleExecuter = new LocalBattleLogic_Executer();
+            localBattleExecuter.Init();
+
+            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, source, mapInitData, isPureLocal);
+
+            battleClientArgs = GetBattleClientArgs(battleLogic);
+
+            //填充客户端所需组件
+            msgSender = new BattleClient_MsgSender_Local(battleLogic);
+            msgReceiver = new BattleClient_MsgReceiver_Impl();
+
+            ////客户端开启战斗
+            //BattleManager.Instance.CreateBattle(battleClientArgs);
+
+            ////启动本地战斗后台逻辑
+            //localBattleExecuter.StartBattleLogic();
+
+            // GameMain.Instance.StartCoroutine(StartLocalBattle(battleClientArgs));
+        }
+
+        IEnumerator StartLocalBattle(BattleClient_CreateBattleArgs battleClientArgs)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            //客户端开启战斗
+            BattleManager.Instance.CreateBattleData(battleClientArgs);
+
+            yield return null;
+
+            //启动本地战斗后台逻辑
+            localBattleExecuter.StartBattleLogic();
+        }
+
 
         public IEnumerator LoadMapData(int battleConfigId, Action<List<List<int>>> finishCallback)
         {
@@ -284,9 +326,10 @@ namespace Battle_Client
             finishCallback?.Invoke(mapList);
         }
 
+        //加载战斗触发器资源文件
         public IEnumerator LoadTriggerResource(int battleConfigId, Action<TriggerSourceResData> finishCallback)
         {
-            Logx.Log(LogxType.Battle,"BattleManager : LoadTriggerResource ");
+            Logx.Log(LogxType.Battle, "BattleManager : LoadTriggerResource ");
 
             TriggerSourceResData source = new TriggerSourceResData();
             source.dataStrList = new List<string>();
@@ -364,51 +407,8 @@ namespace Battle_Client
             }
 
 
-            Logx.Log(LogxType.Battle,"local execute : finish all ");
+            Logx.Log(LogxType.Battle, "local execute : finish all ");
             finishCallback?.Invoke(source);
-        }
-
-
-        //创建本地战斗
-        public void CreateLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source,
-            MapInitArg mapInitData, bool isPureLocal)
-        {
-            Logx.Log(LogxType.Game,"start create a local battle");
-            //填充数据
-
-            //初始化本地战斗后台逻辑
-            localBattleExecuter = new LocalBattleLogic_Executer();
-            localBattleExecuter.Init();
-
-            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, source, mapInitData, isPureLocal);
-
-            var battleClientArgs = GetBattleClientArgs(battleLogic);
-
-            //填充客户端所需组件
-            msgSender = new BattleClient_MsgSender_Local(battleLogic);
-            msgReceiver = new BattleClient_MsgReceiver_Impl();
-
-            ////客户端开启战斗
-            //BattleManager.Instance.CreateBattle(battleClientArgs);
-
-            ////启动本地战斗后台逻辑
-            //localBattleExecuter.StartBattleLogic();
-
-            GameMain.Instance.StartCoroutine(StartLocalBattle(battleClientArgs));
-        }
-
-        IEnumerator StartLocalBattle(BattleClient_CreateBattleArgs battleClientArgs)
-        {
-           
-            yield return new WaitForSeconds(0.1f);
-
-            //客户端开启战斗
-            BattleManager.Instance.CreateBattle(battleClientArgs);
-
-            yield return null;
-
-            //启动本地战斗后台逻辑
-            localBattleExecuter.StartBattleLogic();
         }
 
 
@@ -480,10 +480,41 @@ namespace Battle_Client
         public void BattleEnd(BattleResultDataArgs battleResultDataArgs)
         {
             BattleManager.Instance.BattleState = BattleState.End;
+            
             EventDispatcher.Broadcast(EventIDs.OnBattleEnd, battleResultDataArgs);
+            
             this.OnExitBattle();
+            
+            // //战斗结算界面
+            // var args = new BattleResultUIArgs()
+            // {
+            //     isWin = battleResultArgs.isWin,
+            //     //reward
+            // };
+            // args.uiItem = new List<CommonItemUIArgs>();
+            //
+            // foreach (var item in battleResultArgs.rewardDataList)
+            // {
+            //     var _item = new CommonItemUIArgs()
+            //     {
+            //         configId = item.configId,
+            //         count = item.count
+            //     };
+            //     args.uiItem.Add(_item);
+            // }
+            //
+            // this._resultUIPre.Refresh(args);
+            // this._resultUIPre.Show();
+            // //
+            
+            
+            BattleEntityManager.Instance.OnBattleEnd();
+            skillTrackModule.OnBattleEnd();
+            BattleSkillEffect_Client_Manager.Instance.OnBattleEnd();
+           
+            
         }
-
+        
         ////get --------------------
 
         public void GetSkillByIndex()
@@ -495,21 +526,34 @@ namespace Battle_Client
         public void Update(float timeDelta)
         {
             localBattleExecuter?.Update(timeDelta);
+            
+            CheckInput();
+            
+            this.skillDirectModule?.Update(timeDelta);
+            skillTrackModule?.Update(timeDelta);
+        }
+
+        public void LateUpdate(float timeDelta)
+        {
+            UpdateCamera();
+           
         }
 
         public void FixedUpdate(float fixedTime)
         {
-            localBattleExecuter?.FixedUpdate(fixedTime);
+            localBattleExecuter?.FixedUpdate(fixedTime);    
         }
 
         public void RemoveListener()
         {
             //EventDispatcher.RemoveListener<BattleEntityInfo>(EventIDs.OnCreateBattle, OnCreateEntity);
+            EventDispatcher.RemoveListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
+            EventDispatcher.RemoveListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
         }
 
         public void Clear()
         {
-            this.RemoveListener();
+           
             localBattleExecuter = null;
         }
 
@@ -520,7 +564,7 @@ namespace Battle_Client
 
         public GameObject GetLocalCtrlHeroGameObject()
         {
-            return this.localCtrlEntity.gameObject;
+            return this.localCtrlEntity?.gameObject;
         }
 
         public int GetLocalCtrlHerGuid()
@@ -536,6 +580,25 @@ namespace Battle_Client
         public List<BattleSkillInfo> GetLocalCtrlHeroSkills()
         {
             return this.localCtrlEntity.GetSkills();
+        }
+
+        public BattleSkillInfo FindLocalHeroSkill(int skillId)
+        {
+            var skills = BattleManager.Instance.GetLocalCtrlHeroSkills();
+            foreach (var skill in skills)
+            {
+                if (skill.configId == skillId)
+                {
+                    return skill;
+                }
+            }
+
+            return null;
+        }
+
+        public void Release()
+        {
+            RemoveListener();
         }
     }
 }

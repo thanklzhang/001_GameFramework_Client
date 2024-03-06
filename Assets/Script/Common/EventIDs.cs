@@ -46,6 +46,8 @@ public enum EventIDs
     OnSkillTrackStart = 101204,         //当有技能轨迹开始的时候
     OnSkillTrackEnd = 101205,         //当有技能轨迹结束的时候
     
+    OnSkillTips = 101250,              //技能提示
+    
     _Battle_Flag_End = 101300,      //战斗消息的结束符号
     //
 

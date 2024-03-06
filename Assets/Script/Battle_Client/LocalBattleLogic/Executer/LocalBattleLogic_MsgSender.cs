@@ -152,7 +152,7 @@ namespace Battle_Client
                 var value = kv.Value;
                 BattleClientMsg_BattleAttr attr = new BattleClientMsg_BattleAttr();
                 var type = kv.Key;
-                attr.type = (Battle_Client.EntityAttrType)(int)kv.Key;
+                attr.type = (EntityAttrType)(int)kv.Key;
                 if (type == Battle.EntityAttrType.AttackSpeed)
                 {
                     //attr.value = (int)(option.value * 1000.0f);

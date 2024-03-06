@@ -7,7 +7,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Battle;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Battle_Client
 {
@@ -20,25 +23,25 @@ namespace Battle_Client
         Destroy = 4
     }
 
-    public enum EntityAttrType
-    {
-        Null = 0,
-
-        Attack = 1,
-        Defence = 2,
-        MaxHealth = 3,
-        AttackSpeed = 4,
-        MoveSpeed = 5,
-        AttackRange = 6,
-        CritRate = 7,
-        CritDamage = 8,
-
-        //最终伤害的比率(千分比)
-        OutputDamageRate = 9,
-
-        //受到伤害的比率(千分比)
-        InputDamageRate = 10,
-    }
+    // public enum EntityAttrType
+    // {
+    //     Null = 0,
+    //
+    //     Attack = 1,
+    //     Defence = 2,
+    //     MaxHealth = 3,
+    //     AttackSpeed = 4,
+    //     MoveSpeed = 5,
+    //     AttackRange = 6,
+    //     CritRate = 7,
+    //     CritDamage = 8,
+    //
+    //     //最终伤害的比率(千分比)
+    //     OutputDamageRate = 9,
+    //
+    //     //受到伤害的比率(千分比)
+    //     InputDamageRate = 10,
+    // }
 
     //实体当前数据值类型
     public enum EntityCurrValueType

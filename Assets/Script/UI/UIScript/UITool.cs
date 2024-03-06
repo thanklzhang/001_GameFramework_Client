@@ -47,6 +47,13 @@ public class UIFunc
         for (int i = dataList.Count; i < root.childCount; i++)
         {
             var obj = root.GetChild(i).gameObject;
+
+            if (i < showObjList.Count)
+            {
+                var showObj = showObjList[i];
+                showObj.Release();
+            }
+
             obj.SetActive(false);
         }
     }

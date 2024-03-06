@@ -11,7 +11,7 @@
 //
 // //战斗 ctrl
 // public class BattleCtrlPre : BaseCtrl_pre
-// {B
+// {
 //     BattleUIPre _uiPre;
 //     BattleResultUIPre _resultUIPre;
 //     GameObject sceneObj;
@@ -68,7 +68,7 @@
 //
 //     public override void OnStartLoad()
 //     {
-//         var battleTableId = BattleManager.Instance.battleTableId;
+//         var battleTableId = BattleManager.Instance.battleConfigId;
 //         var battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleTableId);
 //         var battleTriggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleTb.TriggerId);
 //
@@ -376,14 +376,14 @@
 //             return -1;
 //         });
 //
-//         args.battleConfigId = BattleManager.Instance.battleTableId;
+//         args.battleConfigId = BattleManager.Instance.battleConfigId;
 //
 //         _uiPre.RefreshHeroInfoUI(args);
 //     }
 //
 //     void RefreshBattleStageInfoUI()
 //     {
-//         var battleTableId = BattleManager.Instance.battleTableId;
+//         var battleTableId = BattleManager.Instance.battleConfigId;
 //
 //         BattleStageInfoUIArgs args = new BattleStageInfoUIArgs();
 //         args.battleConfigId = battleTableId;

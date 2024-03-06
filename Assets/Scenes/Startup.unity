@@ -337,9 +337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254da6f6258b5c64b8a66a7564263856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocalBattleTest: 0
-  isUseAB: 1
-  isUseInternalAB: 1
+  isLocalBattleTest: 1
+  isUseAB: 0
+  isUseInternalAB: 0
   serverTypeUI: {fileID: 2115276800}
   initOperateRoot: {fileID: 1633507926}
   updateResourceRootGo: {fileID: 3849844732760189556}

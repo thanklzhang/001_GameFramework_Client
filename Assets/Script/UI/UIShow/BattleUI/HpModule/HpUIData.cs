@@ -7,7 +7,7 @@
 // using UnityEngine;
 // using UnityEngine.UI;
 //
-// public class HpUIData : UIArgs
+// public class HpUIData
 // {
 //     public int entityGuid;
 //     public float preCurrHp;

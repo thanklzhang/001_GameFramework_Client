@@ -52,6 +52,10 @@ public class TeamRoomListUICtrl : BaseUICtrl
 
     public void OnEnterRoomInfoUI(TeamRoomData creatRoomData)
     {
+        
+        
+        UICtrlManager.Instance.Open<TeamRoomInfoUICtrl>();
+        
         //UICtrlManager.Instance.ShowTitleBar(TitleBarIds.TeamRoomInfo);
 
         //TODO 打开房间 info
@@ -96,6 +100,11 @@ public class TeamRoomListUICtrl : BaseUICtrl
 
     protected override void OnActive()
     {
+        UICtrlManager.Instance.Open<TitleBarUICtrl>(new TitleBarUIArgs()
+        {
+            titleBarId = 3
+        });
+        
         var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
         net.SendGetTeamRoomList(RefreshRoomList);
     }

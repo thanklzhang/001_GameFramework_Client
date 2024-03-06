@@ -127,8 +127,16 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         Logx.Log(LogxType.SceneCtrl,"start unload : " + sceneName);
         exitAction = action;
+
+        //场景 Load 之后就会自动调用卸载 所以不用 unload 
+        //unloadReq = SceneManager.UnloadSceneAsync(sceneName);
         
-        unloadReq = SceneManager.UnloadSceneAsync(sceneName);
+        if (Const.isUseAB)
+        {
+            var path = (Const.buildPath + "/" + Const.sceneRootPath + "/" + sceneName + ".unity").ToLower();
+            var abPath = AssetManager.Instance.GetABPathByAssetPath(path);
+            AssetBundleManager.Instance.Unload(abPath);
+        }
     }
 
     public void OnExitScene()

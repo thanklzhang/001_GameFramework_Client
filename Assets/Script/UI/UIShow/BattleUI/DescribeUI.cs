@@ -1,94 +1,165 @@
-﻿// using System;
-// using System.Collections;
-// using System.Collections.Generic;
-// using Table;
-// using UnityEngine;
-// using UnityEngine.UI;
-//
-// public class DescribeUIArgs : UIArgs
-// {
-//     public int iconResId;
-//     public string name;
-//     public string content;
-//
-//     public Vector2 pos;
-// }
-//
-// public class DescribeUI
-// {
-//     public GameObject gameObject;
-//     public Transform transform;
-//
-//     Image icon;
-//     Text nameText;
-//     Text contentText;
-//
-//     DescribeUIArgs uiDataArgs;
-//
-//     public void Init(GameObject gameObject, BattleUIPre battleUIPre)
-//     {
-//         this.gameObject = gameObject;
-//         this.transform = this.gameObject.transform;
-//
-//         icon = this.transform.Find("Layout/Up/iconBg/icon").GetComponent<Image>();
-//         nameText = this.transform.Find("Layout/Up/name_text").GetComponent<Text>();
-//         contentText = this.transform.Find("Layout/Down/content_text").GetComponent<Text>();
-//
-//         //buffDataList = new List<BattleBuffUIData>();
-//         //this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
-//     }
-//
-//     public void Show()
-//     {
-//         this.gameObject.SetActive(true);
-//     }
-//
-//     public void Refresh(UIArgs args)
-//     {
-//         uiDataArgs = (DescribeUIArgs)args;
-//
-//         this.RefreshInfo();
-//
-//     }
-//
-//     void RefreshInfo()
-//     {
-//         int iconResId = uiDataArgs.iconResId;
-//         string name = uiDataArgs.name;
-//         string content = uiDataArgs.content;
-//         //相对于 BattleUI 的位置
-//         var pos = uiDataArgs.pos;
-//
-//         nameText.text = name;
-//         contentText.text = content;
-//         //icon
-//         ResourceManager.Instance.GetObject<Sprite>(this.uiDataArgs.iconResId, (sprite) =>
-//         {
-//             this.icon.sprite = sprite;
-//         });
-//
-//         this.transform.localPosition = pos;
-//     }
-//
-//     public void Update(float deltaTime)
-//     {
-//
-//
-//     }
-//
-//     public void Hide()
-//     {
-//         this.gameObject.SetActive(false);
-//     }
-//
-//     public void Close()
-//     {
-//         this.Hide();
-//     }
-//
-//     public void Release()
-//     {
-//
-//     }
-//
-// }
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Battle;
+using Table;
+using UnityEngine;
+using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
+
+public class DescribeUIArgs : UICtrlArgs
+{
+    public int iconResId;
+    public string name;
+    public string content;
+
+    public Vector2 pos;
+}
+
+public class DescribeUI
+{
+    public GameObject gameObject;
+    public Transform transform;
+
+    Image icon;
+    Text nameText;
+    Text contentText;
+
+    DescribeUIArgs uiDataArgs;
+
+    public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+    {
+        this.gameObject = gameObject;
+        this.transform = this.gameObject.transform;
+
+        icon = this.transform.Find("Layout/Up/iconBg/icon").GetComponent<Image>();
+        nameText = this.transform.Find("Layout/Up/name_text").GetComponent<Text>();
+        contentText = this.transform.Find("Layout/Down/content_text").GetComponent<Text>();
+
+        //buffDataList = new List<BattleBuffUIData>();
+        //this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
+        EventDispatcher.AddListener<EntityAttrType, Vector2>(EventIDs.On_UIAttrOption_PointEnter,
+            OnUIAttrOptionPointEnter);
+        EventDispatcher.AddListener<EntityAttrType>(EventIDs.On_UIAttrOption_PointExit, OnUIAttrOptionPointExit);
+        EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, OnUISkillOptionPointEnter);
+        EventDispatcher.AddListener<int>(EventIDs.On_UISkillOption_PointExit, OnUISkillOptionPointExit);
+        EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UIBuffOption_PointEnter, OnUIBuffOptionPointEnter);
+        EventDispatcher.AddListener<int>(EventIDs.On_UIBuffOption_PointExit, OnUIBuffOptionPointExit);
+    }
+
+    public void Show()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    public void Refresh(UICtrlArgs args)
+    {
+        uiDataArgs = (DescribeUIArgs)args;
+
+        this.RefreshInfo();
+    }
+
+    void RefreshInfo()
+    {
+        int iconResId = uiDataArgs.iconResId;
+        string name = uiDataArgs.name;
+        string content = uiDataArgs.content;
+        //相对于 BattleUI 的位置
+        var pos = uiDataArgs.pos;
+
+        nameText.text = name;
+        contentText.text = content;
+        //icon
+        ResourceManager.Instance.GetObject<Sprite>(this.uiDataArgs.iconResId,
+            (sprite) => { this.icon.sprite = sprite; });
+
+        this.transform.localPosition = pos;
+    }
+
+    public void Update(float deltaTime)
+    {
+    }
+
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public void Close()
+    {
+        this.Hide();
+    }
+
+    public void OnUIAttrOptionPointEnter(EntityAttrType type, Vector2 pos)
+    {
+        var attrOption = AttrInfoHelper.Instance.GetAttrInfo(type);
+        var args = new DescribeUIArgs()
+        {
+            name = attrOption.name,
+            content = attrOption.describe,
+            pos = pos + Vector2.right * 50,
+            iconResId = attrOption.iconResId
+        };
+        this.Refresh(args);
+        this.Show();
+    }
+
+    public void OnUIAttrOptionPointExit(EntityAttrType type)
+    {
+        this.Hide();
+    }
+
+    public void OnUISkillOptionPointEnter(int skillId, Vector2 pos)
+    {
+        var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+
+        var des = skillConfig.Describe;
+        var args = new DescribeUIArgs()
+        {
+            name = skillConfig.Name,
+            content = des,
+            pos = pos + Vector2.right * 50,
+            iconResId = skillConfig.IconResId
+        };
+        this.Refresh(args);
+        this.Show();
+    }
+
+    public void OnUISkillOptionPointExit(int skillId)
+    {
+        this.Hide();
+    }
+
+    public void OnUIBuffOptionPointEnter(int buffConfigId, Vector2 pos)
+    {
+        var buffConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(buffConfigId);
+
+        var des = buffConfig.Describe;
+        var args = new DescribeUIArgs()
+        {
+            name = buffConfig.Name,
+            content = des,
+            pos = pos + Vector2.right * 50,
+            iconResId = buffConfig.IconResId
+        };
+        this.Refresh(args);
+        this.Show();
+    }
+
+    public void OnUIBuffOptionPointExit(int OnUIBuffOptionPointEnter)
+    {
+        this.Hide();
+    }
+
+
+    public void Release()
+    {
+        EventDispatcher.RemoveListener<EntityAttrType, Vector2>(EventIDs.On_UIAttrOption_PointEnter,
+            OnUIAttrOptionPointEnter);
+        EventDispatcher.RemoveListener<EntityAttrType>(EventIDs.On_UIAttrOption_PointExit, OnUIAttrOptionPointExit);
+        EventDispatcher.RemoveListener<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, OnUISkillOptionPointEnter);
+        EventDispatcher.RemoveListener<int>(EventIDs.On_UISkillOption_PointExit, OnUISkillOptionPointExit);
+        EventDispatcher.RemoveListener<int, Vector2>(EventIDs.On_UIBuffOption_PointEnter, OnUIBuffOptionPointEnter);
+        EventDispatcher.RemoveListener<int>(EventIDs.On_UIBuffOption_PointExit, OnUIBuffOptionPointExit);
+    }
+}

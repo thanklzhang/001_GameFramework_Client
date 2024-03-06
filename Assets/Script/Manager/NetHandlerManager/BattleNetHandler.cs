@@ -120,7 +120,7 @@ public class BattleNetHandler : NetHandler
     {
         // Logx.Log("OnNotifyCreateBattle");
         var netBattleInit = NetProto.scNotifyCreateBattle.Parser.ParseFrom(msgPack.data);
-
+       
         bool isLocal = netBattleInit.LocalApplyBattleArg != null;
         if (isLocal)
         {
@@ -476,7 +476,7 @@ public class BattleNetHandler : NetHandler
         foreach (var option in netAttrs)
         {
             BattleClientMsg_BattleAttr attr = new BattleClientMsg_BattleAttr();
-            attr.type = (Battle_Client.EntityAttrType)(int)option.Type;
+            attr.type = (Battle.EntityAttrType)(int)option.Type;
             if (option.Type == (int)Battle.EntityAttrType.AttackSpeed)
             {
                 attr.value = BattleConvert.GetValue(option.Value);

@@ -178,6 +178,14 @@ public class UICtrlManager : Singleton<UICtrlManager>
         }
     }
 
+    public void CloseTopFixedUI()
+    {
+        var lastUI = ctrlCacheList[^1];
+        if (lastUI.showMode == CtrlShowMode.Fixed)
+        {
+            CloseFixedUICtrl(lastUI);
+        }
+    }
 
     public void Close<T>() where T : BaseUICtrl
     {
@@ -203,23 +211,38 @@ public class UICtrlManager : Singleton<UICtrlManager>
         }
         else if (findCtrl.showMode == CtrlShowMode.Fixed)
         {
-            if (CurrFixedCtrl == findCtrl)
-            {
-                findCtrl.StartExitAni(() =>
-                {
-                    findCtrl.Inactive();
-                    findCtrl.Close();
-                    ctrlCacheList.Remove(findCtrl);
+            // if (CurrFixedCtrl == findCtrl)
+            // {
+            //     findCtrl.StartExitAni(() =>
+            //     {
+            //         findCtrl.Inactive();
+            //         findCtrl.Close();
+            //         ctrlCacheList.Remove(findCtrl);
+            //
+            //         ActivePreCtrls();
+            //     });
+            // }
+            // else
+            // {
+            //     Logx.LogError(LogxType.Game, "findCtrl != ctrl : " + typeof(T) + " != " + CurrFixedCtrl?.GetType());
+            // }
 
-                    ActivePreCtrls();
-                });
-            }
-            else
-            {
-                Logx.LogError(LogxType.Game, "findCtrl != ctrl : " + typeof(T) + " != " + CurrFixedCtrl?.GetType());
-            }
+            CloseFixedUICtrl(findCtrl);
         }
     }
+
+    public void CloseFixedUICtrl(BaseUICtrl findCtrl)
+    {
+        findCtrl.StartExitAni(() =>
+        {
+            findCtrl.Inactive();
+            findCtrl.Close();
+            ctrlCacheList.Remove(findCtrl);
+
+            ActivePreCtrls();
+        });
+    }
+
 
     //激活之前的 ctrl
     public void ActivePreCtrls()

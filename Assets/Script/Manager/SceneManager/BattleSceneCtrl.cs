@@ -3,39 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Battle_Client;
 using Table;
 using Unity.Services.Core;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
-
-public class LoginSceneCtrl : BaseSceneCtrl
+public enum BattleType
+{
+    Remote = 0,
+    LocalButRemoteResult = 1,
+    PureLocal = 2
+}
+public class BattleSceneCtrl : BaseSceneCtrl
 {
     public override void Init()
     {
         sceneName = Table.TableManager.Instance.GetById<Table.ResourceConfig>((int)ResIds.LoginScene).Name;
     }
-
+  
     public override void StartLoad(Action action = null)
     {
-        //open loading UI
         CoroutineManager.Instance.StartCoroutine(_StartLoad());
     }
 
     public IEnumerator _StartLoad()
     {
-        //加载场景
-        yield return SceneLoadManager.Instance.LoadRequest(sceneName);
+        //loading 界面开始
+        // currProgress = 0;
+        // maxProgress = 1;
+        // SetLoadingProgress();
+        // CtrlManager.Instance.GlobalCtrlPre.LoadingUIPre.Show();
+
+        //加载战斗所需资源
+        yield return BattleManager.Instance.StartLoad();
+
+        Logx.Log(LogxType.Game,"BattleSceneCtrl : all laod finish");
         
-        //加载 UI 并打开
-        yield return UICtrlManager.Instance.EnterRequest<LoginUICtrl>();
-        
+        //加载完成
         this.LoadFinish();
-        
+
     }
+
 
     public void LoadFinish()
     {
-        //close loading UI
+        //加载结束 关闭 loading 界面
+        
+        BattleManager.Instance.MsgSender.Send_PlayerLoadProgress(1000);
+        
+        AudioManager.Instance.PlayBGM((int)ResIds.bgm_battle_001);
+        
+        
     }
 
     // public override void Exit(Action action)

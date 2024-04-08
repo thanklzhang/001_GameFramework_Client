@@ -23,7 +23,15 @@ namespace Table
 			
 			"Battle.json",
 			
+			"BattleItem.json",
+			
 			"BattleMap.json",
+			
+			"BattleProcess.json",
+			
+			"BattleProcessWave.json",
+			
+			"BattleProcessWaveNode.json",
 			
 			"BattleTrigger.json",
 			

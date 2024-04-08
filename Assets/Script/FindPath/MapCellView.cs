@@ -96,7 +96,7 @@ public class MapCellView : MonoBehaviour
             new List<int>(){ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
         };
 
-            map.Init(mapInfo);
+            map.Init(mapInfo,new List<Battle.Vector3>(),new List<Battle.Vector3>());
 
             mapNodes = map.mapNodes;
         }

@@ -44,6 +44,9 @@ public enum LogxType
     //SceneCtrl(场景控制)
     SceneCtrl = 110,
     
+    //战斗流程
+    BattleProcess = 111,
+    
     //---------------------------------
 
     //自定义类型(200 以上)-----------------------------
@@ -76,7 +79,8 @@ public class Logx
         {LogxType.Asset,new LogxConfigInfo() { enable = false }},
         {LogxType.AB,new LogxConfigInfo() { enable = false }},
         // {LogxType.Ctrl,new LogxConfigInfo() { enable = true }},
-        {LogxType.SceneCtrl,new LogxConfigInfo() { enable = true }}
+        {LogxType.SceneCtrl,new LogxConfigInfo() { enable = true }},
+        {LogxType.BattleProcess,new LogxConfigInfo() { enable = true }}
         
     };
 

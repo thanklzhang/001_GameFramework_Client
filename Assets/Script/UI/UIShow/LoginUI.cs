@@ -102,10 +102,6 @@ public class LoginUI : BaseUI
         
     }
 
-    public void OnEnter()
-    {
-        
-    }
 
     public void RefreshSaveLoginSuccessShow()
     {

@@ -58,6 +58,36 @@ public enum EventIDs
     On_UISkillOption_PointExit = 101504,
     On_UIBuffOption_PointEnter = 101505,
     On_UIBuffOption_PointExit = 101506,
+    
+    OnChangeLoadingProgress = 101601,
     //
 
+}
+
+public class EventSender
+{
+    public static void SendLoadingProgress(float curr , float max,string str = "" )
+    {
+        SendLoadingProgress(new LoadingUICtrlArg()
+        {
+             curr =  curr,
+             max = curr,
+             progress = curr / max,
+             text = str
+        });
+    }
+    
+    public static void SendLoadingProgress(float progress,string str = "" )
+    {
+        SendLoadingProgress(new LoadingUICtrlArg()
+        { 
+            progress = progress,
+            text = str
+        });
+    }
+    
+    public static void SendLoadingProgress(LoadingUICtrlArg arg)
+    {
+        EventDispatcher.Broadcast<LoadingUICtrlArg>(EventIDs.OnChangeLoadingProgress,arg);
+    }
 }

@@ -81,6 +81,12 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         while (true)
         {
             yield return null;
+            
+            
+            //0.3 -> 0.4
+            var resultProgress = 0.3f + loadReq.progress * 0.1f;
+            EventSender.SendLoadingProgress(resultProgress,"加载 场景 中");
+            
             if (loadReq != null && loadReq.isDone)
             {
                 break;

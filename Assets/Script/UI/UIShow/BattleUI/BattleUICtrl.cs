@@ -167,6 +167,8 @@ public class BattleUICtrl : BaseUICtrl
         SetStateText("wait to battle start");
 
         // UICtrlManager.Instance.Close<LoadingUI>
+        
+        UICtrlManager.Instance.Close<LoadingUICtrl>();
     }
 
     void OnBattleStart()

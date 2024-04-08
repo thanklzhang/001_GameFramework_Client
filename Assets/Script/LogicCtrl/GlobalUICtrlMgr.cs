@@ -16,9 +16,11 @@ public class GlobalUICtrlMgr : Singleton<GlobalUICtrlMgr>
         
     }
 
+    //所有全局 UI
     public IEnumerator LoadReq()
     {
         yield return LoadUIReq<TitleBarUICtrl>();
+        yield return LoadUIReq<LoadingUICtrl>();
     }
 
     public IEnumerator LoadUIReq<T>() where T : BaseUICtrl , new ()

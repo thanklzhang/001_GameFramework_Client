@@ -116,6 +116,34 @@ namespace Battle_Client
             return entityGuidList.Count > 0;
         }
 
+        public void OnUseItem(int guid)
+        {
+            //willReleaserSkillIndex = index;
+            int targetGuid = 0;
+            Vector3 targetPos = Vector3.zero;
+            var skillId = 0;//BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
+            var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+            var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+
+            var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+            var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
+            var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+
+            var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
+            if (releaseTargetType == SkillReleaseTargeType.Point)
+            {
+                this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
+            }
+            else if (releaseTargetType == SkillReleaseTargeType.Entity)
+            {
+                this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
+            }
+            else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
+            {
+                BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
+            }
+        }
+
 
         public void OnUseSkill(int index)
         {
@@ -393,6 +421,12 @@ namespace Battle_Client
             }
 
             if (Input.GetKeyDown(KeyCode.R))
+            {
+                this.OnUseSkill(4);
+            }
+            
+            
+            if (Input.GetKeyDown(KeyCode))
             {
                 this.OnUseSkill(4);
             }

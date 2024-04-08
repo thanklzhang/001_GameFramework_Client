@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Battle;
 using UnityEditor;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class MapDataGenerateTool : MonoBehaviour
 {
     public List<List<PathNode>> mapNodes;
 
     public Transform collisionRoot;
+    public Transform customPosRoot;
+    public Transform playerInitPosRoot;
     public int maxMapX = 100;
     public int maxMapZ = 100;
 
@@ -131,8 +135,11 @@ public class MapDataGenerateTool : MonoBehaviour
         GL.PopMatrix();
     }
 
-    public void GenCollisionInfo()
+    public void GenMapInfo()
     {
+        MapSaveData mapData = new MapSaveData();
+        
+        //地图 list
         List<List<int>> list = new List<List<int>>();
         for (int i = 0; i < maxMapX; i++)
         {
@@ -173,7 +180,43 @@ public class MapDataGenerateTool : MonoBehaviour
             }
         }
 
-        var json = LitJson.JsonMapper.ToJson(list);
+        mapData.mapList = list;
+        
+        //自定义点集合
+        List<Transform> customPosList = customPosRoot.GetComponentsInChildrenExceptSelf<Transform>().ToList();
+        List<float[]>_customPosList = new List<float[]>();
+        for (int i = 0; i < customPosList.Count; i++)
+        {
+            var pos = customPosList[i];
+            float[] p = new float[2];
+            p[0] = pos.position.x - 0.5f;
+            p[1] = pos.position.z - 0.5f;
+            
+            _customPosList.Add(p);
+        }
+        
+        mapData.posList = _customPosList;
+        
+        //玩家初始位置集合
+        List<Transform> playerInitPosList = playerInitPosRoot.GetComponentsInChildrenExceptSelf<Transform>().ToList();
+        List<float[]>_playerInitPosList = new List<float[]>();
+        for (int i = 0; i < playerInitPosList.Count; i++)
+        {
+            var pos = playerInitPosList[i];
+            float[] p = new float[2];
+            p[0] = pos.position.x - 0.5f;
+            p[1] = pos.position.z - 0.5f;
+            
+            _playerInitPosList.Add(p);
+        }
+
+        mapData.playerInitPosList = _playerInitPosList;
+        
+        
+
+        // var json = LitJson.JsonMapper.ToJson(list);
+        
+        var json = LitJson.JsonMapper.ToJson(mapData);
 
 
         //var scrPath = Const.buildPath + "/" + "BattleMap/map_info_temp.json";

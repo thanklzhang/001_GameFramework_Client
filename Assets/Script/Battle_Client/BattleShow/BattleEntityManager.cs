@@ -170,6 +170,10 @@ namespace Battle_Client
                 while (finishCount < total)
                 {
                     yield return null;
+                    
+                    //0.5 -> 0.9
+                    var resultProgress = 0.5f + 0.4f * (finishCount / (float)total);
+                    EventSender.SendLoadingProgress(resultProgress,"加载 战斗实体 中");
                 }
             }
             yield return null;

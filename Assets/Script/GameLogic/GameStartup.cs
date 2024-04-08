@@ -131,13 +131,19 @@ public class GameStartup : MonoBehaviour
     {
         StartCoroutine(_Startup());
     }
+
     public IEnumerator _Startup()
     {
         //updateResourceUI.gameObject.SetActive(true);
 
-        updateResourceUI.Show();
+        //if (Const.isUseAB)
+        {
+            updateResourceUI.Show();
+        }
+
+       
         //检查游戏资源并更新
-        Logx.Log(LogxType.Game,"update resource start");
+        //Logx.Log(LogxType.Game,"update resource start");
         UpdateResError updateResError = new UpdateResError();
         yield return updateResModule.CheckResource(updateResError);
 
@@ -148,7 +154,7 @@ public class GameStartup : MonoBehaviour
             yield break;
         }
         
-        Logx.Log(LogxType.Game,"update resource finish");
+       // Logx.Log(LogxType.Game,"update resource finish"); mjno
 
         //资源更新完成
         initOperateRoot.gameObject.SetActive(false);

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vector3 = Battle.Vector3;
 
 //正常游戏流程启动
 public class FindPathTest : MonoBehaviour
@@ -69,7 +70,7 @@ public class FindPathTest : MonoBehaviour
         rand = new System.Random(randSeek);
 
 
-        map.Init(mapInfo);
+        map.Init(mapInfo,new List<Vector3>(),new List<Vector3>());
 
         pathProxy.Init(map);
 

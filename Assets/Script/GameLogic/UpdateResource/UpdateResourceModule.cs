@@ -29,11 +29,13 @@ public class UpdateResourceModule
         
         if (!Const.isUseAB)
         {
+            Logx.Log(LogxType.Game,"非 AB 包模式 ， 完成检查游戏资源");
             yield break;
         }
 
         if (Const.isLocalBattleTest)
         {
+            Logx.Log(LogxType.Game,"纯本地战斗 ， 完成检查游戏资源");
             yield break;
         }
 

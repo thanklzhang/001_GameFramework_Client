@@ -18,7 +18,7 @@ public class BattleSceneCtrl : BaseSceneCtrl
 {
     public override void Init()
     {
-        sceneName = Table.TableManager.Instance.GetById<Table.ResourceConfig>((int)ResIds.LoginScene).Name;
+        //sceneName = Table.TableManager.Instance.GetById<Table.ResourceConfig>((int)ResIds.LoginScene).Name;
     }
   
     public override void StartLoad(Action action = null)
@@ -28,6 +28,10 @@ public class BattleSceneCtrl : BaseSceneCtrl
 
     public IEnumerator _StartLoad()
     {
+        UICtrlManager.Instance.Open<LoadingUICtrl>();
+        
+        EventSender.SendLoadingProgress(0 / 1.0f,"");
+        
         //loading 界面开始
         // currProgress = 0;
         // maxProgress = 1;
@@ -48,6 +52,11 @@ public class BattleSceneCtrl : BaseSceneCtrl
     public void LoadFinish()
     {
         //加载结束 关闭 loading 界面
+        
+        EventSender.SendLoadingProgress(1.0f,"加载完成");
+        
+        
+        // UICtrlManager.Instance.Close<LoadingUICtrl>();
         
         BattleManager.Instance.MsgSender.Send_PlayerLoadProgress(1000);
         

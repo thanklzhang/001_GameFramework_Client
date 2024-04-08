@@ -301,20 +301,21 @@ namespace Battle_Client
         }
 
 
-        public IEnumerator LoadMapData(int battleConfigId, Action<List<List<int>>> finishCallback)
+        public IEnumerator LoadMapData(int battleConfigId, Action<MapSaveData> finishCallback)
         {
             var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
             var mapConfig = Table.TableManager.Instance.GetById<Table.BattleMap>(battleConfigTb.MapId);
 
             var isFinish = false;
-            var mapList = new List<List<int>>();
+            // var mapList = new List<List<int>>();
+            var mapSaveData = new MapSaveData();
             var path = Const.buildPath + "/" + mapConfig.MapDataPath;
             ResourceManager.Instance.GetObject<TextAsset>(path, (textAsset) =>
             {
                 //Logx.Log("local execute : load text finish: " + textAsset.text);
                 var json = textAsset.text;
-                mapList = LitJson.JsonMapper.ToObject<List<List<int>>>(json);
-
+                // mapList = LitJson.JsonMapper.ToObject<List<List<int>>>(json);
+                mapSaveData = LitJson.JsonMapper.ToObject<MapSaveData>(json);
                 isFinish = true;
             });
 
@@ -323,7 +324,8 @@ namespace Battle_Client
                 yield return null;
             }
 
-            finishCallback?.Invoke(mapList);
+            // finishCallback?.Invoke(mapList);
+            finishCallback?.Invoke(mapSaveData);
         }
 
         //加载战斗触发器资源文件

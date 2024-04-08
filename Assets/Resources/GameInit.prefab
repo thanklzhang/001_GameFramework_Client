@@ -358,8 +358,8 @@ Camera:
   m_GameObject: {fileID: 2386264522217083769}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -620,6 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tempModelAsset: {fileID: 6189221663985218476, guid: 90d33deb77455d64b9a42a05b7d06150,
     type: 3}
+  gameObjectRoot: {fileID: 0}
   currBattleFrameNum: 0
 --- !u!114 &2386264523085588578
 MonoBehaviour:

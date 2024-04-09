@@ -42,5 +42,10 @@ namespace Battle_Client
             var netHandle = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
             netHandle.SendUseSkill(skillId, targetGuid, targetPos);
         }
+
+        public void Send_UseItem(ItemUseArg itemUseArg)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

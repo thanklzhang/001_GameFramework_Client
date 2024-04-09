@@ -49,5 +49,15 @@ namespace Battle_Client
             };
             battle.AddPlayerAction(action);
         }
+
+        public void On_UseItem(Battle_ItemUseArg itemUseArg)
+        {
+            Logx.Log(LogxType.Battle,"local battle logic : On_UseItem : itemIndex : " + itemUseArg.itemIndex);
+            UseItemAction useItemAction = new UseItemAction()
+            {
+                arg = itemUseArg
+            };
+            battle.AddPlayerAction(useItemAction);
+        }
     }
 }

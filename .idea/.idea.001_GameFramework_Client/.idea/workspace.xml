@@ -14,6 +14,7 @@
     <setting file="file://$USER_HOME$/ABTest/Assets/MyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1b4ef3a7d18b40c19e89a9442d23530110000/e3/0f79767b/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/22/f0830e8d/StringComparison.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/2a/b6e30577/Int32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/63/c6ed8ad7/Boolean.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/04/ee77a731/ReorderableList.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/33/a94266b6/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
@@ -67,6 +68,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ResTst.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScennTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Data/Define/Table/BattleItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIFramework/BaseUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIFramework/BaseUI_pre.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIScript/UIButton.cs" root0="FORCE_HIGHLIGHTING" />
@@ -153,10 +155,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="25100">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="25100" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -320,6 +322,17 @@
       <workItem from="1709316330169" duration="4464000" />
       <workItem from="1709648265313" duration="5983000" />
       <workItem from="1709735760990" duration="3062000" />
+      <workItem from="1710166856476" duration="321000" />
+      <workItem from="1712037181528" duration="17709000" />
+      <workItem from="1712146032319" duration="11190000" />
+      <workItem from="1712212577096" duration="597000" />
+      <workItem from="1712223108039" duration="23027000" />
+      <workItem from="1712302152496" duration="28063000" />
+      <workItem from="1712389715210" duration="1959000" />
+      <workItem from="1712481883139" duration="19242000" />
+      <workItem from="1712581494131" duration="2281000" />
+      <workItem from="1712587245917" duration="16409000" />
+      <workItem from="1712645443152" duration="33739000" />
     </task>
     <servers />
   </component>

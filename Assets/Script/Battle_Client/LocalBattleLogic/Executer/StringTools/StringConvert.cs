@@ -23,6 +23,18 @@ public class StringConvert
         }).ToList();
         return list;
     }
+    
+    public static List<string> ToStringList(string str, char splitChar = ',')
+    {
+
+        if (string.IsNullOrEmpty(str))
+        {
+            return new List<string>();
+        }
+
+        var strs = str.Split(splitChar).ToList();
+        return strs;
+    }
 
 }
 

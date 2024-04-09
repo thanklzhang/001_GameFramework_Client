@@ -9,6 +9,7 @@ using Battle_Client;
 using GameData;
 using NetProto;
 using UnityEngine;
+
 namespace Battle_Client
 {
     //战斗客户端消息发送器
@@ -42,6 +43,7 @@ namespace Battle_Client
             var myUid = GameDataManager.Instance.UserStore.Uid;
             battle.PlayerMsgReceiver.On_BattleReadyFinish((long)myUid);
         }
+
         public void Send_BattleReadyFinish()
         {
             GameMain.Instance.StartCoroutine(DelayBattleReadyFinish());
@@ -65,6 +67,19 @@ namespace Battle_Client
         {
             var pos = new Battle.Vector3(targetPos.x, targetPos.y, targetPos.z);
             battle.PlayerMsgReceiver.On_UseSkill(releaserGuid, skillId, targetGuid, pos);
+        }
+
+        public void Send_UseItem(ItemUseArg itemUseArg)
+        {
+            var pos = new Battle.Vector3(itemUseArg.targetPos.x, itemUseArg.targetPos.y, itemUseArg.targetPos.z);
+            var arg = new Battle_ItemUseArg()
+            {
+                itemIndex = itemUseArg.itemIndex,
+                releaserGuid = itemUseArg.releaserGuid,
+                targetGuid = itemUseArg.targetGuid,
+                targetPos = pos,
+            };
+            battle.PlayerMsgReceiver.On_UseItem(arg);
         }
     }
 }

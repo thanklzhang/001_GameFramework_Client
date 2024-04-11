@@ -507,11 +507,16 @@ namespace Battle_Client
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        for (int i = (int)KeyCode.Alpha1; i <= (int)KeyCode.Alpha6; i++)
         {
-            //TODO 找 第一个 道具栏的道具
-            this.OnUseItem(0);
+            var index = i - (int)KeyCode.Alpha1;
+            var key = (KeyCode)(i);
+            if (Input.GetKeyDown(key))
+            {
+                this.OnUseItem(index);
+            }
         }
+        
     }
 
     public void OnSkillTrackStart(TrackBean trackBean)

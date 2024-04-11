@@ -45,8 +45,10 @@ public enum EventIDs
     OnBuffInfoUpdate = 101203,         //当有buff信息改变的时候
     OnSkillTrackStart = 101204,         //当有技能轨迹开始的时候
     OnSkillTrackEnd = 101205,         //当有技能轨迹结束的时候
+    OnItemInfoUpdate = 101206,         //当有道具信息改变的时候
     
     OnSkillTips = 101250,              //技能提示
+    OnItemTips = 101251,                //道具提示
     
     _Battle_Flag_End = 101300,      //战斗消息的结束符号
     //
@@ -58,6 +60,8 @@ public enum EventIDs
     On_UISkillOption_PointExit = 101504,
     On_UIBuffOption_PointEnter = 101505,
     On_UIBuffOption_PointExit = 101506,
+    On_UIItemOption_PointEnter = 101507,
+    On_UIItemOption_PointExit = 101508,
     
     OnChangeLoadingProgress = 101601,
     //

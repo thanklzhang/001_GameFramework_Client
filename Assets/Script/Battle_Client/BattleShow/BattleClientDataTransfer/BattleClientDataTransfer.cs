@@ -61,6 +61,7 @@ namespace Battle_Client
         public UnityEngine.Vector3 position;
 
         public List<BattleClientMsg_Skill> skills;
+        public List<BattleClientMsg_Item> itemList;
 
     }
 
@@ -69,6 +70,12 @@ namespace Battle_Client
         public int configId;
         public int level;
         internal float maxCDTime;
+    }
+    
+    public class BattleClientMsg_Item
+    {
+        public int configId;
+        public int count;
     }
 
     public class BattleClientMsg_BattleAttr

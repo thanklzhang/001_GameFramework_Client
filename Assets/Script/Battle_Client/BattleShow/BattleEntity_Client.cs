@@ -135,10 +135,16 @@ namespace Battle_Client
         }
 
         List<BattleSkillInfo> skills;
+        List<BattleItemInfo> itemList = new List<BattleItemInfo>();
 
         public List<BattleSkillInfo> GetSkills()
         {
             return skills;
+        }
+
+        public List<BattleItemInfo> GetItems()
+        {
+            return itemList;
         }
 
         public BattleEntityAttr attr = new BattleEntityAttr();
@@ -156,8 +162,8 @@ namespace Battle_Client
             //先拿一个简易的模型暂时放这 然后等真正模型下载好之后在替换即可
             var asset = GameMain.Instance.tempModelAsset;
             gameObject = GameObject.Instantiate(asset);
-            
-            gameObject.transform.SetParent(GameMain.Instance.gameObjectRoot,false);
+
+            gameObject.transform.SetParent(GameMain.Instance.gameObjectRoot, false);
 
             tempModel = gameObject.transform.Find("Cube").gameObject;
 
@@ -173,6 +179,24 @@ namespace Battle_Client
             isFinishLoad = false;
 
             //this.StartLoadModel();
+
+            InitItemList();
+
+        }
+
+        void InitItemList()
+        {
+            itemList = new List<BattleItemInfo>();
+            for (int i = 0; i < 6; i++)
+            {
+                BattleItemInfo item = new BattleItemInfo();
+                item.index = i;
+                item.ownerGuid = this.guid;
+                
+                
+                itemList.Add(item);
+
+            }
         }
 
         string modelRootName = "Model";
@@ -231,6 +255,11 @@ namespace Battle_Client
             this.skills = skills;
         }
 
+        internal void SetItemList(List<BattleItemInfo> itemList)
+        {
+            this.itemList = itemList;
+        }
+
         public void SetPosition(Vector3 pos)
         {
             //this.position = pos;
@@ -244,10 +273,44 @@ namespace Battle_Client
             return skill;
         }
 
+        public BattleItemInfo FindItem(int index)
+        {
+            var item = this.itemList.Find((s) => { return s.index == index; });
+
+            return item;
+        }
+
         internal void UpdateSkillInfo(int skillConfigId, float currCDTime, float maxCDTime)
         {
             var skill = this.FindSkill(skillConfigId);
             skill?.UpdateInfo(currCDTime, maxCDTime);
+        }
+
+        internal void UpdateItemInfo(int index, int configId, int count, float currCDTime, float maxCDTime)
+        {
+            Logx.Log(LogxType.BattleItem, "entity (client) UpdateItemInfo : UpdateItemInfo , index : " + index +
+                                          " , configId : " + configId + " , count : " + count);
+
+            var item = this.FindItem(index);
+            // if (null == item)
+            // {
+            //     item = new BattleItemInfo()
+            //     {
+            //         configId = configId,
+            //         index = index,
+            //         count = count,
+            //         currCDTime = currCDTime,
+            //         maxCDTime = maxCDTime
+            //     };
+            //     
+            //     this.itemList.Add(item);
+            //     this.itemList.Sort((a,b) =>
+            //     {
+            //         return a.index.CompareTo(b.index);
+            //     });
+            // }
+
+            item?.UpdateInfo(configId,count, currCDTime, maxCDTime);
         }
 
 
@@ -623,14 +686,14 @@ namespace Battle_Client
                 this.animator.SetTrigger(str);
                 triggerNames.Clear();
             }
-            
-            if(this.state == BattleEntityState.Dead)
+
+            if (this.state == BattleEntityState.Dead)
             {
                 deadDisappearCurrTimer -= timeDelta;
                 if (deadDisappearCurrTimer <= 0)
                 {
                     this.state = BattleEntityState.Destroy;
-                    
+
                     //这里应该是设置成标志 然后删除
                     // BattleEntityManager.Instance.DestoryEntity(this.guid);
                 }
@@ -639,7 +702,7 @@ namespace Battle_Client
 
         public float deadDisappearCurrTimer = 0;
         public float deadDisappearTotalTime = 2.0f;
-        
+
         public string currAniTriggerName;
 
         public List<string> triggerNames = new List<string>();
@@ -702,7 +765,7 @@ namespace Battle_Client
             state = BattleEntityState.Dead;
 
             deadDisappearCurrTimer = deadDisappearTotalTime;
-            
+
             EventDispatcher.Broadcast(EventIDs.OnEntityDead, this);
 
 

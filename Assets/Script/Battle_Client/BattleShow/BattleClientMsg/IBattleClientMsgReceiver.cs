@@ -38,6 +38,7 @@ namespace Battle_Client
         void On_SetEntitiesShowState(List<int> Guids, bool isShow);
         void On_BattleEnd(bool isWin);
         void On_SkillInfoUpdate(int entityGuid, int skillConfigId, float currCDTime, float maxCDTime);
+        void On_ItemInfoUpdate(int entityGuid, int index,int configId,int count, float currCDTime, float maxCDTime);
         void On_BuffInfoUpdate(BuffEffectInfo buffInfo);
         void On_SkillTrackStart(BattleClientMsg_CreateSkillTrack buffInfo);
         void On_SkillTrackEnd(int entityGuid, int trackId);

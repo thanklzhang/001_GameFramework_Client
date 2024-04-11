@@ -14,6 +14,11 @@ namespace Battle
             Logx.LogWarning(LogxType.Battle,str);
         }
 
+        public void Log(int type, string str)
+        {
+            Logx.Log((LogxType)type,str);
+        }
+
         public void LogWarning(string str)
         {
             Logx.LogWarning(LogxType.Battle,str);

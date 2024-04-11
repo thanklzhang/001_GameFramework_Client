@@ -3,7 +3,7 @@ using Battle_Client;
 using System.Collections.Generic;
 namespace Battle_Client
 {
-    //战斗逻辑中发送给玩家的发送器
+    //战斗逻辑中接受玩家消息的接受器
     public class LocalBattleLogic_MsgReceiver : IPlayerMsgReceiver
     {
         Battle.Battle battle;

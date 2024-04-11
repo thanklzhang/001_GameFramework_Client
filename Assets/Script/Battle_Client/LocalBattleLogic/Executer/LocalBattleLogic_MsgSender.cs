@@ -37,29 +37,42 @@ namespace Battle_Client
         {
             List<BattleClientMsg_Entity> entityList = new List<BattleClientMsg_Entity>();
 
-            foreach (var item in logicList)
+            foreach (var entity in logicList)
             {
                 BattleClientMsg_Entity entityArg = new BattleClientMsg_Entity()
                 {
-                    guid = item.guid,
-                    configId = item.configId,
-                    playerIndex = item.playerIndex,
-                    level = item.level,
-                    position = new UnityEngine.Vector3(item.position.x, item.position.y, item.position.z)
+                    guid = entity.guid,
+                    configId = entity.configId,
+                    playerIndex = entity.playerIndex,
+                    level = entity.level,
+                    position = new UnityEngine.Vector3(entity.position.x, entity.position.y, entity.position.z)
                 };
 
-                entityArg.skills = new List<BattleClientMsg_Skill>();
-                foreach (var netSkill in item.GetAllSkills())
+                //skill list
+                // entityArg.skills = new List<BattleClientMsg_Skill>();
+                // foreach (var netSkill in item.GetAllSkills())
+                // {
+                //     var skill = new BattleClientMsg_Skill()
+                //     {
+                //         configId = netSkill.Value.configId,
+                //         level = netSkill.Value.level
+                //     };
+                //     entityArg.skills.Add(skill);
+                //
+                // }
+                
+                //item list
+                entityArg.itemList = new List<BattleClientMsg_Item>();
+                foreach (var netItem in entity.itemList)
                 {
-                    var skill = new BattleClientMsg_Skill()
+                    var battleItem = new BattleClientMsg_Item()
                     {
-                        configId = netSkill.Value.configId,
-                        level = netSkill.Value.level
+                        configId = netItem.configId,
+                        count = netItem.count
                     };
-                    entityArg.skills.Add(skill);
-
+                    entityArg.itemList.Add(battleItem);
                 }
-
+                
                 entityList.Add(entityArg);
             }
 
@@ -196,6 +209,27 @@ namespace Battle_Client
             var currCDTime = skill.GetCurrCDTimer();
             var maxCDTime = skill.GetCDMaxTime();
             BattleManager.Instance.MsgReceiver.On_SkillInfoUpdate(entityGuid, skillConfigId, currCDTime, maxCDTime);
+        }
+        
+        public void NotifyAll_NotifyItemInfoUpdate(BattleItem item)
+        {
+            if (null == item.owner)
+            {
+                return;
+            }
+
+            var entityGuid = item.owner.guid;
+            var itemConfigId = item.configId;
+            var itemIndex = item.owner.GetItemIndex(item);
+            var itemCount = item.count;
+            if (item.isDiscard)
+            {
+                itemCount = 0;
+            }
+
+            var currCDTime = item.skill.GetCurrCDTimer();
+            var maxCDTime = item.skill.GetCDMaxTime();
+            BattleManager.Instance.MsgReceiver.On_ItemInfoUpdate(entityGuid, itemIndex, itemConfigId,itemCount,currCDTime, maxCDTime);
         }
 
         public void NotifyAll_NotifyUpdateBuffInfo(BuffEffectInfo buffInfo)

@@ -38,13 +38,23 @@ public class DescribeUI
 
         //buffDataList = new List<BattleBuffUIData>();
         //this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
+        
+        //属性说明
         EventDispatcher.AddListener<EntityAttrType, Vector2>(EventIDs.On_UIAttrOption_PointEnter,
             OnUIAttrOptionPointEnter);
         EventDispatcher.AddListener<EntityAttrType>(EventIDs.On_UIAttrOption_PointExit, OnUIAttrOptionPointExit);
+        
+        //技能说明
         EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, OnUISkillOptionPointEnter);
         EventDispatcher.AddListener<int>(EventIDs.On_UISkillOption_PointExit, OnUISkillOptionPointExit);
+        
+        //buff 说明
         EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UIBuffOption_PointEnter, OnUIBuffOptionPointEnter);
         EventDispatcher.AddListener<int>(EventIDs.On_UIBuffOption_PointExit, OnUIBuffOptionPointExit);
+        
+        //道具说明
+        EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UIItemOption_PointEnter, OnUIItemOptionPointEnter);
+        EventDispatcher.AddListener<int>(EventIDs.On_UIItemOption_PointExit, OnUIItemOptionPointExit);
     }
 
     public void Show()
@@ -146,10 +156,32 @@ public class DescribeUI
         this.Show();
     }
 
-    public void OnUIBuffOptionPointExit(int OnUIBuffOptionPointEnter)
+    public void OnUIBuffOptionPointExit(int buffId)
     {
         this.Hide();
     }
+    
+    public void OnUIItemOptionPointEnter(int itemConfigId, Vector2 pos)
+    {
+        var itemConfig = Table.TableManager.Instance.GetById<Table.BattleItem>(itemConfigId);
+
+        var des = itemConfig.Describe;
+        var args = new DescribeUIArgs()
+        {
+            name = itemConfig.Name,
+            content = des,
+            pos = pos + Vector2.right * 50,
+            iconResId = itemConfig.IconResId
+        };
+        this.Refresh(args);
+        this.Show();
+    }
+
+    public void OnUIItemOptionPointExit(int itemId)
+    {
+        this.Hide();
+    }
+
 
 
     public void Release()
@@ -157,9 +189,14 @@ public class DescribeUI
         EventDispatcher.RemoveListener<EntityAttrType, Vector2>(EventIDs.On_UIAttrOption_PointEnter,
             OnUIAttrOptionPointEnter);
         EventDispatcher.RemoveListener<EntityAttrType>(EventIDs.On_UIAttrOption_PointExit, OnUIAttrOptionPointExit);
+        
         EventDispatcher.RemoveListener<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, OnUISkillOptionPointEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.On_UISkillOption_PointExit, OnUISkillOptionPointExit);
+        
         EventDispatcher.RemoveListener<int, Vector2>(EventIDs.On_UIBuffOption_PointEnter, OnUIBuffOptionPointEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.On_UIBuffOption_PointExit, OnUIBuffOptionPointExit);
+        
+        EventDispatcher.RemoveListener<int, Vector2>(EventIDs.On_UIItemOption_PointEnter, OnUIItemOptionPointEnter);
+        EventDispatcher.RemoveListener<int>(EventIDs.On_UIItemOption_PointExit, OnUIItemOptionPointExit);
     }
 }

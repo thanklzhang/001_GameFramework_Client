@@ -41,6 +41,9 @@ public class BattleUICtrl : BaseUICtrl
 
     //技能显示面板
     BattleSkillUI skillUI;
+    
+    //道具显示面板
+    BattleItemUI battleItemUI;
 
     //队友英雄信息面板
     BattleHeroInfoUICtrl heroInfoUI;
@@ -97,6 +100,11 @@ public class BattleUICtrl : BaseUICtrl
         var skillUIRoot = this.transform.Find("skillBar");
         skillUI = new BattleSkillUI();
         skillUI.Init(skillUIRoot.gameObject, this);
+        
+        //道具面板
+        var itemUIRoot = this.transform.Find("itemBar");
+        battleItemUI = new BattleItemUI();
+        battleItemUI.Init(itemUIRoot.gameObject,this);
 
         //英雄信息面板
         var heroInfoUIRoot = this.transform.Find("all_player_info");
@@ -127,6 +135,7 @@ public class BattleUICtrl : BaseUICtrl
         this.heroInfoUI.RefreshAllUI();
         this.stageInfoUI.RefreshAllUI();
         this.buffUI.Refresh();
+        this.battleItemUI.RefreshAllUI();
 
         EventDispatcher.AddListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
@@ -148,6 +157,8 @@ public class BattleUICtrl : BaseUICtrl
         this.heroInfoUI.Update(timeDelta);
 
         this.stageInfoUI.Update(timeDelta);
+        
+        this.battleItemUI.Update(timeDelta);
     }
 
     void OnPlayerReadyState(int uid, bool isReady)
@@ -412,5 +423,6 @@ public class BattleUICtrl : BaseUICtrl
         this.buffUI.Release();
         this.describeUI.Release();
         this.floatWordMgr.Release();
+        this.battleItemUI.Release();
     }
 }

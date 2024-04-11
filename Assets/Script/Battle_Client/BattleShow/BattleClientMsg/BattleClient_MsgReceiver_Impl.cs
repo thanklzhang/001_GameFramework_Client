@@ -213,6 +213,15 @@ namespace Battle_Client
                 entity.UpdateSkillInfo(skillConfigId, currCDTime, maxCDTime);
             }
         }
+        
+        public void On_ItemInfoUpdate(int entityGuid, int index,int configId, int count,float currCDTime, float maxCDTime)
+        {
+            var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+            if (entity != null)
+            {
+                entity.UpdateItemInfo(index, configId,count,currCDTime, maxCDTime);
+            }
+        }
 
         public void On_BuffInfoUpdate(BuffEffectInfo buffInfo)
         {

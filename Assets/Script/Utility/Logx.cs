@@ -47,6 +47,12 @@ public enum LogxType
     //战斗流程
     BattleProcess = 111,
     
+    //战斗技能
+    BattleSkill = 112,
+    
+    //战斗道具
+    BattleItem = 113,
+    
     //---------------------------------
 
     //自定义类型(200 以上)-----------------------------
@@ -68,7 +74,7 @@ public class Logx
         { LogxType.Null, new LogxConfigInfo() { enable = true } },
         { LogxType.Game, new LogxConfigInfo() { enable = true } },
         { LogxType.UI, new LogxConfigInfo() { enable = true } },
-        { LogxType.Battle, new LogxConfigInfo() { enable = true } },
+        { LogxType.Battle, new LogxConfigInfo() { enable = false } },
         { LogxType.Net, new LogxConfigInfo() { enable = true } },
 
         { LogxType.Resource, new LogxConfigInfo() { enable = false } },
@@ -80,7 +86,9 @@ public class Logx
         {LogxType.AB,new LogxConfigInfo() { enable = false }},
         // {LogxType.Ctrl,new LogxConfigInfo() { enable = true }},
         {LogxType.SceneCtrl,new LogxConfigInfo() { enable = true }},
-        {LogxType.BattleProcess,new LogxConfigInfo() { enable = true }}
+        {LogxType.BattleProcess,new LogxConfigInfo() { enable = true }},
+        {LogxType.BattleSkill,new LogxConfigInfo() { enable = true }},
+        {LogxType.BattleItem,new LogxConfigInfo() { enable = true }}
         
     };
 

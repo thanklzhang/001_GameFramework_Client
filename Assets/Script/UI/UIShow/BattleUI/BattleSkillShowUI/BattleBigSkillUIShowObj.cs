@@ -16,9 +16,9 @@ public class BattleBigSkillUIShowObj : BattleSkillUIShowObj
       cdTimeText = this.transform.Find("iconMaskBg/CDRoot/CDShow/cd_text").GetComponent<Text>();
       cdImg = this.transform.Find("iconMaskBg/CDRoot/CDShow").GetComponent<Image>();
       icon = this.transform.Find("iconMaskBg/icon").GetComponent<Image>();
-
+   
       evetnTrigger = icon.GetComponent<UIEventTrigger>();
-
+   
       canUseMaskGo.SetActive(false);
       cdRootGo.SetActive(false);
       

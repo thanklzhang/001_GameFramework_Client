@@ -26,6 +26,28 @@ namespace Battle_Client
             EventDispatcher.Broadcast(EventIDs.OnSkillInfoUpdate, releaserGuid, this);
         }
     }
+    
+    public class BattleItemInfo
+    {
+        public int ownerGuid;
+        public int index;
+        
+        public int configId;
+        public int count;
+        
+        public float maxCDTime;
+        public float currCDTime;
+
+        internal void UpdateInfo(int configId,int count,float currCDTime, float maxCDTime)
+        {
+            this.configId = configId;
+            this.count = count;
+            this.currCDTime = currCDTime;
+            this.maxCDTime = maxCDTime;
+
+            EventDispatcher.Broadcast(EventIDs.OnItemInfoUpdate, this);
+        }
+    }
 
 
     public class BattleEntityManager : Singleton<BattleEntityManager>
@@ -86,16 +108,29 @@ namespace Battle_Client
                 };
                 skills.Add(skill);
             }
-
+            
             entity.SetSkillList(skills);
+            
+            //填充初始道具
+            List<BattleItemInfo> itemList = new List<BattleItemInfo>();
+            msgEntity.itemList = null == msgEntity.itemList ? new List<BattleClientMsg_Item>() : msgEntity.itemList;
+            foreach (var serverItem in msgEntity.itemList)
+            {
+                BattleItemInfo item = new BattleItemInfo()
+                {
+                    configId = serverItem.configId,
+                    count = serverItem.count,
+                };
+                itemList.Add(item);
+            }
+            // entity.SetItemList(itemList);
+            // Logx.Log(LogxType.BattleItem,"BattleEntityManager : init item list : count : " + itemList.Count);
 
-
+            //
             entityDic.Add(guid, entity);
 
             //Debug.Log("zxy : hh : add entity guid : " + guid );
-
             //EventDispatcher.Broadcast<BattleEntity>(EventIDs.OnCreateEntity, entity);
-
             //entity.StartLoadModel(loadFinishCallback);
             return entity;
         }

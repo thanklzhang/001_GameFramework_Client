@@ -53,6 +53,9 @@ public enum LogxType
     //战斗道具
     BattleItem = 113,
     
+    //战斗宝箱
+    BattleBox = 114,
+    
     //---------------------------------
 
     //自定义类型(200 以上)-----------------------------
@@ -88,7 +91,8 @@ public class Logx
         {LogxType.SceneCtrl,new LogxConfigInfo() { enable = true }},
         {LogxType.BattleProcess,new LogxConfigInfo() { enable = true }},
         {LogxType.BattleSkill,new LogxConfigInfo() { enable = true }},
-        {LogxType.BattleItem,new LogxConfigInfo() { enable = true }}
+        {LogxType.BattleItem,new LogxConfigInfo() { enable = true }},
+        {LogxType.BattleBox,new LogxConfigInfo() { enable = true }}
         
     };
 

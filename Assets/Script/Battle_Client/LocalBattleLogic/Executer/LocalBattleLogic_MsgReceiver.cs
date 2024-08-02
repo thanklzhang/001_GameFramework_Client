@@ -52,12 +52,42 @@ namespace Battle_Client
 
         public void On_UseItem(Battle_ItemUseArg itemUseArg)
         {
-            Logx.Log(LogxType.Battle,"local battle logic : On_UseItem : itemIndex : " + itemUseArg.itemIndex);
+            Logx.Log(LogxType.BattleItem,"local battle logic : On_UseItem : itemIndex : " + itemUseArg.itemIndex);
             UseItemAction useItemAction = new UseItemAction()
             {
                 arg = itemUseArg
             };
             battle.AddPlayerAction(useItemAction);
+        }
+
+        public void On_UseSkillItem(Battle_ItemUseArg itemUseArg)
+        {
+            Logx.Log(LogxType.BattleItem,"local battle logic : On_UseSkillItem : itemIndex : " + itemUseArg.itemIndex);
+            UseSkillItemAction useItemAction = new UseSkillItemAction()
+            {
+                arg = itemUseArg
+            };
+            battle.AddPlayerAction(useItemAction);
+        }
+
+        public void On_OpenBox(Battle_OpenBoxArg arg)
+        {
+            Logx.Log(LogxType.BattleItem,"local battle logic : On_OpenBox ");
+            var action = new OpenBoxAction()
+            {
+                arg = arg
+            };
+            battle.AddPlayerAction(action);
+        }
+
+        public void On_SelectBoxReward(Battle_SelectBoxRewardArg arg)
+        {
+            Logx.Log(LogxType.BattleItem,"local battle logic : On_SelectBoxReward ");
+            var action = new SelectBoxRewardAction()
+            {
+                arg = arg
+            };
+            battle.AddPlayerAction(action);
         }
     }
 }

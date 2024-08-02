@@ -120,7 +120,7 @@ public class BattleHeroInfoUICtrl
 
         dataList.Sort((a, b) =>
         {
-            int myHeroGuid = BattleManager.Instance.GetLocalCtrlHerGuid();
+            int myHeroGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
             if (b.heroGuid == myHeroGuid)
             {
                 return 1;

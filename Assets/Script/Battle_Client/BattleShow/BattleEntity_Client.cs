@@ -99,7 +99,7 @@ namespace Battle_Client
         }
     }
 
-    public class BattleEntity_Client
+    public partial class BattleEntity_Client
     {
         public int guid;
         public int configId;
@@ -136,6 +136,7 @@ namespace Battle_Client
 
         List<BattleSkillInfo> skills;
         List<BattleItemInfo> itemList = new List<BattleItemInfo>();
+        List<BattleItemInfo> skillItemList = new List<BattleItemInfo>();
 
         public List<BattleSkillInfo> GetSkills()
         {
@@ -145,6 +146,11 @@ namespace Battle_Client
         public List<BattleItemInfo> GetItems()
         {
             return itemList;
+        }
+        
+        public List<BattleItemInfo> GetSkillItems()
+        {
+            return skillItemList;
         }
 
         public BattleEntityAttr attr = new BattleEntityAttr();
@@ -279,11 +285,32 @@ namespace Battle_Client
 
             return item;
         }
+        
+        public BattleItemInfo FindSkillItem(int index)
+        {
+            var item = this.skillItemList.Find((s) => { return s.index == index; });
+
+            return item;
+        }
 
         internal void UpdateSkillInfo(int skillConfigId, float currCDTime, float maxCDTime)
         {
             var skill = this.FindSkill(skillConfigId);
-            skill?.UpdateInfo(currCDTime, maxCDTime);
+            if (skill != null)
+            {
+                skill?.UpdateInfo(currCDTime, maxCDTime);
+            }
+            else
+            {
+                skill = new BattleSkillInfo();
+                skill.configId = skillConfigId;
+                skill.releaserGuid = this.guid;
+                skill.level = 1;
+                
+                this.skills.Add(skill);
+                
+                skill?.UpdateInfo(currCDTime, maxCDTime);
+            }
         }
 
         internal void UpdateItemInfo(int index, int configId, int count, float currCDTime, float maxCDTime)
@@ -310,7 +337,63 @@ namespace Battle_Client
             //     });
             // }
 
-            item?.UpdateInfo(configId,count, currCDTime, maxCDTime);
+            if (item != null)
+            {
+                item?.UpdateInfo(configId,count, currCDTime, maxCDTime);
+            
+                EventDispatcher.Broadcast(EventIDs.OnItemInfoUpdate, item);
+            }
+
+          
+        }
+        
+        internal void UpdateSkillItemInfo(int index, int configId, int count, float currCDTime, float maxCDTime)
+        {
+            Logx.Log(LogxType.BattleItem, "entity (client) : UpdateSkillItemInfo , index : " + index +
+                                          " , configId : " + configId + " , count : " + count);
+
+            var item = this.FindSkillItem(index);
+            // if (null == item)
+            // {
+            //     item = new BattleItemInfo()
+            //     {
+            //         configId = configId,
+            //         index = index,
+            //         count = count,
+            //         currCDTime = currCDTime,
+            //         maxCDTime = maxCDTime
+            //     };
+            //     
+            //     this.itemList.Add(item);
+            //     this.itemList.Sort((a,b) =>
+            //     {
+            //         return a.index.CompareTo(b.index);
+            //     });
+            // }
+
+            if (item != null)
+            {
+                item?.UpdateInfo(configId,count, currCDTime, maxCDTime);
+                if (count <= 0)
+                {
+                    this.skillItemList.Remove(item);
+                }
+            }
+            else
+            {
+                item = new BattleItemInfo();
+                item.configId = configId;
+                item.count = count;
+                item.currCDTime = currCDTime;
+                item.maxCDTime = maxCDTime;
+                item.index = index;
+                item.ownerGuid = this.guid;
+                
+                this.skillItemList.Add(item);
+            }
+
+            EventDispatcher.Broadcast(EventIDs.OnSkillItemInfoUpdate, item);
+      
         }
 
 
@@ -710,7 +793,7 @@ namespace Battle_Client
 
         public void PlayAnimation(string aniTriggerName, float speed = 1.0f)
         {
-            var myEntityGuid = BattleManager.Instance.GetLocalCtrlHerGuid();
+            var myEntityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
 
             // if (this.configId == 1000210)
             // {

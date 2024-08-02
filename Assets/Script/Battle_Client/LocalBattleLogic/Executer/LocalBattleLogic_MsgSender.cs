@@ -1,6 +1,11 @@
 ﻿using Battle;
 using Battle_Client;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Table;
+using BattleItem = Battle.BattleItem;
+using BuffEffect = Battle.BuffEffect;
+using Skill = Battle.Skill;
 
 namespace Battle_Client
 {
@@ -8,14 +13,15 @@ namespace Battle_Client
     public class LocalBattleLogic_MsgSender : IPlayerMsgSender
     {
         Battle.Battle battle;
+
         public void NotifyAllPlayerMsg(int cmd, byte[] bytes)
         {
             throw new System.NotImplementedException();
         }
 
-        public void NotifyAll_PlayerReadyState(int uid,bool isReady)
+        public void NotifyAll_PlayerReadyState(int uid, bool isReady)
         {
-            BattleManager.Instance.MsgReceiver.On_PlayerReadyState(uid,isReady);
+            BattleManager.Instance.MsgReceiver.On_PlayerReadyState(uid, isReady);
         }
 
         public void NotifyAll_AllPlayerLoadFinish()
@@ -60,7 +66,7 @@ namespace Battle_Client
                 //     entityArg.skills.Add(skill);
                 //
                 // }
-                
+
                 //item list
                 entityArg.itemList = new List<BattleClientMsg_Item>();
                 foreach (var netItem in entity.itemList)
@@ -72,7 +78,7 @@ namespace Battle_Client
                     };
                     entityArg.itemList.Add(battleItem);
                 }
-                
+
                 entityList.Add(entityArg);
             }
 
@@ -81,7 +87,6 @@ namespace Battle_Client
 
         public void NotifyAll_CreateSkillEffect(CreateEffectInfo createInfo)
         {
-
             var pos = new UnityEngine.Vector3(createInfo.createPos.x, createInfo.createPos.y, createInfo.createPos.z);
             //var lastTimeInt = (int)(lastTime * 1000);
             BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(createInfo);
@@ -89,7 +94,6 @@ namespace Battle_Client
 
         public void NotifyAll_EntityAddBuff(int guid, BuffEffect buff)
         {
-
         }
 
         public void NotifyAll_EntityDead(Battle.BattleEntity battleEntity)
@@ -112,6 +116,7 @@ namespace Battle_Client
                 var resultPos = new UnityEngine.Vector3(pos.x, pos.y, pos.z);
                 unityPosList.Add(resultPos);
             }
+
             BattleManager.Instance.MsgReceiver.On_EntityStartMoveByPath(guid, unityPosList, finalMoveSpeed);
         }
 
@@ -151,7 +156,7 @@ namespace Battle_Client
         {
             var guid = effectMoveArg.effectGuid;
             var targetPos = new UnityEngine.Vector3(effectMoveArg.targetPos.x, effectMoveArg.targetPos.y,
-                 effectMoveArg.targetPos.z);
+                effectMoveArg.targetPos.z);
             var targetGuid = effectMoveArg.targetGuid;
             var moveSpeed = effectMoveArg.moveSpeed;
             BattleManager.Instance.MsgReceiver.On_SkillEffectStartMove(guid, targetPos, targetGuid, moveSpeed);
@@ -183,10 +188,15 @@ namespace Battle_Client
                 {
                     attr.value = (int)value;
                 }
+
                 attrs.Add(attr);
             }
 
             BattleManager.Instance.MsgReceiver.On_SyncEntityAttr(guid, attrs);
+        }
+
+        public void NotifyAll_SyncEntitySkills(int guid, Dictionary<int, Skill> dic)
+        {
         }
 
         public void NotifyAll_SyncEntityCurrHealth(int guid, int hp, int fromEntityGuid)
@@ -210,7 +220,7 @@ namespace Battle_Client
             var maxCDTime = skill.GetCDMaxTime();
             BattleManager.Instance.MsgReceiver.On_SkillInfoUpdate(entityGuid, skillConfigId, currCDTime, maxCDTime);
         }
-        
+
         public void NotifyAll_NotifyItemInfoUpdate(BattleItem item)
         {
             if (null == item.owner)
@@ -229,8 +239,39 @@ namespace Battle_Client
 
             var currCDTime = item.skill.GetCurrCDTimer();
             var maxCDTime = item.skill.GetCDMaxTime();
-            BattleManager.Instance.MsgReceiver.On_ItemInfoUpdate(entityGuid, itemIndex, itemConfigId,itemCount,currCDTime, maxCDTime);
+            BattleManager.Instance.MsgReceiver.On_ItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
+                currCDTime, maxCDTime);
         }
+
+        public void NotifyAll_NotifySkillItemInfoUpdate(BattleItem item)
+        {
+            if (null == item.owner)
+            {
+                return;
+            }
+
+            var entityGuid = item.owner.guid;
+            var itemConfigId = item.configId;
+            var itemIndex = item.owner.GetItemIndex(item);
+            var itemCount = item.count;
+            if (item.isDiscard)
+            {
+                itemCount = 0;
+            }
+
+            float currCDTime = 0;
+            float maxCDTime = 0;
+            if (item.skill != null)
+            {
+                currCDTime = item.skill.GetCurrCDTimer();
+                maxCDTime = item.skill.GetCDMaxTime();
+            }
+
+
+            BattleManager.Instance.MsgReceiver.On_SkillItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
+                currCDTime, maxCDTime);
+        }
+
 
         public void NotifyAll_NotifyUpdateBuffInfo(BuffEffectInfo buffInfo)
         {
@@ -252,17 +293,70 @@ namespace Battle_Client
         public void NotifyAll_NotifySkillTrackEnd(Skill skill, int skillTrackId)
         {
             var releaserGuid = skill.releser.guid;
-         
+
             BattleManager.Instance.MsgReceiver.On_SkillTrackEnd(releaserGuid, skillTrackId);
         }
 
+        // public void NotifyAll_NotifyOpenBox(BattleBox box)
+        // {
+        //     BattleManager.Instance.MsgReceiver.On_OpenBox(releaserGuid, skillTrackId);
+        // }
+
+        public void NotifyAll_NotifyOpenBox(Battle.BattleBox box)
+        {
+            BattleClientMsg_BattleBox netBox = new BattleClientMsg_BattleBox();
+            netBox.selections = new List<BattleClientMsg_BattleBoxSelection>();
+            netBox.openEntityGuid = box.entity.guid;
+            for (int i = 0; i < box.selectionGroup.Count; i++)
+            {
+                var boxSelection = box.selectionGroup[i];
+
+                BattleClientMsg_BattleBoxSelection netSelection = new BattleClientMsg_BattleBoxSelection();
+                netSelection.rewardConfigId = boxSelection.rewardConfig.Id;
+                netSelection.intValueList = boxSelection.GetRealRewardIntValueList();
+
+                netBox.selections.Add(netSelection);
+            }
+
+            BattleManager.Instance.MsgReceiver.On_OpenBox(netBox);
+        }
+
+        public void NotifyAll_NotifyBoxInfoUpdate(int entityGuid,List<Battle.BattleBox> netBoxList)
+        {
+            List<BattleClientMsg_BattleBox> list = new List<BattleClientMsg_BattleBox>();
+            foreach (var netBox in netBoxList)
+            {
+                BattleClientMsg_BattleBox box = new BattleClientMsg_BattleBox();
+
+                box.selections = new List<BattleClientMsg_BattleBoxSelection>();
+                if (netBox.selectionGroup != null)
+                {
+                    foreach (var netSelection in netBox.selectionGroup)
+                    {
+                        BattleClientMsg_BattleBoxSelection selecion = new BattleClientMsg_BattleBoxSelection();
+                        selecion.rewardConfigId = netSelection.rewardConfig.Id;
+                        selecion.intValueList = netSelection.realityReward.GetIntValueList();
+                        box.selections.Add(selecion);
+                    }
+
+                }
+                
+                list.Add(box);
+            }
+
+
+            BattleManager.Instance.MsgReceiver.On_BoxInfoUpdate(entityGuid,list);
+        }
+
+        public void NotifyAll_NotifySelectBoxReward(int index)
+        {
+            throw new System.NotImplementedException();
+        }
 
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {
             throw new System.NotImplementedException();
         }
-
-
     }
 }

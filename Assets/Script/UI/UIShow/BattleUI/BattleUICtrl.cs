@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle_Client.BattleSkillOperate;
 using GameData;
 using Table;
 using UnityEngine;
@@ -30,6 +31,12 @@ public class BattleUICtrl : BaseUICtrl
 
     public GameObject bossComingRootGo;
 
+    private Transform funcBtnRoot;
+    private Button heroFuncBtn;
+    private Button skillFuncBtn;
+    private Button boxFuncBtn;
+    public Text boxFuncBtnCountText;
+    
     //血条
     HpUIMgr hpUIMgr;
 
@@ -41,7 +48,7 @@ public class BattleUICtrl : BaseUICtrl
 
     //技能显示面板
     BattleSkillUI skillUI;
-    
+
     //道具显示面板
     BattleItemUI battleItemUI;
 
@@ -57,6 +64,11 @@ public class BattleUICtrl : BaseUICtrl
     //关卡信息界面
     BattleStageInfoUI stageInfoUI;
 
+    //技能书操作UI
+    private BattleSkillOperateUI skillItemOperateUI;
+
+    //宝箱界面
+    private BattleBoxUI boxUI;
 
     protected override void OnLoadFinish()
     {
@@ -69,6 +81,31 @@ public class BattleUICtrl : BaseUICtrl
 
         bossComingRootGo = this.transform.Find("bossComingRoot").gameObject;
 
+        //功能栏
+        funcBtnRoot = transform.Find("functionBar/group");
+        
+        skillFuncBtn = funcBtnRoot.Find("skill/item").GetComponent<Button>();
+        skillFuncBtn.onClick.AddListener(() =>
+        {
+            skillItemOperateUI.Show();
+        });
+      
+        
+        
+        boxFuncBtn =  funcBtnRoot.Find("box/item").GetComponent<Button>();
+        boxFuncBtn.onClick.AddListener(() =>
+        {
+            var hero = BattleManager.Instance.GetLocalCtrlHero();
+            if (hero != null)
+            {
+                hero.TryOpenBox();
+            }
+
+        });
+        boxFuncBtnCountText = boxFuncBtn.transform.Find("countBg/count").GetComponent<Text>();
+        
+        
+        //
         closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
         readyStartBtn.onClick.AddListener(() =>
         {
@@ -100,11 +137,11 @@ public class BattleUICtrl : BaseUICtrl
         var skillUIRoot = this.transform.Find("skillBar");
         skillUI = new BattleSkillUI();
         skillUI.Init(skillUIRoot.gameObject, this);
-        
+
         //道具面板
         var itemUIRoot = this.transform.Find("itemBar");
         battleItemUI = new BattleItemUI();
-        battleItemUI.Init(itemUIRoot.gameObject,this);
+        battleItemUI.Init(itemUIRoot.gameObject, this);
 
         //英雄信息面板
         var heroInfoUIRoot = this.transform.Find("all_player_info");
@@ -126,6 +163,16 @@ public class BattleUICtrl : BaseUICtrl
         var stageUIRoot = this.transform.Find("stageInfo");
         stageInfoUI = new BattleStageInfoUI();
         stageInfoUI.Init(stageUIRoot.gameObject, this);
+
+        //技能操作界面
+        var skillOperateUIRoot = this.transform.Find("skillOperateUI");
+        skillItemOperateUI = new BattleSkillOperateUI();
+        skillItemOperateUI.Init(skillOperateUIRoot.gameObject, this);
+        
+        //宝箱界面
+        var boxUIRoot = this.transform.Find("boxUI");
+        boxUI = new BattleBoxUI();
+        boxUI.Init(boxUIRoot.gameObject, this);
     }
 
     protected override void OnActive()
@@ -136,10 +183,13 @@ public class BattleUICtrl : BaseUICtrl
         this.stageInfoUI.RefreshAllUI();
         this.buffUI.Refresh();
         this.battleItemUI.RefreshAllUI();
+        this.skillItemOperateUI.RefreshAllUI();
+        this.boxUI.RefreshAllUI();
 
         EventDispatcher.AddListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
+        EventDispatcher.AddListener(EventIDs.OnUpdateBoxInfo,this.OnUpdateBoxInfo);
     }
 
     protected override void OnUpdate(float timeDelta)
@@ -157,8 +207,12 @@ public class BattleUICtrl : BaseUICtrl
         this.heroInfoUI.Update(timeDelta);
 
         this.stageInfoUI.Update(timeDelta);
-        
+
         this.battleItemUI.Update(timeDelta);
+        
+        this.skillItemOperateUI.Update(timeDelta);
+        
+        this.boxUI.Update(timeDelta);
     }
 
     void OnPlayerReadyState(int uid, bool isReady)
@@ -178,7 +232,7 @@ public class BattleUICtrl : BaseUICtrl
         SetStateText("wait to battle start");
 
         // UICtrlManager.Instance.Close<LoadingUI>
-        
+
         UICtrlManager.Instance.Close<LoadingUICtrl>();
     }
 
@@ -217,8 +271,17 @@ public class BattleUICtrl : BaseUICtrl
         stateText.text = stateStr;
     }
 
+    public void OnUpdateBoxInfo()
+    {
+        var hero = BattleManager.Instance.GetLocalCtrlHero();
+        if (hero != null)
+        {
+            var boxCount = hero.GetBoxCount();
+            boxFuncBtnCountText.text = "" + boxCount;
 
-    
+        }
+    }
+
     #region 飘字相关
 
     internal void ShowFloatWord(string word, GameObject go, int floatStyle, Color color)
@@ -229,12 +292,12 @@ public class BattleUICtrl : BaseUICtrl
     #endregion
 
 
-
     protected override void OnInactive()
     {
         EventDispatcher.RemoveListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
+        EventDispatcher.RemoveListener(EventIDs.OnUpdateBoxInfo, this.OnUpdateBoxInfo);
     }
     //
     // public void SetReadyShowState(bool isShow)
@@ -275,7 +338,7 @@ public class BattleUICtrl : BaseUICtrl
     // #endregion
     //
 
-   
+
     //
     // #region 属性面板相关
     //
@@ -424,5 +487,8 @@ public class BattleUICtrl : BaseUICtrl
         this.describeUI.Release();
         this.floatWordMgr.Release();
         this.battleItemUI.Release();
+        this.stageInfoUI.Release();
+        this.skillItemOperateUI.Release();
+        this.boxUI.Release();
     }
 }

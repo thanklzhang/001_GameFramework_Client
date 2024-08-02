@@ -222,6 +222,15 @@ namespace Battle_Client
                 entity.UpdateItemInfo(index, configId,count,currCDTime, maxCDTime);
             }
         }
+        
+        public void On_SkillItemInfoUpdate(int entityGuid, int index,int configId, int count,float currCDTime, float maxCDTime)
+        {
+            var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+            if (entity != null)
+            {
+                entity.UpdateSkillItemInfo(index, configId,count,currCDTime, maxCDTime);
+            }
+        }
 
         public void On_BuffInfoUpdate(BuffEffectInfo buffInfo)
         {
@@ -249,6 +258,37 @@ namespace Battle_Client
         public void On_SkillTrackEnd(int entityGuid, int skillTrackConfigId)
         {
             EventDispatcher.Broadcast<int, int>(EventIDs.OnSkillTrackEnd, entityGuid, skillTrackConfigId);
+        }
+
+        public void On_BoxInfoUpdate(int entityGuid,List<BattleClientMsg_BattleBox> boxList)
+        {
+            //目前开箱子只是自己开
+            var hero = BattleManager.Instance.GetLocalCtrlHero();
+            if (hero != null && entityGuid == hero.guid)
+            {
+                hero.SetBoxList(boxList);
+            }
+        }
+
+        public void On_OpenBox(BattleClientMsg_BattleBox box)
+        {
+            var entity = BattleEntityManager.Instance.FindEntity(box.openEntityGuid);
+            if (entity != null)
+            {
+                 var hero = BattleManager.Instance.GetLocalCtrlHero();
+                 if (hero != null)
+                 {
+                     if (hero.guid == entity.guid)
+                     {
+                         hero.OnOpenBox(box);
+                     }
+                 }
+            }
+        }
+
+        public void On_SelectBoxReward(int index)
+        {
+            throw new NotImplementedException();
         }
     }
 }

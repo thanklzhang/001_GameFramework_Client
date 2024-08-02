@@ -55,7 +55,12 @@ public class DescribeUI
         //道具说明
         EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UIItemOption_PointEnter, OnUIItemOptionPointEnter);
         EventDispatcher.AddListener<int>(EventIDs.On_UIItemOption_PointExit, OnUIItemOptionPointExit);
+        
+        //技能道具说明
+        EventDispatcher.AddListener<int, Vector2>(EventIDs.On_UISkillItemOption_PointEnter, OnUISkillItemOptionPointEnter);
+        EventDispatcher.AddListener<int>(EventIDs.On_UISkillItemOption_PointExit, OnUISkillItemOptionPointExit);
     }
+    
 
     public void Show()
     {
@@ -177,12 +182,31 @@ public class DescribeUI
         this.Show();
     }
 
-    public void OnUIItemOptionPointExit(int itemId)
+    public void OnUISkillItemOptionPointExit(int itemId)
     {
         this.Hide();
     }
 
+    public void OnUISkillItemOptionPointEnter(int itemConfigId, Vector2 pos)
+    {
+        var itemConfig = Table.TableManager.Instance.GetById<Table.BattleItem>(itemConfigId);
 
+        var des = itemConfig.Describe;
+        var args = new DescribeUIArgs()
+        {
+            name = itemConfig.Name,
+            content = des,
+            pos = pos + Vector2.right * 50,
+            iconResId = itemConfig.IconResId
+        };
+        this.Refresh(args);
+        this.Show();
+    }
+
+    public void OnUIItemOptionPointExit(int itemId)
+    {
+        this.Hide();
+    }
 
     public void Release()
     {

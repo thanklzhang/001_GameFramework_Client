@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="" />
+    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Prefabs/UI/BattleUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/Prefabs/UI/BattleUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientDataTransfer/BattleClientDataTransfer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientDataTransfer/BattleClientDataTransfer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgReceiver_Impl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgReceiver_Impl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Remote.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Remote.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/IBattleClientMsgReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/IBattleClientMsgReceiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/IBattleClientMsgSender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/IBattleClientMsgSender.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntityManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntityManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgReceiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/ResDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/ResDefine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/TablePathDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/TablePathDefine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/EventIDs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/EventIDs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/ResourceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/ResourceManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleHeroInfoUI/BattleHeroInfoUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleHeroInfoUI/BattleHeroInfoUICtrl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleItemShowUI/BattleItemUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleItemShowUI/BattleItemUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleBigSkillUIShowObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleBigSkillUIShowObj.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleSkillUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleSkillUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleUICtrl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/DescribeUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/DescribeUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Utility/Logx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Utility/Logx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +77,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/b0/17e639c4/Resources.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/bf/e535cd9d/Debug.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/c0/81d53086/LoadSceneMode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/ce/cc003314/KeyCode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/de/85ab6d25/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/f8/313dd16a/BlendMode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fc/104c4b76/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
@@ -68,15 +95,21 @@
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ResTst.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScennTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Data/Define/Table/BattleBox.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Data/Define/Table/BattleItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIFramework/BaseUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIFramework/BaseUI_pre.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIScript/UIButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleBoxUI/BattleSkillOperateUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleSkillUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleSkillUIShowObj.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ZZTest/ABTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ZZTest/WheelAniTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/zxyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.analytics@3.8.1/Tests/Editor/GameStartTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.editorcoroutines@1.0.0/Editor/EditorCoroutineUtility.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/EditorGameService/Analytics/EditorGameServiceAnalyticsRegistrant.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/EditorGameService/EditorGameServiceSettingsProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/Utils/OrganizationHandler/OrganizationProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.4/Editor/Actions/ActionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.4/Editor/Actions/TrackAction.cs" root0="SKIP_HIGHLIGHTING" />
@@ -93,6 +126,9 @@
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="2R0tnUyTYg7wj3UKJho5zwb1EyY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -155,10 +191,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18136">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="18136" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -333,6 +369,26 @@
       <workItem from="1712581494131" duration="2281000" />
       <workItem from="1712587245917" duration="16409000" />
       <workItem from="1712645443152" duration="33739000" />
+      <workItem from="1712738496296" duration="8932000" />
+      <workItem from="1712770778874" duration="10191000" />
+      <workItem from="1712816836484" duration="19619000" />
+      <workItem from="1712844918449" duration="21630000" />
+      <workItem from="1712910420769" duration="1852000" />
+      <workItem from="1713171312262" duration="624000" />
+      <workItem from="1713443609212" duration="23511000" />
+      <workItem from="1713524325404" duration="21004000" />
+      <workItem from="1713643479414" duration="3019000" />
+      <workItem from="1713795378356" duration="632000" />
+      <workItem from="1714026625715" duration="18743000" />
+      <workItem from="1714112097026" duration="15023000" />
+      <workItem from="1719501536619" duration="4518000" />
+      <workItem from="1719842903664" duration="4788000" />
+      <workItem from="1719926970098" duration="5159000" />
+      <workItem from="1720013090138" duration="7791000" />
+      <workItem from="1720101462685" duration="12777000" />
+      <workItem from="1720446225213" duration="2297000" />
+      <workItem from="1722521360867" duration="7925000" />
+      <workItem from="1722609416230" duration="15255000" />
     </task>
     <servers />
   </component>
@@ -549,17 +605,62 @@
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/HpModule/HpUIShowObj.cs</url>
-          <line>63</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\HpModule\HpUIShowObj.cs" initialLine="61" containingFunctionPresentation="Method 'RefreshData'">
+          <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleItemShowUI/BattlItemUIShowObj.cs</url>
+          <line>96</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleItemShowUI\BattlItemUIShowObj.cs" initialLine="91" containingFunctionPresentation="Method 'UpdateInfo'">
             <startOffsets>
-              <option value="1711" />
+              <option value="2757" />
             </startOffsets>
             <endOffsets>
-              <option value="1748" />
+              <option value="2791" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="46" />
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleItemShowUI/BattleItemUI.cs</url>
+          <line>42</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleItemShowUI\BattleItemUI.cs" initialLine="42" containingFunctionPresentation="Method 'OnItemInfoUpdate'">
+            <startOffsets>
+              <option value="1221" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1286" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntity.Item.cs</url>
+          <line>91</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Entity\BattleEntity.UseItem.cs" initialLine="61" containingFunctionPresentation="Method 'UseItem'" />
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillOperateUI/SkillItemListPanel.cs</url>
+          <line>53</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleSkillOperateUI\SkillItemListPanel.cs" initialLine="53" containingFunctionPresentation="Method 'RefreshAllUI'">
+            <startOffsets>
+              <option value="1411" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1429" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs</url>
+          <line>391</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\BattleShow\BattleEntity_Client.cs" initialLine="391" containingFunctionPresentation="Method 'UpdateSkillItemInfo'">
+            <startOffsets>
+              <option value="11059" />
+            </startOffsets>
+            <endOffsets>
+              <option value="11088" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

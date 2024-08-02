@@ -47,5 +47,20 @@ namespace Battle_Client
         {
             throw new NotImplementedException();
         }
+
+        public void Send_UseSkillItem(ItemUseArg itemUseArg)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send_OpenBox()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send_SelectBoxReward(int index)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

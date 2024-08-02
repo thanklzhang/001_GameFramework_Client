@@ -103,4 +103,20 @@ namespace Battle_Client
         public int targetEntityGuid;
 
     }
+
+    public class BattleClientMsg_BattleBox
+    {
+        public int openEntityGuid;
+        public List<BattleClientMsg_BattleBoxSelection> selections;
+    }
+
+    public class BattleClientMsg_BattleBoxSelection
+    {
+        public int rewardConfigId;
+
+        //实际奖励值
+        //根据奖励类型 得到不同的实际奖励意义 如技能id 等
+        public List<int> intValueList;
+
+    }
 }

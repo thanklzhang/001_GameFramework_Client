@@ -23,6 +23,8 @@ namespace Table
 			
 			"Battle.json",
 			
+			"BattleBox.json",
+			
 			"BattleItem.json",
 			
 			"BattleMap.json",
@@ -32,6 +34,12 @@ namespace Table
 			"BattleProcessWave.json",
 			
 			"BattleProcessWaveNode.json",
+			
+			"BattleReward.json",
+			
+			"BattleRewardPool.json",
+			
+			"BattleSkillItemDraw.json",
 			
 			"BattleTrigger.json",
 			

@@ -39,8 +39,12 @@ namespace Battle_Client
         void On_BattleEnd(bool isWin);
         void On_SkillInfoUpdate(int entityGuid, int skillConfigId, float currCDTime, float maxCDTime);
         void On_ItemInfoUpdate(int entityGuid, int index,int configId,int count, float currCDTime, float maxCDTime);
+        void On_SkillItemInfoUpdate(int entityGuid, int index,int configId,int count, float currCDTime, float maxCDTime);
         void On_BuffInfoUpdate(BuffEffectInfo buffInfo);
         void On_SkillTrackStart(BattleClientMsg_CreateSkillTrack buffInfo);
         void On_SkillTrackEnd(int entityGuid, int trackId);
+        void On_BoxInfoUpdate(int entityGuid,List<BattleClientMsg_BattleBox> boxList);
+        void On_OpenBox(BattleClientMsg_BattleBox box);
+        void On_SelectBoxReward(int index);
     }
 }

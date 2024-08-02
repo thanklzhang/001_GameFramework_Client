@@ -46,6 +46,9 @@ public enum EventIDs
     OnSkillTrackStart = 101204,         //当有技能轨迹开始的时候
     OnSkillTrackEnd = 101205,         //当有技能轨迹结束的时候
     OnItemInfoUpdate = 101206,         //当有道具信息改变的时候
+    OnSkillItemInfoUpdate = 101207,     //当有技能书道具信息改变的时候
+    OnUpdateBoxInfo = 101208,           //同步宝箱信息
+    OnBoxOpen = 101209,                 //有宝箱打开了
     
     OnSkillTips = 101250,              //技能提示
     OnItemTips = 101251,                //道具提示
@@ -62,6 +65,8 @@ public enum EventIDs
     On_UIBuffOption_PointExit = 101506,
     On_UIItemOption_PointEnter = 101507,
     On_UIItemOption_PointExit = 101508,
+    On_UISkillItemOption_PointEnter = 101509,
+    On_UISkillItemOption_PointExit = 101510,
     
     OnChangeLoadingProgress = 101601,
     //

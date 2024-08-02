@@ -45,7 +45,7 @@ namespace Battle_Client
             this.currCDTime = currCDTime;
             this.maxCDTime = maxCDTime;
 
-            EventDispatcher.Broadcast(EventIDs.OnItemInfoUpdate, this);
+            
         }
     }
 

@@ -40,7 +40,7 @@ public class BattleItemUI
     {
         //var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
 
-        var myEntityGuid = BattleManager.Instance.GetLocalCtrlHerGuid();
+        var myEntityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
 
         if (myEntityGuid == itemInfo.ownerGuid)
         {

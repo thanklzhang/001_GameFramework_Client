@@ -81,5 +81,33 @@ namespace Battle_Client
             };
             battle.PlayerMsgReceiver.On_UseItem(arg);
         }
+
+        public void Send_UseSkillItem(ItemUseArg itemUseArg)
+        {
+            var pos = new Battle.Vector3(itemUseArg.targetPos.x, itemUseArg.targetPos.y, itemUseArg.targetPos.z);
+            var arg = new Battle_ItemUseArg()
+            {
+                itemIndex = itemUseArg.itemIndex,
+                releaserGuid = itemUseArg.releaserGuid,
+                targetGuid = itemUseArg.targetGuid,
+                targetPos = pos,
+            };
+            battle.PlayerMsgReceiver.On_UseSkillItem(arg);
+        }
+
+        public void Send_OpenBox()
+        {
+            Battle_OpenBoxArg arg = new Battle_OpenBoxArg();
+            arg.releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            battle.PlayerMsgReceiver.On_OpenBox(arg);
+        }
+
+        public void Send_SelectBoxReward(int index)
+        {
+            Battle_SelectBoxRewardArg arg = new Battle_SelectBoxRewardArg();
+            arg.releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            arg.index = index;
+            battle.PlayerMsgReceiver.On_SelectBoxReward(arg);
+        }
     }
 }

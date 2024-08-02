@@ -569,7 +569,16 @@ namespace Battle_Client
             return this.localCtrlEntity?.gameObject;
         }
 
-        public int GetLocalCtrlHerGuid()
+        public BattleEntity_Client GetLocalCtrlHero()
+        {
+            var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+            var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
+            var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+
+            return localEntity;
+        }
+
+        public int GetLocalCtrlHeroGuid()
         {
             return this.localCtrlEntity.guid;
         }
@@ -587,6 +596,11 @@ namespace Battle_Client
         public List<BattleItemInfo> GetLocalCtrlHeroItems()
         {
             return this.localCtrlEntity.GetItems();
+        }
+        
+        public List<BattleItemInfo> GetLocalCtrlHeroSkillItems()
+        {
+            return this.localCtrlEntity.GetSkillItems();
         }
 
         public BattleSkillInfo FindLocalHeroSkill(int skillId)

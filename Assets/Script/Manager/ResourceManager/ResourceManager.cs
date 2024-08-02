@@ -26,6 +26,12 @@ public class ResourceManager : Singleton<ResourceManager>
     public void GetObject<T>(int resId, Action<T> callback, bool isSync = false) where T : UnityEngine.Object
     {
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
+        if (null == resTb)
+        {
+            callback?.Invoke(null);
+            return;
+        }
+
         var fullPath = Const.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
         GetObject(fullPath, callback, isSync);

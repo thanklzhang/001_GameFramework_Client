@@ -20,8 +20,8 @@ public class BattleSkillUI
     List<BattleSkillUIData> skillDataList = new List<BattleSkillUIData>();
     List<BattleSkillUIShowObj> skillShowObjList = new List<BattleSkillUIShowObj>();
 
-    private BattleSkillUIData bigSkillData;
-    private BattleBigSkillUIShowObj bigSkillShowObj;
+    // private BattleSkillUIData bigSkillData;
+    // private BattleBigSkillUIShowObj bigSkillShowObj;
 
     private GameObject bigSkillGo;
     
@@ -37,9 +37,9 @@ public class BattleSkillUI
         skillListRoot = this.transform.Find("group");
         this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
 
-        bigSkillGo = this.transform.Find("bigSkill").gameObject;
-        bigSkillShowObj = new BattleBigSkillUIShowObj();
-        bigSkillShowObj.Init(bigSkillGo,this);
+        // bigSkillGo = this.transform.Find("bigSkill").gameObject;
+        // bigSkillShowObj = new BattleBigSkillUIShowObj();
+        // bigSkillShowObj.Init(bigSkillGo,this);
         
         EventDispatcher.AddListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
         EventDispatcher.AddListener<string>(EventIDs.OnSkillTips,OnSkillTips);
@@ -49,11 +49,13 @@ public class BattleSkillUI
     {
         //var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
 
-        var myEntityGuid = BattleManager.Instance.GetLocalCtrlHerGuid();
+        var myEntityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
 
         if (myEntityGuid == entityGuid)
         {
             this.UpdateSkillInfo(skillInfo.configId, skillInfo.currCDTime);
+
+            RefreshAllUI();
         }
     }
 
@@ -89,16 +91,18 @@ public class BattleSkillUI
             };
             
             var skillConfig = Table.TableManager.Instance.GetById<Skill>(skillData.configId);
-            if (skillConfig.IsBigSkill != 1)
-            {
-               
-                
-                dataList.Add(skill);
-            }
-            else
-            {
-                this.bigSkillData = skill;
-            }
+            // if (skillConfig.IsBigSkill != 1)
+            // {
+            //    
+            //     
+            //     dataList.Add(skill);
+            // }
+            // else
+            // {
+            //     this.bigSkillData = skill;
+            // }
+            
+            dataList.Add(skill);
         }
         this.skillDataList = dataList;
        
@@ -114,7 +118,7 @@ public class BattleSkillUI
         args.parentObj = this;
         UIFunc.DoUIList(args);
         
-        this.bigSkillShowObj.Refresh(this.bigSkillData);
+        //this.bigSkillShowObj.Refresh(this.bigSkillData);
     }
 
     public void UpdateSkillInfo(int skillId, float cdTime)
@@ -127,6 +131,9 @@ public class BattleSkillUI
         else
         {
             //Logx.LogWarning("BattleSkillUI : UpdateSkillInfo : the skillId is not found : " + skillId);
+            
+            //not found , perhaps add a new skill
+            
         }
     }
 
@@ -144,7 +151,7 @@ public class BattleSkillUI
             item.Update(deltaTime);
         }
 
-        bigSkillShowObj.Update(deltaTime);
+        //bigSkillShowObj.Update(deltaTime);
         
         if (this.skillTipShowTimer > 0)
         {
@@ -170,10 +177,10 @@ public class BattleSkillUI
             }
         }
 
-        if (this.bigSkillData != null && skillId == this.bigSkillData.skillId)
-        {
-            return this.bigSkillShowObj;
-        }
+        // if (this.bigSkillData != null && skillId == this.bigSkillData.skillId)
+        // {
+        //     return this.bigSkillShowObj;
+        // }
 
         return null;
     }

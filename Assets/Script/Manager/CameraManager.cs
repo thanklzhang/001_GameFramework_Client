@@ -41,7 +41,6 @@ public class CameraObject
 
 }
 
-//网络消息管理器 可以在这里收敛所有协议消息
 public class CameraManager : Singleton<CameraManager>
 {
     CameraObject cameraObj3D;

@@ -100,7 +100,7 @@ public class GameMain : MonoBehaviour
         yield return UICtrlManager.Instance.LoadGlobalCtrlReq();
         
         GameDataManager.Instance.Init();
-        ServiceManager.Instance.Init();
+        // ServiceManager.Instance.Init();
 
         SceneLoadManager.Instance.Init();
         SceneCtrlManager.Instance.Init();

@@ -6,58 +6,63 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/Bag.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/Battle.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/BattleEntrance.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/Cmd.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/Common.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/Hero.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/Login.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/MainTask.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/Protobuf/Team.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/TableTool/MainTaskChapter_Tool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/TableTool/ResourceConfig_Tool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Define/TableTool/Skill_Tool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/BagGameDataStore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/BaseData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/BattleGameDataStore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/BattleResult/BattleResultDataArgs.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/CommonHero/Convert/HeroConvert.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/CommonHero/HeroData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/CommonItem/ItemData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/GameDataManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/GlobaData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/HeroGameDataStore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/MainTaskGameDataStore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/Player/Convert/PlayerConvert.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/Player/PlayerInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/Team/Convert/TeamConvert.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/Team/TeamGameDataStore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Runtime/UserGameDataStore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/BagNetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/Base/NetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/Base/NetHandlerManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/BattleEntranceNetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/BattleNetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/HeroListNetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/LoginNetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/MainTaskNetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/TeamNetHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/AssetBundleLoadProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/AssetBundleLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/AssetLoadProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/AssetLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/BaseLoadProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/BaseLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/LoadTaskManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/ResourceManager/UpdateResource.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/TableManager/BaseTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/TableManager/TableDataLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/TableManager/TableManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/CameraManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/ClientProtoHead.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/ServerProtoHead.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/TcpNetClient.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/CommonFunction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/ExtensionMethods.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/MonoSingleton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Singleton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/UnitySingleton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/ConvertTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/EncryptionTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FTPHelper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileOp/LocalDataTools.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/Loom.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/MathTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/MemoryTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/NetTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/PrintFPS.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/TableManager/BaseTable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/TableManager/TableDataLoader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/TableManager/TableManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/FSM/BaseState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/FSM/BaseStateManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/AudioManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/CoroutineManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/EventManager/EventManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/TimeManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/Framework/ClientProtoHead.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/Framework/ServerProtoHead.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/Framework/TcpNetClient.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/MsgDefine/MsgDefine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetUtil/ByteBuffer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/Asset/AssetCache.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/Asset/AssetManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/Asset/AssetManager_pre.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/AssetBundle/AssetBundleCache.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/AssetBundle/AssetBundleManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/AssetBundle/AssetBundleManager_pre.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetBundleLoadProcess.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetBundleLoader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetLoadProcess.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetLoader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/BaseLoadProcess.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/BaseLoader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/LoadTaskManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/LoadObjectRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/LoadResGroupRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPoolGroup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPoolManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPoolObj.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseCtrl_pre.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseUICtrl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseUI_pre.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/CtrlManager_pre.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/UIConfigInfoDic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/UICtrlManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/UIManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,6 +423,8 @@
       <workItem from="1722521360867" duration="7925000" />
       <workItem from="1722609416230" duration="15255000" />
       <workItem from="1722708850164" duration="3481000" />
+      <workItem from="1722755896181" duration="1011000" />
+      <workItem from="1722760826894" duration="1155000" />
     </task>
     <servers />
   </component>
@@ -436,196 +443,91 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/TeamNetHandler.cs</url>
           <line>198</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\NetHandlerManager\TeamNetHandler.cs" initialLine="198" containingFunctionPresentation="Method 'SendSelectUseHeroInTeamRoom'">
-            <startOffsets>
-              <option value="6493" />
-            </startOffsets>
-            <endOffsets>
-              <option value="6580" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\NetHandlerManager\TeamNetHandler.cs" initialLine="198" containingFunctionPresentation="Method 'SendSelectUseHeroInTeamRoom'" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/LobbyUI.cs</url>
           <line>60</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="65" containingFunctionPresentation="Method 'RefreshAll'">
-            <startOffsets>
-              <option value="1962" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2006" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="65" containingFunctionPresentation="Method 'RefreshAll'" />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/LobbyUI.cs</url>
           <line>26</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="31" containingFunctionPresentation="Method 'OnLoadFinish'">
-            <startOffsets>
-              <option value="900" />
-            </startOffsets>
-            <endOffsets>
-              <option value="986" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="31" containingFunctionPresentation="Method 'OnLoadFinish'" />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/LobbyUI.cs</url>
           <line>40</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="45" containingFunctionPresentation="Method 'OnEnter'">
-            <startOffsets>
-              <option value="1470" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1521" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="45" containingFunctionPresentation="Method 'OnEnter'" />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/LobbyUI.cs</url>
           <line>36</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="41" containingFunctionPresentation="Method 'OnEnter'">
-            <startOffsets>
-              <option value="1370" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1421" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\LobbyUI.cs" initialLine="41" containingFunctionPresentation="Method 'OnEnter'" />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIFramework/UICtrlManager.cs</url>
           <line>183</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIFramework\UICtrlManager.cs" initialLine="183" containingFunctionPresentation="Method 'CloseTopFixedUI'">
-            <startOffsets>
-              <option value="4066" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4108" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIFramework\UICtrlManager.cs" initialLine="183" containingFunctionPresentation="Method 'CloseTopFixedUI'" />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/LogicCtrl/TeamRoomInfoUICtrl.cs</url>
           <line>336</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\TeamRoomInfoUICtrl.cs" initialLine="303" containingFunctionPresentation="Method 'OnChangeReadyStateCallback'">
-            <startOffsets>
-              <option value="10760" />
-            </startOffsets>
-            <endOffsets>
-              <option value="10836" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\TeamRoomInfoUICtrl.cs" initialLine="303" containingFunctionPresentation="Method 'OnChangeReadyStateCallback'" />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/TeamNetHandler.cs</url>
           <line>152</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\NetHandlerManager\TeamNetHandler.cs" initialLine="152" containingFunctionPresentation="Method 'OnChangeReadyStateInTeamRoom'">
-            <startOffsets>
-              <option value="5107" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5150" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\NetHandlerManager\TeamNetHandler.cs" initialLine="152" containingFunctionPresentation="Method 'OnChangeReadyStateInTeamRoom'" />
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Manager/NetHandlerManager/TeamNetHandler.cs</url>
           <line>226</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\NetHandlerManager\TeamNetHandler.cs" initialLine="226" containingFunctionPresentation="Method 'OnNotifyChangePlayerInfoInTeamRoom'">
-            <startOffsets>
-              <option value="7390" />
-            </startOffsets>
-            <endOffsets>
-              <option value="7496" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Manager\NetHandlerManager\TeamNetHandler.cs" initialLine="226" containingFunctionPresentation="Method 'OnNotifyChangePlayerInfoInTeamRoom'" />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/LogicCtrl/SelectHeroUICtrl.cs</url>
           <line>76</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\SelectHeroUICtrl.cs" initialLine="74" containingFunctionPresentation="Method 'OnOpen'">
-            <startOffsets>
-              <option value="2223" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2280" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\SelectHeroUICtrl.cs" initialLine="74" containingFunctionPresentation="Method 'OnOpen'" />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/LogicCtrl/TeamRoomInfoUICtrl.cs</url>
           <line>314</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\TeamRoomInfoUICtrl.cs" initialLine="306" containingFunctionPresentation="Lambda expression inside Method 'OnClickChangeHeroBtn'">
-            <startOffsets>
-              <option value="10083" />
-            </startOffsets>
-            <endOffsets>
-              <option value="10153" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\TeamRoomInfoUICtrl.cs" initialLine="306" containingFunctionPresentation="Lambda expression inside Method 'OnClickChangeHeroBtn'" />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/LogicCtrl/SelectHeroUICtrl.cs</url>
           <line>108</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\SelectHeroUICtrl.cs" initialLine="107" containingFunctionPresentation="Lambda expression inside Method 'RefreshInfo'">
-            <startOffsets>
-              <option value="3246" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3285" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\LogicCtrl\SelectHeroUICtrl.cs" initialLine="107" containingFunctionPresentation="Lambda expression inside Method 'RefreshInfo'" />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/HpModule/HpUIMgr.cs</url>
           <line>57</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\HpModule\HpUIMgr.cs" initialLine="57" containingFunctionPresentation="Method 'OnEntityChangeShowState'">
-            <startOffsets>
-              <option value="1690" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1726" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\HpModule\HpUIMgr.cs" initialLine="57" containingFunctionPresentation="Method 'OnEntityChangeShowState'" />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleItemShowUI/BattlItemUIShowObj.cs</url>
           <line>96</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleItemShowUI\BattlItemUIShowObj.cs" initialLine="91" containingFunctionPresentation="Method 'UpdateInfo'">
-            <startOffsets>
-              <option value="2757" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2791" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleItemShowUI\BattlItemUIShowObj.cs" initialLine="91" containingFunctionPresentation="Method 'UpdateInfo'" />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleItemShowUI/BattleItemUI.cs</url>
           <line>42</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleItemShowUI\BattleItemUI.cs" initialLine="42" containingFunctionPresentation="Method 'OnItemInfoUpdate'">
-            <startOffsets>
-              <option value="1221" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1286" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleItemShowUI\BattleItemUI.cs" initialLine="42" containingFunctionPresentation="Method 'OnItemInfoUpdate'" />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -637,14 +539,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillOperateUI/SkillItemListPanel.cs</url>
           <line>53</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleSkillOperateUI\SkillItemListPanel.cs" initialLine="53" containingFunctionPresentation="Method 'RefreshAllUI'">
-            <startOffsets>
-              <option value="1411" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1429" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleSkillOperateUI\SkillItemListPanel.cs" initialLine="53" containingFunctionPresentation="Method 'RefreshAllUI'" />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">

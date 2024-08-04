@@ -4,42 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/BaseUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/BaseUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/BaseUICtrl.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/UICtrlManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/BattleSceneCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/BattleSceneCtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/LobbySceneCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/LobbySceneCtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/LoginSceneCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/LoginSceneCtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleAttrUI/BattleAttrUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleAttrUI/BattleAttrUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleBoxUI/BattleBoxUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleBoxUI/BattleBoxUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleBuffShowUI/BattleBuffUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleBuffShowUI/BattleBuffUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleHeroInfoUI/BattleHeroInfoUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleHeroInfoUI/BattleHeroInfoUICtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleItemShowUI/BattleItemUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleItemShowUI/BattleItemUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/BattleSkillOperateUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/BattleSkillOperateUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillInputSelectPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillInputSelectPanel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillItemListPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillItemListPanel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillItemShopCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillItemShopCell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillItemShopPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/SkillItemShopPanel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillShowUI/BattleSkillUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillShowUI/BattleSkillUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleStageInfoUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleStageInfoUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/DescribeUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/DescribeUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/HpModule/HpUIMgr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/HpModule/HpUIMgr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/GlobalUICtrlMgr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/GlobalUICtrlMgr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LobbyUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LobbyUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/Pre/LoadingUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/Pre/LoadingUICtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/Pre/Team/TeamRoomList/TeamRoomListUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/Pre/Team/TeamRoomList/TeamRoomListUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/SelectHeroUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/SelectHeroUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomInfoUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomInfoUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomListUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomListUICtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -389,7 +354,7 @@
       <workItem from="1722708850164" duration="3481000" />
       <workItem from="1722755896181" duration="1011000" />
       <workItem from="1722760826894" duration="1155000" />
-      <workItem from="1722765566573" duration="8075000" />
+      <workItem from="1722765566573" duration="9143000" />
     </task>
     <servers />
   </component>

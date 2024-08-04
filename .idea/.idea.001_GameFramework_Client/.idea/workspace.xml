@@ -6,63 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/CommonFunction.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/ExtensionMethods.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/MonoSingleton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Singleton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/UnitySingleton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/ConvertTool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/EncryptionTool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FTPHelper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileOp/LocalDataTools.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileTool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/Loom.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/MathTool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/MemoryTool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/NetTool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/PrintFPS.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/TableManager/BaseTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/TableManager/TableDataLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/TableManager/TableManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/FSM/BaseState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/FSM/BaseStateManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/AudioManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/CoroutineManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/EventManager/EventManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/TimeManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/Framework/ClientProtoHead.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/Framework/ServerProtoHead.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/Framework/TcpNetClient.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/MsgDefine/MsgDefine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetUtil/ByteBuffer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/Asset/AssetCache.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/Asset/AssetManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/Asset/AssetManager_pre.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/AssetBundle/AssetBundleCache.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/AssetBundle/AssetBundleManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/AssetBundle/AssetBundleManager_pre.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetBundleLoadProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetBundleLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetLoadProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/AssetLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/BaseLoadProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/BaseLoader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/LoadResource/LoadTaskManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/LoadObjectRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/LoadResGroupRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPoolGroup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPoolManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Resource/ObjectResource/ObjectPool/ObjectPoolObj.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseCtrl_pre.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseUICtrl.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/BaseUI_pre.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/CtrlManager_pre.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/UIConfigInfoDic.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/UICtrlManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Framework/UIManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/CommonUtil/LocalDataTools.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUICtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUICtrl.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,22 +68,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/26/40e97a5d/File.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/3f/ec3640b3/Void.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/69/6f59671d/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/AniTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ResTst.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ScennTest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Data/Define/Table/BattleBox.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Data/Define/Table/BattleItem.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIFramework/BaseUI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIFramework/BaseUI_pre.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIScript/UIButton.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleBoxUI/BattleSkillOperateUI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleSkillUI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillShowUI/BattleSkillUIShowObj.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ZZTest/ABTest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ZZTest/WheelAniTest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/zxyTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/CommonUtil/FileOperate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/Data/LocalDataTools.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.analytics@3.8.1/Tests/Editor/GameStartTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.editorcoroutines@1.0.0/Editor/EditorCoroutineUtility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/EditorGameService/Analytics/EditorGameServiceAnalyticsRegistrant.cs" root0="SKIP_HIGHLIGHTING" />
@@ -425,6 +358,7 @@
       <workItem from="1722708850164" duration="3481000" />
       <workItem from="1722755896181" duration="1011000" />
       <workItem from="1722760826894" duration="1155000" />
+      <workItem from="1722765566573" duration="1109000" />
     </task>
     <servers />
   </component>

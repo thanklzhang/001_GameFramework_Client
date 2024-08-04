@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class LocalDataTools
+public class LocalData
 {
     public static string GetString(string key)
     {

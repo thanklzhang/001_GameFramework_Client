@@ -105,8 +105,8 @@ public class LoginUICtrl : BaseUICtrl
 
     public void RefreshSaveLoginSuccessShow()
     {
-        var preAccount = LocalDataTools.GetString("currAccount");
-        var preAassword = LocalDataTools.GetString("currPassword");
+        var preAccount = LocalData.GetString("currAccount");
+        var preAassword = LocalData.GetString("currPassword");
         if (string.IsNullOrEmpty(preAccount))
         {
             preAccount = "----";
@@ -170,8 +170,8 @@ public class LoginUICtrl : BaseUICtrl
 
     public void OnClickLoginBtn(string account, string password)
     {
-        var preAccount = LocalDataTools.GetString("currAccount");
-        var prePassword = LocalDataTools.GetString("currPassword");
+        var preAccount = LocalData.GetString("currAccount");
+        var prePassword = LocalData.GetString("currPassword");
         bool isHaveAccount = !string.IsNullOrEmpty(preAccount);
         if (isHaveAccount)
         {
@@ -267,8 +267,8 @@ public class LoginUICtrl : BaseUICtrl
 
     public void SaveLoginSuccessInfo(string account, string password)
     {
-        LocalDataTools.SetString("currAccount", account);
-        LocalDataTools.SetString("currPassword", password);
+        LocalData.SetString("currAccount", account);
+        LocalData.SetString("currPassword", password);
     }
 
 

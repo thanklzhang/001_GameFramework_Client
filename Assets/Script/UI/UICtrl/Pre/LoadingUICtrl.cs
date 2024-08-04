@@ -14,7 +14,7 @@ public class LoadingUICtrlArg : UICtrlArgs
     public string text = "";
 }
 
-public class LoadingUICtrl : BaseUICtrl
+public class LoadingUICtrl : BaseUI
 {
     public Transform bgTran;
     public Transform progressTran;

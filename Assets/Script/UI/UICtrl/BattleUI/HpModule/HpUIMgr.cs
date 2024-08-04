@@ -11,14 +11,14 @@ public class HpUIMgr
     public Transform transform;
     public GameObject gameObject;
 
-    BattleUICtrl _battleUICtrl;
+    BattleUI _battleUICtrl;
     
     public Transform hpRoot;
     public GameObject hpTemp;
 
     Dictionary<int, HpUIShowObj> hpShowObjDic = new Dictionary<int, HpUIShowObj>();
 
-    public void Init(GameObject gameObject, BattleUICtrl ctrl)
+    public void Init(GameObject gameObject, BattleUI ctrl)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 //登录 ctrl
 
-public class LoginUICtrl : BaseUICtrl
+public class LoginUI : BaseUI
 {
     protected override void OnInit()
     {

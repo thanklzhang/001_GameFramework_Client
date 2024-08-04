@@ -28,7 +28,7 @@ public class BattleHeroInfoUICtrl
 
     //runtime
 
-    public BattleUICtrl BattleUIPre;
+    public BattleUI BattleUIPre;
 
     private List<BattleHeroInfoUIData> dataList;
     private List<BattleHeroInfoShowObj> showObjList;
@@ -39,7 +39,7 @@ public class BattleHeroInfoUICtrl
     private float currTimer;
     private bool isHasBossCountdown;
 
-    public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+    public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;

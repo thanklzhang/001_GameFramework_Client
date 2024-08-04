@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //组队房间列表 ctrl
-public class TeamRoomListUICtrl : BaseUICtrl
+public class TeamRoomListUI : BaseUI
 {
     Button closeBtn;
     Transform roomRoot;
@@ -32,7 +32,7 @@ public class TeamRoomListUICtrl : BaseUICtrl
         closeBtn.onClick.AddListener(() =>
         {
             //event_onClickCloseBtn?.Invoke();
-            UICtrlManager.Instance.Close<TeamRoomListUICtrl>();
+            UIManager.Instance.Close<TeamRoomListUI>();
         });
         createBtn.onClick.AddListener(() =>
         {
@@ -54,7 +54,7 @@ public class TeamRoomListUICtrl : BaseUICtrl
     {
         
         
-        UICtrlManager.Instance.Open<TeamRoomInfoUICtrl>();
+        UIManager.Instance.Open<TeamRoomInfoUI>();
         
         //UICtrlManager.Instance.ShowTitleBar(TitleBarIds.TeamRoomInfo);
 
@@ -100,7 +100,7 @@ public class TeamRoomListUICtrl : BaseUICtrl
 
     protected override void OnActive()
     {
-        UICtrlManager.Instance.Open<TitleBarUICtrl>(new TitleBarUIArgs()
+        UIManager.Instance.Open<TitleBarUI>(new TitleBarUIArgs()
         {
             titleBarId = 3
         });

@@ -28,7 +28,7 @@ public class BattleSceneCtrl : BaseSceneCtrl
 
     public IEnumerator _StartLoad()
     {
-        UICtrlManager.Instance.Open<LoadingUICtrl>();
+        UIManager.Instance.Open<LoadingUICtrl>();
         
         EventSender.SendLoadingProgress(0 / 1.0f,"");
         

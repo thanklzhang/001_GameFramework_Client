@@ -160,7 +160,7 @@ namespace Battle_Client
 
             //加载 UI 并打开
             EventSender.SendLoadingProgress(0.4f, "加载 战斗界面 中");
-            yield return UICtrlManager.Instance.EnterRequest<BattleUICtrl>();
+            yield return UIManager.Instance.EnterRequest<BattleUI>();
             Logx.Log(LogxType.Game, "StartLoad_Common : BattleUICtrl load finish");
             //battle ui
             // objsRequestList.Add(new LoadUIRequest<BattleUIPre>() { selfFinishCallback = OnUILoadFinish });

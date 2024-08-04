@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class SelectHeroUICtrl : BaseUICtrl
+public class SelectHeroUI : BaseUI
 {
     Action event_ClickCloseBtn;
     Action<int> event_ClickConfirmBtn;
@@ -51,13 +51,13 @@ public class SelectHeroUICtrl : BaseUICtrl
         confirmBtn.onClick.AddListener(() =>
         {
             event_ClickConfirmBtn?.Invoke(currSelectHeroGuid);
-            UICtrlManager.Instance.Close<SelectHeroUICtrl>();
+            UIManager.Instance.Close<SelectHeroUI>();
         });
 
         closeBtn.onClick.AddListener(() =>
         {
             //event_ClickCloseBtn?.Invoke();
-            UICtrlManager.Instance.Close<SelectHeroUICtrl>();
+            UIManager.Instance.Close<SelectHeroUI>();
         });
 
         heroShowObjList = new List<SelectHeroOptionShowObj>();

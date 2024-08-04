@@ -34,19 +34,19 @@ public enum CtrlShowMode
 }
 
 
-public class UICtrlManager : Singleton<UICtrlManager>
+public class UIManager : Singleton<UIManager>
 {
     Transform uiRoot;
 
-    public List<BaseUICtrl> ctrlCacheList = new List<BaseUICtrl>();
+    public List<BaseUI> ctrlCacheList = new List<BaseUI>();
 
     //全局贮存 UI 一直存在
-    public Dictionary<Type, BaseUICtrl> globalCtrlDic = new Dictionary<Type, BaseUICtrl>();
+    public Dictionary<Type, BaseUI> globalCtrlDic = new Dictionary<Type, BaseUI>();
 
 
     //public BaseCtrl currCtrl;
 
-    public BaseUICtrl CurrFixedCtrl;
+    public BaseUI CurrFixedCtrl;
 
     public Dictionary<UIShowLayer, Transform> layerRootDic;
 
@@ -60,7 +60,7 @@ public class UICtrlManager : Singleton<UICtrlManager>
 
     public IEnumerator LoadGlobalCtrlReq()
     {
-        yield return GlobalUICtrlMgr.Instance.LoadReq();
+        yield return GlobalUIMgr.Instance.LoadReq();
     }
 
 
@@ -77,7 +77,7 @@ public class UICtrlManager : Singleton<UICtrlManager>
         }
     }
 
-    public void SetParent(BaseUICtrl ctrl,GameObject uiGameObject)
+    public void SetParent(BaseUI ctrl,GameObject uiGameObject)
     {
 
         var layerRoot = layerRootDic[ctrl.uiShowLayer];
@@ -85,13 +85,13 @@ public class UICtrlManager : Singleton<UICtrlManager>
         uiGameObject.transform.SetAsLastSibling();
     }
 
-    public void Open<T>(UICtrlArgs args = null, Action loadFinishCallback = null) where T : BaseUICtrl, new()
+    public void Open<T>(UICtrlArgs args = null, Action loadFinishCallback = null) where T : BaseUI, new()
     {
         //判断是否是全局 UI
-        var globalCtrl = GlobalUICtrlMgr.Instance.Get<T>();
+        var globalCtrl = GlobalUIMgr.Instance.Get<T>();
         if (globalCtrl != null)
         {
-            GlobalUICtrlMgr.Instance.Open<T>(args);
+            GlobalUIMgr.Instance.Open<T>(args);
             return;
         }
 
@@ -101,7 +101,7 @@ public class UICtrlManager : Singleton<UICtrlManager>
             //没找到 开始一个新的 ctrl
 
             // CurrMainCtrlPre = newCtrl;
-            BaseUICtrl newCtrl = new T();
+            BaseUI newCtrl = new T();
             newCtrl.Init();
 
             newCtrl.StartLoad((uiGameObject) =>
@@ -146,7 +146,7 @@ public class UICtrlManager : Singleton<UICtrlManager>
         }
     }
 
-    public IEnumerator EnterRequest<T>(UICtrlArgs args = null) where T : BaseUICtrl, new()
+    public IEnumerator EnterRequest<T>(UICtrlArgs args = null) where T : BaseUI, new()
     {
         yield return null;
         var isFinish = false;
@@ -187,13 +187,13 @@ public class UICtrlManager : Singleton<UICtrlManager>
         }
     }
 
-    public void Close<T>() where T : BaseUICtrl
+    public void Close<T>() where T : BaseUI
     {
         //判断是否是全局 UI
-        var globalCtrl = GlobalUICtrlMgr.Instance.Get<T>();
+        var globalCtrl = GlobalUIMgr.Instance.Get<T>();
         if (globalCtrl != null)
         {
-            GlobalUICtrlMgr.Instance.Close<T>();
+            GlobalUIMgr.Instance.Close<T>();
             return;
         }
 
@@ -231,7 +231,7 @@ public class UICtrlManager : Singleton<UICtrlManager>
         }
     }
 
-    public void CloseFixedUICtrl(BaseUICtrl findCtrl)
+    public void CloseFixedUICtrl(BaseUI findCtrl)
     {
         findCtrl.StartExitAni(() =>
         {
@@ -296,7 +296,7 @@ public class UICtrlManager : Singleton<UICtrlManager>
     }
 
 
-    public BaseUICtrl FindCtrl<T>() where T : BaseUICtrl
+    public BaseUI FindCtrl<T>() where T : BaseUI
     {
         for (int i = 0; i < ctrlCacheList.Count; i++)
         {

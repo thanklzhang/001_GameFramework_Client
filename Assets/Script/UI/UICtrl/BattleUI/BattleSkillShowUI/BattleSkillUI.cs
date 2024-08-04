@@ -25,9 +25,9 @@ public class BattleSkillUI
 
     private GameObject bigSkillGo;
     
-    public BattleUICtrl BattleUIPre;
+    public BattleUI BattleUIPre;
 
-    public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+    public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;

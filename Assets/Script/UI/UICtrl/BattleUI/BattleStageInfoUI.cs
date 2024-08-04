@@ -27,7 +27,7 @@ public class BattleStageInfoUI
     // //runtime
     // private float currTimer;
     // private bool isHasBossCountdown;
-    public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+    public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;

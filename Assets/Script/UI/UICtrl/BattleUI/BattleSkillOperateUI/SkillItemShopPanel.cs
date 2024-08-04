@@ -17,7 +17,7 @@ namespace Battle_Client.BattleSkillOperate
       
         private List<SkillItemShopCell> shopCellList;
 
-        public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+        public void Init(GameObject gameObject, BattleUI battleUIPre)
         {
             this.gameObject = gameObject;
             this.transform = this.gameObject.transform;

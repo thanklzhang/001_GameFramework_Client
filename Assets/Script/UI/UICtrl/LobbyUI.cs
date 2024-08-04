@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //登录 ctrl
-public class LobbyUICtrl : BaseUICtrl
+public class LobbyUI : BaseUI
 {
     protected override void OnInit()
     {
@@ -48,7 +48,7 @@ public class LobbyUICtrl : BaseUICtrl
     protected override void OnActive()
     {
         
-        UICtrlManager.Instance.Open<TitleBarUICtrl>(new TitleBarUIArgs()
+        UIManager.Instance.Open<TitleBarUI>(new TitleBarUIArgs()
         {
             titleBarId = 1
         });
@@ -85,7 +85,7 @@ public class LobbyUICtrl : BaseUICtrl
 
     public void OnClickTeamBtn()
     {
-        UICtrlManager.Instance.Open<TeamRoomListUICtrl>();
+        UIManager.Instance.Open<TeamRoomListUI>();
     }
 
     protected override void OnInactive()

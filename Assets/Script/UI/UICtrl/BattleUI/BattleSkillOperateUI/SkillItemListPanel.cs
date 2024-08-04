@@ -19,8 +19,8 @@ namespace Battle_Client.BattleSkillOperate
         public List<SkillItemCell> skillCellList;
         public SkillItemCell currSelectSkillCell;
 
-        public BattleUICtrl battleUI;
-        public void Init(GameObject gameObject, BattleUICtrl battleUI)
+        public BattleUI battleUI;
+        public void Init(GameObject gameObject, BattleUI battleUI)
         {
             this.battleUI = battleUI;
             

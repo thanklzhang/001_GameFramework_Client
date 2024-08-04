@@ -27,7 +27,7 @@ public class LoginSceneCtrl : BaseSceneCtrl
         yield return SceneLoadManager.Instance.LoadRequest(sceneName);
         
         //加载 UI 并打开
-        yield return UICtrlManager.Instance.EnterRequest<LoginUICtrl>();
+        yield return UIManager.Instance.EnterRequest<LoginUI>();
         
         this.LoadFinish();
         

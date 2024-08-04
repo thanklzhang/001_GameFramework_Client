@@ -20,9 +20,9 @@ public class BattleItemUI
     List<BattleItemInfo> itemDataList = new List<BattleItemInfo>();
     List<BattleItemUIShowObj> itemShowObjList = new List<BattleItemUIShowObj>();
   
-    public BattleUICtrl BattleUI;
+    public BattleUI BattleUI;
 
-    public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+    public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;

@@ -29,7 +29,7 @@ public class LobbySceneCtrl : BaseSceneCtrl
         yield return SceneLoadManager.Instance.LoadRequest(sceneName);
         
         //加载 UI 并打开
-        yield return UICtrlManager.Instance.EnterRequest<LobbyUICtrl>();
+        yield return UIManager.Instance.EnterRequest<LobbyUI>();
         
         this.LoadFinish();
         

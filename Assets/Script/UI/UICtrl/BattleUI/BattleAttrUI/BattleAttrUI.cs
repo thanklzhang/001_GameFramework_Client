@@ -22,9 +22,9 @@ public class BattleAttrUI
 
     List<BattleAttrUIData> attrDataList = new List<BattleAttrUIData>();
     List<BattleAttrUIShowObj> attrShowObjList = new List<BattleAttrUIShowObj>();
-    public BattleUICtrl BattleUIPre;
+    public BattleUI BattleUIPre;
 
-    public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+    public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.BattleUIPre = battleUIPre;
         this.gameObject = gameObject;

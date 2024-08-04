@@ -15,7 +15,7 @@ public enum EntityRelationType
     Enemy = 2
 }
 
-public class BattleUICtrl : BaseUICtrl
+public class BattleUI : BaseUI
 {
     public Action onCloseBtnClick;
     public Action onReadyStartBtnClick;
@@ -233,7 +233,7 @@ public class BattleUICtrl : BaseUICtrl
 
         // UICtrlManager.Instance.Close<LoadingUI>
 
-        UICtrlManager.Instance.Close<LoadingUICtrl>();
+        UIManager.Instance.Close<LoadingUICtrl>();
     }
 
     void OnBattleStart()

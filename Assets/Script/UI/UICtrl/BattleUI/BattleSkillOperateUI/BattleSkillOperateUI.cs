@@ -21,9 +21,9 @@ namespace Battle_Client.BattleSkillOperate
         private Button learnBtn;
         private Button saleBtn;
         private Button closeBtn;
-        private BattleUICtrl battleUI;
+        private BattleUI battleUI;
 
-        public void Init(GameObject gameObject, BattleUICtrl battleUI)
+        public void Init(GameObject gameObject, BattleUI battleUI)
         {
             this.battleUI = battleUI;
             this.gameObject = gameObject;

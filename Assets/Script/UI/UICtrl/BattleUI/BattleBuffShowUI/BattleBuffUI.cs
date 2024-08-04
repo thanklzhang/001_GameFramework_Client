@@ -16,11 +16,11 @@ public class BattleBuffUI
     //Text skillTipText;
     //float skillTipShowTimer;
     //float skillTipMaxShowTime = 1.6f;
-    public BattleUICtrl BattleUIPre;
+    public BattleUI BattleUIPre;
     List<BuffEffectInfo_Client> buffDataList = new List<BuffEffectInfo_Client>();
     List<BattleBuffUIShowObj> buffShowObjList = new List<BattleBuffUIShowObj>();
 
-    public void Init(GameObject gameObject, BattleUICtrl battleUIPre)
+    public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;

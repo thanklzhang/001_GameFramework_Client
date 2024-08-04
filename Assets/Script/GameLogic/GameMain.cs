@@ -50,7 +50,7 @@ public class GameMain : MonoBehaviour
         var cameraRoot = transform.Find("CameraRoot");
         CameraManager.Instance.Init(cameraRoot);
 
-        UICtrlManager.Instance.Init(uiRoot);
+        UIManager.Instance.Init(uiRoot);
 
 
         if (Const.isUseAB)
@@ -76,8 +76,8 @@ public class GameMain : MonoBehaviour
         yield return TableManager.Instance.LoadAllTableData();
 
         //全局 UI
-        GlobalUICtrlMgr.Instance.Init();
-        yield return UICtrlManager.Instance.LoadGlobalCtrlReq();
+        GlobalUIMgr.Instance.Init();
+        yield return UIManager.Instance.LoadGlobalCtrlReq();
 
         GameDataManager.Instance.Init();
         // ServiceManager.Instance.Init();
@@ -135,7 +135,7 @@ public class GameMain : MonoBehaviour
     {
         LoadTaskManager.Instance.Update(Time.deltaTime);
         ResourceManager.Instance.Update(Time.deltaTime);
-        UICtrlManager.Instance.Update(Time.deltaTime);
+        UIManager.Instance.Update(Time.deltaTime);
 
         BattleManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
@@ -157,7 +157,7 @@ public class GameMain : MonoBehaviour
 
     private void LateUpdate()
     {
-        UICtrlManager.Instance.LateUpdate(Time.deltaTime);
+        UIManager.Instance.LateUpdate(Time.deltaTime);
         BattleManager.Instance.LateUpdate(Time.deltaTime);
     }
 

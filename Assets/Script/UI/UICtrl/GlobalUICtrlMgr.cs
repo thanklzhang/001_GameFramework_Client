@@ -6,10 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //全局 ctrl 游戏进程中一直存在 不受正常的 ctrl 管理
-public class GlobalUICtrlMgr : Singleton<GlobalUICtrlMgr>
+public class GlobalUIMgr : Singleton<GlobalUIMgr>
 {
 
-    public Dictionary<Type,BaseUICtrl> ctrlDic = new  Dictionary<Type,BaseUICtrl>();
+    public Dictionary<Type,BaseUI> ctrlDic = new  Dictionary<Type,BaseUI>();
     
     public void Init()
     {
@@ -19,11 +19,11 @@ public class GlobalUICtrlMgr : Singleton<GlobalUICtrlMgr>
     //所有全局 UI
     public IEnumerator LoadReq()
     {
-        yield return LoadUIReq<TitleBarUICtrl>();
+        yield return LoadUIReq<TitleBarUI>();
         yield return LoadUIReq<LoadingUICtrl>();
     }
 
-    public IEnumerator LoadUIReq<T>() where T : BaseUICtrl , new ()
+    public IEnumerator LoadUIReq<T>() where T : BaseUI , new ()
     {
         yield return null;
 
@@ -39,7 +39,7 @@ public class GlobalUICtrlMgr : Singleton<GlobalUICtrlMgr>
         {
             loadGo = go;
             
-            UICtrlManager.Instance.SetParent(ctrl,go); 
+            UIManager.Instance.SetParent(ctrl,go); 
             isFinishLoad = true;
         });
 
@@ -57,9 +57,9 @@ public class GlobalUICtrlMgr : Singleton<GlobalUICtrlMgr>
         ctrl.LoadFinish(loadGo);
     }
 
-    public BaseUICtrl Get<T>() where T : BaseUICtrl
+    public BaseUI Get<T>() where T : BaseUI
     {
-        BaseUICtrl ctrl = null;
+        BaseUI ctrl = null;
         var type = typeof(T);
         if (ctrlDic.TryGetValue(type, out ctrl))
         {
@@ -68,14 +68,14 @@ public class GlobalUICtrlMgr : Singleton<GlobalUICtrlMgr>
         return null;
     }
 
-    public void Open<T>(UICtrlArgs args) where T : BaseUICtrl
+    public void Open<T>(UICtrlArgs args) where T : BaseUI
     {
         var ctrl = Get<T>();
         ctrl?.Open(args);
         ctrl?.Active();
     }
 
-    public void Close<T>()where T : BaseUICtrl
+    public void Close<T>()where T : BaseUI
     {
         var ctrl = Get<T>();
         ctrl.Inactive();

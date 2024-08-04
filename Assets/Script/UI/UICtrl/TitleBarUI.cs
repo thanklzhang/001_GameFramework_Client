@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class TitleBarUICtrl : BaseUICtrl
+public class TitleBarUI : BaseUI
 {
     public Transform optionRoot;
     public Button closeBtn;
@@ -65,7 +65,7 @@ public class TitleBarUICtrl : BaseUICtrl
 
     public void DefaultClose()
     {
-        UICtrlManager.Instance.CloseTopFixedUI();
+        UIManager.Instance.CloseTopFixedUI();
     }
 
     private List<TitleOptionShowObj> showObjList;

@@ -14,7 +14,7 @@ public class BattleBoxUI
     public Transform transform;
 
     private Button closeBtn;
-    private BattleUICtrl battleUI;
+    private BattleUI battleUI;
 
     private Transform selectionRoot;
 
@@ -23,7 +23,7 @@ public class BattleBoxUI
     private Text boxCountText;
 
 
-    public void Init(GameObject gameObject, BattleUICtrl battleUI)
+    public void Init(GameObject gameObject, BattleUI battleUI)
     {
         this.battleUI = battleUI;
         this.gameObject = gameObject;

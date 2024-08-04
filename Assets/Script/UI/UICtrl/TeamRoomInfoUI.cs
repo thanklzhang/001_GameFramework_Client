@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class TeamRoomInfoUICtrl : BaseUICtrl
+public class TeamRoomInfoUI : BaseUI
 {
     //this callback
     public Action event_onClickCloseBtn;
@@ -84,7 +84,7 @@ public class TeamRoomInfoUICtrl : BaseUICtrl
         // TeamRoomInfoUIArgs roomInfoArgs = (TeamRoomInfoUIArgs)args;
         EventDispatcher.AddListener(EventIDs.OnPlayerChangeInfoInTeamRoom, OnPlayerChangeInfoInTamRoom);
 
-        UICtrlManager.Instance.Open<TitleBarUICtrl>(new TitleBarUIArgs()
+        UIManager.Instance.Open<TitleBarUI>(new TitleBarUIArgs()
         {
             titleBarId = 4
         });
@@ -223,9 +223,9 @@ public class TeamRoomPlayerUIShowObj // : BaseUIShowObj<TeamRoomInfoUIPre>
 
     private Transform transform;
     private GameObject gameObject;
-    private TeamRoomInfoUICtrl contextCtrl;
+    private TeamRoomInfoUI contextCtrl;
 
-    public void Init(GameObject gameObject, TeamRoomInfoUICtrl contextCtrl)
+    public void Init(GameObject gameObject, TeamRoomInfoUI contextCtrl)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
@@ -327,7 +327,7 @@ public class TeamRoomPlayerUIShowObj // : BaseUIShowObj<TeamRoomInfoUIPre>
             args.currSelectHeroGuid = currSelectHeroGuid;
 
             // CtrlManager.Instance.GlobalCtrlPre.ShowSelectHeroUI(args);
-            UICtrlManager.Instance.Open<SelectHeroUICtrl>(args);
+            UIManager.Instance.Open<SelectHeroUI>(args);
         }
     }
 

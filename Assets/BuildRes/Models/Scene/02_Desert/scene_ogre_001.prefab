@@ -36900,6 +36900,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionRoot: {fileID: 838438899566230018}
+  customPosRoot: {fileID: 0}
+  playerInitPosRoot: {fileID: 0}
   maxMapX: 33
   maxMapZ: 33
 --- !u!1 &6529922082602292302
@@ -37488,7 +37490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3691266606825865297
 Transform:
   m_ObjectHideFlags: 0
@@ -37532,7 +37534,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3661639628750336703, guid: 7955c195660965846b8b9423dae1e6a1, type: 3}
+  - {fileID: -3661639628750336703, guid: 53749bb94c4794147b62fdc31c9f127a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

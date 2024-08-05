@@ -56,7 +56,7 @@ namespace GameData
         public MainTaskStageState state;
     }
 
-    public class MainTaskGameDataStore : GameDataStore
+    public class MainTaskGameData : BaseGameData
     {
         //public int flag;//待定
         List<MainTaskChapterData> chapterList = new List<MainTaskChapterData>();

@@ -39,7 +39,7 @@ public class LoginNetHandler : NetHandler
     public void OnCheckLogin(MsgPack msgPack)
     {
         scCheckLogin check = scCheckLogin.Parser.ParseFrom(msgPack.data);
-        GameDataManager.Instance.UserStore.Uid = (ulong)check.Uid;
+        GameDataManager.Instance.UserData.Uid = (ulong)check.Uid;
         loginResultAction?.Invoke(check);
         loginResultAction = null;
 
@@ -83,7 +83,7 @@ public class LoginNetHandler : NetHandler
     {
         scEnterGame enterGame = scEnterGame.Parser.ParseFrom(msgPack.data);
 
-        var userDataStore = GameDataManager.Instance.UserStore;
+        var userDataStore = GameDataManager.Instance.UserData;
         userDataStore.PlayerInfo = PlayerConvert.ToPlayerInfo(enterGame.PlayerInfo);
 
         enterGameResultAction?.Invoke(enterGame);

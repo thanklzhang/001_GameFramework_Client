@@ -73,8 +73,8 @@ namespace Battle_Client
         {
             Logx.Log(LogxType.Game, "StartLoad_PureLocal : start laod");
 
-            GameDataManager.Instance.UserStore.Uid = 1;
-            var uid = GameDataManager.Instance.UserStore.Uid;
+            GameDataManager.Instance.UserData.Uid = 1;
+            var uid = GameDataManager.Instance.UserData.Uid;
 
 
             //地图数据由本地加载

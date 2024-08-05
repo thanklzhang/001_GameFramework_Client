@@ -7,44 +7,38 @@ using UnityEngine;
 
 namespace GameData
 {
-    public class GameDataStore
+    public class GameDataManager : BaseGameDataManager //Singleton<GameDataManager>
     {
-        public void Init()
+        private static GameDataManager instance;
+
+        public static GameDataManager Instance
         {
+            get
+            {
+                if (null == instance)
+                {
+                    instance = new GameDataManager();
+                }
 
-        }
-    }
-
-    public class GameDataManager : Singleton<GameDataManager>
-    {
-        HeroGameDataStore heroStore = new HeroGameDataStore();
-        public HeroGameDataStore HeroStore { get => heroStore; }
-
-        BattleGameDataStore battleStore = new BattleGameDataStore();
-        public BattleGameDataStore BattleStore { get => battleStore; }
-
-        UserGameDataStore userStore = new UserGameDataStore();
-        public UserGameDataStore UserStore { get => userStore; }
-
-        MainTaskGameDataStore mainTaskStore = new MainTaskGameDataStore();
-        public MainTaskGameDataStore MainTaskStore { get => mainTaskStore; }
-
-        BagGameDataStore bagGameDataStore = new BagGameDataStore();
-        public BagGameDataStore BagStore { get => bagGameDataStore; }
-
-        TeamGameDataStore teamGameDataStore = new TeamGameDataStore();
-        public TeamGameDataStore TeamStore { get => teamGameDataStore; }
-
-        internal void Init()
-        {
-            HeroStore.Init();
-            BattleStore.Init();
-            UserStore.Init();
-            MainTaskStore.Init();
-            BagStore.Init();
-            TeamStore.Init();
+                return instance;
+            }
         }
 
+        public HeroGameData HeroData;
+        public BattleGameData BattleData;
+        public UserGameData UserData;
+        public MainTaskGameData MainTaskData;
+        public BagGameData BagData;
+        public TeamGameDataStore TeamData;
+
+        internal override void Init()
+        {
+            HeroData = AddGameData<HeroGameData>();
+            BattleData = AddGameData<BattleGameData>();
+            UserData = AddGameData<UserGameData>();
+            MainTaskData = AddGameData<MainTaskGameData>();
+            BagData = AddGameData<BagGameData>();
+            TeamData = AddGameData<TeamGameDataStore>();
+        }
     }
 }
-

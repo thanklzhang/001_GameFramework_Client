@@ -74,7 +74,7 @@ public class BattleNetHandler : NetHandler
         // Logx.Log("TransitionBattleMsg : send true cmd : " + cmd);
         csTransitionBattle tranBattleMsg = new csTransitionBattle();
 
-        var myUid = GameDataManager.Instance.UserStore.Uid;
+        var myUid = GameDataManager.Instance.UserData.Uid;
         ClientProtoHead head = new ClientProtoHead()
         {
             cmd = (ushort)cmd,

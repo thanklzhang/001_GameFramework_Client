@@ -40,7 +40,7 @@ public class TeamRoomListUI : BaseUI
             var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
             net.SendCreateTeamRoom(() =>
             {
-                var creatRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+                var creatRoomData = GameDataManager.Instance.TeamData.currEnterRoomData;
                 this.OnEnterRoomInfoUI(creatRoomData);
             });
         });
@@ -113,7 +113,7 @@ public class TeamRoomListUI : BaseUI
     void RefreshRoomList()
     {
         //列表
-        List<TeamRoomData> roomList = GameDataManager.Instance.TeamStore.RoomList;
+        List<TeamRoomData> roomList = GameDataManager.Instance.TeamData.RoomList;
         if (null == roomList)
         {
             roomList = new List<TeamRoomData>();

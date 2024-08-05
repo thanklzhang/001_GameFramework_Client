@@ -8,7 +8,7 @@ using UnityEngine;
 namespace GameData
 {
     //这里组队主要是缓存房间数据
-    public class TeamGameDataStore : GameDataStore
+    public class TeamGameDataStore : BaseGameData
     {
         List<TeamRoomData> roomList = new List<TeamRoomData>();
 

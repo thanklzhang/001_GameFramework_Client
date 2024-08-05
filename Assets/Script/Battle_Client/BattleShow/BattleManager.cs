@@ -157,7 +157,7 @@ namespace Battle_Client
             }
 
             //设置本地玩家
-            var userDataStore = GameDataManager.Instance.UserStore;
+            var userDataStore = GameDataManager.Instance.UserData;
             var uid = (int)userDataStore.Uid;
             if (playerDic.ContainsKey(uid))
             {

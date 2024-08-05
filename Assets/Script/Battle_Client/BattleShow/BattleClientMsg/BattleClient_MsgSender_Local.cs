@@ -27,7 +27,7 @@ namespace Battle_Client
         IEnumerator DelayLoadProgress(int progress)
         {
             yield return new WaitForSeconds(0.5f);
-            var myUid = GameDataManager.Instance.UserStore.Uid;
+            var myUid = GameDataManager.Instance.UserData.Uid;
             battle.PlayerMsgReceiver.On_PlayerLoadProgress((long)myUid, progress);
         }
 
@@ -40,7 +40,7 @@ namespace Battle_Client
         IEnumerator DelayBattleReadyFinish()
         {
             yield return new WaitForSeconds(0.1f);
-            var myUid = GameDataManager.Instance.UserStore.Uid;
+            var myUid = GameDataManager.Instance.UserData.Uid;
             battle.PlayerMsgReceiver.On_BattleReadyFinish((long)myUid);
         }
 
@@ -52,7 +52,7 @@ namespace Battle_Client
 
         public void Send_ClientPlotEnd()
         {
-            var myUid = GameDataManager.Instance.UserStore.Uid;
+            var myUid = GameDataManager.Instance.UserData.Uid;
             battle.PlayerMsgReceiver.On_ClientPlotEnd((long)myUid);
         }
 

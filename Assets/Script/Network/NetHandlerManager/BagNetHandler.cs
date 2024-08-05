@@ -30,7 +30,7 @@ public class BagNetHandler : NetHandler
     {
         scSyncBag sync = scSyncBag.Parser.ParseFrom(msgPack.data);
 
-        var dataStore = GameDataManager.Instance.BagStore;
+        var dataStore = GameDataManager.Instance.BagData;
         dataStore.SetBagItemList(sync.Items);
 
     }

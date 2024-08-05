@@ -11,7 +11,7 @@ namespace GameData
 {
 
 
-    public class HeroGameDataStore : GameDataStore
+    public class HeroGameData : BaseGameData
     {
         //public int flag;//待定
         List<HeroData> heroList = new List<HeroData>();

@@ -33,7 +33,7 @@ public class HeroListNetHandler : NetHandler
     {
         scSyncHeroList sync = scSyncHeroList.Parser.ParseFrom(msgPack.data);
 
-        var dataStore = GameDataManager.Instance.HeroStore;
+        var dataStore = GameDataManager.Instance.HeroData;
         dataStore.SetHeroDataList(sync.HeroList);
 
     }

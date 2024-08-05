@@ -95,7 +95,7 @@ public class TitleBarUI : BaseUI
             showObj.Init(go);
 
 
-            var count = GameDataManager.Instance.BagStore.GetCountByConfigId(itemId);
+            var count = GameDataManager.Instance.BagData.GetCountByConfigId(itemId);
             showObj.RefreshUI(itemId, count, i);
         }
 

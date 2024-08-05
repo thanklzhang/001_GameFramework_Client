@@ -64,7 +64,7 @@ public class TeamRoomInfoUI : BaseUI
     public void OnClickStartBattleBtn()
     {
         var net = NetHandlerManager.Instance.GetHandler<BattleEntranceNetHandler>();
-        var enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+        var enterRoomData = GameDataManager.Instance.TeamData.currEnterRoomData;
         var tamRoomId = enterRoomData.id;
         net.ApplyTeamBattle(tamRoomId, () => { });
     }
@@ -88,7 +88,7 @@ public class TeamRoomInfoUI : BaseUI
         {
             titleBarId = 4
         });
-        currRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+        currRoomData = GameDataManager.Instance.TeamData.currEnterRoomData;
 
 
         var stageConfig = TableManager.Instance.GetById<Table.TeamStage>(currRoomData.teamStageId);
@@ -260,7 +260,7 @@ public class TeamRoomPlayerUIShowObj // : BaseUIShowObj<TeamRoomInfoUIPre>
     public void OnClickReadyBtn()
     {
         var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
-        var enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+        var enterRoomData = GameDataManager.Instance.TeamData.currEnterRoomData;
         var player = enterRoomData.playerList.Find(p => p.playerInfo.uid == this.playerData.playerInfo.uid);
         var roomId = enterRoomData.id;
         var opReady = !player.isHasReady;
@@ -273,13 +273,13 @@ public class TeamRoomPlayerUIShowObj // : BaseUIShowObj<TeamRoomInfoUIPre>
     public void OnClickChangeHeroBtn()
     {
         var uid = this.playerData.playerInfo.uid;
-        if (uid == (int)GameData.GameDataManager.Instance.UserStore.Uid)
+        if (uid == (int)GameData.GameDataManager.Instance.UserData.Uid)
         {
             SelectHeroUIArgs args = new SelectHeroUIArgs();
 
             args.heroDataList = new List<HeroData>();
-            var heroList = GameData.GameDataManager.Instance.HeroStore.HeroList;
-            var enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+            var heroList = GameData.GameDataManager.Instance.HeroData.HeroList;
+            var enterRoomData = GameDataManager.Instance.TeamData.currEnterRoomData;
             var playerInfo = enterRoomData.playerList.Find(p => p.playerInfo.uid == uid);
             for (int i = 0; i < heroList.Count; i++)
             {
@@ -306,7 +306,7 @@ public class TeamRoomPlayerUIShowObj // : BaseUIShowObj<TeamRoomInfoUIPre>
                 // CtrlManager.Instance.GlobalCtrlPre.HideSelectHeroUI();
 
                 NetProto.csSelectUseHeroInTeamRoom csSelect = new NetProto.csSelectUseHeroInTeamRoom();
-                var enterRoomData = GameDataManager.Instance.TeamStore.currEnterRoomData;
+                var enterRoomData = GameDataManager.Instance.TeamData.currEnterRoomData;
 
                 var net = NetHandlerManager.Instance.GetHandler<TeamNetHandler>();
                 currSelectHeroGuid = curr;
@@ -355,7 +355,7 @@ public class TeamRoomPlayerUIShowObj // : BaseUIShowObj<TeamRoomInfoUIPre>
         heroLevelText.text = "" + playerData.selectHeroData.level;
         heroNameText.text = "" + heroConfig.Name;
 
-        var userStore = GameData.GameDataManager.Instance.UserStore;
+        var userStore = GameData.GameDataManager.Instance.UserData;
         var isSelf = (int)userStore.Uid == this.playerData.playerInfo.uid;
         changeHeroBtn.gameObject.SetActive(isSelf);
 

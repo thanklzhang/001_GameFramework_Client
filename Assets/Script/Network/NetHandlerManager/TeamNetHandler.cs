@@ -81,7 +81,7 @@ public class TeamNetHandler : NetHandler
             localRoomList.Add(localRoom);
         }
 
-        GameDataManager.Instance.TeamStore.SetRoomListData(localRoomList);
+        GameDataManager.Instance.TeamData.SetRoomListData(localRoomList);
 
         event_getTeamRoomList?.Invoke();
         event_getTeamRoomList = null;
@@ -105,7 +105,7 @@ public class TeamNetHandler : NetHandler
         // Logx.Log("OnCreateTeamRoom : " + scCreate.ToString());
 
         var resultRoom = TeamConvert.ToTeamRoom(scCreate.TeamRoom);
-        GameDataManager.Instance.TeamStore.SetCurrEnterRoomData(resultRoom);
+        GameDataManager.Instance.TeamData.SetCurrEnterRoomData(resultRoom);
 
         event_createTeamRoom?.Invoke();
         event_createTeamRoom = null;
@@ -127,7 +127,7 @@ public class TeamNetHandler : NetHandler
         scEnterTeamRoom scEnter = scEnterTeamRoom.Parser.ParseFrom(msgPack.data);
 
         var resultRoom = TeamConvert.ToTeamRoom(scEnter.TeamRoom);
-        GameDataManager.Instance.TeamStore.SetCurrEnterRoomData(resultRoom);
+        GameDataManager.Instance.TeamData.SetCurrEnterRoomData(resultRoom);
 
         event_enterTeamRoom?.Invoke();
         event_enterTeamRoom = null;
@@ -231,7 +231,7 @@ public class TeamNetHandler : NetHandler
         //data handler
         var resultPlayer = TeamConvert.ToTeamPlayer(player);
         //Logx.Log("log test : isHasReady : " + resultPlayer.isHasReady);
-        var room = GameDataManager.Instance.TeamStore.currEnterRoomData;
+        var room = GameDataManager.Instance.TeamData.currEnterRoomData;
         room.UpdateRoomPlayerData(resultPlayer);
 
         //dispatch refresh player event 
@@ -244,7 +244,7 @@ public class TeamNetHandler : NetHandler
         // Logx.Log("OnNotiyRoomLeaveRoom : " + leave.ToString());
         var uid = leave.PlayerUid;
 
-        GameDataManager.Instance.TeamStore.RemovePlayer(uid);
+        GameDataManager.Instance.TeamData.RemovePlayer(uid);
 
         EventDispatcher.Broadcast(EventIDs.OnPlayerLeaveTeamRoom, uid);
     }

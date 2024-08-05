@@ -10,7 +10,7 @@ namespace GameData
 {
 
 
-    public class BattleGameDataStore : GameDataStore
+    public class BattleGameData : BaseGameData
     {
         //public void SetBattleInitData()
         //{

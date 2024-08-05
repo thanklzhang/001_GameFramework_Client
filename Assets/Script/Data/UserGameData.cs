@@ -10,7 +10,7 @@ using UnityEngine;
 namespace GameData
 {
     
-    public class UserGameDataStore : GameDataStore
+    public class UserGameData : BaseGameData
     {
         private ulong uid;
         public ulong Uid { get => uid; set => uid = value; }

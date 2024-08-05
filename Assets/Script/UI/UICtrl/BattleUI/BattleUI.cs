@@ -217,7 +217,7 @@ public class BattleUI : BaseUI
 
     void OnPlayerReadyState(int uid, bool isReady)
     {
-        var myUid = (int)GameDataManager.Instance.UserStore.Uid;
+        var myUid = (int)GameDataManager.Instance.UserData.Uid;
 
         if (myUid == uid)
         {

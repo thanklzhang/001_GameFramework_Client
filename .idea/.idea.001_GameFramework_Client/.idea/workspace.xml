@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="" />
+    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BagGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/BagGameData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BaseData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BattleGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/BattleGameData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/GameDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/GameDataManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/GlobaData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/HeroGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/HeroGameData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/MainTaskGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/MainTaskGameData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Model/Team/TeamGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/Model/Team/TeamGameDataStore.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/UserGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/UserGameData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BagNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BagNetHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BattleNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BattleNetHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/HeroListNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/HeroListNetHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/LoginNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/LoginNetHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/TeamNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/TeamNetHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LobbyUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LobbyUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomInfoUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomInfoUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomListUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomListUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -354,7 +380,8 @@
       <workItem from="1722708850164" duration="3481000" />
       <workItem from="1722755896181" duration="1011000" />
       <workItem from="1722760826894" duration="1155000" />
-      <workItem from="1722765566573" duration="9143000" />
+      <workItem from="1722765566573" duration="9449000" />
+      <workItem from="1722867663887" duration="2074000" />
     </task>
     <servers />
   </component>

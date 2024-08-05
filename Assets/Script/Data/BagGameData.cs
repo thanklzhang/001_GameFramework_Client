@@ -16,7 +16,7 @@ namespace GameData
     }
 
 
-    public class BagGameDataStore : GameDataStore
+    public class BagGameData : BaseGameData
     {
         //public int flag;//待定
         List<BagItemData> bagItemList = new List<BagItemData>();

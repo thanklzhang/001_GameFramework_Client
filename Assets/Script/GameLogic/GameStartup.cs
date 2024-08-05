@@ -47,7 +47,7 @@ public class GameStartup : MonoBehaviour
         }
         else
         {
-            if (Const.isLocalBattleTest)
+            if (GlobalConfig.isLocalBattleTest)
             {
                 //本地战斗 供测试使用
                 Logx.Log(LogxType.Game, "mode : local battle test");
@@ -68,15 +68,15 @@ public class GameStartup : MonoBehaviour
     //处理预编译变量
     void HandlePreCompileVar()
     {
-        Const.isLocalBattleTest = false;
-        Const.isUseAB = false;
-        Const.isUseInternalAB = false;
+        GlobalConfig.isLocalBattleTest = false;
+        GlobalConfig.isUseAB = false;
+        GlobalConfig.isUseInternalAB = false;
 
 
 #if UNITY_EDITOR
-        Const.isLocalBattleTest = this.isLocalBattleTest;
-        Const.isUseAB = this.isUseAB;
-        Const.isUseInternalAB = this.isUseInternalAB;
+        GlobalConfig.isLocalBattleTest = this.isLocalBattleTest;
+        GlobalConfig.isUseAB = this.isUseAB;
+        GlobalConfig.isUseInternalAB = this.isUseInternalAB;
 #else
     #if IS_LOCAL_BATTLE
         Const.isLocalBattleTest = true;
@@ -100,7 +100,7 @@ public class GameStartup : MonoBehaviour
 
     public IEnumerator _Startup()
     {
-        if (!Const.isLocalBattleTest)
+        if (!GlobalConfig.isLocalBattleTest)
         {
             //检查游戏资源并更新
             yield return CheckResourceUpdate();
@@ -116,7 +116,7 @@ public class GameStartup : MonoBehaviour
         yield return gameMain.GameInit();
 
         //游戏初始化完毕
-        if (!Const.isLocalBattleTest)
+        if (!GlobalConfig.isLocalBattleTest)
         {
             gameMain.StartToLogin();
         }

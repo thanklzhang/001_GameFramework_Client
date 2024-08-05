@@ -27,20 +27,20 @@ public class UpdateResourceModule
     {
         Logx.Log(LogxType.Game,"开始检查游戏资源");
         
-        if (!Const.isUseAB)
+        if (!GlobalConfig.isUseAB)
         {
             Logx.Log(LogxType.Game,"非 AB 包模式 ， 完成检查游戏资源");
             yield break;
         }
 
-        if (Const.isLocalBattleTest)
+        if (GlobalConfig.isLocalBattleTest)
         {
             Logx.Log(LogxType.Game,"纯本地战斗 ， 完成检查游戏资源");
             yield break;
         }
 
-        var persistentPath = Const.AssetBundlePath;
-        var localVersionPath = Const.AssetBundlePath + "/" + "version.txt";
+        var persistentPath = GlobalConfig.AssetBundlePath;
+        var localVersionPath = GlobalConfig.AssetBundlePath + "/" + "version.txt";
         var isExist = Directory.Exists(persistentPath) && File.Exists(localVersionPath);
         if (!isExist)
         {
@@ -51,7 +51,7 @@ public class UpdateResourceModule
         {
             //有本地资源文件 开始检测资源版本
 
-             if (!Const.isUseInternalAB)
+             if (!GlobalConfig.isUseInternalAB)
             {
                 //从服务端更新资源
 
@@ -89,9 +89,9 @@ public class UpdateResourceModule
     public IEnumerator CopyGameResource(UpdateResError error)
     {
         Logx.Log(LogxType.CheckAndUpdateResource,"第一次进入游戏 开始复制包内中的现有资源复制到本地");
-        var persistentPath = Const.AssetBundlePath;
+        var persistentPath = GlobalConfig.AssetBundlePath;
         Directory.CreateDirectory(persistentPath);
-        var streamingPath = Const.AppStreamingAssetPath;
+        var streamingPath = GlobalConfig.AppStreamingAssetPath;
         var allFiles = System.IO.Directory.GetFiles(streamingPath, "*.*", SearchOption.AllDirectories);
         //过滤文件
         var files = allFiles.Where(f =>
@@ -154,10 +154,10 @@ public class UpdateResourceModule
 
     public string GetServerIp()
     {
-        if (Const.isLANServer)
+        if (GlobalConfig.isLANServer)
         {
             //局域网服务器地址
-            return GameValue.LANServerIP;
+            return GlobalConfig.LANServerIP;
         }
 
         return "";
@@ -166,7 +166,7 @@ public class UpdateResourceModule
     public IEnumerator CheckResourceVersion(UpdateResError error)
     {
         //得到本地资源版本信息
-        var localVersionPath = Const.AssetBundlePath + "/" + "version.txt";
+        var localVersionPath = GlobalConfig.AssetBundlePath + "/" + "version.txt";
         int localBigVer;
         int localSmallVer;
         this.TriggerStateEvent(UpdateResStateType.CheckVersion);
@@ -280,7 +280,7 @@ public class UpdateResourceModule
     {
         //得到本地当前资源列表信息
         localFileDic = new Dictionary<string, string>();
-        var localResFileListPath = Const.AssetBundlePath + "/" + "file_list.txt";
+        var localResFileListPath = GlobalConfig.AssetBundlePath + "/" + "file_list.txt";
         if (File.Exists(localResFileListPath))
         {
             var fileTxtStr = FileTool.GetTextFromFile(localResFileListPath, true);
@@ -369,7 +369,7 @@ public class UpdateResourceModule
 
         //全部文件都一致了就更新 version.txt 
         Logx.Log(LogxType.CheckAndUpdateResource,"开始更新 version.txt 文件");
-        var localVersionFileListPath = Const.AssetBundlePath + "/" + "version.txt";
+        var localVersionFileListPath = GlobalConfig.AssetBundlePath + "/" + "version.txt";
         var str = "v" + serBigVer + "." + serSmallVer;
         FileTool.SaveToFile(localVersionFileListPath, str);
         Logx.Log(LogxType.CheckAndUpdateResource,"完成更新 version.txt 文件");
@@ -416,7 +416,7 @@ public class UpdateResourceModule
 
         Logx.Log(LogxType.CheckAndUpdateResource,"服务端回包 : bytes 长度 : " + bytes.Length);
         var serFileData = bytes;
-        var savePath = Const.AssetBundlePath + "/" + serResInfo.path;
+        var savePath = GlobalConfig.AssetBundlePath + "/" + serResInfo.path;
         var tempDir = Path.GetDirectoryName(savePath);
         if (!Directory.Exists(tempDir))
         {
@@ -436,7 +436,7 @@ public class UpdateResourceModule
         }
 
         //下载完一个 更新 file_list.txt
-        var localResFileListPath = Const.AssetBundlePath + "/" + "file_list.txt";
+        var localResFileListPath = GlobalConfig.AssetBundlePath + "/" + "file_list.txt";
         if (File.Exists(localResFileListPath))
         {
             var str = FileDicToStr(localFileDic);

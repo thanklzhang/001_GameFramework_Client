@@ -97,7 +97,7 @@ public class LoginUI : BaseUI
         //目前直接当作局域网进行连接
         // string ip = NetTool.GetHostIp();
 
-        string ip = GameValue.LANServerIP;
+        string ip = GlobalConfig.LANServerIP;
         int port = 5556;
         OnclickConnectBtn(ip, port);
         
@@ -136,7 +136,7 @@ public class LoginUI : BaseUI
 
     public void OnclickConnectBtn(string ip, int port)
     {
-        var isLocal = Const.isLANServer;
+        var isLocal = GlobalConfig.isLANServer;
         if (isLocal)
         {
             // ui.SetConnectTips("start to connect to login server ...");

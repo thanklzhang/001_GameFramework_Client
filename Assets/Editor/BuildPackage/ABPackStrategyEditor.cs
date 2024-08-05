@@ -26,7 +26,7 @@ public class ABPackStrategyEditor : EditorWindow
 
     public void OnEnable()
     {
-        var resPath = Const.ABPackageStrategyPath;
+        var resPath = GlobalConfig.ABPackageStrategyPath;
         var strategySO =
             AssetDatabase.LoadAssetAtPath<ABPackageStrategySO>(resPath);
         if (null == strategySO)

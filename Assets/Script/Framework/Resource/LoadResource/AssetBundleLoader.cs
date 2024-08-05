@@ -95,7 +95,7 @@ public class AssetBundleLoader : BaseLoader
 
     string GetABLoadPath(string path)
     {
-        return Const.AssetBundlePath + "/" + path; // + Const.ExtName;
+        return GlobalConfig.AssetBundlePath + "/" + path; // + Const.ExtName;
     }
 
     public override string GetPath()

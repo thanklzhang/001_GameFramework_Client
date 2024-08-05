@@ -32,9 +32,9 @@ public class AssetManager : Singleton<AssetManager>
 
     public void Init()
     {
-        if (Const.isUseAB)
+        if (GlobalConfig.isUseAB)
         {
-            var assetFileStr = File.ReadAllText(Const.AppStreamingAssetPath + "/" + "AssetToAbFileData.json");
+            var assetFileStr = File.ReadAllText(GlobalConfig.AppStreamingAssetPath + "/" + "AssetToAbFileData.json");
 
             //读取 asset 和 ab 对应关系表
             this.assetToAbDic = JsonMapper.ToObject<Dictionary<string, string>>(assetFileStr);
@@ -92,7 +92,7 @@ public class AssetManager : Singleton<AssetManager>
     public void LoadAsync<T>(string assetPath, Action<UnityEngine.Object> finishCallback) where T : UnityEngine.Object
     {
         assetPath = assetPath.ToLower().Replace('\\', '/');
-        if (Const.isUseAB && !this.assetToAbDic.ContainsKey(assetPath))
+        if (GlobalConfig.isUseAB && !this.assetToAbDic.ContainsKey(assetPath))
         {
             Logx.LogError("Asset", "LoadAsync : the asset doesnt exist in assetToAbDic : " + assetPath);
             return;
@@ -123,7 +123,7 @@ public class AssetManager : Singleton<AssetManager>
                 assetCache.finishLoadCallbackList.Add(finishCallback);
 
                 Logx.Log(LogxType.Resource, "ab : start load ab , abPath : " + abPath);
-                if (Const.isUseAB)
+                if (GlobalConfig.isUseAB)
                 {
                     AssetBundleManager.Instance.Load(abPath, LoadAssetBundleByAssetFinish, false, assetInfo);
                 }
@@ -155,7 +155,7 @@ public class AssetManager : Singleton<AssetManager>
 
             assetCache.finishLoadCallbackList.Add(finishCallback);
 
-            if (Const.isUseAB)
+            if (GlobalConfig.isUseAB)
             {
                 //透传 assetInfo 给 ab
                 ContextAssetInfo assetInfo = new ContextAssetInfo();
@@ -280,7 +280,7 @@ public class AssetManager : Singleton<AssetManager>
             var callback = callbacks[i];
             callback?.Invoke(assetCache.asset);
 
-            if (Const.isUseAB)
+            if (GlobalConfig.isUseAB)
             {
                 //修改 asset 和 ab 之间的加载引用计数
                 var abPath = "";

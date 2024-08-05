@@ -309,7 +309,7 @@ namespace Battle_Client
             var isFinish = false;
             // var mapList = new List<List<int>>();
             var mapSaveData = new MapSaveData();
-            var path = Const.buildPath + "/" + mapConfig.MapDataPath;
+            var path = GlobalConfig.buildPath + "/" + mapConfig.MapDataPath;
             ResourceManager.Instance.GetObject<TextAsset>(path, (textAsset) =>
             {
                 //Logx.Log("local execute : load text finish: " + textAsset.text);
@@ -333,84 +333,88 @@ namespace Battle_Client
         {
             Logx.Log(LogxType.Battle, "BattleManager : LoadTriggerResource ");
 
-            TriggerSourceResData source = new TriggerSourceResData();
-            source.dataStrList = new List<string>();
+            // TriggerSourceResData source = new TriggerSourceResData();
+            // source.dataStrList = new List<string>();
+            //
+            // var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+            // var triggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleConfigTb.TriggerId);
+            //
+            // //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
+            // var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
+            //
+            //
+            // if (!GlobalConfig.isUseAB)
+            // {
+            //     var loadPath2 = GlobalConfig.buildPath + "/" + triggerTb.ScriptPath;
+            //     var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories)
+            //         .ToList();
+            //
+            //     files = new List<string>();
+            //     for (int i = 0; i < files2.Count; i++)
+            //     {
+            //         var f = files2[i];
+            //         var f2 = f.Replace(GlobalConfig.buildPath + "/", "");
+            //         files.Add(f2);
+            //     }
+            // }
+            // else
+            // {
+            //     var loadPath2 = GlobalConfig.buildPath + "/" + triggerTb.ScriptPath;
+            //     var abPath = loadPath2 + ".ab";
+            //     if (AssetManager.Instance.abToAssetsDic.ContainsKey(abPath))
+            //     {
+            //         files = new List<string>();
+            //         var assets = AssetManager.Instance.abToAssetsDic[abPath];
+            //         foreach (var assetPath in assets)
+            //         {
+            //             var resultPath = assetPath.Replace(GlobalConfig.buildPath.ToLower() + "/", "");
+            //             files.Add(resultPath);
+            //         }
+            //     }
+            //     else
+            //     {
+            //         Logx.LogError("the ab is not found : abPath : " + abPath);
+            //     }
+            // }
+            //
+            //
+            // foreach (var filePath in files)
+            // {
+            //     bool isLoadFinish = false;
+            //     string loadText = "";
+            //     //Logx.Log("local execute : start load : filePath :  " + filePath);
+            //     //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
+            //     var loadPath = Path.Combine(GlobalConfig.buildPath, filePath);
+            //
+            //     //Debug.Log("zxy : loadPath " + loadPath);
+            //
+            //     //里面已经判断 是否AB 模式了 所以这里通用
+            //     ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
+            //     {
+            //         //Logx.Log("local execute : load text finish: " + textAsset.text);
+            //         loadText = textAsset.text;
+            //         isLoadFinish = true;
+            //     });
+            //
+            //     while (true)
+            //     {
+            //         yield return null;
+            //
+            //         if (isLoadFinish)
+            //         {
+            //             source.dataStrList.Add(loadText);
+            //             break;
+            //         }
+            //     }
+            // }
 
-            var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
-            var triggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleConfigTb.TriggerId);
-
-            //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
-            var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
-
-
-            if (!Const.isUseAB)
-            {
-                var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
-                var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories)
-                    .ToList();
-
-                files = new List<string>();
-                for (int i = 0; i < files2.Count; i++)
-                {
-                    var f = files2[i];
-                    var f2 = f.Replace(Const.buildPath + "/", "");
-                    files.Add(f2);
-                }
-            }
-            else
-            {
-                var loadPath2 = Const.buildPath + "/" + triggerTb.ScriptPath;
-                var abPath = loadPath2 + ".ab";
-                if (AssetManager.Instance.abToAssetsDic.ContainsKey(abPath))
-                {
-                    files = new List<string>();
-                    var assets = AssetManager.Instance.abToAssetsDic[abPath];
-                    foreach (var assetPath in assets)
-                    {
-                        var resultPath = assetPath.Replace(Const.buildPath.ToLower() + "/", "");
-                        files.Add(resultPath);
-                    }
-                }
-                else
-                {
-                    Logx.LogError("the ab is not found : abPath : " + abPath);
-                }
-            }
-
-
-            foreach (var filePath in files)
-            {
-                bool isLoadFinish = false;
-                string loadText = "";
-                //Logx.Log("local execute : start load : filePath :  " + filePath);
-                //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
-                var loadPath = Path.Combine(Const.buildPath, filePath);
-
-                //Debug.Log("zxy : loadPath " + loadPath);
-
-                //里面已经判断 是否AB 模式了 所以这里通用
-                ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
-                {
-                    //Logx.Log("local execute : load text finish: " + textAsset.text);
-                    loadText = textAsset.text;
-                    isLoadFinish = true;
-                });
-
-                while (true)
-                {
-                    yield return null;
-
-                    if (isLoadFinish)
-                    {
-                        source.dataStrList.Add(loadText);
-                        break;
-                    }
-                }
-            }
+            yield return null;
 
 
             Logx.Log(LogxType.Battle, "local execute : finish all ");
-            finishCallback?.Invoke(source);
+            // finishCallback?.Invoke(source);
+            
+            finishCallback?.Invoke(null);
         }
 
 

@@ -26,7 +26,7 @@ public class ServerTypeUI : MonoBehaviour
         remoteStartBtn.onClick.AddListener(() =>
         {
             tips.text = "暂未开放";
-            Const.isLANServer = false;
+            GlobalConfig.isLANServer = false;
         });
 
         localStartBtn.onClick.AddListener(() =>
@@ -42,10 +42,10 @@ public class ServerTypeUI : MonoBehaviour
                 return;
             }
 
-            Const.isLANServer = true;
+            GlobalConfig.isLANServer = true;
             this.gameObject.SetActive(false);
 
-            GameValue.LANServerIP = localServerIp.text;
+            GlobalConfig.LANServerIP = localServerIp.text;
             //var startUp = GameObject.Find("GameStartup").GetComponent<GameStartup>();
             startUp.Startup();
         });

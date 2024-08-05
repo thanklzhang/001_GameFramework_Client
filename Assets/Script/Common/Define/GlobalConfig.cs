@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Const
+public class GlobalConfig
 {
     //是否局域网服务器
     public static bool isLANServer = false;
 
     //path
     public const string AppName = "Jeko";
-
+    
     public static string AppStreamingAssetPath = Application.streamingAssetsPath; //游戏第一次安装的游戏内部包
     //public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "/Resource";
     // public static string AssetBundlePath = Application.persistentDataPath + "/" + AppName + "";///Resources
@@ -73,5 +73,7 @@ public class Const
     public const int frameTime = 66;
     public const int floatMul = 10000;
 
+    public static string LANServerIP = "";
+    
     public static Fix timeDelta = Fix.Ratio(frameTime, 1000);
 }

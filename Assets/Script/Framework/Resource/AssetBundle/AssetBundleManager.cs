@@ -29,7 +29,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     public void Init()
     {
         Logx.Log(LogxType.AB, "AssetBundleManager : init");
-        var manifestAB = AssetBundle.LoadFromFile(Const.AssetBundlePath + "/" + "StreamingAssets");
+        var manifestAB = AssetBundle.LoadFromFile(GlobalConfig.AssetBundlePath + "/" + "StreamingAssets");
         manifest = manifestAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
 
         //EventManager.AddListener<AssetBundleCache>((int)GameEvent.LoadABTaskFinish, this.OnLoadFinish);

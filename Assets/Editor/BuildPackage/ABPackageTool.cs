@@ -113,8 +113,8 @@ public class ABPackageTool
     public static void BuildAssetBundle(BuildTarget buildTarget, string resVersion = "", UploadABType uploadAbType = UploadABType.No)
     {
         //先取出当前的版本资源信息
-        var versionPath = Const.AppStreamingAssetPath + "/" + "version.txt";
-        var fileListPath = Const.AppStreamingAssetPath + "/" + "file_list.txt";
+        var versionPath = GlobalConfig.AppStreamingAssetPath + "/" + "version.txt";
+        var fileListPath = GlobalConfig.AppStreamingAssetPath + "/" + "file_list.txt";
         var oldBigVer = 0;
         var oldSmallVer = 0;
         var filelistStr = "";
@@ -140,7 +140,7 @@ public class ABPackageTool
         }
 
         //开始 bundle 打包到 streamingAsset 路径中
-        var outPath = Const.AppStreamingAssetPath;
+        var outPath = GlobalConfig.AppStreamingAssetPath;
         var abManifest = BuildPipeline.BuildAssetBundles(outPath, bundleBuildList.ToArray(), BuildAssetBundleOptions.None, buildTarget);
 
         
@@ -152,7 +152,7 @@ public class ABPackageTool
         
         var difList = new List<ResInfo>();
         //获取打包后的资源
-        List<ResInfo> newestResList = GenerateFileResWithMD5(Const.AppStreamingAssetPath);
+        List<ResInfo> newestResList = GenerateFileResWithMD5(GlobalConfig.AppStreamingAssetPath);
 
         //比对资源文件
         difList = GetNeedUpdateResList(oldResList, newestResList);
@@ -276,7 +276,7 @@ public class ABPackageTool
         string[] files = System.IO.Directory.GetFiles(sourceFolder, "*", SearchOption.AllDirectories);
         foreach (string file in files)
         {
-            var isAB = Path.GetExtension(file).Equals(Const.ABExtName);
+            var isAB = Path.GetExtension(file).Equals(GlobalConfig.ABExtName);
             List<string> depPathList = new List<string>()
             {
                 "StreamingAssets","AssetToAbFileData.json"
@@ -297,7 +297,7 @@ public class ABPackageTool
             if ((isAB || isDepPath) && !isIgnore)
             {
                 ResInfo resInfo = new ResInfo();
-                resInfo.path = file.Replace(Const.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
+                resInfo.path = file.Replace(GlobalConfig.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
                 resInfo.md5 = EncryptionTool.GetMD5HashFromFile(file);
 
                 resList.Add(resInfo);
@@ -409,7 +409,7 @@ public class ABPackageTool
             if (!ext.Equals(".meta"))
             {
                 ResInfo resInfo = new ResInfo();
-                var _path = file.Replace(Const.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
+                var _path = file.Replace(GlobalConfig.AppStreamingAssetPath + "\\", "").Replace("\\", "/");
                 resInfo.path = _path;
                 resList.Add(resInfo);
             }
@@ -427,7 +427,7 @@ public class ABPackageTool
         {
             Logx.Log(LogxType.Build,"开始 所有资源上传");
 
-            List<ResInfo> newestResList = GetCanUploadAllFilesInfo(Const.AppStreamingAssetPath);
+            List<ResInfo> newestResList = GetCanUploadAllFilesInfo(GlobalConfig.AppStreamingAssetPath);
             UploadByResInfoList(newestResList, UploadABType.Local);
             UploadResFlagInfo(UploadABType.Local);
 
@@ -451,7 +451,7 @@ public class ABPackageTool
         {
             Logx.Log(LogxType.Build,"开始 所有资源上传");
 
-            List<ResInfo> newestResList = GetCanUploadAllFilesInfo(Const.AppStreamingAssetPath);
+            List<ResInfo> newestResList = GetCanUploadAllFilesInfo(GlobalConfig.AppStreamingAssetPath);
             UploadByResInfoList(newestResList, UploadABType.FTP);
             UploadResFlagInfo(UploadABType.FTP);
 
@@ -470,8 +470,8 @@ public class ABPackageTool
             for (int i = 0; i < newestResList.Count; i++)
             {
                 var resInfo = newestResList[i];
-                var localPath = Const.AppStreamingAssetPath + "/" + resInfo.path;
-                var remotePath = Const.localUploadABResPath + "/" + resInfo.path;
+                var localPath = GlobalConfig.AppStreamingAssetPath + "/" + resInfo.path;
+                var remotePath = GlobalConfig.localUploadABResPath + "/" + resInfo.path;
                 Debug.Log("start upload res (local) : " + localPath + " , remote res : " + remotePath);
                 FileTool.CopyFile(localPath,remotePath);
                 // helper.UpLoadFile(localPath, remotePath);
@@ -485,7 +485,7 @@ public class ABPackageTool
             for (int i = 0; i < newestResList.Count; i++)
             {
                 var resInfo = newestResList[i];
-                var localPath = Const.AppStreamingAssetPath + "/" + resInfo.path;
+                var localPath = GlobalConfig.AppStreamingAssetPath + "/" + resInfo.path;
                 var remotePath = resInfo.path;
                 Debug.Log("start upload res (ftp) : " + localPath + " , remote res : " + remotePath);
                 helper.UpLoadFile(localPath, remotePath);

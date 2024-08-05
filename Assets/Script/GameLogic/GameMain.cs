@@ -53,7 +53,7 @@ public class GameMain : MonoBehaviour
         UIManager.Instance.Init(uiRoot);
 
 
-        if (Const.isUseAB)
+        if (GlobalConfig.isUseAB)
         {
             AssetBundleManager.Instance.Init();
         }

@@ -73,14 +73,39 @@ namespace Table
         {
             List<TableInfo> infoList = new List<TableInfo>();
 
-            var files = TablePathDefine.GetTablePathList();
+            // var files = TablePathDefine.GetTablePathList();
             //string[] files = System.IO.Directory.GetFiles(loadPath, "*.json", SearchOption.AllDirectories);
+
+            var files = new String[] { };
+            if (GlobalConfig.isUseAB)
+            {
+                //TODO
+            }
+            else
+            {
+                
+                var loadPath = Path.Combine(GlobalConfig.buildPath, GlobalConfig.tablePath);
+                files = System.IO.Directory.GetFiles(loadPath, "*.json", SearchOption.AllDirectories);
+                
+                List<string> fileList = new List<string>();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var file = files[i];
+                    var name = Path.GetFileName(file);
+                    fileList.Add(name);
+                }
+
+                files = fileList.ToArray();
+            }
+
+          
+            
             foreach (var filePath in files)
             {
                 bool isLoadFinish = false;
                 string loadText = "";
 
-                var loadPath = Path.Combine(Const.buildPath, Const.tablePath, filePath);
+                var loadPath = Path.Combine(GlobalConfig.buildPath, GlobalConfig.tablePath, filePath);
                 ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
                 {
                     //Logx.Log("table manager : LoadFromFile : load text finish: " + textAsset.text);

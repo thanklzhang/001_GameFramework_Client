@@ -6,30 +6,50 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Battle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/UI/Atlas/BattleUI/BattleUI.spriteatlas" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/UI/Atlas/BattleUI/BattleUI.spriteatlas" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/Trigger/Window/TriggerWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/Trigger/Window/TriggerWindow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BagGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/BagGameData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BaseData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BattleGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/BattleGameData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/GameDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/GameDataManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/GlobaData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/HeroGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/HeroGameData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/MainTaskGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/MainTaskGameData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/Model/Team/TeamGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/Model/Team/TeamGameDataStore.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/UserGameDataStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/UserGameData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BagNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BagNetHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BattleNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BattleNetHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/HeroListNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/HeroListNetHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/LoginNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/LoginNetHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/TeamNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/TeamNetHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LobbyUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LobbyUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomInfoUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomInfoUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomListUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TeamRoomListUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/Map/MapDataGenerateTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/Map/MapDataGenerateTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Const.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/GlobalConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/BattleTriggerPathDefine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/ResDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/ResDefine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/TablePathDefine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/EnumsDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/EnumsDefine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/EventIDs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/EventIDs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/Fix.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixConst.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixMath.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixMathConsts.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixTrans2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixTrans3.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixVec2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixVec3.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/GameValue.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/GlobalObject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/UI/OptionPage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/UI/UIFunction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/AttrInfoHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/AttrInfoHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileOp/FileProtobuf.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Utility/File/FileProtobuf.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileOp/JsonTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Utility/File/JsonTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/Logx.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BaseGameData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BaseGameDataManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/AssetBundle/AssetBundleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/AssetBundle/AssetBundleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/LoadResource/AssetBundleLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/LoadResource/AssetBundleLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/ResourceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/ResourceManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/BaseUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/BaseUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/GameStartup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/GameStartup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/ServerTypeUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/ServerTypeUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/UpdateResource/UpdateResourceModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/UpdateResource/UpdateResourceModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/SceneLoadManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/SceneLoadManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

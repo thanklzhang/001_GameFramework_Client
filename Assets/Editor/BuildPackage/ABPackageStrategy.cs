@@ -19,7 +19,7 @@ public class ABPackageStrategy
 
     public List<AssetBundleBuild> StartParse()
     {
-        var resPath = Const.ABPackageStrategyPath;
+        var resPath = GlobalConfig.ABPackageStrategyPath;
         var strategySO = AssetDatabase.LoadAssetAtPath<ABPackageStrategySO>(resPath);
         foreach (var option in strategySO.strategyList)
         {
@@ -146,7 +146,7 @@ public class ABPackageStrategy
 
             AssetBundleBuild build = new AssetBundleBuild();
 
-            var abName = file.Replace(ext, Const.ABExtName).Replace("\\", "/");
+            var abName = file.Replace(ext, GlobalConfig.ABExtName).Replace("\\", "/");
 
             build.assetBundleName = abName;
             var assetName = file.Replace("\\", "/");
@@ -168,7 +168,7 @@ public class ABPackageStrategy
         AssetBundleBuild build = new AssetBundleBuild();
         var bundleName = path.Replace("\\", "/");
         List<string> assetNameList = new List<string>();
-        build.assetBundleName = bundleName + Const.ABExtName;
+        build.assetBundleName = bundleName + GlobalConfig.ABExtName;
 
         for (int i = 0; i < files.Length; i++)
         {

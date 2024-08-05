@@ -72,7 +72,7 @@ public abstract class BaseUI
         this.laodFinishAction = action;
         this.state = CtrlState.Loading;
 
-        Logx.Log(LogxType.Ctrl, " StartLoad : ctrl : " + this.GetType());
+        Logx.Log(LogxType.UI, " StartLoad : ctrl : " + this.GetType());
 
         //TODO:不光是 UI , 有可能有自定义的资源相关
         ResourceManager.Instance.GetObject<GameObject>(this.uiResId, LoadFinish);

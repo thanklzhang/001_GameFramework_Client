@@ -32,7 +32,7 @@ public class ResourceManager : Singleton<ResourceManager>
             return;
         }
 
-        var fullPath = Const.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
+        var fullPath = GlobalConfig.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
         GetObject(fullPath, callback, isSync);
     }
@@ -79,7 +79,7 @@ public class ResourceManager : Singleton<ResourceManager>
     internal void ReturnObject<T>(int resId, T obj) where T : UnityEngine.Object
     {
         var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
-        var fullPath = Const.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
+        var fullPath = GlobalConfig.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
         ReturnObject(fullPath, obj);
     }
 

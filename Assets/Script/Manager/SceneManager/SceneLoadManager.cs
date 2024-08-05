@@ -61,9 +61,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         // event_OnSceneLoadFinish = finishAction;
         currActiveScenName = sceneName;
 
-        if (Const.isUseAB)
+        if (GlobalConfig.isUseAB)
         {
-            var path = (Const.buildPath + "/" + Const.sceneRootPath + "/" + sceneName + ".unity").ToLower();
+            var path = (GlobalConfig.buildPath + "/" + GlobalConfig.sceneRootPath + "/" + sceneName + ".unity").ToLower();
             var abPath = AssetManager.Instance.GetABPathByAssetPath(path);
             AssetBundleManager.Instance.Load(abPath, (abCache,assetInfo) =>
             {
@@ -107,7 +107,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         //     isLoadFinish = true;
         // }
 
-        if (Const.isUseAB)
+        if (GlobalConfig.isUseAB)
         {
             if (!isExit && unloadReq != null && unloadReq.isDone)
             {
@@ -137,9 +137,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         //场景 Load 之后就会自动调用卸载 所以不用 unload 
         //unloadReq = SceneManager.UnloadSceneAsync(sceneName);
         
-        if (Const.isUseAB)
+        if (GlobalConfig.isUseAB)
         {
-            var path = (Const.buildPath + "/" + Const.sceneRootPath + "/" + sceneName + ".unity").ToLower();
+            var path = (GlobalConfig.buildPath + "/" + GlobalConfig.sceneRootPath + "/" + sceneName + ".unity").ToLower();
             var abPath = AssetManager.Instance.GetABPathByAssetPath(path);
             AssetBundleManager.Instance.Unload(abPath);
         }

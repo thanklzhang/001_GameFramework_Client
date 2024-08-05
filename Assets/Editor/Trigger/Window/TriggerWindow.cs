@@ -204,10 +204,10 @@ namespace BattleTrigger.Editor
             GUILayout.Label("战斗触发器文件");
             if (GUILayout.Button("新建触发器"))
             {
-                var scrPath = Const.buildPath + "/" + "FileTemplate/BattleTriggerTemp/battle_trigger_temp.json";
+                var scrPath = GlobalConfig.buildPath + "/" + "FileTemplate/BattleTriggerTemp/battle_trigger_temp.json";
                 //var desName = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger";
                 //var desName = Application.dataPath.Replace("/001_GameFramework_Client/Assets","");
-                var desName = Const.buildPath + @"\BattleTrigger\new_trigger";
+                var desName = GlobalConfig.buildPath + @"\BattleTrigger\new_trigger";
                 Debug.Log("desName : " + desName);
                 //var desPath = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger.json";
                 var currDesName = desName;

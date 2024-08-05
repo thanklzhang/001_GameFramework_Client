@@ -220,7 +220,7 @@ public class MapDataGenerateTool : MonoBehaviour
 
 
         //var scrPath = Const.buildPath + "/" + "BattleMap/map_info_temp.json";
-        var desName = Const.buildPath + @"\Battle\BattleMap\map_info_temp";
+        var desName = GlobalConfig.buildPath + @"\Battle\BattleMap\map_info_temp";
         //Debug.Log("desName : " + desName);
         //var desPath = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger.json";
         var currDesName = desName;

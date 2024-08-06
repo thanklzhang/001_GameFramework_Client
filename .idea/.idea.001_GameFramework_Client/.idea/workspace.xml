@@ -6,50 +6,136 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Battle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/UI/Atlas/BattleUI/BattleUI.spriteatlas" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/UI/Atlas/BattleUI/BattleUI.spriteatlas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageTool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/Trigger/Window/TriggerWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/Trigger/Window/TriggerWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/Map/MapDataGenerateTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/Map/MapDataGenerateTool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Const.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/GlobalConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/BattleTriggerPathDefine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/ResDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/ResDefine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/DefineDic/TablePathDefine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/EnumsDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/EnumsDefine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/EventIDs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/EventIDs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/Fix.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixConst.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixMath.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixMathConsts.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixTrans2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixTrans3.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixVec2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/FixedPoint/FixVec3.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/GameValue.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/GlobalObject.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/UI/OptionPage.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/UI/UIFunction.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/AttrInfoHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/AttrInfoHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileOp/FileProtobuf.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Utility/File/FileProtobuf.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/FileOp/JsonTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Utility/File/JsonTool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Utility/Logx.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BaseGameData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/BaseGameDataManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/AssetBundle/AssetBundleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/AssetBundle/AssetBundleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/LoadResource/AssetBundleLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/LoadResource/AssetBundleLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/ResourceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/ResourceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/BaseUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/UIFramework/BaseUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/GameStartup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/GameStartup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/ServerTypeUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/ServerTypeUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/UpdateResource/UpdateResourceModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/UpdateResource/UpdateResourceModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/SceneLoadManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/SceneManager/SceneLoadManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/LoginUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/role_002.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/role_002.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_001/22/22.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_001/22/22.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/Materials/n1014.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/Materials/n1014.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_attack.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_born.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_die.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_getup.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_hit.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_hitair.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_hitground.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_idle.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_knockdown.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_knockout.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_push.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_ready.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run_Left.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run_back.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run_right.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_skill.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_stun.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_walk.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/role_002.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/role_002.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10201_desertex01.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10202_ground.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_01.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_02.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_03.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_ground.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10403_ground.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10502_building01.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10502_glass.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_tree.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_bone02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_bone03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_bone06.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone06.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stop.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tent.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tent_01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tent_02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tree02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_wood04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10205_gress01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10205_wood03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10205_wood04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10206_stone01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10401_wood05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10401_wood06.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10401_wood09.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10403_stone06.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10403_wood01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10403_wood02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building09.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building20.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building23.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building24.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building25.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building26.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building27.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_case03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_case05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass08.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_statue01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_stone01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_stone03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_stop.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood06.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Collider_plane.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Stone09.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood06.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood07.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood09.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/bones04.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/bones05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/bones06.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/flag.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/house.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/plantform.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone01.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone02.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone03.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone05.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone08.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/tengtiao.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Shader/MogoTransparentDiffuse.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10201_desertex01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10202_ground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10204_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10204_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10401_ground1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10403_stone01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10502_building01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10502_glass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/scene_ogre_001.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Camera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Camera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Define/ResDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/ResDefine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +163,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/fb/74df2900/PlayerSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5f8a7fbc5006430fa41a872fbc34844b6200/27/f33f9097/AssetBundle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6aa56e57ab504395b555cf3ed50fa53d46ac00/76/d3ebac2a/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7ff4597333a544bc9923788716880fcc572e20/36/e2c31f2e/Void.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8595137a53a742a4afdf0740b33ef8ba24e00/07/efa338cb/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/05/bb0a7071/RectTransform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/08/9bdbfad4/Texture.cs" root0="SKIP_HIGHLIGHTING" />
@@ -113,7 +200,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/CommonUtil/FileOperate.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/Data/LocalDataTools.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.analytics@3.8.1/Tests/Editor/GameStartTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.editorcoroutines@1.0.0/Editor/EditorCoroutineUtility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/EditorGameService/Analytics/EditorGameServiceAnalyticsRegistrant.cs" root0="SKIP_HIGHLIGHTING" />
@@ -402,6 +488,7 @@
       <workItem from="1722760826894" duration="1155000" />
       <workItem from="1722765566573" duration="9449000" />
       <workItem from="1722867663887" duration="2074000" />
+      <workItem from="1722953978408" duration="2683000" />
     </task>
     <servers />
   </component>

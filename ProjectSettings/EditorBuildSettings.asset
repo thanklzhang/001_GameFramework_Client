@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BuildRes/Scenes/LobbyScene.unity
     guid: a20e04de902197a4486919bf0cac7b81
+  - enabled: 1
+    path: Assets/BuildRes/Scenes/Battle_02_Desert.unity
+    guid: bfb31c1077317064ead89ec648c6c705
   m_configObjects: {}

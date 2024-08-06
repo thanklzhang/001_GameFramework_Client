@@ -30,10 +30,10 @@ namespace Battle_Client
         {
             //先这样去 之后增加 scene 读取的接口
             var sceneRoot = GameObject.Find("_scene_root").transform;
-            var sceneObj = sceneRoot.GetChild(0).gameObject;
-            sceneObj.transform.position = new Vector3(0, 0, 0);
+            // var sceneObj = sceneRoot.GetChild(0).gameObject;
+            // sceneObj.transform.position = new Vector3(0, 0, 0);
 
-            var tempCameraTran = sceneObj.transform.Find("Camera");
+            var tempCameraTran = sceneRoot.Find("Camera");
 
             var camera3D = CameraManager.Instance.GetCamera3D();
             camera3D.SetPosition(tempCameraTran.position);

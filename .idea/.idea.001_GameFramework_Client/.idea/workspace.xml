@@ -5,137 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/role_002.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/role_002.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_001/22/22.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_001/22/22.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/Materials/n1014.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/Materials/n1014.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_attack.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_born.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_die.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_getup.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_hit.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_hitair.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_hitground.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_idle.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_knockdown.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_knockout.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_push.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_ready.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run_Left.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run_back.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_run_right.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_skill.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_stun.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/ani/1_walk.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/role_002.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/role_002/role_002/role_002.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10201_desertex01.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10202_ground.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_01.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_02.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_03.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10204_ground.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10403_ground.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10502_building01.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Materials/10502_glass.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_ground05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10203_tree.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_bone02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_bone03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_bone06.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_gress05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_ground04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stone06.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_stop.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tent.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tent_01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tent_02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_tree02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10204_wood04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10205_gress01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10205_wood03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10205_wood04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10206_stone01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10401_wood05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10401_wood06.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10401_wood09.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10403_stone06.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10403_wood01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10403_wood02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building09.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building20.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building23.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building24.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building25.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building26.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_building27.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_case03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_case05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_glass08.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_statue01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_stone01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_stone03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_stop.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/10502_wood06.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Collider_plane.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Stone09.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood06.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood07.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/Wood09.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/bones04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/bones05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/bones06.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/flag.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/house.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/plantform.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone01.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone02.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone05.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/stone08.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Models/tengtiao.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Shader/MogoTransparentDiffuse.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10201_desertex01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10202_ground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10204_01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10204_02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10401_ground1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10403_stone01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10502_building01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/Textures/10502_glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Scene/02_Desert/scene_ogre_001.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Camera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Camera.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Define/ResDefine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/ResDefine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/monster_001.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/monster_001.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/10.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/10.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/Materials/n1079.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/Materials/n1079.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_attack.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_born.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_die.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_getup.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_hit.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_hitair.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_hitground.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_idle.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_knockdown.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_knockout.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_push.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_ready.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run_back.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run_left.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run_right.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_skill.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_stun.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_walk.anim" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -488,7 +381,7 @@
       <workItem from="1722760826894" duration="1155000" />
       <workItem from="1722765566573" duration="9449000" />
       <workItem from="1722867663887" duration="2074000" />
-      <workItem from="1722953978408" duration="2683000" />
+      <workItem from="1722953978408" duration="3286000" />
     </task>
     <servers />
   </component>

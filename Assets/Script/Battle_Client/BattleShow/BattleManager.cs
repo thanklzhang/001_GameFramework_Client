@@ -270,8 +270,10 @@ namespace Battle_Client
             localBattleExecuter = new LocalBattleLogic_Executer();
             localBattleExecuter.Init();
 
+            //根据申请战斗参数 获得后台战斗逻辑
             var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, source, mapInitData, isPureLocal);
 
+            //通过后台战斗逻辑 获得客户端战斗初始化参数（供客户端初始化，如地图加载 模型加载等）
             battleClientArgs = GetBattleClientArgs(battleLogic);
 
             //填充客户端所需组件
@@ -422,9 +424,9 @@ namespace Battle_Client
         {
             var _battle = battle;
             Battle_Client.BattleClient_CreateBattleArgs battleClientArgs = new BattleClient_CreateBattleArgs();
-            battleClientArgs.guid = _battle.Guid;
-            battleClientArgs.configId = _battle.tableId;
-            battleClientArgs.roomId = _battle.RoomId;
+            battleClientArgs.guid = _battle.guid;
+            battleClientArgs.configId = _battle.battleConfigId;
+            battleClientArgs.roomId = _battle.roomId;
 
             battleClientArgs.clientPlayers = new List<BattleClient_ClientPlayer>();
 

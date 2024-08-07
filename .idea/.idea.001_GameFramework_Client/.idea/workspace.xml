@@ -5,30 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/monster_001.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/Prefabs/monster_001.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/10.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/10.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/Materials/n1079.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/Materials/n1079.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_attack.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_born.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_die.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_getup.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_hit.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_hitair.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_hitground.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_idle.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_knockdown.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_knockout.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_push.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_ready.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run_back.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run_left.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_run_right.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_skill.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_stun.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/Models/Role/SourceRes/monster_001/monster_001/ani/10_walk.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/FindPath/AITest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/FindPath/AITest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -381,7 +364,8 @@
       <workItem from="1722760826894" duration="1155000" />
       <workItem from="1722765566573" duration="9449000" />
       <workItem from="1722867663887" duration="2074000" />
-      <workItem from="1722953978408" duration="3286000" />
+      <workItem from="1722953978408" duration="5125000" />
+      <workItem from="1723041578711" duration="9980000" />
     </task>
     <servers />
   </component>

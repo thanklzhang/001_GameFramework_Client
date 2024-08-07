@@ -28,7 +28,7 @@ namespace Battle_Client
 
             Logx.Log(LogxType.Battle,"local execute : CreateLocalBattleLogic");
 
-            //创建战斗逻辑参数
+            //根据申请战斗参数 创建后台战斗初始化参数
             var logicArgs = GetBattleLogicArgs(applyArg, sourceData, mapInitData);
 
             battle = new Battle.Battle();
@@ -43,6 +43,7 @@ namespace Battle_Client
             battle.ConfigManager = new ConfigManager_Proxy();
 
             battle.Init(battleGuid);
+            //加载后台战斗
             battle.Load(logicArgs);
 
             currTargetLogicTime = battle.TimeDelta;
@@ -193,7 +194,7 @@ namespace Battle_Client
             return this.battle;
         }
 
-        //根据战斗服务端发来的战斗参数来开始运行战斗逻辑  在本地跑战斗逻辑 服务端结算
+        //根据申请战斗参数 获得 后台战斗初始化参数
         public Battle.BattleCreateArg GetBattleLogicArgs(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData, MapInitArg mapInitData)
         {
             var battleArg = ApplyBattleUtil.ToBattleArg(applyArg, sourceData, mapInitData);

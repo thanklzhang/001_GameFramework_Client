@@ -89,6 +89,7 @@ namespace Battle_Client
 
             Logx.Log(LogxType.Game, "StartLoad_PureLocal : load map config finish");
 
+            //获得申请战斗参数
             var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
 
             //触发器配置由本地加载
@@ -104,7 +105,7 @@ namespace Battle_Client
             mapInitData.posList = ToVector3s(mapSaveData.posList);
             mapInitData.playerInitPosList = ToVector3s(mapSaveData.playerInitPosList);
 
-            //创建本地战斗数据
+            //设置本地战斗数据
             SetLocalBattle(applyArg, sourceData, mapInitData, true);
 
             //开启本地战斗流程

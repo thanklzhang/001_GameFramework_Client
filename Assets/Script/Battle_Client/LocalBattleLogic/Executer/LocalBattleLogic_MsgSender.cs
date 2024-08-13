@@ -138,7 +138,7 @@ namespace Battle_Client
             {
                 entityGuid = battleEntity.guid
             };
-            BattleManager.Instance.RecvBattleMsg<CreateSkillEffect_RecvMsg>(arg);
+            BattleManager.Instance.RecvBattleMsg<EntityDead_RecvMsg>(arg);
 
 
             // BattleManager.Instance.MsgReceiver.On_EntityDead(battleEntity.guid);

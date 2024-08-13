@@ -137,6 +137,7 @@ public class GameMain : MonoBehaviour
         ResourceManager.Instance.Update(Time.deltaTime);
         UIManager.Instance.Update(Time.deltaTime);
 
+        
         BattleManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
         BattleSkillEffect_Client_Manager.Instance.Update(Time.deltaTime);

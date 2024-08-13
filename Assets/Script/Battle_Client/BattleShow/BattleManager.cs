@@ -534,6 +534,11 @@ namespace Battle_Client
 
         public void Update(float timeDelta)
         {
+            if (this.battleState == BattleState.Null)
+            {
+                return;
+            }
+
             UpdateRecvMsgList();
             localBattleExecuter?.Update(timeDelta);
             
@@ -568,6 +573,7 @@ namespace Battle_Client
            
             localBattleExecuter = null;
             ClearRecvMsg();
+            this.battleState = BattleState.Null;
         }
 
         public int GetCtrlHeroSkillIdByIndex(int index)

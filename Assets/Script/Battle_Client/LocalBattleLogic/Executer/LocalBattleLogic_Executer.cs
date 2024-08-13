@@ -38,13 +38,13 @@ namespace Battle_Client
             _Battle_Log.RegisterLog(new BattleLog_Impl());
 
             battle.PlayerMsgSender = new LocalBattleLogic_MsgSender();
-            battle.PlayerMsgReceiver = new LocalBattleLogic_MsgReceiver(battle);
+            //battle.PlayerMsgReceiver = new LocalBattleLogic_MsgReceiver(battle);
             battle.TriggerReader = new TriggerReader_Impl(battle);
             battle.ConfigManager = new ConfigManager_Proxy();
 
-            battle.Init(battleGuid);
+            battle.Init(battleGuid,logicArgs);
             //加载后台战斗
-            battle.Load(logicArgs);
+            //battle.Load(logicArgs);
 
             currTargetLogicTime = battle.TimeDelta;
 

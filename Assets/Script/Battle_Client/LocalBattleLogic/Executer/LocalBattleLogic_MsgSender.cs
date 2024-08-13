@@ -21,22 +21,45 @@ namespace Battle_Client
 
         public void NotifyAll_PlayerReadyState(int uid, bool isReady)
         {
-            BattleManager.Instance.MsgReceiver.On_PlayerReadyState(uid, isReady);
+            //BattleManager.Instance.MsgReceiver.On_PlayerReadyState(uid, isReady);
+
+
+            var arg = new PlayerReadState_RecvMsg_Arg()
+            {
+                playerIndex = uid,
+                isReady = isReady
+            };
+            BattleManager.Instance.RecvBattleMsg<PlayerReadState_RecvMsg>(arg);
         }
 
         public void NotifyAll_AllPlayerLoadFinish()
         {
-            BattleManager.Instance.MsgReceiver.On_AllPlayerLoadFinish();
+            var arg = new AllPlayerLoadFinish_RecvMsg_Arg()
+            {
+            };
+            BattleManager.Instance.RecvBattleMsg<AllPlayerLoadFinish_RecvMsg>(arg);
+
+            //BattleManager.Instance.MsgReceiver.On_AllPlayerLoadFinish();
         }
 
         public void NotifyAll_AllPlayerPlotEnd(string plotName)
         {
-            BattleManager.Instance.MsgReceiver.On_PlotEnd();
+            //BattleManager.Instance.MsgReceiver.On_PlotEnd();
+
+            var arg = new AllPlayerPlotEnd_RecvMsg_Arg()
+            {
+            };
+            BattleManager.Instance.RecvBattleMsg<AllPlayerPlotEnd_RecvMsg>(arg);
         }
 
         public void NotifyAll_BattleStart()
         {
-            BattleManager.Instance.MsgReceiver.On_StartBattle();
+            // BattleManager.Instance.MsgReceiver.On_StartBattle();
+
+            var arg = new BattleStart_RecvMsg_Arg()
+            {
+            };
+            BattleManager.Instance.RecvBattleMsg<BattleStart_RecvMsg>(arg);
         }
 
         public void NotifyAll_CreateEntities(List<Battle.BattleEntity> logicList)
@@ -82,14 +105,27 @@ namespace Battle_Client
                 entityList.Add(entityArg);
             }
 
-            BattleManager.Instance.MsgReceiver.On_CreateEntities(entityList);
+            var arg = new CreateEntities_RecvMsg_Arg()
+            {
+                entityList = entityList
+            };
+            BattleManager.Instance.RecvBattleMsg<CreateEntities_RecvMsg>(arg);
+
+            // BattleManager.Instance.MsgReceiver.On_CreateEntities(entityList);
         }
 
         public void NotifyAll_CreateSkillEffect(CreateEffectInfo createInfo)
         {
             var pos = new UnityEngine.Vector3(createInfo.createPos.x, createInfo.createPos.y, createInfo.createPos.z);
             //var lastTimeInt = (int)(lastTime * 1000);
-            BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(createInfo);
+
+            var arg = new CreateSkillEffect_RecvMsg_Arg()
+            {
+                createEffectInfo = createInfo
+            };
+            BattleManager.Instance.RecvBattleMsg<CreateSkillEffect_RecvMsg>(arg);
+
+            //BattleManager.Instance.MsgReceiver.On_CreateSkillEffect(createInfo);
         }
 
         public void NotifyAll_EntityAddBuff(int guid, BuffEffect buff)
@@ -98,7 +134,14 @@ namespace Battle_Client
 
         public void NotifyAll_EntityDead(Battle.BattleEntity battleEntity)
         {
-            BattleManager.Instance.MsgReceiver.On_EntityDead(battleEntity.guid);
+            var arg = new EntityDead_RecvMsg_Arg()
+            {
+                entityGuid = battleEntity.guid
+            };
+            BattleManager.Instance.RecvBattleMsg<CreateSkillEffect_RecvMsg>(arg);
+
+
+            // BattleManager.Instance.MsgReceiver.On_EntityDead(battleEntity.guid);
         }
 
         //public void NotifyAll_EntityStartMove(int guid, Vector3 targetPos, Vector3 dir, float finalMoveSpeed)
@@ -117,49 +160,114 @@ namespace Battle_Client
                 unityPosList.Add(resultPos);
             }
 
-            BattleManager.Instance.MsgReceiver.On_EntityStartMoveByPath(guid, unityPosList, finalMoveSpeed);
+            var arg = new EntityStartMoveByPath_RecvMsg_Arg()
+            {
+                Guid = guid,
+                EndPos = unityPosList,
+                MoveSpeed = finalMoveSpeed
+            };
+            BattleManager.Instance.RecvBattleMsg<EntityStartMoveByPath_RecvMsg>(arg);
+
+
+            // BattleManager.Instance.MsgReceiver.On_EntityStartMoveByPath(guid, unityPosList, finalMoveSpeed);
         }
 
         public void NotifyAll_EntityStopMove(int guid, Vector3 position)
         {
             var pos = new UnityEngine.Vector3(position.x, position.y, position.z);
-            BattleManager.Instance.MsgReceiver.On_EntityStopMove(guid, pos);
+            var arg = new EntityStopMove_RecvMsg_Arg()
+            {
+                Guid = guid,
+                EndPos = pos,
+            };
+            BattleManager.Instance.RecvBattleMsg<EntityStopMove_RecvMsg>(arg);
+
+            //BattleManager.Instance.MsgReceiver.On_EntityStopMove(guid, pos);
         }
 
         public void NotifyAll_SyncEntityDir(int guid, Vector3 dir)
         {
             var pos = new UnityEngine.Vector3(dir.x, dir.y, dir.z);
-            BattleManager.Instance.MsgReceiver.On_EntitySyncDir(guid, pos);
+
+            var arg = new SyncEntityDir_RecvMsg_Arg()
+            {
+                guid = guid,
+                dir = pos,
+            };
+            BattleManager.Instance.RecvBattleMsg<SyncEntityDir_RecvMsg>(arg);
+
+            // BattleManager.Instance.MsgReceiver.On_EntitySyncDir(guid, pos);
         }
 
         public void NotifyAll_OnEntityReleaseSkill(int guid, int skillConfigId)
         {
-            BattleManager.Instance.MsgReceiver.On_EntityUseSkill(guid, skillConfigId);
+            var arg = new EntityReleaseSkill_RecvMsg_Arg()
+            {
+                entityGuid = guid,
+                skillConfig = skillConfigId,
+            };
+            BattleManager.Instance.RecvBattleMsg<EntityReleaseSkill_RecvMsg>(arg);
+
+
+            //BattleManager.Instance.MsgReceiver.On_EntityUseSkill(guid, skillConfigId);
         }
 
         public void NotifyAll_PlayPlot(string name)
         {
-            BattleManager.Instance.MsgReceiver.On_PlayPlot(name);
+            var arg = new PlayPlot_RecvMsg_Arg()
+            {
+                plotName = name,
+            };
+            BattleManager.Instance.RecvBattleMsg<PlayPlot_RecvMsg>(arg);
+
+
+            // BattleManager.Instance.MsgReceiver.On_PlayPlot(name);
         }
 
         public void NotifyAll_SetEntitiesShowState(List<int> entityGuids, bool isShow)
         {
-            BattleManager.Instance.MsgReceiver.On_SetEntitiesShowState(entityGuids, isShow);
+            var arg = new SetEntitiesShowState_RecvMsg_Arg()
+            {
+                Guids = entityGuids,
+                isShow = isShow
+            };
+            BattleManager.Instance.RecvBattleMsg<SetEntitiesShowState_RecvMsg>(arg);
+
+
+            // BattleManager.Instance.MsgReceiver.On_SetEntitiesShowState(entityGuids, isShow);
         }
 
         public void NotifyAll_SkillEffectDestroy(int guid)
         {
-            BattleManager.Instance.MsgReceiver.On_DestroySkillEffect(guid);
+            var arg = new SkillEffectDestroy_RecvMsg_Arg()
+            {
+                effectGuid = guid,
+            };
+            BattleManager.Instance.RecvBattleMsg<SkillEffectDestroy_RecvMsg>(arg);
+
+
+            // BattleManager.Instance.MsgReceiver.On_DestroySkillEffect(guid);
         }
 
         public void NotifyAll_SkillEffectStartMove(EffectMoveArg effectMoveArg)
         {
-            var guid = effectMoveArg.effectGuid;
-            var targetPos = new UnityEngine.Vector3(effectMoveArg.targetPos.x, effectMoveArg.targetPos.y,
-                effectMoveArg.targetPos.z);
-            var targetGuid = effectMoveArg.targetGuid;
-            var moveSpeed = effectMoveArg.moveSpeed;
-            BattleManager.Instance.MsgReceiver.On_SkillEffectStartMove(guid, targetPos, targetGuid, moveSpeed);
+            var arg = new SkillEffectStartMove_RecvMsg_Arg()
+            {
+                EffectGuid = effectMoveArg.effectGuid,
+                TargetPos = new UnityEngine.Vector3(effectMoveArg.targetPos.x, effectMoveArg.targetPos.y,
+                    effectMoveArg.targetPos.z),
+                TargetGuid = effectMoveArg.targetGuid,
+                moveSpeed = effectMoveArg.moveSpeed,
+            };
+            BattleManager.Instance.RecvBattleMsg<SkillEffectStartMove_RecvMsg>(arg);
+
+
+            // var guid = effectMoveArg.effectGuid;
+            // var targetPos = new UnityEngine.Vector3(effectMoveArg.targetPos.x, effectMoveArg.targetPos.y,
+            //     effectMoveArg.targetPos.z);
+            // var targetGuid = effectMoveArg.targetGuid;
+            // var moveSpeed = effectMoveArg.moveSpeed;
+            // BattleManager.Instance.MsgReceiver.On_SkillEffectStartMove(guid, targetPos, targetGuid, moveSpeed);
         }
 
         public void NotifyAll_SyncEntityAttr(int guid, Dictionary<Battle.EntityAttrType, float> dic)
@@ -192,7 +300,15 @@ namespace Battle_Client
                 attrs.Add(attr);
             }
 
-            BattleManager.Instance.MsgReceiver.On_SyncEntityAttr(guid, attrs);
+            var arg = new SyncEntityAttr_RecvMsg_Arg()
+            {
+                entityGuid = guid,
+                atts = attrs
+            };
+            BattleManager.Instance.RecvBattleMsg<SyncEntityAttr_RecvMsg>(arg);
+
+
+            // BattleManager.Instance.MsgReceiver.On_SyncEntityAttr(guid, attrs);
         }
 
         public void NotifyAll_SyncEntitySkills(int guid, Dictionary<int, Skill> dic)
@@ -209,16 +325,35 @@ namespace Battle_Client
                 fromEntityGuid = fromEntityGuid
             };
             values.Add(v);
-            BattleManager.Instance.MsgReceiver.On_SyncEntityValue(guid, values);
+
+            var arg = new SyncEntityValue_RecvMsg_Arg()
+            {
+                entityGuid = guid,
+                values = values
+            };
+            BattleManager.Instance.RecvBattleMsg<SyncEntityValue_RecvMsg>(arg);
+
+
+            // BattleManager.Instance.MsgReceiver.On_SyncEntityValue(guid, values);
         }
 
         public void NotifyAll_NotifySkillInfoUpdate(Skill skill)
         {
-            var entityGuid = skill.releser.guid;
-            var skillConfigId = skill.configId;
-            var currCDTime = skill.GetCurrCDTimer();
-            var maxCDTime = skill.GetCDMaxTime();
-            BattleManager.Instance.MsgReceiver.On_SkillInfoUpdate(entityGuid, skillConfigId, currCDTime, maxCDTime);
+            // var entityGuid = skill.releser.guid;
+            // var skillConfigId = skill.configId;
+            // var currCDTime = skill.GetCurrCDTimer();
+            // var maxCDTime = skill.GetCDMaxTime();
+            // BattleManager.Instance.MsgReceiver.On_SkillInfoUpdate(entityGuid, skillConfigId, currCDTime, maxCDTime);
+            //
+
+            var arg = new SkillInfoUpdate_RecvMsg_Arg()
+            {
+                entityGuid = skill.releser.guid,
+                skillConfigId = skill.configId,
+                currCDTime = skill.GetCurrCDTimer(),
+                maxCDTime = skill.GetCDMaxTime()
+            };
+            BattleManager.Instance.RecvBattleMsg<SkillInfoUpdate_RecvMsg>(arg);
         }
 
         public void NotifyAll_NotifyItemInfoUpdate(BattleItem item)
@@ -237,10 +372,22 @@ namespace Battle_Client
                 itemCount = 0;
             }
 
-            var currCDTime = item.skill.GetCurrCDTimer();
-            var maxCDTime = item.skill.GetCDMaxTime();
-            BattleManager.Instance.MsgReceiver.On_ItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
-                currCDTime, maxCDTime);
+            // var currCDTime = item.skill.GetCurrCDTimer();
+            // var maxCDTime = item.skill.GetCDMaxTime();
+            // BattleManager.Instance.MsgReceiver.On_ItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
+            //     currCDTime, maxCDTime);
+
+
+            var arg = new ItemInfoUpdate_RecvMsg_Arg()
+            {
+                entityGuid = entityGuid,
+                configId = itemConfigId,
+                index = itemIndex,
+                count = itemCount,
+                currCDTime = item.skill.GetCurrCDTimer(),
+                maxCDTime = item.skill.GetCDMaxTime()
+            };
+            BattleManager.Instance.RecvBattleMsg<ItemInfoUpdate_RecvMsg>(arg);
         }
 
         public void NotifyAll_NotifySkillItemInfoUpdate(BattleItem item)
@@ -259,17 +406,28 @@ namespace Battle_Client
                 itemCount = 0;
             }
 
-            float currCDTime = 0;
-            float maxCDTime = 0;
-            if (item.skill != null)
+            // float currCDTime = 0;
+            // float maxCDTime = 0;
+            // if (item.skill != null)
+            // {
+            //     currCDTime = item.skill.GetCurrCDTimer();
+            //     maxCDTime = item.skill.GetCDMaxTime();
+            // }
+            //
+            //
+            // BattleManager.Instance.MsgReceiver.On_SkillItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
+            //     currCDTime, maxCDTime);
+
+            var arg = new SkillItemInfoUpdate_RecvMsg_Arg()
             {
-                currCDTime = item.skill.GetCurrCDTimer();
-                maxCDTime = item.skill.GetCDMaxTime();
-            }
-
-
-            BattleManager.Instance.MsgReceiver.On_SkillItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
-                currCDTime, maxCDTime);
+                entityGuid = entityGuid,
+                configId = itemConfigId,
+                index = itemIndex,
+                count = itemCount,
+                currCDTime = item.skill.GetCurrCDTimer(),
+                maxCDTime = item.skill.GetCDMaxTime()
+            };
+            BattleManager.Instance.RecvBattleMsg<SkillItemInfoUpdate_RecvMsg>(arg);
         }
 
 
@@ -287,14 +445,29 @@ namespace Battle_Client
             create.releaserEntityGuid = skill.releser.guid;
             create.targetPos = BattleConvert.ConvertToVector3(skill.targetPos);
             create.targetEntityGuid = skill.targetGuid;
-            BattleManager.Instance.MsgReceiver.On_SkillTrackStart(create);
+
+            // BattleManager.Instance.MsgReceiver.On_SkillTrackStart(create);
+
+
+            var arg = new SkillTrackStart_RecvMsg_Arg()
+            {
+                create = create
+            };
+            BattleManager.Instance.RecvBattleMsg<SkillTrackStart_RecvMsg>(arg);
         }
 
         public void NotifyAll_NotifySkillTrackEnd(Skill skill, int skillTrackId)
         {
             var releaserGuid = skill.releser.guid;
 
-            BattleManager.Instance.MsgReceiver.On_SkillTrackEnd(releaserGuid, skillTrackId);
+            // BattleManager.Instance.MsgReceiver.On_SkillTrackEnd(releaserGuid, skillTrackId);
+
+            var arg = new SkillTrackEnd_RecvMsg_Arg()
+            {
+                entityGuid = releaserGuid,
+                skillTrackConfigId = skillTrackId
+            };
+            BattleManager.Instance.RecvBattleMsg<SkillTrackEnd_RecvMsg>(arg);
         }
 
         // public void NotifyAll_NotifyOpenBox(BattleBox box)
@@ -318,10 +491,17 @@ namespace Battle_Client
                 netBox.selections.Add(netSelection);
             }
 
-            BattleManager.Instance.MsgReceiver.On_OpenBox(netBox);
+            // BattleManager.Instance.MsgReceiver.On_OpenBox(netBox);
+
+            var arg = new OpenBox_RecvMsg_Arg()
+            {
+                box = netBox
+            };
+            BattleManager.Instance.RecvBattleMsg<OpenBox_RecvMsg>(arg);
         }
 
-        public void NotifyAll_NotifyBoxInfoUpdate(int entityGuid,List<Battle.BattleBox> netBoxList)
+
+        public void NotifyAll_NotifyBoxInfoUpdate(int entityGuid, List<Battle.BattleBox> netBoxList)
         {
             List<BattleClientMsg_BattleBox> list = new List<BattleClientMsg_BattleBox>();
             foreach (var netBox in netBoxList)
@@ -338,15 +518,22 @@ namespace Battle_Client
                         selecion.intValueList = netSelection.realityReward.GetIntValueList();
                         box.selections.Add(selecion);
                     }
-
                 }
-                
+
                 list.Add(box);
             }
 
 
-            BattleManager.Instance.MsgReceiver.On_BoxInfoUpdate(entityGuid,list);
+            // BattleManager.Instance.MsgReceiver.On_BoxInfoUpdate(entityGuid, list);
+
+            var arg = new BoxInfoUpdate_RecvMsg_Arg()
+            {
+                entityGuid = entityGuid,
+                boxList = list
+            };
+            BattleManager.Instance.RecvBattleMsg<BoxInfoUpdate_RecvMsg>(arg);
         }
+
 
         public void NotifyAll_NotifySelectBoxReward(int index)
         {

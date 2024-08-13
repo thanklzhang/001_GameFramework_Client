@@ -43,12 +43,12 @@ namespace Battle_Client
             netHandle.SendUseSkill(skillId, targetGuid, targetPos);
         }
 
-        public void Send_UseItem(ItemUseArg itemUseArg)
+        public void Send_UseItem(ItemUseArg_Client itemUseArg)
         {
             throw new NotImplementedException();
         }
 
-        public void Send_UseSkillItem(ItemUseArg itemUseArg)
+        public void Send_UseSkillItem(ItemUseArg_Client itemUseArg)
         {
             throw new NotImplementedException();
         }

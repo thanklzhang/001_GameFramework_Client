@@ -10,7 +10,7 @@ using NetProto;
 using UnityEngine;
 namespace Battle_Client
 {
-    public class ItemUseArg
+    public class ItemUseArg_Client
     {
         public int itemIndex;
         public int releaserGuid;
@@ -25,8 +25,8 @@ namespace Battle_Client
         void Send_ClientPlotEnd();
         void Send_MoveEntity(int guid, UnityEngine.Vector3 targetPos);
         void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos);
-        void Send_UseItem(ItemUseArg itemUseArg );
-        void Send_UseSkillItem(ItemUseArg itemUseArg);
+        void Send_UseItem(ItemUseArg_Client itemUseArg );
+        void Send_UseSkillItem(ItemUseArg_Client itemUseArg);
         void Send_OpenBox();
         void Send_SelectBoxReward(int index);
 

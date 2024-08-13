@@ -56,7 +56,7 @@ namespace Battle_Client
         {
             //填充客户端所需组件
             msgSender = new BattleClient_MsgSender_Remote();
-            msgReceiver = new BattleClient_MsgReceiver_Impl();
+            // msgReceiver = new BattleClient_MsgReceiver_Impl();
 
             //创建战斗数据
             CreateBattleData(battleClientArgs);

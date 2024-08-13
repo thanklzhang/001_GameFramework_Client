@@ -82,6 +82,7 @@ namespace Battle_Client
 
         public void Init()
         {
+            InitBattleRecvMsg();
             this.RegisterListener();
             BattleState = BattleState.Null;
         }
@@ -278,7 +279,7 @@ namespace Battle_Client
 
             //填充客户端所需组件
             msgSender = new BattleClient_MsgSender_Local(battleLogic);
-            msgReceiver = new BattleClient_MsgReceiver_Impl();
+            // msgReceiver = new BattleClient_MsgReceiver_Impl();
 
             ////客户端开启战斗
             //BattleManager.Instance.CreateBattle(battleClientArgs);
@@ -533,12 +534,15 @@ namespace Battle_Client
 
         public void Update(float timeDelta)
         {
+            UpdateRecvMsgList();
             localBattleExecuter?.Update(timeDelta);
             
             CheckInput();
             
             this.skillDirectModule?.Update(timeDelta);
             skillTrackModule?.Update(timeDelta);
+            
+            
         }
 
         public void LateUpdate(float timeDelta)
@@ -563,6 +567,7 @@ namespace Battle_Client
         {
            
             localBattleExecuter = null;
+            ClearRecvMsg();
         }
 
         public int GetCtrlHeroSkillIdByIndex(int index)

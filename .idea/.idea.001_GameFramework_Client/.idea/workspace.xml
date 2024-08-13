@@ -6,11 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgReceiver_Impl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgReceiver_Impl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Local.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Remote.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/BattleClient_MsgSender_Remote.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/IBattleClientMsgSender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/IBattleClientMsgSender.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.BattleMsg.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.BattleMsg.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/FindPath/AITest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/FindPath/AITest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgReceiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Log/Logx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Log/Logx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/BattleSkillOperateUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleSkillOperateUI/BattleSkillOperateUI.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -366,6 +373,12 @@
       <workItem from="1722867663887" duration="2074000" />
       <workItem from="1722953978408" duration="5125000" />
       <workItem from="1723041578711" duration="9980000" />
+      <workItem from="1723127631614" duration="13144000" />
+      <workItem from="1723210757541" duration="9405000" />
+      <workItem from="1723275303440" duration="35284000" />
+      <workItem from="1723368453361" duration="25390000" />
+      <workItem from="1723474376731" duration="11146000" />
+      <workItem from="1723556450569" duration="10351000" />
     </task>
     <servers />
   </component>
@@ -472,12 +485,6 @@
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntity.Item.cs</url>
-          <line>91</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Entity\BattleEntity.UseItem.cs" initialLine="61" containingFunctionPresentation="Method 'UseItem'" />
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/UI/UIShow/BattleUI/BattleSkillOperateUI/SkillItemListPanel.cs</url>
           <line>53</line>
           <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\UI\UIShow\BattleUI\BattleSkillOperateUI\SkillItemListPanel.cs" initialLine="53" containingFunctionPresentation="Method 'RefreshAllUI'" />
@@ -495,6 +502,45 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntityMgr.cs</url>
+          <line>39</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Entity\BattleEntityMgr.cs" initialLine="39" containingFunctionPresentation="Method 'SetPlayerCtrlEntity'">
+            <startOffsets>
+              <option value="1206" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1230" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Player/BattlePlayerEntityCtrl.cs</url>
+          <line>24</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Player\BattlePlayerEntityCtrl.cs" initialLine="24" containingFunctionPresentation="Method 'SetEntity'">
+            <startOffsets>
+              <option value="538" />
+            </startOffsets>
+            <endOffsets>
+              <option value="559" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Player/BattlePlayerEntityCtrl.cs</url>
+          <line>120</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Player\BattlePlayerEntityCtrl.cs" initialLine="115" containingFunctionPresentation="Method 'Update'">
+            <startOffsets>
+              <option value="3481" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3500" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="69" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

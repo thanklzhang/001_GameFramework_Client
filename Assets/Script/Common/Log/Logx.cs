@@ -77,7 +77,7 @@ public class Logx
         { LogxType.Null, new LogxConfigInfo() { enable = true } },
         { LogxType.Game, new LogxConfigInfo() { enable = true } },
         { LogxType.UI, new LogxConfigInfo() { enable = true } },
-        { LogxType.Battle, new LogxConfigInfo() { enable = false } },
+        { LogxType.Battle, new LogxConfigInfo() { enable = true } },
         { LogxType.Net, new LogxConfigInfo() { enable = true } },
 
         { LogxType.Resource, new LogxConfigInfo() { enable = false } },

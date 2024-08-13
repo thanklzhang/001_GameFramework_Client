@@ -53,7 +53,7 @@ namespace Battle_Client.BattleSkillOperate
             var selectSkill = skillListPanel.GetCurrSelect();
 
             //send net
-            ItemUseArg arg = new ItemUseArg()
+            ItemUseArg_Client arg = new ItemUseArg_Client()
             {
                 itemIndex = selectSkill.Index,
                 releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid()

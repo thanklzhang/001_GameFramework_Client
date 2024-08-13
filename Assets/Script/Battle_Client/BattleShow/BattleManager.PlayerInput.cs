@@ -164,7 +164,7 @@ namespace Battle_Client
             }
             else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
             {
-                var arg = new ItemUseArg()
+                var arg = new ItemUseArg_Client()
                 {
                     itemIndex = willUseItemIndex,
                     releaserGuid = localEntity.guid,
@@ -273,7 +273,7 @@ namespace Battle_Client
                         if (willUseItemIndex > 0)
                         {
                             //使用道具
-                            var arg = new ItemUseArg()
+                            var arg = new ItemUseArg_Client()
                             {
                                 itemIndex = willUseItemIndex,
                                 releaserGuid = localEntity.guid,
@@ -332,7 +332,7 @@ namespace Battle_Client
                             if (willUseItemIndex > 0)
                             {
                                 //使用道具
-                                var arg = new ItemUseArg()
+                                var arg = new ItemUseArg_Client()
                                 {
                                     itemIndex = willUseItemIndex,
                                     releaserGuid = localEntity.guid,

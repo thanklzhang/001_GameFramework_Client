@@ -23,7 +23,7 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(guid);
             if (entity != null)
             {
-                entity.SetToward(dir);
+                entity.SetDirTarget(dir);
             }
         }
     }

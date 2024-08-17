@@ -77,7 +77,7 @@ public class Logx
         { LogxType.Null, new LogxConfigInfo() { enable = true } },
         { LogxType.Game, new LogxConfigInfo() { enable = true } },
         { LogxType.UI, new LogxConfigInfo() { enable = true } },
-        { LogxType.Battle, new LogxConfigInfo() { enable = true } },
+        { LogxType.Battle, new LogxConfigInfo() { enable = false } },
         { LogxType.Net, new LogxConfigInfo() { enable = true } },
 
         { LogxType.Resource, new LogxConfigInfo() { enable = false } },
@@ -89,10 +89,14 @@ public class Logx
         {LogxType.AB,new LogxConfigInfo() { enable = false }},
         // {LogxType.Ctrl,new LogxConfigInfo() { enable = true }},
         {LogxType.SceneCtrl,new LogxConfigInfo() { enable = true }},
-        {LogxType.BattleProcess,new LogxConfigInfo() { enable = true }},
+        {LogxType.BattleProcess,new LogxConfigInfo() { enable = false }},
         {LogxType.BattleSkill,new LogxConfigInfo() { enable = true }},
         {LogxType.BattleItem,new LogxConfigInfo() { enable = true }},
-        {LogxType.BattleBox,new LogxConfigInfo() { enable = true }}
+        {LogxType.BattleBox,new LogxConfigInfo() { enable = true }},
+        
+        
+        
+        {LogxType.Zxy,new LogxConfigInfo() { enable = true }}
         
     };
 
@@ -180,10 +184,10 @@ public class Logx
 
     public static void LogError(LogxType type, object obj)
     {
-        if (!IsLogTypeEnable(type))
-        {
-            return;
-        }
+        // if (!IsLogTypeEnable(type))
+        // {
+        //     return;
+        // }
         
         LogError(type.ToString(), obj);
     }

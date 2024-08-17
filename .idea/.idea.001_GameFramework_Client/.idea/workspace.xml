@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/RecvMsg/EntitySyncDir_RecvMsg.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/RecvMsg/EntitySyncDir_RecvMsg.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/FindPath/MapCellView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/FindPath/MapCellView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Log/Logx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Log/Logx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +21,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/ABTest/Assets/MyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1b4ef3a7d18b40c19e89a9442d23530110000/e3/0f79767b/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/22/f0830e8d/StringComparison.cs" root0="SKIP_HIGHLIGHTING" />
@@ -55,10 +70,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/a1/765a12e5/DebugLogHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/aa/b1b53654/Logger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/b0/17e639c4/Resources.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/b3/fe419553/Quaternion.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/bf/e535cd9d/Debug.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/c0/81d53086/LoadSceneMode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/c6/4c126c15/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/ce/cc003314/KeyCode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/de/85ab6d25/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/e8/d1886bb3/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/f8/313dd16a/BlendMode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fc/104c4b76/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fd/7aa5ed25/Transform.cs" root0="SKIP_HIGHLIGHTING" />
@@ -73,6 +91,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/CommonUtil/FileOperate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ai.navigation@1.1.3/Runtime/NavMeshSurface.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.analytics@3.8.1/Tests/Editor/GameStartTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.editorcoroutines@1.0.0/Editor/EditorCoroutineUtility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/EditorGameService/Analytics/EditorGameServiceAnalyticsRegistrant.cs" root0="SKIP_HIGHLIGHTING" />
@@ -101,28 +120,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.30508474&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.14848486",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\94067\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\94067\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../../UnityPackageOutPath/OrderOfChain\001_GameFramework_Client.exe" />
@@ -158,10 +177,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="19700">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="19700" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -369,6 +388,10 @@
       <workItem from="1723368453361" duration="25390000" />
       <workItem from="1723474376731" duration="11146000" />
       <workItem from="1723556450569" duration="11449000" />
+      <workItem from="1723642501093" duration="12986000" />
+      <workItem from="1723735912542" duration="6369000" />
+      <workItem from="1723816856675" duration="10074000" />
+      <workItem from="1723876025283" duration="30767000" />
     </task>
     <servers />
   </component>
@@ -482,55 +505,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs</url>
-          <line>391</line>
+          <line>390</line>
           <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\BattleShow\BattleEntity_Client.cs" initialLine="391" containingFunctionPresentation="Method 'UpdateSkillItemInfo'">
             <startOffsets>
-              <option value="11059" />
+              <option value="10980" />
             </startOffsets>
             <endOffsets>
-              <option value="11088" />
+              <option value="11009" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/BattleEntityMgr.cs</url>
-          <line>39</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Entity\BattleEntityMgr.cs" initialLine="39" containingFunctionPresentation="Method 'SetPlayerCtrlEntity'">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/OperateQueue/Move_OperateNode.cs</url>
+          <line>113</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Entity\OperateQueue\Move_OperateNode.cs" initialLine="105" containingFunctionPresentation="Method 'UpdateMoveToTargetPos'">
             <startOffsets>
-              <option value="1206" />
+              <option value="3344" />
             </startOffsets>
             <endOffsets>
-              <option value="1230" />
+              <option value="3393" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="66" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Player/BattlePlayerEntityCtrl.cs</url>
-          <line>24</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Player\BattlePlayerEntityCtrl.cs" initialLine="24" containingFunctionPresentation="Method 'SetEntity'">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleClientMsg/RecvMsg/EntityStartMoveByPath_RecvMsg.cs</url>
+          <line>29</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\BattleShow\BattleClientMsg\RecvMsg\EntityStartMoveByPath_RecvMsg.cs" initialLine="29" containingFunctionPresentation="Method 'Handle'">
             <startOffsets>
-              <option value="538" />
+              <option value="804" />
             </startOffsets>
             <endOffsets>
-              <option value="559" />
+              <option value="846" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Player/BattlePlayerEntityCtrl.cs</url>
-          <line>120</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Player\BattlePlayerEntityCtrl.cs" initialLine="115" containingFunctionPresentation="Method 'Update'">
-            <startOffsets>
-              <option value="3481" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3500" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="69" />
+          <option name="timeStamp" value="93" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class MapCellView : MonoBehaviour
 {
@@ -58,12 +60,13 @@ public class MapCellView : MonoBehaviour
             {
                 return;
             }
-            var ai = (Battle.PlayerAI)battle.FindAI(entity.guid);
+
+            BaseAI ai = null;//(Battle.PlayerAI)battle.FindAI(entity.guid);
             if (null == ai)
             {
                 return;
             }
-            SetRenderPath(ai?.GetCurrPathPosList());
+            SetRenderPath(entity.GetCurrPathPosList());
             mapNodes = map.mapNodes;
         }
         else

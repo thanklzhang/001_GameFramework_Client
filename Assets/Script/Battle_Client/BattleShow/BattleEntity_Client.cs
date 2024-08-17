@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Battle;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Battle_Client
@@ -147,7 +148,7 @@ namespace Battle_Client
         {
             return itemList;
         }
-        
+
         public List<BattleItemInfo> GetSkillItems()
         {
             return skillItemList;
@@ -187,7 +188,6 @@ namespace Battle_Client
             //this.StartLoadModel();
 
             InitItemList();
-
         }
 
         void InitItemList()
@@ -198,10 +198,9 @@ namespace Battle_Client
                 BattleItemInfo item = new BattleItemInfo();
                 item.index = i;
                 item.ownerGuid = this.guid;
-                
-                
-                itemList.Add(item);
 
+
+                itemList.Add(item);
             }
         }
 
@@ -212,10 +211,12 @@ namespace Battle_Client
             return this.model.transform.Find(modelRootName + "/" + nodeName);
         }
 
-        internal void SetToward(Vector3 dir)
+        internal void SetDirTarget(Vector3 dir)
         {
             this.dirTarget = dir;
         }
+
+       
 
         //开始自行加载(主要用于创建 entity 的时候自己自行异步加载 )
         public void StartSelfLoadModel()
@@ -285,7 +286,7 @@ namespace Battle_Client
 
             return item;
         }
-        
+
         public BattleItemInfo FindSkillItem(int index)
         {
             var item = this.skillItemList.Find((s) => { return s.index == index; });
@@ -306,9 +307,9 @@ namespace Battle_Client
                 skill.configId = skillConfigId;
                 skill.releaserGuid = this.guid;
                 skill.level = 1;
-                
+
                 this.skills.Add(skill);
-                
+
                 skill?.UpdateInfo(currCDTime, maxCDTime);
             }
         }
@@ -339,14 +340,12 @@ namespace Battle_Client
 
             if (item != null)
             {
-                item?.UpdateInfo(configId,count, currCDTime, maxCDTime);
-            
+                item?.UpdateInfo(configId, count, currCDTime, maxCDTime);
+
                 EventDispatcher.Broadcast(EventIDs.OnItemInfoUpdate, item);
             }
-
-          
         }
-        
+
         internal void UpdateSkillItemInfo(int index, int configId, int count, float currCDTime, float maxCDTime)
         {
             Logx.Log(LogxType.BattleItem, "entity (client) : UpdateSkillItemInfo , index : " + index +
@@ -373,7 +372,7 @@ namespace Battle_Client
 
             if (item != null)
             {
-                item?.UpdateInfo(configId,count, currCDTime, maxCDTime);
+                item?.UpdateInfo(configId, count, currCDTime, maxCDTime);
                 if (count <= 0)
                 {
                     this.skillItemList.Remove(item);
@@ -388,12 +387,11 @@ namespace Battle_Client
                 item.maxCDTime = maxCDTime;
                 item.index = index;
                 item.ownerGuid = this.guid;
-                
+
                 this.skillItemList.Add(item);
             }
 
             EventDispatcher.Broadcast(EventIDs.OnSkillItemInfoUpdate, item);
-      
         }
 
 
@@ -450,7 +448,8 @@ namespace Battle_Client
                 this.moveTargetPos = pathList[0];
 
                 //设置朝向
-                dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
+                SetDirTarget((moveTargetPos - this.gameObject.transform.position).normalized);
+                // dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
             }
         }
 
@@ -692,6 +691,24 @@ namespace Battle_Client
         float rotateSpeed = 540;
         int lastDir = 1;
 
+
+        public void SetTrueDir(float deltaTime)
+        {
+            float speed = 30;
+            var subDir = this.gameObject.transform.forward + dirTarget;
+            if (subDir == Vector3.zero)
+            {
+                //矢量和为 0 的情况
+                var filterDir = Quaternion.Euler(0, 1, 0) * this.gameObject.transform.forward;
+                this.gameObject.transform.forward =  Vector3.Lerp(filterDir, dirTarget, speed * deltaTime);
+            }
+            else
+            {
+                this.gameObject.transform.forward =
+                    Vector3.Lerp(this.gameObject.transform.forward, dirTarget, speed * deltaTime);
+            }
+        }
+
         public void Update(float timeDelta)
         {
             //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward.normalized, dirTarget.normalized, timeDelta * 15);
@@ -703,15 +720,19 @@ namespace Battle_Client
 
             //缓慢转向
 
-            if (dirTarget == Vector3.zero)
-            {
-                dirTarget = new Vector3(0, 0, 1);
-            }
+            // if (dirTarget == Vector3.zero)
+            // {
+            //     dirTarget = new Vector3(0, 0, 1);
+            // }
 
-            dirTarget = new Vector3(dirTarget.x, 0, dirTarget.z);
+            SetDirTarget(new Vector3(dirTarget.x, 0, dirTarget.z));
+            // dirTarget = new Vector3(dirTarget.x, 0, dirTarget.z);
 
-            this.gameObject.transform.forward =
-                Vector3.Lerp(this.gameObject.transform.forward, dirTarget, 30 * timeDelta);
+            // this.gameObject.transform.forward = dirTarget;
+            // this.gameObject.transform.forward =
+            //     Vector3.Lerp(this.gameObject.transform.forward, dirTarget, 10 * timeDelta);
+
+            SetTrueDir(timeDelta);
 
 
             //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
@@ -745,7 +766,8 @@ namespace Battle_Client
                         this.moveTargetPos = this.movePosList[this.movePosIndex];
 
                         //设置朝向
-                        dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
+                        SetDirTarget((moveTargetPos - this.gameObject.transform.position).normalized);
+                        // dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
                     }
 
                     //this.gameObject.transform.forward = dirTarget;

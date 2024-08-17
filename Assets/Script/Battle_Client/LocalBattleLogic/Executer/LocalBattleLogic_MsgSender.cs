@@ -348,10 +348,10 @@ namespace Battle_Client
 
             var arg = new SkillInfoUpdate_RecvMsg_Arg()
             {
-                entityGuid = skill.releser.guid,
+                entityGuid = skill.releaser.guid,
                 skillConfigId = skill.configId,
                 currCDTime = skill.GetCurrCDTimer(),
-                maxCDTime = skill.GetCDMaxTime()
+                maxCDTime = skill.GetCDTotalTime()
             };
             BattleManager.Instance.RecvBattleMsg<SkillInfoUpdate_RecvMsg>(arg);
         }
@@ -385,7 +385,7 @@ namespace Battle_Client
                 index = itemIndex,
                 count = itemCount,
                 currCDTime = item.skill.GetCurrCDTimer(),
-                maxCDTime = item.skill.GetCDMaxTime()
+                maxCDTime = item.skill.GetCDTotalTime()
             };
             BattleManager.Instance.RecvBattleMsg<ItemInfoUpdate_RecvMsg>(arg);
         }
@@ -425,7 +425,7 @@ namespace Battle_Client
                 index = itemIndex,
                 count = itemCount,
                 currCDTime = item.skill.GetCurrCDTimer(),
-                maxCDTime = item.skill.GetCDMaxTime()
+                maxCDTime = item.skill.GetCDTotalTime()
             };
             BattleManager.Instance.RecvBattleMsg<SkillItemInfoUpdate_RecvMsg>(arg);
         }
@@ -433,7 +433,10 @@ namespace Battle_Client
 
         public void NotifyAll_NotifyUpdateBuffInfo(BuffEffectInfo buffInfo)
         {
-            BattleManager.Instance.MsgReceiver.On_BuffInfoUpdate(buffInfo);
+            var arg = new BuffInfoUpdate_RecvMsg_Arg();
+            arg.buffInfo = buffInfo;
+                
+            BattleManager.Instance.RecvBattleMsg<BuffInfoUpdate_RecvMsg>(arg);
         }
 
         public void NotifyAll_NotifySkillTrackStart(Skill skill, int skillTrackId)
@@ -442,7 +445,7 @@ namespace Battle_Client
             //var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skill.configId);
             ////var ids = StringConvert.ToIntList(skillConfig.SkillTrackList, ',');
             create.trackConfigId = skillTrackId;
-            create.releaserEntityGuid = skill.releser.guid;
+            create.releaserEntityGuid = skill.releaser.guid;
             create.targetPos = BattleConvert.ConvertToVector3(skill.targetPos);
             create.targetEntityGuid = skill.targetGuid;
 
@@ -458,7 +461,7 @@ namespace Battle_Client
 
         public void NotifyAll_NotifySkillTrackEnd(Skill skill, int skillTrackId)
         {
-            var releaserGuid = skill.releser.guid;
+            var releaserGuid = skill.releaser.guid;
 
             // BattleManager.Instance.MsgReceiver.On_SkillTrackEnd(releaserGuid, skillTrackId);
 

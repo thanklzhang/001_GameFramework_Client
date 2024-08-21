@@ -43,7 +43,7 @@ public class BaseUIShowObj<K>
     {
         if (!isHasInit)
         {
-            Logx.LogWarning(LogxType.UI,"BaseUIShowObj Release :  isHasInit is false , " + this.GetType());
+            //Logx.LogWarning(LogxType.UI,"BaseUIShowObj Release :  isHasInit is false , " + this.GetType());
             return;
         }
 

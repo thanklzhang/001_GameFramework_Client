@@ -853,6 +853,13 @@ namespace Battle_Client
                 }
                 else if ("attack" == aniTriggerName)
                 {
+                    var currStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                    var hash = currStateInfo.shortNameHash;
+           
+                    if (currStateInfo.shortNameHash == hash)
+                    {
+                        animator.Play(hash, 0, 0f);     
+                    }
                     aniAct = 3;
                 }
                 else if ("die" == aniTriggerName)

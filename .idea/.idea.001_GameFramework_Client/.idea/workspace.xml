@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Tool/BaseUIShowObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/Tool/BaseUIShowObj.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,16 +16,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/ABTest/Assets/MyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1b4ef3a7d18b40c19e89a9442d23530110000/e3/0f79767b/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/22/f0830e8d/StringComparison.cs" root0="SKIP_HIGHLIGHTING" />
@@ -75,6 +65,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/f8/313dd16a/BlendMode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fc/104c4b76/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fd/7aa5ed25/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a788eca61267411daecc97d72d1696bc27800/1d/7b182031/AnimatorStateInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a788eca61267411daecc97d72d1696bc27800/44/2af5058f/Animator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b644db5258b34c95ba27d45b6ce848b06b18/10/a1a322dd/WinPlayerPostProcessor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ce12dc1aa9e14b919d8c1321c95d47fb35e718/17/bea91ef5/Dns.cs" root0="SKIP_HIGHLIGHTING" />
@@ -172,10 +163,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="11052">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="11052" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -389,6 +380,7 @@
       <workItem from="1723876025283" duration="40746000" />
       <workItem from="1723970357408" duration="23264000" />
       <workItem from="1724074048638" duration="10274000" />
+      <workItem from="1724343629199" duration="5630000" />
     </task>
     <servers />
   </component>
@@ -538,6 +530,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs</url>
+          <line>860</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\BattleShow\BattleEntity_Client.cs" initialLine="858" containingFunctionPresentation="Method 'PlayAnimation'">
+            <startOffsets>
+              <option value="26721" />
+            </startOffsets>
+            <endOffsets>
+              <option value="26748" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="94" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -6,7 +6,6 @@ Packages
 Temp
 *.csproj
 *.sln
-*.meta
 .vs
 .vscode
 

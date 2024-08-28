@@ -2,10 +2,7 @@
  * generate by tool
 */
 //using System.Collections;
-//using System.Collections.Generic;
-//using System.Linq;
-//using LitJson;
-//using FixedPointy;
+using System.Collections.Generic;
 namespace Table
 {
     
@@ -88,32 +85,32 @@ namespace Table
         /// <summary>
         ///开始的时候触发的效果列表
         /// </summary>
-        private string startEffectList; 
+        private List<int> startEffectList; 
         
         /// <summary>
         ///间隔触发的效果列表
         /// </summary>
-        private string intervalEffectList; 
+        private List<int> intervalEffectList; 
         
         /// <summary>
         ///结束的时候触发的效果列表
         /// </summary>
-        private string endEffectList; 
+        private List<int> endEffectList; 
         
         /// <summary>
         ///增加的属性组(,分割)
         /// </summary>
-        private string addedAttrGroup; 
+        private List<int> addedAttrGroup; 
         
         /// <summary>
         ///增加属性组数值(,|分割 目前只做一个属性之只受一种属性增加)
         /// </summary>
-        private string addedValueGroup; 
+        private List<List<int>> addedValueGroup; 
         
         /// <summary>
         ///结束的时候移除的效果列表
         /// </summary>
-        private string endRemoveEffectList; 
+        private List<int> endRemoveEffectList; 
         
         /// <summary>
         ///效果资源id
@@ -150,17 +147,17 @@ namespace Table
         
         public string LastTimeAddedGroup { get => lastTimeAddedGroup; }     
         
-        public string StartEffectList { get => startEffectList; }     
+        public List<int> StartEffectList { get => startEffectList; }     
         
-        public string IntervalEffectList { get => intervalEffectList; }     
+        public List<int> IntervalEffectList { get => intervalEffectList; }     
         
-        public string EndEffectList { get => endEffectList; }     
+        public List<int> EndEffectList { get => endEffectList; }     
         
-        public string AddedAttrGroup { get => addedAttrGroup; }     
+        public List<int> AddedAttrGroup { get => addedAttrGroup; }     
         
-        public string AddedValueGroup { get => addedValueGroup; }     
+        public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
         
-        public string EndRemoveEffectList { get => endRemoveEffectList; }     
+        public List<int> EndRemoveEffectList { get => endRemoveEffectList; }     
         
         public int EffectResId { get => effectResId; }     
         

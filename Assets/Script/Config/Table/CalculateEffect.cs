@@ -2,10 +2,7 @@
  * generate by tool
 */
 //using System.Collections;
-//using System.Collections.Generic;
-//using System.Linq;
-//using LitJson;
-//using FixedPointy;
+using System.Collections.Generic;
 namespace Table
 {
     
@@ -33,7 +30,7 @@ namespace Table
         /// <summary>
         ///附加伤害组
         /// </summary>
-        private string addedValueGroup; 
+        private List<List<int>> addedValueGroup; 
         
         /// <summary>
         ///最终的效果类型 1 物理伤害 2 法强伤害 
@@ -68,7 +65,7 @@ namespace Table
         
         public int EffectTargetType { get => effectTargetType; }     
         
-        public string AddedValueGroup { get => addedValueGroup; }     
+        public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
         
         public int FinalEffectType { get => finalEffectType; }     
         

@@ -212,6 +212,45 @@ namespace Table
                             {
                                 f.SetValue(currObject, jsonValue.ToString());
                             }
+                            else if (jsonValue.IsBoolean)
+                            {
+                                f.SetValue(currObject, GetBoolFromStr(jsonValue.ToString()));
+                            }
+                            else if (jsonValue.IsArray)
+                            {
+                                if (f.FieldType == typeof(List<int>))
+                                {
+                                    var list = new List<int>();
+                                    for (int i = 0; i < jsonValue.Count; i++)
+                                    {
+                                        var v = (int)jsonValue[i];
+                                        list.Add(v);
+                                    }
+                                    f.SetValue(currObject, list);
+                                }
+                                else if (f.FieldType == typeof(List<string>))
+                                {
+                                    var list = new List<string>();
+                                    for (int i = 0; i < jsonValue.Count; i++)
+                                    {
+                                        var v = jsonValue[i].ToString();
+                                        list.Add(v);
+                                    }
+                                    f.SetValue(currObject, list);
+                                }
+                                else if (f.FieldType == typeof(List<bool>))
+                                {
+                                    var list = new List<bool>();
+                                    for (int i = 0; i < jsonValue.Count; i++)
+                                    {
+                                        var v = jsonValue[i].ToString();
+
+
+                                        list.Add(GetBoolFromStr(v));
+                                    }
+                                    f.SetValue(currObject, list);
+                                }
+                            }
 
 
                         });
@@ -235,6 +274,21 @@ namespace Table
             });
 
             return configDic;
+        }
+
+        bool GetBoolFromStr(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return false;
+            }
+
+            if (str.ToLower().Equals("true") || str.Equals("1"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
 

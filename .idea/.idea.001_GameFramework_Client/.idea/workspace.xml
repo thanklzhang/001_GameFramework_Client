@@ -4,42 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/AreaEffect2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/AreaEffect2.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/Attribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/Attribute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/Battle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/Battle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleBox.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcessWave.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcessWave.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcessWaveNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcessWaveNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleReward.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleReward.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleRewardPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleRewardPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleSkillItemDraw.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleSkillItemDraw.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleTrigger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BuffEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BuffEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/CalculateEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/CalculateEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/CollisionGroupEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/CollisionGroupEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityAttrBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityAttrBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityAttrLevel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityAttrLevel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityAttrStar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityAttrStar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/MainTaskChapter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/MainTaskChapter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/MainTaskStage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/MainTaskStage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/MoveEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/MoveEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/PassiveEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/PassiveEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/ProjectileEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/ProjectileEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/ResourceConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/ResourceConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/Skill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/Skill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/SkillTrack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/SkillTrack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/TeamStage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/TeamStage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/TitleBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/TitleBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" afterDir="false" />
-    </list>
+    <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -414,7 +379,7 @@
       <workItem from="1723970357408" duration="23264000" />
       <workItem from="1724074048638" duration="10274000" />
       <workItem from="1724343629199" duration="5630000" />
-      <workItem from="1724856654732" duration="8419000" />
+      <workItem from="1724856654732" duration="8774000" />
     </task>
     <servers />
   </component>

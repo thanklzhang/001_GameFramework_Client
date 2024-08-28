@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Battle;
 using UnityEngine;
-using UnityEngine.Experimental.XR.Interaction;
+//using UnityEngine.Experimental.XR.Interaction;
 using Rect = Battle.Rect;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;

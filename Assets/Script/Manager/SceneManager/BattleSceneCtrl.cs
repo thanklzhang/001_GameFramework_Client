@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using Battle_Client;
 using Table;
-using Unity.Services.Core;
+//using Unity.Services.Core;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 public enum BattleType

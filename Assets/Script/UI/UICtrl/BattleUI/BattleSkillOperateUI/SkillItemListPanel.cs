@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Newtonsoft.Json.Bson;
+//using Newtonsoft.Json.Bson;
 using Table;
 using UnityEngine;
 using UnityEngine.UI;

@@ -40,7 +40,10 @@ namespace Battle_Client
             battle.PlayerMsgSender = new LocalBattleLogic_MsgSender();
             //battle.PlayerMsgReceiver = new LocalBattleLogic_MsgReceiver(battle);
             battle.TriggerReader = new TriggerReader_Impl(battle);
-            battle.ConfigManager = new ConfigManager_Proxy();
+            // BattleConfigManager.Instance = new ConfigManager_Proxy();
+            
+            //设置战斗数据配置
+            BattleConfigManager.Instance.SetBattleConfig(new LocalBattleLogic_BattleConfig());
 
             battle.Init(battleGuid,logicArgs);
             //加载后台战斗

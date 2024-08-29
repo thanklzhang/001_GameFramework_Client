@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Battle.BattleTrigger.Runtime;
 using UnityEngine;
 namespace Table
 {
@@ -218,41 +219,42 @@ namespace Table
                             }
                             else if (jsonValue.IsArray)
                             {
-                                if (f.FieldType == typeof(List<int>))
+                                //json 数组 => List
+                                var generType = f.FieldType.GetGenericArguments()[0];//获取List<> 的范型类型
+                                Type listType = typeof(List<>).MakeGenericType(generType); // 创建对应类型的List  
+                                IList listInstance = (IList)Activator.CreateInstance(listType); // 创建List的实例  
+                                
+                                for (int i = 0; i < jsonValue.Count; i++)
                                 {
-                                    var list = new List<int>();
-                                    for (int i = 0; i < jsonValue.Count; i++)
-                                    {
-                                        var v = (int)jsonValue[i];
-                                        list.Add(v);
-                                    }
-                                    f.SetValue(currObject, list);
-                                }
-                                else if (f.FieldType == typeof(List<string>))
-                                {
-                                    var list = new List<string>();
-                                    for (int i = 0; i < jsonValue.Count; i++)
-                                    {
-                                        var v = jsonValue[i].ToString();
-                                        list.Add(v);
-                                    }
-                                    f.SetValue(currObject, list);
-                                }
-                                else if (f.FieldType == typeof(List<bool>))
-                                {
-                                    var list = new List<bool>();
-                                    for (int i = 0; i < jsonValue.Count; i++)
-                                    {
-                                        var v = jsonValue[i].ToString();
+                                    var v = jsonValue[i];
 
-
-                                        list.Add(GetBoolFromStr(v));
+                                    var genericArgs = generType.GetGenericArguments();
+                                    if (genericArgs != null && genericArgs.Length > 0)
+                                    {
+                                        //List<List<>> 二维
+                                        var innerType = genericArgs[0];
+                                        Type innerListType = typeof(List<>).MakeGenericType(innerType); // 创建对应类型的List  
+                                        IList innerListInstance = (IList)Activator.CreateInstance(innerListType); // 创建List的实例  
+                                        for (int j = 0; j < v.Count; j++)
+                                        {
+                                            var innerV = v[i];
+                                            
+                                            object convertItem = Convert.ChangeType(innerV, innerListType);
+                                            innerListInstance.Add(convertItem);
+                                            
+                                        }
                                     }
-                                    f.SetValue(currObject, list);
+                                    else
+                                    {
+                                        //List<> 一维
+                                        object convertItem = Convert.ChangeType(v, listType);
+                                        listInstance.Add(convertItem);
+                                    }
                                 }
+                                
+                                f.SetValue(currObject, listInstance);
+                                
                             }
-
-
                         });
 
                         var addMethod = listType.GetMethod("Add");

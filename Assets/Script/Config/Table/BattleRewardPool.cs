@@ -25,17 +25,17 @@ namespace Table
         /// <summary>
         ///固定奖励（一定产出）
         /// </summary>
-        private string fixedRewardList; 
+        private List<int> fixedRewardList; 
         
         /// <summary>
         ///奖励id总列表
         /// </summary>
-        private string rewardIdList; 
+        private List<int> rewardIdList; 
         
         /// <summary>
         ///权重
         /// </summary>
-        private string rewardWeightList; 
+        private List<int> rewardWeightList; 
         
 
         
@@ -43,11 +43,11 @@ namespace Table
         
         public string Describe { get => describe; }     
         
-        public string FixedRewardList { get => fixedRewardList; }     
+        public List<int> FixedRewardList { get => fixedRewardList; }     
         
-        public string RewardIdList { get => rewardIdList; }     
+        public List<int> RewardIdList { get => rewardIdList; }     
         
-        public string RewardWeightList { get => rewardWeightList; }     
+        public List<int> RewardWeightList { get => rewardWeightList; }     
         
 
     } 

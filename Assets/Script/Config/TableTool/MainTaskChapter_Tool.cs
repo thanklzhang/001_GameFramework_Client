@@ -10,10 +10,10 @@ namespace Table
             var chapter = Table.TableManager.Instance.GetById<Table.MainTaskChapter>(chapterId);
             if (chapter != null)
             {
-                var strs = chapter.StageList.Split(',');
-                foreach (var idStr in strs)
+                var stageList = chapter.StageList;
+                foreach (var idStr in stageList)
                 {
-                    var id = int.Parse(idStr);
+                    var id = idStr;
                     list.Add(id);
                 }
             }

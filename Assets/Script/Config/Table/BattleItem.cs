@@ -55,12 +55,12 @@ namespace Table
         /// <summary>
         ///增加的属性组(,分割)
         /// </summary>
-        private string addedAttrGroup; 
+        private List<int> addedAttrGroup; 
         
         /// <summary>
         ///增加属性组数值(,|分割 目前只做一个属性之只受一种属性增加)
         /// </summary>
-        private string addedValueGroup; 
+        private List<List<int>> addedValueGroup; 
         
 
         
@@ -80,9 +80,9 @@ namespace Table
         
         public int SkillId { get => skillId; }     
         
-        public string AddedAttrGroup { get => addedAttrGroup; }     
+        public List<int> AddedAttrGroup { get => addedAttrGroup; }     
         
-        public string AddedValueGroup { get => addedValueGroup; }     
+        public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
         
 
     } 

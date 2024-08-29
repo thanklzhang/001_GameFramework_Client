@@ -25,7 +25,7 @@ namespace Table
         /// <summary>
         ///包含的技能效果id列表(表示这些效果碰撞到的实体只有第一次是正常效果)
         /// </summary>
-        private string skillEffectIds; 
+        private List<int> skillEffectIds; 
         
         /// <summary>
         ///影响效果类型
@@ -35,7 +35,7 @@ namespace Table
         /// <summary>
         ///影响效果参数
         /// </summary>
-        private string affectParam; 
+        private int affectParam; 
         
         /// <summary>
         ///效果资源id
@@ -48,11 +48,11 @@ namespace Table
         
         public string Describe { get => describe; }     
         
-        public string SkillEffectIds { get => skillEffectIds; }     
+        public List<int> SkillEffectIds { get => skillEffectIds; }     
         
         public int AffectType { get => affectType; }     
         
-        public string AffectParam { get => affectParam; }     
+        public int AffectParam { get => affectParam; }     
         
         public int EffectResId { get => effectResId; }     
         

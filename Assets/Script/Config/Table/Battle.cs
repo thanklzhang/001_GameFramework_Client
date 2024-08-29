@@ -40,12 +40,12 @@ namespace Table
         /// <summary>
         ///强制玩家控制某一个实体(|分割玩家 ,分割索引和实体id)
         /// </summary>
-        private string forceUseHeroList; 
+        private List<List<int>> forceUseHeroList; 
         
         /// <summary>
         ///玩家控制实体初始位置(|分割玩家 ,分割坐标轴)(长度作为玩家数最大数目)
         /// </summary>
-        private string initPos; 
+        private List<List<int>> initPos; 
         
         /// <summary>
         ///boss限时击杀时间(*1000 微妙)
@@ -65,7 +65,7 @@ namespace Table
         /// <summary>
         ///队伍信息(| 分割队伍  ,分割玩家索引)
         /// </summary>
-        private string teamInfo; 
+        private List<List<int>> teamInfo; 
         
 
         
@@ -79,9 +79,9 @@ namespace Table
         
         public int TriggerId { get => triggerId; }     
         
-        public string ForceUseHeroList { get => forceUseHeroList; }     
+        public List<List<int>> ForceUseHeroList { get => forceUseHeroList; }     
         
-        public string InitPos { get => initPos; }     
+        public List<List<int>> InitPos { get => initPos; }     
         
         public int BossLimitTime { get => bossLimitTime; }     
         
@@ -89,7 +89,7 @@ namespace Table
         
         public int BattleConfigId { get => battleConfigId; }     
         
-        public string TeamInfo { get => teamInfo; }     
+        public List<List<int>> TeamInfo { get => teamInfo; }     
         
 
     } 

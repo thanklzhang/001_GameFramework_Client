@@ -45,12 +45,12 @@ namespace Table
         /// <summary>
         ///触发效果列表
         /// </summary>
-        private string triggerEffectList; 
+        private List<int> triggerEffectList; 
         
         /// <summary>
         ///触发后移除的效果列表
         /// </summary>
-        private string afterTriggerRemoveEffectList; 
+        private List<int> afterTriggerRemoveEffectList; 
         
         /// <summary>
         ///触发CD(毫秒)
@@ -76,9 +76,9 @@ namespace Table
         
         public int TriggerTargetType { get => triggerTargetType; }     
         
-        public string TriggerEffectList { get => triggerEffectList; }     
+        public List<int> TriggerEffectList { get => triggerEffectList; }     
         
-        public string AfterTriggerRemoveEffectList { get => afterTriggerRemoveEffectList; }     
+        public List<int> AfterTriggerRemoveEffectList { get => afterTriggerRemoveEffectList; }     
         
         public int TriggerCD { get => triggerCD; }     
         

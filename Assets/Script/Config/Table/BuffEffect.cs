@@ -35,7 +35,7 @@ namespace Table
         /// <summary>
         ///异常状态类型列表(,分割)
         /// </summary>
-        private string abnormalStateTypeList; 
+        private List<int> abnormalStateTypeList; 
         
         /// <summary>
         ///持续时间(ms)
@@ -65,7 +65,7 @@ namespace Table
         /// <summary>
         ///满层触发效果列表
         /// </summary>
-        private string maxLayerTriggerEffectList; 
+        private List<int> maxLayerTriggerEffectList; 
         
         /// <summary>
         ///满层触发时施加效果的目标类型
@@ -80,7 +80,7 @@ namespace Table
         /// <summary>
         ///持续时间附加组(ms)
         /// </summary>
-        private string lastTimeAddedGroup; 
+        private List<List<int>> lastTimeAddedGroup; 
         
         /// <summary>
         ///开始的时候触发的效果列表
@@ -127,7 +127,7 @@ namespace Table
         
         public int EffectTargetType { get => effectTargetType; }     
         
-        public string AbnormalStateTypeList { get => abnormalStateTypeList; }     
+        public List<int> AbnormalStateTypeList { get => abnormalStateTypeList; }     
         
         public int LastTime { get => lastTime; }     
         
@@ -139,13 +139,13 @@ namespace Table
         
         public int IsMaxLayerRemove { get => isMaxLayerRemove; }     
         
-        public string MaxLayerTriggerEffectList { get => maxLayerTriggerEffectList; }     
+        public List<int> MaxLayerTriggerEffectList { get => maxLayerTriggerEffectList; }     
         
         public int MaxLayerTriggerTargetType { get => maxLayerTriggerTargetType; }     
         
         public int IntervalTime { get => intervalTime; }     
         
-        public string LastTimeAddedGroup { get => lastTimeAddedGroup; }     
+        public List<List<int>> LastTimeAddedGroup { get => lastTimeAddedGroup; }     
         
         public List<int> StartEffectList { get => startEffectList; }     
         

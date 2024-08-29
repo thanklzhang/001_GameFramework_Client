@@ -45,17 +45,17 @@ namespace Table
         /// <summary>
         ///开始的时候触发的效果列表
         /// </summary>
-        private string startEffectList; 
+        private List<int> startEffectList; 
         
         /// <summary>
         ///结束的时候触发的效果列表
         /// </summary>
-        private string endEffectList; 
+        private List<int> endEffectList; 
         
         /// <summary>
         ///结束的时候移除的效果列表
         /// </summary>
-        private string endRemoveEffectList; 
+        private List<int> endRemoveEffectList; 
         
         /// <summary>
         ///此技能效果结束时是否判定为释放者技能结束
@@ -81,11 +81,11 @@ namespace Table
         
         public int LastTime { get => lastTime; }     
         
-        public string StartEffectList { get => startEffectList; }     
+        public List<int> StartEffectList { get => startEffectList; }     
         
-        public string EndEffectList { get => endEffectList; }     
+        public List<int> EndEffectList { get => endEffectList; }     
         
-        public string EndRemoveEffectList { get => endRemoveEffectList; }     
+        public List<int> EndRemoveEffectList { get => endRemoveEffectList; }     
         
         public int IsThisEndForSkillEnd { get => isThisEndForSkillEnd; }     
         

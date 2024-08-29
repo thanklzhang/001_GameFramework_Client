@@ -23,7 +23,7 @@ public enum SkillDirectorRotateType
 //终端指示器 适用于施法者指示和目标指示
 public class SkillDirectorTerminal : BaseSkillDirector
 {
-    string param;
+    List<int> param;
     //矩形范围参数
     float rectXWidth;
     float rectZWidth;
@@ -34,7 +34,7 @@ public class SkillDirectorTerminal : BaseSkillDirector
 
     SkillDirectorTerminalType skillDirectorType;
 
-    public override void OnInit(int _skillDirectorType, string param)
+    public override void OnInit(int _skillDirectorType, List<int> param)
     {
         this.skillDirectorType = (SkillDirectorTerminalType)_skillDirectorType;
         this.param = param;
@@ -42,17 +42,15 @@ public class SkillDirectorTerminal : BaseSkillDirector
         //parse param
         if (skillDirectorType == SkillDirectorTerminalType.RectangleRotate)
         {
-            var paramsStrs = param.Split(',');
-            this.resourceId = int.Parse(paramsStrs[0]);
-            this.rectXWidth = int.Parse(paramsStrs[1]) / 1000.0f;
-            this.rectZWidth = int.Parse(paramsStrs[2]) / 1000.0f;
-            this.rotateType = (SkillDirectorRotateType)int.Parse(paramsStrs[3]);
+            this.resourceId = param[0];
+            this.rectXWidth = param[1] / 1000.0f;
+            this.rectZWidth = param[2] / 1000.0f;
+            this.rotateType = (SkillDirectorRotateType)param[3];
         }
         else if (skillDirectorType == SkillDirectorTerminalType.Circle)
         {
-            var paramsStrs = param.Split(',');
-            this.resourceId = int.Parse(paramsStrs[0]);
-            this.radius = int.Parse(paramsStrs[1]) / 1000.0f;
+            this.resourceId = param[0];
+            this.radius = param[1] / 1000.0f;
         }
     }
 

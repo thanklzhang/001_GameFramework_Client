@@ -55,12 +55,12 @@ namespace Table
         /// <summary>
         ///触发的效果列表（主动释放产生的效果）
         /// </summary>
-        private string effectList; 
+        private List<int> effectList; 
         
         /// <summary>
         ///获得时候触发的效果列表（获得技能的时候立即生效）
         /// </summary>
-        private string effectListOnGain; 
+        private List<int> effectListOnGain; 
         
         /// <summary>
         ///释放距离(普通攻击不走这个 走属性)
@@ -120,7 +120,7 @@ namespace Table
         /// <summary>
         ///技能释放 投掷物 指示器参数
         /// </summary>
-        private string skillDirectorProjectileParam; 
+        private List<int> skillDirectorProjectileParam; 
         
         /// <summary>
         ///技能释放 释放者 指示类型
@@ -130,7 +130,7 @@ namespace Table
         /// <summary>
         ///释放者指示参数
         /// </summary>
-        private string skillReleaserDirectParam; 
+        private List<int> skillReleaserDirectParam; 
         
         /// <summary>
         ///技能释放 目标 指示类型
@@ -140,12 +140,12 @@ namespace Table
         /// <summary>
         ///目标指示参数
         /// </summary>
-        private string skillTargetDirectParam; 
+        private List<int> skillTargetDirectParam; 
         
         /// <summary>
         ///技能轨迹 Id 列表
         /// </summary>
-        private string skillTrackList; 
+        private List<int> skillTrackList; 
         
 
         
@@ -165,9 +165,9 @@ namespace Table
         
         public int SkillTargetType { get => skillTargetType; }     
         
-        public string EffectList { get => effectList; }     
+        public List<int> EffectList { get => effectList; }     
         
-        public string EffectListOnGain { get => effectListOnGain; }     
+        public List<int> EffectListOnGain { get => effectListOnGain; }     
         
         public int ReleaseRange { get => releaseRange; }     
         
@@ -191,17 +191,17 @@ namespace Table
         
         public int SkillDirectorProjectileType { get => skillDirectorProjectileType; }     
         
-        public string SkillDirectorProjectileParam { get => skillDirectorProjectileParam; }     
+        public List<int> SkillDirectorProjectileParam { get => skillDirectorProjectileParam; }     
         
         public int SkillReleaserDirectType { get => skillReleaserDirectType; }     
         
-        public string SkillReleaserDirectParam { get => skillReleaserDirectParam; }     
+        public List<int> SkillReleaserDirectParam { get => skillReleaserDirectParam; }     
         
         public int SkillTargetDirectType { get => skillTargetDirectType; }     
         
-        public string SkillTargetDirectParam { get => skillTargetDirectParam; }     
+        public List<int> SkillTargetDirectParam { get => skillTargetDirectParam; }     
         
-        public string SkillTrackList { get => skillTrackList; }     
+        public List<int> SkillTrackList { get => skillTrackList; }     
         
 
     } 

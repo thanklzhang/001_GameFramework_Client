@@ -23,12 +23,12 @@ public class BaseSkillDirector
     //不考虑是否加载完成中的'是否显示'变量 , 这里应该是 state(show hide release  这样就可以根据是否加载完进行一些操作)
     private bool isShow = false;
     
-    public void Init(int skillDirectorType, string param)
+    public void Init(int skillDirectorType, List<int> param)
     {
         this.OnInit(skillDirectorType, param);
     }
 
-    public virtual void OnInit(int skillDirectorType, string param)
+    public virtual void OnInit(int skillDirectorType, List<int> param)
     {
 
     }

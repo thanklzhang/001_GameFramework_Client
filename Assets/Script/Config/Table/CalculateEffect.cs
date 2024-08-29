@@ -28,7 +28,7 @@ namespace Table
         private int effectTargetType; 
         
         /// <summary>
-        ///附加伤害组
+        ///附加伤害组（, | ）
         /// </summary>
         private List<List<int>> addedValueGroup; 
         

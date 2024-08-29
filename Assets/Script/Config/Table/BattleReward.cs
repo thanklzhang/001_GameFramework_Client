@@ -35,12 +35,12 @@ namespace Table
         /// <summary>
         ///参数值列表
         /// </summary>
-        private string valueList; 
+        private List<int> valueList; 
         
         /// <summary>
         ///权重
         /// </summary>
-        private string weightList; 
+        private List<int> weightList; 
         
         /// <summary>
         ///获得数目
@@ -62,9 +62,9 @@ namespace Table
         
         public int Type { get => type; }     
         
-        public string ValueList { get => valueList; }     
+        public List<int> ValueList { get => valueList; }     
         
-        public string WeightList { get => weightList; }     
+        public List<int> WeightList { get => weightList; }     
         
         public int Count { get => count; }     
         

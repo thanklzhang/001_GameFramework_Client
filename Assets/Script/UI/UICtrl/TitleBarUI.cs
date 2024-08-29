@@ -72,7 +72,7 @@ public class TitleBarUI : BaseUI
 
     void RefreshOptionList()
     {
-        var resIdList = StringConvert.ToIntList(config.ResList);
+        var resIdList = config.ResList;
 
         showObjList = new List<TitleOptionShowObj>();
         for (int i = 0; i < resIdList.Count; i++)

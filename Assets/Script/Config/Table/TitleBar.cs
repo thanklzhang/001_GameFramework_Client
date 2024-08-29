@@ -35,7 +35,7 @@ namespace Table
         /// <summary>
         ///标题资源列表(，分割)
         /// </summary>
-        private string resList; 
+        private List<int> resList; 
         
         /// <summary>
         ///是否显示关闭按钮
@@ -62,7 +62,7 @@ namespace Table
         
         public string TitleName { get => titleName; }     
         
-        public string ResList { get => resList; }     
+        public List<int> ResList { get => resList; }     
         
         public int IsShowCloseBtn { get => isShowCloseBtn; }     
         

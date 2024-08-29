@@ -183,9 +183,9 @@ namespace Table
 
                     //建造每一个对象
                     object list = Activator.CreateInstance(listType);
-                    List<JsonData> objs = JsonMapper.ToObject<List<JsonData>>(info.json);//{}
+                    List<JsonData> jdList = JsonMapper.ToObject<List<JsonData>>(info.json);//{}
 
-                    objs.ForEach(obj =>
+                    jdList.ForEach(jd =>
                     {
 
                         //定义 对象
@@ -194,63 +194,72 @@ namespace Table
                         var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
                         fields.ToList().ForEach(f =>
                         {
-                            var jsonValue = obj[f.Name];
+                            var jsonValue = jd[f.Name];
 
                             //object value = jsonValue;
                             //if (null == jsonValue)
                             //{
                             //    return;
                             //}
-                            if (jsonValue.IsInt)
+                            
+                            //var generType = f.FieldType.GetGenericArguments();//试着获取List<> 的范型类型
+                            
+                            if (f.FieldType == typeof(int))
                             {
                                 f.SetValue(currObject, (int)jsonValue);
                             }
-                            else if (jsonValue.IsDouble)//f.FieldType.Name.Contains("Fix") && 
+                            else if (f.FieldType == typeof(float))//f.FieldType.Name.Contains("Fix") && 
                             {
                                 f.SetValue(currObject, jsonValue);
                             }
-                            else if (jsonValue.IsString)
+                            else if (f.FieldType == typeof(string))
                             {
                                 f.SetValue(currObject, jsonValue.ToString());
                             }
-                            else if (jsonValue.IsBoolean)
+                            else if (f.FieldType == typeof(bool))
                             {
                                 f.SetValue(currObject, GetBoolFromStr(jsonValue.ToString()));
                             }
-                            else if (jsonValue.IsArray)
+                            else if (f.FieldType.IsGenericType && f.FieldType.GetGenericTypeDefinition() == typeof(List<>))
                             {
                                 //json 数组 => List
                                 var generType = f.FieldType.GetGenericArguments()[0];//获取List<> 的范型类型
                                 Type listType = typeof(List<>).MakeGenericType(generType); // 创建对应类型的List  
                                 IList listInstance = (IList)Activator.CreateInstance(listType); // 创建List的实例  
-                                
-                                for (int i = 0; i < jsonValue.Count; i++)
-                                {
-                                    var v = jsonValue[i];
 
-                                    var genericArgs = generType.GetGenericArguments();
-                                    if (genericArgs != null && genericArgs.Length > 0)
+                                if (jsonValue.IsArray)
+                                {
+                                    for (int i = 0; i < jsonValue.Count; i++)
                                     {
-                                        //List<List<>> 二维
-                                        var innerType = genericArgs[0];
-                                        Type innerListType = typeof(List<>).MakeGenericType(innerType); // 创建对应类型的List  
-                                        IList innerListInstance = (IList)Activator.CreateInstance(innerListType); // 创建List的实例  
-                                        for (int j = 0; j < v.Count; j++)
+                                        var v = jsonValue[i];
+
+                                        var genericArgs = generType.GetGenericArguments();
+                                         if (genericArgs != null && genericArgs.Length > 0) 
                                         {
-                                            var innerV = v[i];
+                                            //List<List<>> 二维
+                                            var innerType = genericArgs[0];
+                                            Type innerListType = typeof(List<>).MakeGenericType(innerType); // 创建对应类型的List  
+                                            IList innerListInstance = (IList)Activator.CreateInstance(innerListType); // 创建List的实例  
+                                            for (int j = 0; j < v.Count; j++)
+                                            {
+                                                var innerV = v[j];
                                             
-                                            object convertItem = Convert.ChangeType(innerV, innerListType);
-                                            innerListInstance.Add(convertItem);
-                                            
+                                                object convertItem = Convert.ChangeType(innerV.ToString(), innerType);
+                                                innerListInstance.Add(convertItem);
+                                            }
+
+                                            listInstance.Add(innerListInstance);
+                                        }
+                                        else
+                                        {
+                                            //List<> 一维
+                                            object convertItem = Convert.ChangeType(v.ToString(), generType);
+                                            listInstance.Add(convertItem);
                                         }
                                     }
-                                    else
-                                    {
-                                        //List<> 一维
-                                        object convertItem = Convert.ChangeType(v, listType);
-                                        listInstance.Add(convertItem);
-                                    }
                                 }
+
+                               
                                 
                                 f.SetValue(currObject, listInstance);
                                 

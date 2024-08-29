@@ -50,7 +50,7 @@ namespace Table
         /// <summary>
         ///技能id列表(这个会换成技能模板)
         /// </summary>
-        private string skillIds; 
+        private List<int> skillIds; 
         
         /// <summary>
         ///等级
@@ -65,7 +65,7 @@ namespace Table
         /// <summary>
         ///技能等级
         /// </summary>
-        private string skillLevels; 
+        private List<int> skillLevels; 
         
         /// <summary>
         ///AI脚本
@@ -103,13 +103,13 @@ namespace Table
         
         public int StarAttrId { get => starAttrId; }     
         
-        public string SkillIds { get => skillIds; }     
+        public List<int> SkillIds { get => skillIds; }     
         
         public int Level { get => level; }     
         
         public int Star { get => star; }     
         
-        public string SkillLevels { get => skillLevels; }     
+        public List<int> SkillLevels { get => skillLevels; }     
         
         public string AiScript { get => aiScript; }     
         

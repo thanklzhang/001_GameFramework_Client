@@ -25,7 +25,7 @@ namespace Table
         /// <summary>
         ///关卡
         /// </summary>
-        private string stageList; 
+        private List<int> stageList; 
         
 
         
@@ -33,7 +33,7 @@ namespace Table
         
         public string Describe { get => describe; }     
         
-        public string StageList { get => stageList; }     
+        public List<int> StageList { get => stageList; }     
         
 
     } 

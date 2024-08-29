@@ -45,7 +45,7 @@ namespace Table
         /// <summary>
         ///影响范围的参数 半径 或者 长宽等  (*1000)
         /// </summary>
-        private string rangeParam; 
+        private List<int> rangeParam; 
         
         /// <summary>
         ///选择实体类型
@@ -55,7 +55,7 @@ namespace Table
         /// <summary>
         ///触发的效果列表（对每个选取单位）
         /// </summary>
-        private string effectList; 
+        private List<int> effectList; 
         
         /// <summary>
         ///效果资源id
@@ -76,11 +76,11 @@ namespace Table
         
         public int StartPosShiftDistance { get => startPosShiftDistance; }     
         
-        public string RangeParam { get => rangeParam; }     
+        public List<int> RangeParam { get => rangeParam; }     
         
         public int SelectEntityType { get => selectEntityType; }     
         
-        public string EffectList { get => effectList; }     
+        public List<int> EffectList { get => effectList; }     
         
         public int EffectResId { get => effectResId; }     
         

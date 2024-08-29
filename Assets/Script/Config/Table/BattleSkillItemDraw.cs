@@ -30,62 +30,62 @@ namespace Table
         /// <summary>
         ///消耗道具id（，分割）
         /// </summary>
-        private string costItemIds; 
+        private List<int> costItemIds; 
         
         /// <summary>
         ///消耗道具数目（，分割）
         /// </summary>
-        private string costItemCounts; 
+        private List<int> costItemCounts; 
         
         /// <summary>
         ///抽取权重（，分割 蓝紫橙红）
         /// </summary>
-        private string drawWeights; 
+        private List<int> drawWeights; 
         
         /// <summary>
         ///抽取值
         /// </summary>
-        private string drawValues; 
+        private List<int> drawValues; 
         
         /// <summary>
         ///蓝色卡池ids（不填则是所有蓝色卡池）
         /// </summary>
-        private string pool1ItemIds; 
+        private List<int> pool1ItemIds; 
         
         /// <summary>
         ///蓝色卡池权重（不填的话就是都相同）
         /// </summary>
-        private string pool1ItemWeights; 
+        private List<int> pool1ItemWeights; 
         
         /// <summary>
         ///紫色卡池ids
         /// </summary>
-        private string pool2ItemIds; 
+        private List<int> pool2ItemIds; 
         
         /// <summary>
         ///紫色卡池权重
         /// </summary>
-        private string pool2ItemWeights; 
+        private List<int> pool2ItemWeights; 
         
         /// <summary>
         ///橙色卡池ids
         /// </summary>
-        private string pool3ItemIds; 
+        private List<int> pool3ItemIds; 
         
         /// <summary>
         ///橙色卡池权重
         /// </summary>
-        private string pool3ItemWeights; 
+        private List<int> pool3ItemWeights; 
         
         /// <summary>
         ///红色卡池ids
         /// </summary>
-        private string pool4ItemIds; 
+        private List<int> pool4ItemIds; 
         
         /// <summary>
         ///红色卡池权重
         /// </summary>
-        private string pool4ItemWeights; 
+        private List<int> pool4ItemWeights; 
         
 
         
@@ -95,29 +95,29 @@ namespace Table
         
         public int IconResId { get => iconResId; }     
         
-        public string CostItemIds { get => costItemIds; }     
+        public List<int> CostItemIds { get => costItemIds; }     
         
-        public string CostItemCounts { get => costItemCounts; }     
+        public List<int> CostItemCounts { get => costItemCounts; }     
         
-        public string DrawWeights { get => drawWeights; }     
+        public List<int> DrawWeights { get => drawWeights; }     
         
-        public string DrawValues { get => drawValues; }     
+        public List<int> DrawValues { get => drawValues; }     
         
-        public string Pool1ItemIds { get => pool1ItemIds; }     
+        public List<int> Pool1ItemIds { get => pool1ItemIds; }     
         
-        public string Pool1ItemWeights { get => pool1ItemWeights; }     
+        public List<int> Pool1ItemWeights { get => pool1ItemWeights; }     
         
-        public string Pool2ItemIds { get => pool2ItemIds; }     
+        public List<int> Pool2ItemIds { get => pool2ItemIds; }     
         
-        public string Pool2ItemWeights { get => pool2ItemWeights; }     
+        public List<int> Pool2ItemWeights { get => pool2ItemWeights; }     
         
-        public string Pool3ItemIds { get => pool3ItemIds; }     
+        public List<int> Pool3ItemIds { get => pool3ItemIds; }     
         
-        public string Pool3ItemWeights { get => pool3ItemWeights; }     
+        public List<int> Pool3ItemWeights { get => pool3ItemWeights; }     
         
-        public string Pool4ItemIds { get => pool4ItemIds; }     
+        public List<int> Pool4ItemIds { get => pool4ItemIds; }     
         
-        public string Pool4ItemWeights { get => pool4ItemWeights; }     
+        public List<int> Pool4ItemWeights { get => pool4ItemWeights; }     
         
 
     } 

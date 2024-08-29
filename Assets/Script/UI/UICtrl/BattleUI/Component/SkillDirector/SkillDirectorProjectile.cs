@@ -14,14 +14,14 @@ public enum SkillDirectorProjectileType
 
 public class SkillDirectorProjectile : BaseSkillDirector
 {
-    string param;
+    List<int> param;
     //矩形参数
     float rectXWidth;
     float rectZWidth;
 
     SkillDirectorProjectileType skillDirectorType;
 
-    public override void OnInit(int _skillDirectorType, string param)
+    public override void OnInit(int _skillDirectorType, List<int> param)
     {
         this.skillDirectorType = (SkillDirectorProjectileType)_skillDirectorType;
         this.param = param;
@@ -29,14 +29,14 @@ public class SkillDirectorProjectile : BaseSkillDirector
         ParseParam(skillDirectorType, param);
     }
 
-    public void ParseParam(SkillDirectorProjectileType skillDirectorType, string param)
+    public void ParseParam(SkillDirectorProjectileType skillDirectorType, List<int> param)
     {
         if (skillDirectorType == SkillDirectorProjectileType.Rectangle)
         {
-            var paramsStrs = param.Split(',');
-            this.resourceId = int.Parse(paramsStrs[0]);
-            this.rectXWidth = int.Parse(paramsStrs[1]) / 1000.0f;
-            this.rectZWidth = int.Parse(paramsStrs[2]) / 1000.0f;
+            var paramsStrs = param;
+            this.resourceId = paramsStrs[0];
+            this.rectXWidth = paramsStrs[1] / 1000.0f;
+            this.rectZWidth = paramsStrs[2] / 1000.0f;
         }
     }
 

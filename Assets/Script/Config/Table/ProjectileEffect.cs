@@ -65,17 +65,17 @@ namespace Table
         /// <summary>
         ///开始的时候触发的效果列表
         /// </summary>
-        private string startEffectList; 
+        private List<int> startEffectList; 
         
         /// <summary>
         ///碰到物体时触发的效果列表
         /// </summary>
-        private string collisionEffectList; 
+        private List<int> collisionEffectList; 
         
         /// <summary>
         ///结束的时候触发的效果列表
         /// </summary>
-        private string endEffectList; 
+        private List<int> endEffectList; 
         
         /// <summary>
         ///碰到物体时触发的对应实体类型(待加)
@@ -129,11 +129,11 @@ namespace Table
         
         public int IsFlyMaxRange { get => isFlyMaxRange; }     
         
-        public string StartEffectList { get => startEffectList; }     
+        public List<int> StartEffectList { get => startEffectList; }     
         
-        public string CollisionEffectList { get => collisionEffectList; }     
+        public List<int> CollisionEffectList { get => collisionEffectList; }     
         
-        public string EndEffectList { get => endEffectList; }     
+        public List<int> EndEffectList { get => endEffectList; }     
         
         public int CollisionEffectEntityType { get => collisionEffectEntityType; }     
         

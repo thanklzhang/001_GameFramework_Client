@@ -30,7 +30,7 @@ namespace Table
         /// <summary>
         ///波次节点
         /// </summary>
-        private string waveNodeIdList; 
+        private List<int> waveNodeIdList; 
         
         /// <summary>
         ///波次类型
@@ -60,7 +60,7 @@ namespace Table
         
         public int WaveIndex { get => waveIndex; }     
         
-        public string WaveNodeIdList { get => waveNodeIdList; }     
+        public List<int> WaveNodeIdList { get => waveNodeIdList; }     
         
         public int WaveType { get => waveType; }     
         

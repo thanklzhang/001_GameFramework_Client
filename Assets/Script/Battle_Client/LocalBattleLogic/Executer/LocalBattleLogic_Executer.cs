@@ -43,7 +43,7 @@ namespace Battle_Client
             // BattleConfigManager.Instance = new ConfigManager_Proxy();
             
             //设置战斗数据配置
-            BattleConfigManager.Instance.SetBattleConfig(new LocalBattleLogic_BattleConfig());
+             BattleConfigManager.Instance.SetBattleConfig(new BattleConfig_Impl());
 
             battle.Init(battleGuid,logicArgs);
             //加载后台战斗

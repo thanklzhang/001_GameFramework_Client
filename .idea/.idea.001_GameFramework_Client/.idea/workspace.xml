@@ -5,9 +5,153 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/BattleConfig_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/BattleConfig_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/AreaEffect_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Attribute_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Attribute_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleBox_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleBox_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleItem_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleItem_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleMap_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleMap_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleProcessWaveNode_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleProcessWaveNode_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleProcessWave_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleProcessWave_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleProcess_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleProcess_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleRewardPool_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleRewardPool_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleReward_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleReward_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleSkillItemDraw_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleSkillItemDraw_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleTrigger_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BattleTrigger_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Battle_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Battle_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BuffEffect_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/BuffEffect_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/CalculateEffect_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/CalculateEffect_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/CollisionGroupEffect_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/CollisionGroupEffect_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityAttrBase_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityAttrBase_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityAttrLevel_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityAttrLevel_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityAttrStar_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityAttrStar_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityInfo_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/EntityInfo_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Item_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Item_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/MainTaskChapter_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/MainTaskChapter_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/MainTaskStage_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/MainTaskStage_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/MoveEffect_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/MoveEffect_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/PassiveEffect_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/PassiveEffect_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/ProjectileEffect_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/ProjectileEffect_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/ResourceConfig_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/ResourceConfig_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/SkillTrack_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/SkillTrack_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Skill_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/Skill_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/TeamStage_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/TeamStage_Impl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/TitleBar_Impl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/TitleBar_Impl.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/AreaEffect_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/AreaEffect_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Attribute_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Attribute_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleBox_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleBox_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleItem_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleItem_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleMap_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleMap_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleProcessWaveNode_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleProcessWaveNode_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleProcessWave_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleProcessWave_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleProcess_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleProcess_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleRewardPool_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleRewardPool_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleReward_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleReward_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleSkillItemDraw_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleSkillItemDraw_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleTrigger_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BattleTrigger_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Battle_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Battle_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BuffEffect_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/BuffEffect_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/CalculateEffect_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/CalculateEffect_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/CollisionGroupEffect_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/CollisionGroupEffect_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityAttrBase_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityAttrBase_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityAttrLevel_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityAttrLevel_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityAttrStar_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityAttrStar_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityInfo_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/EntityInfo_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Item_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Item_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/MainTaskChapter_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/MainTaskChapter_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/MainTaskStage_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/MainTaskStage_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/MoveEffect_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/MoveEffect_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/PassiveEffect_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/PassiveEffect_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/ProjectileEffect_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/ProjectileEffect_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/ResourceConfig_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/ResourceConfig_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/SkillTrack_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/SkillTrack_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Skill_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/Skill_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/TeamStage_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/TeamStage_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/TitleBar_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/TitleBar_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigImpl.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigImpl/LocalBattleLogic_BattleConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigImpl/LocalBattleLogic_BattleConfig.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/JsonDataProxy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/JsonDataProxy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/JsonDataProxy.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/JsonDataProxy.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/LocalBattleLogic_MsgReceiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgReceiver.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/LocalBattleLogic_MsgReceiver.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/LocalBattleLogic_MsgSender.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_MsgSender.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/LocalBattleLogic_MsgSender.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LogImpl.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/LogImpl.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LogImpl/BattleLog_Impl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/LogImpl/BattleLog_Impl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LogImpl/BattleLog_Impl.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/LogImpl/BattleLog_Impl.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/StringTools.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/StringTools/StringConvert.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/StringTools/StringConvert.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/ConfigImpl/ConfigDefineImpl/AreaEffect_Impl.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/TriggerReader_Impl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/TriggerReader_Impl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/TriggerReader_Impl.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/TriggerReader_Impl.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,12 +164,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IAreaEffect.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IBattle.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IBattleMap.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IBattleProcess.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/AreaEffect_Impl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/BattleConfigManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/IBattleConfig.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Config/Table/AreaEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/CommonUtil/FileOperate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/ButtonEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -40,10 +180,10 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2R0tnUyTYg7wj3UKJho5zwb1EyY" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -70,9 +210,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "/Users/zhangxiangyu/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
-      "/Users/zhangxiangyu/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
-      "/Users/zhangxiangyu/.local/share/Symbols/src"
+      "C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\94067\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -86,7 +226,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="/Applications/2022.3.28f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="D:\Software\UnityHubLocation\2022.3.0f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\UnityProjects\KalGame\001_GameFramework_Client -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\UnityProjects\KalGame\001_GameFramework_Client" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -94,7 +234,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="/Applications/2022.3.28f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="D:\Software\UnityHubLocation\2022.3.0f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\UnityProjects\KalGame\001_GameFramework_Client -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\UnityProjects\KalGame\001_GameFramework_Client" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -332,6 +472,7 @@
       <workItem from="1724856654732" duration="8774000" />
       <workItem from="1724938403024" duration="7548000" />
       <workItem from="1724983560960" duration="15611000" />
+      <workItem from="1725029411413" duration="5094000" />
     </task>
     <servers />
   </component>

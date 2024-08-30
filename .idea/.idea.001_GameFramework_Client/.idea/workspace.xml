@@ -6,113 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/AreaEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/AreaEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/Battle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/Battle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcessWave.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleProcessWave.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleReward.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleReward.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleRewardPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleRewardPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleSkillItemDraw.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BattleSkillItemDraw.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/BuffEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/BuffEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/CalculateEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/CalculateEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/CollisionGroupEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/CollisionGroupEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/EntityInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/MainTaskChapter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/MainTaskChapter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/MoveEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/MoveEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/PassiveEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/PassiveEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/ProjectileEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/ProjectileEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/Skill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/Skill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/Table/TitleBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/Table/TitleBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Config/TableTool/MainTaskChapter_Tool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Config/TableTool/MainTaskChapter_Tool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/Component/SkillDirector/BaseSkillDirector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/Component/SkillDirector/BaseSkillDirector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/Component/SkillDirector/SkillDirectorProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/Component/SkillDirector/SkillDirectorProjectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/Component/SkillDirector/SkillDirectorTerminal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/Component/SkillDirector/SkillDirectorTerminal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/TitleBarUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/ABTest/Assets/MyTest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1b4ef3a7d18b40c19e89a9442d23530110000/e3/0f79767b/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/22/f0830e8d/StringComparison.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/2a/b6e30577/Int32.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/63/c6ed8ad7/Boolean.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/04/ee77a731/ReorderableList.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/33/a94266b6/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/39/88976a1a/NPath.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/59/b416b79e/BuildTarget.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/74/a7fb26b9/BuildPipeline.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/8a/ebb74ef8/CustomEditor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/92/af7938ff/BuildTargetGroup.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/cc/3ee5ea2f/BuildPlayerOptions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/ce/5d2976e1/BuildOptions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/dd/3ce40af0/EditorUserBuildSettings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/ea/16ec940f/SerializedObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/f4/c10a728d/NamedBuildTarget.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/505360e321ae48e3804e227a34262e1e946600/fb/74df2900/PlayerSettings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5f8a7fbc5006430fa41a872fbc34844b6200/27/f33f9097/AssetBundle.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6aa56e57ab504395b555cf3ed50fa53d46ac00/5a/a5a63d43/CultureInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6aa56e57ab504395b555cf3ed50fa53d46ac00/76/d3ebac2a/List`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6aa56e57ab504395b555cf3ed50fa53d46ac00/96/7880bf10/Convert.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7ff4597333a544bc9923788716880fcc572e20/36/e2c31f2e/Void.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8595137a53a742a4afdf0740b33ef8ba24e00/07/efa338cb/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/05/bb0a7071/RectTransform.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/08/9bdbfad4/Texture.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/13/06ac774c/SceneManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/1b/9ed32232/Time.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/1e/f30b3717/Scene.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/3a/976ef059/InvokableCall.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/4a/edde65d1/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/51/fc0e95c6/ILogger.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/56/6ad1beb6/LogType.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/56/c62e8e31/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/64/cbae7a29/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/69/735329a5/ILogHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/87/dcb497d0/Color.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/89/d2b137b4/AsyncOperation.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/a1/765a12e5/DebugLogHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/aa/b1b53654/Logger.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/b0/17e639c4/Resources.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/b3/fe419553/Quaternion.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/bf/e535cd9d/Debug.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/c0/81d53086/LoadSceneMode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/c6/4c126c15/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/ce/cc003314/KeyCode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/de/85ab6d25/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/e8/d1886bb3/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/f8/313dd16a/BlendMode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fc/104c4b76/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/fd/7aa5ed25/Transform.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a788eca61267411daecc97d72d1696bc27800/1d/7b182031/AnimatorStateInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a788eca61267411daecc97d72d1696bc27800/44/2af5058f/Animator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b644db5258b34c95ba27d45b6ce848b06b18/10/a1a322dd/WinPlayerPostProcessor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ce12dc1aa9e14b919d8c1321c95d47fb35e718/17/bea91ef5/Dns.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d46c07da13f941aeb9b5f49c78214485173200/26/be4b0b80/Image.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e585f5e2b21741c8a3a65b4f9abfa5e8572e20/02/314780b0/Type.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e585f5e2b21741c8a3a65b4f9abfa5e8572e20/14/aac089a0/List`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e585f5e2b21741c8a3a65b4f9abfa5e8572e20/bf/5fa3c993/Int32.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e585f5e2b21741c8a3a65b4f9abfa5e8572e20/e1/1e520cb9/Convert.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/1f/6ba399f5/Path.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/26/40e97a5d/File.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/3f/ec3640b3/Void.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/69/6f59671d/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IAreaEffect.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IBattle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IBattleMap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/ConfigDefine/IBattleProcess.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/ConfigDefineImpl/AreaEffect_Impl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Config/Table/AreaEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/CommonUtil/FileOperate.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ai.navigation@1.1.3/Runtime/NavMeshSurface.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.analytics@3.8.1/Tests/Editor/GameStartTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.editorcoroutines@1.0.0/Editor/EditorCoroutineUtility.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/EditorGameService/Analytics/EditorGameServiceAnalyticsRegistrant.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/EditorGameService/EditorGameServiceSettingsProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.9.0/Editor/Core/Utils/OrganizationHandler/OrganizationProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.4/Editor/Actions/ActionContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.4/Editor/Actions/TrackAction.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/ButtonEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SelectableEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
@@ -125,6 +40,10 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
   <component name="ProjectId" id="2R0tnUyTYg7wj3UKJho5zwb1EyY" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -134,28 +53,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.14848486&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.14848486",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\94067\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\94067\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/zhangxiangyu/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
+      "/Users/zhangxiangyu/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
+      "/Users/zhangxiangyu/.local/share/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../../UnityPackageOutPath/OrderOfChain\001_GameFramework_Client.exe" />
@@ -166,7 +86,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Software\UnityHubLocation\2022.3.0f1c1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/2022.3.28f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\UnityProjects\KalGame\001_GameFramework_Client -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\UnityProjects\KalGame\001_GameFramework_Client" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -174,7 +94,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Software\UnityHubLocation\2022.3.0f1c1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/2022.3.28f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\UnityProjects\KalGame\001_GameFramework_Client -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\UnityProjects\KalGame\001_GameFramework_Client" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -191,10 +111,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="2116">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="2116" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -411,6 +331,7 @@
       <workItem from="1724343629199" duration="5630000" />
       <workItem from="1724856654732" duration="8774000" />
       <workItem from="1724938403024" duration="7548000" />
+      <workItem from="1724983560960" duration="15611000" />
     </task>
     <servers />
   </component>
@@ -525,66 +446,31 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleEntity_Client.cs</url>
           <line>390</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\BattleShow\BattleEntity_Client.cs" initialLine="391" containingFunctionPresentation="Method 'UpdateSkillItemInfo'">
-            <startOffsets>
-              <option value="10980" />
-            </startOffsets>
-            <endOffsets>
-              <option value="11009" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\BattleShow\BattleEntity_Client.cs" initialLine="391" containingFunctionPresentation="Method 'UpdateSkillItemInfo'" />
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Entity/OperateQueue/Move_OperateNode.cs</url>
           <line>113</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Entity\OperateQueue\Move_OperateNode.cs" initialLine="105" containingFunctionPresentation="Method 'UpdateMoveToTargetPos'">
-            <startOffsets>
-              <option value="3344" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3393" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\Entity\OperateQueue\Move_OperateNode.cs" initialLine="105" containingFunctionPresentation="Method 'UpdateMoveToTargetPos'" />
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/BattleStageLogic/Process/BattleProcessWaveNode.cs</url>
           <line>186</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\BattleStageLogic\Process\BattleProcessWaveNode.cs" initialLine="186" containingFunctionPresentation="Method 'HandleTriggerLogic'">
-            <startOffsets>
-              <option value="5372" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5418" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\BattleCore\BattleStageLogic\Process\BattleProcessWaveNode.cs" initialLine="186" containingFunctionPresentation="Method 'HandleTriggerLogic'" />
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/ApplyBattle/ApplyBattleUtil.cs</url>
-          <line>187</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\ApplyBattle\ApplyBattleUtil.cs" initialLine="187" containingFunctionPresentation="Method 'MakePureLocalApplyBattleArg'">
-            <startOffsets>
-              <option value="6830" />
-            </startOffsets>
-            <endOffsets>
-              <option value="6865" />
-            </endOffsets>
-          </properties>
+          <line>194</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Battle_Client\LocalBattleLogic\BattleLogic\ApplyBattle\ApplyBattleUtil.cs" initialLine="187" containingFunctionPresentation="Method 'MakePureLocalApplyBattleArg'" />
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Script/Framework/Config/TableDataLoader.cs</url>
-          <line>240</line>
-          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Framework\Config\TableDataLoader.cs" initialLine="240" containingFunctionPresentation="Lambda expression inside Method 'LoadAllDataByField'">
-            <startOffsets>
-              <option value="9294" />
-            </startOffsets>
-            <endOffsets>
-              <option value="9374" />
-            </endOffsets>
-          </properties>
+          <line>245</line>
+          <properties documentPath="D:\GameProjects\KalGame\001_GameFramework_Client\Assets\Script\Framework\Config\TableDataLoader.cs" initialLine="240" containingFunctionPresentation="Lambda expression inside Method 'LoadAllDataByField'" />
           <option name="timeStamp" value="104" />
         </line-breakpoint>
       </breakpoints>

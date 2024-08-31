@@ -85,7 +85,7 @@ namespace Config
             else
             {
                 
-                var loadPath = Path.Combine(GlobalConfig.buildPath, GlobalConfig.tablePath);
+                var loadPath = Path.Combine(GlobalConfig.buildPath, GlobalConfig.configPath);
                 files = System.IO.Directory.GetFiles(loadPath, "*.json", SearchOption.AllDirectories);
                 
                 List<string> fileList = new List<string>();
@@ -106,7 +106,7 @@ namespace Config
                 bool isLoadFinish = false;
                 string loadText = "";
 
-                var loadPath = Path.Combine(GlobalConfig.buildPath, GlobalConfig.tablePath, filePath);
+                var loadPath = Path.Combine(GlobalConfig.buildPath, GlobalConfig.configPath, filePath);
                 ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
                 {
                     //Logx.Log("table manager : LoadFromFile : load text finish: " + textAsset.text);

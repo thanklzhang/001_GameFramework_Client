@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle;
+using Config;
 using GameData;
 using NetProto;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -91,7 +92,7 @@ public class TeamRoomInfoUI : BaseUI
         currRoomData = GameDataManager.Instance.TeamData.currEnterRoomData;
 
 
-        var stageConfig = TableManager.Instance.GetById<Table.TeamStage>(currRoomData.teamStageId);
+        var stageConfig = ConfigManager.Instance.GetById<Config.TeamStage>(currRoomData.teamStageId);
         // roomPlayerDataList = roomInfoArgs.playerUIDataList;
         roomName = currRoomData.roomName;
         stageName = stageConfig.Name;
@@ -344,14 +345,14 @@ public class TeamRoomPlayerUIShowObj // : BaseUIShowObj<TeamRoomInfoUIPre>
     {
         this.playerData = data;
         //var teamStageId = this.uiPlayerData.teamStageId;
-        //var currTeamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(teamStageId);
+        //var currTeamStageTb = Config.ConfigManager.Instance.GetById<Config.TeamStage>(teamStageId);
 
         idText.text = "" + playerData.playerInfo.uid;
         nameText.text = playerData.playerInfo.name;
         levelText.text = "" + playerData.playerInfo.level;
 
         var heroConfigId = playerData.selectHeroData.configId;
-        var heroConfig = TableManager.Instance.GetById<Table.EntityInfo>(heroConfigId);
+        var heroConfig = ConfigManager.Instance.GetById<Config.EntityInfo>(heroConfigId);
         heroLevelText.text = "" + playerData.selectHeroData.level;
         heroNameText.text = "" + heroConfig.Name;
 

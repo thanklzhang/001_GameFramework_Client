@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,7 +75,7 @@ public class TeamRoomListUI : BaseUI
     //
     //     TeamRoomInfoUIArgs args = new TeamRoomInfoUIArgs();
     //     args.id = roomData.id;
-    //     //var teamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(roomData.teamStageId);
+    //     //var teamStageTb = Config.ConfigManager.Instance.GetById<Config.TeamStage>(roomData.teamStageId);
     //     args.stageConfigId = roomData.teamStageId;
     //     args.roomName = roomData.roomName;
     //     args.playerUIDataList = new List<TeamRoomPlayerUIData>();
@@ -219,7 +219,7 @@ public class TeamRoomUIShowObj
     {
         this.roomData = data;
         var teamStageId = this.roomData.teamStageId;
-        var currTeamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(teamStageId);
+        var currTeamStageTb = Config.ConfigManager.Instance.GetById<Config.TeamStage>(teamStageId);
 
         idText.text = "" + this.roomData.id;
         roomNameText.text = this.roomData.roomName;
@@ -230,11 +230,11 @@ public class TeamRoomUIShowObj
 
         stageNameText.text = currTeamStageTb.Name;
 
-        var teamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(roomData.teamStageId);
+        var teamStageTb = Config.ConfigManager.Instance.GetById<Config.TeamStage>(roomData.teamStageId);
 
         roomPlayerCountText.text = this.roomData.playerList.Count + "/" + teamStageTb.MaxPlayerCount;
 
-        var stageTb = TableManager.Instance.GetById<Table.TeamStage>(this.roomData.teamStageId);
+        var stageTb = ConfigManager.Instance.GetById<Config.TeamStage>(this.roomData.teamStageId);
         ResourceManager.Instance.GetObject<Sprite>(stageTb.IconResId, (sprite) => { stageBgImg.sprite = sprite; });
         var masterAvatarResId = int.Parse(master.playerInfo.avatarURL);
 

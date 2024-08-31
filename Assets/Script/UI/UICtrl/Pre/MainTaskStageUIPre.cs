@@ -1,7 +1,7 @@
 ﻿// using System;
 // using System.Collections;
 // using System.Collections.Generic;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -53,7 +53,7 @@
 //         var isUnlock = this.uiData.state != MainTaskStageState.Lock;
 //
 //
-//         var currStageTb = Table.TableManager.Instance.GetById<Table.MainTaskStage>(stageId);
+//         var currStageTb = Config.ConfigManager.Instance.GetById<Config.MainTaskStage>(stageId);
 //         nameText.text = "" + currStageTb.Name;
 //
 //         lockGo.SetActive(!isUnlock);
@@ -179,7 +179,7 @@
 //         UIFunc.DoUIList(args);
 //
 //         //当前章节的最大关卡进度名称
-//         //var stageTb = Table.TableManager.Instance.GetById<Table.MainTaskStage>(this.currStageId);
+//         //var stageTb = Config.ConfigManager.Instance.GetById<Config.MainTaskStage>(this.currStageId);
 //         //this.currStageNameText.text = "当前关卡进度：" + stageTb.Name;
 //     }
 //
@@ -190,7 +190,7 @@
 //         {
 //             return;
 //         }
-//         var stageTb = Table.TableManager.Instance.GetById<Table.MainTaskStage>(this.currStageId);
+//         var stageTb = Config.ConfigManager.Instance.GetById<Config.MainTaskStage>(this.currStageId);
 //         this.stageDetailText.text = stageTb.Describe;
 //
 //         this.stageName.text = stageTb.Name;

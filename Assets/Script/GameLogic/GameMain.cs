@@ -7,10 +7,11 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using LitJson;
-using Table;
+
 using GameData;
 using PlotDesigner.Runtime;
 using Battle_Client;
+using Config;
 using UnityEditor;
 
 
@@ -72,8 +73,8 @@ public class GameMain : MonoBehaviour
         // yield break;
 
         //读取表数据 这里可能换成异步操作
-        TableManager.Instance.Init();
-        yield return TableManager.Instance.LoadAllTableData();
+        ConfigManager.Instance.Init();
+        yield return ConfigManager.Instance.LoadAllConfigData();
 
         //全局 UI
         GlobalUIMgr.Instance.Init();

@@ -10,7 +10,7 @@ using Battle.BattleTrigger.Runtime;
 using Battle_Client;
 using GameData;
 using NetProto;
-using Table;
+
 using UnityEditor;
 using UnityEngine;
 
@@ -306,8 +306,8 @@ namespace Battle_Client
 
         public IEnumerator LoadMapData(int battleConfigId, Action<MapSaveData> finishCallback)
         {
-            var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
-            var mapConfig = Table.TableManager.Instance.GetById<Table.BattleMap>(battleConfigTb.MapId);
+            var battleConfigTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
+            var mapConfig = Config.ConfigManager.Instance.GetById<Config.BattleMap>(battleConfigTb.MapId);
 
             var isFinish = false;
             // var mapList = new List<List<int>>();
@@ -339,8 +339,8 @@ namespace Battle_Client
             // TriggerSourceResData source = new TriggerSourceResData();
             // source.dataStrList = new List<string>();
             //
-            // var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
-            // var triggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleConfigTb.TriggerId);
+            // var battleConfigTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
+            // var triggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleConfigTb.TriggerId);
             //
             // //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
             // var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);

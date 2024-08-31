@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -66,7 +66,7 @@ public class BattleBuffUIShowObj : BaseUIShowObj<BattleBuffUI>
             canUseMaskGo.SetActive(true);
         }
 
-        var buffConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(this.uiData.configId);
+        var buffConfig = Config.ConfigManager.Instance.GetById<Config.BuffEffect>(this.uiData.configId);
 //        Logx.Log("zxy : buffConfig.IconResId : " + buffConfig.IconResId);
         ResourceManager.Instance.GetObject<Sprite>(buffConfig.IconResId, (sprite) =>
         {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameData;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,7 +45,7 @@ public class HeroAvatar
         this.data = uiData;
 
         //avatarImg
-        var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.data.configId);
+        var config = Config.ConfigManager.Instance.GetById<Config.EntityInfo>(this.data.configId);
         levelText.text = "" + this.data.level;
         
         ResourceManager.Instance.GetObject<Sprite>(config.AvatarResId, (sprite) =>

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,7 +66,7 @@ public class BattleStageInfoUI
 
     // public void StartBossLimitCountdown()
     // {
-    //     var battleConfig = TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+    //     var battleConfig = ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
     //     currTimer = battleConfig.BossLimitTime / 1000.0f;
     //     isHasBossCountdown = true;
     //
@@ -77,7 +77,7 @@ public class BattleStageInfoUI
 
     void RefreshInfo()
     {
-        var battleConfig = TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+        var battleConfig = ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
 
         stageNameText.text = battleConfig.Name;
 

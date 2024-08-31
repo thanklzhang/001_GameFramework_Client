@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class BattleMap_Impl : IBattleMap
     {
-        private Table.BattleMap config;
+        private Config.BattleMap config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.BattleMap>(id);
+            config = ConfigManager.Instance.GetById<Config.BattleMap>(id);
         }
         
         public int Id => config.Id;

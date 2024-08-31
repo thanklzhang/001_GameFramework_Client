@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class TitleBar_Impl : ITitleBar
     {
-        private Table.TitleBar config;
+        private Config.TitleBar config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.TitleBar>(id);
+            config = ConfigManager.Instance.GetById<Config.TitleBar>(id);
         }
         
         public int Id => config.Id;

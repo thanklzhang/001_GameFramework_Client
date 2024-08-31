@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class BattleReward_Impl : IBattleReward
     {
-        private Table.BattleReward config;
+        private Config.BattleReward config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.BattleReward>(id);
+            config = ConfigManager.Instance.GetById<Config.BattleReward>(id);
         }
         
         public int Id => config.Id;

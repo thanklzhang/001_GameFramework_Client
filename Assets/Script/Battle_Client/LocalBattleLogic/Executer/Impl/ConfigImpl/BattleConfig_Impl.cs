@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Table;
+using Config;
+
 
 namespace Battle
 {
@@ -16,12 +17,12 @@ namespace Battle
 
         public static string NameSpaceName = "Battle";
 
-        public void LoadAllTableData(string path)
+        public void Load()
         {
-            var tableManager = TableManager.Instance;
-            //tableManager.LoadAllTableData(path);
+            var configManager = ConfigManager.Instance;
+            //ConfigManager.LoadAllTableData(path);
             typeToListConfigDic = new Dictionary<Type, IList>();
-            foreach (var item in tableManager.typeToListConfigDic)
+            foreach (var item in configManager.typeToListConfigDic)
             {
                 var type = item.Key;
                 var list = item.Value;
@@ -52,19 +53,15 @@ namespace Battle
                 List<IConfig> newList = new List<IConfig>();
                 foreach (var data in list)
                 {
-                    var srcData = data as Table.BaseTable;
+                    var srcData = data as Config.BaseConfig;
                     var newObj = Activator.CreateInstance(implType) as IConfig;
-                    // newObj.Init(srcData.Id);
+                    newObj.Init(srcData.Id);
                     newList.Add(newObj);
                 }
 
                 typeToDicConfigDic.Add(typeInBattle, newList.ToDictionary((v) => { return v.Id; }));
                 typeToListConfigDic.Add(typeInBattle, newList);
             }
-        }
-
-        public void XX()
-        {
         }
 
         public T GetById<T>(int id) where T : IConfig
@@ -111,6 +108,11 @@ namespace Battle
                 });
             }
             return null;
+        }
+        
+        public void Release()
+        {
+            
         }
     }
 }

@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class BuffEffect_Impl : IBuffEffect
     {
-        private Table.BuffEffect config;
+        private Config.BuffEffect config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.BuffEffect>(id);
+            config = ConfigManager.Instance.GetById<Config.BuffEffect>(id);
         }
         
         public int Id => config.Id;

@@ -3,8 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client.BattleSkillOperate;
+using Config;
 using GameData;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 

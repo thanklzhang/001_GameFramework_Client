@@ -2,7 +2,6 @@
 using Battle_Client;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using Table;
 using BattleItem = Battle.BattleItem;
 using BuffEffect = Battle.BuffEffect;
 using Skill = Battle.Skill;
@@ -442,7 +441,7 @@ namespace Battle_Client
         public void NotifyAll_NotifySkillTrackStart(Skill skill, int skillTrackId)
         {
             BattleClientMsg_CreateSkillTrack create = new BattleClientMsg_CreateSkillTrack();
-            //var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skill.configId);
+            //var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skill.configId);
             ////var ids = StringConvert.ToIntList(skillConfig.SkillTrackList, ',');
             create.trackConfigId = skillTrackId;
             create.releaserEntityGuid = skill.releaser.guid;

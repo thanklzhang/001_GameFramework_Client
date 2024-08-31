@@ -7,7 +7,7 @@
 //using UnityEngine.UI;
 //using UnityEngine.SceneManagement;
 //using LitJson;
-//using Table;
+//
 //using GameData;
 //using PlotDesigner.Runtime;
 //using Battle_Client;
@@ -74,8 +74,8 @@
 
 
 //        ////读取表数据
-//        //TableManager.Instance.Init();
-//        //yield return TableManager.Instance.LoadAllTableData();
+//        //ConfigManager.Instance.Init();
+//        //yield return ConfigManager.Instance.LoadAllTableData();
 
 //        //GameDataManager.Instance.Init();
 //        ////////////ServiceManager.Instance.Init();

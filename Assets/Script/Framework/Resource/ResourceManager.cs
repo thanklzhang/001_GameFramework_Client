@@ -25,7 +25,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public void GetObject<T>(int resId, Action<T> callback, bool isSync = false) where T : UnityEngine.Object
     {
-        var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
+        var resTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(resId);
         if (null == resTb)
         {
             callback?.Invoke(null);
@@ -78,7 +78,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
     internal void ReturnObject<T>(int resId, T obj) where T : UnityEngine.Object
     {
-        var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
+        var resTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(resId);
         var fullPath = GlobalConfig.buildPath + "/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
         ReturnObject(fullPath, obj);
     }
@@ -130,7 +130,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public T GetObjectByConfiIdEditor<T>(int configId) where T : UnityEngine.Object
     {
-        var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(configId);
+        var resTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(configId);
         var path = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
         return GetObjectByEditor<T>(path);
     }

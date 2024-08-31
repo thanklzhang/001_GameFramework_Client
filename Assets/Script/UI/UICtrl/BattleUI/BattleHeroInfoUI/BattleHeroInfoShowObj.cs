@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -50,7 +50,7 @@ public class BattleHeroInfoShowObj : BaseUIShowObj<BattleHeroInfoUICtrl>
     {
         if (this.uiData != null)
         {
-            var heroConfig = TableManager.Instance.GetById<EntityInfo>(this.uiData.heroConfigId);
+            var heroConfig = ConfigManager.Instance.GetById<EntityInfo>(this.uiData.heroConfigId);
             this.nameText.text = heroConfig.Name;
             var progress = 0.0f;
             if (this.uiData.maxHealth != 0)

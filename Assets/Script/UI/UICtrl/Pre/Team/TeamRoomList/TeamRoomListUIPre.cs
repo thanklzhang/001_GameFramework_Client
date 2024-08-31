@@ -1,7 +1,7 @@
 ﻿// using System;
 // using System.Collections;
 // using System.Collections.Generic;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -138,7 +138,7 @@
 //     {
 //         this.uiData = (TeamRoomUIData)data;
 //         var teamStageId = this.uiData.teamStageId;
-//         var currTeamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(teamStageId);
+//         var currTeamStageTb = Config.ConfigManager.Instance.GetById<Config.TeamStage>(teamStageId);
 //
 //         idText.text = "" + uiData.id;
 //         roomNameText.text = uiData.roomName;
@@ -148,7 +148,7 @@
 //         stageNameText.text = currTeamStageTb.Name;
 //         roomPlayerCountText.text = uiData.currPlayerCount + "/" + uiData.totalPlayerCount;
 //         
-//         var stageTb = TableManager.Instance.GetById<Table.TeamStage>(this.uiData.teamStageId);
+//         var stageTb = ConfigManager.Instance.GetById<Config.TeamStage>(this.uiData.teamStageId);
 //         ResourceManager.Instance.GetObject<Sprite>(stageTb.IconResId,(sprite) =>
 //         {
 //             stageBgImg.sprite = sprite;

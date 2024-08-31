@@ -1,7 +1,7 @@
 ﻿// using System;
 // using System.Collections;
 // using System.Collections.Generic;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -154,7 +154,7 @@
 //         uiArgs.currChapterId = mainTaskDataStore.GetCurrChapterId();
 //         uiArgs.chapterUIDataList = new List<MainTaskChapterUIData>();
 //
-//         var allTbData = TableManager.Instance.GetList<Table.MainTaskChapter>();
+//         var allTbData = ConfigManager.Instance.GetList<Config.MainTaskChapter>();
 //
 //         foreach (var tbData in allTbData)
 //         {

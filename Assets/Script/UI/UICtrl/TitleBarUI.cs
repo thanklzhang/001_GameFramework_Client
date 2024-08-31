@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Config;
 using GameData;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,7 +39,7 @@ public class TitleBarUI : BaseUI
         this.closeBtn.onClick.AddListener(() => { clickCloseBtnAction?.Invoke(); });
     }
 
-    private Table.TitleBar config;
+    private Config.TitleBar config;
 
     protected override void OnOpen(UICtrlArgs args)
     {
@@ -46,7 +47,7 @@ public class TitleBarUI : BaseUI
         TitleBarUIArgs titleBarListArgs = (TitleBarUIArgs)args;
 
         var titleBarId = titleBarListArgs.titleBarId;
-        config = TableManager.Instance.GetById<Table.TitleBar>(titleBarId);
+        config = ConfigManager.Instance.GetById<Config.TitleBar>(titleBarId);
 
         //资源
         this.RefreshOptionList();
@@ -162,7 +163,7 @@ public class TitleOptionShowObj
         // this.uiData = (TitleOptionUIData)data;
         //
         // var configId = this.uiData.configId;
-        var itemTb = TableManager.Instance.GetById<Table.Item>(itemId);
+        var itemTb = ConfigManager.Instance.GetById<Config.Item>(itemId);
         nameText.text = itemTb.Name;
         countText.text = "" + count;
 

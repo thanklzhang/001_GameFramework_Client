@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class SkillTrack_Impl : ISkillTrack
     {
-        private Table.SkillTrack config;
+        private Config.SkillTrack config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.SkillTrack>(id);
+            config = ConfigManager.Instance.GetById<Config.SkillTrack>(id);
         }
         
         public int Id => config.Id;

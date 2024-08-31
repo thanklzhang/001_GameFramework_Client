@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class BattleSkillItemDraw_Impl : IBattleSkillItemDraw
     {
-        private Table.BattleSkillItemDraw config;
+        private Config.BattleSkillItemDraw config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.BattleSkillItemDraw>(id);
+            config = ConfigManager.Instance.GetById<Config.BattleSkillItemDraw>(id);
         }
         
         public int Id => config.Id;

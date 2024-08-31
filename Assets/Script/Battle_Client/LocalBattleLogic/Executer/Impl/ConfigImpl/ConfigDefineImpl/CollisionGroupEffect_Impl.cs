@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class CollisionGroupEffect_Impl : ICollisionGroupEffect
     {
-        private Table.CollisionGroupEffect config;
+        private Config.CollisionGroupEffect config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.CollisionGroupEffect>(id);
+            config = ConfigManager.Instance.GetById<Config.CollisionGroupEffect>(id);
         }
         
         public int Id => config.Id;

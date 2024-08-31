@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Table;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -47,7 +47,7 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 
         //技能图标
         var skillId = this.uiData.skillId;
-        var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+        var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
         ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
     }
 

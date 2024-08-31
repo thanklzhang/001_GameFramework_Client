@@ -175,13 +175,13 @@ namespace Battle_Client
             tempModel = gameObject.transform.Find("Cube").gameObject;
 
             // get path
-            var heroConfig = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.configId);
+            var heroConfig = Config.ConfigManager.Instance.GetById<Config.EntityInfo>(this.configId);
 
-            var heroResTable = Table.TableManager.Instance.GetById<Table.ResourceConfig>(heroConfig.ModelId);
+            var heroResConfig = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(heroConfig.ModelId);
             //临时组路径 之后会打进 ab 包
-            path = "Assets/BuildRes/" + heroResTable.Path + "/" + heroResTable.Name + "." + heroResTable.Ext;
+            path = "Assets/BuildRes/" + heroResConfig.Path + "/" + heroResConfig.Name + "." + heroResConfig.Ext;
 
-            this.gameObject.name = heroResTable.Name;
+            this.gameObject.name = heroResConfig.Name;
 
             isFinishLoad = false;
 
@@ -500,7 +500,7 @@ namespace Battle_Client
 
         internal void ReleaseSkill(int skillConfigId)
         {
-            var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillConfigId);
+            var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillConfigId);
             var normalAttackSkill = FindNormalAttackSkill();
             if (normalAttackSkill != null && normalAttackSkill.configId == skillConfig.Id)
             {

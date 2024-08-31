@@ -1,7 +1,7 @@
 ﻿// using System;
 // using System.Collections;
 // using System.Collections.Generic;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -108,7 +108,7 @@
 //         this.uiData = (CommonItemUIArgs)data;
 //
 //         var configId = this.uiData.configId;
-//         var itemTb = TableManager.Instance.GetById<Table.Item>(configId);
+//         var itemTb = ConfigManager.Instance.GetById<Config.Item>(configId);
 //         nameText.text = itemTb.Name;
 //         countText.text = "" + this.uiData.count;
 //

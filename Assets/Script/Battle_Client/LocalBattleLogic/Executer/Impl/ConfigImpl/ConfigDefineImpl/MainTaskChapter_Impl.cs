@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class MainTaskChapter_Impl : IMainTaskChapter
     {
-        private Table.MainTaskChapter config;
+        private Config.MainTaskChapter config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.MainTaskChapter>(id);
+            config = ConfigManager.Instance.GetById<Config.MainTaskChapter>(id);
         }
         
         public int Id => config.Id;

@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class BattleProcess_Impl : IBattleProcess
     {
-        private Table.BattleProcess config;
+        private Config.BattleProcess config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.BattleProcess>(id);
+            config = ConfigManager.Instance.GetById<Config.BattleProcess>(id);
         }
         
         public int Id => config.Id;

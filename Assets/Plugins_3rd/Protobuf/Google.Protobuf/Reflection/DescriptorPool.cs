@@ -146,10 +146,10 @@ namespace Google.Protobuf.Reflection
         }
 
         /// <summary>
-        /// Adds a symbol to the symbol table.
+        /// Adds a symbol to the symbol Config.
         /// </summary>
         /// <exception cref="DescriptorValidationException">The symbol already existed
-        /// in the symbol table.</exception>
+        /// in the symbol Config.</exception>
         internal void AddSymbol(IDescriptor descriptor)
         {
             ValidateSymbolName(descriptor);
@@ -221,7 +221,7 @@ namespace Google.Protobuf.Reflection
         }
 
         /// <summary>
-        /// Adds a field to the fieldsByNumber table.
+        /// Adds a field to the fieldsByNumber Config.
         /// </summary>
         /// <exception cref="DescriptorValidationException">A field with the same
         /// containing type and number already exists.</exception>
@@ -240,7 +240,7 @@ namespace Google.Protobuf.Reflection
         }
 
         /// <summary>
-        /// Adds an enum value to the enumValuesByNumber table. If an enum value
+        /// Adds an enum value to the enumValuesByNumber Config. If an enum value
         /// with the same type and number already exists, this method does nothing.
         /// (This is allowed; the first value defined with the number takes precedence.)
         /// </summary>
@@ -331,7 +331,7 @@ namespace Google.Protobuf.Reflection
         }
 
         /// <summary>
-        /// Struct used to hold the keys for the fieldByNumber table.
+        /// Struct used to hold the keys for the fieldByNumber Config.
         /// </summary>
         private struct DescriptorIntPair : IEquatable<DescriptorIntPair>
         {

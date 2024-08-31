@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class MainTaskStage_Impl : IMainTaskStage
     {
-        private Table.MainTaskStage config;
+        private Config.MainTaskStage config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.MainTaskStage>(id);
+            config = ConfigManager.Instance.GetById<Config.MainTaskStage>(id);
         }
         
         public int Id => config.Id;

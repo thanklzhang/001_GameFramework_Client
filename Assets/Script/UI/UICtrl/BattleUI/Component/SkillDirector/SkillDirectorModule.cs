@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +12,7 @@ public class SkillDirectorModule
 {
     // BattleCtrlPre _battleCtrlPre;
     bool selectState;
-    private Table.Skill skillConfig;
+    private Config.Skill skillConfig;
 
     public Dictionary<int, SkillDirectorGroup> directorGroupDic;
     SkillDirectorGroup currDirectorGroup;
@@ -34,7 +34,7 @@ public class SkillDirectorModule
         }
         else
         {
-            this.skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+            this.skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
 
             var pDirector = GenNewDirector(SkillDirectorType.DirectorProjectile);
             var rDirector = GenNewDirector(SkillDirectorType.DirectorReleaserTerminal);

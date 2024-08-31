@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -173,7 +173,7 @@ public class BattleHeroInfoUICtrl
 
     public void StartBossLimitCountdown()
     {
-        var battleConfig = TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+        var battleConfig = ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
         currTimer = battleConfig.BossLimitTime / 1000.0f;
         isHasBossCountdown = true;
 
@@ -189,7 +189,7 @@ public class BattleHeroInfoUICtrl
             return;
         }
 
-        var entityConfig = Table.TableManager.Instance.GetById<EntityInfo>(findEntity.configId);
+        var entityConfig = Config.ConfigManager.Instance.GetById<EntityInfo>(findEntity.configId);
         var isBoss = 1 == entityConfig.IsBoss;
 
         if (isBoss)
@@ -260,7 +260,7 @@ public class BattleHeroInfoUICtrl
         BattleHeroInfoUIData info = new BattleHeroInfoUIData();
 
 
-        var entityConfig = Table.TableManager.Instance.GetById<EntityInfo>(entity.configId);
+        var entityConfig = Config.ConfigManager.Instance.GetById<EntityInfo>(entity.configId);
         var isBoss = 1 == entityConfig.IsBoss;
 
         if (0 == entity.playerIndex || isBoss)

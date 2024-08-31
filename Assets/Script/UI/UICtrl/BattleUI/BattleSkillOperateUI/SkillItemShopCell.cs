@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 

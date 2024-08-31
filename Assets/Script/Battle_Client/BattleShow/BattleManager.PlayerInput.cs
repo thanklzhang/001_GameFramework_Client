@@ -11,7 +11,7 @@ using Battle.BattleTrigger.Runtime;
 using Battle_Client;
 using GameData;
 using NetProto;
-using Table;
+
 using UnityEditor;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -136,7 +136,7 @@ namespace Battle_Client
             Vector3 targetPos = Vector3.zero;
 
             var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-            var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+            var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
 
             var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
             var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
@@ -189,7 +189,7 @@ namespace Battle_Client
         Vector3 targetPos = Vector3.zero;
         
         var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-        var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+        var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
 
         var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
         var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
@@ -252,7 +252,7 @@ namespace Battle_Client
             var index = willReleaserSkillIndex;
              var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
             /*var skillId = willReleaserSkillId;*/
-            var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+            var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
             var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
 
             if (isMouseLeftButtonDown)

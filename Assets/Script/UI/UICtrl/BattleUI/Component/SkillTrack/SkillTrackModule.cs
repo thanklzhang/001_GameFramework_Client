@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +59,7 @@ public class SkillTrackModule
     BaseSkillTrack CreateTrack(TrackBean trackBean)
     {
         BaseSkillTrack skillTrack = null;
-        var config = TableManager.Instance.GetById<Table.SkillTrack>(trackBean.trackConfigId);
+        var config = ConfigManager.Instance.GetById<Config.SkillTrack>(trackBean.trackConfigId);
 
         var type = (SkillTrackType)config.Type;
         if (type == SkillTrackType.Rectangle)

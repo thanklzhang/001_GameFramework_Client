@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Config;
 using GameData;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -141,7 +142,7 @@ public class SelectHeroUI : BaseUI
         }
 
         var heroConfigId = currShowObj.data.configId;
-        var heroTb = TableManager.Instance.GetById<Table.EntityInfo>(heroConfigId);
+        var heroTb = ConfigManager.Instance.GetById<Config.EntityInfo>(heroConfigId);
 
         currHeroNameText.text = heroTb.Name;
         ResourceManager.Instance.GetObject<Sprite>(heroTb.AllBodyResId,
@@ -210,7 +211,7 @@ public class SelectHeroOptionShowObj
         this.data = data;
         avatar.Refresh(data);
 
-        var config = Table.TableManager.Instance.GetById<Table.EntityInfo>(data.configId);
+        var config = Config.ConfigManager.Instance.GetById<Config.EntityInfo>(data.configId);
         nameText.text = config.Name;
     }
 

@@ -2,7 +2,7 @@
 // using System.Collections;
 // using System.Collections.Generic;
 // using Battle;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -58,7 +58,7 @@
 //         TeamRoomInfoUIArgs roomInfoArgs = (TeamRoomInfoUIArgs)args;
 //
 //
-//         var stageConfig = TableManager.Instance.GetById<Table.TeamStage>(roomInfoArgs.stageConfigId);
+//         var stageConfig = ConfigManager.Instance.GetById<Config.TeamStage>(roomInfoArgs.stageConfigId);
 //         roomPlayerDataList = roomInfoArgs.playerUIDataList;
 //         roomName = roomInfoArgs.roomName;
 //         stageName = stageConfig.Name;
@@ -192,14 +192,14 @@
 //     {
 //         this.uiPlayerData = (TeamRoomPlayerUIData)data;
 //         //var teamStageId = this.uiPlayerData.teamStageId;
-//         //var currTeamStageTb = Table.TableManager.Instance.GetById<Table.TeamStage>(teamStageId);
+//         //var currTeamStageTb = Config.ConfigManager.Instance.GetById<Config.TeamStage>(teamStageId);
 //
 //         idText.text = "" + uiPlayerData.uid;
 //         nameText.text = uiPlayerData.name;
 //         levelText.text = "" + uiPlayerData.level;
 //
 //         var heroConfigId = uiPlayerData.heroUIData.configId;
-//         var heroConfig = TableManager.Instance.GetById<Table.EntityInfo>(heroConfigId);
+//         var heroConfig = ConfigManager.Instance.GetById<Config.EntityInfo>(heroConfigId);
 //         heroLevelText.text = "" + uiPlayerData.heroUIData.level;
 //         heroNameText.text = "" + heroConfig.Name;
 //

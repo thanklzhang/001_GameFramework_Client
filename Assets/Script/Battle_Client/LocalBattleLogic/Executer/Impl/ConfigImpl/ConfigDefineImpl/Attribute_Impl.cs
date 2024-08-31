@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class Attribute_Impl : IAttribute
     {
-        private Table.Attribute config;
+        private Config.Attribute config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.Attribute>(id);
+            config = ConfigManager.Instance.GetById<Config.Attribute>(id);
         }
         
         public int Id => config.Id;

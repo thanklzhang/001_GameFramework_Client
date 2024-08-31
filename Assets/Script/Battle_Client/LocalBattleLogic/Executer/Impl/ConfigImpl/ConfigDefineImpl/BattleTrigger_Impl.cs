@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class BattleTrigger_Impl : IBattleTrigger
     {
-        private Table.BattleTrigger config;
+        private Config.BattleTrigger config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.BattleTrigger>(id);
+            config = ConfigManager.Instance.GetById<Config.BattleTrigger>(id);
         }
         
         public int Id => config.Id;

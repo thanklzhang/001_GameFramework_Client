@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +24,7 @@ public enum SkillStartPosType
 public class BaseSkillTrack
 {
     public int configId;
-    protected Table.SkillTrack config;
+    protected Config.SkillTrack config;
     protected BattleEntity_Client entity;
 
     protected int resourceId;
@@ -45,7 +45,7 @@ public class BaseSkillTrack
         this.trackBean = trackBean;
 
         this.configId = this.trackBean.trackConfigId;
-        this.config = Table.TableManager.Instance.GetById<Table.SkillTrack>(this.configId);
+        this.config = Config.ConfigManager.Instance.GetById<Config.SkillTrack>(this.configId);
         totalProgressTime = this.config.ProgressFinishTime / 1000.0f;
         this.resourceId = config.EffectResId;
         OnInit();

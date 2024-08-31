@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Table;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -63,7 +63,7 @@ public class BattleItemUIShowObj : BaseUIShowObj<BattleItemUI>
         {
             //道具图标
             var itemId = this.uiData.configId;
-            var itemConfig = Table.TableManager.Instance.GetById<Table.BattleItem>(itemId);
+            var itemConfig = Config.ConfigManager.Instance.GetById<Config.BattleItem>(itemId);
             ResourceManager.Instance.GetObject<Sprite>(itemConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
 
             countText.text = "" + this.uiData.count;

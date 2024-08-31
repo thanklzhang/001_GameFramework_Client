@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class PassiveEffect_Impl : IPassiveEffect
     {
-        private Table.PassiveEffect config;
+        private Config.PassiveEffect config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.PassiveEffect>(id);
+            config = ConfigManager.Instance.GetById<Config.PassiveEffect>(id);
         }
         
         public int Id => config.Id;

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
@@ -126,7 +126,7 @@ public class DescribeUI
 
     public void OnUISkillOptionPointEnter(int skillId, Vector2 pos)
     {
-        var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+        var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
 
         var des = skillConfig.Describe;
         var args = new DescribeUIArgs()
@@ -147,7 +147,7 @@ public class DescribeUI
 
     public void OnUIBuffOptionPointEnter(int buffConfigId, Vector2 pos)
     {
-        var buffConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(buffConfigId);
+        var buffConfig = Config.ConfigManager.Instance.GetById<Config.BuffEffect>(buffConfigId);
 
         var des = buffConfig.Describe;
         var args = new DescribeUIArgs()
@@ -168,7 +168,7 @@ public class DescribeUI
     
     public void OnUIItemOptionPointEnter(int itemConfigId, Vector2 pos)
     {
-        var itemConfig = Table.TableManager.Instance.GetById<Table.BattleItem>(itemConfigId);
+        var itemConfig = Config.ConfigManager.Instance.GetById<Config.BattleItem>(itemConfigId);
 
         var des = itemConfig.Describe;
         var args = new DescribeUIArgs()
@@ -189,7 +189,7 @@ public class DescribeUI
 
     public void OnUISkillItemOptionPointEnter(int itemConfigId, Vector2 pos)
     {
-        var itemConfig = Table.TableManager.Instance.GetById<Table.BattleItem>(itemConfigId);
+        var itemConfig = Config.ConfigManager.Instance.GetById<Config.BattleItem>(itemConfigId);
 
         var des = itemConfig.Describe;
         var args = new DescribeUIArgs()

@@ -36,7 +36,7 @@ public class CursorModule
 
     public void StartLoad()
     {
-        ResourceManager.Instance.GetObject<Texture2D>((int)Table.ResIds.cursor_normal_005, (tex) =>
+        ResourceManager.Instance.GetObject<Texture2D>((int)Config.ResIds.cursor_normal_005, (tex) =>
         {
             if (tex != null)
             {
@@ -46,7 +46,7 @@ public class CursorModule
                 CheckIsLoadFinish();
             }
         });
-        ResourceManager.Instance.GetObject<Texture2D>((int)Table.ResIds.cursor_attack_001, (tex) =>
+        ResourceManager.Instance.GetObject<Texture2D>((int)Config.ResIds.cursor_attack_001, (tex) =>
         {
             if (tex != null)
             {
@@ -56,7 +56,7 @@ public class CursorModule
                 CheckIsLoadFinish();
             }
         });
-        ResourceManager.Instance.GetObject<Texture2D>((int)Table.ResIds.cursor_002, (tex) =>
+        ResourceManager.Instance.GetObject<Texture2D>((int)Config.ResIds.cursor_002, (tex) =>
         {
             if (tex != null)
             {
@@ -66,7 +66,7 @@ public class CursorModule
                 CheckIsLoadFinish();
             }
         });
-        ResourceManager.Instance.GetObject<Texture2D>((int)Table.ResIds.cursor_select_attack_001, (tex) =>
+        ResourceManager.Instance.GetObject<Texture2D>((int)Config.ResIds.cursor_select_attack_001, (tex) =>
         {
             if (tex != null)
             {

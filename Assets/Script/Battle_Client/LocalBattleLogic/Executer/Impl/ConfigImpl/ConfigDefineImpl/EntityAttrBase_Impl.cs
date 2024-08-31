@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class EntityAttrBase_Impl : IEntityAttrBase
     {
-        private Table.EntityAttrBase config;
+        private Config.EntityAttrBase config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.EntityAttrBase>(id);
+            config = ConfigManager.Instance.GetById<Config.EntityAttrBase>(id);
         }
         
         public int Id => config.Id;

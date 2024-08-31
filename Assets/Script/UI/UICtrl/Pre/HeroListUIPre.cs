@@ -1,7 +1,7 @@
 ﻿// using System;
 // using System.Collections;
 // using System.Collections.Generic;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -48,9 +48,9 @@
 //     //    this.uiData = uiData;
 //
 //     //    var id = this.uiData.id;
-//     //    var heroInfoTable = TableManager.Instance.GetById<Table.HeroInfo>(id);
+//     //    var heroInfoTable = ConfigManager.Instance.GetById<Config.HeroInfo>(id);
 //     //    levelText.text = "" + this.uiData.level;
-//     //    nameText.text = "" + heroInfoTable.Name;
+//     //    nameText.text = "" + heroInfoConfig.Name;
 //     //    unlockFlagObj.SetActive(!this.uiData.isUnlock);
 //     //    upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
 //     //}
@@ -60,13 +60,13 @@
 //         this.uiData = (HeroCardUIData)data;
 //
 //         var configId = this.uiData.configId;
-//         var heroInfoTable = TableManager.Instance.GetById<Table.EntityInfo>(configId);
+//         var heroInfoTable = ConfigManager.Instance.GetById<Config.EntityInfo>(configId);
 //         levelText.text = "Lv." + this.uiData.level;
-//         nameText.text = "" + heroInfoTable.Name;
+//         nameText.text = "" + heroInfoConfig.Name;
 //         unlockFlagObj.SetActive(!this.uiData.isUnlock);
 //         // upgradeLevelBtn.gameObject.SetActive(this.uiData.isUnlock);
 //
-//         ResourceManager.Instance.GetObject<Sprite>(heroInfoTable.AllBodyResId, (sprite)
+//         ResourceManager.Instance.GetObject<Sprite>(heroInfoConfig.AllBodyResId, (sprite)
 //             =>
 //         {
 //             heroIconImg.sprite = sprite;

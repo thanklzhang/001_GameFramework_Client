@@ -28,9 +28,9 @@ namespace Battle_Client
             //json 解析
 
 
-            //Table.Battle battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
+            //Config.Battle battleTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
             //var triggerId = battleTb.TriggerId;
-            //Table.BattleTrigger striggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(triggerId);
+            //Config.BattleTrigger striggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(triggerId);
             //var jsonFileRootPath = striggerTb.ScriptPath;
 
             ////这里文件应该是一开始都加载好 这里先这么读取

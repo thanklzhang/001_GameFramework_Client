@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class EntityAttrLevel_Impl : IEntityAttrLevel
     {
-        private Table.EntityAttrLevel config;
+        private Config.EntityAttrLevel config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.EntityAttrLevel>(id);
+            config = ConfigManager.Instance.GetById<Config.EntityAttrLevel>(id);
         }
         
         public int Id => config.Id;

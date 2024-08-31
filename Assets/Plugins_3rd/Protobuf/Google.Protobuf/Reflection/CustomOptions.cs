@@ -40,7 +40,7 @@ namespace Google.Protobuf.Reflection
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This type is publicly immutable, but internally mutable. It is only populated
+    /// This type is publicly immutable, but internally muConfig. It is only populated
     /// by the descriptor parsing code - by the time any user code is able to see an instance,
     /// it will be fully initialized.
     /// </para>

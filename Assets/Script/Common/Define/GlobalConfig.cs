@@ -51,7 +51,7 @@ public class GlobalConfig
 
     public static string buildPath = "Assets/BuildRes";
 
-    public static string tablePath = "Table";
+    public static string tablePath = "Config";
 
     public static string sceneRootPath = "Scenes";
 

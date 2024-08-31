@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class BattleProcessWave_Impl : IBattleProcessWave
     {
-        private Table.BattleProcessWave config;
+        private Config.BattleProcessWave config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.BattleProcessWave>(id);
+            config = ConfigManager.Instance.GetById<Config.BattleProcessWave>(id);
         }
         
         public int Id => config.Id;

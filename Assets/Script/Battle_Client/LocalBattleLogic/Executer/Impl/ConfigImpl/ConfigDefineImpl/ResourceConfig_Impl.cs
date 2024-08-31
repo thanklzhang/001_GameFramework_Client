@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class ResourceConfig_Impl : IResourceConfig
     {
-        private Table.ResourceConfig config;
+        private Config.ResourceConfig config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.ResourceConfig>(id);
+            config = ConfigManager.Instance.GetById<Config.ResourceConfig>(id);
         }
         
         public int Id => config.Id;

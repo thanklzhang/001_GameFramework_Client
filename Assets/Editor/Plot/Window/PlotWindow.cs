@@ -121,9 +121,9 @@ namespace PlotDesigner.Editor
             EditorApplication.update += OnEditorUpdate;
             preTime = EditorApplication.timeSinceStartup;
 
-            Table.TableManager.Instance.Clear();
+            Config.ConfigManager.Instance.Clear();
             
-            Table.TableManager.Instance.LoadAllTableDataByEditor();
+            Config.ConfigManager.Instance.LoadAllConfigDataByEditor();
 
             var gameInitPath = "Assets/Resources/GameInit.prefab";
             var gameInitPrefab = ResourceManager.Instance.GetObjectByEditor<GameObject>(gameInitPath);
@@ -591,7 +591,7 @@ namespace PlotDesigner.Editor
         {
             EditorApplication.update -= OnEditorUpdate;
 
-            Table.TableManager.Instance.Clear();
+            Config.ConfigManager.Instance.Clear();
 
             ClearTarckRes();
 

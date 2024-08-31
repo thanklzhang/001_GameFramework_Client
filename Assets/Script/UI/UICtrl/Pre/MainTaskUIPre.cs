@@ -1,7 +1,7 @@
 ﻿// using System;
 // using System.Collections;
 // using System.Collections.Generic;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -57,7 +57,7 @@
 //
 //         var chapterId = this.uiData.chapterId;
 //
-//         var currChapterTb = Table.TableManager.Instance.GetById<Table.MainTaskChapter>(chapterId);
+//         var currChapterTb = Config.ConfigManager.Instance.GetById<Config.MainTaskChapter>(chapterId);
 //         nameText.text = "" + currChapterTb.Name;
 //
 //         //刷新此时的状态
@@ -139,7 +139,7 @@
 //     void RefreshChapterList()
 //     {
 //         //当前章节
-//         //var currChapterTb = Table.TableManager.Instance.GetById<Table.MainTaskChapter>(currChapterId);
+//         //var currChapterTb = Config.ConfigManager.Instance.GetById<Config.MainTaskChapter>(currChapterId);
 //         //currChapterNameText.text = "当前进度：" + currChapterTb.Name;
 //
 //         //列表

@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class TeamStage_Impl : ITeamStage
     {
-        private Table.TeamStage config;
+        private Config.TeamStage config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.TeamStage>(id);
+            config = ConfigManager.Instance.GetById<Config.TeamStage>(id);
         }
         
         public int Id => config.Id;

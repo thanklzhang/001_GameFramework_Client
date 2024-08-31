@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class CalculateEffect_Impl : ICalculateEffect
     {
-        private Table.CalculateEffect config;
+        private Config.CalculateEffect config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.CalculateEffect>(id);
+            config = ConfigManager.Instance.GetById<Config.CalculateEffect>(id);
         }
         
         public int Id => config.Id;

@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class EntityInfo_Impl : IEntityInfo
     {
-        private Table.EntityInfo config;
+        private Config.EntityInfo config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.EntityInfo>(id);
+            config = ConfigManager.Instance.GetById<Config.EntityInfo>(id);
         }
         
         public int Id => config.Id;

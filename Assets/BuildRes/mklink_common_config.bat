@@ -13,7 +13,7 @@ if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
 
 
 cd /d %~dp0
-mklink /d Table ..\..\..\001_GameFramework_Table\CommonData\Table
+mklink /d Config ..\..\..\001_GameFramework_Table\CommonData\Config
 mklink /d Plot ..\..\..\001_GameFramework_Table\CommonData\Plot
 mklink /d Battle ..\..\..\001_GameFramework_Table\CommonData\Battle
 pause

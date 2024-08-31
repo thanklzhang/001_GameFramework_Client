@@ -144,7 +144,7 @@ namespace PlotDesigner.Runtime
                     if (resId > 0)
                     {
                         //这里先只收集 gameObject
-                        var isGo = Table.ResourceConfig_Tool.IsGameObject(resId);
+                        var isGo = Config.ResourceConfig_Tool.IsGameObject(resId);
                         if (isGo)
                         {
                             if (gameObjectResIdToCountDic.ContainsKey(resId))
@@ -189,7 +189,7 @@ namespace PlotDesigner.Runtime
                 var resId = item.Key;
                 var count = item.Value;
 
-                var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
+                var resTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(resId);
                 var path = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
                 objsRequestList.Add(new LoadGameObjectRequest(path, count) { selfFinishCallback = (hash) => { OnOneRequestListFinish(resId, hash); } });
@@ -341,7 +341,7 @@ namespace PlotDesigner.Runtime
                     var go = plotEntity.obj as GameObject;
 
                     var resId = plotEntity.res;
-                    var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(resId);
+                    var resTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(resId);
                     var path = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
                     ResourceManager.Instance.ReturnObject(path, go);

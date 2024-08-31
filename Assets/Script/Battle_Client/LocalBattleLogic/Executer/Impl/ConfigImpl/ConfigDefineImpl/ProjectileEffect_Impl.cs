@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class ProjectileEffect_Impl : IProjectileEffect
     {
-        private Table.ProjectileEffect config;
+        private Config.ProjectileEffect config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.ProjectileEffect>(id);
+            config = ConfigManager.Instance.GetById<Config.ProjectileEffect>(id);
         }
         
         public int Id => config.Id;

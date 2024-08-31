@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class AreaEffect_Impl : IAreaEffect
     {
-        private Table.AreaEffect config;
+        private Config.AreaEffect config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.AreaEffect>(id);
+            config = ConfigManager.Instance.GetById<Config.AreaEffect>(id);
         }
         
         public int Id => config.Id;

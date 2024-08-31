@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -96,7 +96,7 @@ namespace Battle_Client.BattleSkillOperate
             bool isHaveSkill = itemInfo != null;
             if (isHaveSkill)
             {
-                var config = TableManager.Instance.GetById<Table.BattleItem>(itemInfo.configId);
+                var config = ConfigManager.Instance.GetById<Config.BattleItem>(itemInfo.configId);
                 ResourceManager.Instance.GetObject<Sprite>(config.IconResId, (sprite) => { icon.sprite = sprite; });
                 icon.gameObject.SetActive(true);
                 //this.Show();

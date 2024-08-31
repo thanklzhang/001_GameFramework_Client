@@ -24,7 +24,7 @@ public class AttrInfoHelper : Singleton<AttrInfoHelper>
     public void Init()
     {
         attrInfoDic = new Dictionary<EntityAttrType, AttrInfoOption>();
-        var list = Table.TableManager.Instance.GetList<Table.Attribute>();
+        var list = Config.ConfigManager.Instance.GetList<Config.Attribute>();
 
         foreach (var attrConfig in list)
         {
@@ -46,7 +46,7 @@ public class AttrInfoHelper : Singleton<AttrInfoHelper>
 
     //public static AttrDesOption GetAttrDes(EntityAttrType attrType)
     //{
-    //    Table.TableManager.Instance.GetDic<>
+    //    Config.ConfigManager.Instance.GetDic<>
     //    AttrDesOption option = new AttrDesOption();
     //}
 }

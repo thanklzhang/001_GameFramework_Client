@@ -10,7 +10,7 @@ using Battle.BattleTrigger.Runtime;
 using Battle_Client;
 using GameData;
 using NetProto;
-using Table;
+
 using UnityEditor;
 using UnityEngine;
 using Vector3 = Battle.Vector3;
@@ -143,11 +143,11 @@ namespace Battle_Client
 
             //读取战斗相关配置数据
             var battleTableId = BattleManager.Instance.battleConfigId;
-            var battleTb = Table.TableManager.Instance.GetById<Table.Battle>(battleTableId);
-            var mapConfig = Table.TableManager.Instance.GetById<Table.BattleMap>(battleTb.MapId);
-            var battleTriggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleTb.TriggerId);
+            var battleTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleTableId);
+            var mapConfig = Config.ConfigManager.Instance.GetById<Config.BattleMap>(battleTb.MapId);
+            var battleTriggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleTb.TriggerId);
 
-            var sceneResTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(mapConfig.ResId);
+            var sceneResTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(mapConfig.ResId);
 
             //加载场景
             EventSender.SendLoadingProgress(0.3f, "加载 场景 中");
@@ -156,7 +156,7 @@ namespace Battle_Client
             Logx.Log(LogxType.Game, "StartLoad_Common : scene load finish");
 
             // var sceneResId = mapConfig.ResId;
-            // var resTb = Table.TableManager.Instance.GetById<Table.ResourceConfig>(sceneResId);
+            // var resTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(sceneResId);
             // scenePath = "Assets/BuildRes/" + resTb.Path + "/" + resTb.Name + "." + resTb.Ext;
 
             //加载 UI 并打开

@@ -80,12 +80,12 @@ namespace Battle_Client
             gameObject = GameObject.Instantiate(asset);
 
             // get path
-            //var heroConfig = Table.TableManager.Instance.GetById<Table.EntityInfo>(this.configId);
+            //var heroConfig = Config.ConfigManager.Instance.GetById<Config.EntityInfo>(this.configId);
             if (this.resId > 0)
             {
-                var resTable = Table.TableManager.Instance.GetById<Table.ResourceConfig>(this.resId);
+                var resConfig = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(this.resId);
                 //临时组路径 之后会打进 ab 包
-                path = "Assets/BuildRes/" + resTable.Path + "/" + resTable.Name + "." + resTable.Ext;
+                path = "Assets/BuildRes/" + resConfig.Path + "/" + resConfig.Name + "." + resConfig.Ext;
             }
             else
             {

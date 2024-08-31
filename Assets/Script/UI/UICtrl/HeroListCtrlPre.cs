@@ -2,7 +2,7 @@
 // using System;
 // using System.Collections;
 // using System.Collections.Generic;
-// using Table;
+// 
 // using UnityEngine;
 // using UnityEngine.UI;
 //
@@ -148,7 +148,7 @@
 //     public HeroListUIArgs ConvertToUIArgs()
 //     {
 //         var heroDataStore = GameDataManager.Instance.HeroStore;
-//         var heroTbList = TableManager.Instance.GetList<Table.EntityInfo>();
+//         var heroTbList = ConfigManager.Instance.GetList<Config.EntityInfo>();
 //
 //         //开始填充
 //         HeroListUIArgs uiArgs = new HeroListUIArgs();

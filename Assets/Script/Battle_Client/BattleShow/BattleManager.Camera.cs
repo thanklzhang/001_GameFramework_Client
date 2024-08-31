@@ -10,7 +10,7 @@ using Battle.BattleTrigger.Runtime;
 using Battle_Client;
 using GameData;
 using NetProto;
-using Table;
+
 using UnityEditor;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;

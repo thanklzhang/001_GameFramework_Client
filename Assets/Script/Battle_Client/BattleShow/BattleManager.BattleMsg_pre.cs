@@ -10,7 +10,7 @@
 // using Battle_Client;
 // using GameData;
 // using NetProto;
-// using Table;
+// 
 // using UnityEditor;
 // using Vector2 = UnityEngine.Vector2;
 //
@@ -85,7 +85,7 @@
 //         {
 //             hpModule.RefreshEntityData(entity);
 //
-//             var entityConfig = Table.TableManager.Instance.GetById<EntityInfo>(entity.configId);
+//             var entityConfig = Config.ConfigManager.Instance.GetById<EntityInfo>(entity.configId);
 //             var isBoss = 1 == entityConfig.IsBoss;
 //             if (isBoss)
 //             {
@@ -157,7 +157,7 @@
 //
 //         public void OnUISkillOptionPointEnter(int skillId, Vector2 pos)
 //         {
-//             var skillConfig = Table.TableManager.Instance.GetById<Table.Skill>(skillId);
+//             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
 //
 //             var des = skillConfig.Describe;
 //             UIArgs args = new DescribeUIArgs()
@@ -177,7 +177,7 @@
 //
 //         public void OnUIBuffOptionPointEnter(int buffConfigId, Vector2 pos)
 //         {
-//             var buffConfig = Table.TableManager.Instance.GetById<Table.BuffEffect>(buffConfigId);
+//             var buffConfig = Config.ConfigManager.Instance.GetById<Config.BuffEffect>(buffConfigId);
 //
 //             var des = buffConfig.Describe;
 //             UIArgs args = new DescribeUIArgs()

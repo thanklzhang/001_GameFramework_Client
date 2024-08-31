@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -79,7 +79,7 @@ public class BattleItemUI
         //         maxCDTime = itemData.maxCDTime,
         //     };
         //     
-        //     // var skillConfig = Table.TableManager.Instance.GetById<Skill>(itemData.configId);
+        //     // var skillConfig = Config.ConfigManager.Instance.GetById<Skill>(itemData.configId);
         //     dataList.Add(item);
         // }
         this.itemDataList = items;

@@ -10,23 +10,23 @@ using UnityEngine;
 
 namespace Battle_Client
 {
-
-
     public class LocalBattleLogic_Executer
     {
         Battle.Battle battle;
+
         public void Init()
         {
-
         }
 
         bool isPureLocal;
+
         //创建本地战斗
-        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData, MapInitArg mapInitData, bool isPureLocal)
+        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData,
+            MapInitArg mapInitData, bool isPureLocal)
         {
             this.isPureLocal = isPureLocal;
 
-            Logx.Log(LogxType.Battle,"local execute : CreateLocalBattleLogic");
+            Logx.Log(LogxType.Battle, "local execute : CreateLocalBattleLogic");
 
             //根据申请战斗参数 创建后台战斗初始化参数
             var logicArgs = GetBattleLogicArgs(applyArg, sourceData, mapInitData);
@@ -41,11 +41,17 @@ namespace Battle_Client
             //battle.PlayerMsgReceiver = new LocalBattleLogic_MsgReceiver(battle);
             battle.TriggerReader = new TriggerReader_Impl(battle);
             // BattleConfigManager.Instance = new ConfigManager_Proxy();
-            
-            //设置战斗数据配置
-             BattleConfigManager.Instance.SetBattleConfig(new BattleConfig_Impl());
 
-            battle.Init(battleGuid,logicArgs);
+            //加载战斗数据配置
+            var battleConfigManager = BattleConfigManager.Instance;
+            if (!battleConfigManager.IsInitFinish)
+            {
+                battleConfigManager.LoadBattleConfig(new BattleConfig_Impl());
+            }
+
+           
+
+            battle.Init(battleGuid, logicArgs);
             //加载后台战斗
             //battle.Load(logicArgs);
 
@@ -61,8 +67,8 @@ namespace Battle_Client
         //    TriggerSourceData source = new TriggerSourceData();
         //    source.dataStrList = new List<string>();
 
-        //    var battleConfigTb = Table.TableManager.Instance.GetById<Table.Battle>(battleConfigId);
-        //    var triggerTb = Table.TableManager.Instance.GetById<Table.BattleTrigger>(battleConfigTb.TriggerId);
+        //    var battleConfigTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
+        //    var triggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleConfigTb.TriggerId);
 
         //    var loadPath = Const.AssetBundlePath + "/" + Const.buildPath + "/" + triggerTb.ScriptPath;
         //    var files = System.IO.Directory.GetFiles(loadPath, "*.ab", System.IO.SearchOption.AllDirectories);
@@ -101,10 +107,10 @@ namespace Battle_Client
             battle.OnBattleEnd += OnBattleLogicEnd;
         }
 
-        public void OnBattleLogicEnd(Battle.Battle battle, int teamIndex,BattleEndType endType)
+        public void OnBattleLogicEnd(Battle.Battle battle, int teamIndex, BattleEndType endType)
         {
             //本地战斗结算是在 center server
-            var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, teamIndex,endType);
+            var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, teamIndex, endType);
 
 
             //判断是否是服务端结算
@@ -113,13 +119,12 @@ namespace Battle_Client
                 //本地战斗 在服务端结算
                 var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
                 battleNet.SendApplyBattleEnd(arg);
-
             }
             else
             {
                 //纯本地战斗
-                Logx.Log(LogxType.Battle,"pure battle : battle result");
-                
+                Logx.Log(LogxType.Battle, "pure battle : battle result");
+
                 BattleResultDataArgs resultData = new BattleResultDataArgs();
                 resultData.isWin = endType == BattleEndType.Win;
                 resultData.rewardDataList = new List<ItemData>();
@@ -132,10 +137,7 @@ namespace Battle_Client
                 // }
 
                 BattleManager.Instance.BattleEnd(resultData);
-                
             }
-
-
         }
 
         public void OnExitBattle()
@@ -184,7 +186,6 @@ namespace Battle_Client
             //    //    currTimer = 0;
             //    //}
             //}
-
         }
 
         public void FixedUpdate(float fixedTime)
@@ -198,14 +199,11 @@ namespace Battle_Client
         }
 
         //根据申请战斗参数 获得 后台战斗初始化参数
-        public Battle.BattleCreateArg GetBattleLogicArgs(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData, MapInitArg mapInitData)
+        public Battle.BattleCreateArg GetBattleLogicArgs(NetProto.ApplyBattleArg applyArg,
+            TriggerSourceResData sourceData, MapInitArg mapInitData)
         {
             var battleArg = ApplyBattleUtil.ToBattleArg(applyArg, sourceData, mapInitData);
             return battleArg;
-
         }
-
     }
-
-
 }

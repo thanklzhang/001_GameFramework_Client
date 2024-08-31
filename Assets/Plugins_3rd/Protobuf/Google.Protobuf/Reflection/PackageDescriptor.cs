@@ -33,7 +33,7 @@
 namespace Google.Protobuf.Reflection
 {
     /// <summary>
-    /// Represents a package in the symbol table.  We use PackageDescriptors
+    /// Represents a package in the symbol Config.  We use PackageDescriptors
     /// just as placeholders so that someone cannot define, say, a message type
     /// that has the same name as an existing package.
     /// </summary>

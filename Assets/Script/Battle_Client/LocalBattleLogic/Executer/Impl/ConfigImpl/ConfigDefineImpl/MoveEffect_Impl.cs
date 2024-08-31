@@ -3,7 +3,7 @@
 */
 //using System.Collections;
 using System.Collections.Generic;
-using Table;
+using Config;
 namespace Battle
 {
     
@@ -11,11 +11,11 @@ namespace Battle
  
     public class MoveEffect_Impl : IMoveEffect
     {
-        private Table.MoveEffect config;
+        private Config.MoveEffect config;
         
         public void Init(int id)
         {
-            config = TableManager.Instance.GetById<Table.MoveEffect>(id);
+            config = ConfigManager.Instance.GetById<Config.MoveEffect>(id);
         }
         
         public int Id => config.Id;

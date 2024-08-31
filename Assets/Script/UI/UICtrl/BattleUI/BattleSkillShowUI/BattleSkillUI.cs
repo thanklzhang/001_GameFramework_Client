@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -90,7 +90,7 @@ public class BattleSkillUI
                 maxCDTime = skillData.maxCDTime,
             };
             
-            var skillConfig = Table.TableManager.Instance.GetById<Skill>(skillData.configId);
+            var skillConfig = Config.ConfigManager.Instance.GetById<Skill>(skillData.configId);
             // if (skillConfig.IsBigSkill != 1)
             // {
             //    

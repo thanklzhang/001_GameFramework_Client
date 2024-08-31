@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Battle_Client;
-using Table;
+using Config;
+
 //using Unity.Services.Core;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
@@ -18,7 +19,7 @@ public class BattleSceneCtrl : BaseSceneCtrl
 {
     public override void Init()
     {
-        //sceneName = Table.TableManager.Instance.GetById<Table.ResourceConfig>((int)ResIds.LoginScene).Name;
+        //sceneName = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>((int)ResIds.LoginScene).Name;
     }
   
     public override void StartLoad(Action action = null)

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-using Table;
+using Config;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -50,7 +50,7 @@ public class BattleBoxCell
         this.index = index;
         
         var configId = this.data.rewardConfigId;
-        var rewardConfig = TableManager.Instance.GetById<Table.BattleReward>(configId);
+        var rewardConfig = ConfigManager.Instance.GetById<Config.BattleReward>(configId);
 
 
         ResourceManager.Instance.GetObject<Sprite>(rewardConfig.IconResId,

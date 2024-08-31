@@ -1,5 +1,6 @@
-﻿using GameData;
-using Table;
+﻿using Config;
+using GameData;
+
 using UnityEngine;
 using UnityEngine.UI;
 

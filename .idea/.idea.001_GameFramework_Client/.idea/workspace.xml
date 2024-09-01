@@ -6,9 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BuildRes/mklink_common_config.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BuildRes/mklink_common_config.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Common/Define/GlobalConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Common/Define/GlobalConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.BattleMsg_pre.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.BattleMsg_pre.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Camera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Camera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.Load.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.PlayerInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/BattleShow/BattleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/JsonDataProxy.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/JsonDataProxy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/TriggerReader_Impl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/Impl/TriggerReader_Impl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Config/ConfigDataLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Config/ConfigDataLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetManager_pre.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Framework/Resource/Asset/AssetManager_pre.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -337,6 +347,7 @@
       <workItem from="1725106652262" duration="8559000" />
       <workItem from="1725122612956" duration="106000" />
       <workItem from="1725124211003" duration="146000" />
+      <workItem from="1725186539745" duration="1955000" />
     </task>
     <servers />
   </component>

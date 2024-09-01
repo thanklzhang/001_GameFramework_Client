@@ -1,5 +1,5 @@
 ﻿using Battle;
-using Battle.BattleTrigger.Runtime;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Battle_Client
         bool isPureLocal;
 
         //创建本地战斗
-        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg, TriggerSourceResData sourceData,
+        public Battle.Battle CreateLocalBattleLogic(NetProto.ApplyBattleArg applyArg, 
             MapInitArg mapInitData, bool isPureLocal)
         {
             this.isPureLocal = isPureLocal;
@@ -29,7 +29,7 @@ namespace Battle_Client
             Logx.Log(LogxType.Battle, "local execute : CreateLocalBattleLogic");
 
             //根据申请战斗参数 创建后台战斗初始化参数
-            var logicArgs = GetBattleLogicArgs(applyArg, sourceData, mapInitData);
+            var logicArgs = GetBattleLogicArgs(applyArg, mapInitData);
 
             battle = new Battle.Battle();
             int battleGuid = 0;
@@ -39,7 +39,7 @@ namespace Battle_Client
 
             battle.PlayerMsgSender = new LocalBattleLogic_MsgSender();
             //battle.PlayerMsgReceiver = new LocalBattleLogic_MsgReceiver(battle);
-            battle.TriggerReader = new TriggerReader_Impl(battle);
+            //battle.TriggerReader = new TriggerReader_Impl(battle);
             // BattleConfigManager.Instance = new ConfigManager_Proxy();
 
             //加载战斗数据配置
@@ -104,13 +104,13 @@ namespace Battle_Client
 
         public void OnEnterBattle()
         {
-            battle.OnBattleEnd += OnBattleLogicEnd;
+            // battle.OnBattleEnd += OnBattleLogicEnd;
         }
 
-        public void OnBattleLogicEnd(Battle.Battle battle, int teamIndex, BattleEndType endType)
+        public void OnBattleLogicEnd(Battle.Battle battle, int teamIndex)//, BattleEndType endType
         {
             //本地战斗结算是在 center server
-            var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, teamIndex, endType);
+            var arg = BattleEndUtil.MakeApplyBattleArgProto(battle, teamIndex);//, endType
 
 
             //判断是否是服务端结算
@@ -126,7 +126,7 @@ namespace Battle_Client
                 Logx.Log(LogxType.Battle, "pure battle : battle result");
 
                 BattleResultDataArgs resultData = new BattleResultDataArgs();
-                resultData.isWin = endType == BattleEndType.Win;
+                // resultData.isWin = endType == BattleEndType.Win;
                 resultData.rewardDataList = new List<ItemData>();
                 // foreach (var serReward in scBattleEnd.Rewards)
                 // {
@@ -142,7 +142,7 @@ namespace Battle_Client
 
         public void OnExitBattle()
         {
-            battle.OnBattleEnd -= OnBattleLogicEnd;
+            // battle.OnBattleEnd -= OnBattleLogicEnd;
             isPureLocal = false;
         }
 
@@ -200,9 +200,9 @@ namespace Battle_Client
 
         //根据申请战斗参数 获得 后台战斗初始化参数
         public Battle.BattleCreateArg GetBattleLogicArgs(NetProto.ApplyBattleArg applyArg,
-            TriggerSourceResData sourceData, MapInitArg mapInitData)
+             MapInitArg mapInitData)
         {
-            var battleArg = ApplyBattleUtil.ToBattleArg(applyArg, sourceData, mapInitData);
+            var battleArg = ApplyBattleUtil.ToBattleArg(applyArg,  mapInitData);
             return battleArg;
         }
     }

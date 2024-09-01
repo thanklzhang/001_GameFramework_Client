@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Battle;
-using Battle.BattleTrigger.Runtime;
+
 using Battle_Client;
 using GameData;
 using NetProto;
@@ -92,12 +92,11 @@ namespace Battle_Client
             //获得申请战斗参数
             var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
 
-            //触发器配置由本地加载
             EventSender.SendLoadingProgress(0.1f, "开始加载触发器数据");
-            TriggerSourceResData sourceData = null;
-            yield return LoadTriggerResource(battleConfigId, (source) => { sourceData = source; });
-
-            Logx.Log(LogxType.Game, "StartLoad_PureLocal : load trigger config finish");
+            // TriggerSourceResData sourceData = null;
+            // yield return LoadTriggerResource(battleConfigId, (source) => { sourceData = source; });
+            //
+            // Logx.Log(LogxType.Game, "StartLoad_PureLocal : load trigger config finish");
 
 
             MapInitArg mapInitData = new MapInitArg();
@@ -106,7 +105,7 @@ namespace Battle_Client
             mapInitData.playerInitPosList = ToVector3s(mapSaveData.playerInitPosList);
 
             //设置本地战斗数据
-            SetLocalBattle(applyArg, sourceData, mapInitData, true);
+            SetLocalBattle(applyArg, mapInitData, true);
 
             //开启本地战斗流程
             EventSender.SendLoadingProgress(0.2f, "开始启动本地战斗");

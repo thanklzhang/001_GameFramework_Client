@@ -5,7 +5,7 @@
 // using System.Linq;
 // using System.Text;
 // using System.Threading.Tasks;
-// using Battle.BattleTrigger.Runtime;
+// 
 // using UnityEngine;
 // using LitJson;
 // using UnityEngine.UI;

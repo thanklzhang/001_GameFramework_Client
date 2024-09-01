@@ -6,7 +6,7 @@
 // using System.Text;
 // using System.Threading.Tasks;
 // using Battle;
-// using Battle.BattleTrigger.Runtime;
+// 
 // using Battle_Client;
 // using GameData;
 // using NetProto;

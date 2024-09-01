@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Battle;
-using Battle.BattleTrigger.Runtime;
+
 using Battle_Client;
 using GameData;
 using NetProto;
@@ -252,16 +252,16 @@ namespace Battle_Client
             Logx.Log(LogxType.Game, "start create a local battle (result at remote)");
 
             var battleConfigId = applyArg.BattleTableId;
-            CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
-            {
-                //CreateLocalBattle(applyArg, sourceData, false);
-            }));
+            // CoroutineManager.Instance.StartCoroutine(LoadTriggerResource(battleConfigId, (sourceData) =>
+            // {
+            //     //CreateLocalBattle(applyArg, sourceData, false);
+            // }));
         }
 
         private BattleClient_CreateBattleArgs battleClientArgs;
 
         //设置本地战斗
-        public void SetLocalBattle(NetProto.ApplyBattleArg applyArg, TriggerSourceResData source,
+        public void SetLocalBattle(NetProto.ApplyBattleArg applyArg,
             MapInitArg mapInitData, bool isPureLocal)
         {
             Logx.Log(LogxType.Game, "start create a local battle");
@@ -272,7 +272,7 @@ namespace Battle_Client
             localBattleExecuter.Init();
 
             //根据申请战斗参数 获得后台战斗逻辑
-            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, source, mapInitData, isPureLocal);
+            var battleLogic = localBattleExecuter.CreateLocalBattleLogic(applyArg, mapInitData, isPureLocal);
 
             //通过后台战斗逻辑 获得客户端战斗初始化参数（供客户端初始化，如地图加载 模型加载等）
             battleClientArgs = GetBattleClientArgs(battleLogic);
@@ -331,94 +331,94 @@ namespace Battle_Client
             finishCallback?.Invoke(mapSaveData);
         }
 
-        //加载战斗触发器资源文件
-        public IEnumerator LoadTriggerResource(int battleConfigId, Action<TriggerSourceResData> finishCallback)
-        {
-            Logx.Log(LogxType.Battle, "BattleManager : LoadTriggerResource ");
-
-            // TriggerSourceResData source = new TriggerSourceResData();
-            // source.dataStrList = new List<string>();
-            //
-            // var battleConfigTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
-            // var triggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleConfigTb.TriggerId);
-            //
-            // //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
-            // var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
-            //
-            //
-            // if (!GlobalConfig.isUseAB)
-            // {
-            //     var loadPath2 = GlobalConfig.buildPath + "/" + triggerTb.ScriptPath;
-            //     var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories)
-            //         .ToList();
-            //
-            //     files = new List<string>();
-            //     for (int i = 0; i < files2.Count; i++)
-            //     {
-            //         var f = files2[i];
-            //         var f2 = f.Replace(GlobalConfig.buildPath + "/", "");
-            //         files.Add(f2);
-            //     }
-            // }
-            // else
-            // {
-            //     var loadPath2 = GlobalConfig.buildPath + "/" + triggerTb.ScriptPath;
-            //     var abPath = loadPath2 + ".ab";
-            //     if (AssetManager.Instance.abToAssetsDic.ContainsKey(abPath))
-            //     {
-            //         files = new List<string>();
-            //         var assets = AssetManager.Instance.abToAssetsDic[abPath];
-            //         foreach (var assetPath in assets)
-            //         {
-            //             var resultPath = assetPath.Replace(GlobalConfig.buildPath.ToLower() + "/", "");
-            //             files.Add(resultPath);
-            //         }
-            //     }
-            //     else
-            //     {
-            //         Logx.LogError("the ab is not found : abPath : " + abPath);
-            //     }
-            // }
-            //
-            //
-            // foreach (var filePath in files)
-            // {
-            //     bool isLoadFinish = false;
-            //     string loadText = "";
-            //     //Logx.Log("local execute : start load : filePath :  " + filePath);
-            //     //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
-            //     var loadPath = Path.Combine(GlobalConfig.buildPath, filePath);
-            //
-            //     //Debug.Log("zxy : loadPath " + loadPath);
-            //
-            //     //里面已经判断 是否AB 模式了 所以这里通用
-            //     ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
-            //     {
-            //         //Logx.Log("local execute : load text finish: " + textAsset.text);
-            //         loadText = textAsset.text;
-            //         isLoadFinish = true;
-            //     });
-            //
-            //     while (true)
-            //     {
-            //         yield return null;
-            //
-            //         if (isLoadFinish)
-            //         {
-            //             source.dataStrList.Add(loadText);
-            //             break;
-            //         }
-            //     }
-            // }
-
-            yield return null;
-
-
-            Logx.Log(LogxType.Battle, "local execute : finish all ");
-            // finishCallback?.Invoke(source);
-            
-            finishCallback?.Invoke(null);
-        }
+        // //加载战斗触发器资源文件
+        // public IEnumerator LoadTriggerResource(int battleConfigId, Action<TriggerSourceResData> finishCallback)
+        // {
+        //     Logx.Log(LogxType.Battle, "BattleManager : LoadTriggerResource ");
+        //
+        //     // TriggerSourceResData source = new TriggerSourceResData();
+        //     // source.dataStrList = new List<string>();
+        //     //
+        //     // var battleConfigTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleConfigId);
+        //     // var triggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleConfigTb.TriggerId);
+        //     //
+        //     // //需要更改方式 可以全配 或者引用关系用配置表 不要用 cs 文件
+        //     // var files = BattlrTriggerPathDefine.GetTriggerPathList(triggerTb.ScriptPath);
+        //     //
+        //     //
+        //     // if (!GlobalConfig.isUseAB)
+        //     // {
+        //     //     var loadPath2 = GlobalConfig.buildPath + "/" + triggerTb.ScriptPath;
+        //     //     var files2 = System.IO.Directory.GetFiles(loadPath2, "*.json", System.IO.SearchOption.AllDirectories)
+        //     //         .ToList();
+        //     //
+        //     //     files = new List<string>();
+        //     //     for (int i = 0; i < files2.Count; i++)
+        //     //     {
+        //     //         var f = files2[i];
+        //     //         var f2 = f.Replace(GlobalConfig.buildPath + "/", "");
+        //     //         files.Add(f2);
+        //     //     }
+        //     // }
+        //     // else
+        //     // {
+        //     //     var loadPath2 = GlobalConfig.buildPath + "/" + triggerTb.ScriptPath;
+        //     //     var abPath = loadPath2 + ".ab";
+        //     //     if (AssetManager.Instance.abToAssetsDic.ContainsKey(abPath))
+        //     //     {
+        //     //         files = new List<string>();
+        //     //         var assets = AssetManager.Instance.abToAssetsDic[abPath];
+        //     //         foreach (var assetPath in assets)
+        //     //         {
+        //     //             var resultPath = assetPath.Replace(GlobalConfig.buildPath.ToLower() + "/", "");
+        //     //             files.Add(resultPath);
+        //     //         }
+        //     //     }
+        //     //     else
+        //     //     {
+        //     //         Logx.LogError("the ab is not found : abPath : " + abPath);
+        //     //     }
+        //     // }
+        //     //
+        //     //
+        //     // foreach (var filePath in files)
+        //     // {
+        //     //     bool isLoadFinish = false;
+        //     //     string loadText = "";
+        //     //     //Logx.Log("local execute : start load : filePath :  " + filePath);
+        //     //     //var partPath = filePath.Replace(Const.AssetBundlePath + "/", "").Replace(".ab", ".json").Replace("\\", "/");
+        //     //     var loadPath = Path.Combine(GlobalConfig.buildPath, filePath);
+        //     //
+        //     //     //Debug.Log("zxy : loadPath " + loadPath);
+        //     //
+        //     //     //里面已经判断 是否AB 模式了 所以这里通用
+        //     //     ResourceManager.Instance.GetObject<TextAsset>(loadPath, (textAsset) =>
+        //     //     {
+        //     //         //Logx.Log("local execute : load text finish: " + textAsset.text);
+        //     //         loadText = textAsset.text;
+        //     //         isLoadFinish = true;
+        //     //     });
+        //     //
+        //     //     while (true)
+        //     //     {
+        //     //         yield return null;
+        //     //
+        //     //         if (isLoadFinish)
+        //     //         {
+        //     //             source.dataStrList.Add(loadText);
+        //     //             break;
+        //     //         }
+        //     //     }
+        //     // }
+        //
+        //     yield return null;
+        //
+        //
+        //     Logx.Log(LogxType.Battle, "local execute : finish all ");
+        //     // finishCallback?.Invoke(source);
+        //     
+        //     finishCallback?.Invoke(null);
+        // }
 
 
         public Battle_Client.BattleClient_CreateBattleArgs GetBattleClientArgs(Battle.Battle battle)

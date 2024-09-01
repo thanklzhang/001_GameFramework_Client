@@ -232,7 +232,7 @@ namespace Battle_Client
 
     public void CheckInput()
     {
-        if (this.battleState != BattleState.Running)
+        if (this.BattleState != BattleState.Running)
         {
             return;
         }

@@ -14,7 +14,7 @@ namespace Battle_Client
         }
 
         public void RecvBattleMsg<T>(BaseClientRecvMsgArg arg)
-            where T : ClientRecvMsg, new()
+            where T : ClientRecvMsg,  new()
         {
             T t = new T();
             t.msgArg = arg;

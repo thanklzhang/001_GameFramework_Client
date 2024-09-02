@@ -19,7 +19,7 @@ namespace Battle_Client
             var arg = this.msgArg as SkillEffectDestroy_RecvMsg_Arg;
             var effectGuid = arg.effectGuid;
             //如果是 buff 先处理 UI 显示
-            var effect = BattleSkillEffect_Client_Manager.Instance.FindSkillEffect(effectGuid);
+            var effect = BattleSkillEffectManager_Client.Instance.FindSkillEffect(effectGuid);
             if (effect != null)
             {
                 var targetEntityGuid = effect.GetFollowEntityGuid();
@@ -42,7 +42,7 @@ namespace Battle_Client
             }
 
 
-            BattleSkillEffect_Client_Manager.Instance.DestorySkillEffect(effectGuid);
+            BattleSkillEffectManager_Client.Instance.DestorySkillEffect(effectGuid);
         }
     }
 

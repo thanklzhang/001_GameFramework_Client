@@ -6,11 +6,16 @@ namespace Battle_Client
     //技能相关
     public partial class BattleEntity_Client
     {
-        
+        List<BattleSkillInfo> skills;
         internal void SetSkillList(List<BattleSkillInfo> skills)
         {
             this.skills = skills;
         }
+        public List<BattleSkillInfo> GetSkills()
+        {
+            return skills;
+        }
+
         
         public BattleSkillInfo FindSkill(int skillConfigId)
         {
@@ -88,4 +93,23 @@ namespace Battle_Client
 
 
     }
+    
+    
+    public class BattleSkillInfo
+    {
+        public int releaserGuid;
+        public int configId;
+        public int level;
+        public float maxCDTime;
+        public float currCDTime;
+
+        internal void UpdateInfo(float currCDTime, float maxCDTime)
+        {
+            this.currCDTime = currCDTime;
+            this.maxCDTime = maxCDTime;
+
+            EventDispatcher.Broadcast(EventIDs.OnSkillInfoUpdate, releaserGuid, this);
+        }
+    }
+
 }

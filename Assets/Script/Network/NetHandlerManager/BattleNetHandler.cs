@@ -514,10 +514,10 @@ public class BattleNetHandler : NetHandler
     {
         scNotifySyncEntityValue sync = scNotifySyncEntityValue.Parser.ParseFrom(byteData);
 
-        List<BattleClientMsg_BattleValue> values = new List<BattleClientMsg_BattleValue>();
+        List<BattleClientMsg_BattleStateValue> values = new List<BattleClientMsg_BattleStateValue>();
         foreach (var item in sync.Values)
         {
-            BattleClientMsg_BattleValue battleValue = new BattleClientMsg_BattleValue()
+            BattleClientMsg_BattleStateValue battleValue = new BattleClientMsg_BattleStateValue()
             {
                 type = (EntityCurrValueType)item.Type,
                 value = item.Value,

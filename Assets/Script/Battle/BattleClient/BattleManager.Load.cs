@@ -67,8 +67,8 @@ namespace Battle_Client
 
             MapInitArg mapInitData = new MapInitArg();
             mapInitData.mapList = mapSaveData.mapList;
-            mapInitData.posList = VectorConvert.ToVector3s(mapSaveData.posList);
-            mapInitData.playerInitPosList = VectorConvert.ToVector3s(mapSaveData.playerInitPosList);
+            mapInitData.posList = VectorConvert.ToVector3(mapSaveData.posList);
+            mapInitData.playerInitPosList = VectorConvert.ToVector3(mapSaveData.playerInitPosList);
 
             //设置本地战斗逻辑
             SetLocalBattleLogic(applyArg, mapInitData, true);

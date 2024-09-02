@@ -36,4 +36,12 @@
         //敌人
         Enemy = 2
     }
+    
+    public enum BattleSkillEffectState
+    {
+        Idle = 0,
+        Move = 1,
+        WillDestroy = 2,
+        Destroy = 3
+    }
 }

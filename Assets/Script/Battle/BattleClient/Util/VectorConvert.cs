@@ -4,7 +4,7 @@ namespace Battle_Client
 {
     public class VectorConvert
     {
-        public static List<Battle.Vector3> ToVector3s(List<float[]> _posList)
+        public static List<Battle.Vector3> ToVector3(List<float[]> _posList)
         {
             List<Battle.Vector3> pList = new List<Battle.Vector3>();
             ;

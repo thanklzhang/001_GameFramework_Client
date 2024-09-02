@@ -316,8 +316,8 @@ namespace Battle_Client
 
         public void NotifyAll_SyncEntityCurrHealth(int guid, int hp, int fromEntityGuid)
         {
-            List<BattleClientMsg_BattleValue> values = new List<BattleClientMsg_BattleValue>();
-            BattleClientMsg_BattleValue v = new BattleClientMsg_BattleValue()
+            List<BattleClientMsg_BattleStateValue> values = new List<BattleClientMsg_BattleStateValue>();
+            BattleClientMsg_BattleStateValue v = new BattleClientMsg_BattleStateValue()
             {
                 type = EntityCurrValueType.CurrHealth,
                 value = hp,

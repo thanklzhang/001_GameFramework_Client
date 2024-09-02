@@ -21,7 +21,7 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(arg.entityGuid);
             if (entity != null)
             {
-                entity.SyncValue(arg.values);
+                entity.SyncStateValue(arg.values);
             }
         }
     }
@@ -29,6 +29,6 @@ namespace Battle_Client
     public class SyncEntityValue_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int entityGuid;
-        public List<BattleClientMsg_BattleValue> values;
+        public List<BattleClientMsg_BattleStateValue> values;
     }
 }

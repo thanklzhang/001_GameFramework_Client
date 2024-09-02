@@ -18,7 +18,7 @@ namespace Battle_Client
         {
             var arg = this.msgArg as BuffInfoUpdate_RecvMsg_Arg;
 
-            var effect = BattleSkillEffect_Client_Manager.Instance.FindSkillEffect(arg.buffInfo.guid);
+            var effect = BattleSkillEffectManager_Client.Instance.FindSkillEffect(arg.buffInfo.guid);
 
             if (effect != null)
             {

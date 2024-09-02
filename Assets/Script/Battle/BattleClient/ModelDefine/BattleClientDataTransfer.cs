@@ -84,7 +84,7 @@ namespace Battle_Client
         public float value;
     }
 
-    public class BattleClientMsg_BattleValue
+    public class BattleClientMsg_BattleStateValue
     {
         public EntityCurrValueType type;
         public float value;

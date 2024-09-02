@@ -9,11 +9,9 @@ using UnityEngine;
 
 namespace Battle_Client
 {
-    public class BattleSkillEffect_Client_Manager : Singleton<BattleSkillEffect_Client_Manager>
+    public class BattleSkillEffectManager_Client : Singleton<BattleSkillEffectManager_Client>
     {
         Dictionary<int, BattleSkillEffect> skillEffectDic = new Dictionary<int, BattleSkillEffect>();
-
-
 
         public void Init()
         {
@@ -26,34 +24,24 @@ namespace Battle_Client
             //EventDispatcher.AddListener<BattleEntityInfo>(EventIDs.OnCreateBattle, CreateEntity);
         }
 
-        //收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
+        //收到 创建技能效果 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
         internal void CreateSkillEffect(CreateEffectInfo createEffectInfo)
         {
             var skillEffect = CreateSkillEffectInfo(createEffectInfo);
             skillEffect.StartSelfLoadModel();
         }
 
-
-        ////收到 创建实体 的事件 ,将要进行创建一个完整的实体(包括数据和资源显示等) , 这里 entity 进行自行加载
-        //public void CreateEntity(BattleEntityInfo battleEntityInfo)
-        //{
-        //    var entity = CreateViewEntityInfo(battleEntityInfo);
-        //    entity.StartSelfLoadModel();
-        //}
-
         //只创建技能信息 , 是创建一个技能实体的一个步骤
         internal BattleSkillEffect CreateSkillEffectInfo(CreateEffectInfo createEffectInfo)
         {
             //var guid = serverEntity.Guid;
             //var configId = serverEntity.ConfigId;
-
             var guid = createEffectInfo.guid;
             var resId = createEffectInfo.resId;
             var pos = new UnityEngine.Vector3(createEffectInfo.createPos.x, createEffectInfo.createPos.y,
                 createEffectInfo.createPos.z);
             var followEntityGuid = createEffectInfo.followEntityGuid;
             var isAutoDestroy = createEffectInfo.isAutoDestroy;
-
 
             if (skillEffectDic.ContainsKey(guid))
             {
@@ -88,21 +76,13 @@ namespace Battle_Client
             {
                 skillEffect.SetPosition(pos);
             }
-
-            //skillEffect.SetLastTime(lastTime);
-
-            //test
             skillEffect.SetIsAutoDestroy(isAutoDestroy);
 
             if (createEffectInfo.buffInfo != null && createEffectInfo.buffInfo.guid > 0)
             {
                 skillEffect.SetBuffInfo(createEffectInfo.buffInfo);
             }
-
-            //Logx.Log("add skill effect : guid : " + guid);
             skillEffectDic.Add(guid, skillEffect);
-
-            //entity.StartLoadModel(loadFinishCallback);
             return skillEffect;
         }
 
@@ -142,6 +122,15 @@ namespace Battle_Client
             }
         }
 
+        public void OnBattleEnd()
+        {
+            foreach (var item in skillEffectDic)
+            {
+                var skillEffect = item.Value;
+                skillEffect.OnBattleEnd();
+            }
+        }
+        
         public void DestorySkillEffect(int guid)
         {
             if (skillEffectDic.ContainsKey(guid))
@@ -155,22 +144,8 @@ namespace Battle_Client
                 Logx.LogWarning("the guid is not found : " + guid);
             }
         }
-
-        public void OnBattleEnd()
-        {
-            foreach (var item in skillEffectDic)
-            {
-                var skillEffect = item.Value;
-                skillEffect.OnBattleEnd();
-            }
-        }
         
-        public void RemoveListener()
-        {
-            //EventDispatcher.RemoveListener<BattleEntityInfo>(EventIDs.OnCreateBattle, CreateEntity);
-        }
-
-        public void ReleaseAll()
+        public void DestorySkillEffects()
         {
             var kvs = skillEffectDic.ToList();
             for (int i = 0; i < kvs.Count; i++)
@@ -184,6 +159,21 @@ namespace Battle_Client
             }
         }
 
-       
+        public void RemoveListener()
+        {
+            //EventDispatcher.RemoveListener<BattleEntityInfo>(EventIDs.OnCreateBattle, CreateEntity);
+        }
+        
+        public void Clear()
+        {
+            RemoveListener();
+            DestorySkillEffects();
+        }
+
+        public void Release()
+        {
+            
+        }
+
     }
 }

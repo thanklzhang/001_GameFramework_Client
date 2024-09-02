@@ -96,11 +96,11 @@ public class BattleBuffUI
         }
         else
         {
-            var eft = BattleSkillEffect_Client_Manager.Instance.FindSkillEffect(buffInfo.guid);
+            var eft = BattleSkillEffectManager_Client.Instance.FindSkillEffect(buffInfo.guid);
             if (eft != null)
             {
                 //如果在 技能效果中找到了 那么应该是非 buff 的显示特效 需要删除 (这块逻辑待修改)
-                BattleSkillEffect_Client_Manager.Instance.DestorySkillEffect(buffInfo.guid);
+                BattleSkillEffectManager_Client.Instance.DestorySkillEffect(buffInfo.guid);
             }
             else
             {

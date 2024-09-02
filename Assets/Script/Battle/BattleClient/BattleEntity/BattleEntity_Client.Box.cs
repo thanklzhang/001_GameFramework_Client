@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Battle_Client
 {
+    //实体身上的宝箱部分
     public partial class BattleEntity_Client
     {
         //拥有的宝箱配置id list

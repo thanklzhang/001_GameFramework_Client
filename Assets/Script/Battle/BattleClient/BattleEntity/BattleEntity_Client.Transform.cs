@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Battle_Client
 {
+    //实体转换部分 如位移旋转等
     public partial class BattleEntity_Client
     {
         Vector3 moveTargetPos;

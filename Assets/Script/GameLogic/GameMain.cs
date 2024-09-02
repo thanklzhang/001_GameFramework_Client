@@ -64,7 +64,7 @@ public class GameMain : MonoBehaviour
 
 
         BattleEntityManager.Instance.Init();
-        BattleSkillEffect_Client_Manager.Instance.Init();
+        BattleSkillEffectManager_Client.Instance.Init();
         PlotManager.Instance.Init();
 
         var audioRoot = transform.Find("AudioRoot");
@@ -141,7 +141,7 @@ public class GameMain : MonoBehaviour
         
         BattleManager.Instance.Update(Time.deltaTime);
         BattleEntityManager.Instance.Update(Time.deltaTime);
-        BattleSkillEffect_Client_Manager.Instance.Update(Time.deltaTime);
+        BattleSkillEffectManager_Client.Instance.Update(Time.deltaTime);
 
         PlotManager.Instance.Update(Time.deltaTime);
 

@@ -17,7 +17,6 @@ namespace Battle_Client
         public int Team => BattleManager.Instance.GetTeamByPlayerIndex(this.playerIndex);
         public float MaxHealth => attr.maxHealth;
         
-       
         public BattleEntityState state = BattleEntityState.Idle;
         
         public GameObject gameObject;
@@ -25,14 +24,6 @@ namespace Battle_Client
         
         public float deadDisappearCurrTimer = 0;
         public float deadDisappearTotalTime = 2.0f;
-        
-        
-        //attr
-        public BattleEntityAttr attr = new BattleEntityAttr();
-        
-        List<BattleSkillInfo> skills;
-        List<BattleItemInfo> itemList = new List<BattleItemInfo>();
-        List<BattleItemInfo> skillItemList = new List<BattleItemInfo>();
         
         //初始化
         public void Init(int guid, int configId)
@@ -47,208 +38,6 @@ namespace Battle_Client
             InitItemList();
         }
 
-        //道具初始化
-        void InitItemList()
-        {
-            itemList = new List<BattleItemInfo>();
-            for (int i = 0; i < 6; i++)
-            {
-                BattleItemInfo item = new BattleItemInfo();
-                item.index = i;
-                item.ownerGuid = this.guid;
-
-
-                itemList.Add(item);
-            }
-        }
-
-       
-        internal void SetPlayerIndex(int playerIndex)
-        {
-            this.playerIndex = playerIndex;
-        }
-
-        internal void SetItemList(List<BattleItemInfo> itemList)
-        {
-            this.itemList = itemList;
-        }
-
-        public BattleItemInfo FindItem(int index)
-        {
-            var item = this.itemList.Find((s) => { return s.index == index; });
-
-            return item;
-        }
-
-        public BattleItemInfo FindSkillItem(int index)
-        {
-            var item = this.skillItemList.Find((s) => { return s.index == index; });
-
-            return item;
-        }
-
-        internal void UpdateItemInfo(int index, int configId, int count, float currCDTime, float maxCDTime)
-        {
-            Logx.Log(LogxType.BattleItem, "entity (client) UpdateItemInfo : UpdateItemInfo , index : " + index +
-                                          " , configId : " + configId + " , count : " + count);
-
-            var item = this.FindItem(index);
-            // if (null == item)
-            // {
-            //     item = new BattleItemInfo()
-            //     {
-            //         configId = configId,
-            //         index = index,
-            //         count = count,
-            //         currCDTime = currCDTime,
-            //         maxCDTime = maxCDTime
-            //     };
-            //     
-            //     this.itemList.Add(item);
-            //     this.itemList.Sort((a,b) =>
-            //     {
-            //         return a.index.CompareTo(b.index);
-            //     });
-            // }
-
-            if (item != null)
-            {
-                item?.UpdateInfo(configId, count, currCDTime, maxCDTime);
-
-                EventDispatcher.Broadcast(EventIDs.OnItemInfoUpdate, item);
-            }
-        }
-
-        internal void UpdateSkillItemInfo(int index, int configId, int count, float currCDTime, float maxCDTime)
-        {
-            Logx.Log(LogxType.BattleItem, "entity (client) : UpdateSkillItemInfo , index : " + index +
-                                          " , configId : " + configId + " , count : " + count);
-
-            var item = this.FindSkillItem(index);
-            // if (null == item)
-            // {
-            //     item = new BattleItemInfo()
-            //     {
-            //         configId = configId,
-            //         index = index,
-            //         count = count,
-            //         currCDTime = currCDTime,
-            //         maxCDTime = maxCDTime
-            //     };
-            //     
-            //     this.itemList.Add(item);
-            //     this.itemList.Sort((a,b) =>
-            //     {
-            //         return a.index.CompareTo(b.index);
-            //     });
-            // }
-
-            if (item != null)
-            {
-                item?.UpdateInfo(configId, count, currCDTime, maxCDTime);
-                if (count <= 0)
-                {
-                    this.skillItemList.Remove(item);
-                }
-            }
-            else
-            {
-                item = new BattleItemInfo();
-                item.configId = configId;
-                item.count = count;
-                item.currCDTime = currCDTime;
-                item.maxCDTime = maxCDTime;
-                item.index = index;
-                item.ownerGuid = this.guid;
-
-                this.skillItemList.Add(item);
-            }
-
-            EventDispatcher.Broadcast(EventIDs.OnSkillItemInfoUpdate, item);
-        }
-
-        public static EntityRelationType GetRelation(BattleEntity_Client aEntity, BattleEntity_Client bEntity)
-        {
-            if (null == aEntity || null == bEntity)
-            {
-                return EntityRelationType.Me;
-            }
-
-            if (aEntity.guid == bEntity.guid)
-            {
-                return EntityRelationType.Me;
-            }
-            else
-            {
-                if (aEntity.Team == bEntity.Team)
-                {
-                    return EntityRelationType.Friend;
-                }
-                else
-                {
-                    return EntityRelationType.Enemy;
-                }
-            }
-        }
-
-        internal void SyncAttr(List<BattleClientMsg_BattleAttr> attrs)
-        {
-            foreach (var item in attrs)
-            {
-                var type = (EntityAttrType)item.type;
-                if (type == EntityAttrType.Attack)
-                {
-                    this.attr.attack = (int)item.value;
-                }
-                else if (type == EntityAttrType.Defence)
-                {
-                    this.attr.defence = (int)item.value;
-                }
-                else if (type == EntityAttrType.MaxHealth)
-                {
-                    this.attr.maxHealth = (int)item.value;
-                }
-                else if (type == EntityAttrType.MoveSpeed)
-                {
-                    // /1000
-                    this.attr.moveSpeed = item.value;
-
-                    //ani
-                    var aniScale = this.attr.moveSpeed / normalAnimationMoveSpeed;
-                    SetAnimationSpeed(aniScale);
-                }
-                else if (type == EntityAttrType.AttackSpeed)
-                {
-                    // /1000
-                    this.attr.attackSpeed = item.value;
-                }
-                else if (type == EntityAttrType.AttackRange)
-                {
-                    // /1000
-                    this.attr.attackRange = item.value;
-                }
-
-                //Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
-
-                EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, 0);
-            }
-        }
-
-        internal void SyncValue(List<BattleClientMsg_BattleValue> values)
-        {
-            foreach (var item in values)
-            {
-                var type = (EntityCurrValueType)item.type;
-                var value = item.value;
-                if (type == EntityCurrValueType.CurrHealth)
-                {
-                    this.CurrHealth = value;
-                }
-                //Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
-
-                EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, item.fromEntityGuid);
-            }
-        }
 
         public void Update(float timeDelta)
         {
@@ -281,12 +70,41 @@ namespace Battle_Client
             }
         }
 
+        
+        internal void SetPlayerIndex(int playerIndex)
+        {
+            this.playerIndex = playerIndex;
+        }
+
+        public static EntityRelationType GetRelation(BattleEntity_Client aEntity, BattleEntity_Client bEntity)
+        {
+            if (null == aEntity || null == bEntity)
+            {
+                return EntityRelationType.Me;
+            }
+
+            if (aEntity.guid == bEntity.guid)
+            {
+                return EntityRelationType.Me;
+            }
+            else
+            {
+                if (aEntity.Team == bEntity.Team)
+                {
+                    return EntityRelationType.Friend;
+                }
+                else
+                {
+                    return EntityRelationType.Enemy;
+                }
+            }
+        }
+        
         internal void SetShowState(bool isShow)
         {
             gameObject.SetActive(isShow);
         }
         
-       
         public IEnumerator RemoveSelf()
         {
             yield return new WaitForSeconds(2);
@@ -307,7 +125,6 @@ namespace Battle_Client
 
             // CoroutineManager.Instance.StartCoroutine(RemoveSelf());
         }
-        
         
         public void Destroy()
         {

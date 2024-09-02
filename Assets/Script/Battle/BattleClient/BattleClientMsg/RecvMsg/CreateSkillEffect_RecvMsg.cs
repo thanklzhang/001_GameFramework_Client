@@ -18,7 +18,7 @@ namespace Battle_Client
         {
             var arg = this.msgArg as CreateSkillEffect_RecvMsg_Arg;
             
-            BattleSkillEffect_Client_Manager.Instance.CreateSkillEffect(arg.createEffectInfo);
+            BattleSkillEffectManager_Client.Instance.CreateSkillEffect(arg.createEffectInfo);
 
         }
     }

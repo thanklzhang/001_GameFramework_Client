@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Battle_Client
 {
-    //模型相关
+    //模型相关 包括模型加载 动画播放等
     public partial class BattleEntity_Client
     {
         public GameObject tempModel;

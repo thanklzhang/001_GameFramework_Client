@@ -19,7 +19,7 @@ namespace Battle_Client
             var arg = this.msgArg as SkillEffectStartMove_RecvMsg_Arg;
 
             var guid = arg.EffectGuid;
-            var skillEffect = BattleSkillEffect_Client_Manager.Instance.FindSkillEffect(guid);
+            var skillEffect = BattleSkillEffectManager_Client.Instance.FindSkillEffect(guid);
             if (skillEffect != null)
             {
                 skillEffect.StartMove(arg.TargetPos, arg.TargetGuid, arg.moveSpeed);

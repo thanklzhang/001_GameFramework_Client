@@ -31,7 +31,7 @@ namespace Battle_Client
         void On_SkillEffectStartMove(int EffectGuid, UnityEngine.Vector3 TargetPos, int TargetGuid, float moveSpeed);
         void On_DestroySkillEffect(int effectGuid);
         void On_SyncEntityAttr(int entityGuid, List<BattleClientMsg_BattleAttr> atts);
-        void On_SyncEntityValue(int entityGuid, List<BattleClientMsg_BattleValue> values);
+        void On_SyncEntityValue(int entityGuid, List<BattleClientMsg_BattleStateValue> values);
         void On_EntityDead(int entityGuid);
         void On_PlayPlot(string plotName);
         void On_PlotEnd();

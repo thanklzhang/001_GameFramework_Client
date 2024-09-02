@@ -119,7 +119,7 @@ namespace Battle_Client
 
             BattleEntityManager.Instance.OnBattleEnd();
             skillTrackModule.OnBattleEnd();
-            BattleSkillEffect_Client_Manager.Instance.OnBattleEnd();
+            BattleSkillEffectManager_Client.Instance.OnBattleEnd();
         }
 
         public void RemoveListener()

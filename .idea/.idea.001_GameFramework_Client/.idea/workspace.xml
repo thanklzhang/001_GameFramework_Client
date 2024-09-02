@@ -5,12 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a839c9e3-7b1c-41da-8e68-db7c9032a3fd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/Manager/BattleEntityManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.001_GameFramework_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/IBattleClientMsgReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/IBattleClientMsgReceiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/BuffInfoUpdate_RecvMsg.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/BuffInfoUpdate_RecvMsg.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/CreateSkillEffect_RecvMsg.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/CreateSkillEffect_RecvMsg.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/SkillEffectDestroy_RecvMsg.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/SkillEffectDestroy_RecvMsg.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/SkillEffectStartMove_RecvMsg.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/SkillEffectStartMove_RecvMsg.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/SyncEntityValue_RecvMsg.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleClientMsg/RecvMsg/SyncEntityValue_RecvMsg.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEffect/BattleSkillEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEffect/BattleSkillEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEffect/BattleSkillEffect_Client_Manager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEffect/Manager/BattleSkillEffectManager_Client.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEffect/BattleSkillEffect_Client_Manager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEffect/Manager/BattleSkillEffectManager_Client.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/Attr.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/Attr/BattleEntityAttr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleEntityAttr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/Attr/BattleEntityAttr.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleEntityAttr.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntityManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntityManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/Manager/BattleEntityManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Box.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Box.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Get.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Get.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Skill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Skill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Transform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.Transform.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleEntity/BattleEntity_Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleDefine_Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleDefine_Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleManager.Load.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleManager.Load.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/BattleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/DataTransfer.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/DataTransfer/BattleClientDataTransfer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleClientDataTransfer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/DataTransfer/BattleClientDataTransfer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleClientDataTransfer.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleDefine_Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/DefineEnum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/BattleDefine_Client.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/ModelDefine/DefineEnum.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/Util/BattleConvert.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/Util/BattleConvert.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/Util/VectorConvert.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/BattleClient/Util/VectorConvert.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/LocalBattleLogic/Executer/Impl/LocalBattleLogic_MsgSender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/LocalBattleLogic/Executer/Impl/LocalBattleLogic_MsgSender.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Battle/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Battle/LocalBattleLogic/Executer/LocalBattleLogic_Executer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameLogic/GameMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BattleNetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Network/NetHandlerManager/BattleNetHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleBuffShowUI/BattleBuffUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/UICtrl/BattleUI/BattleBuffShowUI/BattleBuffUI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,15 +52,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a655008de92846458baa16d876fb23c4171c00/ce/cc003314/KeyCode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e585f5e2b21741c8a3a65b4f9abfa5e8572e20/61/c9da37cb/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackStrategyEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/BuildPackage/ABPackageStrategySO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/BattleConfigManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Battle_Client/LocalBattleLogic/BattleLogic/BattleCore/Config/IBattleConfig.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Config/Table/AreaEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/CommonUtil/FileOperate.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Framework/Config/BaseTable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/ButtonEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SelectableEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />

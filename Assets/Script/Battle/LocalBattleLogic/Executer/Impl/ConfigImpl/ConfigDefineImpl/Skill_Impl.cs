@@ -121,34 +121,9 @@ namespace Battle
         public int ReleaserEffectResId => config.ReleaserEffectResId;
         
         /// <summary>
-        ///技能释放 投掷物 指示器类型
+        ///技能指示器id
         /// </summary>
-        public int SkillDirectorProjectileType => config.SkillDirectorProjectileType;
-        
-        /// <summary>
-        ///技能释放 投掷物 指示器参数
-        /// </summary>
-        public List<int> SkillDirectorProjectileParam => config.SkillDirectorProjectileParam;
-        
-        /// <summary>
-        ///技能释放 释放者 指示类型
-        /// </summary>
-        public int SkillReleaserDirectType => config.SkillReleaserDirectType;
-        
-        /// <summary>
-        ///释放者指示参数
-        /// </summary>
-        public List<int> SkillReleaserDirectParam => config.SkillReleaserDirectParam;
-        
-        /// <summary>
-        ///技能释放 目标 指示类型
-        /// </summary>
-        public int SkillTargetDirectType => config.SkillTargetDirectType;
-        
-        /// <summary>
-        ///目标指示参数
-        /// </summary>
-        public List<int> SkillTargetDirectParam => config.SkillTargetDirectParam;
+        public int SkillDirectionId => config.SkillDirectionId;
         
         /// <summary>
         ///技能轨迹 Id 列表

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using Config;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,20 +58,32 @@ public class SkillDirectorModule
     public BaseSkillDirector GenNewDirector(SkillDirectorType type)
     {
         BaseSkillDirector skillDirector = null;
+        var skillDirId = skillConfig.SkillDirectionId;
+        if (0 == skillDirId)
+        {
+            return null;
+        }
+
+        var skillDirConfig = ConfigManager.Instance.GetById<Config.SkillDirection>(skillDirId);
+        if (null == skillDirConfig)
+        {
+            return null;
+        }
+
         if (type == SkillDirectorType.DirectorProjectile)
         {
             skillDirector = new SkillDirectorProjectile();
-            skillDirector.Init(skillConfig.SkillDirectorProjectileType, skillConfig.SkillDirectorProjectileParam);
+            skillDirector.Init(skillDirConfig.SkillDirectorProjectileType, skillDirConfig.SkillDirectorProjectileParam);
         }
         else if (type == SkillDirectorType.DirectorReleaserTerminal)
         {
             skillDirector = new SkillDirectorTerminal();
-            skillDirector.Init(skillConfig.SkillReleaserDirectType, skillConfig.SkillReleaserDirectParam);
+            skillDirector.Init(skillDirConfig.SkillReleaserDirectType, skillDirConfig.SkillReleaserDirectParam);
         }
         else if (type == SkillDirectorType.DirectorTargetTerminal)
         {
             skillDirector = new SkillDirectorTerminal();
-            skillDirector.Init(skillConfig.SkillTargetDirectType, skillConfig.SkillTargetDirectParam);
+            skillDirector.Init(skillDirConfig.SkillTargetDirectType, skillDirConfig.SkillTargetDirectParam);
 
         }
 

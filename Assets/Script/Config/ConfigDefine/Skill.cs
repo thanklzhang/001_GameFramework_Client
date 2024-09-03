@@ -113,34 +113,9 @@ namespace Config
         private int releaserEffectResId; 
         
         /// <summary>
-        ///技能释放 投掷物 指示器类型
+        ///技能指示器id
         /// </summary>
-        private int skillDirectorProjectileType; 
-        
-        /// <summary>
-        ///技能释放 投掷物 指示器参数
-        /// </summary>
-        private List<int> skillDirectorProjectileParam; 
-        
-        /// <summary>
-        ///技能释放 释放者 指示类型
-        /// </summary>
-        private int skillReleaserDirectType; 
-        
-        /// <summary>
-        ///释放者指示参数
-        /// </summary>
-        private List<int> skillReleaserDirectParam; 
-        
-        /// <summary>
-        ///技能释放 目标 指示类型
-        /// </summary>
-        private int skillTargetDirectType; 
-        
-        /// <summary>
-        ///目标指示参数
-        /// </summary>
-        private List<int> skillTargetDirectParam; 
+        private int skillDirectionId; 
         
         /// <summary>
         ///技能轨迹 Id 列表
@@ -189,17 +164,7 @@ namespace Config
         
         public int ReleaserEffectResId { get => releaserEffectResId; }     
         
-        public int SkillDirectorProjectileType { get => skillDirectorProjectileType; }     
-        
-        public List<int> SkillDirectorProjectileParam { get => skillDirectorProjectileParam; }     
-        
-        public int SkillReleaserDirectType { get => skillReleaserDirectType; }     
-        
-        public List<int> SkillReleaserDirectParam { get => skillReleaserDirectParam; }     
-        
-        public int SkillTargetDirectType { get => skillTargetDirectType; }     
-        
-        public List<int> SkillTargetDirectParam { get => skillTargetDirectParam; }     
+        public int SkillDirectionId { get => skillDirectionId; }     
         
         public List<int> SkillTrackList { get => skillTrackList; }     
         

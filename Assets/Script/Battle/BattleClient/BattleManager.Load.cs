@@ -143,11 +143,7 @@ namespace Battle_Client
 
         public void OnLoadFinish()
         {
-            skillDirectModule = new SkillDirectorModule();
-            skillDirectModule.Init();
-
-            skillTrackModule = new SkillTrackModule();
-            skillTrackModule.Init();
+            this.playerInput.InitPlayerInput();
         }
 
         #region 创建战斗

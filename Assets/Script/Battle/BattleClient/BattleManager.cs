@@ -11,22 +11,25 @@ namespace Battle_Client
         //战斗信息
         public int battleGuid;
         public int battleConfigId;
+
         public int battleRoomId;
+
         //玩家信息
         public Dictionary<int, ClientPlayer> playerDic;
         public List<ClientPlayer> playerList;
+
         ClientPlayer localPlayer;
+
         //本地玩家控制的英雄
         BattleEntity_Client localCtrlEntity;
         public BattleState BattleState;
         LocalBattleLogic_Executer localBattleExecuter;
         public IBattleClientMsgSender MsgSender;
         public IBattleClientMsgReceiver MsgReceiver;
-        public BattleType battleType;        
+        public BattleType battleType;
         private BattleClient_CreateBattleArgs battleClientArgs;
-
-
-
+        private PlayerInput playerInput;
+        
         #endregion
 
         public void Init()
@@ -34,6 +37,8 @@ namespace Battle_Client
             InitBattleRecvMsg();
             this.RegisterListener();
             BattleState = BattleState.Null;
+            
+            playerInput = new PlayerInput();
         }
 
         public void RegisterListener()
@@ -49,9 +54,9 @@ namespace Battle_Client
 
             this.localBattleExecuter?.OnEnterBattle();
         }
-        
-        
-        public void Update(float timeDelta)
+
+
+        public void Update(float deltaTime)
         {
             if (this.BattleState == BattleState.Null)
             {
@@ -59,12 +64,9 @@ namespace Battle_Client
             }
 
             UpdateRecvMsgList();
-            localBattleExecuter?.Update(timeDelta);
+            localBattleExecuter?.Update(deltaTime);
 
-            CheckInput();
-
-            this.skillDirectModule?.Update(timeDelta);
-            skillTrackModule?.Update(timeDelta);
+            playerInput.Update(deltaTime);
         }
 
         public void LateUpdate(float timeDelta)
@@ -118,7 +120,7 @@ namespace Battle_Client
 
 
             BattleEntityManager.Instance.OnBattleEnd();
-            skillTrackModule.OnBattleEnd();
+            playerInput.OnBattleEnd();
             BattleSkillEffectManager_Client.Instance.OnBattleEnd();
         }
 
@@ -129,6 +131,16 @@ namespace Battle_Client
             EventDispatcher.RemoveListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
         }
 
+        void OnSkillTrackStart(TrackBean trackBean)
+        {
+            this.playerInput.OnSkillTrackStart(trackBean);
+        }
+
+        void OnSkillTrackEnd(int entityGuid, int trackId)
+        {
+            this.playerInput.OnSkillTrackEnd(entityGuid, trackId);
+        }
+
         public void Clear()
         {
             localBattleExecuter = null;
@@ -136,7 +148,7 @@ namespace Battle_Client
             this.BattleState = BattleState.Null;
         }
 
-       
+
         public void Release()
         {
             RemoveListener();

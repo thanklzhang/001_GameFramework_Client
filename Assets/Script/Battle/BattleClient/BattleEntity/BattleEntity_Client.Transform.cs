@@ -122,9 +122,14 @@ namespace Battle_Client
             this.SetPosition(endPos);
         }
 
-        
+
         internal void SetDirTarget(Vector3 dir)
         {
+            if (dir == Vector3.zero)
+            {
+                return;
+            }
+
             this.dirTarget = dir;
         }
 

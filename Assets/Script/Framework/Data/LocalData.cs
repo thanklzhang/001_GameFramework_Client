@@ -18,5 +18,15 @@ public class LocalData
     {
         PlayerPrefs.SetString(key, value);
     }
+    
+    public static int GetInt(string key)
+    {
+        return PlayerPrefs.GetInt(key);
+    }
+
+    public static void SetInt(string key, int value)
+    {
+        PlayerPrefs.SetInt(key, value);
+    }
 }
 

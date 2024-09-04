@@ -16,7 +16,7 @@ namespace Battle_Client
             }
 
             //判断用户键盘输入
-            CheckKeyboardEvent();
+            CheckKeyboardEvent(out int eventType);
 
             //判断用户鼠标输入
             var isSelectSkillState = skillDirectModule.GetSelectState();
@@ -24,10 +24,16 @@ namespace Battle_Client
             var isMouseRightButtonDown = Input.GetMouseButtonDown(1);
             if (isSelectSkillState)
             {
+
                 //选择技能中
-                if (isMouseLeftButtonDown)
+                if (BattleManager.Instance.IsIntelligentRelease && eventType > 1)
                 {
-                    //开始执行释放技能操作
+                    //智能施法(除了普通攻击) 直接执行释放技能操作
+                    HandleReleaseSkill();
+                }
+                else if (isMouseLeftButtonDown)
+                {
+                    //选择了目标或者点 开始执行释放技能操作
                     HandleReleaseSkill();
                 }
                 else if (isMouseRightButtonDown)
@@ -38,7 +44,7 @@ namespace Battle_Client
                 }
                 else
                 {
-                    //还没有下一步操作 技能目标选择中状态
+                    //还没有下一步操作 继续技能目标选择中状态
                     CheckNoEventBySkillState();
                 }
             }
@@ -51,11 +57,17 @@ namespace Battle_Client
                 }
                 else if (isMouseRightButtonDown)
                 {
-                    //移动到某处
-                    Vector3 resultPos;
-                    if (TryToGetRayOnGroundPos(out resultPos))
+                    //检查右键普通攻击
+                    var entity = CheckNormalAttackByRightMouseKey();
+
+                    if (null == entity)
                     {
-                        this.OnPlayerClickGround(resultPos);
+                        //移动到某处
+                        Vector3 resultPos;
+                        if (TryToGetRayOnGroundPos(out resultPos))
+                        {
+                            this.OnPlayerClickGround(resultPos);
+                        }
                     }
                 }
                 else
@@ -64,6 +76,86 @@ namespace Battle_Client
                     CheckNoEventWithoutSkillState();
                 }
             }
+        }
+
+        //检查键盘输入 eventType：1：普通攻击，2：技能，3：道具
+        void CheckKeyboardEvent(out int eventType)
+        {
+            eventType = -1;
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                eventType = 1;
+                this.OnUseSkill(0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                eventType = 2;
+                this.OnUseSkill(1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                eventType = 2;
+                this.OnUseSkill(2);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                eventType = 2;
+                this.OnUseSkill(3);
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                eventType = 2;
+                this.OnUseSkill(4);
+            }
+
+
+            for (int i = (int)KeyCode.Alpha1; i <= (int)KeyCode.Alpha6; i++)
+            {
+                var index = i - (int)KeyCode.Alpha1;
+                var key = (KeyCode)(i);
+                if (Input.GetKeyDown(key))
+                {
+                    eventType = 3;
+                    this.OnUseItem(index);
+                }
+            }
+        }
+        
+        BattleEntity_Client CheckNormalAttackByRightMouseKey()
+        {
+            var localEntity = BattleManager.Instance.GetLocalCtrlHero();
+            GameObject gameObject = null;
+            List<int> entityGuidList;
+            BattleEntity_Client battleEntity = null;
+            if (TryToGetRayOnEntity(out entityGuidList))
+            {
+                //遍历寻找 效率低下 之后更改
+                //只找一个
+                battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
+            }
+
+            if (battleEntity != null)
+            {
+                var targetGuid = battleEntity.guid;
+                var targetPos = Vector3.right;
+                //先排除自己
+                if (localEntity.collider.gameObject.GetInstanceID() !=
+                    battleEntity.collider.gameObject.GetInstanceID())
+                {
+                    var skill = localEntity.GetNormalAttackSkill();
+                    if (skill != null)
+                    {
+                        var skillId = skill.configId;
+                        SuccessRelease(targetGuid,targetPos,skillId);
+                    }
+                }
+            }
+
+            return battleEntity;
         }
 
         void CheckNoEventBySkillState()
@@ -163,43 +255,6 @@ namespace Battle_Client
             }
         }
 
-        void CheckKeyboardEvent()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                this.OnUseSkill(0);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                this.OnUseSkill(1);
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                this.OnUseSkill(2);
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                this.OnUseSkill(3);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                this.OnUseSkill(4);
-            }
-
-
-            for (int i = (int)KeyCode.Alpha1; i <= (int)KeyCode.Alpha6; i++)
-            {
-                var index = i - (int)KeyCode.Alpha1;
-                var key = (KeyCode)(i);
-                if (Input.GetKeyDown(key))
-                {
-                    this.OnUseItem(index);
-                }
-            }
-        }
+     
     }
 }

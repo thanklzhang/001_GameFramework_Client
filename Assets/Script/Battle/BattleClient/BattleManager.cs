@@ -28,8 +28,25 @@ namespace Battle_Client
         public IBattleClientMsgReceiver MsgReceiver;
         public BattleType battleType;
         private BattleClient_CreateBattleArgs battleClientArgs;
+
         private PlayerInput playerInput;
-        
+
+        //是否智能施法
+        private bool isIntelligentRelease;
+
+        public bool IsIntelligentRelease
+        {
+            get
+            {
+                return LocalData.GetInt("intelligentRelease_switch") > 0;
+            }
+            set
+            {
+                isIntelligentRelease = value;
+                LocalData.SetInt("intelligentRelease_switch", isIntelligentRelease ? 1 : 0);
+            }
+        }
+
         #endregion
 
         public void Init()
@@ -37,7 +54,7 @@ namespace Battle_Client
             InitBattleRecvMsg();
             this.RegisterListener();
             BattleState = BattleState.Null;
-            
+
             playerInput = new PlayerInput();
         }
 

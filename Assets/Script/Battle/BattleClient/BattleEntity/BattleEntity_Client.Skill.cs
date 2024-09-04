@@ -49,7 +49,7 @@ namespace Battle_Client
         internal void ReleaseSkill(int skillConfigId)
         {
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillConfigId);
-            var normalAttackSkill = FindNormalAttackSkill();
+            var normalAttackSkill = GetNormalAttackSkill();
             if (normalAttackSkill != null && normalAttackSkill.configId == skillConfig.Id)
             {
                 //普通攻击
@@ -68,7 +68,7 @@ namespace Battle_Client
             //Logx.Log(this.guid + " release skill : " + skillConfigId);
         }
 
-        public BattleSkillInfo FindNormalAttackSkill()
+        public BattleSkillInfo GetNormalAttackSkill()
         {
             if (this.skills.Count > 0)
             {

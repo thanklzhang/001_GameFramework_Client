@@ -70,6 +70,12 @@ public class BattleUI : BaseUI
 
     //宝箱界面
     private BattleBoxUI boxUI;
+    
+    
+    //-----------------
+    //智能施法 临时功能
+    private Button intelligentReleaseBtn;
+    private GameObject intelligentReleaseSelectFlagGo;
 
     protected override void OnLoadFinish()
     {
@@ -91,8 +97,6 @@ public class BattleUI : BaseUI
             skillItemOperateUI.Show();
         });
       
-        
-        
         boxFuncBtn =  funcBtnRoot.Find("box/item").GetComponent<Button>();
         boxFuncBtn.onClick.AddListener(() =>
         {
@@ -174,6 +178,12 @@ public class BattleUI : BaseUI
         var boxUIRoot = this.transform.Find("boxUI");
         boxUI = new BattleBoxUI();
         boxUI.Init(boxUIRoot.gameObject, this);
+
+        //智能施法
+        intelligentReleaseBtn = this.transform.Find("intelligentRelease").GetComponent<Button>();
+        intelligentReleaseSelectFlagGo = this.intelligentReleaseBtn.transform.Find("flag").gameObject;
+        intelligentReleaseBtn.onClick.AddListener(OnClickIntelligentReleaseBtn);
+        intelligentReleaseSelectFlagGo.SetActive(BattleManager.Instance.IsIntelligentRelease);
     }
 
     protected override void OnActive()
@@ -475,6 +485,13 @@ public class BattleUI : BaseUI
 //         GameMain.Instance.StartLocalBattle();
 //     }
 
+    void OnClickIntelligentReleaseBtn()
+    {
+        BattleManager.Instance.IsIntelligentRelease = !BattleManager.Instance.IsIntelligentRelease;
+        
+        this.intelligentReleaseSelectFlagGo.SetActive(BattleManager.Instance.IsIntelligentRelease);
+    }
+    
     protected override void OnClose()
     {
         onCloseBtnClick = null;
@@ -491,5 +508,7 @@ public class BattleUI : BaseUI
         this.stageInfoUI.Release();
         this.skillItemOperateUI.Release();
         this.boxUI.Release();
+        
+        this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }
 }

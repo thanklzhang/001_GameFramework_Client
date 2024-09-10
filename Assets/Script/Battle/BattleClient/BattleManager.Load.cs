@@ -42,6 +42,8 @@ namespace Battle_Client
             yield return StartLoad_Common();
         }
 
+        private MapSaveData mapSaveData;
+
         /// <summary>
         /// 纯本地战斗加载
         /// </summary>
@@ -55,11 +57,11 @@ namespace Battle_Client
 
             //地图数据由本地加载
             EventSender.SendLoadingProgress(0.0f, "开始加载地图数据");
-            MapSaveData mapSaveData = null;
+            mapSaveData = null;
             yield return LoadMapData(battleConfigId, (map) => { mapSaveData = map; });
 
             EventSender.SendLoadingProgress(0.2f, "开始加载本地战斗所需数据");
-            
+
             Logx.Log(LogxType.Game, "StartLoad_PureLocal : load map config finish");
 
             //获得申请战斗参数
@@ -80,7 +82,7 @@ namespace Battle_Client
             yield return StartLoad_Common();
         }
 
-        
+
         //加载地图
         public IEnumerator LoadMapData(int battleConfigId, Action<MapSaveData> finishCallback)
         {
@@ -108,7 +110,7 @@ namespace Battle_Client
             // finishCallback?.Invoke(mapList);
             finishCallback?.Invoke(mapSaveData);
         }
-        
+
         public IEnumerator StartLoad_Common()
         {
             Logx.Log(LogxType.Game, "StartLoad_Common : load start");
@@ -118,9 +120,9 @@ namespace Battle_Client
             var battleTableId = BattleManager.Instance.battleConfigId;
             var battleTb = Config.ConfigManager.Instance.GetById<Config.Battle>(battleTableId);
             var mapConfig = Config.ConfigManager.Instance.GetById<Config.BattleMap>(battleTb.MapId);
-            var battleTriggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleTb.TriggerId);
-
+            // var battleTriggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleTb.TriggerId);
             var sceneResTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(mapConfig.ResId);
+           
 
             //加载场景
             EventSender.SendLoadingProgress(0.3f, "加载 场景 中");
@@ -139,6 +141,29 @@ namespace Battle_Client
             EventSender.SendLoadingProgress(0.5f, "加载 战斗实体 中");
             yield return BattleEntityManager.Instance.LoadInitEntities();
             Logx.Log(LogxType.Game, "StartLoad_Common : entities load finish");
+            
+            // ShowMapPosView();
+        }
+
+        //显示辅助地图坐标
+        void ShowMapPosView()
+        {
+
+            var temp = Resources.Load("GridPos") as GameObject;
+            var list = mapSaveData.mapList;
+            for (int i = 0; i < list.Count; i++)
+            {
+                var row = i;
+                var l = list[i];
+                for (int j = 0; j < l.Count; j++)
+                {
+                    var line = j;
+                    var ins = GameObject.Instantiate(temp,null,false);
+                    ins.transform.position = new UnityEngine.Vector3(row,0,line);
+                    ins.GetComponent<TextMesh>().text = "(" + row + "," + line + ")";
+
+                }
+            }
         }
 
         public void OnLoadFinish()

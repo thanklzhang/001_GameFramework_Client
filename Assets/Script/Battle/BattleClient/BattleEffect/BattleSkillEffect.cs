@@ -27,6 +27,12 @@ namespace Battle_Client
             this.guid = guid;
             this.resId = resId;
 
+            // if (resId <= 0)
+            // {
+            //     this.SetWillDestoryState();
+            //     return;
+            // }
+
             //load
             //先拿一个简易的模型暂时放这 然后等真正模型下载好之后在替换即可
             var asset = GameMain.Instance.tempModelAsset;

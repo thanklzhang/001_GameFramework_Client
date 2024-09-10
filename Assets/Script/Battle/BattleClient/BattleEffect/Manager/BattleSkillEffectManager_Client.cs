@@ -28,7 +28,7 @@ namespace Battle_Client
         internal void CreateSkillEffect(CreateEffectInfo createEffectInfo)
         {
             var skillEffect = CreateSkillEffectInfo(createEffectInfo);
-            skillEffect.StartSelfLoadModel();
+            skillEffect?.StartSelfLoadModel();
         }
 
         //只创建技能信息 , 是创建一个技能实体的一个步骤
@@ -38,6 +38,12 @@ namespace Battle_Client
             //var configId = serverEntity.ConfigId;
             var guid = createEffectInfo.guid;
             var resId = createEffectInfo.resId;
+
+            if (resId <= 0)
+            {
+                return null;
+            }
+
             var pos = new UnityEngine.Vector3(createEffectInfo.createPos.x, createEffectInfo.createPos.y,
                 createEffectInfo.createPos.z);
             var followEntityGuid = createEffectInfo.followEntityGuid;
@@ -141,7 +147,7 @@ namespace Battle_Client
             }
             else
             {
-                Logx.LogWarning("the guid is not found : " + guid);
+                //Logx.LogWarning("the guid is not found : " + guid);
             }
         }
         

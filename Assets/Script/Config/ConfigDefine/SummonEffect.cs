@@ -53,6 +53,11 @@ namespace Config
         private List<List<int>> lastTimeAddedGroup; 
         
         /// <summary>
+        ///开始的时候在召唤物身上触发的效果列表
+        /// </summary>
+        private List<int> startEffectList; 
+        
+        /// <summary>
         ///召唤物增加的属性组(,分割)
         /// </summary>
         private List<int> addedAttrGroup; 
@@ -84,6 +89,8 @@ namespace Config
         public int LastTime { get => lastTime; }     
         
         public List<List<int>> LastTimeAddedGroup { get => lastTimeAddedGroup; }     
+        
+        public List<int> StartEffectList { get => startEffectList; }     
         
         public List<int> AddedAttrGroup { get => addedAttrGroup; }     
         

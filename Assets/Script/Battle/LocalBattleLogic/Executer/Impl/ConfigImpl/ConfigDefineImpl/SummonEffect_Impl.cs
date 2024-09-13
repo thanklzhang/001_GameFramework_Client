@@ -61,6 +61,11 @@ namespace Battle
         public List<List<int>> LastTimeAddedGroup => config.LastTimeAddedGroup;
         
         /// <summary>
+        ///开始的时候在召唤物身上触发的效果列表
+        /// </summary>
+        public List<int> StartEffectList => config.StartEffectList;
+        
+        /// <summary>
         ///召唤物增加的属性组(,分割)
         /// </summary>
         public List<int> AddedAttrGroup => config.AddedAttrGroup;

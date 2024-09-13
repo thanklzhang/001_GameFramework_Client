@@ -77,7 +77,7 @@ static internal class EventManager
         if (!eventTable.ContainsKey(eventType))
         {
             //throw new BroadcastException(string.Format("Broadcasting message \"{0}\" but no listener found. Try marking the message with Messenger.MarkAsPermanent.", eventType));
-            Debug.LogWarning(string.Format("Broadcasting message \"{0}\" but no listener found. Try marking the message with Messenger.MarkAsPermanent.", eventType));
+            //Debug.LogWarning(string.Format("Broadcasting message \"{0}\" but no listener found. Try marking the message with Messenger.MarkAsPermanent.", eventType));
         }
 
     }

@@ -85,7 +85,7 @@ public class SkillTrackModule
         }
         else
         {
-            Logx.LogWarning("the tarck is not found : entityGuid : " + entityGuid);
+            //Logx.LogWarning("the tarck is not found : entityGuid : " + entityGuid);
         }
     }
 

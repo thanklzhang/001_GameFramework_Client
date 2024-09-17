@@ -53,7 +53,7 @@ namespace Battle_Client
             throw new NotImplementedException();
         }
 
-        public void Send_OpenBox()
+        public void Send_OpenBox(RewardQuality quality)
         {
             throw new NotImplementedException();
         }

@@ -28,6 +28,11 @@ namespace Config
         private int iconResId; 
         
         /// <summary>
+        ///宝箱品质（0-4对应绿色-红色）
+        /// </summary>
+        private int quality; 
+        
+        /// <summary>
         ///奖励选项数
         /// </summary>
         private int selectionCount; 
@@ -44,6 +49,8 @@ namespace Config
         public string Describe { get => describe; }     
         
         public int IconResId { get => iconResId; }     
+        
+        public int Quality { get => quality; }     
         
         public int SelectionCount { get => selectionCount; }     
         

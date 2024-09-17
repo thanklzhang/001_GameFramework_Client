@@ -169,11 +169,12 @@ namespace Battle_Client
                 hero.playerIndex, arg);
         }
 
-        public void Send_OpenBox()
+        public void Send_OpenBox(RewardQuality quality)
         {
             Battle_OpenBoxArg arg = new Battle_OpenBoxArg();
             arg.releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
-
+            arg.quality = quality;
+            
             var hero = BattleManager.Instance.GetLocalCtrlHero();
 
             // var arg = new Battle_OpenBoxArg()

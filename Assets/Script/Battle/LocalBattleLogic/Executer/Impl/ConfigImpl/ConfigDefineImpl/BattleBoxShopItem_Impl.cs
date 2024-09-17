@@ -9,13 +9,13 @@ namespace Battle
     
     
  
-    public class BattleBox_Impl : IBattleBox
+    public class BattleBoxShopItem_Impl : IBattleBoxShopItem
     {
-        private Config.BattleBox config;
+        private Config.BattleBoxShopItem config;
         
         public void Init(int id)
         {
-            config = ConfigManager.Instance.GetById<Config.BattleBox>(id);
+            config = ConfigManager.Instance.GetById<Config.BattleBoxShopItem>(id);
         }
         
         public int Id => config.Id;
@@ -31,24 +31,29 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
-        ///图标显示资源id
+        ///刷出 宝箱 id 列表
         /// </summary>
-        public int IconResId => config.IconResId;
+        public List<int> BoxIdList => config.BoxIdList;
         
         /// <summary>
-        ///宝箱品质（0-4对应绿色-红色）
+        ///刷出 宝箱 权重 列表
         /// </summary>
-        public int Quality => config.Quality;
+        public List<int> BoxWeightList => config.BoxWeightList;
         
         /// <summary>
-        ///奖励选项数
+        ///保底刷出数量
         /// </summary>
-        public int SelectionCount => config.SelectionCount;
+        public int MinCount => config.MinCount;
         
         /// <summary>
-        ///奖励池
+        ///刷出数量上限
         /// </summary>
-        public int PoolId => config.PoolId;
+        public int MaxCount => config.MaxCount;
+        
+        /// <summary>
+        ///刷出概率（不算保底）千分比
+        /// </summary>
+        public int Chance => config.Chance;
         
     } 
 }

@@ -434,7 +434,7 @@ namespace Battle_Client
         {
             var arg = new BuffInfoUpdate_RecvMsg_Arg();
             arg.buffInfo = buffInfo;
-                
+
             BattleManager.Instance.RecvBattleMsg<BuffInfoUpdate_RecvMsg>(arg);
         }
 
@@ -503,27 +503,57 @@ namespace Battle_Client
         }
 
 
-        public void NotifyAll_NotifyBoxInfoUpdate(int entityGuid, List<Battle.BattleBox> netBoxList)
+        public void NotifyAll_NotifyBoxInfoUpdate(int entityGuid,
+            Dictionary<RewardQuality, List<BattleBox>> targetBoxDic)
         {
-            List<BattleClientMsg_BattleBox> list = new List<BattleClientMsg_BattleBox>();
-            foreach (var netBox in netBoxList)
+            Dictionary<RewardQuality, List<BattleClientMsg_BattleBox>> dic =
+                new Dictionary<RewardQuality, List<BattleClientMsg_BattleBox>>();
+
+            foreach (var kv in targetBoxDic)
             {
-                BattleClientMsg_BattleBox box = new BattleClientMsg_BattleBox();
-
-                box.selections = new List<BattleClientMsg_BattleBoxSelection>();
-                if (netBox.selectionGroup != null)
+                var targetQuality = kv.Key;
+                var targetBoxList = kv.Value;
+                dic.Add(targetQuality, new List<BattleClientMsg_BattleBox>());
+                foreach (var targetBox in targetBoxList)
                 {
-                    foreach (var netSelection in netBox.selectionGroup)
-                    {
-                        BattleClientMsg_BattleBoxSelection selecion = new BattleClientMsg_BattleBoxSelection();
-                        selecion.rewardConfigId = netSelection.rewardConfig.Id;
-                        selecion.intValueList = netSelection.realityReward.GetIntValueList();
-                        box.selections.Add(selecion);
-                    }
-                }
+                    BattleClientMsg_BattleBox box = new BattleClientMsg_BattleBox();
 
-                list.Add(box);
+                    box.selections = new List<BattleClientMsg_BattleBoxSelection>();
+                    if (targetBox.selectionGroup != null)
+                    {
+                        foreach (var netSelection in targetBox.selectionGroup)
+                        {
+                            BattleClientMsg_BattleBoxSelection selecion = new BattleClientMsg_BattleBoxSelection();
+                            selecion.rewardConfigId = netSelection.rewardConfig.Id;
+                            selecion.intValueList = netSelection.realityReward.GetIntValueList();
+                            box.selections.Add(selecion);
+                        }
+                    }
+
+                    dic[targetQuality].Add(box);
+                }
             }
+
+
+            // List<BattleClientMsg_BattleBox> list = new List<BattleClientMsg_BattleBox>();
+            // foreach (var netBox in netBoxList)
+            // {
+            //     BattleClientMsg_BattleBox box = new BattleClientMsg_BattleBox();
+            //
+            //     box.selections = new List<BattleClientMsg_BattleBoxSelection>();
+            //     if (netBox.selectionGroup != null)
+            //     {
+            //         foreach (var netSelection in netBox.selectionGroup)
+            //         {
+            //             BattleClientMsg_BattleBoxSelection selecion = new BattleClientMsg_BattleBoxSelection();
+            //             selecion.rewardConfigId = netSelection.rewardConfig.Id;
+            //             selecion.intValueList = netSelection.realityReward.GetIntValueList();
+            //             box.selections.Add(selecion);
+            //         }
+            //     }
+            //
+            //     list.Add(box);
+            // }
 
 
             // BattleManager.Instance.MsgReceiver.On_BoxInfoUpdate(entityGuid, list);
@@ -531,7 +561,7 @@ namespace Battle_Client
             var arg = new BoxInfoUpdate_RecvMsg_Arg()
             {
                 entityGuid = entityGuid,
-                boxList = list
+                boxDic = dic
             };
             BattleManager.Instance.RecvBattleMsg<BoxInfoUpdate_RecvMsg>(arg);
         }

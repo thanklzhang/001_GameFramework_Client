@@ -27,7 +27,7 @@ namespace Battle_Client
         void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos);
         void Send_UseItem(ItemUseArg_Client itemUseArg );
         void Send_UseSkillItem(ItemUseArg_Client itemUseArg);
-        void Send_OpenBox();
+        void Send_OpenBox(RewardQuality quality);
         void Send_SelectBoxReward(int index);
 
     }

@@ -31,6 +31,6 @@ namespace Battle_Client
     public class BoxInfoUpdate_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int entityGuid;
-        public List<BattleClientMsg_BattleBox> boxList;
+        public Dictionary<RewardQuality,List<BattleClientMsg_BattleBox>> boxDic;
     }
 }

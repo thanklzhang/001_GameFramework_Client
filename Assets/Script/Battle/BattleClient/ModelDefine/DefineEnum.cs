@@ -44,4 +44,13 @@
         WillDestroy = 2,
         Destroy = 3
     }
+
+    // public enum RewardQuality
+    // {
+    //     Green = 0,
+    //     Blue = 1,
+    //     Purple = 2,
+    //     Orange = 3,
+    //     Red = 4
+    // }
 }

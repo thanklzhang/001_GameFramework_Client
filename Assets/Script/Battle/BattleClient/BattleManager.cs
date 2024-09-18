@@ -19,6 +19,7 @@ namespace Battle_Client
         public List<ClientPlayer> playerList;
 
         ClientPlayer localPlayer;
+        
 
         //本地玩家控制的英雄
         BattleEntity_Client localCtrlEntity;

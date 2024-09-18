@@ -1,0 +1,13 @@
+﻿using System.Collections.Generic;
+
+namespace Battle_Client
+{
+    public class Currency
+    {
+        public int itemId;
+        public int count;
+
+        public static int CoinId = 500001;
+    }
+
+}

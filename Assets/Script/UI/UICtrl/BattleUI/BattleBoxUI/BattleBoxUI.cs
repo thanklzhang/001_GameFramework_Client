@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Battle_Client;
 
 using UnityEngine;
@@ -55,7 +56,7 @@ public class BattleBoxUI
             return;
         }
 
-        entity.TryOpenBox();
+        entity.TryOpenBox(RewardQuality.Blue);
     }
 
     void OnOpenBox()

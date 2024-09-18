@@ -22,7 +22,7 @@ namespace Battle_Client
             var hero = BattleManager.Instance.GetLocalCtrlHero();
             if (hero != null && arg.entityGuid == hero.guid)
             {
-                hero.SetBoxList(arg.boxList);
+                hero.SetBoxList(arg.boxDic);
             }
 
         }

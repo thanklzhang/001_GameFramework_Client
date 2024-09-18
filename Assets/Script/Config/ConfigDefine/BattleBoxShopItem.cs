@@ -23,6 +23,11 @@ namespace Config
         private string describe; 
         
         /// <summary>
+        ///宝箱组品质（绿 - 红）
+        /// </summary>
+        private int quality; 
+        
+        /// <summary>
         ///刷出 宝箱 id 列表
         /// </summary>
         private List<int> boxIdList; 
@@ -52,6 +57,8 @@ namespace Config
         public string Name { get => name; }     
         
         public string Describe { get => describe; }     
+        
+        public int Quality { get => quality; }     
         
         public List<int> BoxIdList { get => boxIdList; }     
         

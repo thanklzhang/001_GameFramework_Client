@@ -31,6 +31,11 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
+        ///宝箱组品质（绿 - 红）
+        /// </summary>
+        public int Quality => config.Quality;
+        
+        /// <summary>
         ///刷出 宝箱 id 列表
         /// </summary>
         public List<int> BoxIdList => config.BoxIdList;

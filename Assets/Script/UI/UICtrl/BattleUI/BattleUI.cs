@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Battle_Client.BattleSkillOperate;
 using Config;
 using GameData;
@@ -103,7 +104,7 @@ public class BattleUI : BaseUI
             var hero = BattleManager.Instance.GetLocalCtrlHero();
             if (hero != null)
             {
-                hero.TryOpenBox();
+                hero.TryOpenBox(RewardQuality.Blue);
             }
 
         });
@@ -287,7 +288,7 @@ public class BattleUI : BaseUI
         var hero = BattleManager.Instance.GetLocalCtrlHero();
         if (hero != null)
         {
-            var boxCount = hero.GetBoxCount();
+            var boxCount = hero.GetBoxCount(RewardQuality.Blue);
             boxFuncBtnCountText.text = "" + boxCount;
 
         }

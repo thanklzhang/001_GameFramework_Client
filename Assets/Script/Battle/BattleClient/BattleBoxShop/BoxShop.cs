@@ -23,9 +23,10 @@ namespace Battle_Client
             this.boxShopItemDic = shopItemDic;
         }
 
-        public void Buy()
+        public void Buy(RewardQuality quality,int buyCount)
         {
             //send msg
+            BattleManager.Instance.MsgSender.Send_BuyBoxFromShop(quality,buyCount);
         }
     }
 }

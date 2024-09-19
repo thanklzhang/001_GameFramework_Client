@@ -29,6 +29,7 @@ namespace Battle_Client
         void Send_UseSkillItem(ItemUseArg_Client itemUseArg);
         void Send_OpenBox(RewardQuality quality);
         void Send_SelectBoxReward(int index);
+        void Send_BuyBoxFromShop(RewardQuality quality,int buyCount);
 
     }
 }

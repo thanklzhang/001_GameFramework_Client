@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
+using Battle;
 
 namespace Battle_Client
 {
-    public class ClientPlayer
+    public partial class ClientPlayer
     {
         public int playerIndex;
         public int team;
         public int uid;
         public int ctrlHeroGuid;
+
+        public void Init()
+        {
+            InitBoxShop();
+        }
 
         public Dictionary<int, Currency> currencyDic =
             new Dictionary<int, Currency>();
@@ -26,5 +32,7 @@ namespace Battle_Client
         {
             return GetCurrencyCount(Currency.CoinId);
         }
+        
+     
     }
 }

@@ -56,6 +56,8 @@ public class BoxShopShowItem
         }
         
         //send buy
+        var localPlayer = BattleManager.Instance.GetLocalPlayer();
+        localPlayer.BuyBoxFromShop(data.quality,1);
     }
 
     public void Release()

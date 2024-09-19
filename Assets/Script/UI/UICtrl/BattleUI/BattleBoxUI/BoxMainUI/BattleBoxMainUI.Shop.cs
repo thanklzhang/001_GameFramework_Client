@@ -24,7 +24,8 @@ public partial class BattleBoxMainUI
         //get data
         List<BoxShopItem> dataList = new List<BoxShopItem>();
 
-        var shopItemDic = BattleManager.Instance.GetAllBoxShopItem();
+        var localPlayer = BattleManager.Instance.GetLocalPlayer();
+        var shopItemDic = localPlayer.GetAllBoxShopItems();
         foreach (var kv in shopItemDic)
         {
             var quality = kv.Key;

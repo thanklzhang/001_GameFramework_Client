@@ -31,25 +31,54 @@ namespace Battle_Client
         public int team;
         public long uid;
         public int ctrlHeroGuid;
+
+
+        public BattleClientMsg_BoxShop boxShop;
+        public BattleClient_Currency currency;
+    }
+
+    public class BattleClient_Currency
+    {
+        private Dictionary<int, BattleClient_CurrencyItem> currencyDic;
+    }
+
+    public class BattleClient_CurrencyItem
+    {
+        public int itemId;
+        public int count;
     }
 
 
-    public class BattleClientMsg_InitArg
+    // public class BattleClientMsg_InitArg
+    // {
+    //     public int battleGuid;
+    //     public int battleTableId;
+    //     public int battleRoomId;
+    //
+    //     public Dictionary<int, BattleClientMsg_ClientPlayer> players;
+    //
+    // }
+
+    // public class BattleClientMsg_ClientPlayer
+    // {
+    //     public int playerIndex;
+    //     public int team;
+    //     public int uid;
+    //     public int ctrlHeroGuid;
+    // }
+
+    public class BattleClientMsg_BoxShop
     {
-        public int battleGuid;
-        public int battleTableId;
-        public int battleRoomId;
-
-        public Dictionary<int, BattleClientMsg_ClientPlayer> players;
-
+        public Dictionary<int, BattleClientMsg_BoxShopItem> shopItems;
     }
 
-    public class BattleClientMsg_ClientPlayer
+    public class BattleClientMsg_BoxShopItem
     {
-        public int playerIndex;
-        public int team;
-        public int uid;
-        public int ctrlHeroGuid;
+        public int quality;
+        public int canBuyCount;
+        public int maxBuyCount;
+        public int costItemId;
+        public int costCount;
     }
 
     public class BattleClientMsg_Entity
@@ -62,7 +91,6 @@ namespace Battle_Client
 
         public List<BattleClientMsg_Skill> skills;
         public List<BattleClientMsg_Item> itemList;
-
     }
 
     public class BattleClientMsg_Skill
@@ -71,7 +99,7 @@ namespace Battle_Client
         public int level;
         internal float maxCDTime;
     }
-    
+
     public class BattleClientMsg_Item
     {
         public int configId;
@@ -91,7 +119,6 @@ namespace Battle_Client
 
         //来源实体 如伤害来源
         public int fromEntityGuid;
-
     }
 
     public class BattleClientMsg_CreateSkillTrack
@@ -101,7 +128,6 @@ namespace Battle_Client
         public int releaserEntityGuid;
         public Vector3 targetPos;
         public int targetEntityGuid;
-
     }
 
     public class BattleClientMsg_BattleBox
@@ -117,6 +143,5 @@ namespace Battle_Client
         //实际奖励值
         //根据奖励类型 得到不同的实际奖励意义 如技能id 等
         public List<int> intValueList;
-
     }
 }

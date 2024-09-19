@@ -122,7 +122,7 @@ namespace Battle_Client
             var mapConfig = Config.ConfigManager.Instance.GetById<Config.BattleMap>(battleTb.MapId);
             // var battleTriggerTb = Config.ConfigManager.Instance.GetById<Config.BattleTrigger>(battleTb.TriggerId);
             var sceneResTb = Config.ConfigManager.Instance.GetById<Config.ResourceConfig>(mapConfig.ResId);
-           
+
 
             //加载场景
             EventSender.SendLoadingProgress(0.3f, "加载 场景 中");
@@ -141,14 +141,13 @@ namespace Battle_Client
             EventSender.SendLoadingProgress(0.5f, "加载 战斗实体 中");
             yield return BattleEntityManager.Instance.LoadInitEntities();
             Logx.Log(LogxType.Game, "StartLoad_Common : entities load finish");
-            
+
             // ShowMapPosView();
         }
 
         //显示辅助地图坐标
         void ShowMapPosView()
         {
-
             var temp = Resources.Load("GridPos") as GameObject;
             var list = mapSaveData.mapList;
             for (int i = 0; i < list.Count; i++)
@@ -158,10 +157,9 @@ namespace Battle_Client
                 for (int j = 0; j < l.Count; j++)
                 {
                     var line = j;
-                    var ins = GameObject.Instantiate(temp,null,false);
-                    ins.transform.position = new UnityEngine.Vector3(row,0,line);
+                    var ins = GameObject.Instantiate(temp, null, false);
+                    ins.transform.position = new UnityEngine.Vector3(row, 0, line);
                     ins.GetComponent<TextMesh>().text = "(" + row + "," + line + ")";
-
                 }
             }
         }
@@ -258,6 +256,26 @@ namespace Battle_Client
                 player.uid = _player.uid;
                 player.ctrlHeroGuid = _player.ctrlHeroGuid;
 
+
+                //宝箱商店
+                player.boxShop = new BattleClientMsg_BoxShop();
+                var shopItems = _player.boxShop.GetShopItems();
+                foreach (var kv in shopItems)
+                {
+                    player.boxShop.shopItems = new Dictionary<int, BattleClientMsg_BoxShopItem>();
+                    var quality = kv.Key;
+                    var shopItem = kv.Value;
+
+                    var _shopItem = new BattleClientMsg_BoxShopItem();
+                    _shopItem.quality = (int)quality;
+                    _shopItem.canBuyCount = shopItem.GetCanBuyCount();
+                    _shopItem.maxBuyCount = shopItem.GetMaxBuyCount();
+                    _shopItem.costItemId = shopItem.costItemId;
+                    _shopItem.costCount = shopItem.price;
+                    player.boxShop.shopItems.Add(_shopItem.quality, _shopItem);
+                }
+
+
                 battleClientArgs.clientPlayers.Add(player);
             }
 
@@ -318,6 +336,8 @@ namespace Battle_Client
             this.battleRoomId = battleInit.roomId;
 
             //玩家信息
+            var userDataStore = GameDataManager.Instance.UserData;
+            var localPlayerUid = (int)userDataStore.Uid;
             playerDic = new Dictionary<int, ClientPlayer>();
             playerList = new List<ClientPlayer>();
             foreach (var serverPlayer in battleInit.clientPlayers)
@@ -330,21 +350,45 @@ namespace Battle_Client
                     ctrlHeroGuid = serverPlayer.ctrlHeroGuid
                 };
 
+                //设置本地玩家
+
+                if (player.uid == localPlayerUid)
+                {
+                    this.localPlayer = player;
+
+                    //本地玩家宝箱商店
+                    Dictionary<RewardQuality, BoxShopItem> localBoxDic = new Dictionary<RewardQuality, BoxShopItem>();
+                    if (serverPlayer.boxShop.shopItems != null)
+                    {
+                        foreach (var kv in serverPlayer.boxShop.shopItems)
+                        {
+                            var quality = kv.Key;
+                            var shopItem = kv.Value;
+                            var localBoxItem = new BoxShopItem();
+                            localBoxItem.quality = (RewardQuality)shopItem.quality;
+                            localBoxItem.costItemId = shopItem.costItemId;
+                            localBoxItem.costCount = shopItem.costCount;
+                            localBoxItem.canBuyCount = shopItem.canBuyCount;
+                            localBoxItem.maxBuyCount = shopItem.maxBuyCount;
+                            
+                            localBoxDic.Add((RewardQuality)quality,localBoxItem);
+                        }
+                    }
+                    this.localPlayer.SetBoxShopItemsData(localBoxDic);
+                }
+
+                player.Init();
+                
                 this.playerDic.Add(player.uid, player);
                 this.playerList.Add(player);
+               
             }
 
-            //设置本地玩家
-            var userDataStore = GameDataManager.Instance.UserData;
-            var uid = (int)userDataStore.Uid;
-            if (playerDic.ContainsKey(uid))
+            if (null == localPlayer)
             {
-                this.localPlayer = playerDic[uid];
+                Logx.LogError("the uid of localPlayer is not found : " + localPlayerUid);
             }
-            else
-            {
-                Logx.LogError("the uid of localPlayer is not found : " + uid);
-            }
+
 
             //实体信息
             // Logx.Log(LogxType.Battle,"battle manager : CreateInitEntity");

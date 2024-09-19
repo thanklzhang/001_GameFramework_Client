@@ -206,5 +206,17 @@ namespace Battle_Client
 
             // battle.PlayerMsgReceiver.On_SelectBoxReward(arg);
         }
+
+        public void Send_BuyBoxFromShop(RewardQuality quality,int buyCount)
+        {
+            var arg = new BuyBoxFromShop_BattleMsgArg();
+            arg.quality = quality;
+            arg.buyCount = buyCount;
+            
+            var hero = BattleManager.Instance.GetLocalCtrlHero();
+
+            battle.OnRecvBattleMsg<BuyBoxFromShop_BattleMsg>(hero.playerIndex, arg);
+
+        }
     }
 }

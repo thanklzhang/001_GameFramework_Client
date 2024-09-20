@@ -260,19 +260,20 @@ namespace Battle_Client
                 //宝箱商店
                 player.boxShop = new BattleClientMsg_BoxShop();
                 var shopItems = _player.boxShop.GetShopItems();
+                player.boxShop.shopItems = new Dictionary<RewardQuality, BattleClientMsg_BoxShopItem>();
+
                 foreach (var kv in shopItems)
                 {
-                    player.boxShop.shopItems = new Dictionary<int, BattleClientMsg_BoxShopItem>();
                     var quality = kv.Key;
                     var shopItem = kv.Value;
 
                     var _shopItem = new BattleClientMsg_BoxShopItem();
-                    _shopItem.quality = (int)quality;
+                    _shopItem.configId = shopItem.configId;
                     _shopItem.canBuyCount = shopItem.GetCanBuyCount();
                     _shopItem.maxBuyCount = shopItem.GetMaxBuyCount();
                     _shopItem.costItemId = shopItem.costItemId;
-                    _shopItem.costCount = shopItem.price;
-                    player.boxShop.shopItems.Add(_shopItem.quality, _shopItem);
+                    _shopItem.costCount = shopItem.costCount;
+                    player.boxShop.shopItems.Add((RewardQuality)shopItem.config.Quality, _shopItem);
                 }
 
 
@@ -350,8 +351,9 @@ namespace Battle_Client
                     ctrlHeroGuid = serverPlayer.ctrlHeroGuid
                 };
 
-                //设置本地玩家
+                player.Init();
 
+                //设置本地玩家
                 if (player.uid == localPlayerUid)
                 {
                     this.localPlayer = player;
@@ -365,23 +367,22 @@ namespace Battle_Client
                             var quality = kv.Key;
                             var shopItem = kv.Value;
                             var localBoxItem = new BoxShopItem();
-                            localBoxItem.quality = (RewardQuality)shopItem.quality;
+                            localBoxItem.configId = shopItem.configId;
                             localBoxItem.costItemId = shopItem.costItemId;
                             localBoxItem.costCount = shopItem.costCount;
                             localBoxItem.canBuyCount = shopItem.canBuyCount;
                             localBoxItem.maxBuyCount = shopItem.maxBuyCount;
-                            
-                            localBoxDic.Add((RewardQuality)quality,localBoxItem);
+
+                            localBoxDic.Add((RewardQuality)quality, localBoxItem);
                         }
                     }
+
                     this.localPlayer.SetBoxShopItemsData(localBoxDic);
                 }
 
-                player.Init();
-                
+
                 this.playerDic.Add(player.uid, player);
                 this.playerList.Add(player);
-               
             }
 
             if (null == localPlayer)

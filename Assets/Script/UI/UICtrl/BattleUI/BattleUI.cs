@@ -6,7 +6,6 @@ using Battle;
 using Battle_Client.BattleSkillOperate;
 using Config;
 using GameData;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,7 +37,7 @@ public class BattleUI : BaseUI
     private Button skillFuncBtn;
     private Button boxFuncBtn;
     public Text boxFuncBtnCountText;
-    
+
     //血条
     HpUIMgr hpUIMgr;
 
@@ -71,8 +70,11 @@ public class BattleUI : BaseUI
 
     //宝箱界面
     private BattleBoxUI boxUI;
-    
-    
+
+    //宝箱主界面
+    protected BattleBoxMainUI boxMainUI;
+
+
     //-----------------
     //智能施法 临时功能
     private Button intelligentReleaseBtn;
@@ -91,26 +93,24 @@ public class BattleUI : BaseUI
 
         //功能栏
         funcBtnRoot = transform.Find("functionBar/group");
-        
+
         skillFuncBtn = funcBtnRoot.Find("skill/item").GetComponent<Button>();
-        skillFuncBtn.onClick.AddListener(() =>
-        {
-            skillItemOperateUI.Show();
-        });
-      
-        boxFuncBtn =  funcBtnRoot.Find("box/item").GetComponent<Button>();
+        skillFuncBtn.onClick.AddListener(() => { skillItemOperateUI.Show(); });
+
+        boxFuncBtn = funcBtnRoot.Find("box/item").GetComponent<Button>();
         boxFuncBtn.onClick.AddListener(() =>
         {
-            var hero = BattleManager.Instance.GetLocalCtrlHero();
-            if (hero != null)
-            {
-                hero.TryOpenBox(RewardQuality.Blue);
-            }
+            // var hero = BattleManager.Instance.GetLocalCtrlHero();
+            // if (hero != null)
+            // {
+            //     hero.TryOpenBox(RewardQuality.Blue);
+            // }
 
+            this.boxMainUI.Show();
         });
         boxFuncBtnCountText = boxFuncBtn.transform.Find("countBg/count").GetComponent<Text>();
-        
-        
+
+
         //
         closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
         readyStartBtn.onClick.AddListener(() =>
@@ -174,11 +174,18 @@ public class BattleUI : BaseUI
         var skillOperateUIRoot = this.transform.Find("skillOperateUI");
         skillItemOperateUI = new BattleSkillOperateUI();
         skillItemOperateUI.Init(skillOperateUIRoot.gameObject, this);
-        
+
         //宝箱界面
         var boxUIRoot = this.transform.Find("boxUI");
         boxUI = new BattleBoxUI();
         boxUI.Init(boxUIRoot.gameObject, this);
+
+        //宝箱主界面
+        var boxMainUIRoot = this.transform.Find("boxMainUI");
+        boxMainUI = new BattleBoxMainUI();
+        boxMainUI.Init(boxMainUIRoot.gameObject, this);
+        boxMainUI.Hide();
+
 
         //智能施法
         intelligentReleaseBtn = this.transform.Find("intelligentRelease").GetComponent<Button>();
@@ -197,34 +204,37 @@ public class BattleUI : BaseUI
         this.battleItemUI.RefreshAllUI();
         this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
+        this.boxMainUI.RefreshAllUI();
 
         EventDispatcher.AddListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
-        EventDispatcher.AddListener(EventIDs.OnUpdateBoxInfo,this.OnUpdateBoxInfo);
+        EventDispatcher.AddListener(EventIDs.OnUpdateBoxInfo, this.OnUpdateBoxInfo);
     }
 
-    protected override void OnUpdate(float timeDelta)
+    protected override void OnUpdate(float deltaTime)
     {
-        this.hpUIMgr.Update(timeDelta);
+        this.hpUIMgr.Update(deltaTime);
 
-        this.floatWordMgr.Update(timeDelta);
+        this.floatWordMgr.Update(deltaTime);
 
-        this.skillUI.Update(timeDelta);
+        this.skillUI.Update(deltaTime);
 
-        this.buffUI.Update(timeDelta);
+        this.buffUI.Update(deltaTime);
 
-        this.describeUI.Update(timeDelta);
+        this.describeUI.Update(deltaTime);
 
-        this.heroInfoUI.Update(timeDelta);
+        this.heroInfoUI.Update(deltaTime);
 
-        this.stageInfoUI.Update(timeDelta);
+        this.stageInfoUI.Update(deltaTime);
 
-        this.battleItemUI.Update(timeDelta);
-        
-        this.skillItemOperateUI.Update(timeDelta);
-        
-        this.boxUI.Update(timeDelta);
+        this.battleItemUI.Update(deltaTime);
+
+        this.skillItemOperateUI.Update(deltaTime);
+
+        this.boxUI.Update(deltaTime);
+
+        this.boxMainUI.Update(deltaTime);
     }
 
     void OnPlayerReadyState(int uid, bool isReady)
@@ -290,7 +300,6 @@ public class BattleUI : BaseUI
         {
             var boxCount = hero.GetBoxCount(RewardQuality.Blue);
             boxFuncBtnCountText.text = "" + boxCount;
-
         }
     }
 
@@ -311,188 +320,14 @@ public class BattleUI : BaseUI
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
         EventDispatcher.RemoveListener(EventIDs.OnUpdateBoxInfo, this.OnUpdateBoxInfo);
     }
-    //
-    // public void SetReadyShowState(bool isShow)
-    // {
-    //     readyBgGo.SetActive(isShow);
-    //     // readyStartBtn.gameObject.SetActive(isShow);
-    //     if (isShow)
-    //     {
-    //         SetReadyBtnShowState(false);
-    //     }
-    // }
-    //
-
-    //
-    // public void SetStateText(string stateStr)
-    // {
-    //     stateText.text = stateStr;
-    // }
-    //
-    //
-    // #region 血条相关
-    //
-    // public void RefreshHpShow(UIArgs args)
-    // {
-    //     this.hpUIMgr.RefreshHpShow(args);
-    // }
-    //
-    // public void DestoryHpUI(int guid)
-    // {
-    //     this.hpUIMgr.DestoryHpUI(guid);
-    // }
-    //
-    // public void SetHpShowState(int entityGuid, bool isShow)
-    // {
-    //     this.hpUIMgr.SetHpShowState(entityGuid, isShow);
-    // }
-    //
-    // #endregion
-    //
-
-
-    //
-    // #region 属性面板相关
-    //
-    // public void OpenAttrUI()
-    // {
-    //     this.attrUI.Show();
-    // }
-    //
-    // public void CloseAttrUI()
-    // {
-    //     this.attrUI.Hide();
-    // }
-    //
-    // public void RefreshBattleAttrUI(UIArgs args)
-    // {
-    //     this.attrUI.Refresh(args);
-    // }
-    //
-    // #endregion
-    //
-    // #region 技能面板相关
-    //
-    // internal void RefreshBattleSkillUI(UIArgs args)
-    // {
-    //     this.skillUI.Refresh(args);
-    // }
-    //
-    // public void RefreshSkillInfo(int skillConfigId, float currCDTime)
-    // {
-    //     this.skillUI.UpdateSkillInfo(skillConfigId, currCDTime);
-    // }
-    //
-    // public void ShowSkillTipText(string str)
-    // {
-    //     this.skillUI.SetSkillTipText(str);
-    // }
-    //
-    // #endregion
-    //
-    // #region 队友英雄信息, boss 信息相关
-    //
-    // internal void RefreshHeroInfoUI(UIArgs args)
-    // {
-    //     this.heroInfoUI.Refresh(args);
-    // }
-    //
-    // internal void RefreshSingleHeroInfo(BattleHeroInfoUIData info, int fromEntityGuid)
-    // {
-    //     this.heroInfoUI.RefreshSingleHeroInfo(info, fromEntityGuid);
-    // }
-    //
-    // public void StartBossLimitCountdown()
-    // {
-    //     this.heroInfoUI.StartBossLimitCountdown();
-    // }
-    //
-    // #endregion
-    //
-    // #region boss 强敌来袭的动画效果
-    //
-    // public void StartBossComingAni()
-    // {
-    //     bossComingRootGo.gameObject.SetActive(true);
-    // }
-    //
-    // public void HideBossComing()
-    // {
-    //     bossComingRootGo.gameObject.SetActive(false);
-    // }
-    //
-    // #endregion
-    //
-    // #region buff 面板相关
-    //
-    // internal void RefreshBattleBuffUI(UIArgs args)
-    // {
-    //     this.buffUI.Refresh(args);
-    // }
-    //
-    // public void RefreshBuffInfo(BattleBuffUIData buffInfo)
-    // {
-    //     this.buffUI.UpdateBuffInfo(buffInfo);
-    // }
-    //
-    // #endregion
-    //
-    // #region 描述面板相关
-    //
-    // public void ShowDescribeUI(UIArgs arg)
-    // {
-    //     this.describeUI.Refresh(arg);
-    //     this.describeUI.Show();
-    // }
-    //
-    // public void HideDescribeUI()
-    // {
-    //     this.describeUI.Hide();
-    // }
-    //
-    // #endregion
-    //
-    //
-    // #region 关卡信息相关
-    //
-    // public void ShowStageInfoUI(UIArgs arg)
-    // {
-    //     this.stageInfoUI.Refresh(arg);
-    //     this.stageInfoUI.Show();
-    // }
-    //
-    //
-    // public void HideStageInfoUI()
-    // {
-    //     this.stageInfoUI.Hide();
-    // }
-
-    //#endregion
-
-    void OnClickResultConfirmBtn()
-    {
-        // CtrlManager.Instance.Exit<BattleCtrlPre>();
-        //
-        // if (Const.isLocalBattleTest)
-        // {
-        //     GameMain.Instance.StartLocalBattle();
-        //     // CoroutineManager.Instance.StartCoroutine(ReStartBattleTest());
-        // }
-    }
-
-    //     IEnumerator ReStartBattleTest()
-//     {
-//         yield return new WaitForSeconds(0.1f);
-//         GameMain.Instance.StartLocalBattle();
-//     }
 
     void OnClickIntelligentReleaseBtn()
     {
         BattleManager.Instance.IsIntelligentRelease = !BattleManager.Instance.IsIntelligentRelease;
-        
+
         this.intelligentReleaseSelectFlagGo.SetActive(BattleManager.Instance.IsIntelligentRelease);
     }
-    
+
     protected override void OnClose()
     {
         onCloseBtnClick = null;
@@ -509,7 +344,8 @@ public class BattleUI : BaseUI
         this.stageInfoUI.Release();
         this.skillItemOperateUI.Release();
         this.boxUI.Release();
-        
+        this.boxMainUI.Release();
+
         this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }
 }

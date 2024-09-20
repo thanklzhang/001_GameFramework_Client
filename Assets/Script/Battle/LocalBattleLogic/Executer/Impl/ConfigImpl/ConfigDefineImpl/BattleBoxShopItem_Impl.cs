@@ -31,9 +31,24 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
+        ///图标资源id
+        /// </summary>
+        public int IconResId => config.IconResId;
+        
+        /// <summary>
         ///宝箱组品质（绿 - 红）
         /// </summary>
         public int Quality => config.Quality;
+        
+        /// <summary>
+        ///花费道具id
+        /// </summary>
+        public int CostItemId => config.CostItemId;
+        
+        /// <summary>
+        ///花费数量
+        /// </summary>
+        public int CostCount => config.CostCount;
         
         /// <summary>
         ///刷出 宝箱 id 列表

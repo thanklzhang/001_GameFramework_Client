@@ -23,9 +23,24 @@ namespace Config
         private string describe; 
         
         /// <summary>
+        ///图标资源id
+        /// </summary>
+        private int iconResId; 
+        
+        /// <summary>
         ///宝箱组品质（绿 - 红）
         /// </summary>
         private int quality; 
+        
+        /// <summary>
+        ///花费道具id
+        /// </summary>
+        private int costItemId; 
+        
+        /// <summary>
+        ///花费数量
+        /// </summary>
+        private int costCount; 
         
         /// <summary>
         ///刷出 宝箱 id 列表
@@ -58,7 +73,13 @@ namespace Config
         
         public string Describe { get => describe; }     
         
+        public int IconResId { get => iconResId; }     
+        
         public int Quality { get => quality; }     
+        
+        public int CostItemId { get => costItemId; }     
+        
+        public int CostCount { get => costCount; }     
         
         public List<int> BoxIdList { get => boxIdList; }     
         

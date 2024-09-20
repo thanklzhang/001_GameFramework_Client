@@ -16,6 +16,8 @@ public partial class BattleBoxMainUI
 
     public void InitShop()
     {
+        shopRoot = transform.Find("root/shop");
+        shopItemRoot = shopRoot.Find("shopItemRoot/mask/content");
         shopItemList = new List<BoxShopShowItem>();
     }
 

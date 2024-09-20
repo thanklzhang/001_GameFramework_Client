@@ -20,11 +20,17 @@ public partial class BattleBoxMainUI
         this.battleUI = battleUI;
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
+        InitShop();
     }
 
     public void Show()
     {
         this.gameObject.SetActive(true);
+    }
+
+    public void RefreshAllUI()
+    {
+        RefreshShopUI();
     }
 
     public void Update(float deltaTime)

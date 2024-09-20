@@ -69,12 +69,13 @@ namespace Battle_Client
 
     public class BattleClientMsg_BoxShop
     {
-        public Dictionary<int, BattleClientMsg_BoxShopItem> shopItems;
+        public Dictionary<RewardQuality, BattleClientMsg_BoxShopItem> shopItems;
     }
 
     public class BattleClientMsg_BoxShopItem
     {
-        public int quality;
+        public int configId;
+        // public int quality;
         public int canBuyCount;
         public int maxBuyCount;
         public int costItemId;

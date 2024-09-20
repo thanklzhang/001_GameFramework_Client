@@ -572,6 +572,11 @@ namespace Battle_Client
             throw new System.NotImplementedException();
         }
 
+        public void NotifyUpdateBoxShop(int playerIndex, Dictionary<RewardQuality, BattleBoxShopItem> shopItemDic)
+        {
+            throw new System.NotImplementedException();
+        }
+
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {

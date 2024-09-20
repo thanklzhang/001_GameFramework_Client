@@ -62,5 +62,10 @@ namespace Battle_Client
         {
             throw new NotImplementedException();
         }
+
+        public void Send_BuyBoxFromShop(RewardQuality quality, int buyCount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

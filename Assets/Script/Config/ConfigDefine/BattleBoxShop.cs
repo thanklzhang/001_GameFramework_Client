@@ -23,9 +23,9 @@ namespace Config
         private string describe; 
         
         /// <summary>
-        ///商店宝箱组
+        ///商店宝箱购买项列表
         /// </summary>
-        private List<int> boxGroup; 
+        private List<int> boxShopItemList; 
         
 
         
@@ -33,7 +33,7 @@ namespace Config
         
         public string Describe { get => describe; }     
         
-        public List<int> BoxGroup { get => boxGroup; }     
+        public List<int> BoxShopItemList { get => boxShopItemList; }     
         
 
     } 

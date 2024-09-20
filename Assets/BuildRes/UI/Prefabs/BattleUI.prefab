@@ -7065,7 +7065,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 186.45059, y: -0.000030517578}
-  m_SizeDelta: {x: 372.9, y: 0}
+  m_SizeDelta: {x: 372.9, y: 78.7996}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &566608242408618072
 MonoBehaviour:
@@ -9793,7 +9793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8741738495196699807
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39415,9 +39415,9 @@ RectTransform:
   m_Father: {fileID: 7399849118052282959}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 186.45, y: -39.3998}
   m_SizeDelta: {x: 346.4375, y: 78.7996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4174166800846148249
@@ -58025,7 +58025,7 @@ GameObject:
   - component: {fileID: 8608939861622448877}
   - component: {fileID: 8372938377125848447}
   m_Layer: 5
-  m_Name: buytBtn
+  m_Name: buyBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101820,9 +101820,9 @@ RectTransform:
   m_Father: {fileID: 6653262218187176417}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 265.675, y: -65.37}
   m_SizeDelta: {x: 525.7, y: 130.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8299750559742829342
@@ -106564,7 +106564,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 266.18005, y: -0.000030517578}
-  m_SizeDelta: {x: 531.35, y: 0}
+  m_SizeDelta: {x: 531.35, y: 130.74}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3615921975390044921
 MonoBehaviour:
@@ -118686,8 +118686,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 6653262218187176417}
-  m_Horizontal: 1
-  m_Vertical: 0
+  m_Horizontal: 0
+  m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
@@ -122144,8 +122144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 7399849118052282959}
-  m_Horizontal: 1
-  m_Vertical: 0
+  m_Horizontal: 0
+  m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1

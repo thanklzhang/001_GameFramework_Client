@@ -25,13 +25,13 @@ public class BoxShopShowItem
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
+        iconBg = this.transform.Find("iconBg").GetComponent<Image>();
 
-        icon = this.transform.Find("").GetComponent<Image>();
-        iconBg = this.transform.Find("").GetComponent<Image>();
-        nameText = this.transform.Find("").GetComponent<Text>();
-        countText = this.transform.Find("").GetComponent<Text>();
-        costResText = this.transform.Find("").GetComponent<Text>();
-        buyBtn = this.transform.Find("").GetComponent<Button>();
+        icon = iconBg.transform.Find("icon").GetComponent<Image>();
+        nameText = this.transform.Find("name_text").GetComponent<Text>();
+        countText = this.transform.Find("count_text").GetComponent<Text>();
+        costResText = this.transform.Find("costText").GetComponent<Text>();
+        buyBtn = this.transform.Find("buyBtn").GetComponent<Button>();
 
         buyBtn.onClick.AddListener(OnClickBuyBtn);
     }
@@ -39,6 +39,24 @@ public class BoxShopShowItem
     public void RefreshUI(BoxShopItem data)
     {
         this.data = data;
+
+        var config = BattleConfigManager.Instance.
+            GetById<IBattleBoxShopItem>(this.data.configId);
+        var quality = (RewardQuality)config.Quality;
+        iconBg.color = ColorDefine.GetColorByQuality((RewardQuality)config.Quality);
+        int iconResId = config.IconResId;
+        if (iconResId > 0)
+        {
+            ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) =>
+            {
+                icon.sprite = sprite;
+            });
+        }
+
+        nameText.text = config.Name;
+        countText.text = this.data.canBuyCount + "/" + this.data.maxBuyCount;
+        costResText.text = this.data.costCount + "战银";
+
     }
 
     void OnClickBuyBtn()
@@ -56,8 +74,10 @@ public class BoxShopShowItem
         }
         
         //send buy
+        var config = BattleConfigManager.Instance.
+            GetById<IBattleBoxShopItem>(this.data.configId);
         var localPlayer = BattleManager.Instance.GetLocalPlayer();
-        localPlayer.BuyBoxFromShop(data.quality,1);
+        localPlayer.BuyBoxFromShop((RewardQuality)config.Quality,1);
     }
 
     public void Release()

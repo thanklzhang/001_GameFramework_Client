@@ -6,7 +6,8 @@ namespace Battle_Client
 {
     public class BoxShopItem
     {
-        public RewardQuality quality;
+        public int configId;
+        // public RewardQuality quality;
         public int canBuyCount;
         public int maxBuyCount;
         public int costItemId;

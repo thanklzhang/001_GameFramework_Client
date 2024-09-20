@@ -31,9 +31,9 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
-        ///商店宝箱组
+        ///商店宝箱购买项列表
         /// </summary>
-        public List<int> BoxGroup => config.BoxGroup;
+        public List<int> BoxShopItemList => config.BoxShopItemList;
         
     } 
 }

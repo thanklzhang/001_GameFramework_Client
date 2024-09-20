@@ -9,6 +9,7 @@ namespace Battle_Client
 
         public void InitBoxShop()
         {
+            boxShop = new BoxShop();
             boxShop.Init();
         }
 

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Battle_Client
 {
-    public class BattleConvert
+    public partial class BattleConvert
     {
         public static Vector3Proto ConvertToVector3Proto(Vector3 position)
         {

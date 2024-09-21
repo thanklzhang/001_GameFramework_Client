@@ -49,6 +49,7 @@ public enum EventIDs
     OnSkillItemInfoUpdate = 101207,     //当有技能书道具信息改变的时候
     OnUpdateBoxInfo = 101208,           //同步宝箱信息
     OnBoxOpen = 101209,                 //有宝箱打开了
+    OnUpdateBattleResInfo = 101210,           //同步玩家资源
     
     OnSkillTips = 101250,              //技能提示
     OnItemTips = 101251,                //道具提示

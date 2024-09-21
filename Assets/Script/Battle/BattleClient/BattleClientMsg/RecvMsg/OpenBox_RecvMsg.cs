@@ -17,20 +17,27 @@ namespace Battle_Client
         public override void Handle()
         {
             var arg = this.msgArg as OpenBox_RecvMsg_Arg;
-            
+
             var box = arg.box;
-            
-            var entity = BattleEntityManager.Instance.FindEntity(box.openEntityGuid);
-            if (entity != null)
+
+            // var entity = BattleEntityManager.Instance.FindEntity(box.openEntityGuid);
+            // if (entity != null)
+            // {
+            //     var hero = BattleManager.Instance.GetLocalCtrlHero();
+            //     if (hero != null)
+            //     {
+            //         if (hero.guid == entity.guid)
+            //         {
+            //             hero.OnOpenBox(box);
+            //         }
+            //     }
+            // }
+
+
+            var localPlayer = BattleManager.Instance.GetLocalPlayer();
+            if (arg.box.playerIndex == localPlayer.playerIndex)
             {
-                var hero = BattleManager.Instance.GetLocalCtrlHero();
-                if (hero != null)
-                {
-                    if (hero.guid == entity.guid)
-                    {
-                        hero.OnOpenBox(box);
-                    }
-                }
+                localPlayer.OnOpenBox(box);
             }
         }
     }

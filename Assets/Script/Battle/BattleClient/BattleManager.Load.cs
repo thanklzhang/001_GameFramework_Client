@@ -276,6 +276,26 @@ namespace Battle_Client
                     player.boxShop.shopItems.Add((RewardQuality)shopItem.config.Quality, _shopItem);
                 }
 
+                //玩家宝箱
+                player.myBox = new BattleClientMsg_BattleMyBox();
+                player.myBox.boxGroupDic = new
+                    Dictionary<RewardQuality, BattleClientMsg_MyBoxQualityGroup>();
+
+                foreach (var myBox in _player.myBoxDic)
+                {
+                    var _quality = myBox.Key;
+                    var _boxList = myBox.Value;
+
+                    var boxGroup = new BattleClientMsg_MyBoxQualityGroup();
+                    boxGroup.quality = _quality;
+                    boxGroup.count = _boxList.Count;
+                    
+                    player.myBox.boxGroupDic.Add(boxGroup.quality,boxGroup);
+                }
+
+                //玩家货币
+                player.currency = new BattleClient_Currency();
+                player.currency.currencyDic = BattleConvert.ConvertTo(_player.currencyDic);
 
                 battleClientArgs.clientPlayers.Add(player);
             }
@@ -323,7 +343,7 @@ namespace Battle_Client
         }
 
         /// <summary>
-        /// 根据初始化数据 创建战斗所需数据
+        /// 根据客户端战斗的战斗初始化参数 创建战斗运行时数据
         /// </summary>
         /// <param name="battleInit"></param>
         public void CreateBattleData(BattleClient_CreateBattleArgs battleInit)
@@ -378,6 +398,30 @@ namespace Battle_Client
                     }
 
                     this.localPlayer.SetBoxShopItemsData(localBoxDic);
+
+                    //玩家拥有的宝箱
+                    var boxGroupDic = new Dictionary<RewardQuality,MyBoxGroup>();
+                    var _boxGroupDic = serverPlayer.myBox.boxGroupDic;
+                    foreach (var kv in _boxGroupDic)
+                    {
+                        var _quality = kv.Key;
+                        var _group = kv.Value;
+
+                        var boxGroup = new MyBoxGroup();
+                        boxGroup.quality = _quality;
+                        boxGroup.count = _group.count;
+                        
+                        boxGroupDic.Add(boxGroup.quality,boxGroup);
+                    }
+
+                    this.localPlayer.SetMyBoxList(boxGroupDic);
+                    
+                    //玩家战斗货币资源
+                    if (serverPlayer.currency != null)
+                    {
+                        this.localPlayer.SetCurrencyData(
+                            serverPlayer.currency.currencyDic);
+                    }
                 }
 
 

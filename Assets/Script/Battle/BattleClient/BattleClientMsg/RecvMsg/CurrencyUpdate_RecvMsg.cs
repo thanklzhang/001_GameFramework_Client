@@ -12,24 +12,24 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
-    public class BoxInfoUpdate_RecvMsg : ClientRecvMsg
+    public class CurrencyUpdate_RecvMsg : ClientRecvMsg
     {
         public override void Handle()
         {
-            var arg = this.msgArg as BoxInfoUpdate_RecvMsg_Arg;
+            var arg = this.msgArg as CurrencyUpdate_RecvMsg_Arg;
 
             var player = BattleManager.Instance.GetLocalPlayer();
-            if (player != null && arg.playerIndex == player.playerIndex)
+            if (player.playerIndex == arg.playerIndex)
             {
-                player.SeMyBoxList(arg.boxGroupDic);
+                var dic = BattleConvert.ConvertTo(arg.currencyItemDic);
+                player.SetCurrencyData(dic);
             }
-
         }
     }
 
-    public class BoxInfoUpdate_RecvMsg_Arg : BaseClientRecvMsgArg
+    public class CurrencyUpdate_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int playerIndex;
-        public Dictionary<RewardQuality,BattleClientMsg_MyBoxQualityGroup> boxGroupDic;
+        public Dictionary<int, BattleCurrencyItem> currencyItemDic;
     }
 }

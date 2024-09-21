@@ -2,7 +2,7 @@
 
 namespace Battle_Client
 {
-    public class Currency
+    public class CurrencyItem
     {
         public int itemId;
         public int count;

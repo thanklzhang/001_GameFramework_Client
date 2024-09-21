@@ -37,6 +37,7 @@ public class BattleUI : BaseUI
     private Button skillFuncBtn;
     private Button boxFuncBtn;
     public Text boxFuncBtnCountText;
+    public Text coinText; 
 
     //血条
     HpUIMgr hpUIMgr;
@@ -110,6 +111,7 @@ public class BattleUI : BaseUI
         });
         boxFuncBtnCountText = boxFuncBtn.transform.Find("countBg/count").GetComponent<Text>();
 
+        coinText = transform.Find("coinText").GetComponent<Text>();
 
         //
         closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
@@ -205,11 +207,13 @@ public class BattleUI : BaseUI
         this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
+        OnUpdateBattleResInfo();
 
         EventDispatcher.AddListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
         EventDispatcher.AddListener(EventIDs.OnUpdateBoxInfo, this.OnUpdateBoxInfo);
+        EventDispatcher.AddListener(EventIDs.OnUpdateBattleResInfo, this.OnUpdateBattleResInfo);
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -295,12 +299,19 @@ public class BattleUI : BaseUI
 
     public void OnUpdateBoxInfo()
     {
-        var hero = BattleManager.Instance.GetLocalCtrlHero();
-        if (hero != null)
+        var player = BattleManager.Instance.GetLocalPlayer();
+        if (player != null)
         {
-            var boxCount = hero.GetBoxCount(RewardQuality.Blue);
+            var boxCount = player.GetBoxTotalCount();
             boxFuncBtnCountText.text = "" + boxCount;
         }
+    }
+
+    public void OnUpdateBattleResInfo()
+    {
+        var player = BattleManager.Instance.GetLocalPlayer();
+        var coinCount = player.GetCoinCount();
+        this.coinText.text = coinCount + " 战银";
     }
 
     #region 飘字相关
@@ -319,6 +330,8 @@ public class BattleUI : BaseUI
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
         EventDispatcher.RemoveListener(EventIDs.OnUpdateBoxInfo, this.OnUpdateBoxInfo);
+        EventDispatcher.RemoveListener(EventIDs.OnUpdateBattleResInfo, this.OnUpdateBattleResInfo);
+
     }
 
     void OnClickIntelligentReleaseBtn()

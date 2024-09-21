@@ -16,6 +16,9 @@ namespace Battle_Client
         public void SetBoxShopItemsData(Dictionary<RewardQuality, BoxShopItem> shopItemDic)
         {
             boxShop.SetBoxShopItems(shopItemDic);
+            
+            EventDispatcher.Broadcast(EventIDs.OnUpdateBoxInfo);
+
         }
 
         //购买宝箱

@@ -35,11 +35,12 @@ namespace Battle_Client
 
         public BattleClientMsg_BoxShop boxShop;
         public BattleClient_Currency currency;
+        public BattleClientMsg_BattleMyBox myBox;
     }
 
     public class BattleClient_Currency
     {
-        private Dictionary<int, BattleClient_CurrencyItem> currencyDic;
+        public Dictionary<int, BattleClient_CurrencyItem> currencyDic;
     }
 
     public class BattleClient_CurrencyItem
@@ -75,6 +76,7 @@ namespace Battle_Client
     public class BattleClientMsg_BoxShopItem
     {
         public int configId;
+
         // public int quality;
         public int canBuyCount;
         public int maxBuyCount;
@@ -131,9 +133,23 @@ namespace Battle_Client
         public int targetEntityGuid;
     }
 
+    //玩家箱子部分
+    public class BattleClientMsg_BattleMyBox
+    {
+        //public Dictionary<RewardQuality, BattleClientMsg_BattleBox> boxDic;
+        public Dictionary<RewardQuality, BattleClientMsg_MyBoxQualityGroup> boxGroupDic;
+    }
+
+    //玩家箱子品质列表项
+    public class BattleClientMsg_MyBoxQualityGroup
+    {
+        public RewardQuality quality;
+        public int count;
+    }
+
     public class BattleClientMsg_BattleBox
     {
-        public int openEntityGuid;
+        public int playerIndex;
         public List<BattleClientMsg_BattleBoxSelection> selections;
     }
 

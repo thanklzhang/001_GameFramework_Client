@@ -50,13 +50,13 @@ public class BattleBoxUI
 
     public void CheckBoxState()
     {
-        var entity = BattleManager.Instance.GetLocalCtrlHero();
-        if (null == entity)
+        var player = BattleManager.Instance.GetLocalPlayer();
+        if (null == player)
         {
             return;
         }
 
-        entity.TryOpenBox(RewardQuality.Blue);
+        player.TryOpenBox(RewardQuality.Blue);
     }
 
     void OnOpenBox()
@@ -74,15 +74,15 @@ public class BattleBoxUI
 
     public void RefreshSelectionListShow()
     {
-        var entity = BattleManager.Instance.GetLocalCtrlHero();
-        if (null == entity)
+        var player = BattleManager.Instance.GetLocalPlayer();
+        if (null == player)
         {
             return;
         }
 
-        if (entity.currOpenBox != null)
+        if (player.currOpenBox != null)
         {
-            var selections = entity.currOpenBox.selections;
+            var selections = player.currOpenBox.selections;
 
             boxCellShowList.Clear();
 

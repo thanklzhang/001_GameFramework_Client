@@ -21,6 +21,7 @@ public partial class BattleBoxMainUI
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
         InitShop();
+        InitMyBox();
     }
 
     public void Show()

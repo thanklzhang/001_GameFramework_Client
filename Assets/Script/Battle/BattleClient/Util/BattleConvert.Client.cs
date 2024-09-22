@@ -32,5 +32,49 @@ namespace Battle_Client
 
             return dic;
         }
+
+        //我的宝箱：战斗逻辑 -》 客户端战斗
+        public static Dictionary<RewardQuality, MyBoxGroup> ConvertTo(
+            Dictionary<RewardQuality, BattleClientMsg_MyBoxQualityGroup> _dic)
+        {
+            Dictionary<RewardQuality, MyBoxGroup> dic = new Dictionary<RewardQuality, MyBoxGroup>();
+            foreach (var kv in _dic)
+            {
+                var _quality = kv.Key;
+                var _item = kv.Value;
+
+                var group = new MyBoxGroup();
+                group.quality = _quality;
+                group.count = _item.count;
+
+                dic.Add(_quality, group);
+            }
+
+            return dic;
+        }
+        
+        //宝箱商店转换：战斗逻辑 -》 客户端战斗
+        public static Dictionary<RewardQuality, BoxShopItem> ConvertTo(
+            Dictionary<RewardQuality,BattleBoxShopItem > _dic)
+        {
+            var dic = new Dictionary<RewardQuality, BoxShopItem>();
+            foreach (var kv in _dic)
+            {
+                var _quality = kv.Key;
+                var _item = kv.Value;
+
+                var shopItem = new BoxShopItem();
+                shopItem.configId = _item.configId;
+                shopItem.canBuyCount = _item.GetCanBuyCount();
+                shopItem.maxBuyCount = _item.GetMaxBuyCount();
+                shopItem.costItemId = _item.costItemId;
+                shopItem.costCount = _item.costCount;
+
+                dic.Add(_quality, shopItem);
+            }
+
+            return dic;
+        }
+        
     }
 }

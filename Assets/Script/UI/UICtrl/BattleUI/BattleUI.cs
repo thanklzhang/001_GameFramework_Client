@@ -37,7 +37,7 @@ public class BattleUI : BaseUI
     private Button skillFuncBtn;
     private Button boxFuncBtn;
     public Text boxFuncBtnCountText;
-    public Text coinText; 
+    public Text coinText;
 
     //血条
     HpUIMgr hpUIMgr;
@@ -207,13 +207,16 @@ public class BattleUI : BaseUI
         this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
-        OnUpdateBattleResInfo();
+
+        this.OnUpdateMyBoxInfo();
+        this.OnUpdateBattleCurrencyInfo();
 
         EventDispatcher.AddListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.AddListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.AddListener(EventIDs.OnBattleStart, this.OnBattleStart);
-        EventDispatcher.AddListener(EventIDs.OnUpdateBoxInfo, this.OnUpdateBoxInfo);
-        EventDispatcher.AddListener(EventIDs.OnUpdateBattleResInfo, this.OnUpdateBattleResInfo);
+        EventDispatcher.AddListener(EventIDs.OnUpdateMyBoxInfo, this.OnUpdateMyBoxInfo);
+        EventDispatcher.AddListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
+        EventDispatcher.AddListener(EventIDs.OnUpdateShopBoxInfo, this.OnUpdateShopBoxInfo);
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -297,7 +300,7 @@ public class BattleUI : BaseUI
         stateText.text = stateStr;
     }
 
-    public void OnUpdateBoxInfo()
+    public void OnUpdateMyBoxInfo()
     {
         var player = BattleManager.Instance.GetLocalPlayer();
         if (player != null)
@@ -305,13 +308,22 @@ public class BattleUI : BaseUI
             var boxCount = player.GetBoxTotalCount();
             boxFuncBtnCountText.text = "" + boxCount;
         }
+
+        this.boxMainUI.RefreshMyBoxUI();
     }
 
-    public void OnUpdateBattleResInfo()
+    public void OnUpdateBattleCurrencyInfo()
     {
         var player = BattleManager.Instance.GetLocalPlayer();
         var coinCount = player.GetCoinCount();
         this.coinText.text = coinCount + " 战银";
+        
+        this.boxMainUI.RefreshMyBoxUI();
+    }
+
+    public void OnUpdateShopBoxInfo()
+    {
+        this.boxMainUI.RefreshShopUI();
     }
 
     #region 飘字相关
@@ -329,9 +341,9 @@ public class BattleUI : BaseUI
         EventDispatcher.RemoveListener<int, bool>(EventIDs.OnPlayerReadyState, this.OnPlayerReadyState);
         EventDispatcher.RemoveListener(EventIDs.OnAllPlayerLoadFinish, this.OnAllPlayerLoadFinish);
         EventDispatcher.RemoveListener(EventIDs.OnBattleStart, this.OnBattleStart);
-        EventDispatcher.RemoveListener(EventIDs.OnUpdateBoxInfo, this.OnUpdateBoxInfo);
-        EventDispatcher.RemoveListener(EventIDs.OnUpdateBattleResInfo, this.OnUpdateBattleResInfo);
-
+        EventDispatcher.RemoveListener(EventIDs.OnUpdateMyBoxInfo, this.OnUpdateMyBoxInfo);
+        EventDispatcher.RemoveListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
+        EventDispatcher.RemoveListener(EventIDs.OnUpdateShopBoxInfo, this.OnUpdateShopBoxInfo);
     }
 
     void OnClickIntelligentReleaseBtn()

@@ -17,7 +17,7 @@ namespace Battle_Client
         {
             this.currencyDic = dic;
             
-            EventDispatcher.Broadcast(EventIDs.OnUpdateBattleResInfo);
+            EventDispatcher.Broadcast(EventIDs.OnUpdateBattleCurrencyInfo);
 
         }
 

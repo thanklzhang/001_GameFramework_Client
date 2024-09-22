@@ -140,16 +140,18 @@ namespace Battle_Client
         public Dictionary<RewardQuality, BattleClientMsg_MyBoxQualityGroup> boxGroupDic;
     }
 
-    //玩家箱子品质列表项
+    //玩家箱子品质列表项(只包含品质和数目)
     public class BattleClientMsg_MyBoxQualityGroup
     {
         public RewardQuality quality;
         public int count;
     }
 
+    //开箱子之后的详细箱子信息
     public class BattleClientMsg_BattleBox
     {
         public int playerIndex;
+        public int configId;
         public List<BattleClientMsg_BattleBoxSelection> selections;
     }
 

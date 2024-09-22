@@ -13,6 +13,11 @@ namespace Battle_Client
         //当前打开的宝箱
         public BattleClientMsg_BattleBox currOpenBox;
 
+        public void InitMyBox()
+        {
+            
+        }
+
         public void SetMyBoxList(Dictionary<RewardQuality,MyBoxGroup> boxDic)
         {
             // if (BattleManager.Instance.GetLocalPlayer().playerIndex == this.playerIndex)
@@ -21,7 +26,7 @@ namespace Battle_Client
             // }
 
             this.boxDic = boxDic;
-            EventDispatcher.Broadcast(EventIDs.OnUpdateBoxInfo);
+            EventDispatcher.Broadcast(EventIDs.OnUpdateMyBoxInfo);
         }
 
         public void OnOpenBox(BattleClientMsg_BattleBox box)
@@ -48,14 +53,14 @@ namespace Battle_Client
             var totalCount = 0;
             foreach (var kv in boxDic)
             {
-                var count = GetBoxCount(kv.Key);
+                var count = GetMyBoxCount(kv.Key);
                 totalCount += count;
             }
 
             return totalCount;
         }
 
-        public int GetBoxCount(RewardQuality quality)
+        public int GetMyBoxCount(RewardQuality quality)
         {
             if (null == boxDic)
             {
@@ -99,6 +104,12 @@ namespace Battle_Client
                 Logx.Log(LogxType.BattleBox, "BattlePlayer_Client : TryOpenBox : no contain quality : " + quality);
             }
         }
-
+        //获取所有商店宝箱信息
+        public Dictionary<RewardQuality, MyBoxGroup> GetAllMyBoxItems()
+        {
+            return boxDic;
+        }
     }
+    
+  
 }

@@ -12,24 +12,23 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
-    public class BoxInfoUpdate_RecvMsg : ClientRecvMsg
+    public class BoxShopInfoUpdate_RecvMsg : ClientRecvMsg
     {
         public override void Handle()
         {
-            var arg = this.msgArg as BoxInfoUpdate_RecvMsg_Arg;
+            var arg = this.msgArg as BoxShopInfoUpdate_RecvMsg_Arg;
 
             var player = BattleManager.Instance.GetLocalPlayer();
             if (player != null && arg.playerIndex == player.playerIndex)
             {
-                player.SeMyBoxList(arg.boxGroupDic);
+                player.SetBoxShopItemsData(arg.boxDic);
             }
-
         }
     }
 
-    public class BoxInfoUpdate_RecvMsg_Arg : BaseClientRecvMsgArg
+    public class BoxShopInfoUpdate_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int playerIndex;
-        public Dictionary<RewardQuality,BattleClientMsg_MyBoxQualityGroup> boxGroupDic;
+        public Dictionary<RewardQuality, BoxShopItem> boxDic;
     }
 }

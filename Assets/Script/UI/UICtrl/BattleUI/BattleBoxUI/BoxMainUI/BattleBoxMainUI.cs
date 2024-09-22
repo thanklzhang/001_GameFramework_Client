@@ -13,15 +13,23 @@ public partial class BattleBoxMainUI
     public Transform transform;
 
     private BattleUI battleUI;
-
+    private Button closeBtn;
 
     public void Init(GameObject gameObject, BattleUI battleUI)
     {
         this.battleUI = battleUI;
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
+
+        closeBtn = transform.Find("root/closeBtn").GetComponent<Button>();
+        closeBtn.onClick.AddListener(OnClickCloseBtn);
         InitShop();
         InitMyBox();
+    }
+
+    public void OnClickCloseBtn()
+    {
+        this.Hide();
     }
 
     public void Show()
@@ -32,6 +40,7 @@ public partial class BattleBoxMainUI
     public void RefreshAllUI()
     {
         RefreshShopUI();
+        RefreshMyBoxUI();
     }
 
     public void Update(float deltaTime)
@@ -45,5 +54,7 @@ public partial class BattleBoxMainUI
 
     public void Release()
     {
+        closeBtn.onClick.RemoveAllListeners();
+        ReleaseMyBox();
     }
 }

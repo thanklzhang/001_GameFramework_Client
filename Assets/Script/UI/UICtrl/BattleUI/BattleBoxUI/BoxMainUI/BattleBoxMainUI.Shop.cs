@@ -38,6 +38,11 @@ public partial class BattleBoxMainUI
 
 
         //refresh show
+        foreach (var shopShowItem in shopItemList)
+        {
+            shopShowItem.Release();
+        }
+        
         shopItemList.Clear();
 
         for (int i = 0; i < dataList.Count; i++)

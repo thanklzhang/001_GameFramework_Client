@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Battle;
 using Battle_Client;
-
+using Config;
 using UnityEngine;
 using UnityEngine.UI;
+using BattleBox = Config.BattleBox;
 
 
-//战斗宝箱界面（技能书列表 学习技能 合成技能）
+//战斗宝箱界面
 public class BattleBoxUI
 {
     public GameObject gameObject;
@@ -103,7 +104,7 @@ public class BattleBoxUI
                 BattleBoxCell cell = new BattleBoxCell();
                 cell.Init(go, this);
                 cell.Show();
-                cell.RefreshUI(data,i);
+                cell.RefreshUI(data, i);
 
                 boxCellShowList.Add(cell);
             }
@@ -125,8 +126,17 @@ public class BattleBoxUI
     {
         this.Hide();
 
+        var player = BattleManager.Instance.GetLocalPlayer();
+        if (null == player)
+        {
+            return;
+        }
+
+        var box = ConfigManager.Instance.GetById<BattleBox>(player.currOpenBox.configId);
+
         var selectIndex = boxCell.index;
-        BattleManager.Instance.MsgSender.Send_SelectBoxReward(selectIndex);
+        var quality = (RewardQuality)box.Quality;
+        BattleManager.Instance.MsgSender.Send_SelectBoxReward(quality, selectIndex);
     }
 
     public void OnRefreshBoxInfo()

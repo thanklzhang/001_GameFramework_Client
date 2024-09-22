@@ -482,6 +482,7 @@ namespace Battle_Client
             BattleClientMsg_BattleBox netBox = new BattleClientMsg_BattleBox();
             netBox.selections = new List<BattleClientMsg_BattleBoxSelection>();
             netBox.playerIndex = box.player.playerIndex;
+            netBox.configId = box.boxConfig.Id;
             for (int i = 0; i < box.selectionGroup.Count; i++)
             {
                 var boxSelection = box.selectionGroup[i];
@@ -520,12 +521,12 @@ namespace Battle_Client
                 dic.Add(targetQuality, boxGroup);
             }
 
-            var arg = new BoxInfoUpdate_RecvMsg_Arg()
+            var arg = new MyBoxInfoUpdate_RecvMsg_Arg()
             {
                 playerIndex = playerIndex,
                 boxGroupDic = dic
             };
-            BattleManager.Instance.RecvBattleMsg<BoxInfoUpdate_RecvMsg>(arg);
+            BattleManager.Instance.RecvBattleMsg<MyBoxInfoUpdate_RecvMsg>(arg);
         }
 
         public void NotifyAll_NotifySelectBoxReward(int index)
@@ -533,9 +534,15 @@ namespace Battle_Client
             throw new System.NotImplementedException();
         }
 
-        public void NotifyUpdateBoxShop(int playerIndex, Dictionary<RewardQuality, BattleBoxShopItem> shopItemDic)
+        public void NotifyUpdateBoxShop(int playerIndex,
+            Dictionary<RewardQuality, BattleBoxShopItem> shopItemDic)
         {
-            throw new System.NotImplementedException();
+            var arg = new BoxShopInfoUpdate_RecvMsg_Arg()
+            {
+                playerIndex = playerIndex,
+                boxDic = BattleConvert.ConvertTo(shopItemDic)
+            };
+            BattleManager.Instance.RecvBattleMsg<BoxShopInfoUpdate_RecvMsg>(arg);
         }
 
         public void NotifyUpdateCurrency(int playerIndex, Dictionary<int, BattleCurrencyItem> currencyItemDic)

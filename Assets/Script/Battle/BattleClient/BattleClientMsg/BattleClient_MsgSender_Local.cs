@@ -83,7 +83,7 @@ namespace Battle_Client
             // };
             // var myUid = GameDataManager.Instance.UserData.Uid;
             // battle.PlayerMsgReceiver.On_ClientPlotEnd((long)myUid);
-            
+
             battle.OnRecvBattleMsg<ClientPlotEnd_BattleMsg>(
                 hero.playerIndex, null);
         }
@@ -172,10 +172,12 @@ namespace Battle_Client
         public void Send_OpenBox(RewardQuality quality)
         {
             Battle_OpenBoxArg arg = new Battle_OpenBoxArg();
-            arg.releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            //arg.releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
             arg.quality = quality;
-            
-            var hero = BattleManager.Instance.GetLocalCtrlHero();
+
+            //var hero = BattleManager.Instance.GetLocalCtrlHero();
+            var player = BattleManager.Instance.GetLocalPlayer();
+
 
             // var arg = new Battle_OpenBoxArg()
             // {
@@ -183,18 +185,19 @@ namespace Battle_Client
             // };
 
             battle.OnRecvBattleMsg<OpenBox_BattleMsg>(
-                hero.playerIndex, arg);
+                player.playerIndex, arg);
 
             // battle.PlayerMsgReceiver.On_OpenBox(arg);
         }
 
-        public void Send_SelectBoxReward(int index)
+        public void Send_SelectBoxReward(RewardQuality quality, int index)
         {
-            var hero = BattleManager.Instance.GetLocalCtrlHero();
-
+            // var hero = BattleManager.Instance.GetLocalCtrlHero();
+            var player = BattleManager.Instance.GetLocalPlayer();
 
             Battle_SelectBoxRewardArg arg = new Battle_SelectBoxRewardArg();
-            arg.releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            //arg.releaserGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            arg.quality = quality;
             arg.index = index;
 
             // SelectBoxReward_BattleMsg msg = new SelectBoxReward_BattleMsg()
@@ -202,21 +205,20 @@ namespace Battle_Client
             //     arg = arg
             // };
 
-            battle.OnRecvBattleMsg<SelectBoxReward_BattleMsg>(hero.playerIndex, arg);
+            battle.OnRecvBattleMsg<SelectBoxReward_BattleMsg>(player.playerIndex, arg);
 
             // battle.PlayerMsgReceiver.On_SelectBoxReward(arg);
         }
 
-        public void Send_BuyBoxFromShop(RewardQuality quality,int buyCount)
+        public void Send_BuyBoxFromShop(RewardQuality quality, int buyCount)
         {
             var arg = new BuyBoxFromShop_BattleMsgArg();
             arg.quality = quality;
             arg.buyCount = buyCount;
-            
+
             var hero = BattleManager.Instance.GetLocalCtrlHero();
 
             battle.OnRecvBattleMsg<BuyBoxFromShop_BattleMsg>(hero.playerIndex, arg);
-
         }
     }
 }

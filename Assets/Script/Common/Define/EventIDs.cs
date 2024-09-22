@@ -47,9 +47,11 @@ public enum EventIDs
     OnSkillTrackEnd = 101205,         //当有技能轨迹结束的时候
     OnItemInfoUpdate = 101206,         //当有道具信息改变的时候
     OnSkillItemInfoUpdate = 101207,     //当有技能书道具信息改变的时候
-    OnUpdateBoxInfo = 101208,           //同步宝箱信息
+    // OnUpdateBoxInfo = 101208,           //同步宝箱信息
     OnBoxOpen = 101209,                 //有宝箱打开了
-    OnUpdateBattleResInfo = 101210,           //同步玩家资源
+    OnUpdateBattleCurrencyInfo = 101210,           //同步玩家资源
+    OnUpdateShopBoxInfo = 101211,           //同步宝箱商店信息
+    OnUpdateMyBoxInfo = 101212,           //同步我的宝箱信息
     
     OnSkillTips = 101250,              //技能提示
     OnItemTips = 101251,                //道具提示

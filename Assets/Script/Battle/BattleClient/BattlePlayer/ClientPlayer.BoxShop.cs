@@ -17,7 +17,7 @@ namespace Battle_Client
         {
             boxShop.SetBoxShopItems(shopItemDic);
             
-            EventDispatcher.Broadcast(EventIDs.OnUpdateBoxInfo);
+            EventDispatcher.Broadcast(EventIDs.OnUpdateShopBoxInfo);
 
         }
 

@@ -58,7 +58,7 @@ namespace Battle_Client
             throw new NotImplementedException();
         }
 
-        public void Send_SelectBoxReward(int index)
+        public void Send_SelectBoxReward(RewardQuality quality,int index)
         {
             throw new NotImplementedException();
         }

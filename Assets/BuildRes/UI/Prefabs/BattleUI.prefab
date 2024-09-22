@@ -6070,7 +6070,7 @@ GameObject:
   - component: {fileID: 7378297271814647676}
   - component: {fileID: 1871707566372162385}
   m_Layer: 5
-  m_Name: count_text (1)
+  m_Name: coinCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6137,7 +6137,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "2000\u94F6\u5B50"
+  m_Text: "-1\u94F6\u5B50"
 --- !u!114 &7378297271814647676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54657,6 +54657,7 @@ RectTransform:
   - {fileID: 5433201499451369705}
   - {fileID: 5716496833704480161}
   - {fileID: 2162665640558454762}
+  - {fileID: 4108136026899094816}
   - {fileID: 4023642483909464708}
   - {fileID: 3268408472224284275}
   - {fileID: 4809377902451359848}
@@ -54682,7 +54683,6 @@ RectTransform:
   - {fileID: 5805359316881325217}
   - {fileID: 8741738495196699807}
   - {fileID: 8960933180535090278}
-  - {fileID: 4108136026899094816}
   - {fileID: 3077741162973006880}
   m_Father: {fileID: 0}
   m_RootOrder: -1
@@ -98631,7 +98631,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9c098bc8252d8394da36f6916bdf8ce0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9cba6e69f9d83fc4fb0352056a96194c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -111619,7 +111619,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: x 3
+  m_Text: x -1
 --- !u!114 &8687841491533247172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116593,7 +116593,7 @@ GameObject:
   - component: {fileID: 4826692276296438354}
   - component: {fileID: 5451087583170567960}
   m_Layer: 5
-  m_Name: buytBtn
+  m_Name: openBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

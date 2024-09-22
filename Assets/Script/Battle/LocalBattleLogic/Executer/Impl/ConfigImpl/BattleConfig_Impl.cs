@@ -77,12 +77,12 @@ namespace Battle
                 }
                 else
                 {
-                    Logx.LogWarning("BattleConfig : the id is not found : " + id);
+                    Logx.LogWarning("BattleConfig : the id is not found : id : " + id + " , type : " + typeof(T));
                 }
             }
             else
             {
-                Logx.LogWarning("BattleConfig : the type is not found : " + type);
+                Logx.LogWarning("BattleConfig : the type is not found : type : " + typeof(T));
             }
 
             return default(T);

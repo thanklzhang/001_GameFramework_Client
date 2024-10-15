@@ -38,7 +38,9 @@ public enum EventIDs
     OnEntityDestroy = 101104,           //实体销毁(死亡之后的一段时间后的销毁时间点)
     OnBattleEnd = 101105,
     OnEntityChangeShowState = 101106,   //实体改变了显隐时
-    
+    OnProcessReadyStateEnter = 101110,  //进入准备阶段
+    OnProcessBattleStateEnter = 101111, //进入战斗阶段
+    OnProcessBossStateEnter = 101112, //进入boss阶段
 
     OnSetEntityPosition = 101201,
     OnSkillInfoUpdate = 101202,         //当有技能信息改变的时候

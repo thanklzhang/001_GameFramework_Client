@@ -75,7 +75,8 @@ public class BattleUI : BaseUI
     //宝箱主界面
     protected BattleBoxMainUI boxMainUI;
 
-
+    private BattleProcessUI processUI;
+    
     //-----------------
     //智能施法 临时功能
     private Button intelligentReleaseBtn;
@@ -188,7 +189,12 @@ public class BattleUI : BaseUI
         boxMainUI.Init(boxMainUIRoot.gameObject, this);
         boxMainUI.Hide();
 
-
+        //关卡流程时间相关界面
+        var processUIRoot = this.transform.Find("processTimeRoot");
+        processUI = new BattleProcessUI();
+        processUI.Init(processUIRoot.gameObject, this);
+        
+        
         //智能施法
         intelligentReleaseBtn = this.transform.Find("intelligentRelease").GetComponent<Button>();
         intelligentReleaseSelectFlagGo = this.intelligentReleaseBtn.transform.Find("flag").gameObject;
@@ -207,6 +213,7 @@ public class BattleUI : BaseUI
         this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
+        this.processUI.RefreshAllUI();
 
         this.OnUpdateMyBoxInfo();
         this.OnUpdateBattleCurrencyInfo();
@@ -242,6 +249,8 @@ public class BattleUI : BaseUI
         this.boxUI.Update(deltaTime);
 
         this.boxMainUI.Update(deltaTime);
+        
+        this.processUI.Update(deltaTime);
     }
 
     void OnPlayerReadyState(int uid, bool isReady)
@@ -370,6 +379,7 @@ public class BattleUI : BaseUI
         this.skillItemOperateUI.Release();
         this.boxUI.Release();
         this.boxMainUI.Release();
+        this.processUI.Release();
 
         this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }

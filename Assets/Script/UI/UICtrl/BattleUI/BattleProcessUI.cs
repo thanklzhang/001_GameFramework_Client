@@ -80,23 +80,38 @@ public class BattleProcessUI
     {
     }
 
+
+    void TimePass(float deltaTime)
+    {
+        surplusTimer -= deltaTime * 1000.0f;
+        if (surplusTimer <= 0)
+        {
+            surplusTimer = 0;
+        }
+    }
+
     public void Update(float deltaTime)
     {
         if (processState == BattleProcessState.Ready)
         {
+            TimePass(deltaTime);
+            
             TimeSpan timeSpan = TimeSpan.FromMilliseconds(surplusTimer); 
             string formattedTime = timeSpan.ToString("mm\\:ss\\:ff");
             readyTimeText.text = formattedTime;
-            
         }
         else if (processState == BattleProcessState.Battle)
         {
+            TimePass(deltaTime);
+            
             TimeSpan timeSpan = TimeSpan.FromMilliseconds(surplusTimer); 
             string formattedTime = timeSpan.ToString("mm\\:ss\\:ff");
             battleTimeText.text = formattedTime;
         }
         else if (processState == BattleProcessState.Boss)
         {
+            TimePass(deltaTime);
+            
             TimeSpan timeSpan = TimeSpan.FromMilliseconds(surplusTimer); 
             string formattedTime = timeSpan.ToString("mm\\:ss\\:ff");
             bossTimeText.text = formattedTime;

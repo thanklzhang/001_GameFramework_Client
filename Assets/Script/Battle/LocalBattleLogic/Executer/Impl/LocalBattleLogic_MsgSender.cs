@@ -534,6 +534,17 @@ namespace Battle_Client
             throw new System.NotImplementedException();
         }
 
+        public void NotifyAll_EnterProcessState(BattleProcessState state, int surplusTimeMS)
+        {
+            var arg = new ProcessEnterState_RecvMsg_Arg()
+            {
+                 state = state,
+                 surplusTimeMS = surplusTimeMS
+            };
+            
+            BattleManager.Instance.RecvBattleMsg<ProcessEnterState_RecvMsg>(arg);
+        }
+
         public void NotifyUpdateBoxShop(int playerIndex,
             Dictionary<RewardQuality, BattleBoxShopItem> shopItemDic)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Battle;
 using GameData;
 
 namespace Battle_Client
@@ -24,6 +25,7 @@ namespace Battle_Client
         //本地玩家控制的英雄
         BattleEntity_Client localCtrlEntity;
         public BattleState BattleState;
+        public BattleProcessState processState;
         LocalBattleLogic_Executer localBattleExecuter;
         public IBattleClientMsgSender MsgSender;
         public IBattleClientMsgReceiver MsgReceiver;
@@ -73,6 +75,23 @@ namespace Battle_Client
             this.localBattleExecuter?.OnEnterBattle();
         }
 
+        public void OnEnterProcessState(BattleProcessState state,int timeMS)
+        {
+            this.processState = state;
+
+            if (state == BattleProcessState.Ready)
+            {
+                EventDispatcher.Broadcast<int>(EventIDs.OnProcessReadyStateEnter,timeMS);
+            }
+            else if(state == BattleProcessState.Battle)
+            {
+                EventDispatcher.Broadcast<int>(EventIDs.OnProcessBattleStateEnter,timeMS);
+            }
+            else if(state == BattleProcessState.Boss)
+            {
+                EventDispatcher.Broadcast<int>(EventIDs.OnProcessBossStateEnter,timeMS);
+            }
+        }
 
         public void Update(float deltaTime)
         {

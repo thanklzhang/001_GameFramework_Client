@@ -45,6 +45,7 @@
         Destroy = 3
     }
 
+
     // public enum RewardQuality
     // {
     //     Green = 0,

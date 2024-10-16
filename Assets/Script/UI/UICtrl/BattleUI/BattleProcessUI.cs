@@ -55,8 +55,8 @@ public class BattleProcessUI
         bossTimeRoot = this.transform.Find("bossStateRoot");
 
         readyTimeText = readyTimeRoot.Find("stageTime").GetComponent<Text>();
-        battleTimeText = readyTimeRoot.Find("stageTime").GetComponent<Text>();
-        bossTimeText = readyTimeRoot.Find("stageTime").GetComponent<Text>();
+        battleTimeText = battleTimeRoot.Find("stageTime").GetComponent<Text>();
+        bossTimeText = bossTimeRoot.Find("stageTime").GetComponent<Text>();
         
         readyAni = readyStateRoot.GetComponentInChildren<Animator>();
         battleAni = battleStateRoot.GetComponentInChildren<Animator>();

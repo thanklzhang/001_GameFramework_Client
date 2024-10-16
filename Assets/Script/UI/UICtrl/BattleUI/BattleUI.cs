@@ -30,7 +30,7 @@ public class BattleUI : BaseUI
     public GameObject readyBgGo;
     public Text stateText;
 
-    public GameObject bossComingRootGo;
+    // public GameObject bossComingRootGo;
 
     private Transform funcBtnRoot;
     private Button heroFuncBtn;
@@ -91,7 +91,7 @@ public class BattleUI : BaseUI
         stateText = this.transform.Find("stateText").GetComponent<Text>();
         attrBtn = this.transform.Find("attrBtn").GetComponent<Button>();
 
-        bossComingRootGo = this.transform.Find("bossComingRoot").gameObject;
+        // bossComingRootGo = this.transform.Find("bossComingRoot").gameObject;
 
         //功能栏
         funcBtnRoot = transform.Find("functionBar/group");

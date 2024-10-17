@@ -9,7 +9,7 @@ using Skill = Battle.Skill;
 namespace Battle_Client
 {
     //战斗逻辑中发送给玩家的发送器
-    public class LocalBattleLogic_MsgSender : IPlayerMsgSender
+    public class LocalBattleLogic_MsgSender : IBattleMsgSender
     {
         Battle.Battle battle;
 
@@ -538,10 +538,10 @@ namespace Battle_Client
         {
             var arg = new ProcessEnterState_RecvMsg_Arg()
             {
-                 state = state,
-                 surplusTimeMS = surplusTimeMS
+                state = state,
+                surplusTimeMS = surplusTimeMS
             };
-            
+
             BattleManager.Instance.RecvBattleMsg<ProcessEnterState_RecvMsg>(arg);
         }
 
@@ -564,6 +564,72 @@ namespace Battle_Client
                 currencyItemDic = currencyItemDic
             };
             BattleManager.Instance.RecvBattleMsg<CurrencyUpdate_RecvMsg>(arg);
+        }
+
+        public void Notify_BattleWavePass(int passTeam, BattleWavePassResult reward)
+        {
+            var arg = new BattleWavePass_RecvMsg_Arg()
+            {
+                passTeam = passTeam,
+            };
+
+            //填充货币
+            arg.currencyDic = new Dictionary<int, WavePassCurrency_RecvMsg>();
+            if (reward.currencyItemList != null)
+            {
+                foreach (var _currency in reward.currencyItemList)
+                {
+                    WavePassCurrency_RecvMsg currency = null;
+                    if (!arg.currencyDic.ContainsKey(_currency.itemConfigId))
+                    {
+                        currency = new WavePassCurrency_RecvMsg();
+                        currency.count = 0;
+                        currency.itemConfigId = _currency.itemConfigId;
+                        arg.currencyDic.Add(_currency.itemConfigId,currency);
+                    }
+                    else
+                    {
+                        currency = arg.currencyDic[_currency.itemConfigId];
+                    }
+                
+                    currency.count += _currency.count;
+                }
+            }
+
+            //填充宝箱
+            arg.boxDic = new Dictionary<RewardQuality, List<WavePassBox_RecvMsg>>();
+            if (reward.boxDic != null)
+            {
+                foreach (var kv in reward.boxDic)
+                {
+                    var _quality = kv.Key;
+                    var _boxList = kv.Value;
+
+                    List<WavePassBox_RecvMsg> list = null;
+                    if (!arg.boxDic.ContainsKey(_quality))
+                    {
+                        list = new List<WavePassBox_RecvMsg>();
+                        arg.boxDic.Add(_quality, list);
+                    }
+                    else
+                    {
+                        list = arg.boxDic[_quality];
+                    }
+
+                    List<WavePassBox_RecvMsg> t_list = new List<WavePassBox_RecvMsg>();
+                    foreach (var _box in _boxList)
+                    {
+                        var t_box = new WavePassBox_RecvMsg();
+                        t_box.boxConfigId = _box.boxConfig.Id;
+                        t_list.Add(t_box);
+                    }
+                    
+                    list.AddRange(t_list);
+                }
+            }
+
+
+            BattleManager.Instance.RecvBattleMsg<BattleWavePass_RecvMsg>(arg);
         }
 
 

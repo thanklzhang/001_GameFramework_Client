@@ -104,7 +104,7 @@ namespace Battle_Client
 
         public void OnEnterBattle()
         {
-            // battle.OnBattleEnd += OnBattleLogicEnd;
+            battle.OnBattleEnd += OnBattleLogicEnd;
         }
 
         public void OnBattleLogicEnd(Battle.Battle battle, int teamIndex)//, BattleEndType endType
@@ -142,7 +142,7 @@ namespace Battle_Client
 
         public void OnExitBattle()
         {
-            // battle.OnBattleEnd -= OnBattleLogicEnd;
+            battle.OnBattleEnd -= OnBattleLogicEnd;
             isPureLocal = false;
         }
 

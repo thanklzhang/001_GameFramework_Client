@@ -154,7 +154,7 @@ public class ObjectPool
         return newPoolObj;
     }
 
-    //asset 引用计数 ， 理论上指挥使 1 和 0
+    //asset 引用计数 ， 理论上只会是 1 和 0
     // int assetRefCount = 0;
     public void OnAssetLoadFinish(UnityEngine.Object asset)
     {

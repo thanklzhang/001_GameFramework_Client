@@ -34,7 +34,7 @@ namespace Battle_Client
 
         private PlayerInput playerInput;
         //当前通过波的结算信息
-        private BattleWavePass_RecvMsg_Arg wavePassArg;
+        public BattleWavePass_RecvMsg_Arg wavePassArg;
         //是否智能施法
         private bool isIntelligentRelease;
 

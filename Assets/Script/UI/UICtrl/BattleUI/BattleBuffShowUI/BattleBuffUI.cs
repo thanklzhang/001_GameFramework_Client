@@ -40,7 +40,7 @@ public class BattleBuffUI
         this.gameObject.SetActive(true);
     }
 
-    public void Refresh()
+    public void RefreshAllUI()
     {
         // BattleBuffUIArgs uiDataArgs = (BattleBuffUIArgs)args;
 

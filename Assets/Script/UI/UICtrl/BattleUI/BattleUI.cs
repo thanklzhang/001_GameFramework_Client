@@ -75,7 +75,11 @@ public class BattleUI : BaseUI
     //宝箱主界面
     protected BattleBoxMainUI boxMainUI;
 
+    //战斗流程阶段界面
     private BattleProcessUI processUI;
+
+    //战斗回合（当前波）结算界面
+    private BattleWavePassUI wavePassUI;
     
     //-----------------
     //智能施法 临时功能
@@ -194,6 +198,10 @@ public class BattleUI : BaseUI
         processUI = new BattleProcessUI();
         processUI.Init(processUIRoot.gameObject, this);
         
+        //关卡回合（当前波）结算界面
+        var wavePassUIRoot = this.transform.Find("wavePassUI");
+        wavePassUI = new BattleWavePassUI();
+        wavePassUI.Init(wavePassUIRoot.gameObject,this);
         
         //智能施法
         intelligentReleaseBtn = this.transform.Find("intelligentRelease").GetComponent<Button>();
@@ -208,12 +216,13 @@ public class BattleUI : BaseUI
         this.skillUI.RefreshAllUI();
         this.heroInfoUI.RefreshAllUI();
         this.stageInfoUI.RefreshAllUI();
-        this.buffUI.Refresh();
+        this.buffUI.RefreshAllUI();
         this.battleItemUI.RefreshAllUI();
         this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
         this.processUI.RefreshAllUI();
+        this.wavePassUI.RefreshAllUI();
 
         this.OnUpdateMyBoxInfo();
         this.OnUpdateBattleCurrencyInfo();
@@ -224,33 +233,24 @@ public class BattleUI : BaseUI
         EventDispatcher.AddListener(EventIDs.OnUpdateMyBoxInfo, this.OnUpdateMyBoxInfo);
         EventDispatcher.AddListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
         EventDispatcher.AddListener(EventIDs.OnUpdateShopBoxInfo, this.OnUpdateShopBoxInfo);
+        EventDispatcher.AddListener(EventIDs.OnProcessWavePass, this.OnProcessWavePass);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
         this.hpUIMgr.Update(deltaTime);
-
         this.floatWordMgr.Update(deltaTime);
-
         this.skillUI.Update(deltaTime);
-
         this.buffUI.Update(deltaTime);
-
         this.describeUI.Update(deltaTime);
-
         this.heroInfoUI.Update(deltaTime);
-
         this.stageInfoUI.Update(deltaTime);
-
         this.battleItemUI.Update(deltaTime);
-
         this.skillItemOperateUI.Update(deltaTime);
-
         this.boxUI.Update(deltaTime);
-
         this.boxMainUI.Update(deltaTime);
-        
         this.processUI.Update(deltaTime);
+        this.wavePassUI.Update(deltaTime);
     }
 
     void OnPlayerReadyState(int uid, bool isReady)
@@ -335,6 +335,12 @@ public class BattleUI : BaseUI
         this.boxMainUI.RefreshShopUI();
     }
 
+    public void OnProcessWavePass()
+    {
+        var arg = BattleManager.Instance.wavePassArg;
+        this.wavePassUI.ShowByData(arg);
+    }
+
     #region 飘字相关
 
     internal void ShowFloatWord(string word, GameObject go, int floatStyle, Color color)
@@ -353,6 +359,7 @@ public class BattleUI : BaseUI
         EventDispatcher.RemoveListener(EventIDs.OnUpdateMyBoxInfo, this.OnUpdateMyBoxInfo);
         EventDispatcher.RemoveListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
         EventDispatcher.RemoveListener(EventIDs.OnUpdateShopBoxInfo, this.OnUpdateShopBoxInfo);
+        EventDispatcher.RemoveListener(EventIDs.OnProcessWavePass, this.OnProcessWavePass);
     }
 
     void OnClickIntelligentReleaseBtn()
@@ -380,6 +387,7 @@ public class BattleUI : BaseUI
         this.boxUI.Release();
         this.boxMainUI.Release();
         this.processUI.Release();
+        this.wavePassUI.Release();
 
         this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }

@@ -52,6 +52,11 @@ namespace Config
         /// </summary>
         private int passType; 
         
+        /// <summary>
+        ///通过奖励
+        /// </summary>
+        private int passRewardId; 
+        
 
         
         public string Describe { get => describe; }     
@@ -69,6 +74,8 @@ namespace Config
         public int LimitTime { get => limitTime; }     
         
         public int PassType { get => passType; }     
+        
+        public int PassRewardId { get => passRewardId; }     
         
 
     } 

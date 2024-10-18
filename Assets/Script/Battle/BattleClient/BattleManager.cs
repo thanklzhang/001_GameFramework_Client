@@ -33,7 +33,8 @@ namespace Battle_Client
         private BattleClient_CreateBattleArgs battleClientArgs;
 
         private PlayerInput playerInput;
-
+        //当前通过波的结算信息
+        private BattleWavePass_RecvMsg_Arg wavePassArg;
         //是否智能施法
         private bool isIntelligentRelease;
 
@@ -114,6 +115,13 @@ namespace Battle_Client
         public void FixedUpdate(float fixedTime)
         {
             localBattleExecuter?.FixedUpdate(fixedTime);
+        }
+
+       
+        public void OnBattleWavePass(BattleWavePass_RecvMsg_Arg wavePassArg)
+        {
+            this.wavePassArg = wavePassArg;
+            EventDispatcher.Broadcast(EventIDs.OnProcessWavePass);
         }
 
         public void OnExitBattle()

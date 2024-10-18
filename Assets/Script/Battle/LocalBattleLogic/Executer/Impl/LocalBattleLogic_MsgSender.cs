@@ -620,7 +620,7 @@ namespace Battle_Client
                     foreach (var _box in _boxList)
                     {
                         var t_box = new WavePassBox_RecvMsg();
-                        t_box.boxConfigId = _box.boxConfig.Id;
+                        t_box.boxConfigId = _box.configId;
                         t_list.Add(t_box);
                     }
                     

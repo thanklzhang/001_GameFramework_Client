@@ -22,6 +22,7 @@ namespace Battle_Client
             if (player.team == arg.passTeam)
             {
                 //客户端显示结算界面
+                BattleManager.Instance.OnBattleWavePass(arg);
             }
         }
     }

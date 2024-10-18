@@ -60,5 +60,10 @@ namespace Battle
         /// </summary>
         public int PassType => config.PassType;
         
+        /// <summary>
+        ///通过奖励
+        /// </summary>
+        public int PassRewardId => config.PassRewardId;
+        
     } 
 }

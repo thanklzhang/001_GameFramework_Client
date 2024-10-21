@@ -23,6 +23,11 @@ namespace Config
         private int index; 
         
         /// <summary>
+        ///是否是本波结束节点（如果是怪物死亡胜利的条件，那么这波怪物只有一个，怪物死亡就胜利）
+        /// </summary>
+        private int isEndNode; 
+        
+        /// <summary>
         ///初始延迟（*1000）
         /// </summary>
         private int delayTime; 
@@ -57,6 +62,8 @@ namespace Config
         public string Describe { get => describe; }     
         
         public int Index { get => index; }     
+        
+        public int IsEndNode { get => isEndNode; }     
         
         public int DelayTime { get => delayTime; }     
         

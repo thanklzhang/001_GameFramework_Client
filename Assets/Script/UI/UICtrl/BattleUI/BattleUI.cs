@@ -70,7 +70,7 @@ public class BattleUI : BaseUI
     private BattleSkillOperateUI skillItemOperateUI;
 
     //宝箱界面
-    private BattleBoxUI boxUI;
+    private BattleRewardUI boxUI;
 
     //宝箱主界面
     protected BattleBoxMainUI boxMainUI;
@@ -184,7 +184,7 @@ public class BattleUI : BaseUI
 
         //宝箱界面
         var boxUIRoot = this.transform.Find("boxUI");
-        boxUI = new BattleBoxUI();
+        boxUI = new BattleRewardUI();
         boxUI.Init(boxUIRoot.gameObject, this);
 
         //宝箱主界面

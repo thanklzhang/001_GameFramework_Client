@@ -10,7 +10,7 @@ using BattleBox = Config.BattleBox;
 
 
 //战斗宝箱界面
-public class BattleBoxUI
+public class BattleRewardUI
 {
     public GameObject gameObject;
     public Transform transform;
@@ -20,7 +20,7 @@ public class BattleBoxUI
 
     private Transform selectionRoot;
 
-    private List<BattleBoxCell> boxCellShowList;
+    private List<BattleRewardCell> boxCellShowList;
 
     private Text boxCountText;
 
@@ -41,7 +41,7 @@ public class BattleBoxUI
 
         EventDispatcher.AddListener(EventIDs.OnBoxOpen, OnOpenBox);
 
-        boxCellShowList = new List<BattleBoxCell>();
+        boxCellShowList = new List<BattleRewardCell>();
     }
 
     public void Show()
@@ -101,7 +101,7 @@ public class BattleBoxUI
                         selectionRoot, false);
                 }
 
-                BattleBoxCell cell = new BattleBoxCell();
+                BattleRewardCell cell = new BattleRewardCell();
                 cell.Init(go, this);
                 cell.Show();
                 cell.RefreshUI(data, i);
@@ -122,7 +122,7 @@ public class BattleBoxUI
         this.Hide();
     }
 
-    public void OnSelectSelection(BattleBoxCell boxCell)
+    public void OnSelectSelection(BattleRewardCell boxCell)
     {
         this.Hide();
 

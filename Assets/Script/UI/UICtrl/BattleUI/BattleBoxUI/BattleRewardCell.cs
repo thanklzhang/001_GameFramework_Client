@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 
 //选项
-public class BattleBoxCell
+public class BattleRewardCell
 {
     public GameObject gameObject;
     public Transform transform;
@@ -21,11 +21,11 @@ public class BattleBoxCell
 
     public int index = -1;
 
-    private BattleBoxUI parentUI;
+    private BattleRewardUI parentUI;
 
     public BattleClientMsg_BattleBoxSelection data;
 
-    public void Init(GameObject gameObject, BattleBoxUI parentUI)
+    public void Init(GameObject gameObject, BattleRewardUI parentUI)
     {
         this.parentUI = parentUI;
         this.gameObject = gameObject;

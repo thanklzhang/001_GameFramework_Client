@@ -141,12 +141,12 @@ namespace Battle_Client
 
             this.OnExitBattle();
 
-            // //战斗结算界面
-            // var args = new BattleResultUIArgs()
-            // {
-            //     isWin = battleResultArgs.isWin,
-            //     //reward
-            // };
+            //战斗结算界面
+            var args = new BattleResultUIArgs()
+            {
+                isWin = battleResultDataArgs.isWin,
+                itemDataList = battleResultDataArgs.rewardDataList
+            };
             // args.uiItem = new List<CommonItemUIArgs>();
             //
             // foreach (var item in battleResultArgs.rewardDataList)
@@ -158,11 +158,11 @@ namespace Battle_Client
             //     };
             //     args.uiItem.Add(_item);
             // }
-            //
+            
             // this._resultUIPre.Refresh(args);
             // this._resultUIPre.Show();
-            // //
-
+            //
+            UIManager.Instance.Open<BattleResultUI>(args);
 
             BattleEntityManager.Instance.OnBattleEnd();
             playerInput.OnBattleEnd();

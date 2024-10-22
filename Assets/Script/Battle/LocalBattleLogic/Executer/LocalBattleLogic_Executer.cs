@@ -126,16 +126,19 @@ namespace Battle_Client
                 Logx.Log(LogxType.Battle, "pure battle : battle result");
 
                 BattleResultDataArgs resultData = new BattleResultDataArgs();
-                // resultData.isWin = endType == BattleEndType.Win;
                 resultData.rewardDataList = new List<ItemData>();
-                // foreach (var serReward in scBattleEnd.Rewards)
-                // {
-                //     ItemData item = new ItemData();
-                //     item.configId = serReward.ConfigId;
-                //     item.count = serReward.Count;
-                //     resultData.rewardDataList.Add(item);
-                // }
 
+                var isWin = teamIndex == BattleManager.Instance.GetLocalPlayer().team;
+                resultData.isWin = isWin;
+                
+                //test 这里先测试 ， 之后按照需求给
+                ItemData data1 = new ItemData()
+                {
+                    configId = 22000001,
+                    count = 1200
+                };
+                
+                resultData.rewardDataList.Add(data1);
                 BattleManager.Instance.BattleEnd(resultData);
             }
         }

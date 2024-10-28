@@ -73,6 +73,16 @@ namespace Config
         private List<int> collisionEffectList; 
         
         /// <summary>
+        ///碰到物体后的伤害改变值（千分比，加法）
+        /// </summary>
+        private int collisionDamageChange; 
+        
+        /// <summary>
+        ///碰到物体后的伤害改变值限制（千分比，加法）
+        /// </summary>
+        private int collisionDamageChangeLimit; 
+        
+        /// <summary>
         ///结束的时候触发的效果列表
         /// </summary>
         private List<int> endEffectList; 
@@ -132,6 +142,10 @@ namespace Config
         public List<int> StartEffectList { get => startEffectList; }     
         
         public List<int> CollisionEffectList { get => collisionEffectList; }     
+        
+        public int CollisionDamageChange { get => collisionDamageChange; }     
+        
+        public int CollisionDamageChangeLimit { get => collisionDamageChangeLimit; }     
         
         public List<int> EndEffectList { get => endEffectList; }     
         

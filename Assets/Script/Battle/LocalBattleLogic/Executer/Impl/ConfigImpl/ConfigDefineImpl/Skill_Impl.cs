@@ -31,14 +31,14 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
+        ///技能等级
+        /// </summary>
+        public int Level => config.Level;
+        
+        /// <summary>
         ///技能图标资源id
         /// </summary>
         public int IconResId => config.IconResId;
-        
-        /// <summary>
-        ///等级
-        /// </summary>
-        public int Level => config.Level;
         
         /// <summary>
         ///技能释放目标类型

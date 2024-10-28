@@ -81,6 +81,16 @@ namespace Battle
         public List<int> CollisionEffectList => config.CollisionEffectList;
         
         /// <summary>
+        ///碰到物体后的伤害改变值（千分比，加法）
+        /// </summary>
+        public int CollisionDamageChange => config.CollisionDamageChange;
+        
+        /// <summary>
+        ///碰到物体后的伤害改变值限制（千分比，加法）
+        /// </summary>
+        public int CollisionDamageChangeLimit => config.CollisionDamageChangeLimit;
+        
+        /// <summary>
         ///结束的时候触发的效果列表
         /// </summary>
         public List<int> EndEffectList => config.EndEffectList;

@@ -23,14 +23,14 @@ namespace Config
         private string describe; 
         
         /// <summary>
+        ///技能等级
+        /// </summary>
+        private int level; 
+        
+        /// <summary>
         ///技能图标资源id
         /// </summary>
         private int iconResId; 
-        
-        /// <summary>
-        ///等级
-        /// </summary>
-        private int level; 
         
         /// <summary>
         ///技能释放目标类型
@@ -128,9 +128,9 @@ namespace Config
         
         public string Describe { get => describe; }     
         
-        public int IconResId { get => iconResId; }     
-        
         public int Level { get => level; }     
+        
+        public int IconResId { get => iconResId; }     
         
         public int SkillReleaseTargeType { get => skillReleaseTargeType; }     
         

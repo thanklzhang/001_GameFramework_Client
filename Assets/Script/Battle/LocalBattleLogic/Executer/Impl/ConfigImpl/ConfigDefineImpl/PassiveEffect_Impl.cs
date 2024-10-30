@@ -61,6 +61,11 @@ namespace Battle
         public List<int> AfterTriggerRemoveEffectList => config.AfterTriggerRemoveEffectList;
         
         /// <summary>
+        ///最大触发次数
+        /// </summary>
+        public int MaxTriggerCount => config.MaxTriggerCount;
+        
+        /// <summary>
         ///触发CD(毫秒)
         /// </summary>
         public int TriggerCD => config.TriggerCD;

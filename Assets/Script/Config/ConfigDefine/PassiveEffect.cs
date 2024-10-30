@@ -53,6 +53,11 @@ namespace Config
         private List<int> afterTriggerRemoveEffectList; 
         
         /// <summary>
+        ///最大触发次数
+        /// </summary>
+        private int maxTriggerCount; 
+        
+        /// <summary>
         ///触发CD(毫秒)
         /// </summary>
         private int triggerCD; 
@@ -79,6 +84,8 @@ namespace Config
         public List<int> TriggerEffectList { get => triggerEffectList; }     
         
         public List<int> AfterTriggerRemoveEffectList { get => afterTriggerRemoveEffectList; }     
+        
+        public int MaxTriggerCount { get => maxTriggerCount; }     
         
         public int TriggerCD { get => triggerCD; }     
         

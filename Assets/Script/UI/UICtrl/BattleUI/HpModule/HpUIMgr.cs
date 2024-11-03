@@ -120,9 +120,9 @@ public class HpUIMgr
         }
     }
 
-    public void ShowFloatWord(string str, GameObject gameObject, int style, Color color)
+    public void ShowFloatWord(FloatWordBean bean)
     {
-        this._battleUICtrl.ShowFloatWord(str, gameObject, style, color);
+        this._battleUICtrl.ShowFloatWord(bean);
     }
 
 

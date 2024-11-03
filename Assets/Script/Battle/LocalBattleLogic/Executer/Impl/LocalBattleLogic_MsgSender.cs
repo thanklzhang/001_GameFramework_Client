@@ -585,13 +585,13 @@ namespace Battle_Client
                         currency = new WavePassCurrency_RecvMsg();
                         currency.count = 0;
                         currency.itemConfigId = _currency.itemConfigId;
-                        arg.currencyDic.Add(_currency.itemConfigId,currency);
+                        arg.currencyDic.Add(_currency.itemConfigId, currency);
                     }
                     else
                     {
                         currency = arg.currencyDic[_currency.itemConfigId];
                     }
-                
+
                     currency.count += _currency.count;
                 }
             }
@@ -623,13 +623,23 @@ namespace Battle_Client
                         t_box.boxConfigId = _box.configId;
                         t_list.Add(t_box);
                     }
-                    
+
                     list.AddRange(t_list);
                 }
             }
 
 
             BattleManager.Instance.RecvBattleMsg<BattleWavePass_RecvMsg>(arg);
+        }
+
+        public void Notify_EntityAbnormalEffect(int entityGuid, AbnormalStateBean stateBean)
+        {
+            var arg = new AbnormalEffect_RecvMsg_Arg()
+            {
+                entityGuid = entityGuid,
+                stateBean = stateBean
+            };
+            BattleManager.Instance.RecvBattleMsg<AbnormalEffect_RecvMsg>(arg);
         }
 
 

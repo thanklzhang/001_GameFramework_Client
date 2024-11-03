@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using UnityEngine;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
 
 public class FloatWord
 {
@@ -13,7 +15,10 @@ public class FloatWord
     RectTransform parentRoot;
     bool isUsing;
 
-    public bool IsUsing { get => isUsing; }
+    public bool IsUsing
+    {
+        get => isUsing;
+    }
 
     float timer;
 
@@ -31,26 +36,47 @@ public class FloatWord
         ani = transform.GetComponentInChildren<Animator>();
     }
 
-    internal void Start(string word, GameObject followGo, int floatStyle, Color color)
+    // internal void Start(string word, GameObject followGo, AbnormalStateBean stateBean, Color color)
+    internal void Start(FloatWordBean bean)
     {
         this.isUsing = true;
-        this.followGo = followGo;
+        this.followGo = bean.followGo;
+        var word = bean.wordStr;
         SetShowValue(word);
 
         this.gameObject.SetActive(true);
 
         AnimationClip clip = null;
         string stateName = "";
+        var stateType = bean.stateType;
+        var trigger = bean.triggerType;
         AnimationClip[] clips = ani.runtimeAnimatorController.animationClips;
-        if (0 == floatStyle)
+        if (stateType == EntityAbnormalStateType.CurrHp_Add ||
+            stateType == EntityAbnormalStateType.CurrHp_Sub)
         {
-            //向左
-            stateName = "float_word_left";
+            if (trigger == AbnormalStateTriggerType.Start)
+            {
+                if (bean.showStyle == FloatWordShowStyle.Left)
+                {
+                    //向左
+                    stateName = "float_word_left";
+                }
+                else if (bean.showStyle == FloatWordShowStyle.Right)
+                {
+                    stateName = "float_word_right";
+                }
+            }
+
+          
         }
-        else
+        else if (stateType == EntityAbnormalStateType.AvoidNormalAttack)
         {
-            stateName = "float_word_right";
+            if (trigger == AbnormalStateTriggerType.Trigger)
+            {
+                stateName = "float_word_middle";
+            }
         }
+
 
         clip = FindClip(stateName);
 
@@ -60,7 +86,7 @@ public class FloatWord
 
         this.transform.SetAsLastSibling();
 
-        this.valueText.color = color;
+        this.valueText.color = bean.color;
     }
 
     public AnimationClip FindClip(string stateName)
@@ -74,6 +100,7 @@ public class FloatWord
                 return clip;
             }
         }
+
         return null;
     }
 
@@ -89,6 +116,7 @@ public class FloatWord
             //这里应该和 entity 同步
             return;
         }
+
         var entityObj = this.followGo;
         var camera3D = CameraManager.Instance.GetCamera3D();
         var cameraUI = CameraManager.Instance.GetCameraUI();
@@ -101,16 +129,11 @@ public class FloatWord
         this.transform.localPosition = uiPos + Vector2.up * 80;
 
 
-
-
-
-
         timer += deltaTime;
         if (timer >= this.aniLength)
         {
             this.Finish();
         }
-
     }
 
     public void Finish()
@@ -124,6 +147,4 @@ public class FloatWord
     {
         Finish();
     }
-
 }
-

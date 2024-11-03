@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Battle;
 using UnityEngine;
 
 namespace Battle_Client
@@ -91,7 +92,11 @@ namespace Battle_Client
             }
         }
 
-
+        // public void OnAbnormalEffect(AbnormalStateBean stateBean)
+        // {
+        //     EventDispatcher.Broadcast<BattleEntity_Client,AbnormalStateBean>(EventIDs.OnEntityAbnormalEffect,
+        //         this,stateBean);
+        // }
     }
     
     

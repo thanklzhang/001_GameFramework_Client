@@ -1,8 +1,10 @@
 ﻿
 
+using Battle;
 using Battle_Client;
 using UnityEngine;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
 
 public class HpUIShowObj
 {
@@ -107,7 +109,7 @@ public class HpUIShowObj
                 word = "+" + changeHp;
             }
             var go = this.entityObj;
-            int floatStyle = 0;
+            FloatWordShowStyle floatStyle = FloatWordShowStyle.Left;
             var fromEntityGuid = this.fromEntityGuid;
             if (fromEntityGuid > 0)
             {
@@ -119,12 +121,11 @@ public class HpUIShowObj
                     var dir = (fromEntityPos - currEntityPos).normalized;
                     if (dir.x > 0)
                     {
-                        //受到来自左边敌人的攻击 那么飘字向右
-                        floatStyle = 1;
+                        floatStyle = FloatWordShowStyle.Left;
                     }
                     else
                     {
-                        floatStyle = 0;
+                        floatStyle = FloatWordShowStyle.Right;
                     }
                 }
 
@@ -134,7 +135,16 @@ public class HpUIShowObj
                     color = addHpColor;
                 }
 
-                hpUIMgr.ShowFloatWord(word, go, floatStyle, color);
+                FloatWordBean bean = new FloatWordBean();
+                bean.wordStr = word;
+                bean.followGo = go;
+                bean.color = color;
+                bean.showStyle = floatStyle;
+                bean.stateType = changeHp > 0 ? EntityAbnormalStateType.CurrHp_Add
+                        : EntityAbnormalStateType.CurrHp_Sub;
+                bean.triggerType = AbnormalStateTriggerType.Start;
+                
+                hpUIMgr.ShowFloatWord(bean);
             }
         }
 

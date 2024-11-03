@@ -1,8 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum FloatWordShowStyle
+{
+    Left = 0,
+    Middle = 1,
+    Right = 2
+}
+
+public class FloatWordBean
+{
+    public string wordStr;
+    public FloatWordShowStyle showStyle;
+    public GameObject followGo;
+    public EntityAbnormalStateType stateType;
+    public AbnormalStateTriggerType triggerType;
+    public Color color;
+}
 
 public class FloatWordMgr
 {
@@ -37,7 +55,8 @@ public class FloatWordMgr
         return fw;
     }
 
-    public void ShowFloatWord(string word, GameObject followGo, int floatStyle, Color color)
+    // public void ShowFloatWord(string word, GameObject followGo, AbnormalStateBean stateBean, Color color)
+    public void ShowFloatWord(FloatWordBean bean)
     {
         var fw = FindCanUse();
         if (null == fw)
@@ -45,7 +64,7 @@ public class FloatWordMgr
             fw = AddNew();
         }
 
-        fw.Start(word, followGo, floatStyle, color);
+        fw.Start(bean);
     }
 
     public FloatWord FindCanUse()

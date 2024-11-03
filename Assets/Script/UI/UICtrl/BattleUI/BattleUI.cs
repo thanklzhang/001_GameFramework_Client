@@ -80,7 +80,7 @@ public class BattleUI : BaseUI
 
     //战斗回合（当前波）结算界面
     private BattleWavePassUI wavePassUI;
-    
+
     //-----------------
     //智能施法 临时功能
     private Button intelligentReleaseBtn;
@@ -197,12 +197,12 @@ public class BattleUI : BaseUI
         var processUIRoot = this.transform.Find("processTimeRoot");
         processUI = new BattleProcessUI();
         processUI.Init(processUIRoot.gameObject, this);
-        
+
         //关卡回合（当前波）结算界面
         var wavePassUIRoot = this.transform.Find("wavePassUI");
         wavePassUI = new BattleWavePassUI();
-        wavePassUI.Init(wavePassUIRoot.gameObject,this);
-        
+        wavePassUI.Init(wavePassUIRoot.gameObject, this);
+
         //智能施法
         intelligentReleaseBtn = this.transform.Find("intelligentRelease").GetComponent<Button>();
         intelligentReleaseSelectFlagGo = this.intelligentReleaseBtn.transform.Find("flag").gameObject;
@@ -234,6 +234,8 @@ public class BattleUI : BaseUI
         EventDispatcher.AddListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
         EventDispatcher.AddListener(EventIDs.OnUpdateShopBoxInfo, this.OnUpdateShopBoxInfo);
         EventDispatcher.AddListener(EventIDs.OnProcessWavePass, this.OnProcessWavePass);
+        EventDispatcher.AddListener<BattleEntity_Client, AbnormalStateBean>(EventIDs.OnEntityAbnormalEffect,
+            this.OnEntityAbnormalEffect);
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -326,7 +328,7 @@ public class BattleUI : BaseUI
         var player = BattleManager.Instance.GetLocalPlayer();
         var coinCount = player.GetCoinCount();
         this.coinText.text = coinCount + " 战银";
-        
+
         this.boxMainUI.RefreshMyBoxUI();
     }
 
@@ -341,11 +343,44 @@ public class BattleUI : BaseUI
         this.wavePassUI.ShowByData(arg);
     }
 
+    public void OnEntityAbnormalEffect(BattleEntity_Client entity, AbnormalStateBean stateBean)
+    {
+        var go = entity.gameObject;
+        string showWord = "";
+        Color color = Color.white;
+
+        //TODO : 文字待配置
+        var abnormalType = stateBean.stateType;
+        if (abnormalType == EntityAbnormalStateType.AvoidNormalAttack)
+        {
+            if (stateBean.triggerType == AbnormalStateTriggerType.Trigger)
+            {
+                showWord = "躲避";
+                ColorUtility.TryParseHtmlString("FF0000", out color);
+            }
+        }
+
+        FloatWordBean arg = new FloatWordBean();
+        arg.color = color;
+        arg.showStyle = FloatWordShowStyle.Middle;
+        arg.stateType = stateBean.stateType;
+        arg.triggerType = stateBean.triggerType;
+        arg.wordStr = showWord;
+        arg.followGo = go;
+
+        floatWordMgr.ShowFloatWord(arg);
+    }
+
     #region 飘字相关
 
-    internal void ShowFloatWord(string word, GameObject go, int floatStyle, Color color)
+    // internal void ShowFloatWord(string word, GameObject go, int floatStyle, Color color)
+    // {
+    //     floatWordMgr.ShowFloatWord(word, go, floatStyle, color);
+    // }
+
+    internal void ShowFloatWord(FloatWordBean bean)
     {
-        floatWordMgr.ShowFloatWord(word, go, floatStyle, color);
+        floatWordMgr.ShowFloatWord(bean);
     }
 
     #endregion
@@ -360,6 +395,8 @@ public class BattleUI : BaseUI
         EventDispatcher.RemoveListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
         EventDispatcher.RemoveListener(EventIDs.OnUpdateShopBoxInfo, this.OnUpdateShopBoxInfo);
         EventDispatcher.RemoveListener(EventIDs.OnProcessWavePass, this.OnProcessWavePass);
+        EventDispatcher.RemoveListener<BattleEntity_Client, AbnormalStateBean>(EventIDs.OnEntityAbnormalEffect,
+            this.OnEntityAbnormalEffect);
     }
 
     void OnClickIntelligentReleaseBtn()

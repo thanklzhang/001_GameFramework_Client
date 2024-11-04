@@ -76,6 +76,13 @@ public class FloatWord
                 stateName = "float_word_middle";
             }
         }
+        else if (stateType == EntityAbnormalStateType.AvoidProjectile)
+        {
+            if (trigger == AbnormalStateTriggerType.Trigger)
+            {
+                stateName = "float_word_middle";
+            }
+        }
 
 
         clip = FindClip(stateName);

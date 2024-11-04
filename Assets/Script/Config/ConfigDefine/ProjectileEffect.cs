@@ -33,6 +33,11 @@ namespace Config
         private int isFollow; 
         
         /// <summary>
+        ///投掷物类型
+        /// </summary>
+        private int projectileType; 
+        
+        /// <summary>
         ///持续时间(ms)
         /// </summary>
         private int lastTime; 
@@ -126,6 +131,8 @@ namespace Config
         public int EffectTargetType { get => effectTargetType; }     
         
         public int IsFollow { get => isFollow; }     
+        
+        public int ProjectileType { get => projectileType; }     
         
         public int LastTime { get => lastTime; }     
         

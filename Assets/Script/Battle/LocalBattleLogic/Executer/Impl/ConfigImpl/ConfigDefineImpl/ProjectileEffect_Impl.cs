@@ -41,6 +41,11 @@ namespace Battle
         public int IsFollow => config.IsFollow;
         
         /// <summary>
+        ///投掷物类型
+        /// </summary>
+        public int ProjectileType => config.ProjectileType;
+        
+        /// <summary>
         ///持续时间(ms)
         /// </summary>
         public int LastTime => config.LastTime;

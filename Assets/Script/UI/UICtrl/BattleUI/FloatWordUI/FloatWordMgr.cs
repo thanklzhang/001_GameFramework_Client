@@ -46,7 +46,7 @@ public class FloatWordMgr
     FloatWord AddNew()
     {
         GameObject newGo = GameObject.Instantiate(floatWordPrefab, root, false);
-
+        
         FloatWord fw = new FloatWord();
         fw.Init(newGo, this.root);
 

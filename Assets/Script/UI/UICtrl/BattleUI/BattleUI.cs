@@ -16,7 +16,7 @@ public enum EntityRelationType
     Enemy = 2
 }
 
-public class BattleUI : BaseUI
+public partial class BattleUI : BaseUI
 {
     public Action onCloseBtnClick;
     public Action onReadyStartBtnClick;
@@ -341,34 +341,6 @@ public class BattleUI : BaseUI
     {
         var arg = BattleManager.Instance.wavePassArg;
         this.wavePassUI.ShowByData(arg);
-    }
-
-    public void OnEntityAbnormalEffect(BattleEntity_Client entity, AbnormalStateBean stateBean)
-    {
-        var go = entity.gameObject;
-        string showWord = "";
-        Color color = Color.white;
-
-        //TODO : 文字待配置
-        var abnormalType = stateBean.stateType;
-        if (abnormalType == EntityAbnormalStateType.AvoidNormalAttack)
-        {
-            if (stateBean.triggerType == AbnormalStateTriggerType.Trigger)
-            {
-                showWord = "躲避";
-                ColorUtility.TryParseHtmlString("FF0000", out color);
-            }
-        }
-
-        FloatWordBean arg = new FloatWordBean();
-        arg.color = color;
-        arg.showStyle = FloatWordShowStyle.Middle;
-        arg.stateType = stateBean.stateType;
-        arg.triggerType = stateBean.triggerType;
-        arg.wordStr = showWord;
-        arg.followGo = go;
-
-        floatWordMgr.ShowFloatWord(arg);
     }
 
     #region 飘字相关

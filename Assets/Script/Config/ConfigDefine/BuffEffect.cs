@@ -48,6 +48,11 @@ namespace Config
         private int isCanBeClear; 
         
         /// <summary>
+        ///初始层数
+        /// </summary>
+        private int initLayerCount; 
+        
+        /// <summary>
         ///满层数
         /// </summary>
         private int maxLayerCount; 
@@ -132,6 +137,8 @@ namespace Config
         public int LastTime { get => lastTime; }     
         
         public int IsCanBeClear { get => isCanBeClear; }     
+        
+        public int InitLayerCount { get => initLayerCount; }     
         
         public int MaxLayerCount { get => maxLayerCount; }     
         

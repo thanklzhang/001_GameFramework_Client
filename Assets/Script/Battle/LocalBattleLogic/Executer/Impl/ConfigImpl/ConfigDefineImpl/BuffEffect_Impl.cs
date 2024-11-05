@@ -56,6 +56,11 @@ namespace Battle
         public int IsCanBeClear => config.IsCanBeClear;
         
         /// <summary>
+        ///初始层数
+        /// </summary>
+        public int InitLayerCount => config.InitLayerCount;
+        
+        /// <summary>
         ///满层数
         /// </summary>
         public int MaxLayerCount => config.MaxLayerCount;

@@ -53,16 +53,6 @@ namespace Config
         private List<int> afterTriggerRemoveEffectList; 
         
         /// <summary>
-        ///触发事件类型列表
-        /// </summary>
-        private List<int> triggerEventTypeList; 
-        
-        /// <summary>
-        ///触发事件参数列表
-        /// </summary>
-        private List<string> triggerEventParamList; 
-        
-        /// <summary>
         ///最大触发次数
         /// </summary>
         private int maxTriggerCount; 
@@ -94,10 +84,6 @@ namespace Config
         public List<int> TriggerEffectList { get => triggerEffectList; }     
         
         public List<int> AfterTriggerRemoveEffectList { get => afterTriggerRemoveEffectList; }     
-        
-        public List<int> TriggerEventTypeList { get => triggerEventTypeList; }     
-        
-        public List<string> TriggerEventParamList { get => triggerEventParamList; }     
         
         public int MaxTriggerCount { get => maxTriggerCount; }     
         

@@ -56,6 +56,11 @@ namespace Battle
         public int IsCanBeClear => config.IsCanBeClear;
         
         /// <summary>
+        ///影响类型
+        /// </summary>
+        public int AffectType => config.AffectType;
+        
+        /// <summary>
         ///初始层数
         /// </summary>
         public int InitLayerCount => config.InitLayerCount;

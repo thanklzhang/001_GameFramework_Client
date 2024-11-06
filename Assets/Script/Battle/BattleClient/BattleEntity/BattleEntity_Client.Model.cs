@@ -66,6 +66,11 @@ namespace Battle_Client
             var myEntityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
             if (isFinishLoad && animator != null)
             {
+                if (speed < 0)
+                {
+                    speed = 0.0001f;
+                }
+
                 animator.speed = speed;
                 
                 if ("idle" == aniTriggerName)
@@ -99,6 +104,11 @@ namespace Battle_Client
         
         public void SetAnimationSpeed(float speed)
         {
+            if (speed < 0)
+            {
+                speed = 0.0001f;
+            }
+
             if (isFinishLoad && animator != null)
             {
                 animator.speed = speed;

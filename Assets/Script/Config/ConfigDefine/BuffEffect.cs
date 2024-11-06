@@ -48,6 +48,11 @@ namespace Config
         private int isCanBeClear; 
         
         /// <summary>
+        ///影响类型
+        /// </summary>
+        private int affectType; 
+        
+        /// <summary>
         ///初始层数
         /// </summary>
         private int initLayerCount; 
@@ -137,6 +142,8 @@ namespace Config
         public int LastTime { get => lastTime; }     
         
         public int IsCanBeClear { get => isCanBeClear; }     
+        
+        public int AffectType { get => affectType; }     
         
         public int InitLayerCount { get => initLayerCount; }     
         

@@ -57,6 +57,11 @@ namespace Config
         /// </summary>
         private string effectPosName; 
         
+        /// <summary>
+        ///是否为了显示（只同步效果，实际效果等均不触发）
+        /// </summary>
+        private int isForShow; 
+        
 
         
         public string Name { get => name; }     
@@ -76,6 +81,8 @@ namespace Config
         public int IsEffectFollowTarget { get => isEffectFollowTarget; }     
         
         public string EffectPosName { get => effectPosName; }     
+        
+        public int IsForShow { get => isForShow; }     
         
 
     } 

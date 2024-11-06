@@ -65,5 +65,10 @@ namespace Battle
         /// </summary>
         public string EffectPosName => config.EffectPosName;
         
+        /// <summary>
+        ///是否为了显示（只同步效果，实际效果等均不触发）
+        /// </summary>
+        public int IsForShow => config.IsForShow;
+        
     } 
 }

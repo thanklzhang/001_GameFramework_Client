@@ -36,14 +36,14 @@ namespace Battle
         public int TriggerEventType => config.TriggerEventType;
         
         /// <summary>
-        ///触发目标类型
-        /// </summary>
-        public int TriggerTargetType => config.TriggerTargetType;
-        
-        /// <summary>
         ///触发参数列表
         /// </summary>
         public List<string> TriggerParamList => config.TriggerParamList;
+        
+        /// <summary>
+        ///触发目标类型
+        /// </summary>
+        public int TriggerTargetType => config.TriggerTargetType;
         
     } 
 }

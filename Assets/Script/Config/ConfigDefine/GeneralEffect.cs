@@ -28,14 +28,14 @@ namespace Config
         private int triggerEventType; 
         
         /// <summary>
-        ///触发目标类型
-        /// </summary>
-        private int triggerTargetType; 
-        
-        /// <summary>
         ///触发参数列表
         /// </summary>
         private List<string> triggerParamList; 
+        
+        /// <summary>
+        ///触发目标类型
+        /// </summary>
+        private int triggerTargetType; 
         
 
         
@@ -45,9 +45,9 @@ namespace Config
         
         public int TriggerEventType { get => triggerEventType; }     
         
-        public int TriggerTargetType { get => triggerTargetType; }     
-        
         public List<string> TriggerParamList { get => triggerParamList; }     
+        
+        public int TriggerTargetType { get => triggerTargetType; }     
         
 
     } 

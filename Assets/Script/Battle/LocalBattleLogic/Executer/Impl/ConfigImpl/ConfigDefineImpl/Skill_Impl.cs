@@ -56,7 +56,7 @@ namespace Battle
         public int IsPassiveSkill => config.IsPassiveSkill;
         
         /// <summary>
-        ///技能目标类型
+        ///技能目标类型（选取即将触发效果的单位或点）
         /// </summary>
         public int SkillTargetType => config.SkillTargetType;
         

@@ -135,5 +135,10 @@ namespace Battle
         /// </summary>
         public int EffectResId => config.EffectResId;
         
+        /// <summary>
+        ///显示类型
+        /// </summary>
+        public int ShowType => config.ShowType;
+        
     } 
 }

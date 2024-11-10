@@ -127,6 +127,11 @@ namespace Config
         /// </summary>
         private int effectResId; 
         
+        /// <summary>
+        ///显示类型
+        /// </summary>
+        private int showType; 
+        
 
         
         public string Name { get => name; }     
@@ -174,6 +179,8 @@ namespace Config
         public List<int> EndRemoveEffectList { get => endRemoveEffectList; }     
         
         public int EffectResId { get => effectResId; }     
+        
+        public int ShowType { get => showType; }     
         
 
     } 

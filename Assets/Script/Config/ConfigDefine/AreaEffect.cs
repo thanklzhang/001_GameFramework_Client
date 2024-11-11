@@ -58,6 +58,11 @@ namespace Config
         private List<int> effectList; 
         
         /// <summary>
+        ///触发的效果列表（对所有选择的单位，一般来说是对于之后的组效果，如 linkGroup）
+        /// </summary>
+        private List<int> groupEffectList; 
+        
+        /// <summary>
         ///效果资源id
         /// </summary>
         private int effectResId; 
@@ -81,6 +86,8 @@ namespace Config
         public int SelectEntityType { get => selectEntityType; }     
         
         public List<int> EffectList { get => effectList; }     
+        
+        public List<int> GroupEffectList { get => groupEffectList; }     
         
         public int EffectResId { get => effectResId; }     
         

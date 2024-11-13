@@ -86,6 +86,8 @@ namespace Battle_Client
 
             if (createEffectInfo.buffInfo != null && createEffectInfo.buffInfo.guid > 0)
             {
+                // Logx.Log("zxy : buff add , targetEntityGuid : " + createEffectInfo.buffInfo.targetEntityGuid);
+                // Logx.Log("zxy : buff add , linkTargetEntityGuid : " + createEffectInfo.buffInfo.linkTargetEntityGuid);
                 skillEffect.SetBuffInfo(createEffectInfo.buffInfo);
             }
             skillEffectDic.Add(guid, skillEffect);

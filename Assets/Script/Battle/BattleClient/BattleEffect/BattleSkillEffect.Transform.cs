@@ -10,25 +10,24 @@ namespace Battle_Client
         private int targetGuid;
         int followEntityGuid;
         Transform followEntityNode;
+
         public Vector3 initDir;
-        
+
+        //如果是链子的话
+        private int linkTargetEntityGuid;
+        private Transform linkTargetNode;
+
         //设置该特效为一直跟随实体
         internal void SetFollowEntityGuid(int followEntityGuid, string nodeName)
         {
             //StartMove(Vector3.zero, followEntityGuid, 9999999.0f);
 
             this.followEntityGuid = followEntityGuid;
-
             var entity = BattleEntityManager.Instance.FindEntity(followEntityGuid);
-
             if (null != entity)
             {
                 followEntityNode = entity.FindModelNode(nodeName);
                 this.SetPosition(followEntityNode.position);
-            }
-            else
-            {
-                //Debug.LogWarning("zxy SetFollowEntityGuid : the entity is null : followEntityGuid : " + followEntityGuid);
             }
         }
 
@@ -121,6 +120,7 @@ namespace Battle_Client
 
         void HandleFollowEntity()
         {
+            //跟随的单位
             if (this.followEntityGuid > 0)
             {
                 //完全跟随目标
@@ -139,11 +139,32 @@ namespace Battle_Client
                     }
 
                     this.gameObject.transform.position = followPos + Vector3.up * 0.03f;
+
+                    //link 目标（如果是链子的话）
+                    if (linkTargetNode != null)
+                    {
+                        var startNode = followEntity.FindModelNode(BattleClientConfig.TransformNodeName_hit);
+                        if (startNode != null)
+                        {
+                            UpdateLinkPos(startNode.position,
+                                linkTargetNode.position);
+                        }
+                        else
+                        {
+                            UpdateLinkPos(followPos,
+                                linkTargetNode.position);
+                        }
+
+                       
+                    }
                 }
             }
-            else
-            {
-            }
+        }
+
+        void UpdateLinkPos(Vector3 pos0, Vector3 pos1)
+        {
+            lineRender.SetPosition(0, pos0);
+            lineRender.SetPosition(1, pos1);
         }
 
         public void StopMove(Vector3 endPos)

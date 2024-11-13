@@ -42,7 +42,14 @@ namespace Battle_Client
             gameObject.transform.position = position;
             //gameObject = 
 
+            lineRender = gameObject.GetComponentInChildren<LineRenderer>();
+            if (lineRender != null)
+            {
+                lineRender.positionCount = 2;
+                lineRender.useWorldSpace = true;
+            }
 
+          
             //获取持续时长
             var curParticle = obj.GetComponent<ParticleSystem>();
             var particles = obj.GetComponentsInChildren<ParticleSystem>();

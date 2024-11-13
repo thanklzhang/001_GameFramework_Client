@@ -19,7 +19,7 @@ namespace Battle_Client
         bool isLoop;
 
         BuffEffectInfo_Client buffInfo;
-        
+
         private bool isBattleEnd;
 
         public void Init(int guid, int resId)
@@ -64,6 +64,8 @@ namespace Battle_Client
             this.isAutoDestroy = isAutoDestroy;
         }
 
+        private LineRenderer lineRender;
+
         internal void SetBuffInfo(Battle.BuffEffectInfo buffInfo)
         {
             this.buffInfo = new BuffEffectInfo_Client()
@@ -73,9 +75,22 @@ namespace Battle_Client
                 currCDTime = buffInfo.currCDTime / 1000.0f,
                 maxCDTime = buffInfo.maxCDTime / 1000.0f,
                 stackCount = buffInfo.statckCount,
+                linkTargetEntityGuid = buffInfo.linkTargetEntityGuid,
                 configId = buffInfo.configId,
                 //iconResId = buffInfo.iconResId
             };
+
+            //检查链接信息
+            linkTargetEntityGuid = this.buffInfo.linkTargetEntityGuid;
+            if (linkTargetEntityGuid > 0)
+            {
+                var entity = BattleEntityManager.Instance.FindEntity(linkTargetEntityGuid);
+                if (null != entity)
+                {
+                    linkTargetNode = entity.FindModelNode(BattleClientConfig.TransformNodeName_hit);
+                }
+            }
+
 
             EventDispatcher.Broadcast(EventIDs.OnBuffInfoUpdate, this.buffInfo);
         }
@@ -94,7 +109,7 @@ namespace Battle_Client
             }
 
             HandleFollowEntity();
-           
+
             if (isFinishLoad)
             {
                 //if (!isLoop)

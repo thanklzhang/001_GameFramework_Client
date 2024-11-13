@@ -359,6 +359,8 @@ namespace Config
         
 		eft_explosion_003 = 15008031,
         
+		eft_buff_link_001 = 15008032,
+        
 		eft_skill_director_001 = 15008101,
         
 		eft_skill_director_002 = 15008102,

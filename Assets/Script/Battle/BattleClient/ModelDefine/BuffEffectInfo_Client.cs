@@ -7,7 +7,7 @@
         public int targetEntityGuid;
         public float currCDTime;
         public float maxCDTime;
-
+        public int linkTargetEntityGuid;
         public int stackCount;
 
         //public int iconResId;

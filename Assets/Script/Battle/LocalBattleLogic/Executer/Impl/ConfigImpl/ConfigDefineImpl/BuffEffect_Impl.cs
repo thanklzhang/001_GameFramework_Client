@@ -126,6 +126,11 @@ namespace Battle
         public List<List<int>> AddedValueGroup => config.AddedValueGroup;
         
         /// <summary>
+        ///是否是持续性改变类型的属性
+        /// </summary>
+        public List<int> IsAddedAttrGroupContinuous => config.IsAddedAttrGroupContinuous;
+        
+        /// <summary>
         ///结束的时候移除的效果列表
         /// </summary>
         public List<int> EndRemoveEffectList => config.EndRemoveEffectList;

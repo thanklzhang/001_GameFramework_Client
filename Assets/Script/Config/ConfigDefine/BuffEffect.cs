@@ -118,6 +118,11 @@ namespace Config
         private List<List<int>> addedValueGroup; 
         
         /// <summary>
+        ///是否是持续性改变类型的属性
+        /// </summary>
+        private List<int> isAddedAttrGroupContinuous; 
+        
+        /// <summary>
         ///结束的时候移除的效果列表
         /// </summary>
         private List<int> endRemoveEffectList; 
@@ -175,6 +180,8 @@ namespace Config
         public List<int> AddedAttrGroup { get => addedAttrGroup; }     
         
         public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
+        
+        public List<int> IsAddedAttrGroupContinuous { get => isAddedAttrGroupContinuous; }     
         
         public List<int> EndRemoveEffectList { get => endRemoveEffectList; }     
         

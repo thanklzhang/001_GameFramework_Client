@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Battle_Client;
 using Config;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Skill = Config.Skill;
 
 
 //选项
@@ -36,6 +38,7 @@ public class BattleRewardCell
         describeText = transform.Find("content_text").GetComponent<Text>();
         selectBtn = transform.Find("selectBtn").GetComponent<Button>();
 
+        selectBtn.onClick.RemoveAllListeners();
         selectBtn.onClick.AddListener(OnClickSelectBtn);
     }
 
@@ -44,19 +47,53 @@ public class BattleRewardCell
         this.gameObject.SetActive(true);
     }
 
-    public void RefreshUI(BattleClientMsg_BattleBoxSelection selectionDat,int index)
+    public void RefreshUI(BattleClientMsg_BattleBoxSelection selectionDat, int index)
     {
         this.data = selectionDat;
         this.index = index;
-        
+
         var configId = this.data.rewardConfigId;
         var rewardConfig = ConfigManager.Instance.GetById<Config.BattleReward>(configId);
 
 
         ResourceManager.Instance.GetObject<Sprite>(rewardConfig.IconResId,
             (sprite) => { icon.sprite = sprite; });
-        nameText.text = rewardConfig.Name;
-        describeText.text = rewardConfig.Describe;
+
+        RefreshTextShow();
+    }
+
+    public void RefreshTextShow()
+    {
+        var configId = this.data.rewardConfigId;
+        var rewardConfig = ConfigManager.Instance.GetById<Config.BattleReward>(configId);
+
+        var type = (BattleRewardType)rewardConfig.Type;
+
+        var nameStr = rewardConfig.Name;
+        var desStr = rewardConfig.Describe;
+        var intValueList = this.data.intValueList;
+        if (type == BattleRewardType.GainSkill_FixedRand)
+        {
+            if (0 == rewardConfig.MakeSureRewardOccasion)
+            {
+                nameStr = "获得技能";
+                if (intValueList.Count > 0)
+                {
+                    var skillConfigId = intValueList[0];
+                    var skillConfig = ConfigManager.Instance.GetById<Skill>(skillConfigId);
+                    desStr = $"获得技能:{skillConfig.Name}\n{skillConfig.Describe}";
+                }
+            }
+        }
+        else if (type == BattleRewardType.TeamMember_Gain)
+        {
+        }
+        else if (type == BattleRewardType.TeamMember_RandAttr)
+        {
+        }
+        
+        nameText.text = nameStr;
+        describeText.text = desStr;
     }
 
     public void OnClickSelectBtn()

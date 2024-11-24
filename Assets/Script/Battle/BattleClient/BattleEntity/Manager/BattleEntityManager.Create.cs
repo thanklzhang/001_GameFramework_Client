@@ -43,7 +43,7 @@ namespace Battle_Client
                 BattleSkillInfo skill = new BattleSkillInfo()
                 {
                     configId = serverSkill.configId,
-                    level = serverSkill.level,
+                    // level = serverSkill.level,
                     maxCDTime = serverSkill.maxCDTime,
                     releaserGuid = guid
                 };

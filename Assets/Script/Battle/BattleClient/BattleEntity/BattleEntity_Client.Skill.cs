@@ -8,16 +8,18 @@ namespace Battle_Client
     public partial class BattleEntity_Client
     {
         List<BattleSkillInfo> skills;
+
         internal void SetSkillList(List<BattleSkillInfo> skills)
         {
             this.skills = skills;
         }
+
         public List<BattleSkillInfo> GetSkills()
         {
             return skills;
         }
 
-        
+
         public BattleSkillInfo FindSkill(int skillConfigId)
         {
             var skill = this.skills.Find((s) => { return s.configId == skillConfigId; });
@@ -25,28 +27,46 @@ namespace Battle_Client
             return skill;
         }
 
-        
-        internal void UpdateSkillInfo(int skillConfigId, float currCDTime, float maxCDTime)
+
+        internal void UpdateSkillInfo(SkillInfoUpdate_RecvMsg_Arg arg)
         {
-            var skill = this.FindSkill(skillConfigId);
+            // if (arg.skillConfigId == 2100101 || 2100102 == arg.skillConfigId)
+            // {
+            //     Battle_Log.LogZxy("");
+            // }
+
+            var skill = this.FindSkill(arg.skillConfigId);
             if (skill != null)
             {
-                skill?.UpdateInfo(currCDTime, maxCDTime);
+                skill?.UpdateInfo(arg);
+                
+                if (skill.isDelete)
+                {
+                    this.skills.Remove(skill);
+                }
+
+               
             }
             else
             {
                 skill = new BattleSkillInfo();
-                skill.configId = skillConfigId;
+                skill.configId = arg.skillConfigId;
                 skill.releaserGuid = this.guid;
-                skill.level = 1;
+                skill.exp = arg.exp;
+                // skill.level = 1;
 
                 this.skills.Add(skill);
 
-                skill?.UpdateInfo(currCDTime, maxCDTime);
+                skill?.UpdateInfo(arg);
             }
+            
+            this.skills.Sort((a, b) =>
+            {
+                return a.showIndex.CompareTo(b.showIndex);
+            });
         }
 
-        
+
         internal void ReleaseSkill(int skillConfigId)
         {
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillConfigId);
@@ -98,23 +118,27 @@ namespace Battle_Client
         //         this,stateBean);
         // }
     }
-    
-    
+
+
     public class BattleSkillInfo
     {
         public int releaserGuid;
         public int configId;
-        public int level;
+        public int exp;
         public float maxCDTime;
         public float currCDTime;
+        public bool isDelete;
+        public int showIndex;
 
-        internal void UpdateInfo(float currCDTime, float maxCDTime)
+        internal void UpdateInfo(SkillInfoUpdate_RecvMsg_Arg arg)
         {
-            this.currCDTime = currCDTime;
-            this.maxCDTime = maxCDTime;
+            this.currCDTime = arg.currCDTime;
+            this.maxCDTime = arg.maxCDTime;
+            this.exp = arg.exp;
+            this.isDelete = arg.isDelete;
+            this.showIndex = arg.showIndex;
 
             EventDispatcher.Broadcast(EventIDs.OnSkillInfoUpdate, releaserGuid, this);
         }
     }
-
 }

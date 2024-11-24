@@ -144,20 +144,20 @@ public class Logx
 
     public static void LogWarning(object obj)
     {
-        if (!enable)
-        {
-            return;
-        }
+        // if (!enable)
+        // {
+        //     return;
+        // }
         
-        Debug.LogWarning(obj);
+        Debug.LogError(obj);
     }
 
     public static void LogWarning(LogxType type, object obj)
     {
-        if (!IsLogTypeEnable(type))
-        {
-            return;
-        }
+        // if (!IsLogTypeEnable(type))
+        // {
+        //     return;
+        // }
         
         LogWarning(type.ToString(), obj);
     }
@@ -173,10 +173,10 @@ public class Logx
 
     public static void LogError(object obj)
     {
-        if (!enable)
-        {
-            return;
-        }
+        // if (!enable)
+        // {
+        //     return;
+        // }
         
         Debug.LogError(obj);
     }

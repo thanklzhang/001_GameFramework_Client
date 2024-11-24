@@ -2,7 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
+using Config;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +16,9 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
     protected GameObject cdRootGo;
     protected Image cdImg;
     protected Text cdTimeText;
+    private Slider expSlider;
+    private TextMeshProUGUI expText;
+    private TextMeshProUGUI levelText;
     protected UIEventTrigger evetnTrigger;
     public BattleSkillUIData uiData;
 
@@ -26,12 +31,15 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
         cdTimeText = this.transform.Find("CDRoot/CDShow/cd_text").GetComponent<Text>();
         cdImg = this.transform.Find("CDRoot/CDShow").GetComponent<Image>();
         icon = this.transform.Find("icon").GetComponent<Image>();
+        expSlider = this.transform.Find("expSlider").GetComponent<Slider>();
+        expText = expSlider.transform.Find("exp_text").GetComponent<TextMeshProUGUI>();
+        levelText = this.transform.Find("lv_text").GetComponent<TextMeshProUGUI>();
 
         evetnTrigger = icon.GetComponent<UIEventTrigger>();
 
         canUseMaskGo.SetActive(false);
         cdRootGo.SetActive(false);
-        
+
         evetnTrigger.OnPointEnterEvent += OnPointEnter;
         evetnTrigger.OnPointerExitEvent += OnPointExit;
     }
@@ -42,20 +50,35 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
         {
             return;
         }
-        
+
         this.uiData = (BattleSkillUIData)data;
 
         //技能图标
         var skillId = this.uiData.skillId;
         var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
         ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
+
+        RefreshLevelExpShow();
     }
 
-    internal void UpdateInfo(float cdTime)
+    public void RefreshLevelExpShow()
     {
-        currCDTimer = cdTime;
+        var skillId = this.uiData.skillId;
+        var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
+        var currExp = this.uiData.exp;
+        var skillUpdateConfig = Config.ConfigManager.Instance.GetById<SkillUpdateParam>(1);
+        var maxExp = skillUpdateConfig.UpgradeExpPerLevel.Sum();
+        this.expSlider.value = currExp / (float)maxExp;
+        this.expText.text = $"{currExp}/{maxExp}";
+        
+        this.levelText.text = "" + skillConfig.Level;
+    }
 
-        if (cdTime <= 0)
+    internal void UpdateInfo(BattleSkillInfo skillInfo)
+    {
+        currCDTimer = skillInfo.currCDTime;
+
+        if (currCDTimer <= 0)
         {
             //可以使用技能了
             cdRootGo.SetActive(false);
@@ -68,6 +91,8 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
             //mask 是代表不能用 并不是只有 cd 这个因素 尽管现在只有 cd
             canUseMaskGo.SetActive(true);
         }
+
+        RefreshLevelExpShow();
     }
 
 
@@ -150,4 +175,6 @@ public class BattleSkillUIData
     public int skillId;
     public int iconResId;
     public float maxCDTime;
+    public int exp;
+    public int showIndex;
 }

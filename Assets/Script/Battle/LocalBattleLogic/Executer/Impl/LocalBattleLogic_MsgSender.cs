@@ -350,7 +350,10 @@ namespace Battle_Client
                 entityGuid = skill.releaser.guid,
                 skillConfigId = skill.configId,
                 currCDTime = skill.GetCurrCDTimer(),
-                maxCDTime = skill.GetCDTotalTime()
+                maxCDTime = skill.GetCDTotalTime(),
+                exp = skill.currExp,
+                isDelete = skill.isWillDelete,
+                showIndex = skill.showIndex
             };
             BattleManager.Instance.RecvBattleMsg<SkillInfoUpdate_RecvMsg>(arg);
         }

@@ -21,8 +21,7 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(arg.entityGuid);
             if (entity != null)
             {
-                entity.UpdateSkillInfo(arg.skillConfigId, arg.currCDTime,
-                    arg.maxCDTime);
+                entity.UpdateSkillInfo(arg);
             }
         }
     }
@@ -33,5 +32,8 @@ namespace Battle_Client
         public int skillConfigId;
         public float currCDTime;
         public float maxCDTime;
+        public int exp;
+        public bool isDelete;
+        public int showIndex;
     }
 }

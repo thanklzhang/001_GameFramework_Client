@@ -110,7 +110,7 @@ namespace Battle_Client
 
                     BattleClientMsg_Skill skillInfo = new BattleClientMsg_Skill();
                     skillInfo.configId = skill.configId;
-                    skillInfo.level = skill.level;
+                    // skillInfo.level = skill.level;
                     skillInfo.maxCDTime = skill.GetCDTotalTime();
                     entity.skills.Add(skillInfo);
                 }

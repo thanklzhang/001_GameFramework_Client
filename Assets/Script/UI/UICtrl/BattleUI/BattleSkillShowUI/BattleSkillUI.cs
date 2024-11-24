@@ -53,7 +53,7 @@ public class BattleSkillUI
 
         if (myEntityGuid == entityGuid)
         {
-            this.UpdateSkillInfo(skillInfo.configId, skillInfo.currCDTime);
+            this.UpdateSkillInfo(skillInfo);
 
             RefreshAllUI();
         }
@@ -88,6 +88,9 @@ public class BattleSkillUI
                 //skill.iconResId
                 skillId = skillData.configId,
                 maxCDTime = skillData.maxCDTime,
+                exp = skillData.exp,
+                showIndex = skillData.showIndex
+                
             };
             
             var skillConfig = Config.ConfigManager.Instance.GetById<Skill>(skillData.configId);
@@ -104,6 +107,11 @@ public class BattleSkillUI
             
             dataList.Add(skill);
         }
+        dataList.Sort((a, b) =>
+        {
+            return a.showIndex.CompareTo(b.showIndex);
+        });
+        
         this.skillDataList = dataList;
        
     
@@ -121,12 +129,17 @@ public class BattleSkillUI
         //this.bigSkillShowObj.Refresh(this.bigSkillData);
     }
 
-    public void UpdateSkillInfo(int skillId, float cdTime)
+    public void UpdateSkillInfo(BattleSkillInfo skillInfo)
     {
-        var skillShowObj = FindSkill(skillId);
+        var skillShowObj = FindSkill(skillInfo.configId);
         if (skillShowObj != null)
         {
-            skillShowObj.UpdateInfo(cdTime);
+            skillShowObj.UpdateInfo(skillInfo);
+            
+            if (skillInfo.isDelete)
+            {
+                
+            }
         }
         else
         {

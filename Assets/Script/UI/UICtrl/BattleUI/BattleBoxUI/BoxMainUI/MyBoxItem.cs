@@ -31,6 +31,7 @@ public class MyBoxItem
         countText = this.transform.Find("count_text").GetComponent<Text>();
         openBtn = this.transform.Find("openBtn").GetComponent<Button>();
 
+        openBtn.onClick.RemoveAllListeners();
         openBtn.onClick.AddListener(OnClickOpenBtn);
     }
 

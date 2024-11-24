@@ -48,6 +48,10 @@ namespace Battle_Client
                     // /1000
                     this.attr.attackRange = item.value;
                 }
+                else if (type == EntityAttrType.Attack_Permillage)
+                {
+                    this.attr.attack_Permillage = item.value;
+                }
 
                 //Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
 

@@ -108,19 +108,29 @@ namespace Config
         private List<int> endEffectList; 
         
         /// <summary>
+        ///增加的属性组配置Id
+        /// </summary>
+        private int attrGroupConfigId; 
+        
+        /// <summary>
         ///增加的属性组(,分割)
         /// </summary>
-        private List<int> addedAttrGroup; 
+        private List<int> addedAttrGroup2; 
         
         /// <summary>
         ///增加属性组数值(,|分割 目前只做一个属性之只受一种属性增加)
         /// </summary>
-        private List<List<int>> addedValueGroup; 
+        private List<List<int>> addedValueGroup2; 
+        
+        /// <summary>
+        ///随机值（,|分割 ,如果配了值，那么就代表是随机， 格式：最小值,最大值）
+        /// </summary>
+        private List<List<int>> addedValueRand2; 
         
         /// <summary>
         ///是否是持续性改变类型的属性
         /// </summary>
-        private List<int> isAddedAttrGroupContinuous; 
+        private List<int> isAddedAttrGroupContinuous2; 
         
         /// <summary>
         ///结束的时候移除的效果列表
@@ -177,11 +187,15 @@ namespace Config
         
         public List<int> EndEffectList { get => endEffectList; }     
         
-        public List<int> AddedAttrGroup { get => addedAttrGroup; }     
+        public int AttrGroupConfigId { get => attrGroupConfigId; }     
         
-        public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
+        public List<int> AddedAttrGroup2 { get => addedAttrGroup2; }     
         
-        public List<int> IsAddedAttrGroupContinuous { get => isAddedAttrGroupContinuous; }     
+        public List<List<int>> AddedValueGroup2 { get => addedValueGroup2; }     
+        
+        public List<List<int>> AddedValueRand2 { get => addedValueRand2; }     
+        
+        public List<int> IsAddedAttrGroupContinuous2 { get => isAddedAttrGroupContinuous2; }     
         
         public List<int> EndRemoveEffectList { get => endRemoveEffectList; }     
         

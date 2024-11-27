@@ -149,7 +149,7 @@ public class Logx
         //     return;
         // }
         
-        Debug.LogError(obj);
+        Debug.LogWarning(obj);
     }
 
     public static void LogWarning(LogxType type, object obj)

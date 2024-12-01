@@ -15,6 +15,7 @@ namespace Battle_Client
             InitCurrency();
             InitBoxShop();
             InitMyBox();
+            InitBattleReward();
         }
 
       

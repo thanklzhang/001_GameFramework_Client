@@ -12,12 +12,12 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
-    public class PlayerReadState_RecvMsg : ClientRecvMsg
+    public class PlayerReadyState_RecvMsg : ClientRecvMsg
     {
         
         public override void Handle()
         {
-            var arg = this.msgArg as PlayerReadState_RecvMsg_Arg;
+            var arg = this.msgArg as PlayerReadyState_RecvMsg_Arg;
             var uid = arg.playerIndex;
             var isReady = arg.isReady;
             EventDispatcher.Broadcast<int, bool>(EventIDs.OnPlayerReadyState, uid, isReady);
@@ -25,7 +25,7 @@ namespace Battle_Client
         }
     }
 
-    public class PlayerReadState_RecvMsg_Arg : BaseClientRecvMsgArg
+    public class PlayerReadyState_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int playerIndex;
         public bool isReady;

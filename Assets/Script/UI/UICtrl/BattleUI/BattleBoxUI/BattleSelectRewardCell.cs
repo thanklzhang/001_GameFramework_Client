@@ -11,7 +11,7 @@ using Skill = Config.Skill;
 
 
 //选项
-public class BattleRewardCell
+public class BattleSelectRewardCell
 {
     public GameObject gameObject;
     public Transform transform;
@@ -23,11 +23,11 @@ public class BattleRewardCell
 
     public int index = -1;
 
-    private BattleRewardUI parentUI;
+    private BattleSelectRewardUI parentUI;
 
     public BattleClientMsg_BattleBoxSelection data;
 
-    public void Init(GameObject gameObject, BattleRewardUI parentUI)
+    public void Init(GameObject gameObject, BattleSelectRewardUI parentUI)
     {
         this.parentUI = parentUI;
         this.gameObject = gameObject;
@@ -66,32 +66,41 @@ public class BattleRewardCell
     {
         var configId = this.data.rewardConfigId;
         var rewardConfig = ConfigManager.Instance.GetById<Config.BattleReward>(configId);
-
-        var type = (BattleRewardType)rewardConfig.Type;
-
-        var nameStr = rewardConfig.Name;
-        var desStr = rewardConfig.Describe;
-        var intValueList = this.data.intValueList;
-        if (type == BattleRewardType.GainSkill_FixedRand)
-        {
-            if (0 == rewardConfig.MakeSureRewardOccasion)
-            {
-                nameStr = "获得技能";
-                if (intValueList.Count > 0)
-                {
-                    var skillConfigId = intValueList[0];
-                    var skillConfig = ConfigManager.Instance.GetById<Skill>(skillConfigId);
-                    desStr = $"获得技能:{skillConfig.Name}\n{skillConfig.Describe}";
-                }
-            }
-        }
-        else if (type == BattleRewardType.TeamMember_Gain)
-        {
-        }
-        else if (type == BattleRewardType.TeamMember_RandAttr)
-        {
-        }
+        var nameStr = "";
+        var desStr = "";
+        var isMaskSureReward = 1 == rewardConfig.MakeSureRewardOccasion;
+        AttrHelper_Client.GetBattleRewardContent(this.data.battleReward,isMaskSureReward,
+            out nameStr,
+            out desStr);
         
+        // var configId = this.data.rewardConfigId;
+        // var rewardConfig = ConfigManager.Instance.GetById<Config.BattleReward>(configId);
+        //
+        // var type = (BattleRewardType)rewardConfig.Type;
+        //
+        // var nameStr = rewardConfig.Name;
+        // var desStr = rewardConfig.Describe;
+        // var intValueList = this.data.intValueList;
+        // if (type == BattleRewardType.GainSkill_FixedRand)
+        // {
+        //     if (0 == rewardConfig.MakeSureRewardOccasion)
+        //     {
+        //         nameStr = "获得技能";
+        //         if (intValueList.Count > 0)
+        //         {
+        //             var skillConfigId = intValueList[0];
+        //             var skillConfig = ConfigManager.Instance.GetById<Skill>(skillConfigId);
+        //             desStr = $"获得技能:{skillConfig.Name}\n{skillConfig.Describe}";
+        //         }
+        //     }
+        // }
+        // else if (type == BattleRewardType.TeamMember_Gain)
+        // {
+        // }
+        // else if (type == BattleRewardType.TeamMember_RandAttr)
+        // {
+        // }
+        //
         nameText.text = nameStr;
         describeText.text = desStr;
     }

@@ -161,6 +161,8 @@ namespace Battle_Client
 
         //实际奖励值
         //根据奖励类型 得到不同的实际奖励意义 如技能id 等
-        public List<int> intValueList;
+        // public List<int> intValueList;
+
+        public BattleReward_Client battleReward;
     }
 }

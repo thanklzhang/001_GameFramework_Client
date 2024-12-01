@@ -23,12 +23,12 @@ namespace Battle_Client
             //BattleManager.Instance.MsgReceiver.On_PlayerReadyState(uid, isReady);
 
 
-            var arg = new PlayerReadState_RecvMsg_Arg()
+            var arg = new PlayerReadyState_RecvMsg_Arg()
             {
                 playerIndex = uid,
                 isReady = isReady
             };
-            BattleManager.Instance.RecvBattleMsg<PlayerReadState_RecvMsg>(arg);
+            BattleManager.Instance.RecvBattleMsg<PlayerReadyState_RecvMsg>(arg);
         }
 
         public void NotifyAll_AllPlayerLoadFinish()
@@ -492,8 +492,16 @@ namespace Battle_Client
 
                 BattleClientMsg_BattleBoxSelection netSelection = new BattleClientMsg_BattleBoxSelection();
                 netSelection.rewardConfigId = boxSelection.rewardConfig.Id;
-                netSelection.intValueList = boxSelection.GetRealRewardIntValueList();
-
+                // netSelection.intValueList = boxSelection.GetRealRewardIntValueList();
+                var _battleReward =  boxSelection.GetBattleRewardValues();
+                netSelection.battleReward = new BattleReward_Client();
+                netSelection.battleReward.guid = _battleReward.guid;
+                netSelection.battleReward.configId = _battleReward.configId;
+                netSelection.battleReward.intArg1 = _battleReward.intArg1;
+                netSelection.battleReward.intArg2 = _battleReward.intArg2;
+                netSelection.battleReward.intListArg1 = ListTool.CopyList(_battleReward.intListArg1);
+                netSelection.battleReward.intListArg2 = ListTool.CopyList(_battleReward.intListArg2);
+                
                 netBox.selections.Add(netSelection);
             }
 
@@ -645,6 +653,27 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<AbnormalEffect_RecvMsg>(arg);
         }
 
+        public void NotifySyncPlayerBattleReward(int playerIndex,
+            BaseBattleReward reward)
+        {
+            var arg = new SyncPlayerBattleReward_RecvMsg_Arg()
+            {
+                playerIndex = playerIndex,
+            };
+            
+            //arg
+            var dto = reward.GetValues();
+            arg.battleReward = new BattleReward_Client();
+            arg.battleReward.guid = dto.guid;
+            arg.battleReward.configId = dto.configId;
+            arg.battleReward.intArg1 = dto.intArg1;
+            arg.battleReward.intArg2 = dto.intArg2;
+            arg.battleReward.intListArg1 = ListTool.CopyList(dto.intListArg1);
+            arg.battleReward.intListArg2 = ListTool.CopyList(dto.intListArg2);
+            
+            BattleManager.Instance.RecvBattleMsg<SyncPlayerBattleReward_RecvMsg>(arg);
+
+        }
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {

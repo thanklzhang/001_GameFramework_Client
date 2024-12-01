@@ -36,6 +36,8 @@ public partial class BattleUI : BaseUI
     private Button heroFuncBtn;
     private Button skillFuncBtn;
     private Button boxFuncBtn;
+    private Button battleRewardBtn;
+
     public Text boxFuncBtnCountText;
     public Text coinText;
 
@@ -70,7 +72,7 @@ public partial class BattleUI : BaseUI
     private BattleSkillOperateUI skillItemOperateUI;
 
     //宝箱界面
-    private BattleRewardUI boxUI;
+    private BattleSelectRewardUI boxUI;
 
     //宝箱主界面
     protected BattleBoxMainUI boxMainUI;
@@ -80,6 +82,9 @@ public partial class BattleUI : BaseUI
 
     //战斗回合（当前波）结算界面
     private BattleWavePassUI wavePassUI;
+
+    //战斗获得奖励的列表界面
+    private BattleRewardUI battleRewardUI;
 
     //-----------------
     //智能施法 临时功能
@@ -117,6 +122,10 @@ public partial class BattleUI : BaseUI
         boxFuncBtnCountText = boxFuncBtn.transform.Find("countBg/count").GetComponent<Text>();
 
         coinText = transform.Find("coinText").GetComponent<Text>();
+
+        battleRewardBtn = funcBtnRoot.Find("battleReward/item").GetComponent<Button>();
+        battleRewardBtn.onClick.AddListener(() => { this.battleRewardUI.Show(); });
+
 
         //
         closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
@@ -184,7 +193,7 @@ public partial class BattleUI : BaseUI
 
         //宝箱界面
         var boxUIRoot = this.transform.Find("boxUI");
-        boxUI = new BattleRewardUI();
+        boxUI = new BattleSelectRewardUI();
         boxUI.Init(boxUIRoot.gameObject, this);
 
         //宝箱主界面
@@ -202,6 +211,12 @@ public partial class BattleUI : BaseUI
         var wavePassUIRoot = this.transform.Find("wavePassUI");
         wavePassUI = new BattleWavePassUI();
         wavePassUI.Init(wavePassUIRoot.gameObject, this);
+
+        //战斗奖励列表界面
+        var battleRewardUIRoot = this.transform.Find("battleRewardUI");
+        battleRewardUIRoot.gameObject.SetActive(false);
+        battleRewardUI = new BattleRewardUI();
+        battleRewardUI.Init(battleRewardUIRoot.gameObject, this);
 
         //智能施法
         intelligentReleaseBtn = this.transform.Find("intelligentRelease").GetComponent<Button>();
@@ -223,6 +238,7 @@ public partial class BattleUI : BaseUI
         this.boxMainUI.RefreshAllUI();
         this.processUI.RefreshAllUI();
         this.wavePassUI.RefreshAllUI();
+        this.battleRewardUI.RefreshAllUI();
 
         this.OnUpdateMyBoxInfo();
         this.OnUpdateBattleCurrencyInfo();
@@ -253,6 +269,7 @@ public partial class BattleUI : BaseUI
         this.boxMainUI.Update(deltaTime);
         this.processUI.Update(deltaTime);
         this.wavePassUI.Update(deltaTime);
+        this.battleRewardUI.Update(deltaTime);
     }
 
     void OnPlayerReadyState(int uid, bool isReady)
@@ -397,6 +414,7 @@ public partial class BattleUI : BaseUI
         this.boxMainUI.Release();
         this.processUI.Release();
         this.wavePassUI.Release();
+        this.battleRewardUI.Release();
 
         this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }

@@ -9,8 +9,8 @@ using UnityEngine.UI;
 using BattleBox = Config.BattleBox;
 
 
-//战斗宝箱界面
-public class BattleRewardUI
+//战斗选择战斗奖励界面
+public class BattleSelectRewardUI
 {
     public GameObject gameObject;
     public Transform transform;
@@ -20,7 +20,7 @@ public class BattleRewardUI
 
     private Transform selectionRoot;
 
-    private List<BattleRewardCell> boxCellShowList;
+    private List<BattleSelectRewardCell> boxCellShowList;
 
     private Text boxCountText;
 
@@ -41,7 +41,7 @@ public class BattleRewardUI
 
         EventDispatcher.AddListener(EventIDs.OnBoxOpen, OnOpenBox);
 
-        boxCellShowList = new List<BattleRewardCell>();
+        boxCellShowList = new List<BattleSelectRewardCell>();
     }
 
     public void Show()
@@ -101,7 +101,7 @@ public class BattleRewardUI
                         selectionRoot, false);
                 }
 
-                BattleRewardCell cell = new BattleRewardCell();
+                BattleSelectRewardCell cell = new BattleSelectRewardCell();
                 cell.Init(go, this);
                 cell.Show();
                 cell.RefreshUI(data, i);
@@ -122,7 +122,7 @@ public class BattleRewardUI
         this.Hide();
     }
 
-    public void OnSelectSelection(BattleRewardCell boxCell)
+    public void OnSelectSelection(BattleSelectRewardCell boxCell)
     {
         this.Hide();
 

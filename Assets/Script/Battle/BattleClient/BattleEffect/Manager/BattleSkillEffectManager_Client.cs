@@ -52,7 +52,8 @@ namespace Battle_Client
             if (skillEffectDic.ContainsKey(guid))
             {
                 Logx.LogWarning("BattleSkillEffectManager : CreateSkillEffectInfo : the guid is exist : " + guid);
-                Debug.LogWarning("BattleSkillEffectManager : CreateSkillEffectInfo : the guid is exist : " + guid + " resId : " + resId);
+                Debug.LogWarning("BattleSkillEffectManager : CreateSkillEffectInfo : the guid is exist : " + guid +
+                                 " resId : " + resId);
                 return null;
             }
 
@@ -82,14 +83,33 @@ namespace Battle_Client
             {
                 skillEffect.SetPosition(pos);
             }
+
             skillEffect.SetIsAutoDestroy(isAutoDestroy);
 
             if (createEffectInfo.buffInfo != null && createEffectInfo.buffInfo.guid > 0)
             {
                 // Logx.Log("zxy : buff add , targetEntityGuid : " + createEffectInfo.buffInfo.targetEntityGuid);
                 // Logx.Log("zxy : buff add , linkTargetEntityGuid : " + createEffectInfo.buffInfo.linkTargetEntityGuid);
-                skillEffect.SetBuffInfo(createEffectInfo.buffInfo);
+
+                var buffInfo = createEffectInfo.buffInfo;
+                var buffInfo_client = BuffEffectInfo_Client.ToBuffClient(buffInfo);
+                
+                //添加到 entity 上
+                if (createEffectInfo.buffInfo.targetEntityGuid > 0)
+                {
+                    var followEntity =
+                        BattleEntityManager.Instance.FindEntity(createEffectInfo.buffInfo.targetEntityGuid);
+                    if (followEntity != null)
+                    {
+                        followEntity.AddBuff(buffInfo_client);
+                    }
+                }
+                
+                //更新 buff
+                buffInfo_client.SetCrateState();
+                skillEffect.SetBuffInfo(buffInfo_client);
             }
+
             skillEffectDic.Add(guid, skillEffect);
             return skillEffect;
         }
@@ -127,6 +147,7 @@ namespace Battle_Client
             {
                 //Logx.LogWarning("the guid is not found : " + guid);
             }
+
             return null;
         }
 
@@ -161,7 +182,7 @@ namespace Battle_Client
                 skillEffect.OnBattleEnd();
             }
         }
-        
+
         public void DestorySkillEffect(int guid)
         {
             if (skillEffectDic.ContainsKey(guid))
@@ -169,13 +190,29 @@ namespace Battle_Client
                 //Logx.Log("WillDestorySkillEffect : " + guid);
                 BattleSkillEffect skillEffect = skillEffectDic[guid];
                 skillEffect.SetWillDestoryState();
+
+                if (skillEffect.buffInfo != null)
+                {
+                    if (skillEffect.buffInfo.targetEntityGuid > 0)
+                    {
+                        var entity = BattleEntityManager.Instance.FindEntity(skillEffect.buffInfo.targetEntityGuid);
+                        if (entity != null)
+                        {
+                            entity.RemoveBuff(skillEffect.buffInfo.guid);
+                        }
+
+                        skillEffect.buffInfo.SetRemoveState();
+                        skillEffect.SetBuffInfo(skillEffect.buffInfo);
+                        //EventDispatcher.Broadcast(EventIDs.OnBuffInfoUpdate, skillEffect.buffInfo);
+                    }
+                }
             }
             else
             {
                 //Logx.LogWarning("the guid is not found : " + guid);
             }
         }
-        
+
         public void DestorySkillEffects()
         {
             var kvs = skillEffectDic.ToList();
@@ -194,7 +231,7 @@ namespace Battle_Client
         {
             //EventDispatcher.RemoveListener<BattleEntityInfo>(EventIDs.OnCreateBattle, CreateEntity);
         }
-        
+
         public void Clear()
         {
             RemoveListener();
@@ -203,8 +240,6 @@ namespace Battle_Client
 
         public void Release()
         {
-            
         }
-
     }
 }

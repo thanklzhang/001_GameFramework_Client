@@ -110,33 +110,40 @@ public class BattleBuffUI
 
     public void UpdateBuffInfo(BuffEffectInfo_Client buffInfo)
     {
-        var buffShowObj = FindBuff(buffInfo.guid);
-        if (buffShowObj != null)
-        {
-            if (buffInfo.isRemove)
-            {
-                RemoveBuffFromDataList(buffInfo.guid);
-                this.RefreshBuffList();
-            }
-            else
-            {
-                buffShowObj.Refresh(buffInfo);
-            }
-        }
-        else
-        {
-            var eft = BattleSkillEffectManager_Client.Instance.FindSkillEffect(buffInfo.guid);
-            if (eft != null)
-            {
-                //如果在 技能效果中找到了 那么应该是非 buff 的显示特效 需要删除 (这块逻辑待修改)
-                BattleSkillEffectManager_Client.Instance.DestorySkillEffect(buffInfo.guid);
-            }
-            else
-            {
-                buffDataList.Add(buffInfo);
-                this.RefreshBuffList();
-            }
-        }
+
+        var entity = BattleManager.Instance.GetLocalCtrlHero();
+
+        buffDataList = entity.GetBuffList();
+        this.RefreshBuffList();
+   
+        
+        // var buffShowObj = FindBuff(buffInfo.guid);
+        // if (buffShowObj != null)
+        // {
+        //     if (buffInfo.isRemove)
+        //     {
+        //         RemoveBuffFromDataList(buffInfo.guid);
+        //         this.RefreshBuffList();
+        //     }
+        //     else
+        //     {
+        //         buffShowObj.Refresh(buffInfo);
+        //     }
+        // }
+        // else
+        // {
+        //     var eft = BattleSkillEffectManager_Client.Instance.FindSkillEffect(buffInfo.guid);
+        //     if (eft != null)
+        //     {
+        //         //如果在 技能效果中找到了 那么应该是非 buff 的显示特效 需要删除 (这块逻辑待修改)
+        //         BattleSkillEffectManager_Client.Instance.DestorySkillEffect(buffInfo.guid);
+        //     }
+        //     else
+        //     {
+        //         buffDataList.Add(buffInfo);
+        //         this.RefreshBuffList();
+        //     }
+        // }
     }
 
     public void Update(float deltaTime)

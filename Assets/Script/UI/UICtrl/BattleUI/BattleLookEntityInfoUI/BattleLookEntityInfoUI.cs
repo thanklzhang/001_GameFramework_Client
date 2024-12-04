@@ -58,7 +58,8 @@ public class BattleLookEntityInfoUI
         {
             if (currShowEntity != null && currShowEntity.guid == entity.guid)
             {
-                RefreshAllUI();
+                // RefreshAllUI();
+                lookAttrUI.RefreshAllUI(currShowEntity);
             }
         }
     }
@@ -174,24 +175,23 @@ public class BattleLookEntityInfoUI
 
         if (this.currShowEntity.guid == buffInfo.targetEntityGuid)
         {
-            var buffShowObj = lookBuffUI.FindBuff(buffInfo.guid);
-            if (buffShowObj != null)
-            {
-                if (buffInfo.isRemove)
-                {
-                    var eft = BattleSkillEffectManager_Client.Instance.FindSkillEffect(buffInfo.guid);
-                    if (eft != null)
-                    {
-                        // (这块逻辑待修改)
-                        BattleSkillEffectManager_Client.Instance.DestorySkillEffect(buffInfo.guid);
-                    }
-
-                    // this.lookBuffUI.RemoveBuffFromDataList(buffInfo.guid);
-                }
-            }
-
-            
-            this.lookBuffUI.RefreshAllUI(this.currShowEntity);
+            lookBuffUI.UpdateBuff(buffInfo);
+            // var buffShowObj = lookBuffUI.FindBuff(buffInfo.guid);
+            // if (buffShowObj != null)
+            // {
+            //     if (buffInfo.isRemove)
+            //     {
+            //         // var eft = BattleSkillEffectManager_Client.Instance.FindSkillEffect(buffInfo.guid);
+            //         // if (eft != null)
+            //         // {
+            //         //     // (这块逻辑待修改)
+            //         //     BattleSkillEffectManager_Client.Instance.DestorySkillEffect(buffInfo.guid);
+            //         // }
+            //
+            //         // this.lookBuffUI.RemoveBuffFromDataList(buffInfo.guid);
+            //     }
+            // }
+            //this.lookBuffUI.RefreshAllUI(this.currShowEntity);
         }
     }
   

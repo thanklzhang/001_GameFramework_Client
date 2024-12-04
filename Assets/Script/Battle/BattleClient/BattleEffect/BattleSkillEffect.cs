@@ -66,19 +66,20 @@ namespace Battle_Client
 
         private LineRenderer lineRender;
 
-        internal void SetBuffInfo(Battle.BuffEffectInfo buffInfo)
+        internal void SetBuffInfo(BuffEffectInfo_Client buffInfo)
         {
-            this.buffInfo = new BuffEffectInfo_Client()
-            {
-                guid = buffInfo.guid,
-                targetEntityGuid = buffInfo.targetEntityGuid,
-                currCDTime = buffInfo.currCDTime / 1000.0f,
-                maxCDTime = buffInfo.maxCDTime / 1000.0f,
-                stackCount = buffInfo.statckCount,
-                linkTargetEntityGuid = buffInfo.linkTargetEntityGuid,
-                configId = buffInfo.configId,
-                //iconResId = buffInfo.iconResId
-            };
+            // this.buffInfo = new BuffEffectInfo_Client()
+            // {
+            //     guid = buffInfo.guid,
+            //     targetEntityGuid = buffInfo.targetEntityGuid,
+            //     currCDTime = buffInfo.currCDTime / 1000.0f,
+            //     maxCDTime = buffInfo.maxCDTime / 1000.0f,
+            //     stackCount = buffInfo.statckCount,
+            //     linkTargetEntityGuid = buffInfo.linkTargetEntityGuid,
+            //     configId = buffInfo.configId,
+            //     //iconResId = buffInfo.iconResId
+            // };
+            this.buffInfo = buffInfo;
 
             //检查链接信息
             linkTargetEntityGuid = this.buffInfo.linkTargetEntityGuid;

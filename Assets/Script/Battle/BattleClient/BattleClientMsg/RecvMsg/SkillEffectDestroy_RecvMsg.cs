@@ -18,31 +18,33 @@ namespace Battle_Client
         {
             var arg = this.msgArg as SkillEffectDestroy_RecvMsg_Arg;
             var effectGuid = arg.effectGuid;
-            //如果是 buff 先处理 UI 显示
-            var effect = BattleSkillEffectManager_Client.Instance.FindSkillEffect(effectGuid);
-            if (effect != null)
-            {
-                var targetEntityGuid = effect.GetFollowEntityGuid();
-
-                if (targetEntityGuid > 0)
-                {
-                    //var entity = BattleEntityManager.Instance.FindEntity(targetEntityGuid);
-                    //if (entity != null)
-                    //{
-
-                    //}
-                    BuffEffectInfo_Client buffUIData = new BuffEffectInfo_Client()
-                    {
-                        targetEntityGuid = targetEntityGuid,
-                        guid = effectGuid,
-                        isRemove = true
-                    };
-                    EventDispatcher.Broadcast(EventIDs.OnBuffInfoUpdate, buffUIData);
-                }
-            }
-
-
+          
+            //移除
             BattleSkillEffectManager_Client.Instance.DestorySkillEffect(effectGuid);
+            
+            // //如果是 buff 先处理 UI 显示
+            // var effect = BattleSkillEffectManager_Client.Instance.FindSkillEffect(effectGuid);
+            // if (effect != null)
+            // {
+            //     var targetEntityGuid = effect.GetFollowEntityGuid();
+            //
+            //     if (targetEntityGuid > 0)
+            //     {
+            //         //var entity = BattleEntityManager.Instance.FindEntity(targetEntityGuid);
+            //         //if (entity != null)
+            //         //{
+            //
+            //         //}
+            //         BuffEffectInfo_Client buffUIData = new BuffEffectInfo_Client()
+            //         {
+            //             targetEntityGuid = targetEntityGuid,
+            //             guid = effectGuid,
+            //             isRemove = true
+            //         };
+            //         EventDispatcher.Broadcast(EventIDs.OnBuffInfoUpdate, buffUIData);
+            //     }
+            // }
+            
         }
     }
 

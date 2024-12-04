@@ -22,7 +22,8 @@ namespace Battle_Client
 
             if (effect != null)
             {
-                effect.SetBuffInfo(arg.buffInfo);
+                var buffInfo_client = BuffEffectInfo_Client.ToBuffClient(arg.buffInfo);
+                effect.SetBuffInfo(buffInfo_client);
             }
         }
     }

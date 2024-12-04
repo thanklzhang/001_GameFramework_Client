@@ -39,6 +39,8 @@ namespace Battle_Client
 
             InitAttr();
 
+            InitBuffs();
+
             var dir = this.gameObject.transform.forward;
             dirTarget = new Vector3(dir.x,0,dir.z);
         }

@@ -117,6 +117,7 @@ namespace Battle_Client
         //     EventDispatcher.Broadcast<BattleEntity_Client,AbnormalStateBean>(EventIDs.OnEntityAbnormalEffect,
         //         this,stateBean);
         // }
+       
     }
 
 

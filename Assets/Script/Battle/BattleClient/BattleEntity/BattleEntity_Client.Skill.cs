@@ -74,7 +74,7 @@ namespace Battle_Client
             if (normalAttackSkill != null && normalAttackSkill.configId == skillConfig.Id)
             {
                 //普通攻击
-                var attackSpeed = this.attr.attackSpeed;
+                var attackSpeed = this.attr.GetValue(EntityAttrType.AttackSpeed);
                 var aniScale = attackSpeed * (skillConfig.AnimationSpeedScale / 1000.0f);
 
                 PlayAnimation("attack", aniScale);

@@ -15,7 +15,7 @@ namespace Battle_Client
         public int level;
         public float CurrHealth;
         public int Team => BattleManager.Instance.GetTeamByPlayerIndex(this.playerIndex);
-        public float MaxHealth => attr.maxHealth;
+        public float MaxHealth => attr.GetValue(EntityAttrType.MaxHealth);
         
         public BattleEntityState state = BattleEntityState.Idle;
         
@@ -36,6 +36,8 @@ namespace Battle_Client
             isFinishLoad = false;
             
             InitItemList();
+
+            InitAttr();
 
             var dir = this.gameObject.transform.forward;
             dirTarget = new Vector3(dir.x,0,dir.z);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Battle_Client;
 using Config;
 using UnityEngine;
@@ -112,7 +113,7 @@ public class BattleHeroInfoUICtrl
 
             uiData.level = heroEntity.level;
             uiData.currHealth = heroEntity.CurrHealth;
-            uiData.maxHealth = heroEntity.attr.maxHealth;
+            uiData.maxHealth = heroEntity.attr.GetValue(EntityAttrType.MaxHealth);
             uiData.playerIndex = heroEntity.playerIndex;
 
             dataList.Add(uiData);

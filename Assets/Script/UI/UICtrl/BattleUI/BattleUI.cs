@@ -86,6 +86,9 @@ public partial class BattleUI : BaseUI
     //战斗获得奖励的列表界面
     private BattleRewardUI battleRewardUI;
 
+    //观看实体信息界面
+    private BattleLookEntityInfoUI lookEntityInfoUI;
+
     //-----------------
     //智能施法 临时功能
     private Button intelligentReleaseBtn;
@@ -218,7 +221,13 @@ public partial class BattleUI : BaseUI
         battleRewardUI = new BattleRewardUI();
         battleRewardUI.Init(battleRewardUIRoot.gameObject, this);
 
-        //智能施法
+        //观看实体信息界面
+        var lookEntityInfoUIRoot = this.transform.Find("lookInfoBar");
+        lookEntityInfoUIRoot.gameObject.SetActive(false);
+        lookEntityInfoUI = new BattleLookEntityInfoUI();
+        lookEntityInfoUI.Init(lookEntityInfoUIRoot.gameObject, this);
+
+        //智能施法----------------------
         intelligentReleaseBtn = this.transform.Find("intelligentRelease").GetComponent<Button>();
         intelligentReleaseSelectFlagGo = this.intelligentReleaseBtn.transform.Find("flag").gameObject;
         intelligentReleaseBtn.onClick.AddListener(OnClickIntelligentReleaseBtn);
@@ -270,6 +279,7 @@ public partial class BattleUI : BaseUI
         this.processUI.Update(deltaTime);
         this.wavePassUI.Update(deltaTime);
         this.battleRewardUI.Update(deltaTime);
+        this.lookEntityInfoUI.Update(deltaTime);
     }
 
     void OnPlayerReadyState(int uid, bool isReady)
@@ -415,6 +425,7 @@ public partial class BattleUI : BaseUI
         this.processUI.Release();
         this.wavePassUI.Release();
         this.battleRewardUI.Release();
+        this.lookEntityInfoUI.Release();
 
         this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }

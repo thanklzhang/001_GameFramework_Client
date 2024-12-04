@@ -44,6 +44,8 @@ public class UIManager : Singleton<UIManager>
     public Dictionary<Type, BaseUI> globalCtrlDic = new Dictionary<Type, BaseUI>();
 
 
+    public RectTransform uiRootRectTran;
+    
     //public BaseCtrl currCtrl;
 
     public BaseUI CurrFixedCtrl;
@@ -75,6 +77,8 @@ public class UIManager : Singleton<UIManager>
             var layerRoot = this.uiRoot.Find(tranPath);
             layerRootDic.Add(type, layerRoot);
         }
+
+        uiRootRectTran = this.uiRoot.GetComponent<RectTransform>();
     }
 
     public void SetParent(BaseUI ctrl,GameObject uiGameObject)

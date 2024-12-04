@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +17,7 @@ public class BattleBuffUI
     //float skillTipMaxShowTime = 1.6f;
     public BattleUI BattleUIPre;
     List<BuffEffectInfo_Client> buffDataList = new List<BuffEffectInfo_Client>();
-    List<BattleBuffUIShowObj> buffShowObjList = new List<BattleBuffUIShowObj>();
+    List<BuffShowObj> buffShowObjList = new List<BuffShowObj>();
 
     public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
@@ -31,7 +30,7 @@ public class BattleBuffUI
 
         buffDataList = new List<BuffEffectInfo_Client>();
         //this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
-        
+
         EventDispatcher.AddListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
     }
 
@@ -50,18 +49,50 @@ public class BattleBuffUI
             this.buffDataList = new List<BuffEffectInfo_Client>();
         }
 
+        //fill data
+        
+        
         this.RefreshBuffList();
-
     }
 
     void RefreshBuffList()
     {
-        UIListArgs<BattleBuffUIShowObj, BattleBuffUI> args = new UIListArgs<BattleBuffUIShowObj, BattleBuffUI>();
-        args.dataList = buffDataList;
-        args.showObjList = buffShowObjList;
-        args.root = buffListRoot;
-        args.parentObj = this;
-        UIFunc.DoUIList(args);
+        // UIListArgs<BattleBuffUIShowObj, BattleBuffUI> args = new UIListArgs<BattleBuffUIShowObj, BattleBuffUI>();
+        // args.dataList = buffDataList;
+        // args.showObjList = buffShowObjList;
+        // args.root = buffListRoot;
+        // args.parentObj = this;
+        // UIFunc.DoUIList(args);
+        
+        buffShowObjList.Clear();
+        
+        for (int i = 0; i < buffDataList.Count; i++)
+        {
+            var data = buffDataList[i];
+            GameObject go = null;
+            if (i < this.buffListRoot.childCount)
+            {
+                go = this.buffListRoot.GetChild(i).gameObject;
+            }
+            else
+            {
+                go = GameObject.Instantiate(this.buffListRoot.GetChild(0).gameObject,
+                    this.buffListRoot, false);
+            }
+
+            BuffShowObj cell = new BuffShowObj();
+            cell.Init(go);
+            cell.Show();
+            cell.Refresh(data,i);
+
+            buffShowObjList.Add(cell);
+        }
+        
+        for (int i = buffDataList.Count; i < this.buffListRoot.childCount; i++)
+        {
+            var go = this.buffListRoot.GetChild(i).gameObject;
+            go.SetActive(false);
+        }
     }
 
     public void RemoveBuffFromDataList(int guid)
@@ -75,7 +106,6 @@ public class BattleBuffUI
                 return;
             }
         }
-
     }
 
     public void UpdateBuffInfo(BuffEffectInfo_Client buffInfo)
@@ -90,9 +120,8 @@ public class BattleBuffUI
             }
             else
             {
-                buffShowObj.UpdateInfo(buffInfo);
+                buffShowObj.Refresh(buffInfo);
             }
-
         }
         else
         {
@@ -105,9 +134,8 @@ public class BattleBuffUI
             else
             {
                 buffDataList.Add(buffInfo);
-                this.RefreshBuffList();                
+                this.RefreshBuffList();
             }
-
         }
     }
 
@@ -117,10 +145,9 @@ public class BattleBuffUI
         {
             item.Update(deltaTime);
         }
-
     }
 
-    public BattleBuffUIShowObj FindBuff(int buffId)
+    public BuffShowObj FindBuff(int buffId)
     {
         foreach (var buff in buffShowObjList)
         {
@@ -129,6 +156,7 @@ public class BattleBuffUI
                 return buff;
             }
         }
+
         return null;
     }
 
@@ -144,7 +172,6 @@ public class BattleBuffUI
 
     public void OnBuffInfoUpdate(BuffEffectInfo_Client buffInfo)
     {
-        
         if (BattleManager.Instance.GetLocalPlayer().ctrlHeroGuid == buffInfo.targetEntityGuid)
         {
             UpdateBuffInfo(buffInfo);
@@ -160,9 +187,7 @@ public class BattleBuffUI
 
         buffShowObjList = null;
         buffDataList = null;
-        
+
         EventDispatcher.RemoveListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
-
     }
-
 }

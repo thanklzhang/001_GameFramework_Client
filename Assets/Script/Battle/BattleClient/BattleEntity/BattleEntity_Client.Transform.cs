@@ -1,5 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
+using Battle;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Battle_Client
 {
@@ -21,9 +23,10 @@ namespace Battle_Client
                 state = BattleEntityState.Move;
 
                 this.movePosList = pathList;
-                this.attr.moveSpeed = moveSpeed;
+                // this.attr.moveSpeed = moveSpeed;
+                this.attr.SetAttr(EntityAttrType.MoveSpeed,moveSpeed);
 
-                var aniScale = this.attr.moveSpeed / normalAnimationMoveSpeed;
+                var aniScale = this.attr.GetValue(EntityAttrType.MoveSpeed) / normalAnimationMoveSpeed;
 
                 PlayAnimation("walk", aniScale);
 
@@ -39,7 +42,7 @@ namespace Battle_Client
         public void UpdateMove(float timeDelta)
         {
              var moveVector = moveTargetPos - this.gameObject.transform.position;
-                var speed = this.attr.moveSpeed;
+                var speed = this.attr.GetValue(EntityAttrType.MoveSpeed);
                 var dir = moveVector.normalized;
                 //var dis = moveVector.magnitude;
 

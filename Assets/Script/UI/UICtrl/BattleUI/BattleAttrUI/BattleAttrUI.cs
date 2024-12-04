@@ -20,8 +20,14 @@ public class BattleAttrUI
 
     Transform attrListRoot;
 
-    List<BattleAttrUIData> attrDataList = new List<BattleAttrUIData>();
-    List<BattleAttrUIShowObj> attrShowObjList = new List<BattleAttrUIShowObj>();
+    // List<BattleAttrUIData> attrDataList = new List<BattleAttrUIData>();
+    List<AttrUIData> attrDataList = new List<AttrUIData>();
+
+    
+    // List<BattleAttrUIShowObj> attrShowObjList = new List<BattleAttrUIShowObj>();
+
+    private List<AttrShowObj> attrShowObjList = new List<AttrShowObj>();
+    
     public BattleUI BattleUIPre;
 
     public void Init(GameObject gameObject, BattleUI battleUIPre)
@@ -45,7 +51,11 @@ public class BattleAttrUI
 
     public void OnChangeEntityBattleData(BattleEntity_Client entity,int fromEntityGuid)
     {
-        RefreshAllUI();
+        var localEntity = BattleManager.Instance.GetLocalCtrlHero();
+        if (localEntity.guid == entity.guid)
+        {
+            RefreshAllUI();
+        }
     }
 
     public void Show()
@@ -62,7 +72,7 @@ public class BattleAttrUI
     public void RefreshDataList()
     {
         // BattleAttrUIArgs attrUIArgs = new BattleAttrUIArgs();
-        attrDataList = new List<BattleAttrUIData>();
+        attrDataList = new List<AttrUIData>();
 
         var attr = BattleManager.Instance.GetLocalCtrlHeroAttrs();
         List<EntityAttrType> types = new List<EntityAttrType>()
@@ -74,48 +84,17 @@ public class BattleAttrUI
             EntityAttrType.AttackRange,
             EntityAttrType.MoveSpeed,
         };
-        ////之后配置
-        //List<string> typeNameList = new List<string>()
-        //{
-        //     "攻击",
-        //     "防御",
-        //     "生命值",
-        //     "攻击速度",
-        //     "攻击距离",
-        //     "移动速度",
-        //};
+      
         for (int i = 0; i < types.Count; i++)
         {
             var attrType = types[i];
-
-            var attrOption = AttrInfoHelper.Instance.GetAttrInfo(attrType);
-
-            string name = "" + attrOption.name;
-            float value = attr.GetValue(attrType);
-            AttrValueShowType showType = AttrValueShowType.Int;
-            if (attrType == EntityAttrType.AttackSpeed)
+            float value = attr.GetValue(attrType);  
+            AttrUIData uiData = new AttrUIData()
             {
-                showType = AttrValueShowType.Float_2;
-            }
-            else if (attrType == EntityAttrType.AttackRange)
-            {
-                showType = AttrValueShowType.Float_2;
-            }
-            else if (attrType == EntityAttrType.MoveSpeed)
-            {
-                showType = AttrValueShowType.Float_2;
-            }
-
-            BattleAttrUIData uiData = new BattleAttrUIData()
-            {
-                type = attrType,
-                describe = attrOption.describe,
-                name = name,
-                value = value,
-                valueShowType = showType,
-                iconResId = attrOption.iconResId
+                 type = attrType,
+                 value = value
             };
-
+         
             attrDataList.Add(uiData);
         }
     }
@@ -123,12 +102,35 @@ public class BattleAttrUI
     //用这个开始显示
     public void RefreshShowList()
     {
-        var args = new UIListArgs<BattleAttrUIShowObj, BattleAttrUI>();
-        args.dataList = attrDataList;
-        args.showObjList = attrShowObjList;
-        args.root = attrListRoot;
-        args.parentObj = this;
-        UIFunc.DoUIList(args);
+        attrShowObjList.Clear();
+        
+        for (int i = 0; i < attrDataList.Count; i++)
+        {
+            var data = attrDataList[i];
+            GameObject go = null;
+            if (i < this.attrListRoot.childCount)
+            {
+                go = this.attrListRoot.GetChild(i).gameObject;
+            }
+            else
+            {
+                go = GameObject.Instantiate(this.attrListRoot.GetChild(0).gameObject,
+                    this.attrListRoot, false);
+            }
+
+            AttrShowObj cell = new AttrShowObj();
+            cell.Init(go);
+            cell.Show();
+            cell.Refresh(data,i);
+
+            attrShowObjList.Add(cell);
+        }
+
+        for (int i = attrDataList.Count; i < this.attrListRoot.childCount; i++)
+        {
+            var go = this.attrListRoot.GetChild(i).gameObject;
+            go.SetActive(false);
+        }
     }
 
 

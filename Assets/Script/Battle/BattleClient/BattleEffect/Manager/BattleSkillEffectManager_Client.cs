@@ -94,10 +94,33 @@ namespace Battle_Client
             return skillEffect;
         }
 
+        public List<BuffEffectInfo_Client> GetBuffListFromEntity(BattleEntity_Client entity)
+        {
+            List<BuffEffectInfo_Client> list = new List<BuffEffectInfo_Client>();
+            foreach (var kv in this.skillEffectDic)
+            {
+                var skillEffect = kv.Value;
+                if (skillEffect.IsBuff())
+                {
+                    if (entity.guid == skillEffect.buffInfo.targetEntityGuid)
+                    {
+                        if (skillEffect.state != BattleSkillEffectState.WillDestroy &&
+                            skillEffect.state != BattleSkillEffectState.Destroy)
+                        {
+                            list.Add(skillEffect.buffInfo);
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+
         public BattleSkillEffect FindSkillEffect(int guid)
         {
             if (skillEffectDic.ContainsKey(guid))
             {
+                var eft = skillEffectDic[guid];
                 return skillEffectDic[guid];
             }
             else

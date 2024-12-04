@@ -61,6 +61,8 @@ public enum EventIDs
     
     OnSkillTips = 101250,              //技能提示
     OnItemTips = 101251,                //道具提示
+    OnSelectEntity = 101270,            //当选择了一个单位（相当于左键）
+    OnCancelSelectEntity = 101271,            //当取消选择了一个单位
     
     _Battle_Flag_End = 101300,      //战斗消息的结束符号
     //

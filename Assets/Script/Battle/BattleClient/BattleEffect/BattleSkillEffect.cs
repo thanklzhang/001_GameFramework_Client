@@ -18,7 +18,7 @@ namespace Battle_Client
         float totalAutoDestroyTime;
         bool isLoop;
 
-        BuffEffectInfo_Client buffInfo;
+        public BuffEffectInfo_Client buffInfo;
 
         private bool isBattleEnd;
 
@@ -140,6 +140,11 @@ namespace Battle_Client
                 //    //BattleSkillEffectManager.Instance.DestorySkillEffect(this.guid);
                 //}
             }
+
+            if (this.IsBuff())
+            {
+                this.buffInfo.currCDTime -= deltaTime;
+            }
         }
 
         public void SetWillDestoryState()
@@ -170,6 +175,11 @@ namespace Battle_Client
         public void OnBattleEnd()
         {
             this.isBattleEnd = true;
+        }
+
+        public bool IsBuff()
+        {
+            return this.buffInfo != null;
         }
     }
 }

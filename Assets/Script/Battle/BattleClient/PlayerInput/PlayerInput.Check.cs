@@ -53,7 +53,16 @@ namespace Battle_Client
                 //无技能释放动作
                 if (isMouseLeftButtonDown)
                 {
-                    //仅仅是左键点击了某处
+                    if (TryToGetRayOnEntity(out var entityGuidList))
+                    {
+                        var battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
+                        EventDispatcher.Broadcast(EventIDs.OnSelectEntity,battleEntity);
+                    }
+                    else
+                    {
+                        //仅仅是左键点击了某处
+                        EventDispatcher.Broadcast(EventIDs.OnCancelSelectEntity);
+                    }
                 }
                 else if (isMouseRightButtonDown)
                 {

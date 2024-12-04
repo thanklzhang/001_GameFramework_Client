@@ -117,6 +117,11 @@ public class AttrShowObj
         this.gameObject.SetActive(true);
     }
 
+    public void Update(float deltaTime)
+    {
+        
+    }
+
     public void Hide()
     {
         this.gameObject.SetActive(false);

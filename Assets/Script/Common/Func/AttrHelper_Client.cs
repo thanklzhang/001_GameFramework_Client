@@ -108,6 +108,31 @@ public class AttrHelper_Client
                 desStr = "增加队长随机属性";
             }
         }
+        else if (type == BattleRewardType.Resource_BattleCoin)
+        {
+            nameStr = "获得战银";
+            if (isMakeSureReward)
+            {
+                desStr = "获得战银：";
+
+                if (rewardConfig.ValueList.Count > 1)
+                {
+                    //随机
+                    var str = $"{battleReward.intArg1}({rewardConfig.ValueList[0]}~{rewardConfig.ValueList[1]})";
+                    desStr += str;
+                }
+                else
+                {
+                    //固定
+                    var str = $"{battleReward.intArg1}";
+                    desStr += str;
+                }
+            }
+            else
+            {
+                desStr = "获得一定的战银";
+            }
+        }
     }
 
     public static string GetAttrContent(int attrGroupConfigId, List<int> intValueList)

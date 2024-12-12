@@ -6,18 +6,19 @@ using UnityEngine;
 
 public class AttrHelper_Client
 {
-    public static float GetValue(EntityAttrType attrType, int value)
+    public static float GetAttrShowValue(EntityAttrType attrType, int value)
     {
-        if (attrType == EntityAttrType.MoveSpeed ||
-            attrType == EntityAttrType.AttackSpeed ||
-            attrType == EntityAttrType.AttackRange ||
-            attrType == EntityAttrType.InputDamageRate ||
-            attrType == EntityAttrType.OutputDamageRate)
+        if (AttrHelper.IsFixedFloatValue(attrType))
         {
             return value / 1000.0f;
         }
 
-        return (float)value;
+        if (AttrHelper.IsPermillage(attrType))
+        {
+            return  value / 1000.0f;
+        }
+
+        return value;
     }
 
     public static void GetBattleRewardContent(BattleReward_Client battleReward, bool isMakeSureReward,
@@ -158,7 +159,7 @@ public class AttrHelper_Client
             var attrInfo = AttrInfoHelper.Instance.GetAttrInfo(showAttrType);
             if (attrValueType == AddedValueType.Fixed)
             {
-                var resultValue = AttrHelper_Client.GetValue(attrType, attrValue);
+                var resultValue = AttrHelper_Client.GetAttrShowValue(attrType, attrValue);
 
                 if ((int)attrType < (int)EntityAttrType.Attack_Permillage)
                 {

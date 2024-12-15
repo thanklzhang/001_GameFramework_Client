@@ -7,6 +7,7 @@ namespace Battle_Client
 {
     public partial class BattleEntityManager
     {
+        
         internal BattleEntity_Client CreateEntity(BattleClientMsg_Entity msg_entity)
         {
             var entity = CreateViewEntityInfo(msg_entity);
@@ -32,8 +33,8 @@ namespace Battle_Client
             BattleEntity_Client entity = new BattleEntity_Client();
             entity.Init(guid, configId);
             entity.SetPlayerIndex(msgEntity.playerIndex);
-
             entity.SetPosition(msgEntity.position);
+            entity.SetLocationType(msgEntity.localType);
 
             //填充技能
             List<BattleSkillInfo> skills = new List<BattleSkillInfo>();

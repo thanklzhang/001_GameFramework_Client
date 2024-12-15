@@ -58,6 +58,11 @@ namespace Config
         private int level; 
         
         /// <summary>
+        ///品质
+        /// </summary>
+        private int quality; 
+        
+        /// <summary>
         ///星级
         /// </summary>
         private int star; 
@@ -106,6 +111,8 @@ namespace Config
         public List<int> SkillIds { get => skillIds; }     
         
         public int Level { get => level; }     
+        
+        public int Quality { get => quality; }     
         
         public int Star { get => star; }     
         

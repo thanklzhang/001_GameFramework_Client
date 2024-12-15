@@ -123,14 +123,14 @@ public class FindPathTest : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             UnityEngine.Vector3 resultPos;
-            if (TryToGetRayOnGroundPos(out resultPos))
+            if (TryToGetRayTargetPos(out resultPos))
             {
                 this.OnPlayerClickGround(resultPos);
             }
         }
     }
 
-    public bool TryToGetRayOnGroundPos(out UnityEngine.Vector3 pos)
+    public bool TryToGetRayTargetPos(out UnityEngine.Vector3 pos)
     {
         pos = UnityEngine.Vector3.zero;
 

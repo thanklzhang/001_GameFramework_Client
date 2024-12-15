@@ -66,6 +66,11 @@ namespace Battle
         public int Level => config.Level;
         
         /// <summary>
+        ///品质
+        /// </summary>
+        public int Quality => config.Quality;
+        
+        /// <summary>
         ///星级
         /// </summary>
         public int Star => config.Star;

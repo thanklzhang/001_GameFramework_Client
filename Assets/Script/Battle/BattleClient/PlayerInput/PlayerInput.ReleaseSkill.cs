@@ -19,15 +19,14 @@ namespace Battle_Client
 
             if (releaseTargetType == SkillReleaseTargeType.Point)
             {
-                Vector3 resultPos;
-                var isColliderGround = TryToGetRayOnGroundPos(out resultPos);
+                var isColliderGround = TryToGetRayTargetPos(out var hit);
                 //确定选择技能目标
                 if (isColliderGround)
                 {
                     // skillDirectModule.FinishSelect();
                     // willUseItemIndex = -1;
                     int targetGuid = 0;
-                    Vector3 targetPos = resultPos;
+                    Vector3 targetPos = hit.point;
 
                     SuccessRelease(targetGuid,targetPos,skillId);
                 }

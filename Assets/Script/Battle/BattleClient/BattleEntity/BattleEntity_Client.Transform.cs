@@ -15,6 +15,7 @@ namespace Battle_Client
         float normalAnimationMoveSpeed = 4.0f;
         float rotateSpeed = 540;
         int lastDir = 1;
+        public EntityLocationType localtionType;
         
         internal void StartMoveByPath(List<Vector3> pathList, float moveSpeed)
         {
@@ -141,8 +142,13 @@ namespace Battle_Client
             //this.position = pos;
             gameObject.transform.position = pos;
         }
-        
-        
+
+       
+        public void SetLocationType(EntityLocationType type)
+        {
+            localtionType = type;
+        }
+
         internal Vector3 GetPosition()
         {
             return this.gameObject.transform.position;

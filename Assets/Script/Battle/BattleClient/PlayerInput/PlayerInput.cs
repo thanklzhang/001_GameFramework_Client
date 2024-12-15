@@ -62,10 +62,11 @@ namespace Battle_Client
             BattleManager.Instance.MsgSender.Send_MoveEntity(guid, clickPos);
         }
 
-        //得到射线到地面的焦点
-        public bool TryToGetRayOnGroundPos(out Vector3 pos)
+
+        //根据 tag 获取碰撞物体
+        public bool TryToGetRayTargetPos(out RaycastHit hit, List<string> tags)
         {
-            pos = Vector3.zero;
+            hit = new RaycastHit();
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             //Debug.DrawRay(ray.origin, ray.direction, Color.red);
@@ -76,10 +77,12 @@ namespace Battle_Client
                 {
                     var currHit = hits[i];
                     var tag = currHit.collider.tag;
-                    if (tag == "Ground")
+                    if (tags.Contains(tag))
                     {
                         //Logx.Log("hit ground : " + currHit.collider.gameObject.name);
-                        pos = currHit.point;
+                        // pos = currHit.point;
+                        // return true;
+                        hit = currHit;
                         return true;
 
                         //this.OnPlayerClickGround(currHit.point);
@@ -88,6 +91,13 @@ namespace Battle_Client
             }
 
             return false;
+        }
+
+        //得到射线检测的目标
+        public bool TryToGetRayTargetPos(out RaycastHit hit,string targetTag = GlobalConfig.Ground)
+        {
+            var list = new List<string>(){targetTag};
+            return TryToGetRayTargetPos(out hit,list);
         }
 
         public bool TryToGetRayOnEntity(out List<int> entityGuidList)

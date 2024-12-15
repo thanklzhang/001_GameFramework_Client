@@ -7,6 +7,10 @@ namespace Battle_Client
 {
     public partial class PlayerInput
     {
+        public BattleEntity_Client currDragEntity;
+        public Vector3 dragEntityOriginPos;
+        public Vector3 dragEntityOffset;
+
         public void CheckInput()
         {
             var battleState = BattleManager.Instance.BattleState;
@@ -22,9 +26,9 @@ namespace Battle_Client
             var isSelectSkillState = skillDirectModule.GetSelectState();
             var isMouseLeftButtonDown = Input.GetMouseButtonDown(0);
             var isMouseRightButtonDown = Input.GetMouseButtonDown(1);
+            var isMouseLeftButtonUp = Input.GetMouseButtonUp(0);
             if (isSelectSkillState)
             {
-
                 //选择技能中
                 if (BattleManager.Instance.IsIntelligentRelease && eventType > 1)
                 {
@@ -56,7 +60,26 @@ namespace Battle_Client
                     if (TryToGetRayOnEntity(out var entityGuidList))
                     {
                         var battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
-                        EventDispatcher.Broadcast(EventIDs.OnSelectEntity,battleEntity);
+                        EventDispatcher.Broadcast(EventIDs.OnSelectEntity, battleEntity);
+
+                        if (battleEntity.guid != BattleManager.Instance.GetLocalCtrlHeroGuid())
+                        {
+                            currDragEntity = battleEntity;
+                            dragEntityOriginPos = currDragEntity.gameObject.transform.position;
+                            var isInArea = TryToGetRayTargetPos(out var hit,new List<string>()
+                            {
+                                GlobalConfig.Ground,
+                                GlobalConfig.UnderstudyArea
+                            });
+                            if (isInArea)
+                            {
+                                this.dragEntityOffset = dragEntityOriginPos - hit.point;
+                            }
+                            else
+                            {
+                                //?????? 到底在哪呢
+                            }
+                        }
                     }
                     else
                     {
@@ -72,19 +95,132 @@ namespace Battle_Client
                     if (null == entity)
                     {
                         //移动到某处
-                        Vector3 resultPos;
-                        if (TryToGetRayOnGroundPos(out resultPos))
+                        if (TryToGetRayTargetPos(out var hit))
                         {
-                            this.OnPlayerClickGround(resultPos);
+                            this.OnPlayerClickGround(hit.point);
                         }
+                    }
+                }
+                else if (isMouseLeftButtonUp)
+                {
+                    CheckMouseLeftUp();
+                }
+                else
+                {
+                    //啥也没干 检测持续性行为
+                    CheckNoEventWithoutSkillState();
+                }
+            }
+        }
+
+        public void CheckMouseLeftUp()
+        {
+            List<int> entityGuidList;
+            BattleEntity_Client battleEntity = null;
+
+            //检测是否有射线碰到的单位
+            var isRayToEntity = TryToGetRayOnEntity(out entityGuidList);
+            if (isRayToEntity)
+            {
+                battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
+                if (battleEntity != null)
+                {
+                    if (battleEntity != currDragEntity)
+                    {
+                        //发送信息：用当前拖动的单位 替换 目标单位
+                        Logx.Log(LogxType.Zxy, "drag : replace target entity guid : "
+                                               + battleEntity.guid);
+
+                        BattleManager.Instance.MsgSender.Send_OperateHero(new OperateHeroArg()
+                        {
+                            opType = OperateHeroType.Replace,
+                            opHeroGuid = currDragEntity.guid,
+                            targetHeroGuid = battleEntity.guid
+                        });
+                        
+                        currDragEntity = null;
+                        return;
+                    }
+                }
+            }
+
+            //检测区域
+            var isColliderUnderstudy = TryToGetRayTargetPos(out var hit, GlobalConfig.UnderstudyArea);
+            if (isColliderUnderstudy)
+            {
+                //检测是否扔到了替补位
+                if (currDragEntity != null)
+                {
+                    var position = hit.transform.position;
+                    var midPos = new Vector3(position.x, hit.point.y, position.z);   
+                    var pos = midPos;
+                    currDragEntity.SetPosition(pos);
+                    var index = hit.transform.GetSiblingIndex();
+
+                    //发送信息：改变布阵位置 到替补
+                    Logx.Log(LogxType.Zxy, $"drag : move entity , entity guid : {currDragEntity.guid}"
+                                           + $" isUnderstudyArea : {true}");
+                    
+                    BattleManager.Instance.MsgSender.Send_OperateHero(new OperateHeroArg()
+                    {
+                        opType = OperateHeroType.MoveToUnderstudy,
+                        opHeroGuid = currDragEntity.guid,
+                        targetPos = pos,
+                        understudyIndex = index
+                    });
+                    
+                    currDragEntity = null;
+                    return;
+                }
+            }
+            else
+            {
+                //检测是否扔到了战场上
+                var isColliderGround = TryToGetRayTargetPos(out hit, GlobalConfig.Ground);
+                if (isColliderGround)
+                {
+                    if (currDragEntity != null)
+                    {
+                        // var pos = new Vector3(resultPos.x,
+                        //     currDragEntity.gameObject.transform.position.y, resultPos.z);
+                        
+                        var pos = hit.point + dragEntityOffset;
+                        currDragEntity.SetPosition(pos);
+                        //发送信息：改变布阵位置 
+                        //参数：entityGuid,isUnderstudyArea(目标)，pos，index（替补区域位置）
+                        Logx.Log(LogxType.Zxy, $"drag : move entity , entity guid : {currDragEntity.guid}"
+                                               + $" isUnderstudyArea : {false}");
+                        
+                        BattleManager.Instance.MsgSender.Send_OperateHero(new OperateHeroArg()
+                        {
+                            opType = OperateHeroType.MoveToBattle,
+                            opHeroGuid = currDragEntity.guid,
+                            targetPos = pos,
+                        });
+                        
+                        currDragEntity = null;
+                        return;
                     }
                 }
                 else
                 {
-                    //啥也没干
-                    CheckNoEventWithoutSkillState();
+                    //扔到了既不是替补位，也不是交换单位又不是地面
                 }
             }
+
+            //恢复原位
+            if (currDragEntity != null)
+            {
+                currDragEntity.SetPosition(dragEntityOriginPos);
+            }
+
+            currDragEntity = null;
+        }
+
+        //该点是否在替补区域中
+        public bool IsInUnderstudyArea(Vector3 pos)
+        {
+            return false;
         }
 
         //检查键盘输入 eventType：1：普通攻击，2：技能，3：道具
@@ -133,7 +269,7 @@ namespace Battle_Client
                 }
             }
         }
-        
+
         BattleEntity_Client CheckNormalAttackByRightMouseKey()
         {
             var localEntity = BattleManager.Instance.GetLocalCtrlHero();
@@ -159,7 +295,7 @@ namespace Battle_Client
                     if (skill != null)
                     {
                         var skillId = skill.configId;
-                        SuccessRelease(targetGuid,targetPos,skillId);
+                        SuccessRelease(targetGuid, targetPos, skillId);
                     }
                 }
             }
@@ -170,9 +306,8 @@ namespace Battle_Client
         void CheckNoEventBySkillState()
         {
             var localEntity = BattleManager.Instance.GetLocalCtrlHero();
-            Vector3 resultPos;
-            var isColliderGround = TryToGetRayOnGroundPos(out resultPos);
-            skillDirectModule.UpdateMousePosition(resultPos);
+            var isColliderGround = TryToGetRayTargetPos(out var hit);
+            skillDirectModule.UpdateMousePosition(hit.point);
 
             GameObject gameObject = null;
             List<int> entityGuidList;
@@ -259,11 +394,26 @@ namespace Battle_Client
             else
             {
                 OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Normal);
-
                 OperateViewManager.Instance.modelOutlineModule.CloseAllModelOutline();
             }
+            
+            
+            //检测拖动释放
+            if (currDragEntity != null)
+            {
+                var isColliderGround = TryToGetRayTargetPos(out var hit);
+                if (isColliderGround)
+                {
+                    // var pos = new Vector3(resultPos.x,
+                    //     currDragEntity.gameObject.transform.position.y, resultPos.z);
+                        
+                    var pos = hit.point + dragEntityOffset;
+                    // Logx.Log(LogxType.Zxy,$"hit.point:{hit.point} " +
+                    //                       $"dragEntityOffset:{dragEntityOffset} pos:{pos}");
+                        
+                    currDragEntity.SetPosition(pos);
+                }
+            }
         }
-
-     
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Battle;
 using GameData;
+using UnityEngine;
 
 namespace Battle_Client
 {
@@ -50,6 +51,8 @@ namespace Battle_Client
                 LocalData.SetInt("intelligentRelease_switch", isIntelligentRelease ? 1 : 0);
             }
         }
+
+        Transform sceneRoot;
 
         #endregion
 

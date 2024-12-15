@@ -127,7 +127,9 @@ namespace Battle_Client
             //加载场景
             EventSender.SendLoadingProgress(0.3f, "加载 场景 中");
             yield return SceneLoadManager.Instance.LoadRequest(sceneResTb.Name);
+            SetSceneInfo();
             SetCameraInfo();
+            
             Logx.Log(LogxType.Game, "StartLoad_Common : scene load finish");
 
             //加载 UI 并打开
@@ -143,6 +145,11 @@ namespace Battle_Client
             Logx.Log(LogxType.Game, "StartLoad_Common : entities load finish");
 
             // ShowMapPosView();
+        }
+
+        void SetSceneInfo()
+        {
+            sceneRoot = GameObject.Find("_scene_root").transform;
         }
 
         //显示辅助地图坐标
@@ -167,6 +174,8 @@ namespace Battle_Client
         public void OnLoadFinish()
         {
             this.playerInput.InitPlayerInput();
+            var understudyRoot = sceneRoot.Find("UnderstudyArea");
+            UnderstudyManager_Client.Instance.Init(understudyRoot);
         }
 
         #region 创建战斗

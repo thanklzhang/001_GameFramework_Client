@@ -91,9 +91,10 @@ namespace Battle_Client
         public int playerIndex;
         public int level;
         public UnityEngine.Vector3 position;
-
         public List<BattleClientMsg_Skill> skills;
         public List<BattleClientMsg_Item> itemList;
+
+        public EntityLocationType localType;
     }
 
     public class BattleClientMsg_Skill

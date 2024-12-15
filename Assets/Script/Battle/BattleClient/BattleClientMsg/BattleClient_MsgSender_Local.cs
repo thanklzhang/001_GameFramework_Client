@@ -220,5 +220,10 @@ namespace Battle_Client
 
             battle.OnRecvBattleMsg<BuyBoxFromShop_BattleMsg>(hero.playerIndex, arg);
         }
+
+        public void Send_OperateHero(OperateHeroArg opArg)
+        {
+            
+        }
     }
 }

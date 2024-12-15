@@ -56,6 +56,9 @@ public enum LogxType
     //战斗宝箱
     BattleBox = 114,
     
+    //英雄升星
+    HeroStar = 115,
+    
     //---------------------------------
 
     //自定义类型(200 以上)-----------------------------
@@ -93,8 +96,7 @@ public class Logx
         {LogxType.BattleSkill,new LogxConfigInfo() { enable = true }},
         {LogxType.BattleItem,new LogxConfigInfo() { enable = true }},
         {LogxType.BattleBox,new LogxConfigInfo() { enable = true }},
-        
-        
+        {LogxType.HeroStar,new LogxConfigInfo() { enable = true }},
         
         {LogxType.Zxy,new LogxConfigInfo() { enable = true }}
         

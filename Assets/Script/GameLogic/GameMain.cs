@@ -107,6 +107,12 @@ public class GameMain : MonoBehaviour
         isLoadFinish = true;
     }
 
+    //有互相引用的初始化 在 Init 结束后 在这里初始化
+    void InitByRelation()
+    {
+        
+    }
+
     public void InitHelper()
     {
         AttrInfoHelper.Instance.Init();

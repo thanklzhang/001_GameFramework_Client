@@ -76,4 +76,7 @@ public class GlobalConfig
     public static string LANServerIP = "";
     
     public static Fix timeDelta = Fix.Ratio(frameTime, 1000);
+
+    public const string Ground = "Ground";
+    public const string UnderstudyArea = "UnderstudyArea";
 }

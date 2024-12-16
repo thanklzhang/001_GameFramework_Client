@@ -9,6 +9,7 @@ using Battle_Client;
 using GameData;
 using NetProto;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Battle_Client
 {
@@ -221,9 +222,17 @@ namespace Battle_Client
             battle.OnRecvBattleMsg<BuyBoxFromShop_BattleMsg>(hero.playerIndex, arg);
         }
 
-        public void Send_OperateHero(OperateHeroArg opArg)
+        public void Send_OperateHeroByArraying(int opHeroGuid, Vector3 targetPos, int toUnderstudyIndex)
         {
-            
+            var arg = new HeroOperationByArraying_BattleMsgArg();
+
+            arg.opHeroGuid = opHeroGuid;
+            arg.targetPos = BattleConvert.ConvertToVector3(targetPos);
+            arg.toUnderstudyIndex = toUnderstudyIndex;
+
+            var hero = BattleManager.Instance.GetLocalCtrlHero();
+
+            battle.OnRecvBattleMsg<HeroOperationByArraying_BattleMsg>(hero.playerIndex, arg);
         }
     }
 }

@@ -8,6 +8,8 @@ using Battle_Client;
 using GameData;
 using NetProto;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
+
 namespace Battle_Client
 {
     //战斗客户端消息发送器
@@ -64,6 +66,11 @@ namespace Battle_Client
         }
 
         public void Send_BuyBoxFromShop(RewardQuality quality, int buyCount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send_OperateHeroByArraying(int opHeroGuid, Vector3 targetPos, int toUnderstudyIndex)
         {
             throw new NotImplementedException();
         }

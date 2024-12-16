@@ -12,7 +12,6 @@ namespace Battle_Client
     public partial class BattleManager
     {
 
-        public 
         // //替补索引和位置的 Dic
         // public List<Vector3> understudyPosList = new List<Vector3>()
         // {

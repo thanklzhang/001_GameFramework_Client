@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - EntityCollider
   - Entity
+  - UnderstudyArea
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Ground
   - Hero
   - Entity
-  - HeroOperation
+  - 
   - 
   - 
   - 

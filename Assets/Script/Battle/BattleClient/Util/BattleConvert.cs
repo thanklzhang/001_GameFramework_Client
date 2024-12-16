@@ -20,7 +20,6 @@ namespace Battle_Client
             v3Proto.Y = ToValue(position.y);
             v3Proto.Z = ToValue(position.z);
             return v3Proto;
-
         }
 
         public static Vector3 ConvertToVector3(Vector3Proto vector3Proto)
@@ -42,6 +41,15 @@ namespace Battle_Client
             };
 
             return v;
+        }
+
+        public static Battle.Vector3 ConvertToVector3(UnityEngine.Vector3 uPos)
+        {
+            Battle.Vector3 pos = new Battle.Vector3();
+            pos.x = uPos.x;
+            pos.y = uPos.y;
+            pos.z = uPos.z;
+            return pos;
         }
 
         public static int ToValue(float value)
@@ -67,8 +75,5 @@ namespace Battle_Client
 
             return buff;
         }
-
     }
-
 }
-

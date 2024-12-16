@@ -12,22 +12,26 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
-    public class OperateHero_RecvMsg : ClientRecvMsg
+    public class OperateHeroByArraying_RecvMsg : ClientRecvMsg
     {
         public override void Handle()
         {
-            var arg = this.msgArg as OperateHero_RecvMsg_Arg;
+            var arg = this.msgArg as OperateHeroByArraying_RecvMsg_Arg;
 
             var player = BattleManager.Instance.GetLocalPlayer();
             if (player != null && arg.playerIndex == player.playerIndex)
             {
-                player.OnOperateHero();
+                player.OnOperateHero(arg);
             }
         }
     }
 
-    public class OperateHero_RecvMsg_Arg : BaseClientRecvMsgArg
+    public class OperateHeroByArraying_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int playerIndex;
+
+        public int opHeroGuid;
+        public  UnityEngine.Vector3 targetPos;
+        public int toUnderstudyIndex;
     }
 }

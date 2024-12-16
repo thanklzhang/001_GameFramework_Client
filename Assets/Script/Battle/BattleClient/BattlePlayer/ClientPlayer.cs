@@ -18,38 +18,43 @@ namespace Battle_Client
             InitBattleReward();
         }
 
-        public void OnOperateHero(OnHeroOperationMsgArg arg)
+        public void OnOperateHero(OperateHeroByArraying_RecvMsg_Arg arg)
         {
+          
             Vector3 pos = arg.targetPos; //
-            var targetGuid = arg.targetGuid; //
-            bool isUnderstudy = arg.isUnderstudy;
+            var opHeroGuid = arg.opHeroGuid; //
             int toUnderstudyIndex = arg.toUnderstudyIndex;
 
-            var targetEntity = BattleEntityManager.Instance.FindEntity(targetGuid);
-            if (targetEntity != null)
+            Logx.Log(LogxType.Zxy,$"client : recv msg : pos:{pos} opHeroGuid:{opHeroGuid} toUnderstudyIndex:{toUnderstudyIndex}");
+            
+            if (opHeroGuid > 0)
             {
-                if (isUnderstudy)
+                var targetEntity = BattleEntityManager.Instance.FindEntity(opHeroGuid);
+                if (targetEntity != null)
                 {
-                    //设置替补点
-                    UnderstudyManager_Client.Instance.SetLocation(targetEntity, toUnderstudyIndex);
-                }
-                else
-                {
-                    //去战场
-                    var pre = targetEntity.GetPosition();
-                    targetEntity.SetPosition(new Vector3(
-                        pos.x, pre.y, pos.z));
+                    if (toUnderstudyIndex >= 0)
+                    {
+                        //设置替补点
+                        UnderstudyManager_Client.Instance.SetLocation(targetEntity, toUnderstudyIndex);
+                    }
+                    else
+                    {
+                        //去战场
+                        var pre = targetEntity.GetPosition();
+                        targetEntity.SetPosition(new Vector3(
+                            pos.x, pre.y, pos.z));
+                    }
                 }
             }
+            else
+            {
+                if (toUnderstudyIndex >= 0)
+                {
+                    UnderstudyManager_Client.Instance.SetLocation(null, toUnderstudyIndex);
+                }
+            }
+
+           
         }
-    }
-
-    public class OnHeroOperationMsgArg
-    {
-        public Vector3 targetPos;
-        public int targetGuid;
-
-        public bool isUnderstudy;
-        public int toUnderstudyIndex;
     }
 }

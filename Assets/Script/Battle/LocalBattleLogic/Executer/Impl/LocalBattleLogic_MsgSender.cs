@@ -493,7 +493,7 @@ namespace Battle_Client
                 BattleClientMsg_BattleBoxSelection netSelection = new BattleClientMsg_BattleBoxSelection();
                 netSelection.rewardConfigId = boxSelection.rewardConfig.Id;
                 // netSelection.intValueList = boxSelection.GetRealRewardIntValueList();
-                var _battleReward =  boxSelection.GetBattleRewardValues();
+                var _battleReward = boxSelection.GetBattleRewardValues();
                 netSelection.battleReward = new BattleReward_Client();
                 netSelection.battleReward.guid = _battleReward.guid;
                 netSelection.battleReward.configId = _battleReward.configId;
@@ -501,7 +501,7 @@ namespace Battle_Client
                 netSelection.battleReward.intArg2 = _battleReward.intArg2;
                 netSelection.battleReward.intListArg1 = ListTool.CopyList(_battleReward.intListArg1);
                 netSelection.battleReward.intListArg2 = ListTool.CopyList(_battleReward.intListArg2);
-                
+
                 netBox.selections.Add(netSelection);
             }
 
@@ -660,7 +660,7 @@ namespace Battle_Client
             {
                 playerIndex = playerIndex,
             };
-            
+
             //arg
             var dto = reward.GetValues();
             arg.battleReward = new BattleReward_Client();
@@ -670,9 +670,23 @@ namespace Battle_Client
             arg.battleReward.intArg2 = dto.intArg2;
             arg.battleReward.intListArg1 = ListTool.CopyList(dto.intListArg1);
             arg.battleReward.intListArg2 = ListTool.CopyList(dto.intListArg2);
-            
-            BattleManager.Instance.RecvBattleMsg<SyncPlayerBattleReward_RecvMsg>(arg);
 
+            BattleManager.Instance.RecvBattleMsg<SyncPlayerBattleReward_RecvMsg>(arg);
+        }
+
+        //接收布阵中的英雄操作消息
+        public void NotifyHeroOperationByArraying(int playerIndex, int opHeroGuid, Vector3 targetPos,
+            int toUnderstudyIndex)
+        {
+            var arg = new OperateHeroByArraying_RecvMsg_Arg()
+            {
+                playerIndex = playerIndex,
+                opHeroGuid = opHeroGuid,
+                targetPos = BattleConvert.ConvertToVector3(targetPos),
+                toUnderstudyIndex = toUnderstudyIndex
+            };
+
+            BattleManager.Instance.RecvBattleMsg<OperateHeroByArraying_RecvMsg>(arg);
         }
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)

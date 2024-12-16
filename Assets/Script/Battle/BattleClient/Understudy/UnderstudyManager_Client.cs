@@ -30,6 +30,11 @@ namespace Battle_Client
             return locationList[index];
         }
 
+        public int GetLocationByEntityGuid(int guid)
+        {
+            return locationList.FindIndex(t => t.entity.guid == guid);
+        }
+
         public void SetLocation(BattleEntity_Client entity,int index)
         {
             locationList[index].SetEntity(entity);

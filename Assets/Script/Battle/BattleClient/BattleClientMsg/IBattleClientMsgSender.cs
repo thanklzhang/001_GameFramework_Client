@@ -33,6 +33,6 @@ namespace Battle_Client
         void Send_OpenBox(RewardQuality quality);
         void Send_SelectBoxReward(RewardQuality quality, int index);
         void Send_BuyBoxFromShop(RewardQuality quality, int buyCount);
-        void Send_OperateHero(OperateHeroArg opArg);
+        void Send_OperateHeroByArraying(int opHeroGuid,Vector3 targetPos,int toUnderstudyIndex);
     }
 }

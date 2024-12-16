@@ -30,6 +30,10 @@ namespace Battle_Client
                     , targetPos.z);
                 this.entity.SetPosition(resultPos);
             }
+            else
+            {
+                //离开替补
+            }
         }
     }
 }

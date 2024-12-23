@@ -96,9 +96,9 @@ namespace Battle
         public int IsNormalAttack => config.IsNormalAttack;
         
         /// <summary>
-        ///是否是大招
+        ///技能类别
         /// </summary>
-        public int IsBigSkill => config.IsBigSkill;
+        public int SkillCategory => config.SkillCategory;
         
         /// <summary>
         ///是否'不能被打断' 0: 能被打断 , 1:不能被打断

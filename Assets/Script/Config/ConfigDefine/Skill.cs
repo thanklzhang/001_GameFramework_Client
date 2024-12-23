@@ -88,9 +88,9 @@ namespace Config
         private int isNormalAttack; 
         
         /// <summary>
-        ///是否是大招
+        ///技能类别
         /// </summary>
-        private int isBigSkill; 
+        private int skillCategory; 
         
         /// <summary>
         ///是否'不能被打断' 0: 能被打断 , 1:不能被打断
@@ -154,7 +154,7 @@ namespace Config
         
         public int IsNormalAttack { get => isNormalAttack; }     
         
-        public int IsBigSkill { get => isBigSkill; }     
+        public int SkillCategory { get => skillCategory; }     
         
         public int IsNoBreak { get => isNoBreak; }     
         

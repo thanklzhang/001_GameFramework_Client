@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 
-public class HpUIShowObj
+public class HeroStateHp
 {
     GameObject gameObject;
     Transform transform;
@@ -15,7 +15,7 @@ public class HpUIShowObj
     public Transform hp;
     public Text valueText;
 
-    HpUIMgr hpUIMgr;
+    HeroStateUIMgr stateUIMgr;
     RectTransform parentTranRect;
     EntityHpColorSelector colorSelector;
     
@@ -32,17 +32,17 @@ public class HpUIShowObj
     private int fromEntityGuid;
     private float maxHp;
 
-    public void Init(GameObject gameObject,BattleEntity_Client entity, HpUIMgr hpUIMgr)
+    public void Init(GameObject gameObject,BattleEntity_Client entity, HeroStateUIMgr stateUIMgr)
     {
         this.gameObject = gameObject;
-        this.hpUIMgr = hpUIMgr;
-        parentTranRect = hpUIMgr.transform.GetComponent<RectTransform>();
+        this.stateUIMgr = stateUIMgr;
+        parentTranRect = stateUIMgr.transform.GetComponent<RectTransform>();
         this.transform = this.gameObject.transform;
 
-        bgRoot = this.transform.Find("hpMain/bg");
-        hp = this.transform.Find("hpMain/bg/hpFill/hp");
+        bgRoot = this.transform.Find("bg");
+        hp = this.transform.Find("bg/hpFill/hp");
         hpBg = hp.GetComponent<Image>();
-        valueText = this.transform.Find("hpMain/valueText").GetComponent<Text>();
+        valueText = this.transform.Find("valueText").GetComponent<Text>();
         colorSelector = hp.GetComponent<EntityHpColorSelector>();
 
         preCurrHp = entity.CurrHealth;
@@ -57,7 +57,7 @@ public class HpUIShowObj
     }
 
     //刷新数据
-    private void RefreshData(BattleEntity_Client entity,int fromEntityGuid)
+    public void RefreshData(BattleEntity_Client entity,int fromEntityGuid)
     {
         //preCurrHp = entity.CurrHealth;
         nowCurrHp = entity.CurrHealth;
@@ -144,7 +144,7 @@ public class HpUIShowObj
                         : EntityAbnormalStateType.CurrHp_Sub;
                 bean.triggerType = AbnormalStateTriggerType.Start;
                 
-                hpUIMgr.ShowFloatWord(bean);
+                stateUIMgr.ShowFloatWord(bean);
             }
         }
 
@@ -176,27 +176,8 @@ public class HpUIShowObj
 
     public void Update(float timeDelta)
     {
-        //血条跟随实体
-        var entityObj = this.entityObj;
-        var camera3D = CameraManager.Instance.GetCamera3D();
-        var cameraUI = CameraManager.Instance.GetCameraUI();
-        var screenPos = RectTransformUtility.WorldToScreenPoint(camera3D.camera, entityObj.transform.position);
-
-        Vector2 uiPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentTranRect, screenPos, cameraUI.camera, out uiPos);
-
-        //这里可以换成实体上的血条挂点
-        this.transform.localPosition = uiPos + Vector2.up * 100;
+     
     }
 
-    public void Destroy()
-    {
-        GameObject.Destroy(this.gameObject);
-    }
-
-    internal void SetShowState(bool isShow)
-    {
-        gameObject.SetActive(isShow);
-    }
 }
 

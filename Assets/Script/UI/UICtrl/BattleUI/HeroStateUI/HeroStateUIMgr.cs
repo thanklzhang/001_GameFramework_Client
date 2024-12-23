@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//战斗血条 UI 管理
-public class HpUIMgr
+//英雄状态 UI 管理 包括血条等
+public class HeroStateUIMgr
 {
     public Transform transform;
     public GameObject gameObject;
@@ -14,9 +14,9 @@ public class HpUIMgr
     BattleUI _battleUICtrl;
     
     public Transform hpRoot;
-    public GameObject hpTemp;
+    public GameObject stateTemp;
 
-    Dictionary<int, HpUIShowObj> hpShowObjDic = new Dictionary<int, HpUIShowObj>();
+    Dictionary<int, HeroStateShowObj> stateShowObjDic = new Dictionary<int, HeroStateShowObj>();
 
     public void Init(GameObject gameObject, BattleUI ctrl)
     {
@@ -26,8 +26,8 @@ public class HpUIMgr
         this._battleUICtrl = ctrl;
 
         hpRoot = this.transform.Find("root");
-        hpTemp = hpRoot.Find("hpItem").gameObject;
-        hpTemp.SetActive(false);
+        stateTemp = hpRoot.Find("stateItem").gameObject;
+        stateTemp.SetActive(false);
 
         EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnCreateEntity, OnCreateEntity);
         EventDispatcher.AddListener<BattleEntity_Client>(EventIDs.OnEntityDestroy, OnEntityDestroy);
@@ -40,7 +40,7 @@ public class HpUIMgr
 
     public void OnCreateEntity(BattleEntity_Client entity)
     {
-        RefreshHpShow(entity, 0);
+        RefreshStateShow(entity, 0);
     }
 
     public void OnEntityDestroy(BattleEntity_Client entity)
@@ -50,31 +50,31 @@ public class HpUIMgr
 
     public void OnChangeEntityBattleData(BattleEntity_Client entity, int fromEntityGuid)
     {
-        this.RefreshHpShow(entity, fromEntityGuid);
+        this.RefreshStateShow(entity, fromEntityGuid);
     }
 
     public void OnEntityChangeShowState(BattleEntity_Client entity, bool isShow)
     {
-        this.SetHpShowState(entity, isShow);
+        this.SetShowState(entity, isShow);
     }
 
 
-    public void RefreshHpShow(BattleEntity_Client entity, int fromEntityGuid)
+    public void RefreshStateShow(BattleEntity_Client entity, int fromEntityGuid)
     {
-        HpUIShowObj showObj = null;
-        if (hpShowObjDic.ContainsKey(entity.guid))
+        HeroStateShowObj showObj = null;
+        if (stateShowObjDic.ContainsKey(entity.guid))
         {
-            showObj = hpShowObjDic[entity.guid];
+            showObj = stateShowObjDic[entity.guid];
         }
         else
         {
-            showObj = new HpUIShowObj();
+            showObj = new HeroStateShowObj();
 
-            GameObject newObj = GameObject.Instantiate(hpTemp, this.hpRoot, false);
+            GameObject newObj = GameObject.Instantiate(stateTemp, this.hpRoot, false);
             newObj.SetActive(true);
             showObj.Init(newObj, entity,this);
 
-            hpShowObjDic.Add(entity.guid, showObj);
+            stateShowObjDic.Add(entity.guid, showObj);
         }
 
         showObj.Refresh(entity, fromEntityGuid);
@@ -83,11 +83,11 @@ public class HpUIMgr
     public void DestoryHpUI(BattleEntity_Client entity)
     {
         var entityGuid = entity.guid;
-        if (hpShowObjDic.ContainsKey(entityGuid))
+        if (stateShowObjDic.ContainsKey(entityGuid))
         {
-            var hpShowObj = hpShowObjDic[entityGuid];
+            var hpShowObj = stateShowObjDic[entityGuid];
             hpShowObj.Destroy();
-            hpShowObjDic.Remove(entityGuid);
+            stateShowObjDic.Remove(entityGuid);
         }
         else
         {
@@ -95,12 +95,12 @@ public class HpUIMgr
         }
     }
 
-    public HpUIShowObj FindHpUI(int entityGuid)
+    public HeroStateShowObj FindStateShow(int entityGuid)
     {
-        HpUIShowObj showObj = null;
-        if (hpShowObjDic.ContainsKey(entityGuid))
+        HeroStateShowObj showObj = null;
+        if (stateShowObjDic.ContainsKey(entityGuid))
         {
-            showObj = hpShowObjDic[entityGuid];
+            showObj = stateShowObjDic[entityGuid];
         }
         else
         {
@@ -110,13 +110,13 @@ public class HpUIMgr
         return showObj;
     }
 
-    public void SetHpShowState(BattleEntity_Client entity, bool isShow)
+    public void SetShowState(BattleEntity_Client entity, bool isShow)
     {
         var entityGuid = entity.guid;
-        var hpUI = FindHpUI(entityGuid);
-        if (hpUI != null)
+        var stateUI = FindStateShow(entityGuid);
+        if (stateUI != null)
         {
-            hpUI.SetShowState(isShow);
+            stateUI.SetShowState(isShow);
         }
     }
 
@@ -128,7 +128,7 @@ public class HpUIMgr
 
     public void Update(float timeDelta)
     {
-        foreach (var item in hpShowObjDic)
+        foreach (var item in stateShowObjDic)
         {
             item.Value.Update(timeDelta);
         }

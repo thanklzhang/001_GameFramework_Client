@@ -9,7 +9,7 @@ namespace Battle
     
     
  
-    public class SkillUpdateParam_Impl : ISkillUpgradeParam
+    public class SkillUpgradeParam_Impl : ISkillUpgradeParam
     {
         private Config.SkillUpgradeParam config;
         

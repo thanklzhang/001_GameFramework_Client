@@ -42,7 +42,7 @@ public partial class BattleUI : BaseUI
     public Text coinText;
 
     //血条
-    HpUIMgr hpUIMgr;
+    HeroStateUIMgr heroStateUIMgr;
 
     //飘字
     FloatWordMgr floatWordMgr;
@@ -142,10 +142,10 @@ public partial class BattleUI : BaseUI
         });
         attrBtn.onClick.AddListener(() => { onAttrBtnClick?.Invoke(); });
 
-        //血条管理
-        this.hpUIMgr = new HpUIMgr();
-        var hpUIRoot = this.transform.Find("HpShow");
-        this.hpUIMgr.Init(hpUIRoot.gameObject, this);
+        //英雄头顶状态UI管理
+        this.heroStateUIMgr = new HeroStateUIMgr();
+        var heroStateUIRoot = this.transform.Find("heroStateShow");
+        this.heroStateUIMgr.Init(heroStateUIRoot.gameObject, this);
 
         //飘字管理
         floatWordMgr = new FloatWordMgr();
@@ -265,7 +265,7 @@ public partial class BattleUI : BaseUI
 
     protected override void OnUpdate(float deltaTime)
     {
-        this.hpUIMgr.Update(deltaTime);
+        this.heroStateUIMgr.Update(deltaTime);
         this.floatWordMgr.Update(deltaTime);
         this.skillUI.Update(deltaTime);
         this.buffUI.Update(deltaTime);
@@ -410,7 +410,7 @@ public partial class BattleUI : BaseUI
         onCloseBtnClick = null;
         onReadyStartBtnClick = null;
 
-        this.hpUIMgr.Release();
+        this.heroStateUIMgr.Release();
         this.attrUI.Release();
         this.skillUI.Release();
         this.heroInfoUI.Release();

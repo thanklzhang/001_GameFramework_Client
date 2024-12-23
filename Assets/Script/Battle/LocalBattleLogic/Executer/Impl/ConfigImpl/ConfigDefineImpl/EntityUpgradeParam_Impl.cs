@@ -9,7 +9,7 @@ namespace Battle
     
     
  
-    public class EntityUpdateParam_Impl : IEntityUpgradeParam
+    public class EntityUpgradeParam_Impl : IEntityUpgradeParam
     {
         private Config.EntityUpgradeParam config;
         

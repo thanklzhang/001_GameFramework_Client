@@ -118,7 +118,7 @@ namespace Battle_Client
 
     public class BattleClientMsg_BattleStateValue
     {
-        public EntityCurrValueType type;
+        public EntityStateValueType type;
         public float value;
 
         //来源实体 如伤害来源

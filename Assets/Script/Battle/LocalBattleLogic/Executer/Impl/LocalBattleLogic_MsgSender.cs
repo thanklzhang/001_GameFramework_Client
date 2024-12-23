@@ -319,7 +319,7 @@ namespace Battle_Client
             List<BattleClientMsg_BattleStateValue> values = new List<BattleClientMsg_BattleStateValue>();
             BattleClientMsg_BattleStateValue v = new BattleClientMsg_BattleStateValue()
             {
-                type = EntityCurrValueType.CurrHealth,
+                type = EntityStateValueType.CurrHealth,
                 value = hp,
                 fromEntityGuid = fromEntityGuid
             };
@@ -334,6 +334,31 @@ namespace Battle_Client
 
 
             // BattleManager.Instance.MsgReceiver.On_SyncEntityValue(guid, values);
+        }
+
+        public void NotifyAll_SyncEntityStateData(int guid, EntityStateDataBean stateData)
+        {
+            List<BattleClientMsg_BattleStateValue> values = new List<BattleClientMsg_BattleStateValue>();
+            BattleClientMsg_BattleStateValue v = new BattleClientMsg_BattleStateValue()
+            {
+                type = EntityStateValueType.StarLevel,
+                value = stateData.starLv,
+            };
+            values.Add(v);
+            
+            BattleClientMsg_BattleStateValue v2 = new BattleClientMsg_BattleStateValue()
+            {
+                type = EntityStateValueType.StarExp,
+                value = stateData.starExp,
+            };
+            values.Add(v2);
+
+            var arg = new SyncEntityValue_RecvMsg_Arg()
+            {
+                entityGuid = guid,
+                values = values
+            };
+            BattleManager.Instance.RecvBattleMsg<SyncEntityValue_RecvMsg>(arg);
         }
 
         public void NotifyAll_NotifySkillInfoUpdate(Skill skill)

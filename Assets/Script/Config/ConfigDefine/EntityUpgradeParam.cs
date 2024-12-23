@@ -9,7 +9,7 @@ namespace Config
     
     
        
-    public class EntityUpdateParam : BaseConfig
+    public class EntityUpgradeParam : BaseConfig
     {
         
         /// <summary>
@@ -20,13 +20,13 @@ namespace Config
         /// <summary>
         ///英雄每个星级对应的分解星级经验
         /// </summary>
-        private List<int> decomoseExpPerStarLevel; 
+        private List<int> decomposeExpPerStarLevel; 
         
 
         
         public List<int> UpgradeExpPerStarLevel { get => upgradeExpPerStarLevel; }     
         
-        public List<int> DecomoseExpPerStarLevel { get => decomoseExpPerStarLevel; }     
+        public List<int> DecomposeExpPerStarLevel { get => decomposeExpPerStarLevel; }     
         
 
     } 

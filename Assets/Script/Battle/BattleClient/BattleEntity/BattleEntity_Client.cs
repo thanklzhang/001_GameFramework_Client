@@ -24,6 +24,9 @@ namespace Battle_Client
         
         public float deadDisappearCurrTimer = 0;
         public float deadDisappearTotalTime = 2.0f;
+
+        public int starLv;
+        public int starExp;
         
         //初始化
         public void Init(int guid, int configId)

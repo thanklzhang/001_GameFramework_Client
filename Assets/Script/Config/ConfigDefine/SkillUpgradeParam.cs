@@ -9,7 +9,7 @@ namespace Config
     
     
        
-    public class SkillUpdateParam : BaseConfig
+    public class SkillUpgradeParam : BaseConfig
     {
         
         /// <summary>

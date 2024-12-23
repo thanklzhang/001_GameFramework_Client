@@ -74,22 +74,5 @@ namespace Battle_Client
             EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, 0);
         }
 
-        internal void SyncStateValue(List<BattleClientMsg_BattleStateValue> values)
-        {
-            foreach (var item in values)
-            {
-                var type = (EntityCurrValueType)item.type;
-                var value = item.value;
-                if (type == EntityCurrValueType.CurrHealth)
-                {
-                    this.CurrHealth = value;
-                }
-                //Logx.Log("sync entity curr value : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
-
-                EventDispatcher.Broadcast(EventIDs.OnChangeEntityBattleData, this, item.fromEntityGuid);
-            }
-        }
-
-
     }
 }

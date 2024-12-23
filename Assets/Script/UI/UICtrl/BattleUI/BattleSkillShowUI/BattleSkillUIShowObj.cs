@@ -66,8 +66,8 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
         var skillId = this.uiData.skillId;
         var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
         var currExp = this.uiData.exp;
-        var skillUpdateConfig = Config.ConfigManager.Instance.GetById<SkillUpdateParam>(1);
-        var maxExp = skillUpdateConfig.UpgradeExpPerLevel.Sum();
+        var skillUpdateConfig = Config.ConfigManager.Instance.GetById<SkillUpgradeParam>(1);
+        var maxExp = skillUpdateConfig.UpgradeExpPerLevel.Sum() + 1;
         this.expSlider.value = currExp / (float)maxExp;
         this.expText.text = $"{currExp}/{maxExp}";
         

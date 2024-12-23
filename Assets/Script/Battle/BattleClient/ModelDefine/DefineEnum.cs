@@ -19,11 +19,13 @@
         Destroy = 4
     }
 
-    //实体当前数据值类型
-    public enum EntityCurrValueType
+    //实体状态数据值类型
+    public enum EntityStateValueType
     {
         CurrHealth = 1,
         CurrMagic = 2,
+        StarLevel = 3,
+        StarExp = 4,
     }
 
     //实体间的关系

@@ -9,7 +9,6 @@ using NetProto;
 using GameData;
 using Battle_Client;
 using BattleConvert = Battle_Client.BattleConvert;
-using EntityCurrValueType = Battle_Client.EntityCurrValueType;
 using Vector3 = UnityEngine.Vector3;
 
 public class BattleNetHandler : NetHandler
@@ -519,7 +518,7 @@ public class BattleNetHandler : NetHandler
         {
             BattleClientMsg_BattleStateValue battleValue = new BattleClientMsg_BattleStateValue()
             {
-                type = (EntityCurrValueType)item.Type,
+                type = (EntityStateValueType)item.Type,
                 value = item.Value,
                 fromEntityGuid = item.FromEntityGuid
             };

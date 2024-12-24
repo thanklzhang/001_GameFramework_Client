@@ -32,7 +32,7 @@ public class AttrHelper_Client
         nameStr = rewardConfig.Name;
         desStr = rewardConfig.Describe;
         // var intValueList = this.data.intValueList;
-        if (type == BattleRewardType.GainSkill_FixedRand)
+        if (type == BattleRewardType.Skill_Gain)
         {
             var skillConfigId = battleReward.intArg1;
             nameStr = "获得技能";

@@ -53,6 +53,11 @@ namespace Config
         private List<int> skillIds; 
         
         /// <summary>
+        ///大招技能配置id
+        /// </summary>
+        private int ultimateSkillId; 
+        
+        /// <summary>
         ///等级
         /// </summary>
         private int level; 
@@ -109,6 +114,8 @@ namespace Config
         public int StarAttrId { get => starAttrId; }     
         
         public List<int> SkillIds { get => skillIds; }     
+        
+        public int UltimateSkillId { get => ultimateSkillId; }     
         
         public int Level { get => level; }     
         

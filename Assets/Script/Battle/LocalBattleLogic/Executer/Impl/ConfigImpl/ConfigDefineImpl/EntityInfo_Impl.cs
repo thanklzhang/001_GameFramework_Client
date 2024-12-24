@@ -61,6 +61,11 @@ namespace Battle
         public List<int> SkillIds => config.SkillIds;
         
         /// <summary>
+        ///大招技能配置id
+        /// </summary>
+        public int UltimateSkillId => config.UltimateSkillId;
+        
+        /// <summary>
         ///等级
         /// </summary>
         public int Level => config.Level;

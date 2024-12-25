@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Battle_Client;
 using Config;
 using UnityEngine;
 using UnityEngine.UI;
+using Skill = Config.Skill;
 
 public class BattleSkillUI
 {
@@ -24,15 +26,15 @@ public class BattleSkillUI
     // private BattleBigSkillUIShowObj bigSkillShowObj;
 
     private GameObject bigSkillGo;
-    
-    public BattleUI BattleUIPre;
+
+    public BattleUI BattleUI;
 
     public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
 
-        this.BattleUIPre = battleUIPre;
+        this.BattleUI = battleUIPre;
 
         skillListRoot = this.transform.Find("group");
         this.skillTipText = this.transform.Find("skillTipText").GetComponent<Text>();
@@ -40,11 +42,11 @@ public class BattleSkillUI
         // bigSkillGo = this.transform.Find("bigSkill").gameObject;
         // bigSkillShowObj = new BattleBigSkillUIShowObj();
         // bigSkillShowObj.Init(bigSkillGo,this);
-        
+
         EventDispatcher.AddListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
-        EventDispatcher.AddListener<string>(EventIDs.OnSkillTips,OnSkillTips);
-        
+        EventDispatcher.AddListener<string>(EventIDs.OnSkillTips, OnSkillTips);
     }
+
     public void OnSkillInfoUpdate(int entityGuid, BattleSkillInfo skillInfo)
     {
         //var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
@@ -77,55 +79,139 @@ public class BattleSkillUI
 
     public void RefreshDataList()
     {
-
-        var skills = BattleManager.Instance.GetLocalCtrlHeroSkills();
         List<BattleSkillUIData> dataList = new List<BattleSkillUIData>();
-        for (int i = 1; i < skills.Count; i++)
-        {
-            var skillData = skills[i];
-            BattleSkillUIData skill = new BattleSkillUIData()
-            {
-                //skill.iconResId
-                skillId = skillData.configId,
-                maxCDTime = skillData.maxCDTime,
-                exp = skillData.exp,
-                showIndex = skillData.showIndex
-                
-            };
-            
-            var skillConfig = Config.ConfigManager.Instance.GetById<Skill>(skillData.configId);
-            // if (skillConfig.IsBigSkill != 1)
-            // {
-            //    
-            //     
-            //     dataList.Add(skill);
-            // }
-            // else
-            // {
-            //     this.bigSkillData = skill;
-            // }
-            
-            dataList.Add(skill);
-        }
-        dataList.Sort((a, b) =>
-        {
-            return a.showIndex.CompareTo(b.showIndex);
-        });
         
+        var localEntity = BattleManager.Instance.GetLocalCtrlHero();
+        var entityConfig = ConfigManager.Instance.GetById<Config.EntityInfo>(localEntity.configId);
+        var skills = BattleManager.Instance.GetLocalCtrlHeroSkills();
+
+        //填充专属小招
+        {
+            //填充小招
+            var minorSkillId = entityConfig.SkillIds.Find(skillId =>
+            {
+                var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skillId);
+                return (SkillCategory)skillConfig.SkillCategory == SkillCategory.MinorSkill;
+            });
+
+            var minorSkill = skills.Find(skill =>
+            {
+                var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skill.configId);
+                return (SkillCategory)skillConfig.SkillCategory == SkillCategory.MinorSkill;
+            });
+
+            BattleSkillUIData minorSkillUIData = new BattleSkillUIData();
+            minorSkillUIData.showIndex = 0;
+            minorSkillUIData.skillId = minorSkillId;
+            if (minorSkillId > 0)
+            {
+                //有专属小招
+                if (minorSkill != null)
+                {
+                    //专属小招解锁了
+                    minorSkillUIData.maxCDTime = minorSkill.maxCDTime;
+                    minorSkillUIData.exp = minorSkill.exp;
+                    minorSkillUIData.isUnlock = true;
+                }
+            }
+            dataList.Add(minorSkillUIData);
+        }
+
+        //填充队长技能
+        {
+            var leaderSkills = skills.FindAll(skill =>
+            {
+                var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skill.configId);
+                return (SkillCategory)skillConfig.SkillCategory == SkillCategory.LeaderSkill;
+            });
+
+            for (int i = 0; i < 2; i++)
+            {
+                BattleSkillUIData leaderSkillUIData = new BattleSkillUIData();
+                leaderSkillUIData.showIndex = i + 1;
+
+                if (i < leaderSkills.Count)
+                {
+                    var skillData = leaderSkills[i];
+                    leaderSkillUIData.skillId = skillData.configId;
+                    leaderSkillUIData.maxCDTime = skillData.maxCDTime;
+                    leaderSkillUIData.exp = skillData.exp;
+                    leaderSkillUIData.isUnlock = true;
+                }
+                
+                dataList.Add(leaderSkillUIData);
+            }
+        }
+
+        //填充大招技能
+        {
+            var ultimateSkillId = entityConfig.UltimateSkillId;
+            var ultimateSkill = skills.Find(skill =>
+            {
+                var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skill.configId);
+                return (SkillCategory)skillConfig.SkillCategory == SkillCategory.UltimateSkill;
+            });
+
+            BattleSkillUIData ultimateSkillUIData = new BattleSkillUIData();
+            ultimateSkillUIData.showIndex = 0;
+            ultimateSkillUIData.skillId = ultimateSkillId;
+            if (ultimateSkillId > 0)
+            {
+                //有专属大招
+                if (ultimateSkill != null)
+                {
+                    //专属大招解锁了
+                    ultimateSkillUIData.maxCDTime = ultimateSkill.maxCDTime;
+                    ultimateSkillUIData.exp = ultimateSkill.exp;
+                    ultimateSkillUIData.isUnlock = true;
+                }
+            }
+            
+            dataList.Add(ultimateSkillUIData);
+        }
+
         this.skillDataList = dataList;
-       
-    
     }
 
     void RefreshSkillShowList()
     {
-        UIListArgs<BattleSkillUIShowObj, BattleSkillUI> args = new UIListArgs<BattleSkillUIShowObj, BattleSkillUI>();
-        args.dataList = skillDataList;
-        args.showObjList = skillShowObjList;
-        args.root = skillListRoot;
-        args.parentObj = this;
-        UIFunc.DoUIList(args);
-        
+        for (int i = 0; i < this.skillDataList.Count; i++)
+        {
+            GameObject go = null;
+            var data = this.skillDataList[i];
+            BattleSkillUIShowObj showObj = null;
+            if (i < skillListRoot.childCount)
+            {
+                go = skillListRoot.GetChild(i).gameObject;
+                if (i < this.skillShowObjList.Count)
+                {
+                    showObj = skillShowObjList[i];
+                }
+                else
+                {
+                    showObj = new BattleSkillUIShowObj();
+                    showObj.Init(go, this);
+                    this.skillShowObjList.Add(showObj);
+                }
+            }
+            else
+            {
+                go = GameObject.Instantiate(skillListRoot.GetChild(0).gameObject, skillListRoot, false);
+                showObj = new BattleSkillUIShowObj();
+                showObj.Init(go, this);
+                this.skillShowObjList.Add(showObj);
+            }
+
+            go.SetActive(true);
+            showObj.Refresh(data, i);
+        }
+
+        for (int i = skillDataList.Count; i < skillListRoot.childCount; i++)
+        {
+            this.skillShowObjList[i].Release();
+            skillListRoot.GetChild(i).gameObject.SetActive(false);
+        }
+
         //this.bigSkillShowObj.Refresh(this.bigSkillData);
     }
 
@@ -135,18 +221,16 @@ public class BattleSkillUI
         if (skillShowObj != null)
         {
             skillShowObj.UpdateInfo(skillInfo);
-            
+
             if (skillInfo.isDelete)
             {
-                
             }
         }
         else
         {
             //Logx.LogWarning("BattleSkillUI : UpdateSkillInfo : the skillId is not found : " + skillId);
-            
+
             //not found , perhaps add a new skill
-            
         }
     }
 
@@ -165,7 +249,7 @@ public class BattleSkillUI
         }
 
         //bigSkillShowObj.Update(deltaTime);
-        
+
         if (this.skillTipShowTimer > 0)
         {
             this.skillTipShowTimer -= deltaTime;
@@ -174,10 +258,6 @@ public class BattleSkillUI
                 this.skillTipText.gameObject.SetActive(false);
             }
         }
-
-      
-
-
     }
 
     public BattleSkillUIShowObj FindSkill(int skillId)
@@ -211,8 +291,8 @@ public class BattleSkillUI
     public void Release()
     {
         EventDispatcher.RemoveListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
-        EventDispatcher.RemoveListener<string>(EventIDs.OnSkillTips,OnSkillTips);
-        
+        EventDispatcher.RemoveListener<string>(EventIDs.OnSkillTips, OnSkillTips);
+
         foreach (var item in skillShowObjList)
         {
             item.Release();
@@ -221,5 +301,4 @@ public class BattleSkillUI
         skillShowObjList = null;
         skillDataList = null;
     }
-
 }

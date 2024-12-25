@@ -9,8 +9,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
+public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
 {
+    public GameObject gameObject;
+    public Transform transform;
+    
     protected Image icon;
     protected GameObject canUseMaskGo;
     protected GameObject cdRootGo;
@@ -24,27 +27,48 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 
     float currCDTimer = 0;
 
-    public override void OnInit()
+    private BattleSkillUI skillUI;
+    private Transform normalRoot;
+    private Transform lockRoot;
+    private Transform emptyRoot;
+    public void Init(GameObject gameObject,BattleSkillUI skillUI)
     {
-        canUseMaskGo = this.transform.Find("cantUse").gameObject;
-        cdRootGo = this.transform.Find("CDRoot").gameObject;
-        cdTimeText = this.transform.Find("CDRoot/CDShow/cd_text").GetComponent<Text>();
-        cdImg = this.transform.Find("CDRoot/CDShow").GetComponent<Image>();
-        icon = this.transform.Find("icon").GetComponent<Image>();
-        expSlider = this.transform.Find("expSlider").GetComponent<Slider>();
+        this.gameObject = gameObject;
+        this.transform = this.gameObject.transform;
+        this.skillUI = skillUI;
+
+        normalRoot = this.transform.Find("normal");
+        emptyRoot = this.transform.Find("empty");
+        
+        lockRoot = this.normalRoot.Find("lock");
+      
+        canUseMaskGo = normalRoot.Find("cantUse").gameObject;
+        cdRootGo = normalRoot.Find("CDRoot").gameObject;
+        cdTimeText = normalRoot.Find("CDRoot/CDShow/cd_text").GetComponent<Text>();
+        cdImg = normalRoot.Find("CDRoot/CDShow").GetComponent<Image>();
+        icon = normalRoot.Find("icon").GetComponent<Image>();
+        expSlider = normalRoot.Find("expSlider").GetComponent<Slider>();
         expText = expSlider.transform.Find("exp_text").GetComponent<TextMeshProUGUI>();
-        levelText = this.transform.Find("lv_text").GetComponent<TextMeshProUGUI>();
+        levelText = normalRoot.Find("lv_text").GetComponent<TextMeshProUGUI>();
 
         evetnTrigger = icon.GetComponent<UIEventTrigger>();
 
         canUseMaskGo.SetActive(false);
         cdRootGo.SetActive(false);
+        
+        normalRoot.gameObject.SetActive(false);
+        emptyRoot.gameObject.SetActive(true);
+        
+        lockRoot.gameObject.SetActive(false);
 
+        evetnTrigger.OnPointEnterEvent -= OnPointEnter;
+        evetnTrigger.OnPointerExitEvent -= OnPointExit;
+        
         evetnTrigger.OnPointEnterEvent += OnPointEnter;
         evetnTrigger.OnPointerExitEvent += OnPointExit;
     }
 
-    public override void OnRefresh(object data, int index)
+    public void Refresh(BattleSkillUIData data, int index)
     {
         if (null == data)
         {
@@ -53,25 +77,49 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 
         this.uiData = (BattleSkillUIData)data;
 
-        //技能图标
-        var skillId = this.uiData.skillId;
-        var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
-        ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
+        if (this.uiData.skillId > 0)
+        {
+            normalRoot.gameObject.SetActive(true);
+            emptyRoot.gameObject.SetActive(false);
+            
+            if (this.uiData.isUnlock)
+            {
+                lockRoot.gameObject.SetActive(false);
+            }
+            else
+            {
+                lockRoot.gameObject.SetActive(true);
+            }
 
-        RefreshLevelExpShow();
+            //技能图标
+            var skillId = this.uiData.skillId;
+            var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
+            ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
+
+            RefreshLevelExpShow();
+        }
+        else
+        {
+            normalRoot.gameObject.SetActive(false);
+            emptyRoot.gameObject.SetActive(true);
+        }
+
     }
 
     public void RefreshLevelExpShow()
     {
-        var skillId = this.uiData.skillId;
-        var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
-        var currExp = this.uiData.exp;
-        var skillUpdateConfig = Config.ConfigManager.Instance.GetById<SkillUpgradeParam>(1);
-        var maxExp = skillUpdateConfig.UpgradeExpPerLevel.Sum() + 1;
-        this.expSlider.value = currExp / (float)maxExp;
-        this.expText.text = $"{currExp}/{maxExp}";
+        if (this.uiData.skillId > 0)
+        {
+            var skillId = this.uiData.skillId;
+            var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
+            var currExp = this.uiData.exp;
+            var skillUpdateConfig = Config.ConfigManager.Instance.GetById<SkillUpgradeParam>(1);
+            var maxExp = skillUpdateConfig.UpgradeExpPerLevel.Sum() + 1;
+            this.expSlider.value = currExp / (float)maxExp;
+            this.expText.text = $"{currExp}/{maxExp}";
         
-        this.levelText.text = "" + skillConfig.Level;
+            this.levelText.text = "" + skillConfig.Level;
+        }
     }
 
     internal void UpdateInfo(BattleSkillInfo skillInfo)
@@ -139,13 +187,18 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
     {
         //转换成点在 BattleUI 中的 localPosition
 
+        if (this.uiData.skillId <= 0)
+        {
+            return;
+        }
+
         var camera3D = CameraManager.Instance.GetCamera3D();
         var cameraUI = CameraManager.Instance.GetCameraUI();
 
         var screenPos = e.position;
 
         Vector2 uiPos;
-        var battleUIRect = parentObj.BattleUIPre.gameObject.GetComponent<RectTransform>();
+        var battleUIRect = this.skillUI.BattleUI.gameObject.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(battleUIRect, screenPos, cameraUI.camera, out uiPos);
 
         EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, this.uiData.skillId, uiPos);
@@ -153,11 +206,16 @@ public class BattleSkillUIShowObj : BaseUIShowObj<BattleSkillUI>
 
     public void OnPointExit(PointerEventData e)
     {
+        if (this.uiData.skillId <= 0)
+        {
+            return;
+        }
+        
         EventDispatcher.Broadcast<int>(EventIDs.On_UISkillOption_PointExit, this.uiData.skillId);
     }
 
 
-    public override void OnRelease()
+    public void Release()
     {
         evetnTrigger.OnPointEnterEvent -= OnPointEnter;
         evetnTrigger.OnPointerExitEvent -= OnPointExit;
@@ -177,4 +235,5 @@ public class BattleSkillUIData
     public float maxCDTime;
     public int exp;
     public int showIndex;
+    public bool isUnlock;
 }

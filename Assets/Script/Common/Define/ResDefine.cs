@@ -39,6 +39,8 @@ namespace Config
         
 		SelectHeroUI = 15000015,
         
+		BattleReplaceHeroUI = 15000501,
+        
 		hero_100 = 15001001,
         
 		icon_money = 15002001,

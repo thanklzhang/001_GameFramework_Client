@@ -47,6 +47,46 @@
         Destroy = 3
     }
 
+    public enum PlayerInputType
+    {
+        Null = 0,
+        KeyCode_A = 97,
+        KeyCode_Q = 113,
+        KeyCode_W = 119,
+        KeyCode_E = 101,
+        KeyCode_R = 114,
+        KeyCode_D = 100,
+        KeyCode_F = 102,
+    }
+
+    public enum PlayerCommandType
+    {
+        Null = 0,
+        NormalAttack = 10,
+
+        //默认 q
+        Skill1 = 101,
+
+        //默认 w
+        Skill2 = 102,
+
+        //默认 e
+        Skill3 = 103,
+
+        //默认 r
+        Skill4 = 104,
+
+        //默认 d
+        Skill5 = 105,
+
+        //默认 f
+        Skill6 = 106,
+        Skill7 = 107,
+        
+        //打开商店
+        OpenShopUI  = 201,
+    }
+
 
     // public enum RewardQuality
     // {

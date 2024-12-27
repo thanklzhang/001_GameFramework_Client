@@ -189,6 +189,14 @@ namespace Battle_Client
             this.playerInput.OnSkillTrackEnd(entityGuid, trackId);
         }
 
+        public void OnReplaceSkillResult(ReplaceSkillResult_RecvMsg_Arg arg)
+        {
+            BattleReplaceSkillUIArgs uiArg = new BattleReplaceSkillUIArgs();
+            // uiArg.replaceSkillIdList = new List<int>();
+            uiArg.opSkillId = arg.opSkillId;
+            UIManager.Instance.Open<BattleReplaceSkillUI>(uiArg);
+        }
+
         public void Clear()
         {
             localBattleExecuter = null;

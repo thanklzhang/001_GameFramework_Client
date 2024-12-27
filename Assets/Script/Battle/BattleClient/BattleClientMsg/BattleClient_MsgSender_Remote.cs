@@ -74,5 +74,10 @@ namespace Battle_Client
         {
             throw new NotImplementedException();
         }
+
+        public void Send_SelectReplaceSkill(int selectSkillId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

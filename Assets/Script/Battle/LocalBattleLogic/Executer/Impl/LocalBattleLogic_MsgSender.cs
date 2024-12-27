@@ -714,6 +714,18 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<OperateHeroByArraying_RecvMsg>(arg);
         }
 
+        public void Notify_ReplaceSkillResult(int playerIndex,ResultCode retCode)
+        {
+            var arg = new ReplaceSkillResult_RecvMsg_Arg()
+            {
+                playerIndex = playerIndex,
+                retCodeType = retCode.type,
+                opSkillId = retCode.intArg1
+            };
+
+            BattleManager.Instance.RecvBattleMsg<ReplaceSkillResult_RecvMsg>(arg);
+        }
+
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {
             throw new System.NotImplementedException();

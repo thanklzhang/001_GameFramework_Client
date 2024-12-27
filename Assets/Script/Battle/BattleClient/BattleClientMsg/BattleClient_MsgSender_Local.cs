@@ -231,8 +231,17 @@ namespace Battle_Client
             arg.toUnderstudyIndex = toUnderstudyIndex;
 
             var hero = BattleManager.Instance.GetLocalCtrlHero();
-
             battle.OnRecvBattleMsg<HeroOperationByArraying_BattleMsg>(hero.playerIndex, arg);
+        }
+
+        public void Send_SelectReplaceSkill(int selectSkillId)
+        {
+            var arg = new SelectReplaceSkill_BattleMsgArg();
+            arg.selectSkillId = selectSkillId;
+            
+            var hero = BattleManager.Instance.GetLocalCtrlHero();
+            battle.OnRecvBattleMsg<SelectReplaceSkill_BattleMsg>(hero.playerIndex, arg);
+            
         }
     }
 }

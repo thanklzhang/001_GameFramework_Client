@@ -119,6 +119,7 @@ public class BattleSkillUI
 
         //填充队长技能
         {
+            //这里顺序在数据层已经排好了
             var leaderSkills = skills.FindAll(skill =>
             {
                 var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skill.configId);

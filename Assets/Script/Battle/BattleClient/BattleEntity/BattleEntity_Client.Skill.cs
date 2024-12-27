@@ -44,7 +44,7 @@ namespace Battle_Client
                 {
                     this.skills.Remove(skill);
                 }
-
+                SortSkill();
                
             }
             else
@@ -56,10 +56,16 @@ namespace Battle_Client
                 // skill.level = 1;
 
                 this.skills.Add(skill);
+                SortSkill();
 
                 skill?.UpdateInfo(arg);
             }
             
+            
+        }
+
+        void SortSkill()
+        {
             this.skills.Sort((a, b) =>
             {
                 return a.showIndex.CompareTo(b.showIndex);

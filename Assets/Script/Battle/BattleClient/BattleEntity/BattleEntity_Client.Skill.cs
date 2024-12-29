@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Battle;
+using Config;
 using UnityEngine;
 
 namespace Battle_Client
@@ -27,6 +28,16 @@ namespace Battle_Client
             return skill;
         }
 
+        public bool IsHeroCtrl()
+        {
+            var player = BattleManager.Instance.GetLocalPlayer();
+            if (player.ctrlHeroGuid == this.guid)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         internal void UpdateSkillInfo(SkillInfoUpdate_RecvMsg_Arg arg)
         {
@@ -39,13 +50,23 @@ namespace Battle_Client
             if (skill != null)
             {
                 skill?.UpdateInfo(arg);
-                
+
                 if (skill.isDelete)
                 {
                     this.skills.Remove(skill);
+                    if (IsHeroCtrl())
+                    {
+                        var player = BattleManager.Instance.GetLocalPlayer();
+                        player.RemoveSkillInput(skill.configId);
+                    }
+                    
+                    EventDispatcher.Broadcast(EventIDs.OnSkillRefreshAll);
+
                 }
-                SortSkill();
-               
+
+                //player input remove skill
+
+                // SortSkill();
             }
             else
             {
@@ -56,27 +77,40 @@ namespace Battle_Client
                 // skill.level = 1;
 
                 this.skills.Add(skill);
-                SortSkill();
+                // SortSkill();
+
+                //player input add skill by index
+                if (IsHeroCtrl())
+                {
+                    var player = BattleManager.Instance.GetLocalPlayer();
+                    player.TryToAddSkillInput(skill.configId);
+                }
 
                 skill?.UpdateInfo(arg);
+                
+                EventDispatcher.Broadcast(EventIDs.OnSkillRefreshAll);
             }
-            
-            
         }
 
         void SortSkill()
         {
-            this.skills.Sort((a, b) =>
+            this.skills.Sort((a, b) => { return a.showIndex.CompareTo(b.showIndex); });
+        }
+
+        public void UpdateSkillInput()
+        {
+            var player = BattleManager.Instance.GetLocalPlayer();
+            if (this.guid == player.ctrlHeroGuid)
             {
-                return a.showIndex.CompareTo(b.showIndex);
-            });
+                player.UpdateSkillInput();
+            }
         }
 
 
         internal void ReleaseSkill(int skillConfigId)
         {
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillConfigId);
-            var normalAttackSkill = GetNormalAttackSkill();
+            var normalAttackSkill = FindSkill(SkillCategory.NormalAttack);
             if (normalAttackSkill != null && normalAttackSkill.configId == skillConfig.Id)
             {
                 //普通攻击
@@ -95,15 +129,15 @@ namespace Battle_Client
             //Logx.Log(this.guid + " release skill : " + skillConfigId);
         }
 
-        public BattleSkillInfo GetNormalAttackSkill()
-        {
-            if (this.skills.Count > 0)
-            {
-                return this.skills[0];
-            }
-
-            return null;
-        }
+        // public BattleSkillInfo GetNormalAttackSkill()
+        // {
+        //     if (this.skills.Count > 0)
+        //     {
+        //         return this.skills[0];
+        //     }
+        //
+        //     return null;
+        // }
 
         internal int GetSkillIdByIndex(int index)
         {
@@ -123,7 +157,20 @@ namespace Battle_Client
         //     EventDispatcher.Broadcast<BattleEntity_Client,AbnormalStateBean>(EventIDs.OnEntityAbnormalEffect,
         //         this,stateBean);
         // }
-       
+
+        public BattleSkillInfo FindSkill(SkillCategory category)
+        {
+            return skills.Find(skill =>
+            {
+                var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skill.configId);
+                if (skillConfig != null)
+                {
+                    return (SkillCategory)skillConfig.SkillCategory == category;
+                }
+
+                return false;
+            });
+        }
     }
 
 

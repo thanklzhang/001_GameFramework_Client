@@ -201,6 +201,9 @@ namespace Battle_Client
                         this.localPlayer.SetCurrencyData(
                             serverPlayer.currency.currencyDic);
                     }
+                    
+                    //玩家偏好
+                    // player.SetPreference();
                 }
 
 
@@ -227,6 +230,8 @@ namespace Battle_Client
             {
                 Logx.LogError("the localCtrlEntity is not found : ctrlHeroGuid : " + this.localPlayer.ctrlHeroGuid);
             }
+            
+            localPlayer.SetPreference();
 
             BattleState = BattleState.Loading;
 

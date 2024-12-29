@@ -12,8 +12,10 @@ namespace Battle_Client
         {
             var localEntity = BattleManager.Instance.GetLocalCtrlHero();
 
-            var index = willReleaserSkillIndex;
-            var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
+            // var index = willReleaserSkillId;
+            var skillId = willReleaserSkillId;
+            
+            //var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
             var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
 

@@ -234,6 +234,6 @@ public class BattleSkillUIData
     public int iconResId;
     public float maxCDTime;
     public int exp;
-    public int showIndex;
+    // public int showIndex;
     public bool isUnlock;
 }

@@ -5,6 +5,14 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Battle_Client
 {
+    public enum InputEventType
+    {
+        Null = 0,
+        NormalAttack = 1,
+        UseSkill = 2,
+        UseItem = 3,
+    }
+
     public partial class PlayerInput
     {
         public BattleEntity_Client currDragEntity;
@@ -20,7 +28,7 @@ namespace Battle_Client
             }
 
             //判断用户键盘输入
-            CheckKeyboardEvent(out int eventType);
+            CheckKeyboardEvent(out InputEventType eventType);
 
             //判断用户鼠标输入
             var isSelectSkillState = skillDirectModule.GetSelectState();
@@ -30,7 +38,8 @@ namespace Battle_Client
             if (isSelectSkillState)
             {
                 //选择技能中
-                if (BattleManager.Instance.IsIntelligentRelease && eventType > 1)
+                if (BattleManager.Instance.IsIntelligentRelease &&
+                    (eventType == InputEventType.UseSkill || eventType == InputEventType.UseItem))
                 {
                     //智能施法(除了普通攻击) 直接执行释放技能操作
                     HandleReleaseSkill();
@@ -221,39 +230,68 @@ namespace Battle_Client
             return false;
         }
 
-        //检查键盘输入 eventType：1：普通攻击，2：技能，3：道具
-        void CheckKeyboardEvent(out int eventType)
+        private List<KeyCode> skillKeyCodeList = new List<KeyCode>()
         {
-            eventType = -1;
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                eventType = 1;
-                this.OnUseSkill(0);
-            }
+            KeyCode.A, KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R
+        };
 
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                eventType = 2;
-                this.OnUseSkill(1);
-            }
+        //检查键盘输入 eventType：1：普通攻击，2：技能，3：道具
+        void CheckKeyboardEvent(out InputEventType eventType)
+        {
+            eventType = InputEventType.Null;
 
-            if (Input.GetKeyDown(KeyCode.W))
+            //处理技能输入
+            for (int i = 0; i < skillKeyCodeList.Count; i++)
             {
-                eventType = 2;
-                this.OnUseSkill(2);
-            }
+                var currKeyCode = skillKeyCodeList[i];
+                if (Input.GetKeyDown(currKeyCode))
+                {
+                    var inputType = (PlayerInputType)(int)currKeyCode;
+                    var player = BattleManager.Instance.GetLocalPlayer();
 
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                eventType = 2;
-                this.OnUseSkill(3);
-            }
+                    var commandModel = player.GetCommandModelByInputType(inputType);
+                    if (commandModel.commandType == PlayerCommandType.NormalAttack)
+                    {
+                        eventType = InputEventType.NormalAttack;
+                    }
+                    else
+                    {
+                        eventType = InputEventType.UseSkill;
+                    }
 
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                eventType = 2;
-                this.OnUseSkill(4);
+                    this.OnSkillInput(inputType);
+                }
             }
+            
+            // if (Input.GetKeyDown(KeyCode.A))
+            // {
+            //     eventType = InputEventType.NormalAttack;
+            //     this.OnSkillInput(PlayerInputType.KeyCode_A);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.Q))
+            // {
+            //     eventType = InputEventType.UseSkill;
+            //     this.OnSkillInput(1);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.W))
+            // {
+            //     eventType = InputEventType.UseSkill;
+            //     this.OnSkillInput(2);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.E))
+            // {
+            //     eventType = InputEventType.UseSkill;
+            //     this.OnSkillInput(3);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.R))
+            // {
+            //     eventType = InputEventType.UseSkill;
+            //     this.OnSkillInput(4);
+            // }
 
 
             for (int i = (int)KeyCode.Alpha1; i <= (int)KeyCode.Alpha6; i++)
@@ -262,7 +300,7 @@ namespace Battle_Client
                 var key = (KeyCode)(i);
                 if (Input.GetKeyDown(key))
                 {
-                    eventType = 3;
+                    eventType = InputEventType.UseItem;
                     this.OnUseItem(index);
                 }
             }
@@ -289,7 +327,7 @@ namespace Battle_Client
                 if (localEntity.collider.gameObject.GetInstanceID() !=
                     battleEntity.collider.gameObject.GetInstanceID())
                 {
-                    var skill = localEntity.GetNormalAttackSkill();
+                    var skill = localEntity.FindSkill(SkillCategory.NormalAttack);
                     if (skill != null)
                     {
                         var skillId = skill.configId;

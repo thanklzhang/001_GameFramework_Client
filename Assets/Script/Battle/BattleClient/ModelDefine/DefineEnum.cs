@@ -65,16 +65,16 @@
         NormalAttack = 10,
 
         //默认 q
-        Skill1 = 101,
+        Skill_Minor = 101,
 
         //默认 w
-        Skill2 = 102,
+        Skill_Leader_1 = 102,
 
         //默认 e
-        Skill3 = 103,
+        Skill_Leader_2 = 103,
 
         //默认 r
-        Skill4 = 104,
+        Skill_Ultimate = 104,
 
         //默认 d
         Skill5 = 105,

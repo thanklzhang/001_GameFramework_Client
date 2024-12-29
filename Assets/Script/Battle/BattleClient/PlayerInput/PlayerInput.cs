@@ -14,9 +14,9 @@ namespace Battle_Client
 
         //技能释放后的轨道模块
         SkillTrackModule skillTrackModule;
-        
+
         public int willUseItemIndex;
-        public int willReleaserSkillIndex;
+        public int willReleaserSkillId;
         private Color enemyOutlineColor = new Color(1, 0.2f, 0.2f, 1);
         private Color myOutlineColor = new Color(0.5f, 1.0f, 0.5f, 1);
         private Color friendOutlineColor = new Color(0.2f, 0.6f, 1.0f, 1);
@@ -29,7 +29,7 @@ namespace Battle_Client
             skillTrackModule = new SkillTrackModule();
             skillTrackModule.Init();
         }
-        
+
         public bool CheckLocalHeroSkillRelease(int skillId)
         {
             //检测 cd
@@ -94,10 +94,10 @@ namespace Battle_Client
         }
 
         //得到射线检测的目标
-        public bool TryToGetRayTargetPos(out RaycastHit hit,string targetTag = GlobalConfig.Ground)
+        public bool TryToGetRayTargetPos(out RaycastHit hit, string targetTag = GlobalConfig.Ground)
         {
-            var list = new List<string>(){targetTag};
-            return TryToGetRayTargetPos(out hit,list);
+            var list = new List<string>() { targetTag };
+            return TryToGetRayTargetPos(out hit, list);
         }
 
         public bool TryToGetRayOnEntity(out List<int> entityGuidList)
@@ -184,15 +184,26 @@ namespace Battle_Client
             }
         }
 
-        public void OnUseSkill(int index)
+        public void OnSkillInput(PlayerInputType inputType)
         {
-            var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
+            var player = BattleManager.Instance.GetLocalPlayer();
 
-            willReleaserSkillIndex = index;
+            var commandModel = player.GetCommandModelByInputType(inputType);
+            if (null == commandModel)
+            {
+                return;
+            }
+
+            var skillModel = commandModel as SkillCommandModel;
+            var skillId = skillModel.skillConfigId;
+
+            // var skill = BattleManager.Instance.FindLocalHeroSkill(skillId);
+
+            willReleaserSkillId = skillId;
             int targetGuid = 0;
             Vector3 targetPos = Vector3.zero;
 
-            var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+            // var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
 
             var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
@@ -200,10 +211,10 @@ namespace Battle_Client
             var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
 
             //判断释放条件 现在本地检测一下
-            //普通攻击不提示
+            //普通攻击不提示 
 
 
-            var isNormalAttack = 1 == skillConfig.IsNormalAttack;
+            var isNormalAttack = (SkillCategory.NormalAttack) == (SkillCategory)skillConfig.SkillCategory;
             if (!isNormalAttack)
             {
                 var isCanRelease = CheckLocalHeroSkillRelease(skillId);
@@ -230,6 +241,52 @@ namespace Battle_Client
             //Logx.Log("use skill : skillId : " + skillId + " targetGuid : " + targetGuid + " targetPos : " + targetPos);
         }
 
+        // public void OnUseSkill(int index)
+        // {
+        //     var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
+        //
+        //     willReleaserSkillIndex = index;
+        //     int targetGuid = 0;
+        //     Vector3 targetPos = Vector3.zero;
+        //
+        //     var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+        //     var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
+        //
+        //     var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
+        //     var localInstanceID = localCtrlHeroGameObject.GetInstanceID();
+        //     var localEntity = BattleEntityManager.Instance.FindEntityByInstanceId(localInstanceID);
+        //
+        //     //判断释放条件 现在本地检测一下
+        //     //普通攻击不提示
+        //
+        //
+        //     var isNormalAttack = (SkillCategory.NormalAttack) == (SkillCategory)skillConfig.SkillCategory;
+        //     if (!isNormalAttack)
+        //     {
+        //         var isCanRelease = CheckLocalHeroSkillRelease(skillId);
+        //         if (!isCanRelease)
+        //         {
+        //             return;
+        //         }
+        //     }
+        //
+        //     var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
+        //     if (releaseTargetType == SkillReleaseTargeType.Point)
+        //     {
+        //         this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
+        //     }
+        //     else if (releaseTargetType == SkillReleaseTargeType.Entity)
+        //     {
+        //         this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
+        //     }
+        //     else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
+        //     {
+        //         BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
+        //     }
+        //
+        //     //Logx.Log("use skill : skillId : " + skillId + " targetGuid : " + targetGuid + " targetPos : " + targetPos);
+        // }
+
         public void OnSkillTrackStart(TrackBean trackBean)
         {
             this.skillTrackModule.AddTrack(trackBean);
@@ -240,7 +297,7 @@ namespace Battle_Client
             this.skillTrackModule.DeleteTrack(entityGuid, trackId);
         }
 
-        
+
         public void Update(float deltaTime)
         {
             CheckInput();

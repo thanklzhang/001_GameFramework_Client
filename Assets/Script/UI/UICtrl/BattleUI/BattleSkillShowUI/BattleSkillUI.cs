@@ -45,6 +45,7 @@ public class BattleSkillUI
 
         EventDispatcher.AddListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
         EventDispatcher.AddListener<string>(EventIDs.OnSkillTips, OnSkillTips);
+        EventDispatcher.AddListener(EventIDs.OnSkillRefreshAll, OnSkillRefreshAll);
     }
 
     public void OnSkillInfoUpdate(int entityGuid, BattleSkillInfo skillInfo)
@@ -57,7 +58,7 @@ public class BattleSkillUI
         {
             this.UpdateSkillInfo(skillInfo);
 
-            RefreshAllUI();
+            //RefreshAllUI();
         }
     }
 
@@ -101,7 +102,7 @@ public class BattleSkillUI
             });
 
             BattleSkillUIData minorSkillUIData = new BattleSkillUIData();
-            minorSkillUIData.showIndex = 0;
+            // minorSkillUIData.showIndex = 0;
             minorSkillUIData.skillId = minorSkillId;
             if (minorSkillId > 0)
             {
@@ -119,7 +120,6 @@ public class BattleSkillUI
 
         //填充队长技能
         {
-            //这里顺序在数据层已经排好了
             var leaderSkills = skills.FindAll(skill =>
             {
                 var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skill.configId);
@@ -129,18 +129,40 @@ public class BattleSkillUI
             for (int i = 0; i < 2; i++)
             {
                 BattleSkillUIData leaderSkillUIData = new BattleSkillUIData();
-                leaderSkillUIData.showIndex = i + 1;
+                dataList.Add(leaderSkillUIData);
+            }
 
-                if (i < leaderSkills.Count)
+            if (leaderSkills != null)
+            {
                 {
-                    var skillData = leaderSkills[i];
-                    leaderSkillUIData.skillId = skillData.configId;
-                    leaderSkillUIData.maxCDTime = skillData.maxCDTime;
-                    leaderSkillUIData.exp = skillData.exp;
-                    leaderSkillUIData.isUnlock = true;
+                    //队长技能 1
+                    var player = BattleManager.Instance.GetLocalPlayer();
+                    var leaderSkill = GetLeaderSkill(leaderSkills,PlayerCommandType.Skill_Leader_1);
+
+                    if (leaderSkill != null)
+                    {
+                        var leaderSkillUIData = dataList[1];
+                        leaderSkillUIData.skillId = leaderSkill.configId;
+                        leaderSkillUIData.maxCDTime = leaderSkill.maxCDTime;
+                        leaderSkillUIData.exp = leaderSkill.exp;
+                        leaderSkillUIData.isUnlock = true;
+                    }
                 }
                 
-                dataList.Add(leaderSkillUIData);
+                {
+                    //队长技能 1
+                    var player = BattleManager.Instance.GetLocalPlayer();
+                    var leaderSkill = GetLeaderSkill(leaderSkills,PlayerCommandType.Skill_Leader_2);
+
+                    if (leaderSkill != null)
+                    {
+                        var leaderSkillUIData = dataList[2];
+                        leaderSkillUIData.skillId = leaderSkill.configId;
+                        leaderSkillUIData.maxCDTime = leaderSkill.maxCDTime;
+                        leaderSkillUIData.exp = leaderSkill.exp;
+                        leaderSkillUIData.isUnlock = true;
+                    }
+                }
             }
         }
 
@@ -154,7 +176,7 @@ public class BattleSkillUI
             });
 
             BattleSkillUIData ultimateSkillUIData = new BattleSkillUIData();
-            ultimateSkillUIData.showIndex = 0;
+            // ultimateSkillUIData.showIndex = 0;
             ultimateSkillUIData.skillId = ultimateSkillId;
             if (ultimateSkillId > 0)
             {
@@ -173,6 +195,30 @@ public class BattleSkillUI
 
         this.skillDataList = dataList;
     }
+
+    BattleSkillInfo GetLeaderSkill(List<BattleSkillInfo> leaderSkills,PlayerCommandType commanType)
+    {
+        //队长技能 1
+        var player = BattleManager.Instance.GetLocalPlayer();
+        var leaderSkill1 = leaderSkills.Find(skill =>
+        {
+
+            var commandMode = player.GetInputCommand(commanType);
+            if (commandMode != null)
+            {
+                var skillCM = commandMode as SkillCommandModel;
+                if (skillCM.skillConfigId == skill.configId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        return leaderSkill1;
+    }
+
 
     void RefreshSkillShowList()
     {
@@ -279,6 +325,11 @@ public class BattleSkillUI
         return null;
     }
 
+    public void OnSkillRefreshAll()
+    {
+        this.RefreshAllUI();
+    }
+
     public void Hide()
     {
         this.gameObject.SetActive(false);
@@ -292,6 +343,8 @@ public class BattleSkillUI
     public void Release()
     {
         EventDispatcher.RemoveListener<int, BattleSkillInfo>(EventIDs.OnSkillInfoUpdate, OnSkillInfoUpdate);
+        EventDispatcher.RemoveListener(EventIDs.OnSkillRefreshAll, OnSkillRefreshAll);
+        
         EventDispatcher.RemoveListener<string>(EventIDs.OnSkillTips, OnSkillTips);
 
         foreach (var item in skillShowObjList)

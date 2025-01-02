@@ -70,5 +70,30 @@ namespace Battle
         /// </summary>
         public int AttackRange => config.AttackRange;
         
+        /// <summary>
+        ///承受伤害千分比
+        /// </summary>
+        public int InputDamageRate => config.InputDamageRate;
+        
+        /// <summary>
+        ///输出伤害千分比
+        /// </summary>
+        public int OutputDamageRate => config.OutputDamageRate;
+        
+        /// <summary>
+        ///暴击几率（千分比）
+        /// </summary>
+        public int CritRate => config.CritRate;
+        
+        /// <summary>
+        ///暴击伤害（千分比）
+        /// </summary>
+        public int CritDamage => config.CritDamage;
+        
+        /// <summary>
+        ///技能冷却
+        /// </summary>
+        public int SkillCD => config.SkillCD;
+        
     } 
 }

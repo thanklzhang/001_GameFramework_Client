@@ -91,11 +91,6 @@ namespace Battle
         public int CdTime => config.CdTime;
         
         /// <summary>
-        ///是否是普通攻击
-        /// </summary>
-        public int IsNormalAttack_del => config.IsNormalAttack_del;
-        
-        /// <summary>
         ///技能类别
         /// </summary>
         public int SkillCategory => config.SkillCategory;

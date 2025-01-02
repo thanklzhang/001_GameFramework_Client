@@ -62,6 +62,31 @@ namespace Config
         /// </summary>
         private int attackRange; 
         
+        /// <summary>
+        ///承受伤害千分比
+        /// </summary>
+        private int inputDamageRate; 
+        
+        /// <summary>
+        ///输出伤害千分比
+        /// </summary>
+        private int outputDamageRate; 
+        
+        /// <summary>
+        ///暴击几率（千分比）
+        /// </summary>
+        private int critRate; 
+        
+        /// <summary>
+        ///暴击伤害（千分比）
+        /// </summary>
+        private int critDamage; 
+        
+        /// <summary>
+        ///技能冷却
+        /// </summary>
+        private int skillCD; 
+        
 
         
         public int TemplateId { get => templateId; }     
@@ -83,6 +108,16 @@ namespace Config
         public int MoveSpeed { get => moveSpeed; }     
         
         public int AttackRange { get => attackRange; }     
+        
+        public int InputDamageRate { get => inputDamageRate; }     
+        
+        public int OutputDamageRate { get => outputDamageRate; }     
+        
+        public int CritRate { get => critRate; }     
+        
+        public int CritDamage { get => critDamage; }     
+        
+        public int SkillCD { get => skillCD; }     
         
 
     } 

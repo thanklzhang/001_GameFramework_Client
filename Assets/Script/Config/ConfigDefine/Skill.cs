@@ -83,11 +83,6 @@ namespace Config
         private int cdTime; 
         
         /// <summary>
-        ///是否是普通攻击
-        /// </summary>
-        private int isNormalAttack_del; 
-        
-        /// <summary>
         ///技能类别
         /// </summary>
         private int skillCategory; 
@@ -151,8 +146,6 @@ namespace Config
         public int AfterTime { get => afterTime; }     
         
         public int CdTime { get => cdTime; }     
-        
-        public int IsNormalAttack_del { get => isNormalAttack_del; }     
         
         public int SkillCategory { get => skillCategory; }     
         

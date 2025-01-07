@@ -60,6 +60,7 @@ public enum EventIDs
     OnUpdateBattleReward = 101213,           //同步战斗奖励
     //OnReplaceSkillResult = 101214,       //更换技能的消息返回同步（例如：技能满了要替换的时候）
     OnSkillRefreshAll = 101215,         //当有技能有增加或者删除等的时候需要刷新全部
+    OnUpdateWarehouseItemData = 101220, //仓库的道具数据刷新
     
     OnSkillTips = 101250,              //技能提示
     OnItemTips = 101251,                //道具提示

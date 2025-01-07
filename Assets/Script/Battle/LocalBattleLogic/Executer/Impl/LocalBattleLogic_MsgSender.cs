@@ -91,15 +91,15 @@ namespace Battle_Client
 
                 //item list
                 entityArg.itemList = new List<BattleClientMsg_Item>();
-                foreach (var netItem in entity.itemList)
-                {
-                    var battleItem = new BattleClientMsg_Item()
-                    {
-                        configId = netItem.configId,
-                        count = netItem.count
-                    };
-                    entityArg.itemList.Add(battleItem);
-                }
+                // foreach (var netItem in entity.itemList)
+                // {
+                //     var battleItem = new BattleClientMsg_Item()
+                //     {
+                //         configId = netItem.configId,
+                //         count = netItem.count
+                //     };
+                //     entityArg.itemList.Add(battleItem);
+                // }
 
                 entityList.Add(entityArg);
             }
@@ -345,7 +345,7 @@ namespace Battle_Client
                 value = stateData.starLv,
             };
             values.Add(v);
-            
+
             BattleClientMsg_BattleStateValue v2 = new BattleClientMsg_BattleStateValue()
             {
                 type = EntityStateValueType.StarExp,
@@ -714,7 +714,7 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<OperateHeroByArraying_RecvMsg>(arg);
         }
 
-        public void Notify_ReplaceSkillResult(int playerIndex,ResultCode retCode)
+        public void Notify_ReplaceSkillResult(int playerIndex, ResultCode retCode)
         {
             var arg = new ReplaceSkillResult_RecvMsg_Arg()
             {
@@ -724,6 +724,22 @@ namespace Battle_Client
             };
 
             BattleManager.Instance.RecvBattleMsg<ReplaceSkillResult_RecvMsg>(arg);
+        }
+
+        public void SyncPlayerWarehouseItem(int playerIndex, BattleItem opItem, int cellIndex)
+        {
+            var arg = new SyncWarehouseItem_RecvMsg_Arg()
+            {
+                playerIndex = playerIndex,
+                itemData = new BattleItemData_Client()
+                {
+                    configId = opItem.configId,
+                    count = opItem.count
+                },
+                 index = cellIndex
+            };
+
+            BattleManager.Instance.RecvBattleMsg<SyncWarehouseItem_RecvMsg>(arg);
         }
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)

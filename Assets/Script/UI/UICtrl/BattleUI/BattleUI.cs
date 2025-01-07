@@ -35,6 +35,7 @@ public partial class BattleUI : BaseUI
     private Transform funcBtnRoot;
     private Button heroFuncBtn;
     private Button skillFuncBtn;
+    private Button itemWarehouseBtn;
     private Button boxFuncBtn;
     private Button battleRewardBtn;
 
@@ -53,8 +54,8 @@ public partial class BattleUI : BaseUI
     //技能显示面板
     BattleSkillUI skillUI;
 
-    //道具显示面板
-    BattleItemUI battleItemUI;
+    //玩家仓库道具显示面板
+    BattleItemWarehouseUI itemWarehouseUI;
 
     //队友英雄信息面板
     BattleHeroInfoUICtrl heroInfoUI;
@@ -126,8 +127,13 @@ public partial class BattleUI : BaseUI
 
         coinText = transform.Find("coinText").GetComponent<Text>();
 
+        //战斗奖励列表
         battleRewardBtn = funcBtnRoot.Find("battleReward/item").GetComponent<Button>();
         battleRewardBtn.onClick.AddListener(() => { this.battleRewardUI.Show(); });
+
+        //道具仓库
+        itemWarehouseBtn = funcBtnRoot.Find("warehouse/item").GetComponent<Button>();
+        itemWarehouseBtn.onClick.AddListener(() => { this.itemWarehouseUI.Show(); });
 
 
         //
@@ -163,10 +169,10 @@ public partial class BattleUI : BaseUI
         skillUI = new BattleSkillUI();
         skillUI.Init(skillUIRoot.gameObject, this);
 
-        //道具面板
-        var itemUIRoot = this.transform.Find("itemBar");
-        battleItemUI = new BattleItemUI();
-        battleItemUI.Init(itemUIRoot.gameObject, this);
+        //玩家仓库道具面板
+        var itemWarehouseUIRoot = this.transform.Find("itemWarehouseUI");
+        itemWarehouseUI = new BattleItemWarehouseUI();
+        itemWarehouseUI.Init(itemWarehouseUIRoot.gameObject, this);
 
         //英雄信息面板
         var heroInfoUIRoot = this.transform.Find("all_player_info");
@@ -241,7 +247,7 @@ public partial class BattleUI : BaseUI
         this.heroInfoUI.RefreshAllUI();
         this.stageInfoUI.RefreshAllUI();
         this.buffUI.RefreshAllUI();
-        this.battleItemUI.RefreshAllUI();
+        this.itemWarehouseUI.RefreshAllUI();
         this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
@@ -272,7 +278,7 @@ public partial class BattleUI : BaseUI
         this.describeUI.Update(deltaTime);
         this.heroInfoUI.Update(deltaTime);
         this.stageInfoUI.Update(deltaTime);
-        this.battleItemUI.Update(deltaTime);
+        this.itemWarehouseUI.Update(deltaTime);
         this.skillItemOperateUI.Update(deltaTime);
         this.boxUI.Update(deltaTime);
         this.boxMainUI.Update(deltaTime);
@@ -417,7 +423,7 @@ public partial class BattleUI : BaseUI
         this.buffUI.Release();
         this.describeUI.Release();
         this.floatWordMgr.Release();
-        this.battleItemUI.Release();
+        this.itemWarehouseUI.Release();
         this.stageInfoUI.Release();
         this.skillItemOperateUI.Release();
         this.boxUI.Release();

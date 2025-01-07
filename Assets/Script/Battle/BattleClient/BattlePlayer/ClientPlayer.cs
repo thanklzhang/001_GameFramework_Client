@@ -13,6 +13,7 @@ namespace Battle_Client
         public void Init()
         {
             InitCurrency();
+            InitItemWarehouse();
             InitBoxShop();
             InitMyBox();
             InitBattleReward();

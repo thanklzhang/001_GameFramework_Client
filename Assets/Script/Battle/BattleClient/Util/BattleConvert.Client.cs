@@ -52,10 +52,10 @@ namespace Battle_Client
 
             return dic;
         }
-        
+
         //宝箱商店转换：战斗逻辑 -》 客户端战斗
         public static Dictionary<RewardQuality, BoxShopItem> ConvertTo(
-            Dictionary<RewardQuality,BattleBoxShopItem > _dic)
+            Dictionary<RewardQuality, BattleBoxShopItem> _dic)
         {
             var dic = new Dictionary<RewardQuality, BoxShopItem>();
             foreach (var kv in _dic)
@@ -75,6 +75,28 @@ namespace Battle_Client
 
             return dic;
         }
-        
+
+        public static List<ItemBarCellData_Client> ConvertToItemList(List<ItemBarCell> cellList)
+        {
+            var itemList = new List<ItemBarCellData_Client>();
+            foreach (var cell in cellList)
+            {
+                var item = cell.GetItem();
+                if (item != null)
+                {
+                    var cellClient = new ItemBarCellData_Client();
+                    cellClient.index = cell.Index;
+
+                    var itemData = new BattleItemData_Client();
+                    itemData.configId = item.configId;
+                    itemData.count = item.count;
+                    cellClient.itemData = itemData;
+
+                    itemList.Add(cellClient);
+                }
+            }
+
+            return itemList;
+        }
     }
 }

@@ -50,7 +50,7 @@ public enum EventIDs
     OnBuffInfoUpdate = 101203,         //当有buff信息改变的时候
     OnSkillTrackStart = 101204,         //当有技能轨迹开始的时候
     OnSkillTrackEnd = 101205,         //当有技能轨迹结束的时候
-    OnItemInfoUpdate = 101206,         //当有道具信息改变的时候
+    OnEntityItemInfoUpdate = 101206,         //当有实体单位道具信息改变的时候
     OnSkillItemInfoUpdate = 101207,     //当有技能书道具信息改变的时候
     // OnUpdateBoxInfo = 101208,           //同步宝箱信息
     OnBoxOpen = 101209,                 //有宝箱打开了

@@ -61,6 +61,11 @@ namespace Battle
         public int SkillId => config.SkillId;
         
         /// <summary>
+        ///增加的属性组配置Id
+        /// </summary>
+        public int AttrGroupConfigId => config.AttrGroupConfigId;
+        
+        /// <summary>
         ///增加的属性组(,分割)
         /// </summary>
         public List<int> AddedAttrGroup => config.AddedAttrGroup;

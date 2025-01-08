@@ -40,15 +40,15 @@ namespace Battle_Client
             return this.localCtrlEntity.GetSkills();
         }
 
-        public List<BattleItemInfo> GetLocalCtrlHeroItems()
-        {
-            return this.localCtrlEntity.GetItems();
-        }
-
-        public List<BattleItemInfo> GetLocalCtrlHeroSkillItems()
-        {
-            return this.localCtrlEntity.GetSkillItems();
-        }
+        // public List<BattleItemInfo> GetLocalCtrlHeroItems()
+        // {
+        //     return this.localCtrlEntity.GetItems();
+        // }
+        //
+        // public List<BattleItemInfo> GetLocalCtrlHeroSkillItems()
+        // {
+        //     return this.localCtrlEntity.GetSkillItems();
+        // }
 
         public BattleSkillInfo FindLocalHeroSkill(int skillId)
         {

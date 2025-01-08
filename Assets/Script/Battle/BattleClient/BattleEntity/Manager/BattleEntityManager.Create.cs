@@ -53,18 +53,18 @@ namespace Battle_Client
 
             entity.SetSkillList(skills);
 
-            //填充初始道具
-            List<BattleItemInfo> itemList = new List<BattleItemInfo>();
-            msgEntity.itemList = null == msgEntity.itemList ? new List<BattleClientMsg_Item>() : msgEntity.itemList;
-            foreach (var serverItem in msgEntity.itemList)
-            {
-                BattleItemInfo item = new BattleItemInfo()
-                {
-                    configId = serverItem.configId,
-                    count = serverItem.count,
-                };
-                itemList.Add(item);
-            }
+            // //填充初始道具
+            // List<BattleItemInfo> itemList = new List<BattleItemInfo>();
+            // msgEntity.itemList = null == msgEntity.itemList ? new List<BattleClientMsg_Item>() : msgEntity.itemList;
+            // foreach (var serverItem in msgEntity.itemList)
+            // {
+            //     BattleItemInfo item = new BattleItemInfo()
+            //     {
+            //         configId = serverItem.configId,
+            //         count = serverItem.count,
+            //     };
+            //     itemList.Add(item);
+            // }
             // entity.SetItemList(itemList);
             // Logx.Log(LogxType.BattleItem,"BattleEntityManager : init item list : count : " + itemList.Count);
 

@@ -12,28 +12,22 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
-    public class SkillItemInfoUpdate_RecvMsg : ClientRecvMsg
+    public class SyncEntityItems_RecvMsg : ClientRecvMsg
     {
         public override void Handle()
         {
-            var arg = this.msgArg as SkillItemInfoUpdate_RecvMsg_Arg;
-
+            var arg = this.msgArg as SyncEntityItems_RecvMsg_Arg;
             var entity = BattleEntityManager.Instance.FindEntity(arg.entityGuid);
             if (entity != null)
             {
-                // entity.UpdateSkillItemInfo(arg.index, arg.configId, arg.count,
-                //     arg.currCDTime, arg.maxCDTime);
+                entity.UpdateItemBarCellList(arg.itemBarCellList);
             }
         }
     }
 
-    public class SkillItemInfoUpdate_RecvMsg_Arg : BaseClientRecvMsgArg
+    public class SyncEntityItems_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int entityGuid;
-        public int index;
-        public int configId;
-        public int count;
-        public float currCDTime;
-        public float maxCDTime;
+        public List<ItemBarCellData_Client> itemBarCellList;
     }
 }

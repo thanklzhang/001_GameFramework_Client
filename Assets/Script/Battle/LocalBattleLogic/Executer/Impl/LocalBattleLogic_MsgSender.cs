@@ -90,7 +90,7 @@ namespace Battle_Client
                 // }
 
                 //item list
-                entityArg.itemList = new List<BattleClientMsg_Item>();
+                //entityArg.itemList = new List<BattleClientMsg_Item>();
                 // foreach (var netItem in entity.itemList)
                 // {
                 //     var battleItem = new BattleClientMsg_Item()
@@ -385,36 +385,36 @@ namespace Battle_Client
 
         public void NotifyAll_NotifyItemInfoUpdate(BattleItem item)
         {
-            if (null == item.owner)
-            {
-                return;
-            }
-
-            var entityGuid = item.owner.guid;
-            var itemConfigId = item.configId;
-            var itemIndex = item.owner.GetItemIndex(item);
-            var itemCount = item.count;
-            if (item.isDiscard)
-            {
-                itemCount = 0;
-            }
-
-            // var currCDTime = item.skill.GetCurrCDTimer();
-            // var maxCDTime = item.skill.GetCDMaxTime();
-            // BattleManager.Instance.MsgReceiver.On_ItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
-            //     currCDTime, maxCDTime);
-
-
-            var arg = new ItemInfoUpdate_RecvMsg_Arg()
-            {
-                entityGuid = entityGuid,
-                configId = itemConfigId,
-                index = itemIndex,
-                count = itemCount,
-                currCDTime = item.skill.GetCurrCDTimer(),
-                maxCDTime = item.skill.GetCDTotalTime()
-            };
-            BattleManager.Instance.RecvBattleMsg<ItemInfoUpdate_RecvMsg>(arg);
+            // if (null == item.owner)
+            // {
+            //     return;
+            // }
+            //
+            // var entityGuid = item.owner.guid;
+            // var itemConfigId = item.configId;
+            // var itemIndex = item.owner.GetItemIndex(item);
+            // var itemCount = item.count;
+            // if (item.isDiscard)
+            // {
+            //     itemCount = 0;
+            // }
+            //
+            // // var currCDTime = item.skill.GetCurrCDTimer();
+            // // var maxCDTime = item.skill.GetCDMaxTime();
+            // // BattleManager.Instance.MsgReceiver.On_ItemInfoUpdate(entityGuid, itemIndex, itemConfigId, itemCount,
+            // //     currCDTime, maxCDTime);
+            //
+            //
+            // var arg = new ItemInfoUpdate_RecvMsg_Arg()
+            // {
+            //     entityGuid = entityGuid,
+            //     configId = itemConfigId,
+            //     index = itemIndex,
+            //     count = itemCount,
+            //     currCDTime = item.skill.GetCurrCDTimer(),
+            //     maxCDTime = item.skill.GetCDTotalTime()
+            // };
+            // BattleManager.Instance.RecvBattleMsg<ItemInfoUpdate_RecvMsg>(arg);
         }
 
         public void NotifyAll_NotifySkillItemInfoUpdate(BattleItem item)
@@ -455,6 +455,15 @@ namespace Battle_Client
                 maxCDTime = item.skill.GetCDTotalTime()
             };
             BattleManager.Instance.RecvBattleMsg<SkillItemInfoUpdate_RecvMsg>(arg);
+        }
+
+        public void NotifyAll_NotifyEntityItemsInfoUpdate(int entityGuid, List<ItemBarCell> itemBarCellList)
+        {
+            var arg = new SyncEntityItems_RecvMsg_Arg();
+            arg.entityGuid = entityGuid;
+            arg.itemBarCellList = BattleConvert.ConvertToItemList(itemBarCellList);
+
+            BattleManager.Instance.RecvBattleMsg<SyncEntityItems_RecvMsg>(arg);
         }
 
 

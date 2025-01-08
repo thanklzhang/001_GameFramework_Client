@@ -21,8 +21,8 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(arg.entityGuid);
             if (entity != null)
             {
-                entity.UpdateItemInfo(arg.index, arg.configId,
-                    arg.count, arg.currCDTime, arg.maxCDTime);
+                // entity.UpdateItemInfo(arg.index, arg.configId,
+                //     arg.count, arg.currCDTime, arg.maxCDTime);
             }
         }
     }

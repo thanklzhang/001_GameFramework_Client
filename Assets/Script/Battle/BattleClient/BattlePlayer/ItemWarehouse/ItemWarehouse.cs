@@ -3,27 +3,11 @@ using Battle;
 
 namespace Battle_Client
 {
-    public class WarehouseItemCellData_Client
+    public class WarehouseItemCellData_Client : ItemBarCellData_Client
     {
-        public int index;
-        public BattleItemData_Client itemData;
-
-        public void Init(int index)
-        {
-            this.index = index;
-        }
-
-        public void SetData(BattleItemData_Client itemData)
-        {
-            this.itemData = itemData;
-        }
+        
     }
-
-    public class BattleItemData_Client
-    {
-        public int configId;
-        public int count;
-    }
+    
 
     public class ItemWarehouse
     {
@@ -37,7 +21,7 @@ namespace Battle_Client
             for (int i = 0; i < maxCellCount; i++)
             {
                 var cell = new WarehouseItemCellData_Client();
-                cell.Init(i);
+                cell.index = i;
                 itemCellList.Add(cell);
             }
         }

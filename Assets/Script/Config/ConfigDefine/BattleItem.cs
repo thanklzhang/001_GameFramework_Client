@@ -53,6 +53,11 @@ namespace Config
         private int skillId; 
         
         /// <summary>
+        ///增加的属性组配置Id
+        /// </summary>
+        private int attrGroupConfigId; 
+        
+        /// <summary>
         ///增加的属性组(,分割)
         /// </summary>
         private List<int> addedAttrGroup; 
@@ -79,6 +84,8 @@ namespace Config
         public int IsDestroyAfterUse { get => isDestroyAfterUse; }     
         
         public int SkillId { get => skillId; }     
+        
+        public int AttrGroupConfigId { get => attrGroupConfigId; }     
         
         public List<int> AddedAttrGroup { get => addedAttrGroup; }     
         

@@ -57,6 +57,9 @@ public partial class BattleUI : BaseUI
     //玩家仓库道具显示面板
     BattleItemWarehouseUI itemWarehouseUI;
 
+    //本地玩家实体身上的道具显示面板
+    LocalPlayerEntityItemUI localEntityItemUI;
+
     //队友英雄信息面板
     BattleHeroInfoUICtrl heroInfoUI;
 
@@ -69,8 +72,8 @@ public partial class BattleUI : BaseUI
     //关卡信息界面
     BattleStageInfoUI stageInfoUI;
 
-    //技能书操作UI
-    private BattleSkillOperateUI skillItemOperateUI;
+    // //技能书操作UI
+    // private BattleSkillOperateUI skillItemOperateUI;
 
     //宝箱界面
     private BattleSelectRewardUI boxUI;
@@ -110,7 +113,7 @@ public partial class BattleUI : BaseUI
         funcBtnRoot = transform.Find("functionBar/group");
 
         skillFuncBtn = funcBtnRoot.Find("skill/item").GetComponent<Button>();
-        skillFuncBtn.onClick.AddListener(() => { skillItemOperateUI.Show(); });
+        //skillFuncBtn.onClick.AddListener(() => { skillItemOperateUI.Show(); });
 
         boxFuncBtn = funcBtnRoot.Find("box/item").GetComponent<Button>();
         boxFuncBtn.onClick.AddListener(() =>
@@ -134,7 +137,6 @@ public partial class BattleUI : BaseUI
         //道具仓库
         itemWarehouseBtn = funcBtnRoot.Find("warehouse/item").GetComponent<Button>();
         itemWarehouseBtn.onClick.AddListener(() => { this.itemWarehouseUI.Show(); });
-
 
         //
         closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
@@ -174,6 +176,11 @@ public partial class BattleUI : BaseUI
         itemWarehouseUI = new BattleItemWarehouseUI();
         itemWarehouseUI.Init(itemWarehouseUIRoot.gameObject, this);
 
+        //玩家实体道具面板
+        var localEntityItemUIRoot = this.transform.Find("localEntityItemUI");
+        localEntityItemUI = new LocalPlayerEntityItemUI();
+        localEntityItemUI.Init(localEntityItemUIRoot.gameObject, this);
+
         //英雄信息面板
         var heroInfoUIRoot = this.transform.Find("all_player_info");
         heroInfoUI = new BattleHeroInfoUICtrl();
@@ -197,8 +204,8 @@ public partial class BattleUI : BaseUI
 
         //技能操作界面
         var skillOperateUIRoot = this.transform.Find("skillOperateUI");
-        skillItemOperateUI = new BattleSkillOperateUI();
-        skillItemOperateUI.Init(skillOperateUIRoot.gameObject, this);
+        // skillItemOperateUI = new BattleSkillOperateUI();
+        // skillItemOperateUI.Init(skillOperateUIRoot.gameObject, this);
 
         //宝箱界面
         var boxUIRoot = this.transform.Find("boxUI");
@@ -248,7 +255,8 @@ public partial class BattleUI : BaseUI
         this.stageInfoUI.RefreshAllUI();
         this.buffUI.RefreshAllUI();
         this.itemWarehouseUI.RefreshAllUI();
-        this.skillItemOperateUI.RefreshAllUI();
+        this.localEntityItemUI.RefreshAllUI();
+        // this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
         this.processUI.RefreshAllUI();
@@ -279,7 +287,8 @@ public partial class BattleUI : BaseUI
         this.heroInfoUI.Update(deltaTime);
         this.stageInfoUI.Update(deltaTime);
         this.itemWarehouseUI.Update(deltaTime);
-        this.skillItemOperateUI.Update(deltaTime);
+        this.localEntityItemUI.Update(deltaTime);
+        // this.skillItemOperateUI.Update(deltaTime);
         this.boxUI.Update(deltaTime);
         this.boxMainUI.Update(deltaTime);
         this.processUI.Update(deltaTime);
@@ -424,8 +433,9 @@ public partial class BattleUI : BaseUI
         this.describeUI.Release();
         this.floatWordMgr.Release();
         this.itemWarehouseUI.Release();
+        this.localEntityItemUI.Release();
         this.stageInfoUI.Release();
-        this.skillItemOperateUI.Release();
+        // this.skillItemOperateUI.Release();
         this.boxUI.Release();
         this.boxMainUI.Release();
         this.processUI.Release();

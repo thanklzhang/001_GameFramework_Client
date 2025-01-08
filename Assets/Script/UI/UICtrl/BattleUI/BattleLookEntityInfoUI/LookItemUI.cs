@@ -1,0 +1,115 @@
+﻿using Battle_Client;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Battle;
+using Config;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+//查看选中实体的 buff 界面
+public class LookItemUI
+{
+    public GameObject gameObject;
+    public Transform transform;
+
+    // Button closeBtn;
+
+    Transform itemListRoot;
+    private List<ItemUIShowObj> uiShowList;
+
+    public BattleUI BattleUI;
+
+    public void Init(GameObject gameObject, BattleUI battleUIPre)
+    {
+        this.BattleUI = battleUIPre;
+        
+        this.gameObject = gameObject;
+        this.transform = this.gameObject.transform;
+
+        itemListRoot = this.transform.Find("group");
+        uiShowList = new List<ItemUIShowObj>();
+
+        InitList();
+    }
+    //初始化道具列表
+    public void InitList()
+    {
+        var localHero = BattleManager.Instance.GetLocalCtrlHero();
+        var dataList = localHero.GetItemBarCells();
+
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            var data = dataList[i].itemData;
+            GameObject go = null;
+            if (i < this.itemListRoot.childCount)
+            {
+                go = this.itemListRoot.GetChild(i).gameObject;
+            }
+            else
+            {
+                go = GameObject.Instantiate(this.itemListRoot.GetChild(0).gameObject,
+                    this.itemListRoot, false);
+            }
+
+            ItemUIShowObj showObj = new ItemUIShowObj();
+            showObj.Init(go, this.BattleUI);
+            showObj.RefreshUI(data, i);
+
+            uiShowList.Add(showObj);
+        }
+    }
+
+    public void Show()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    private BattleEntity_Client entity;
+    public void RefreshAllUI(BattleEntity_Client entity)
+    {
+        this.entity = entity;
+        UpdateItemShow();
+
+    }
+
+    public void UpdateItemShow()
+    {
+        var dataList = entity.GetItemBarCells();
+
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            var data = dataList[i].itemData;
+            var showObj = this.uiShowList[i];
+            showObj.RefreshUI(data, i);
+        }
+    }
+
+    public void Update(float deltaTime)
+    {
+        // foreach (var item in buffShowObjList)
+        // {
+        //     item.Update(deltaTime);
+        // }
+    }
+
+
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public void Close()
+    {
+        this.Hide();
+    }
+
+    public void Release()
+    {
+        foreach (var item in this.uiShowList)
+        {
+            item.Release();
+        }
+    }
+}

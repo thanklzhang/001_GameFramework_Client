@@ -12,27 +12,17 @@ public class BattleLookEntityInfoUI
     public GameObject gameObject;
     public Transform transform;
 
-    // Button closeBtn;
-
-    // Transform attrListRoot;
-    //
-    // List<AttrUIData> attrDataList = new List<AttrUIData>();
-    // private List<AttrShowObj> attrShowObjList = new List<AttrShowObj>();
-
     public BattleUI battleUI;
 
     private LookAttrUI lookAttrUI;
     private LookBuffUI lookBuffUI;
-    
+    private LookItemUI lookItemUI;
+
     public void Init(GameObject gameObject, BattleUI battleUI)
     {
         this.battleUI = battleUI;
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
-        //closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
-        // attrListRoot = this.transform.Find("lookAttrBar/group");
-
-        //closeBtn.onClick.AddListener(() => { this.Close(); });
 
         EventDispatcher.AddListener<BattleEntity_Client, int>(EventIDs.OnChangeEntityBattleData,
             OnChangeEntityBattleData);
@@ -42,14 +32,21 @@ public class BattleLookEntityInfoUI
 
         EventDispatcher.AddListener(EventIDs.OnCancelSelectEntity,
             OnCancelSelectEntity);
-        
+
         EventDispatcher.AddListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
 
+        EventDispatcher.AddListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemInfoUpdate,
+            OnUpdateItemsData);
+
+
         lookAttrUI = new LookAttrUI();
-        lookAttrUI.Init(this.transform.Find("lookAttrBar").gameObject,this.battleUI);
-        
+        lookAttrUI.Init(this.transform.Find("lookAttrBar").gameObject, this.battleUI);
+
         lookBuffUI = new LookBuffUI();
-        lookBuffUI.Init(this.transform.Find("lookBuffBar").gameObject,this.battleUI);
+        lookBuffUI.Init(this.transform.Find("lookBuffBar").gameObject, this.battleUI);
+
+        lookItemUI = new LookItemUI();
+        lookItemUI.Init(this.transform.Find("lookItemBar").gameObject, this.battleUI);
     }
 
     public void OnChangeEntityBattleData(BattleEntity_Client entity, int fromEntityGuid)
@@ -85,87 +82,18 @@ public class BattleLookEntityInfoUI
 
     public void RefreshAllUI()
     {
-        //attr
-        // RefreshDataList(currShowEntity);
-        // RefreshShowList();
-        
         lookAttrUI.RefreshAllUI(currShowEntity);
-        
-        //buff
         lookBuffUI.RefreshAllUI(currShowEntity);
+        lookItemUI.RefreshAllUI(currShowEntity);
     }
-
-    // public void RefreshDataList(BattleEntity_Client entity)
-    // {
-    //     // BattleAttrUIArgs attrUIArgs = new BattleAttrUIArgs();
-    //     attrDataList = new List<AttrUIData>();
-    //
-    //     //var attr = BattleManager.Instance.GetLocalCtrlHeroAttrs();
-    //
-    //     var attr = entity.attr;
-    //     List<EntityAttrType> types = new List<EntityAttrType>()
-    //     {
-    //         EntityAttrType.Attack,
-    //         EntityAttrType.Defence,
-    //         EntityAttrType.MaxHealth,
-    //         EntityAttrType.AttackSpeed,
-    //         EntityAttrType.AttackRange,
-    //         EntityAttrType.MoveSpeed,
-    //     };
-    //
-    //     for (int i = 0; i < types.Count; i++)
-    //     {
-    //         var attrType = types[i];
-    //         float value = attr.GetValue(attrType);
-    //         AttrUIData uiData = new AttrUIData()
-    //         {
-    //             type = attrType,
-    //             value = value
-    //         };
-    //         attrDataList.Add(uiData);
-    //     }
-    // }
-
-    // //用这个开始显示
-    // public void RefreshShowList()
-    // {
-    //     attrShowObjList.Clear();
-    //
-    //     for (int i = 0; i < attrDataList.Count; i++)
-    //     {
-    //         var data = attrDataList[i];
-    //         GameObject go = null;
-    //         if (i < this.attrListRoot.childCount)
-    //         {
-    //             go = this.attrListRoot.GetChild(i).gameObject;
-    //         }
-    //         else
-    //         {
-    //             go = GameObject.Instantiate(this.attrListRoot.GetChild(0).gameObject,
-    //                 this.attrListRoot, false);
-    //         }
-    //
-    //         AttrShowObj cell = new AttrShowObj();
-    //         cell.Init(go);
-    //         cell.Show();
-    //         cell.Refresh(data, i);
-    //
-    //         attrShowObjList.Add(cell);
-    //     }
-    //     
-    //     for (int i = attrDataList.Count; i < this.attrListRoot.childCount; i++)
-    //     {
-    //         var go = this.attrListRoot.GetChild(i).gameObject;
-    //         go.SetActive(false);
-    //     }
-    // }
 
     public void Update(float deltaTime)
     {
         this.lookAttrUI.Update(deltaTime);
         this.lookBuffUI.Update(deltaTime);
+        this.lookItemUI.Update(deltaTime);
     }
-    
+
     public void OnBuffInfoUpdate(BuffEffectInfo_Client buffInfo)
     {
         if (null == this.currShowEntity)
@@ -176,25 +104,22 @@ public class BattleLookEntityInfoUI
         if (this.currShowEntity.guid == buffInfo.targetEntityGuid)
         {
             lookBuffUI.UpdateBuff(buffInfo);
-            // var buffShowObj = lookBuffUI.FindBuff(buffInfo.guid);
-            // if (buffShowObj != null)
-            // {
-            //     if (buffInfo.isRemove)
-            //     {
-            //         // var eft = BattleSkillEffectManager_Client.Instance.FindSkillEffect(buffInfo.guid);
-            //         // if (eft != null)
-            //         // {
-            //         //     // (这块逻辑待修改)
-            //         //     BattleSkillEffectManager_Client.Instance.DestorySkillEffect(buffInfo.guid);
-            //         // }
-            //
-            //         // this.lookBuffUI.RemoveBuffFromDataList(buffInfo.guid);
-            //     }
-            // }
-            //this.lookBuffUI.RefreshAllUI(this.currShowEntity);
         }
     }
-  
+
+
+    public void OnUpdateItemsData(BattleEntity_Client entity, List<ItemBarCellData_Client> barCellList)
+    {
+        if (null == this.currShowEntity)
+        {
+            return;
+        }
+
+        if (this.currShowEntity.guid == entity.guid)
+        {
+            lookItemUI.RefreshAllUI(entity);
+        }
+    }
 
     public void Hide()
     {
@@ -215,21 +140,12 @@ public class BattleLookEntityInfoUI
             OnSelectEntity);
         EventDispatcher.RemoveListener(EventIDs.OnCancelSelectEntity,
             OnCancelSelectEntity);
-        
+
         EventDispatcher.RemoveListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
 
 
-        // closeBtn.onClick.RemoveAllListeners();
-
-        // foreach (var item in attrShowObjList)
-        // {
-        //     item.Release();
-        // }
-        //
-        // attrShowObjList = null;
-        // attrDataList = null;
-
         lookAttrUI.Release();
         lookBuffUI.Release();
+        lookItemUI.Release();
     }
 }

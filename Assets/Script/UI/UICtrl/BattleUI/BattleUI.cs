@@ -98,6 +98,7 @@ public partial class BattleUI : BaseUI
     private Button intelligentReleaseBtn;
     private GameObject intelligentReleaseSelectFlagGo;
 
+    public Transform tempRoot;
     protected override void OnLoadFinish()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
@@ -107,6 +108,7 @@ public partial class BattleUI : BaseUI
         stateText = this.transform.Find("stateText").GetComponent<Text>();
         attrBtn = this.transform.Find("attrBtn").GetComponent<Button>();
 
+        tempRoot = this.transform.Find("tempRoot");
         // bossComingRootGo = this.transform.Find("bossComingRoot").gameObject;
 
         //功能栏

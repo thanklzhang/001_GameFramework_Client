@@ -23,6 +23,7 @@ public class WarehouseItemUIShowObj
     public BattleItemData_Client data;
     private BattleItemWarehouseUI parentUI;
 
+    private DragScript dragScript;
     public void Init(GameObject gameObject,BattleItemWarehouseUI parentUI)
     {
         this.gameObject = gameObject;
@@ -33,10 +34,29 @@ public class WarehouseItemUIShowObj
         this.itemIconImg = itemTran.Find("icon").GetComponent<Image>();
 
         countText = this.transform.Find("item/countText").GetComponent<TextMeshProUGUI>();
-
+        dragScript = itemTran.GetComponent<DragScript>();
+        dragScript.onBeginDragAction += OnBeginDrag;
+        dragScript.onDragAction += OnDrag;
+        dragScript.onEndDragAction += OnEndDrag;
+        
         evetnTrigger = itemIconImg.GetComponent<UIEventTrigger>();
         evetnTrigger.OnPointEnterEvent += OnPointEnter;
         evetnTrigger.OnPointerExitEvent += OnPointExit;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        
+    }
+    
+    public void OnDrag(PointerEventData eventData)
+    {
+        
+    }
+    
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        this.parentUI.OnItemEndDrag(this,eventData);
     }
 
     public void RefreshUI(BattleItemData_Client data, int index)
@@ -104,6 +124,10 @@ public class WarehouseItemUIShowObj
     {
         evetnTrigger.OnPointEnterEvent -= OnPointEnter;
         evetnTrigger.OnPointerExitEvent -= OnPointExit;
+        
+        dragScript.onBeginDragAction -= OnBeginDrag;
+        dragScript.onDragAction -= OnDrag;
+        dragScript.onEndDragAction -= OnEndDrag;
     }
 }
 

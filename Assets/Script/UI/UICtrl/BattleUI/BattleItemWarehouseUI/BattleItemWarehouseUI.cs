@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Battle_Client;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 //玩家道具仓库
@@ -182,5 +183,27 @@ public class BattleItemWarehouseUI
 
         // itemShowObjList = null;
         // itemDataList = null;
+    }
+
+    public void OnItemEndDrag(WarehouseItemUIShowObj warehouseItemUIShowObj, PointerEventData eventData)
+    {
+        foreach (var showObj in this.uiShowList)
+        {
+            var rectTran = showObj.transform.GetComponent<RectTransform>();
+
+            var parentRectTran = showObj.transform.parent.GetComponent<RectTransform>();
+            var uiCamera = CameraManager.Instance.GetCameraUI().camera;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTran, eventData.position, uiCamera,
+                out var outPos);
+
+            if (rectTran.rect.Contains(outPos))
+            {
+                BattleItemData_Client data = new BattleItemData_Client();
+                data.configId = warehouseItemUIShowObj.data.configId;
+                data.count = warehouseItemUIShowObj.data.count;
+                showObj.RefreshUI(data,showObj.index);
+                break;
+            }
+        }
     }
 }

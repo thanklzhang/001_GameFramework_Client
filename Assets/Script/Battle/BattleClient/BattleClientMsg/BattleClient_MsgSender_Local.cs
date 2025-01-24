@@ -243,5 +243,10 @@ namespace Battle_Client
             battle.OnRecvBattleMsg<SelectReplaceSkill_BattleMsg>(hero.playerIndex, arg);
             
         }
+
+        public void Send_MoveItemTo(ItemBelongType srcType, int srcIndex, ItemBelongType desType, int desIndex)
+        {
+            
+        }
     }
 }

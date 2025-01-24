@@ -79,5 +79,10 @@ namespace Battle_Client
         {
             throw new NotImplementedException();
         }
+
+        public void Send_MoveItemTo(ItemBelongType srcType, int srcIndex, ItemBelongType desType, int desIndex)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

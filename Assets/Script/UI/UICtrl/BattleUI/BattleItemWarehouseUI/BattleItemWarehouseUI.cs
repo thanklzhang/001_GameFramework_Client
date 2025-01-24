@@ -185,6 +185,7 @@ public class BattleItemWarehouseUI
         // itemDataList = null;
     }
 
+    //仓库间拖动
     public void OnItemEndDrag(WarehouseItemUIShowObj warehouseItemUIShowObj, PointerEventData eventData)
     {
         foreach (var showObj in this.uiShowList)
@@ -198,6 +199,9 @@ public class BattleItemWarehouseUI
 
             if (rectTran.rect.Contains(outPos))
             {
+                
+                
+                
                 BattleItemData_Client data = new BattleItemData_Client();
                 data.configId = warehouseItemUIShowObj.data.configId;
                 data.count = warehouseItemUIShowObj.data.count;

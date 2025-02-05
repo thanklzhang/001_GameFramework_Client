@@ -60,12 +60,23 @@ namespace Battle_Client
                 }
             }
 
-            EventDispatcher.Broadcast(EventIDs.OnEntityItemInfoUpdate,this,changeList);
+            EventDispatcher.Broadcast(EventIDs.OnEntityItemsUpdate,this,changeList);
         }
 
         public ItemBarCellData_Client FindItemBarCell(int index)
         {
             return this.itemBarCellList.Find(cell => cell.index == index);
+        }
+
+        public void UpdateItemBarItem(int index,BattleItemData_Client data)
+        {
+            var cell = FindItemBarCell(index);
+            if (cell != null)
+            {
+                cell.itemData = data;
+            }
+            
+            EventDispatcher.Broadcast(EventIDs.OnEntityItemInfoUpdate,this,cell);
         }
 
         // public BattleItemInfo FindItem(int index)

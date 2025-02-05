@@ -35,7 +35,7 @@ public class LocalPlayerEntityItemUI
 
         InitList();
 
-        EventDispatcher.AddListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemInfoUpdate,
+        EventDispatcher.AddListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemsUpdate,
             OnUpdateItemsData);
         // EventDispatcher.AddListener<string>(EventIDs.OnItemTips,OnItemTips);
     }
@@ -169,7 +169,7 @@ public class LocalPlayerEntityItemUI
         // EventDispatcher.RemoveListener<BattleItemInfo>(EventIDs.OnItemInfoUpdate, OnItemInfoUpdate);
         // EventDispatcher.RemoveListener<string>(EventIDs.OnItemTips, OnItemTips);
 
-        EventDispatcher.RemoveListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemInfoUpdate,
+        EventDispatcher.RemoveListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemsUpdate,
             OnUpdateItemsData);
 
         foreach (var item in this.uiShowList)

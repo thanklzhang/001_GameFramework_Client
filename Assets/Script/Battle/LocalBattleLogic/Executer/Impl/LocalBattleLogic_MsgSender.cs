@@ -735,21 +735,31 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<ReplaceSkillResult_RecvMsg>(arg);
         }
 
-        public void SyncPlayerWarehouseItem(int playerIndex, BattleItem opItem, int cellIndex)
+        public void SyncPlayerWarehouseItem(int playerIndex, int cellIndex,BattleItem opItem)
         {
             var arg = new SyncWarehouseItem_RecvMsg_Arg()
             {
                 playerIndex = playerIndex,
-                itemData = new BattleItemData_Client()
-                {
-                    configId = opItem.configId,
-                    count = opItem.count
-                },
                  index = cellIndex
             };
 
+            if (opItem != null)
+            {
+                arg.itemData = new BattleItemData_Client()
+                {
+                    configId = opItem.configId,
+                    count = opItem.count
+                };
+            }
+
             BattleManager.Instance.RecvBattleMsg<SyncWarehouseItem_RecvMsg>(arg);
         }
+
+        public void SyncEntityItemBarItem(int entityGuid, int cellIndex,BattleItem opItem)
+        {
+            
+        }
+
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {

@@ -35,8 +35,13 @@ public class BattleLookEntityInfoUI
 
         EventDispatcher.AddListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
 
-        EventDispatcher.AddListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemInfoUpdate,
+        EventDispatcher.AddListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemsUpdate,
             OnUpdateItemsData);
+        
+        EventDispatcher.AddListener<BattleEntity_Client, ItemBarCellData_Client>(EventIDs.OnEntityItemInfoUpdate,
+            OnEntityItemInfoUpdate);
+        
+        
 
 
         lookAttrUI = new LookAttrUI();
@@ -143,6 +148,11 @@ public class BattleLookEntityInfoUI
 
         EventDispatcher.RemoveListener<BuffEffectInfo_Client>(EventIDs.OnBuffInfoUpdate, OnBuffInfoUpdate);
 
+        EventDispatcher.RemoveListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemsUpdate,
+            OnUpdateItemsData);
+        EventDispatcher.RemoveListener<BattleEntity_Client, ItemBarCellData_Client>(EventIDs.OnEntityItemInfoUpdate,
+            OnEntityItemInfoUpdate);
+        
 
         lookAttrUI.Release();
         lookBuffUI.Release();

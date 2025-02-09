@@ -11,6 +11,7 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
+    //同步实体的道具栏
     public class SyncEntityItemBarItem_RecvMsg : ClientRecvMsg
     {
         public override void Handle()

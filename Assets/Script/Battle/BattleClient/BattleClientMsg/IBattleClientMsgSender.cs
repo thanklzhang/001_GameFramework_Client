@@ -35,16 +35,22 @@ namespace Battle_Client
         void Send_BuyBoxFromShop(RewardQuality quality, int buyCount);
         void Send_OperateHeroByArraying(int opHeroGuid,Vector3 targetPos,int toUnderstudyIndex);
         void Send_SelectReplaceSkill(int selectSkillId);
-        void Send_MoveItemTo(ItemBelongType srcType,int srcIndex,ItemBelongType desType,
-            int desIndex);
+        void Send_MoveItemTo(ItemMoveArg srcItemMoveArg,ItemMoveArg desItemMoveArg);
+    }
+
+    public class ItemMoveArg
+    {
+        public ItemLocationType locationType;
+        public int itemIndex;
+        public int entityGuid;
     }
 
     //道具归属类型
-    public enum ItemBelongType
-    {
-        //仓库
-        Warehouse = 0,
-        //实体道具栏
-        EntityItemBar = 1
-    }
+    // public enum ItemBelongType
+    // {
+    //     //仓库
+    //     Warehouse = 0,
+    //     //实体道具栏
+    //     EntityItemBar = 1
+    // }
 }

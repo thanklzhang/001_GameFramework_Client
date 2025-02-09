@@ -37,6 +37,8 @@ public class LocalPlayerEntityItemUI
 
         EventDispatcher.AddListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemsUpdate,
             OnUpdateItemsData);
+        EventDispatcher.AddListener<BattleEntity_Client, ItemBarCellData_Client>(EventIDs.OnEntityItemInfoUpdate,
+            OnEntityItemInfoUpdate);
         // EventDispatcher.AddListener<string>(EventIDs.OnItemTips,OnItemTips);
     }
 
@@ -46,11 +48,20 @@ public class LocalPlayerEntityItemUI
         {
             foreach (var barCell in barCellList)
             {
-                var cell = FindItemCell(barCell.index);
+                var cell = FindShowItemCell(barCell.index);
                 cell.RefreshUI(barCell.itemData, barCell.index);
             }
         }
       
+    }
+    
+    public void OnEntityItemInfoUpdate(BattleEntity_Client entity, ItemBarCellData_Client itemBarCell)
+    {
+        if (entity.guid == BattleManager.Instance.GetLocalCtrlHeroGuid())
+        {
+             var showObjCel = FindShowItemCell(itemBarCell.index);
+             showObjCel.RefreshUI(itemBarCell.itemData,itemBarCell.index);
+        }
     }
 
     void OnItemTips(string str)
@@ -106,7 +117,7 @@ public class LocalPlayerEntityItemUI
 
     public void UpdateItemInfo(BattleItemData_Client itemInfo, int index)
     {
-        var itemShowObj = FindItemCell(index);
+        var itemShowObj = FindShowItemCell(index);
         if (itemShowObj != null)
         {
             itemShowObj.RefreshUI(itemInfo, index);
@@ -141,7 +152,7 @@ public class LocalPlayerEntityItemUI
         // }
     }
 
-    public ItemUIShowObj FindItemCell(int index)
+    public ItemUIShowObj FindShowItemCell(int index)
     {
         foreach (var showObj in this.uiShowList)
         {
@@ -171,6 +182,8 @@ public class LocalPlayerEntityItemUI
 
         EventDispatcher.RemoveListener<BattleEntity_Client, List<ItemBarCellData_Client>>(EventIDs.OnEntityItemsUpdate,
             OnUpdateItemsData);
+        EventDispatcher.RemoveListener<BattleEntity_Client, ItemBarCellData_Client>(EventIDs.OnEntityItemInfoUpdate,
+            OnEntityItemInfoUpdate);
 
         foreach (var item in this.uiShowList)
         {

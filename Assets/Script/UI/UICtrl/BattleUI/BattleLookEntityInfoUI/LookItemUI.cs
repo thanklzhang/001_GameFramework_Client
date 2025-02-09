@@ -70,11 +70,11 @@ public class LookItemUI
     public void RefreshAllUI(BattleEntity_Client entity)
     {
         this.entity = entity;
-        UpdateItemShow();
+        UpdateAllItemShow();
 
     }
-
-    public void UpdateItemShow()
+    
+    public void UpdateAllItemShow()
     {
         var dataList = entity.GetItemBarCells();
 
@@ -85,6 +85,20 @@ public class LookItemUI
             showObj.RefreshUI(data, i);
         }
     }
+
+    public void RefreshItem(BattleEntity_Client entity,ItemBarCellData_Client cell)
+    {
+        for (int i = 0; i < this.uiShowList.Count; i++)
+        {
+            var showObj = uiShowList[i];
+            if (showObj.index == cell.index)
+            {
+                showObj.RefreshUI(cell.itemData, i);
+            }
+        }
+    }
+
+   
 
     public void Update(float deltaTime)
     {

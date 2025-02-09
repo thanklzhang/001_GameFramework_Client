@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Battle;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Battle_Client
@@ -21,6 +22,8 @@ namespace Battle_Client
 
         public void CheckInput()
         {
+            
+            
             var battleState = BattleManager.Instance.BattleState;
             if (battleState != BattleState.Running)
             {
@@ -66,6 +69,14 @@ namespace Battle_Client
                 //无技能释放动作
                 if (isMouseLeftButtonDown)
                 {
+                    var uiObj = GetHoveredUIObject();
+                    if (uiObj != null)
+                    {
+                        GameObject hoveredObject = uiObj;
+                        
+                        return; // 如果是 UI 上的元素，就不进行射线检测
+                    }
+                        
                     if (TryToGetRayOnEntity(out var entityGuidList))
                     {
                         var battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
@@ -75,19 +86,19 @@ namespace Battle_Client
                         {
                             currDragEntity = battleEntity;
                             dragEntityOriginPos = currDragEntity.gameObject.transform.position;
-                            var isInArea = TryToGetRayTargetPos(out var hit, new List<string>()
-                            {
-                                GlobalConfig.Ground,
-                                GlobalConfig.UnderstudyArea
-                            });
-                            if (isInArea)
-                            {
-                                // this.dragEntityOffset = dragEntityOriginPos - hit.point;
-                            }
-                            else
-                            {
-                                //?????? 到底在哪呢
-                            }
+                            // var isInArea = TryToGetRayTargetPos(out var hit, new List<string>()
+                            // {
+                            //     GlobalConfig.Ground,
+                            //     GlobalConfig.UnderstudyArea
+                            // });
+                            // if (isInArea)
+                            // {
+                            //     // this.dragEntityOffset = dragEntityOriginPos - hit.point;
+                            // }
+                            // else
+                            // {
+                            //     //?????? 到底在哪呢
+                            // }
                         }
                     }
                     else
@@ -120,6 +131,24 @@ namespace Battle_Client
                     CheckNoEventWithoutSkillState();
                 }
             }
+        }
+        
+        GameObject GetHoveredUIObject()
+        {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+            RaycastResult raycastResult = new RaycastResult();
+            var raycastResults = new System.Collections.Generic.List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, raycastResults);
+
+            if (raycastResults.Count > 0)
+            {
+                return raycastResults[0].gameObject;
+            }
+
+            return null;
         }
 
         public void CheckMouseLeftUp()

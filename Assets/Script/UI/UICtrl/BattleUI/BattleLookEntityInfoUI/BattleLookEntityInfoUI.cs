@@ -126,6 +126,19 @@ public class BattleLookEntityInfoUI
         }
     }
 
+    public void OnEntityItemInfoUpdate(BattleEntity_Client entity, ItemBarCellData_Client itemBarCell)
+    {
+        if (null == this.currShowEntity)
+        {
+            return;
+        }
+        
+        if (this.currShowEntity.guid == entity.guid)
+        {
+            lookItemUI.RefreshItem(entity,itemBarCell);
+        }
+    }
+
     public void Hide()
     {
         currShowEntity = null;

@@ -76,6 +76,7 @@ namespace Battle_Client
             return dic;
         }
 
+        //战斗逻辑数据 -》 客户端数据
         public static List<ItemBarCellData_Client> ConvertToItemList(List<ItemBarCell> cellList)
         {
             var itemList = new List<ItemBarCellData_Client>();
@@ -97,6 +98,15 @@ namespace Battle_Client
             }
 
             return itemList;
+        }
+
+        public static MoveItemOpLocation ToItemOpLocation(ItemMoveArg moveArg)
+        {
+            MoveItemOpLocation opLoc = new MoveItemOpLocation();
+            opLoc.type = moveArg.locationType;
+            opLoc.index = moveArg.itemIndex;
+            opLoc.entityGuid = moveArg.entityGuid;
+            return opLoc;
         }
     }
 }

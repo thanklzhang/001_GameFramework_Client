@@ -244,8 +244,16 @@ namespace Battle_Client
             
         }
 
-        public void Send_MoveItemTo(ItemBelongType srcType, int srcIndex, ItemBelongType desType, int desIndex)
+        public void Send_MoveItemTo(ItemMoveArg srcArg,ItemMoveArg desArg)
         {
+            var arg = new MoveItem_BattleMsg_Arg();
+            arg.srcOpLoc = BattleConvert.ToItemOpLocation(srcArg);
+            arg.desOpLoc  = BattleConvert.ToItemOpLocation(desArg);
+            
+            var hero = BattleManager.Instance.GetLocalCtrlHero();
+            battle.OnRecvBattleMsg<MoveItem_BattleMsg>(hero.playerIndex, arg);
+            
+            
             
         }
     }

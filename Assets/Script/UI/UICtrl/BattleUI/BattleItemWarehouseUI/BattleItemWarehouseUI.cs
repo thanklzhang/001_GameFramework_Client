@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Battle_Client;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -199,13 +200,22 @@ public class BattleItemWarehouseUI
 
             if (rectTran.rect.Contains(outPos))
             {
+                // BattleItemData_Client data = new BattleItemData_Client();
+                // data.configId = warehouseItemUIShowObj.data.configId;
+                // data.count = warehouseItemUIShowObj.data.count;
+                // showObj.RefreshUI(data,showObj.index);
+
+                ItemMoveArg srcMoveArg = new ItemMoveArg();
+                srcMoveArg.locationType = ItemLocationType.Warehouse;
+                srcMoveArg.itemIndex = warehouseItemUIShowObj.index;
+                
+                ItemMoveArg desMoveArg = new ItemMoveArg();
+                desMoveArg.locationType = ItemLocationType.Warehouse;
+                desMoveArg.itemIndex = showObj.index;
                 
                 
+                BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg,desMoveArg);
                 
-                BattleItemData_Client data = new BattleItemData_Client();
-                data.configId = warehouseItemUIShowObj.data.configId;
-                data.count = warehouseItemUIShowObj.data.count;
-                showObj.RefreshUI(data,showObj.index);
                 break;
             }
         }

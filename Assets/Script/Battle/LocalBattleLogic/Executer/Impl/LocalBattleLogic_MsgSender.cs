@@ -758,6 +758,22 @@ namespace Battle_Client
         public void SyncEntityItemBarItem(int entityGuid, int cellIndex,BattleItem opItem)
         {
             
+            var arg = new SyncEntityItemBarItem_RecvMsg_Arg()
+            {
+                entityGuid = entityGuid,
+                index = cellIndex
+            };
+
+            if (opItem != null)
+            {
+                arg.itemData = new BattleItemData_Client()
+                {
+                    configId = opItem.configId,
+                    count = opItem.count
+                };
+            }
+
+            BattleManager.Instance.RecvBattleMsg<SyncEntityItemBarItem_RecvMsg>(arg);
         }
 
 

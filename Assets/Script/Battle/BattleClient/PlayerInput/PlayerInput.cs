@@ -106,7 +106,7 @@ namespace Battle_Client
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             //Debug.DrawRay(ray.origin, ray.direction, Color.red);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << LayerMask.NameToLayer("Default"));
+            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << LayerMask.NameToLayer("Default") );
             if (hits.Length > 0)
             {
                 for (int i = 0; i < hits.Length; i++)

@@ -12,6 +12,7 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
+    //同步玩家仓库的道具
     public class SyncWarehouseItem_RecvMsg : ClientRecvMsg
     {
         public override void Handle()

@@ -186,38 +186,38 @@ public class BattleItemWarehouseUI
         // itemDataList = null;
     }
 
-    //仓库间拖动
-    public void OnItemEndDrag(WarehouseItemUIShowObj warehouseItemUIShowObj, PointerEventData eventData)
-    {
-        foreach (var showObj in this.uiShowList)
-        {
-            var rectTran = showObj.transform.GetComponent<RectTransform>();
-
-            var parentRectTran = showObj.transform.parent.GetComponent<RectTransform>();
-            var uiCamera = CameraManager.Instance.GetCameraUI().camera;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTran, eventData.position, uiCamera,
-                out var outPos);
-
-            if (rectTran.rect.Contains(outPos))
-            {
-                // BattleItemData_Client data = new BattleItemData_Client();
-                // data.configId = warehouseItemUIShowObj.data.configId;
-                // data.count = warehouseItemUIShowObj.data.count;
-                // showObj.RefreshUI(data,showObj.index);
-
-                ItemMoveArg srcMoveArg = new ItemMoveArg();
-                srcMoveArg.locationType = ItemLocationType.Warehouse;
-                srcMoveArg.itemIndex = warehouseItemUIShowObj.index;
-                
-                ItemMoveArg desMoveArg = new ItemMoveArg();
-                desMoveArg.locationType = ItemLocationType.Warehouse;
-                desMoveArg.itemIndex = showObj.index;
-                
-                
-                BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg,desMoveArg);
-                
-                break;
-            }
-        }
-    }
+    // //仓库间拖动
+    // public void OnItemEndDrag(WarehouseItemUIShowObj warehouseItemUIShowObj, PointerEventData eventData)
+    // {
+    //     foreach (var showObj in this.uiShowList)
+    //     {
+    //         var rectTran = showObj.transform.GetComponent<RectTransform>();
+    //
+    //         var parentRectTran = showObj.transform.parent.GetComponent<RectTransform>();
+    //         var uiCamera = CameraManager.Instance.GetCameraUI().camera;
+    //         RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTran, eventData.position, uiCamera,
+    //             out var outPos);
+    //
+    //         if (rectTran.rect.Contains(outPos))
+    //         {
+    //             // BattleItemData_Client data = new BattleItemData_Client();
+    //             // data.configId = warehouseItemUIShowObj.data.configId;
+    //             // data.count = warehouseItemUIShowObj.data.count;
+    //             // showObj.RefreshUI(data,showObj.index);
+    //
+    //             ItemMoveArg srcMoveArg = new ItemMoveArg();
+    //             srcMoveArg.locationType = ItemLocationType.Warehouse;
+    //             srcMoveArg.itemIndex = warehouseItemUIShowObj.index;
+    //             
+    //             ItemMoveArg desMoveArg = new ItemMoveArg();
+    //             desMoveArg.locationType = ItemLocationType.Warehouse;
+    //             desMoveArg.itemIndex = showObj.index;
+    //             
+    //             
+    //             BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg,desMoveArg);
+    //             
+    //             break;
+    //         }
+    //     }
+    // }
 }

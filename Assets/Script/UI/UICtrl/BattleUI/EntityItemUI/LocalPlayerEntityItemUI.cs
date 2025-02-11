@@ -6,7 +6,7 @@ using Battle_Client;
 using UnityEngine;
 using UnityEngine.UI;
 
-//本地玩家实体的道具UI
+//本地玩家实体的道具部分整体 UI
 public class LocalPlayerEntityItemUI
 {
     public GameObject gameObject;
@@ -94,7 +94,7 @@ public class LocalPlayerEntityItemUI
                     this.itemListRoot, false);
             }
 
-            ItemUIShowObj showObj = new ItemUIShowObj();
+            ItemUIShowObj showObj = new LocalPlayerItemUIShowObj();
             showObj.Init(go, this.battleUI);
             showObj.RefreshUI(data, i);
 

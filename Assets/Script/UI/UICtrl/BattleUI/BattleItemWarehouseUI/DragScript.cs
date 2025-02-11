@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 
@@ -10,12 +11,17 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private Transform root;
     private RectTransform rootRectTran;
 
+    public Action<PointerEventData> onBeginDragBeforeAction;
     public Action<PointerEventData> onBeginDragAction;
     public Action<PointerEventData> onDragAction;
     public Action<PointerEventData> onEndDragAction;
 
+    public object transferData;
+    
     public void OnBeginDrag(PointerEventData eventData)
     {
+        onBeginDragBeforeAction?.Invoke(eventData);
+        
         var battleUI = UIManager.Instance.FindCtrl<BattleUI>() as BattleUI;
         root = battleUI.tempRoot;
 
@@ -23,6 +29,12 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         
         moveGo = GameObject.Instantiate(target.gameObject,
             rootRectTran, false);
+
+        var allImage = moveGo.GetComponentsInChildren<Image>();
+        foreach (var img in allImage)
+        {
+            img.raycastTarget = false;
+        }
         
         onBeginDragAction?.Invoke(eventData);
     }

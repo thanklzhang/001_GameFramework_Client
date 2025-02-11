@@ -13,8 +13,8 @@ public class ItemUIShowObj
     public GameObject gameObject;
     public Transform transform;
 
-    private Transform itemTran;
-    private Image itemIconImg;
+    protected Transform itemTran;
+    protected Image itemIconImg;
     private TextMeshProUGUI countText;
     private UIEventTrigger evetnTrigger;
 
@@ -22,17 +22,17 @@ public class ItemUIShowObj
     public int index;
     public BattleItemData_Client data;
     private BattleUI battleUI;
-
-    public void Init(GameObject gameObject, BattleUI battleUI)
+    
+    public virtual void Init(GameObject gameObject, BattleUI battleUI)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
         this.battleUI = battleUI;
 
-        itemTran = this.transform.Find("item");
+        itemTran = this.transform.Find("CommonItem");
         this.itemIconImg = itemTran.Find("icon").GetComponent<Image>();
 
-        countText = this.transform.Find("item/countText").GetComponent<TextMeshProUGUI>();
+        countText = itemTran.transform.Find("countText").GetComponent<TextMeshProUGUI>();
 
         evetnTrigger = itemIconImg.GetComponent<UIEventTrigger>();
         evetnTrigger.OnPointEnterEvent += OnPointEnter;
@@ -101,7 +101,7 @@ public class ItemUIShowObj
     }
 
 
-    public void Release()
+    public virtual void Release()
     {
         evetnTrigger.OnPointEnterEvent -= OnPointEnter;
         evetnTrigger.OnPointerExitEvent -= OnPointExit;

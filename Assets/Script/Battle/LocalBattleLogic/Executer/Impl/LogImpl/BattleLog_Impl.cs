@@ -11,7 +11,7 @@ namespace Battle
 
         public void LogError(string str)
         {
-            Logx.LogWarning(LogxType.Battle,str);
+            Logx.LogError(LogxType.Battle,str);
         }
 
         public void Log(int type, string str)

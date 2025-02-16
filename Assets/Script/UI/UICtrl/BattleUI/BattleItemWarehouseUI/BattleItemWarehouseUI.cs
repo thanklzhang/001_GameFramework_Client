@@ -29,7 +29,11 @@ public class BattleItemWarehouseUI
         this.battleUI = battleUI;
         itemListRoot = this.transform.Find("root/scroll/mask/content");
         closeBtn = this.transform.Find("root/closeBtn").GetComponent<Button>();
-        closeBtn.onClick.AddListener(() => { this.Close(); });
+        closeBtn.onClick.AddListener(() =>
+        {
+            this.Close();
+            this.battleUI.OnWarehouseClose();
+        });
 
         uiShowList = new List<WarehouseItemUIShowObj>();
 

@@ -1,6 +1,7 @@
 ﻿using Battle;
 using Battle_Client;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using BattleItem = Battle.BattleItem;
 using BuffEffect = Battle.BuffEffect;
@@ -708,6 +709,16 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<SyncPlayerBattleReward_RecvMsg>(arg);
         }
 
+        public void UpdatePlayerTeamMembersInfo(int playerIndex, List<int> entityGuids)
+        {
+            var arg = new UpdatePlayerTeamMembersInfo_RecvMsg_Arg();
+            arg.playerIndex = playerIndex;
+            arg.entityGuids = entityGuids.ToList();
+
+            BattleManager.Instance.RecvBattleMsg<UpdatePlayerTeamMembersInfo_RecvMsg>(arg);
+
+        }
+
         //接收布阵中的英雄操作消息
         public void NotifyHeroOperationByArraying(int playerIndex, int opHeroGuid, Vector3 targetPos,
             int toUnderstudyIndex)
@@ -735,12 +746,12 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<ReplaceSkillResult_RecvMsg>(arg);
         }
 
-        public void SyncPlayerWarehouseItem(int playerIndex, int cellIndex,BattleItem opItem)
+        public void SyncPlayerWarehouseItem(int playerIndex, int cellIndex, BattleItem opItem)
         {
             var arg = new SyncWarehouseItem_RecvMsg_Arg()
             {
                 playerIndex = playerIndex,
-                 index = cellIndex
+                index = cellIndex
             };
 
             if (opItem != null)
@@ -755,9 +766,8 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<SyncWarehouseItem_RecvMsg>(arg);
         }
 
-        public void SyncEntityItemBarItem(int entityGuid, int cellIndex,BattleItem opItem)
+        public void SyncEntityItemBarItem(int entityGuid, int cellIndex, BattleItem opItem)
         {
-            
             var arg = new SyncEntityItemBarItem_RecvMsg_Arg()
             {
                 entityGuid = entityGuid,

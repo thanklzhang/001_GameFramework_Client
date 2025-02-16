@@ -17,7 +17,7 @@ public class LookItemUI
     // Button closeBtn;
 
     Transform itemListRoot;
-    private List<ItemUIShowObj> uiShowList;
+    private List<ItemCellUIShowObj> uiShowList;
 
     public BattleUI BattleUI;
 
@@ -29,7 +29,7 @@ public class LookItemUI
         this.transform = this.gameObject.transform;
 
         itemListRoot = this.transform.Find("group");
-        uiShowList = new List<ItemUIShowObj>();
+        uiShowList = new List<ItemCellUIShowObj>();
 
         InitList();
     }
@@ -53,8 +53,8 @@ public class LookItemUI
                     this.itemListRoot, false);
             }
 
-            ItemUIShowObj showObj = new ItemUIShowObj();
-            showObj.Init(go, this.BattleUI);
+            ItemCellUIShowObj showObj = new ItemCellUIShowObj();
+            showObj.Init(go, this.BattleUI,0);
             showObj.RefreshUI(data, i);
 
             uiShowList.Add(showObj);
@@ -82,6 +82,7 @@ public class LookItemUI
         {
             var data = dataList[i].itemData;
             var showObj = this.uiShowList[i];
+            showObj.entityGuid = this.entity.guid;
             showObj.RefreshUI(data, i);
         }
     }

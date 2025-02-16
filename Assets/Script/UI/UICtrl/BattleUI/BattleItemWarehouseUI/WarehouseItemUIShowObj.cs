@@ -95,16 +95,16 @@ public class WarehouseItemUIShowObj
         }
 
         //TODO 可以通用
-        if (dragScript.transferData is ItemUIShowObj)
+        if (dragScript.transferData is ItemCellUIShowObj)
         {
             //从实体道具栏拖过来的
-            var showObj = dragScript.transferData as ItemUIShowObj;
+            var showObj = dragScript.transferData as ItemCellUIShowObj;
 
             ItemMoveArg srcMoveArg = new ItemMoveArg();
             srcMoveArg.locationType = ItemLocationType.EntityItemBar;
             srcMoveArg.itemIndex = showObj.index;
             //这里如果还是用的 ItemUIShowObj 那么需要传入 entityGuid
-            srcMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            srcMoveArg.entityGuid = showObj.entityGuid;//BattleManager.Instance.GetLocalCtrlHeroGuid();
 
             ItemMoveArg desMoveArg = new ItemMoveArg();
             desMoveArg.locationType = ItemLocationType.Warehouse;

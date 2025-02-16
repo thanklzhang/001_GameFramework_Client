@@ -16,7 +16,7 @@ public class LocalPlayerEntityItemUI
 
     // private Button closeBtn;
 
-    private List<ItemUIShowObj> uiShowList;
+    private List<ItemCellUIShowObj> uiShowList;
 
     public BattleUI battleUI;
 
@@ -31,7 +31,7 @@ public class LocalPlayerEntityItemUI
         // closeBtn = this.transform.Find("root/closeBtn").GetComponent<Button>();
         // closeBtn.onClick.AddListener(() => { this.Close(); });
 
-        uiShowList = new List<ItemUIShowObj>();
+        uiShowList = new List<ItemCellUIShowObj>();
 
         InitList();
 
@@ -94,8 +94,8 @@ public class LocalPlayerEntityItemUI
                     this.itemListRoot, false);
             }
 
-            ItemUIShowObj showObj = new LocalPlayerItemUIShowObj();
-            showObj.Init(go, this.battleUI);
+            ItemCellUIShowObj showObj = new LocalPlayerItemUIShowObj();
+            showObj.Init(go, this.battleUI,localHero.guid);
             showObj.RefreshUI(data, i);
 
             uiShowList.Add(showObj);
@@ -152,7 +152,7 @@ public class LocalPlayerEntityItemUI
         // }
     }
 
-    public ItemUIShowObj FindShowItemCell(int index)
+    public ItemCellUIShowObj FindShowItemCell(int index)
     {
         foreach (var showObj in this.uiShowList)
         {

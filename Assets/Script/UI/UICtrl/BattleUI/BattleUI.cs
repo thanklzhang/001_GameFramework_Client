@@ -57,6 +57,9 @@ public partial class BattleUI : BaseUI
     //玩家仓库道具显示面板
     BattleItemWarehouseUI itemWarehouseUI;
 
+    //操作实体道具界面
+    OpEntitiesItemUI opEntitiesItemUI;
+
     //本地玩家实体身上的道具显示面板
     LocalPlayerEntityItemUI localEntityItemUI;
 
@@ -138,7 +141,11 @@ public partial class BattleUI : BaseUI
 
         //道具仓库
         itemWarehouseBtn = funcBtnRoot.Find("warehouse/item").GetComponent<Button>();
-        itemWarehouseBtn.onClick.AddListener(() => { this.itemWarehouseUI.Show(); });
+        itemWarehouseBtn.onClick.AddListener(() =>
+        {
+            this.opEntitiesItemUI.Show();
+            this.itemWarehouseUI.Show();
+        });
 
         //
         closeBtn.onClick.AddListener(() => { onCloseBtnClick?.Invoke(); });
@@ -177,6 +184,11 @@ public partial class BattleUI : BaseUI
         var itemWarehouseUIRoot = this.transform.Find("itemWarehouseUI");
         itemWarehouseUI = new BattleItemWarehouseUI();
         itemWarehouseUI.Init(itemWarehouseUIRoot.gameObject, this);
+        
+        //操作实体道具界面
+        var opEntitiesItemUIRoot = this.transform.Find("opEntitiesItemUI");
+        opEntitiesItemUI = new OpEntitiesItemUI();
+        opEntitiesItemUI.Init(opEntitiesItemUIRoot.gameObject, this);
 
         //玩家实体道具面板
         var localEntityItemUIRoot = this.transform.Find("localEntityItemUI");
@@ -258,6 +270,7 @@ public partial class BattleUI : BaseUI
         this.buffUI.RefreshAllUI();
         this.itemWarehouseUI.RefreshAllUI();
         this.localEntityItemUI.RefreshAllUI();
+        this.opEntitiesItemUI.RefreshAllUI();
         // this.skillItemOperateUI.RefreshAllUI();
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
@@ -290,6 +303,7 @@ public partial class BattleUI : BaseUI
         this.stageInfoUI.Update(deltaTime);
         this.itemWarehouseUI.Update(deltaTime);
         this.localEntityItemUI.Update(deltaTime);
+        this.opEntitiesItemUI.Update(deltaTime);
         // this.skillItemOperateUI.Update(deltaTime);
         this.boxUI.Update(deltaTime);
         this.boxMainUI.Update(deltaTime);
@@ -401,6 +415,13 @@ public partial class BattleUI : BaseUI
 
     #endregion
 
+    
+    
+    public void OnWarehouseClose()
+    {
+        this.opEntitiesItemUI.Close();
+    }
+    
 
     protected override void OnInactive()
     {
@@ -435,6 +456,7 @@ public partial class BattleUI : BaseUI
         this.describeUI.Release();
         this.floatWordMgr.Release();
         this.itemWarehouseUI.Release();
+        this.opEntitiesItemUI.Release();
         this.localEntityItemUI.Release();
         this.stageInfoUI.Release();
         // this.skillItemOperateUI.Release();
@@ -447,4 +469,5 @@ public partial class BattleUI : BaseUI
 
         this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }
+
 }

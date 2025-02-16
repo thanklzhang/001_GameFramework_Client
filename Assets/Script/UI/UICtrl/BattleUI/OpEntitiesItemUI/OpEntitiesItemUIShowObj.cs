@@ -9,15 +9,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-//本地玩家实体的装备栏显示
-public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
+//装备操作实体的道具显示
+public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
 {
     private DragScript dragScript;
     private DropScript dropScript;
 
-    public override void Init(GameObject gameObject, BattleUI battleUI,int entityGuid)
+
+    public override void Init(GameObject gameObject, BattleUI battleUI, int entityGuid)
     {
-        base.Init(gameObject, battleUI,entityGuid);
+        base.Init(gameObject, battleUI, entityGuid);
+
+
         dragScript = itemTran.gameObject.GetComponent<DragScript>();
         if (null == dragScript)
         {
@@ -41,13 +44,10 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
     public void OnBeginDrag_Before(PointerEventData eventData)
     {
         dragScript.transferData = this;
-        
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-       
-
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -57,8 +57,6 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
     public void OnEndDrag(PointerEventData eventData)
     {
         //this.parentUI.OnItemEndDrag(this,eventData);
-
-       
     }
 
 
@@ -68,6 +66,10 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
         GameObject dropped = eventData.pointerDrag;
 
         var dragScript = dropped.GetComponent<DragScript>();
+        if (null == dragScript)
+        {
+            return;
+        }
 
         //TODO 可以通用
         if (dragScript.transferData is ItemCellUIShowObj)
@@ -79,13 +81,13 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
             srcMoveArg.locationType = ItemLocationType.EntityItemBar;
             srcMoveArg.itemIndex = showObj.index;
             //这里如果还是用的 ItemUIShowObj 那么需要传入 entityGuid
-            srcMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            srcMoveArg.entityGuid = showObj.entityGuid; // BattleManager.Instance.GetLocalCtrlHeroGuid();
 
             ItemMoveArg desMoveArg = new ItemMoveArg();
             desMoveArg.locationType = ItemLocationType.EntityItemBar;
             desMoveArg.itemIndex = this.index;
-            desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
-            
+            desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
+
 
             BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
         }
@@ -97,11 +99,11 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
             ItemMoveArg srcMoveArg = new ItemMoveArg();
             srcMoveArg.locationType = ItemLocationType.Warehouse;
             srcMoveArg.itemIndex = showObj.index;
-            
+
             ItemMoveArg desMoveArg = new ItemMoveArg();
             desMoveArg.locationType = ItemLocationType.EntityItemBar;
             desMoveArg.itemIndex = this.index;
-            desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+            desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
 
             BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
         }

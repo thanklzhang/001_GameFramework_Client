@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemUIShowObj
+public class ItemCellUIShowObj
 {
     public GameObject gameObject;
     public Transform transform;
@@ -23,11 +23,15 @@ public class ItemUIShowObj
     public BattleItemData_Client data;
     private BattleUI battleUI;
     
-    public virtual void Init(GameObject gameObject, BattleUI battleUI)
+    public int entityGuid;
+    
+    public virtual void Init(GameObject gameObject, BattleUI battleUI,int entityGuid)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
         this.battleUI = battleUI;
+        
+        this.entityGuid = entityGuid;
 
         itemTran = this.transform.Find("CommonItem");
         this.itemIconImg = itemTran.Find("icon").GetComponent<Image>();

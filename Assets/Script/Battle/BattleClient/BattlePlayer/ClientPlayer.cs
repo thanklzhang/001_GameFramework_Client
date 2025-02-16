@@ -19,5 +19,14 @@ namespace Battle_Client
             InitBattleReward();
             InitPreference();
         }
+
+        public List<int> teamMemberGuids = new List<int>();
+        public void UpdatePlayerTeamMembersInfo(List<int> entityGuids)
+        {
+            teamMemberGuids = entityGuids;
+            EventDispatcher.Broadcast(EventIDs.OnUpdatePlayerTeamMembersInfo,
+                teamMemberGuids);
+
+        }
     }
 }

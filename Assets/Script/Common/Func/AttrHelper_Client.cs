@@ -3,6 +3,7 @@ using Battle;
 using Battle_Client;
 using Config;
 using UnityEngine;
+using BattleItem = Config.BattleItem;
 
 public class AttrHelper_Client
 {
@@ -15,7 +16,7 @@ public class AttrHelper_Client
 
         if (AttrHelper.IsPermillage(attrType))
         {
-            return  value / 1000.0f;
+            return value / 1000.0f;
         }
 
         return value;
@@ -46,6 +47,26 @@ public class AttrHelper_Client
                 desStr = "获得一个随机技能";
             }
         }
+        else if (type == BattleRewardType.Item_Gain)
+        {
+            nameStr = "获得道具";
+            if (isMakeSureReward)
+            {
+                desStr = "获得道具:";
+
+                var itemConfigId = battleReward.intArg1;
+                var itemConfig = ConfigManager.Instance.GetById<BattleItem>(itemConfigId);
+                desStr += itemConfig.Name + ":";
+
+                var attrStr = GetAttrContent(itemConfig.AttrGroupConfigId,
+                    battleReward.intListArg1);
+                desStr += attrStr;
+            }
+            else
+            {
+                desStr = "获得一个道具";
+            }
+        }
         else if (type == BattleRewardType.TeamMember_Gain)
         {
             nameStr = "获得队友";
@@ -59,8 +80,6 @@ public class AttrHelper_Client
             {
                 desStr = "获得一个队友";
             }
-
-         
         }
         else if (type == BattleRewardType.TeamMember_RandAttr)
         {
@@ -140,15 +159,35 @@ public class AttrHelper_Client
     {
         var attrGroupConfig = ConfigManager.Instance.GetById<BattleAttributeGroup>(attrGroupConfigId);
 
+        var isRand = attrGroupConfig.AddedValueRand != null && attrGroupConfig.AddedValueRand.Count > 0;
         var attrStr = "";
         for (int i = 0; i < attrGroupConfig.AddedAttrGroup.Count; i++)
         {
             var str = "";
             var attrType = (EntityAttrType)attrGroupConfig.AddedAttrGroup[i];
             var paramsList = attrGroupConfig.AddedValueGroup[i];
-            var randList = attrGroupConfig.AddedValueRand[i];
+            var randList = new List<int>();
+
+            if (isRand)
+            {
+                randList = attrGroupConfig.AddedValueRand[i];
+            }
+
+
             var attrValueType = (AddedValueType)paramsList[0];
-            var attrValue = intValueList[i];
+            var attrValue = 0;
+            bool isUseConfig = false;
+            if (intValueList != null && i < intValueList.Count)
+            {
+                //用传来的属性值
+                attrValue = intValueList[i];
+            }
+            else
+            {
+                //没有运行时数据，那么就走配置，如道具属性
+                attrValue = paramsList[1];
+                isUseConfig = true;
+            }
 
             var showAttrType = attrType;
             if (attrType >= EntityAttrType.Attack_Permillage)
@@ -163,16 +202,34 @@ public class AttrHelper_Client
 
                 if ((int)attrType < (int)EntityAttrType.Attack_Permillage)
                 {
-                    var randMin = randList[0];
-                    var randMax = randList[1];
-                    str += $"{resultValue} 点 {attrInfo.name} ({randMin} ~ {randMax})";
+                    if (isRand)
+                    {
+                        //随机属性项
+                        var randMin = randList[0];
+                        var randMax = randList[1];
+                        str += $"{resultValue} 点 {attrInfo.name} ({randMin} ~ {randMax})";
+                    }
+                    else
+                    {
+                        //固定属性项
+                        str += $"{resultValue} 点 {attrInfo.name}";
+                    }
                 }
                 else
                 {
-                    resultValue *= 100.0f;
-                    var randMin = randList[0] * 100.0f;
-                    var randMax = randList[1] * 100.0f;
-                    str += $"{resultValue}% {attrInfo.name} ({randMin}% ~ {randMax}%)";
+                    if (isRand)
+                    {
+                        //随机千分比属性项
+                        resultValue *= 100.0f;
+                        var randMin = randList[0] * 100.0f;
+                        var randMax = randList[1] * 100.0f;
+                        str += $"{resultValue}% {attrInfo.name} ({randMin}% ~ {randMax}%)";
+                    }
+                    else
+                    {
+                        //固定千分比属性项
+                        str += $"{resultValue}% {attrInfo.name}";
+                    }
                 }
 
                 attrStr += str;

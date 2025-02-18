@@ -55,6 +55,7 @@ namespace Battle_Client
                 if (currCell != null)
                 {
                     currCell.itemData = incomeBarCell.itemData;
+                    currCell.isUnlock = incomeBarCell.isUnlock;
                     
                     changeList.Add(currCell);
                 }
@@ -68,12 +69,13 @@ namespace Battle_Client
             return this.itemBarCellList.Find(cell => cell.index == index);
         }
 
-        public void UpdateItemBarItem(int index,BattleItemData_Client data)
+        public void UpdateItemBarItem(int index,BattleItemData_Client data,bool isUnlock)
         {
             var cell = FindItemBarCell(index);
             if (cell != null)
             {
                 cell.itemData = data;
+                cell.isUnlock = isUnlock;
             }
             
             EventDispatcher.Broadcast(EventIDs.OnEntityItemInfoUpdate,this,cell);
@@ -146,6 +148,7 @@ namespace Battle_Client
     {
         public int index;
         public BattleItemData_Client itemData;
+        public bool isUnlock = true;
     }
 
     //道具数据

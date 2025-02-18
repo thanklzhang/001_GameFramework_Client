@@ -1,0 +1,39 @@
+/*
+ * generate by tool
+*/
+//using System.Collections;
+using System.Collections.Generic;
+using Config;
+namespace Battle
+{
+    
+    
+ 
+    public class BattleCommonParam_Impl : IBattleCommonParam
+    {
+        private Config.BattleCommonParam config;
+        
+        public void Init(int id)
+        {
+            config = ConfigManager.Instance.GetById<Config.BattleCommonParam>(id);
+        }
+        
+        public int Id => config.Id;
+        
+        /// <summary>
+        ///实体初始解锁实体装备栏数目
+        /// </summary>
+        public int InitEntityItemBarCellUnlockCount => config.InitEntityItemBarCellUnlockCount;
+        
+        /// <summary>
+        ///实体的装备栏最大格子数量
+        /// </summary>
+        public int MaxEntityItemBarCellCount => config.MaxEntityItemBarCellCount;
+        
+        /// <summary>
+        ///实体装备栏解锁星级
+        /// </summary>
+        public List<int> EntityItemBarCellUnlockStarLevel => config.EntityItemBarCellUnlockStarLevel;
+        
+    } 
+}

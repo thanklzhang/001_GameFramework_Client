@@ -766,12 +766,13 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<SyncWarehouseItem_RecvMsg>(arg);
         }
 
-        public void SyncEntityItemBarItem(int entityGuid, int cellIndex, BattleItem opItem)
+        public void SyncEntityItemBarItem(int entityGuid, int cellIndex, BattleItem opItem,bool isUnlock)
         {
             var arg = new SyncEntityItemBarItem_RecvMsg_Arg()
             {
                 entityGuid = entityGuid,
-                index = cellIndex
+                index = cellIndex,
+                isUnlock = isUnlock
             };
 
             if (opItem != null)

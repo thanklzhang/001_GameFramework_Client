@@ -21,7 +21,7 @@ namespace Battle_Client
             var entity = BattleEntityManager.Instance.FindEntity(arg.entityGuid);
             if (entity != null)
             {
-                entity.UpdateItemBarItem(arg.index,arg.itemData);
+                entity.UpdateItemBarItem(arg.index,arg.itemData,arg.isUnlock);
             }
             // if (player != null && arg.playerIndex == player.playerIndex)
             // {
@@ -35,5 +35,6 @@ namespace Battle_Client
         public int entityGuid;
         public BattleItemData_Client itemData;
         public int index;
+        public bool isUnlock;
     }
 }

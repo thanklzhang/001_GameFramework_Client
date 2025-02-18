@@ -49,7 +49,7 @@ public class LocalPlayerEntityItemUI
             foreach (var barCell in barCellList)
             {
                 var cell = FindShowItemCell(barCell.index);
-                cell.RefreshUI(barCell.itemData, barCell.index);
+                cell.RefreshUI(barCell.itemData, barCell.index,barCell.isUnlock);
             }
         }
       
@@ -60,7 +60,7 @@ public class LocalPlayerEntityItemUI
         if (entity.guid == BattleManager.Instance.GetLocalCtrlHeroGuid())
         {
              var showObjCel = FindShowItemCell(itemBarCell.index);
-             showObjCel.RefreshUI(itemBarCell.itemData,itemBarCell.index);
+             showObjCel.RefreshUI(itemBarCell.itemData,itemBarCell.index,itemBarCell.isUnlock);
         }
     }
 

@@ -22,15 +22,16 @@ public class ItemCellUIShowObj
     public int index;
     public BattleItemData_Client data;
     private BattleUI battleUI;
-    
+    public bool isUnlock;
+
     public int entityGuid;
-    
-    public virtual void Init(GameObject gameObject, BattleUI battleUI,int entityGuid)
+
+    public virtual void Init(GameObject gameObject, BattleUI battleUI, int entityGuid)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
         this.battleUI = battleUI;
-        
+
         this.entityGuid = entityGuid;
 
         itemTran = this.transform.Find("CommonItem");
@@ -43,38 +44,47 @@ public class ItemCellUIShowObj
         evetnTrigger.OnPointerExitEvent += OnPointExit;
     }
 
-    public void RefreshUI(BattleItemData_Client data, int index)
+    public void RefreshUI(BattleItemData_Client data, int index, bool isUnlock = true)
     {
         this.index = index;
         this.data = data;
+        this.isUnlock = isUnlock;
 
         RefreshItemShow();
     }
 
     void RefreshItemShow()
     {
-        if (data != null)
+        if (this.isUnlock)
         {
-            this.itemTran.gameObject.SetActive(true);
-
-            var itemConfig = ConfigManager.Instance.GetById<Config.BattleItem>(this.data.configId);
-            var iconResId = itemConfig.IconResId;
-            ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) => { this.itemIconImg.sprite = sprite; });
-
-            var count = this.data.count;
-            countText.text = "" + this.data.count;
-            if (count > 1)
+            if (data != null)
             {
-                countText.gameObject.SetActive(true);
+                this.itemTran.gameObject.SetActive(true);
+
+                var itemConfig = ConfigManager.Instance.GetById<Config.BattleItem>(this.data.configId);
+                var iconResId = itemConfig.IconResId;
+                ResourceManager.Instance.GetObject<Sprite>(iconResId,
+                    (sprite) => { this.itemIconImg.sprite = sprite; });
+
+                var count = this.data.count;
+                countText.text = "" + this.data.count;
+                if (count > 1)
+                {
+                    countText.gameObject.SetActive(true);
+                }
+                else
+                {
+                    countText.gameObject.SetActive(false);
+                }
             }
             else
             {
-                countText.gameObject.SetActive(false);
+                this.itemTran.gameObject.SetActive(false);
             }
         }
         else
         {
-            this.itemTran.gameObject.SetActive(false);
+            //TODO 未解锁状态
         }
     }
 

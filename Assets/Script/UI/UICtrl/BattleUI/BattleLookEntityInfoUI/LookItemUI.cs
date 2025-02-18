@@ -24,7 +24,7 @@ public class LookItemUI
     public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.BattleUI = battleUIPre;
-        
+
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
 
@@ -33,6 +33,7 @@ public class LookItemUI
 
         InitList();
     }
+
     //初始化道具列表
     public void InitList()
     {
@@ -54,7 +55,7 @@ public class LookItemUI
             }
 
             ItemCellUIShowObj showObj = new ItemCellUIShowObj();
-            showObj.Init(go, this.BattleUI,0);
+            showObj.Init(go, this.BattleUI, 0);
             showObj.RefreshUI(data, i);
 
             uiShowList.Add(showObj);
@@ -67,39 +68,39 @@ public class LookItemUI
     }
 
     private BattleEntity_Client entity;
+
     public void RefreshAllUI(BattleEntity_Client entity)
     {
         this.entity = entity;
         UpdateAllItemShow();
-
     }
-    
+
     public void UpdateAllItemShow()
     {
         var dataList = entity.GetItemBarCells();
 
         for (int i = 0; i < dataList.Count; i++)
         {
-            var data = dataList[i].itemData;
+            var data = dataList[i];
+            var itemData = data.itemData;
             var showObj = this.uiShowList[i];
             showObj.entityGuid = this.entity.guid;
-            showObj.RefreshUI(data, i);
+            showObj.RefreshUI(itemData, i, data.isUnlock);
         }
     }
 
-    public void RefreshItem(BattleEntity_Client entity,ItemBarCellData_Client cell)
+    public void RefreshItem(BattleEntity_Client entity, ItemBarCellData_Client cell)
     {
         for (int i = 0; i < this.uiShowList.Count; i++)
         {
             var showObj = uiShowList[i];
             if (showObj.index == cell.index)
             {
-                showObj.RefreshUI(cell.itemData, i);
+                showObj.RefreshUI(cell.itemData, i, cell.isUnlock);
             }
         }
     }
 
-   
 
     public void Update(float deltaTime)
     {

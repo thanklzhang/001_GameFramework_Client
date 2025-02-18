@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Config;
 using UnityEngine;
 
 namespace Battle_Client
@@ -35,7 +36,11 @@ namespace Battle_Client
             // }
 
             itemBarCellList = new List<ItemBarCellData_Client>();
-            for (int i = 0; i < 6; i++)
+            
+            var config = ConfigManager.Instance.GetById<Config.BattleCommonParam>(1);
+            var maxCellCount = config.MaxEntityItemBarCellCount;
+            
+            for (int i = 0; i < maxCellCount; i++)
             {
                 var itemCell = new ItemBarCellData_Client();
                 itemCell.index = i;

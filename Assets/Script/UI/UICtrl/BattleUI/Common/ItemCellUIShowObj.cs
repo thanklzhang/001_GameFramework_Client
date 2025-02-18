@@ -14,18 +14,21 @@ public class ItemCellUIShowObj
     public Transform transform;
 
     protected Transform itemTran;
-    protected Image itemIconImg;
-    private TextMeshProUGUI countText;
+    // protected Image itemIconImg;
+    // private TextMeshProUGUI countText;
+    private GameObject lockFlagGo;
     private UIEventTrigger evetnTrigger;
 
     //runtime
     public int index;
-    public BattleItemData_Client data;
+    public BattleItemData_Client itemData;
     private BattleUI battleUI;
     public bool isUnlock;
 
     public int entityGuid;
 
+    private CommonItem itemShowObj;
+    
     public virtual void Init(GameObject gameObject, BattleUI battleUI, int entityGuid)
     {
         this.gameObject = gameObject;
@@ -35,10 +38,16 @@ public class ItemCellUIShowObj
         this.entityGuid = entityGuid;
 
         itemTran = this.transform.Find("CommonItem");
-        this.itemIconImg = itemTran.Find("icon").GetComponent<Image>();
 
-        countText = itemTran.transform.Find("countText").GetComponent<TextMeshProUGUI>();
+        itemShowObj = new CommonItem();
+        itemShowObj.Init(itemTran.gameObject);
+        // this.itemIconImg = itemTran.Find("icon").GetComponent<Image>();
+        //
+        // countText = itemTran.transform.Find("countText").GetComponent<TextMeshProUGUI>();
 
+        lockFlagGo = transform.Find("lock").gameObject;
+
+        var itemIconImg = itemShowObj.GetIconImage();
         evetnTrigger = itemIconImg.GetComponent<UIEventTrigger>();
         evetnTrigger.OnPointEnterEvent += OnPointEnter;
         evetnTrigger.OnPointerExitEvent += OnPointExit;
@@ -47,7 +56,7 @@ public class ItemCellUIShowObj
     public void RefreshUI(BattleItemData_Client data, int index, bool isUnlock = true)
     {
         this.index = index;
-        this.data = data;
+        this.itemData = data;
         this.isUnlock = isUnlock;
 
         RefreshItemShow();
@@ -57,25 +66,27 @@ public class ItemCellUIShowObj
     {
         if (this.isUnlock)
         {
-            if (data != null)
+            if (itemData != null)
             {
+                lockFlagGo.SetActive(false);
                 this.itemTran.gameObject.SetActive(true);
 
-                var itemConfig = ConfigManager.Instance.GetById<Config.BattleItem>(this.data.configId);
-                var iconResId = itemConfig.IconResId;
-                ResourceManager.Instance.GetObject<Sprite>(iconResId,
-                    (sprite) => { this.itemIconImg.sprite = sprite; });
-
-                var count = this.data.count;
-                countText.text = "" + this.data.count;
-                if (count > 1)
-                {
-                    countText.gameObject.SetActive(true);
-                }
-                else
-                {
-                    countText.gameObject.SetActive(false);
-                }
+                // var itemConfig = ConfigManager.Instance.GetById<Config.BattleItem>(this.data.configId);
+                // var iconResId = itemConfig.IconResId;
+                // ResourceManager.Instance.GetObject<Sprite>(iconResId,
+                //     (sprite) => { this.itemIconImg.sprite = sprite; });
+                //
+                // var count = this.data.count;
+                // countText.text = "" + this.data.count;
+                // if (count > 1)
+                // {
+                //     countText.gameObject.SetActive(true);
+                // }
+                // else
+                // {
+                //     countText.gameObject.SetActive(false);
+                // }
+                itemShowObj.RefreshUI(itemData);
             }
             else
             {
@@ -84,7 +95,8 @@ public class ItemCellUIShowObj
         }
         else
         {
-            //TODO 未解锁状态
+            this.itemTran.gameObject.SetActive(true);
+            lockFlagGo.SetActive(true);
         }
     }
 
@@ -106,19 +118,22 @@ public class ItemCellUIShowObj
         var battleUIRect = battleUI.gameObject.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(battleUIRect, screenPos, cameraUI.camera, out uiPos);
 
-        EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UIItemOption_PointEnter, this.data.configId, uiPos);
+        EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UIItemOption_PointEnter, this.itemData.configId, uiPos);
     }
 
     public void OnPointExit(PointerEventData e)
     {
-        EventDispatcher.Broadcast<int>(EventIDs.On_UIItemOption_PointExit, this.data.configId);
+        EventDispatcher.Broadcast<int>(EventIDs.On_UIItemOption_PointExit, this.itemData.configId);
     }
 
 
     public virtual void Release()
     {
+        itemShowObj.Release();
+        
         evetnTrigger.OnPointEnterEvent -= OnPointEnter;
         evetnTrigger.OnPointerExitEvent -= OnPointExit;
+        
     }
 }
 

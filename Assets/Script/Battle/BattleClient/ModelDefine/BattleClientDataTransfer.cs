@@ -38,6 +38,8 @@ namespace Battle_Client
         public BattleClientMsg_BattleMyBox myBox;
     }
 
+    
+    
     public class BattleClient_Currency
     {
         public Dictionary<int, BattleClient_CurrencyItem> currencyDic;

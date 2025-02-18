@@ -27,6 +27,16 @@ namespace Config
         /// </summary>
         private List<int> entityItemBarCellUnlockStarLevel; 
         
+        /// <summary>
+        ///玩家仓库初始解锁道具栏数目
+        /// </summary>
+        private int initPlayerWarhouseCellUnlockCount; 
+        
+        /// <summary>
+        ///实体的仓库道具栏最大格子数量
+        /// </summary>
+        private int maxPlayerWarhouseCellCount; 
+        
 
         
         public int InitEntityItemBarCellUnlockCount { get => initEntityItemBarCellUnlockCount; }     
@@ -34,6 +44,10 @@ namespace Config
         public int MaxEntityItemBarCellCount { get => maxEntityItemBarCellCount; }     
         
         public List<int> EntityItemBarCellUnlockStarLevel { get => entityItemBarCellUnlockStarLevel; }     
+        
+        public int InitPlayerWarhouseCellUnlockCount { get => initPlayerWarhouseCellUnlockCount; }     
+        
+        public int MaxPlayerWarhouseCellCount { get => maxPlayerWarhouseCellCount; }     
         
 
     } 

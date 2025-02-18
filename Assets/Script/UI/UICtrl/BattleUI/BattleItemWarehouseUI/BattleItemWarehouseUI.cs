@@ -47,7 +47,7 @@ public class BattleItemWarehouseUI
     public void OnUpdateWarehouseItemData(WarehouseItemCellData_Client cellData)
     {
         var cell = FindItemCell(cellData.index);
-        cell.RefreshUI(cellData.itemData, cellData.index);
+        cell.RefreshUI(cellData.itemData, cellData.index, cellData.isUnlock);
     }
 
     public void OnItemInfoUpdate(BattleItemData_Client itemData)
@@ -80,6 +80,7 @@ public class BattleItemWarehouseUI
 
         for (int i = 0; i < dataList.Count; i++)
         {
+            var cellData = dataList[i];
             var data = dataList[i].itemData;
             GameObject go = null;
             if (i < this.itemListRoot.childCount)
@@ -94,9 +95,15 @@ public class BattleItemWarehouseUI
 
             WarehouseItemUIShowObj showObj = new WarehouseItemUIShowObj();
             showObj.Init(go, this);
-            showObj.RefreshUI(data, i);
+            showObj.RefreshUI(data, i, cellData.isUnlock);
+            showObj.gameObject.SetActive(true);
 
             uiShowList.Add(showObj);
+        }
+
+        for (int i = dataList.Count; i < this.itemListRoot.childCount; i++)
+        {
+            this.itemListRoot.GetChild(i).gameObject.SetActive(false);
         }
     }
 
@@ -107,18 +114,19 @@ public class BattleItemWarehouseUI
 
         for (int i = 0; i < dataList.Count; i++)
         {
+            var cellData = dataList[i];
             var data = dataList[i].itemData;
             var showObj = this.uiShowList[i];
-            showObj.RefreshUI(data, i);
+            showObj.RefreshUI(data, i, cellData.isUnlock);
         }
     }
 
-    public void UpdateItemInfo(BattleItemData_Client itemInfo, int index)
+    public void UpdateItemInfo(BattleItemData_Client itemInfo, int index, bool isUnlock)
     {
         var itemShowObj = FindItemCell(index);
         if (itemShowObj != null)
         {
-            itemShowObj.RefreshUI(itemInfo, index);
+            itemShowObj.RefreshUI(itemInfo, index, isUnlock);
         }
         else
         {

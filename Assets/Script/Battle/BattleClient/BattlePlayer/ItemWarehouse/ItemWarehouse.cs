@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Battle;
+using Config;
 
 namespace Battle_Client
 {
@@ -13,15 +14,21 @@ namespace Battle_Client
     {
         public List<WarehouseItemCellData_Client> itemCellList;
 
-        public int maxCellCount = 100;
+        //public int maxCellCount = 100;
 
         public void Init()
         {
             itemCellList = new List<WarehouseItemCellData_Client>();
+            
+            var config = ConfigManager.Instance.GetById<Config.BattleCommonParam>(1);
+            var maxCellCount = config.MaxPlayerWarhouseCellCount;
+            var initCount = config.InitPlayerWarhouseCellUnlockCount;
+            
             for (int i = 0; i < maxCellCount; i++)
             {
                 var cell = new WarehouseItemCellData_Client();
                 cell.index = i;
+                cell.isUnlock = i < initCount;
                 itemCellList.Add(cell);
             }
         }

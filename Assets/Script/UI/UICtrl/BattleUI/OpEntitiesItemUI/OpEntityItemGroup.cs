@@ -88,6 +88,7 @@ public class OpEntityItemGroup
             var showObj = new OpEntitiesItemUIShowObj();
             showObj.Init(go, this.battleUI,this.entity.guid);
             showObj.RefreshUI(data, i);
+            showObj.gameObject.SetActive(true);
 
             itemShowObjList.Add(showObj);
         }

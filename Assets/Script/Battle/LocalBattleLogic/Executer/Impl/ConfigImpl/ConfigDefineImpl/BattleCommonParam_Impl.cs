@@ -35,5 +35,15 @@ namespace Battle
         /// </summary>
         public List<int> EntityItemBarCellUnlockStarLevel => config.EntityItemBarCellUnlockStarLevel;
         
+        /// <summary>
+        ///玩家仓库初始解锁道具栏数目
+        /// </summary>
+        public int InitPlayerWarhouseCellUnlockCount => config.InitPlayerWarhouseCellUnlockCount;
+        
+        /// <summary>
+        ///实体的仓库道具栏最大格子数量
+        /// </summary>
+        public int MaxPlayerWarhouseCellCount => config.MaxPlayerWarhouseCellCount;
+        
     } 
 }

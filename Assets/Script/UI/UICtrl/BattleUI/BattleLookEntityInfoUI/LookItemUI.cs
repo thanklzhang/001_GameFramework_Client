@@ -57,8 +57,14 @@ public class LookItemUI
             ItemCellUIShowObj showObj = new ItemCellUIShowObj();
             showObj.Init(go, this.BattleUI, 0);
             showObj.RefreshUI(data, i);
+            showObj.gameObject.SetActive(true);
 
             uiShowList.Add(showObj);
+        }
+        
+        for (int i = dataList.Count; i < this.itemListRoot.childCount; i++)
+        {
+            this.itemListRoot.GetChild(i).gameObject.SetActive(false);
         }
     }
 

@@ -27,7 +27,7 @@ public class LocalPlayerEntityItemUI
 
         this.battleUI = battleUI;
         itemListRoot = this.transform.Find("itemRoot");
-        
+
         // closeBtn = this.transform.Find("root/closeBtn").GetComponent<Button>();
         // closeBtn.onClick.AddListener(() => { this.Close(); });
 
@@ -49,18 +49,17 @@ public class LocalPlayerEntityItemUI
             foreach (var barCell in barCellList)
             {
                 var cell = FindShowItemCell(barCell.index);
-                cell.RefreshUI(barCell.itemData, barCell.index,barCell.isUnlock);
+                cell.RefreshUI(barCell.itemData, barCell.index, barCell.isUnlock);
             }
         }
-      
     }
-    
+
     public void OnEntityItemInfoUpdate(BattleEntity_Client entity, ItemBarCellData_Client itemBarCell)
     {
         if (entity.guid == BattleManager.Instance.GetLocalCtrlHeroGuid())
         {
-             var showObjCel = FindShowItemCell(itemBarCell.index);
-             showObjCel.RefreshUI(itemBarCell.itemData,itemBarCell.index,itemBarCell.isUnlock);
+            var showObjCel = FindShowItemCell(itemBarCell.index);
+            showObjCel.RefreshUI(itemBarCell.itemData, itemBarCell.index, itemBarCell.isUnlock);
         }
     }
 
@@ -82,7 +81,8 @@ public class LocalPlayerEntityItemUI
 
         for (int i = 0; i < dataList.Count; i++)
         {
-            var data = dataList[i].itemData;
+            var data = dataList[i]; //.itemData;
+            var itemData = data.itemData;
             GameObject go = null;
             if (i < this.itemListRoot.childCount)
             {
@@ -95,14 +95,14 @@ public class LocalPlayerEntityItemUI
             }
 
             ItemCellUIShowObj showObj = new LocalPlayerItemUIShowObj();
-            showObj.Init(go, this.battleUI,localHero.guid);
-            showObj.RefreshUI(data, i);
+            showObj.Init(go, this.battleUI, localHero.guid);
+            showObj.RefreshUI(itemData, i, data.isUnlock);
             showObj.gameObject.SetActive(true);
 
             uiShowList.Add(showObj);
         }
 
-        
+
         for (int i = dataList.Count; i < this.itemListRoot.childCount; i++)
         {
             this.itemListRoot.GetChild(i).gameObject.SetActive(false);
@@ -116,9 +116,10 @@ public class LocalPlayerEntityItemUI
 
         for (int i = 0; i < dataList.Count; i++)
         {
-            var data = dataList[i].itemData;
+            var data = dataList[i];
+            var itemdData = dataList[i].itemData;
             var showObj = this.uiShowList[i];
-            showObj.RefreshUI(data, i);
+            showObj.RefreshUI(itemdData, i, data.isUnlock);
         }
     }
 

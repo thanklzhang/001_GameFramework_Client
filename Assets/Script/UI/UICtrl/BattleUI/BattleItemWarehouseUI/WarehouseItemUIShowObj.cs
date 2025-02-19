@@ -153,9 +153,11 @@ public class WarehouseItemUIShowObj
     {
         if (this.isUnlock)
         {
+            this.lockFlagGo.SetActive(false);
+            
             if (itemData != null)
             {
-                this.lockFlagGo.SetActive(false);
+               
                 this.itemTran.gameObject.SetActive(true);
 
                 // var itemConfig = ConfigManager.Instance.GetById<Config.BattleItem>(this.data.configId);

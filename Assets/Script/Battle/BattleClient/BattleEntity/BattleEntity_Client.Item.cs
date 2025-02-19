@@ -39,12 +39,14 @@ namespace Battle_Client
             
             var config = ConfigManager.Instance.GetById<Config.BattleCommonParam>(1);
             var maxCellCount = config.MaxEntityItemBarCellCount;
+            var initCellCount = config.InitEntityItemBarCellUnlockCount;
             
             for (int i = 0; i < maxCellCount; i++)
             {
                 var itemCell = new ItemBarCellData_Client();
                 itemCell.index = i;
                 itemCell.itemData = null;
+                itemCell.isUnlock = i < initCellCount;
                 itemBarCellList.Add(itemCell);
             }
         }

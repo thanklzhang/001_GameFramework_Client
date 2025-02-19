@@ -746,6 +746,17 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<ReplaceSkillResult_RecvMsg>(arg);
         }
 
+        public void Notify_ReplaceTeamMemberResult(int playerIndex, ResultCode retCode)
+        {
+            var arg = new ReplaceTeamMemberResult_RecvMsg_Arg()
+            {
+                playerIndex = playerIndex,
+                retCodeType = retCode.type,
+                teamMemberConfigId = retCode.intArg1
+            };
+            BattleManager.Instance.RecvBattleMsg<ReplaceTeamMemberResult_RecvMsg>(arg);
+        }
+
         public void SyncPlayerWarehouseItem(int playerIndex, int cellIndex, BattleItem opItem)
         {
             var arg = new SyncWarehouseItem_RecvMsg_Arg()

@@ -33,6 +33,7 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
 
 
         dropScript = this.gameObject.GetComponent<DropScript>();
+      
         dropScript.OnDropAction += OnDropAction;
     }
 
@@ -68,6 +69,12 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
         GameObject dropped = eventData.pointerDrag;
 
         var dragScript = dropped.GetComponent<DragScript>();
+
+        if (null == dragScript)
+        {
+            return;
+        }
+        
 
         //TODO 可以通用
         if (dragScript.transferData is ItemCellUIShowObj)

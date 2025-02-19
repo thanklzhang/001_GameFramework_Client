@@ -21,7 +21,7 @@ namespace Battle_Client
         public List<ClientPlayer> playerList;
 
         ClientPlayer localPlayer;
-        
+
 
         //本地玩家控制的英雄
         BattleEntity_Client localCtrlEntity;
@@ -34,17 +34,16 @@ namespace Battle_Client
         private BattleClient_CreateBattleArgs battleClientArgs;
 
         private PlayerInput playerInput;
+
         //当前通过波的结算信息
         public BattleWavePass_RecvMsg_Arg wavePassArg;
+
         //是否智能施法
         private bool isIntelligentRelease;
 
         public bool IsIntelligentRelease
         {
-            get
-            {
-                return LocalData.GetInt("intelligentRelease_switch") > 0;
-            }
+            get { return LocalData.GetInt("intelligentRelease_switch") > 0; }
             set
             {
                 isIntelligentRelease = value;
@@ -79,21 +78,21 @@ namespace Battle_Client
             this.localBattleExecuter?.OnEnterBattle();
         }
 
-        public void OnEnterProcessState(BattleProcessState state,int timeMS)
+        public void OnEnterProcessState(BattleProcessState state, int timeMS)
         {
             this.processState = state;
 
             if (state == BattleProcessState.Ready)
             {
-                EventDispatcher.Broadcast<int>(EventIDs.OnProcessReadyStateEnter,timeMS);
+                EventDispatcher.Broadcast<int>(EventIDs.OnProcessReadyStateEnter, timeMS);
             }
-            else if(state == BattleProcessState.Battle)
+            else if (state == BattleProcessState.Battle)
             {
-                EventDispatcher.Broadcast<int>(EventIDs.OnProcessBattleStateEnter,timeMS);
+                EventDispatcher.Broadcast<int>(EventIDs.OnProcessBattleStateEnter, timeMS);
             }
-            else if(state == BattleProcessState.Boss)
+            else if (state == BattleProcessState.Boss)
             {
-                EventDispatcher.Broadcast<int>(EventIDs.OnProcessBossStateEnter,timeMS);
+                EventDispatcher.Broadcast<int>(EventIDs.OnProcessBossStateEnter, timeMS);
             }
         }
 
@@ -120,7 +119,7 @@ namespace Battle_Client
             localBattleExecuter?.FixedUpdate(fixedTime);
         }
 
-       
+
         public void OnBattleWavePass(BattleWavePass_RecvMsg_Arg wavePassArg)
         {
             this.wavePassArg = wavePassArg;
@@ -161,7 +160,7 @@ namespace Battle_Client
             //     };
             //     args.uiItem.Add(_item);
             // }
-            
+
             // this._resultUIPre.Refresh(args);
             // this._resultUIPre.Show();
             //
@@ -195,6 +194,14 @@ namespace Battle_Client
             // uiArg.replaceSkillIdList = new List<int>();
             uiArg.opSkillId = arg.opSkillId;
             UIManager.Instance.Open<BattleReplaceSkillUI>(uiArg);
+        }
+
+        public void OnReplaceTeamMemberResult(ReplaceTeamMemberResult_RecvMsg_Arg arg)
+        {
+            // BattleReplaceSkillUIArgs uiArg = new BattleReplaceSkillUIArgs();
+            // // uiArg.replaceSkillIdList = new List<int>();
+            // uiArg.opSkillId = arg.teamMemberConfigId;
+            // UIManager.Instance.Open<BattleReplaceSkillUI>(uiArg);
         }
 
         public void Clear()

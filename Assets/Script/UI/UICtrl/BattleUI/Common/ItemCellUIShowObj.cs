@@ -66,9 +66,10 @@ public class ItemCellUIShowObj
     {
         if (this.isUnlock)
         {
+            lockFlagGo.SetActive(false);
+            
             if (itemData != null)
-            {
-                lockFlagGo.SetActive(false);
+            {    
                 this.itemTran.gameObject.SetActive(true);
 
                 // var itemConfig = ConfigManager.Instance.GetById<Config.BattleItem>(this.data.configId);
@@ -95,7 +96,7 @@ public class ItemCellUIShowObj
         }
         else
         {
-            this.itemTran.gameObject.SetActive(true);
+            this.itemTran.gameObject.SetActive(false);
             lockFlagGo.SetActive(true);
         }
     }
@@ -106,6 +107,10 @@ public class ItemCellUIShowObj
 
     public void OnPointEnter(PointerEventData e)
     {
+        if (null == this.itemData)
+        {
+            return;
+        }
         //转换成点在 BattleUI 中的 localPosition
 
         var camera3D = CameraManager.Instance.GetCamera3D();
@@ -123,6 +128,11 @@ public class ItemCellUIShowObj
 
     public void OnPointExit(PointerEventData e)
     {
+        if (null == this.itemData)
+        {
+            return;
+        }
+
         EventDispatcher.Broadcast<int>(EventIDs.On_UIItemOption_PointExit, this.itemData.configId);
     }
 

@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 
+
 public class ItemCellUIShowObj
 {
     public GameObject gameObject;
@@ -148,6 +149,13 @@ public class ItemCellUIShowObj
         evetnTrigger.OnPointEnterEvent -= OnPointEnter;
         evetnTrigger.OnPointerExitEvent -= OnPointExit;
         
+    }
+
+    
+    //获取移动中的定位参数
+    public virtual ItemMoveLocationArg_Client GetItemMoveLocationArg()
+    {
+        return null;
     }
 }
 

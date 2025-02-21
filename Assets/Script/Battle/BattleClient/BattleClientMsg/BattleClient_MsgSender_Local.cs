@@ -252,7 +252,7 @@ namespace Battle_Client
             battle.OnRecvBattleMsg<SelectReplaceHero_BattleMsg>(hero.playerIndex, arg);
         }
 
-        public void Send_MoveItemTo(ItemMoveArg srcArg,ItemMoveArg desArg)
+        public void Send_MoveItemTo(ItemMoveLocationArg_Client srcArg,ItemMoveLocationArg_Client desArg)
         {
             var arg = new MoveItem_BattleMsg_Arg();
             arg.srcOpLoc = BattleConvert.ToItemOpLocation(srcArg);

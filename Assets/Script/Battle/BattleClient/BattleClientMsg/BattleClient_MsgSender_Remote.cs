@@ -85,7 +85,7 @@ namespace Battle_Client
             throw new NotImplementedException();
         }
 
-        public void Send_MoveItemTo(ItemMoveArg srcArg,ItemMoveArg desArg)
+        public void Send_MoveItemTo(ItemMoveLocationArg_Client srcArg,ItemMoveLocationArg_Client desArg)
         {
             
         }

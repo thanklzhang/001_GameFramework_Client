@@ -100,7 +100,7 @@ namespace Battle_Client
             return itemList;
         }
 
-        public static MoveItemOpLocation ToItemOpLocation(ItemMoveArg moveArg)
+        public static MoveItemOpLocation ToItemOpLocation(ItemMoveLocationArg_Client moveArg)
         {
             MoveItemOpLocation opLoc = new MoveItemOpLocation();
             opLoc.type = moveArg.locationType;

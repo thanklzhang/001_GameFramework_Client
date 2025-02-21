@@ -17,7 +17,7 @@ public class BattleItemWarehouseUI
 
     private Button closeBtn;
 
-    private List<WarehouseItemUIShowObj> uiShowList;
+    private List<WarehouseCellUIShowObj> uiShowList;
 
     public BattleUI battleUI;
 
@@ -35,7 +35,7 @@ public class BattleItemWarehouseUI
             this.battleUI.OnWarehouseClose();
         });
 
-        uiShowList = new List<WarehouseItemUIShowObj>();
+        uiShowList = new List<WarehouseCellUIShowObj>();
 
         InitList();
 
@@ -93,7 +93,7 @@ public class BattleItemWarehouseUI
                     this.itemListRoot, false);
             }
 
-            WarehouseItemUIShowObj showObj = new WarehouseItemUIShowObj();
+            WarehouseCellUIShowObj showObj = new WarehouseCellUIShowObj();
             showObj.Init(go, this.battleUI,0);
             showObj.RefreshUI(data, i, cellData.isUnlock);
             showObj.gameObject.SetActive(true);
@@ -158,7 +158,7 @@ public class BattleItemWarehouseUI
         // }
     }
 
-    public WarehouseItemUIShowObj FindItemCell(int index)
+    public WarehouseCellUIShowObj FindItemCell(int index)
     {
         foreach (var showObj in this.uiShowList)
         {

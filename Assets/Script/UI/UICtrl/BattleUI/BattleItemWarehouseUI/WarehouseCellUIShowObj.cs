@@ -8,9 +8,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
 
-//装备操作实体的道具显示
-public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
+public class WarehouseCellUIShowObj : ItemCellUIShowObj
 {
     private DragScript dragScript;
     private DropScript dropScript;
@@ -20,7 +20,7 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
     {
         base.Init(gameObject, battleUI, entityGuid);
 
-        locationType = ItemLocationType.EntityItemBar;
+        locationType = ItemLocationType.Warehouse;
         dragScript = itemTran.gameObject.GetComponent<DragScript>();
         if (null == dragScript)
         {
@@ -74,11 +74,11 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
         if (dragScript.transferData is ItemCellUIShowObj)
         {
             var itemCellUIShowObj = dragScript.transferData as ItemCellUIShowObj;
+
             if (itemCellUIShowObj != null)
             {
                 BattleManager.Instance.MsgSender.Send_MoveItemTo(
                     itemCellUIShowObj.GetItemMoveLocationArg(), this.GetItemMoveLocationArg());
-                
                 
                 // //TODO 可以通用
                 // if (itemCellUIShowObj.locationType == ItemLocationType.EntityItemBar)
@@ -90,12 +90,12 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
                 //     srcMoveArg.locationType = ItemLocationType.EntityItemBar;
                 //     srcMoveArg.itemIndex = showObj.index;
                 //     //这里如果还是用的 ItemUIShowObj 那么需要传入 entityGuid
-                //     srcMoveArg.entityGuid = showObj.entityGuid; // BattleManager.Instance.GetLocalCtrlHeroGuid();
+                //     srcMoveArg.entityGuid = showObj.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
                 //
                 //     ItemMoveLocationArg_Client desMoveArg = new ItemMoveLocationArg_Client();
-                //     desMoveArg.locationType = ItemLocationType.EntityItemBar;
+                //     desMoveArg.locationType = ItemLocationType.Warehouse;
                 //     desMoveArg.itemIndex = this.index;
-                //     desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
+                //     //desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
                 //
                 //
                 //     BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
@@ -110,14 +110,12 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
                 //     srcMoveArg.itemIndex = showObj.index;
                 //
                 //     ItemMoveLocationArg_Client desMoveArg = new ItemMoveLocationArg_Client();
-                //     desMoveArg.locationType = ItemLocationType.EntityItemBar;
+                //     desMoveArg.locationType = ItemLocationType.Warehouse;
                 //     desMoveArg.itemIndex = this.index;
-                //     desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
+                //     // desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
                 //
                 //     BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
                 // }
-                //
-                // // GameObject.Destroy(dropped);
             }
         }
     }
@@ -125,12 +123,11 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
     public override ItemMoveLocationArg_Client GetItemMoveLocationArg()
     {
         ItemMoveLocationArg_Client moveLocArg = new ItemMoveLocationArg_Client();
-        moveLocArg.locationType = ItemLocationType.EntityItemBar;
+        moveLocArg.locationType = ItemLocationType.Warehouse;
         moveLocArg.itemIndex = this.index;
-        moveLocArg.entityGuid = this.entityGuid;
         return moveLocArg;
     }
-    
+
     public override void Release()
     {
         base.Release();
@@ -143,3 +140,23 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
         dropScript.OnDropAction -= OnDropAction;
     }
 }
+
+
+// public class BattleSkillUIArgs : UICtrlArgs
+// {
+//     public List<BattleSkillUIData> battleSkillList;
+// }
+
+// public class BattleItemUIData
+// {
+//     public int index;
+//     public int configId;
+//     public int count;
+//
+//     public float currCDTime;
+//     public float maxCDTime;
+//     
+//     // public int skillId;
+//     // public int iconResId;
+//     
+// }

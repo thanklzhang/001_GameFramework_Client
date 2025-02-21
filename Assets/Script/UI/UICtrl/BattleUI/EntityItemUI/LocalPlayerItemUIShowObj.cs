@@ -83,50 +83,61 @@ public class LocalPlayerItemUIShowObj : ItemCellUIShowObj
             var itemCellUIShowObj = dragScript.transferData as ItemCellUIShowObj;
             if (itemCellUIShowObj != null)
             {
-                //TODO 可以通用
-                if (itemCellUIShowObj.locationType == ItemLocationType.EntityItemBar)
-                {
-                    //从实体道具栏拖过来的
-                    var showObj = dragScript.transferData as ItemCellUIShowObj;
-
-                    ItemMoveArg srcMoveArg = new ItemMoveArg();
-                    srcMoveArg.locationType = ItemLocationType.EntityItemBar;
-                    srcMoveArg.itemIndex = showObj.index;
-                    //这里如果还是用的 ItemUIShowObj 那么需要传入 entityGuid
-                    srcMoveArg.entityGuid = showObj.entityGuid;
-
-                    ItemMoveArg desMoveArg = new ItemMoveArg();
-                    desMoveArg.locationType = ItemLocationType.EntityItemBar;
-                    desMoveArg.itemIndex = this.index;
-                    desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
-            
-
-                    BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
-                }
-                else if (itemCellUIShowObj.locationType == ItemLocationType.Warehouse)
-                {
-                    //从玩家仓库拖过来的
-                    var showObj = dragScript.transferData as WarehouseItemUIShowObj;
-
-                    ItemMoveArg srcMoveArg = new ItemMoveArg();
-                    srcMoveArg.locationType = ItemLocationType.Warehouse;
-                    srcMoveArg.itemIndex = showObj.index;
-            
-                    ItemMoveArg desMoveArg = new ItemMoveArg();
-                    desMoveArg.locationType = ItemLocationType.EntityItemBar;
-                    desMoveArg.itemIndex = this.index;
-                    desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
-
-                    BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
-                }
-
-                // GameObject.Destroy(dropped);
+                BattleManager.Instance.MsgSender.Send_MoveItemTo(
+                    itemCellUIShowObj.GetItemMoveLocationArg(), this.GetItemMoveLocationArg());
+                
+                // //TODO 可以通用
+                // if (itemCellUIShowObj.locationType == ItemLocationType.EntityItemBar)
+                // {
+                //     //从实体道具栏拖过来的
+                //     var showObj = dragScript.transferData as ItemCellUIShowObj;
+                //
+                //     ItemMoveLocationArg_Client srcMoveArg = new ItemMoveLocationArg_Client();
+                //     srcMoveArg.locationType = ItemLocationType.EntityItemBar;
+                //     srcMoveArg.itemIndex = showObj.index;
+                //     //这里如果还是用的 ItemUIShowObj 那么需要传入 entityGuid
+                //     srcMoveArg.entityGuid = showObj.entityGuid;
+                //
+                //     ItemMoveLocationArg_Client desMoveArg = new ItemMoveLocationArg_Client();
+                //     desMoveArg.locationType = ItemLocationType.EntityItemBar;
+                //     desMoveArg.itemIndex = this.index;
+                //     desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+                //
+                //
+                //     BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
+                // }
+                // else if (itemCellUIShowObj.locationType == ItemLocationType.Warehouse)
+                // {
+                //     //从玩家仓库拖过来的
+                //     var showObj = dragScript.transferData as WarehouseItemUIShowObj;
+                //
+                //     ItemMoveLocationArg_Client srcMoveArg = new ItemMoveLocationArg_Client();
+                //     srcMoveArg.locationType = ItemLocationType.Warehouse;
+                //     srcMoveArg.itemIndex = showObj.index;
+                //
+                //     ItemMoveLocationArg_Client desMoveArg = new ItemMoveLocationArg_Client();
+                //     desMoveArg.locationType = ItemLocationType.EntityItemBar;
+                //     desMoveArg.itemIndex = this.index;
+                //     desMoveArg.entityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+                //
+                //     BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
+                // }
+                //
+                // // GameObject.Destroy(dropped);
             }
         }
 
       
     }
-
+    
+    public override ItemMoveLocationArg_Client GetItemMoveLocationArg()
+    {
+        ItemMoveLocationArg_Client moveLocArg = new ItemMoveLocationArg_Client();
+        moveLocArg.locationType = ItemLocationType.EntityItemBar;
+        moveLocArg.itemIndex = this.index;
+        moveLocArg.entityGuid = this.entityGuid;
+        return moveLocArg;
+    }
 
     public override void Release()
     {

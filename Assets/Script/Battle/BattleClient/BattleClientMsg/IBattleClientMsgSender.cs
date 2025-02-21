@@ -36,10 +36,10 @@ namespace Battle_Client
         void Send_OperateHeroByArraying(int opHeroGuid,Vector3 targetPos,int toUnderstudyIndex);
         void Send_SelectReplaceSkill(int selectSkillId);
         void Send_SelectReplaceHero(int selectConfigId);
-        void Send_MoveItemTo(ItemMoveArg srcItemMoveArg,ItemMoveArg desItemMoveArg);
+        void Send_MoveItemTo(ItemMoveLocationArg_Client srcItemMoveArg,ItemMoveLocationArg_Client desItemMoveArg);
     }
 
-    public class ItemMoveArg
+    public class ItemMoveLocationArg_Client
     {
         public ItemLocationType locationType;
         public int itemIndex;

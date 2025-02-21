@@ -20,7 +20,7 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
     {
         base.Init(gameObject, battleUI, entityGuid);
 
-
+        locationType = ItemLocationType.EntityItemBar;
         dragScript = itemTran.gameObject.GetComponent<DragScript>();
         if (null == dragScript)
         {
@@ -71,44 +71,51 @@ public class OpEntitiesItemUIShowObj : ItemCellUIShowObj
             return;
         }
 
-        //TODO 可以通用
         if (dragScript.transferData is ItemCellUIShowObj)
         {
-            //从实体道具栏拖过来的
-            var showObj = dragScript.transferData as ItemCellUIShowObj;
+            var itemCellUIShowObj = dragScript.transferData as ItemCellUIShowObj;
+            if (itemCellUIShowObj != null)
+            {
+                //TODO 可以通用
+                if (itemCellUIShowObj.locationType == ItemLocationType.EntityItemBar)
+                {
+                    //从实体道具栏拖过来的
+                    var showObj = dragScript.transferData as ItemCellUIShowObj;
 
-            ItemMoveArg srcMoveArg = new ItemMoveArg();
-            srcMoveArg.locationType = ItemLocationType.EntityItemBar;
-            srcMoveArg.itemIndex = showObj.index;
-            //这里如果还是用的 ItemUIShowObj 那么需要传入 entityGuid
-            srcMoveArg.entityGuid = showObj.entityGuid; // BattleManager.Instance.GetLocalCtrlHeroGuid();
+                    ItemMoveArg srcMoveArg = new ItemMoveArg();
+                    srcMoveArg.locationType = ItemLocationType.EntityItemBar;
+                    srcMoveArg.itemIndex = showObj.index;
+                    //这里如果还是用的 ItemUIShowObj 那么需要传入 entityGuid
+                    srcMoveArg.entityGuid = showObj.entityGuid; // BattleManager.Instance.GetLocalCtrlHeroGuid();
 
-            ItemMoveArg desMoveArg = new ItemMoveArg();
-            desMoveArg.locationType = ItemLocationType.EntityItemBar;
-            desMoveArg.itemIndex = this.index;
-            desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
+                    ItemMoveArg desMoveArg = new ItemMoveArg();
+                    desMoveArg.locationType = ItemLocationType.EntityItemBar;
+                    desMoveArg.itemIndex = this.index;
+                    desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
 
 
-            BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
+                    BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
+                }
+                else if (itemCellUIShowObj.locationType == ItemLocationType.Warehouse)
+                {
+                    //从玩家仓库拖过来的
+                    var showObj = dragScript.transferData as WarehouseItemUIShowObj;
+
+                    ItemMoveArg srcMoveArg = new ItemMoveArg();
+                    srcMoveArg.locationType = ItemLocationType.Warehouse;
+                    srcMoveArg.itemIndex = showObj.index;
+
+                    ItemMoveArg desMoveArg = new ItemMoveArg();
+                    desMoveArg.locationType = ItemLocationType.EntityItemBar;
+                    desMoveArg.itemIndex = this.index;
+                    desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
+
+                    BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
+                }
+
+                // GameObject.Destroy(dropped);
+            }
         }
-        else if (dragScript.transferData is WarehouseItemUIShowObj)
-        {
-            //从玩家仓库拖过来的
-            var showObj = dragScript.transferData as WarehouseItemUIShowObj;
-
-            ItemMoveArg srcMoveArg = new ItemMoveArg();
-            srcMoveArg.locationType = ItemLocationType.Warehouse;
-            srcMoveArg.itemIndex = showObj.index;
-
-            ItemMoveArg desMoveArg = new ItemMoveArg();
-            desMoveArg.locationType = ItemLocationType.EntityItemBar;
-            desMoveArg.itemIndex = this.index;
-            desMoveArg.entityGuid = this.entityGuid; //BattleManager.Instance.GetLocalCtrlHeroGuid();
-
-            BattleManager.Instance.MsgSender.Send_MoveItemTo(srcMoveArg, desMoveArg);
-        }
-
-        // GameObject.Destroy(dropped);
     }
 
 

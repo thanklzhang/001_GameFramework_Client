@@ -2,11 +2,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Config;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
 
 public class ItemCellUIShowObj
 {
@@ -28,6 +30,8 @@ public class ItemCellUIShowObj
     public int entityGuid;
 
     private CommonItem itemShowObj;
+
+    public ItemLocationType locationType;
     
     public virtual void Init(GameObject gameObject, BattleUI battleUI, int entityGuid)
     {

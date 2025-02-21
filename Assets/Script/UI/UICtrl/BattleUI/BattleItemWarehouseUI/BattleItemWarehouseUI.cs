@@ -94,7 +94,7 @@ public class BattleItemWarehouseUI
             }
 
             WarehouseItemUIShowObj showObj = new WarehouseItemUIShowObj();
-            showObj.Init(go, this);
+            showObj.Init(go, this.battleUI,0);
             showObj.RefreshUI(data, i, cellData.isUnlock);
             showObj.gameObject.SetActive(true);
 

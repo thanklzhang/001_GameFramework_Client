@@ -45,7 +45,12 @@ public class OpEntityItemGroup
         this.index = index;
         entity = BattleEntityManager.Instance.FindEntity(entityGuid);
 
-        avatar.Refresh(entity);
+        avatar.Refresh(new BattleHeroShowData()
+        {
+            configId = entity.configId,
+            level = entity.level,
+            star = entity.starLv
+        });
 
         var info = Config.ConfigManager.Instance.GetById<Config.EntityInfo>(entity.configId);
         heroNameText.text = info.Name;
@@ -73,7 +78,9 @@ public class OpEntityItemGroup
 
         for (int i = 0; i < dataList.Count; i++)
         {
-            var data = dataList[i].itemData;
+            var data = dataList[i];
+
+            var itemData = dataList[i].itemData;
             GameObject go = null;
             if (i < this.itemListRoot.childCount)
             {
@@ -87,7 +94,7 @@ public class OpEntityItemGroup
 
             var showObj = new OpEntitiesItemUIShowObj();
             showObj.Init(go, this.battleUI,this.entity.guid);
-            showObj.RefreshUI(data, i);
+            showObj.RefreshUI(itemData, i,data.isUnlock);
             showObj.gameObject.SetActive(true);
 
             itemShowObjList.Add(showObj);
@@ -107,5 +114,10 @@ public class OpEntityItemGroup
     public virtual void Release()
     {
         this.avatar.Release();
+        for (int i = 0; i < itemShowObjList.Count; i++)
+        {
+            var itemShowObj = itemShowObjList[i];
+            itemShowObj.Release();
+        }
     }
 }

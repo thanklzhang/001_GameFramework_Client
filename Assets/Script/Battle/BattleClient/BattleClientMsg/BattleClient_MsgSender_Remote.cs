@@ -80,6 +80,11 @@ namespace Battle_Client
             throw new NotImplementedException();
         }
 
+        public void Send_SelectReplaceHero(int selectConfigId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Send_MoveItemTo(ItemMoveArg srcArg,ItemMoveArg desArg)
         {
             

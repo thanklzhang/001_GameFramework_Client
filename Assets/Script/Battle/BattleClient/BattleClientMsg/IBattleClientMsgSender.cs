@@ -35,6 +35,7 @@ namespace Battle_Client
         void Send_BuyBoxFromShop(RewardQuality quality, int buyCount);
         void Send_OperateHeroByArraying(int opHeroGuid,Vector3 targetPos,int toUnderstudyIndex);
         void Send_SelectReplaceSkill(int selectSkillId);
+        void Send_SelectReplaceHero(int selectConfigId);
         void Send_MoveItemTo(ItemMoveArg srcItemMoveArg,ItemMoveArg desItemMoveArg);
     }
 

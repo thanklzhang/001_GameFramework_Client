@@ -244,6 +244,14 @@ namespace Battle_Client
             
         }
 
+        public void Send_SelectReplaceHero(int selectConfigId)
+        {
+            var arg = new SelectReplaceHero_BattleMsgArg();
+            arg.entityConfigId = selectConfigId;
+            var hero = BattleManager.Instance.GetLocalCtrlHero();
+            battle.OnRecvBattleMsg<SelectReplaceHero_BattleMsg>(hero.playerIndex, arg);
+        }
+
         public void Send_MoveItemTo(ItemMoveArg srcArg,ItemMoveArg desArg)
         {
             var arg = new MoveItem_BattleMsg_Arg();

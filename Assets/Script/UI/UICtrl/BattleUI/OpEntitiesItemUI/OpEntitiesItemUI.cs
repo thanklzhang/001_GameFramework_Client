@@ -104,6 +104,8 @@ public class OpEntitiesItemUI
 
         List<int> entityGuids = localPlayer.teamMemberGuids;
 
+        entityGuids.RemoveAll(guid => null == BattleEntityManager.Instance.FindEntity(guid));
+
         entityGuids = entityGuids
             .OrderBy(x => x == BattleManager.Instance.GetLocalCtrlHeroGuid() ? 0 : 1)
             .ToList();

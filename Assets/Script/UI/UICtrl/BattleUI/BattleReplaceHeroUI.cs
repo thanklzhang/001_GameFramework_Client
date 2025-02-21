@@ -18,13 +18,15 @@ public class ReplaceHeroCell
     // private Image icon;
     // private TextMeshProUGUI nameText;
     // private TextMeshProUGUI levelText;
-    // private GameObject selectFlagGo;
+    private GameObject selectFlagGo;
     // private Button clickBtn;
 
     public int entityConfigId;
 
     private BattleReplaceHeroUI parentUI;
-    // private bool isOpSkill;
+    private bool isOpSkill;
+
+    private BattleHeroAvatar heroAvatar;
 
     public void Init(GameObject gameObject, BattleReplaceHeroUI parentUI, bool isOpSkill)
     {
@@ -35,13 +37,16 @@ public class ReplaceHeroCell
 
         this.parentUI = parentUI;
 
+        var heroAvatarRoot = this.transform.Find("BattleHeroAvatar");
+        heroAvatar = new BattleHeroAvatar();
+        heroAvatar.Init(heroAvatarRoot.gameObject);
         // bgTran = transform.Find("bg");
         //
         // nameText = bgTran.Find("name").GetComponent<TextMeshProUGUI>();
         // levelText = bgTran.Find("level").GetComponent<TextMeshProUGUI>();
         // icon = bgTran.Find("icon").GetComponent<Image>();
-        // selectFlagGo = bgTran.Find("selectFlag").gameObject;
-        // selectFlagGo.SetActive(false);
+        selectFlagGo = transform.Find("selectFlag").gameObject;
+        selectFlagGo.SetActive(false);
         // clickBtn = icon.GetComponent<Button>();
         //
         // clickBtn.onClick.RemoveAllListeners();
@@ -62,10 +67,17 @@ public class ReplaceHeroCell
             return;
         }
 
-        var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skillConfigId);
-        this.nameText.text = skillConfig.Name;
-        this.levelText.text = "等级 " + skillConfig.Level;
-        ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
+        heroAvatar.Refresh(new BattleHeroShowData()
+        {
+            configId = skillConfigId,
+            level = level,
+            star = starLevel
+        });
+
+        // var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skillConfigId);
+        // this.nameText.text = skillConfig.Name;
+        // this.levelText.text = "等级 " + skillConfig.Level;
+        // ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
     }
 
     public void SetSelectState(bool isSelect)
@@ -99,7 +111,7 @@ public class BattleReplaceHeroUI : BaseUI
 
     protected override void OnInit()
     {
-        this.uiResId = (int)ResIds.BattleReplaceSkillUI;
+        this.uiResId = (int)ResIds.BattleReplaceHeroUI;
         this.uiShowLayer = UIShowLayer.Top_0;
         this.showMode = CtrlShowMode.Float;
     }
@@ -107,12 +119,12 @@ public class BattleReplaceHeroUI : BaseUI
     protected override void OnLoadFinish()
     {
         var panel = transform.Find("Panel");
-        var skillArea = panel.Find("skillArea");
-        replaceHeroRoot = skillArea.transform.Find("leaderSkillRoot/layout");
-        opHeroRoot = skillArea.transform.Find("opSkillRoot");
+        var entityArea = panel.Find("entityArea");
+        replaceHeroRoot = entityArea.transform.Find("allEntityRoot/scroll/mask/layout");
+        opHeroRoot = entityArea.transform.Find("opEntityRoot");
         replaceBtn = panel.transform.Find("ConfirmBtn").GetComponent<Button>();
         giveUpBtn = panel.transform.Find("GiveUpBtn").GetComponent<Button>();
-        opHeroGo = opHeroRoot.Find("skillItem").gameObject;
+        opHeroGo = opHeroRoot.Find("item").gameObject;
 
         replaceBtn.onClick.RemoveAllListeners();
         replaceBtn.onClick.AddListener(this.OnClickReplaceBtn);
@@ -185,7 +197,7 @@ public class BattleReplaceHeroUI : BaseUI
         //将要替换的英雄
         opHeroShowObj = new ReplaceHeroCell();
         opHeroShowObj.Init(opHeroGo, this, true);
-        opHeroShowObj.Refresh(currUIArgs.opEntityGuid, 1, 1);
+        opHeroShowObj.Refresh(currUIArgs.opEntityConfigId, 1, 1);
     }
 
     public void SelectHero(int skillId)
@@ -210,8 +222,8 @@ public class BattleReplaceHeroUI : BaseUI
 
     public void OnClickGiveUpBtn()
     {
-        var skillId = -1;
-        BattleManager.Instance.MsgSender.Send_SelectReplaceHero(skillId);
+        var configId = -1;
+        BattleManager.Instance.MsgSender.Send_SelectReplaceHero(configId);
 
         UIManager.Instance.Close<BattleReplaceHeroUI>();
     }
@@ -224,5 +236,5 @@ public class BattleReplaceHeroUI : BaseUI
 public class BattleReplaceHeroUIArgs : UICtrlArgs
 {
     // public List<int> replaceSkillIdList;
-    public int opEntityGuid;
+    public int opEntityConfigId;
 }

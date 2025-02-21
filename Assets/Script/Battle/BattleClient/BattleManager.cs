@@ -198,10 +198,10 @@ namespace Battle_Client
 
         public void OnReplaceTeamMemberResult(ReplaceTeamMemberResult_RecvMsg_Arg arg)
         {
-            // BattleReplaceSkillUIArgs uiArg = new BattleReplaceSkillUIArgs();
-            // // uiArg.replaceSkillIdList = new List<int>();
-            // uiArg.opSkillId = arg.teamMemberConfigId;
-            // UIManager.Instance.Open<BattleReplaceSkillUI>(uiArg);
+            BattleReplaceHeroUIArgs uiArg = new BattleReplaceHeroUIArgs();
+            // uiArg.replaceSkillIdList = new List<int>();
+            uiArg.opEntityConfigId = arg.teamMemberConfigId;
+            UIManager.Instance.Open<BattleReplaceHeroUI>(uiArg);
         }
 
         public void Clear()

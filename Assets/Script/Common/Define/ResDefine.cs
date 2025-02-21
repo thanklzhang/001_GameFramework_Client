@@ -41,6 +41,8 @@ namespace Config
         
 		BattleReplaceSkillUI = 15000501,
         
+		BattleReplaceHeroUI = 15000502,
+        
 		hero_100 = 15001001,
         
 		icon_money = 15002001,

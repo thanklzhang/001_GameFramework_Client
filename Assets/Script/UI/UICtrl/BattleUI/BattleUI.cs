@@ -74,6 +74,9 @@ public partial class BattleUI : BaseUI
 
     //关卡信息界面
     BattleStageInfoUI stageInfoUI;
+    
+    //人口信息界面
+    BattlePopulationUI populationUI;
 
     // //技能书操作UI
     // private BattleSkillOperateUI skillItemOperateUI;
@@ -215,7 +218,12 @@ public partial class BattleUI : BaseUI
         var stageUIRoot = this.transform.Find("stageInfo");
         stageInfoUI = new BattleStageInfoUI();
         stageInfoUI.Init(stageUIRoot.gameObject, this);
-
+        
+        //人口信息界面
+        var populationUIRoot = this.transform.Find("populationInfo");
+        populationUI = new BattlePopulationUI();
+        populationUI.Init(populationUIRoot.gameObject, this);
+        
         //技能操作界面
         var skillOperateUIRoot = this.transform.Find("skillOperateUI");
         // skillItemOperateUI = new BattleSkillOperateUI();
@@ -267,6 +275,7 @@ public partial class BattleUI : BaseUI
         this.skillUI.RefreshAllUI();
         this.heroInfoUI.RefreshAllUI();
         this.stageInfoUI.RefreshAllUI();
+        this.populationUI.RefreshAllUI();
         this.buffUI.RefreshAllUI();
         this.itemWarehouseUI.RefreshAllUI();
         this.localEntityItemUI.RefreshAllUI();
@@ -301,6 +310,7 @@ public partial class BattleUI : BaseUI
         this.describeUI.Update(deltaTime);
         this.heroInfoUI.Update(deltaTime);
         this.stageInfoUI.Update(deltaTime);
+        this.populationUI.Update(deltaTime);
         this.itemWarehouseUI.Update(deltaTime);
         this.localEntityItemUI.Update(deltaTime);
         this.opEntitiesItemUI.Update(deltaTime);
@@ -388,6 +398,8 @@ public partial class BattleUI : BaseUI
         this.coinText.text = coinCount + " 战银";
 
         this.boxMainUI.RefreshMyBoxUI();
+        
+        this.populationUI.RefreshAllUI();
     }
 
     public void OnUpdateShopBoxInfo()
@@ -459,6 +471,7 @@ public partial class BattleUI : BaseUI
         this.opEntitiesItemUI.Release();
         this.localEntityItemUI.Release();
         this.stageInfoUI.Release();
+        populationUI.Release();
         // this.skillItemOperateUI.Release();
         this.boxUI.Release();
         this.boxMainUI.Release();

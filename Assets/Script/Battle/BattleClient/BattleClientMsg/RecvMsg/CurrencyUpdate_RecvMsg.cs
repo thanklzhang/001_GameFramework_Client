@@ -30,6 +30,6 @@ namespace Battle_Client
     public class CurrencyUpdate_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int playerIndex;
-        public Dictionary<int, BattleCurrencyItem> currencyItemDic;
+        public Dictionary<int, BattleCurrency> currencyItemDic;
     }
 }

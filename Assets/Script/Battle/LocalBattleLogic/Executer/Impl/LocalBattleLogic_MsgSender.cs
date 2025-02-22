@@ -602,7 +602,7 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<BoxShopInfoUpdate_RecvMsg>(arg);
         }
 
-        public void NotifyUpdateCurrency(int playerIndex, Dictionary<int, BattleCurrencyItem> currencyItemDic)
+        public void NotifyUpdateCurrency(int playerIndex, Dictionary<int, BattleCurrency> currencyItemDic)
         {
             var arg = new CurrencyUpdate_RecvMsg_Arg()
             {

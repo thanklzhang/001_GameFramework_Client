@@ -16,7 +16,7 @@ namespace Battle_Client
     {
         //战斗逻辑中货币 转换为 客户端战斗中的传输数据货币
         public static Dictionary<int, BattleClient_CurrencyItem> ConvertTo(
-            Dictionary<int, BattleCurrencyItem> battleCurrencyItemDic)
+            Dictionary<int, BattleCurrency> battleCurrencyItemDic)
         {
             var dic = new Dictionary<int, BattleClient_CurrencyItem>();
 

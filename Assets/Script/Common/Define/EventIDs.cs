@@ -45,6 +45,7 @@ public enum EventIDs
     OnProcessBattleStateEnter = 101111, //进入战斗阶段
     OnProcessBossStateEnter = 101112, //进入boss阶段
     OnProcessWavePass = 101113, //回合结算，当前波通过了
+    OnUpdateProcessStateInfo = 101115, //更新战斗流程中的状态信息
 
     OnSetEntityPosition = 101201,
     OnSkillInfoUpdate = 101202, //当有技能信息改变的时候

@@ -21,10 +21,9 @@ public class WaveTargetInfoUI
 
     private int battleConfigId;
 
-    TextMeshProUGUI populationText;
-    // private GameObject bossLimitGo;
-    // private RectTransform bossLimitRootRectTran;
-    // Text bossLimitTimeText;
+    private TextMeshProUGUI contentTitleText;
+    TextMeshProUGUI contentText;
+    private Transform showRoot;
 
     private BattleUI battleUI;
 
@@ -38,38 +37,43 @@ public class WaveTargetInfoUI
 
         this.battleUI = battleUI;
 
-        populationText = this.transform.Find("countText").GetComponent<TextMeshProUGUI>();
+
+        showRoot = this.transform.Find("root");
+        contentTitleText = showRoot.transform.Find("title2").GetComponent<TextMeshProUGUI>();
+        contentText = showRoot.transform.Find("content").GetComponent<TextMeshProUGUI>();
 
 
         EventDispatcher.AddListener<int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
         EventDispatcher.AddListener<int>(EventIDs.OnProcessBattleStateEnter, OnBattleStateEnter);
         EventDispatcher.AddListener<int>(EventIDs.OnProcessBossStateEnter, OnBossStateEnter);
-    }
 
-    //TODO 请开始的时候
-    public void OnBattleStateEnter_TODO(int time,int currKillCount,int maxKillCount)
-    {
+        EventDispatcher.AddListener<int, int>(EventIDs.OnUpdateProcessStateInfo, OnUpdateProcessStateInfo);
         
+        showRoot.gameObject.SetActive(false);
     }
 
-    //TODO 当游戏流程中的目标进度更新的时候
-    public void OnProcessTargetProgressUpdate(int currKillCount,int maxKillCount)
+
+    public void OnUpdateProcessStateInfo(int currKillCount, int maxKillCount)
     {
-        
+        contentText.text = $"{currKillCount}/{maxKillCount}";
     }
 
-    public void OnReadyStateEnter(int x)
+    public void OnReadyStateEnter(int time)
     {
+        showRoot.gameObject.SetActive(false);
     }
 
-    public void OnBattleStateEnter(int x)
+    public void OnBattleStateEnter(int time)
     {
-        //根据传的类型 变更进度显示字样 ， 这里需要传进来一个（Wave）配置
+        contentTitleText.text = "进度";
+        showRoot.gameObject.SetActive(true);
     }
 
-    public void OnBossStateEnter(int x)
+    public void OnBossStateEnter(int time)
     {
-        //进度变成 ‘击杀 bossxxx’ 字样 
+        showRoot.gameObject.SetActive(true);
+        contentTitleText.text = "击杀";
+        contentText.text = "Boss";
     }
 
     public void Show()
@@ -84,10 +88,10 @@ public class WaveTargetInfoUI
 
     void RefreshCountShow()
     {
-        var player = BattleManager.Instance.GetLocalPlayer();
-        var currCount = player.teamMemberGuids.Count;
-        var maxCount = player.currency.GetCurrencyCount(BattleCurrency.PopulationId);
-        populationText.text = $"{currCount}/{maxCount}";
+        // var player = BattleManager.Instance.GetLocalPlayer();
+        // var currCount = player.teamMemberGuids.Count;
+        // var maxCount = player.currency.GetCurrencyCount(BattleCurrency.PopulationId);
+        // populationText.text = $"{currCount}/{maxCount}";
     }
 
     public void OnUpdatePlayerTeamMembersInfo(List<int> guids)
@@ -125,5 +129,7 @@ public class WaveTargetInfoUI
         EventDispatcher.RemoveListener<int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.OnProcessBattleStateEnter, OnBattleStateEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.OnProcessBossStateEnter, OnBossStateEnter);
+
+        EventDispatcher.RemoveListener<int, int>(EventIDs.OnUpdateProcessStateInfo, OnUpdateProcessStateInfo);
     }
 }

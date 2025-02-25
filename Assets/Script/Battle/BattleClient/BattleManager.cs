@@ -96,6 +96,11 @@ namespace Battle_Client
             }
         }
 
+        public void OnUpdateProcessStateInfo(int currProgress, int maxProgress)
+        {
+            EventDispatcher.Broadcast<int, int>(EventIDs.OnUpdateProcessStateInfo, currProgress, maxProgress);
+        }
+
         public void Update(float deltaTime)
         {
             if (this.BattleState == BattleState.Null)

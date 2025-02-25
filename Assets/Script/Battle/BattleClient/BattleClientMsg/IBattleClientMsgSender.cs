@@ -37,6 +37,7 @@ namespace Battle_Client
         void Send_SelectReplaceSkill(int selectSkillId);
         void Send_SelectReplaceHero(int selectConfigId);
         void Send_MoveItemTo(ItemMoveLocationArg_Client srcItemMoveArg,ItemMoveLocationArg_Client desItemMoveArg);
+        void Send_AskEnterBattleProcess();
     }
 
     public class ItemMoveLocationArg_Client

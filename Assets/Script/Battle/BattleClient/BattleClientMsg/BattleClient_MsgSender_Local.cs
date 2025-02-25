@@ -238,10 +238,9 @@ namespace Battle_Client
         {
             var arg = new SelectReplaceSkill_BattleMsgArg();
             arg.selectSkillId = selectSkillId;
-            
+
             var hero = BattleManager.Instance.GetLocalCtrlHero();
             battle.OnRecvBattleMsg<SelectReplaceSkill_BattleMsg>(hero.playerIndex, arg);
-            
         }
 
         public void Send_SelectReplaceHero(int selectConfigId)
@@ -252,17 +251,21 @@ namespace Battle_Client
             battle.OnRecvBattleMsg<SelectReplaceHero_BattleMsg>(hero.playerIndex, arg);
         }
 
-        public void Send_MoveItemTo(ItemMoveLocationArg_Client srcArg,ItemMoveLocationArg_Client desArg)
+        public void Send_MoveItemTo(ItemMoveLocationArg_Client srcArg, ItemMoveLocationArg_Client desArg)
         {
             var arg = new MoveItem_BattleMsg_Arg();
             arg.srcOpLoc = BattleConvert.ToItemOpLocation(srcArg);
-            arg.desOpLoc  = BattleConvert.ToItemOpLocation(desArg);
-            
+            arg.desOpLoc = BattleConvert.ToItemOpLocation(desArg);
+
             var hero = BattleManager.Instance.GetLocalCtrlHero();
             battle.OnRecvBattleMsg<MoveItem_BattleMsg>(hero.playerIndex, arg);
-            
-            
-            
+        }
+
+        public void Send_AskEnterBattleProcess()
+        {
+            var arg = new AskEnterBattleProcess_BattleMsg_Arg();
+            var player = BattleManager.Instance.GetLocalPlayer();
+            battle.OnRecvBattleMsg<AskEnterBattleProcess_BattleMsg>(player.playerIndex, arg);
         }
     }
 }

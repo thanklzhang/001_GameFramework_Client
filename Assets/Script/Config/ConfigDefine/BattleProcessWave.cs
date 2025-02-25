@@ -43,7 +43,7 @@ namespace Config
         private int readyTime; 
         
         /// <summary>
-        ///限制时间（*1000）
+        ///限制时间（*1000）（战斗时间）
         /// </summary>
         private int limitTime; 
         

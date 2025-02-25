@@ -42,6 +42,8 @@ public partial class BattleUI : BaseUI
     public Text boxFuncBtnCountText;
     public Text coinText;
 
+    public Button startBattleBtn;
+
     //血条
     HeroStateUIMgr heroStateUIMgr;
 
@@ -74,7 +76,7 @@ public partial class BattleUI : BaseUI
 
     //关卡信息界面
     BattleStageInfoUI stageInfoUI;
-    
+
     //人口信息界面
     BattlePopulationUI populationUI;
 
@@ -87,8 +89,11 @@ public partial class BattleUI : BaseUI
     //宝箱主界面
     protected BattleBoxMainUI boxMainUI;
 
-    //战斗流程阶段界面
+    //战斗流程阶段提示界面
     private BattleProcessUI processUI;
+
+    //战斗流程阶段目标信息界面
+    private WaveTargetInfoUI processTargetInfoUI;
 
     //战斗回合（当前波）结算界面
     private BattleWavePassUI wavePassUI;
@@ -105,6 +110,7 @@ public partial class BattleUI : BaseUI
     private GameObject intelligentReleaseSelectFlagGo;
 
     public Transform tempRoot;
+
     protected override void OnLoadFinish()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
@@ -162,6 +168,13 @@ public partial class BattleUI : BaseUI
         });
         attrBtn.onClick.AddListener(() => { onAttrBtnClick?.Invoke(); });
 
+        startBattleBtn = this.transform.Find("startBattleBtn").GetComponent<Button>();
+        startBattleBtn.onClick.AddListener(() =>
+        {
+            //send
+            BattleManager.Instance.MsgSender.Send_AskEnterBattleProcess();
+        });
+
         //英雄头顶状态UI管理
         this.heroStateUIMgr = new HeroStateUIMgr();
         var heroStateUIRoot = this.transform.Find("heroStateShow");
@@ -187,7 +200,7 @@ public partial class BattleUI : BaseUI
         var itemWarehouseUIRoot = this.transform.Find("itemWarehouseUI");
         itemWarehouseUI = new BattleItemWarehouseUI();
         itemWarehouseUI.Init(itemWarehouseUIRoot.gameObject, this);
-        
+
         //操作实体道具界面
         var opEntitiesItemUIRoot = this.transform.Find("opEntitiesItemUI");
         opEntitiesItemUI = new OpEntitiesItemUI();
@@ -218,12 +231,12 @@ public partial class BattleUI : BaseUI
         var stageUIRoot = this.transform.Find("stageInfo");
         stageInfoUI = new BattleStageInfoUI();
         stageInfoUI.Init(stageUIRoot.gameObject, this);
-        
+
         //人口信息界面
         var populationUIRoot = this.transform.Find("populationInfo");
         populationUI = new BattlePopulationUI();
         populationUI.Init(populationUIRoot.gameObject, this);
-        
+
         //技能操作界面
         var skillOperateUIRoot = this.transform.Find("skillOperateUI");
         // skillItemOperateUI = new BattleSkillOperateUI();
@@ -244,6 +257,10 @@ public partial class BattleUI : BaseUI
         var processUIRoot = this.transform.Find("processTimeRoot");
         processUI = new BattleProcessUI();
         processUI.Init(processUIRoot.gameObject, this);
+
+        var waveTargetInfoUIRoot = this.transform.Find("waveTargetInfo");
+        processTargetInfoUI = new WaveTargetInfoUI();
+        processTargetInfoUI.Init(waveTargetInfoUIRoot.gameObject, this);
 
         //关卡回合（当前波）结算界面
         var wavePassUIRoot = this.transform.Find("wavePassUI");
@@ -284,6 +301,7 @@ public partial class BattleUI : BaseUI
         this.boxUI.RefreshAllUI();
         this.boxMainUI.RefreshAllUI();
         this.processUI.RefreshAllUI();
+        this.processTargetInfoUI.RefreshAllUI();
         this.wavePassUI.RefreshAllUI();
         this.battleRewardUI.RefreshAllUI();
 
@@ -318,6 +336,7 @@ public partial class BattleUI : BaseUI
         this.boxUI.Update(deltaTime);
         this.boxMainUI.Update(deltaTime);
         this.processUI.Update(deltaTime);
+        this.processTargetInfoUI.Update(deltaTime);
         this.wavePassUI.Update(deltaTime);
         this.battleRewardUI.Update(deltaTime);
         this.lookEntityInfoUI.Update(deltaTime);
@@ -398,7 +417,7 @@ public partial class BattleUI : BaseUI
         this.coinText.text = coinCount + " 战银";
 
         this.boxMainUI.RefreshMyBoxUI();
-        
+
         this.populationUI.RefreshAllUI();
     }
 
@@ -427,13 +446,12 @@ public partial class BattleUI : BaseUI
 
     #endregion
 
-    
-    
+
     public void OnWarehouseClose()
     {
         this.opEntitiesItemUI.Close();
     }
-    
+
 
     protected override void OnInactive()
     {
@@ -471,16 +489,16 @@ public partial class BattleUI : BaseUI
         this.opEntitiesItemUI.Release();
         this.localEntityItemUI.Release();
         this.stageInfoUI.Release();
-        populationUI.Release();
+        this.populationUI.Release();
         // this.skillItemOperateUI.Release();
         this.boxUI.Release();
         this.boxMainUI.Release();
         this.processUI.Release();
+        this.processTargetInfoUI.Release();
         this.wavePassUI.Release();
         this.battleRewardUI.Release();
         this.lookEntityInfoUI.Release();
 
         this.intelligentReleaseBtn.onClick.RemoveAllListeners();
     }
-
 }

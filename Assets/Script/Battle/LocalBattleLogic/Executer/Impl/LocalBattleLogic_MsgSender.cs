@@ -591,6 +591,17 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<ProcessEnterState_RecvMsg>(arg);
         }
 
+        public void NotifyAll_UpdateProcessStateInfo(int currProgress, int maxProgress)
+        {
+            var arg = new UpdateProcessStateInfo_RecvMsg_Arg()
+            {
+                currProgress = currProgress,
+                maxProgress = maxProgress
+            };
+
+            BattleManager.Instance.RecvBattleMsg<UpdateProcessStateInfo_RecvMsg>(arg);
+        }
+
         public void NotifyUpdateBoxShop(int playerIndex,
             Dictionary<RewardQuality, BattleBoxShopItem> shopItemDic)
         {
@@ -716,7 +727,6 @@ namespace Battle_Client
             arg.entityGuids = entityGuids.ToList();
 
             BattleManager.Instance.RecvBattleMsg<UpdatePlayerTeamMembersInfo_RecvMsg>(arg);
-
         }
 
         //接收布阵中的英雄操作消息
@@ -777,7 +787,7 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<SyncWarehouseItem_RecvMsg>(arg);
         }
 
-        public void SyncEntityItemBarItem(int entityGuid, int cellIndex, BattleItem opItem,bool isUnlock)
+        public void SyncEntityItemBarItem(int entityGuid, int cellIndex, BattleItem opItem, bool isUnlock)
         {
             var arg = new SyncEntityItemBarItem_RecvMsg_Arg()
             {

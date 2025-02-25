@@ -89,5 +89,10 @@ namespace Battle_Client
         {
             
         }
+
+        public void Send_AskEnterBattleProcess()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

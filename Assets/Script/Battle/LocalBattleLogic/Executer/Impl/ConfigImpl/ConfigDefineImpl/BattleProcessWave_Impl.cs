@@ -51,7 +51,7 @@ namespace Battle
         public int ReadyTime => config.ReadyTime;
         
         /// <summary>
-        ///限制时间（*1000）
+        ///限制时间（*1000）（战斗时间）
         /// </summary>
         public int LimitTime => config.LimitTime;
         

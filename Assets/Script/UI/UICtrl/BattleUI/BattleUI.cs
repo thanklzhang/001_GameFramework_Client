@@ -138,7 +138,12 @@ public partial class BattleUI : BaseUI
             //     hero.TryOpenBox(RewardQuality.Blue);
             // }
 
-            this.boxMainUI.Show();
+            if (BattleManager.Instance.processState == BattleProcessState.Ready)
+            {
+                this.boxMainUI.Show();
+            }
+
+            
         });
         boxFuncBtnCountText = boxFuncBtn.transform.Find("countBg/count").GetComponent<Text>();
 
@@ -152,8 +157,11 @@ public partial class BattleUI : BaseUI
         itemWarehouseBtn = funcBtnRoot.Find("warehouse/item").GetComponent<Button>();
         itemWarehouseBtn.onClick.AddListener(() =>
         {
-            this.opEntitiesItemUI.Show();
-            this.itemWarehouseUI.Show();
+            if (BattleManager.Instance.processState == BattleProcessState.Ready)
+            {
+                this.opEntitiesItemUI.Show();
+                this.itemWarehouseUI.Show();
+            }
         });
 
         //

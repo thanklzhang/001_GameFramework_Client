@@ -81,24 +81,30 @@ namespace Battle_Client
                     {
                         var battleEntity = BattleEntityManager.Instance.FindEntity(entityGuidList[0]);
                         EventDispatcher.Broadcast(EventIDs.OnSelectEntity, battleEntity);
-
+                        var localPlayer = BattleManager.Instance.GetLocalPlayer();
                         if (battleEntity.guid != BattleManager.Instance.GetLocalCtrlHeroGuid())
                         {
-                            currDragEntity = battleEntity;
-                            dragEntityOriginPos = currDragEntity.gameObject.transform.position;
-                            // var isInArea = TryToGetRayTargetPos(out var hit, new List<string>()
-                            // {
-                            //     GlobalConfig.Ground,
-                            //     GlobalConfig.UnderstudyArea
-                            // });
-                            // if (isInArea)
-                            // {
-                            //     // this.dragEntityOffset = dragEntityOriginPos - hit.point;
-                            // }
-                            // else
-                            // {
-                            //     //?????? 到底在哪呢
-                            // }
+                            bool isCanMove = battleEntity.playerIndex == localPlayer.playerIndex &&
+                                             BattleManager.Instance.processState == BattleProcessState.Ready;
+
+                            if (isCanMove)
+                            {
+                                currDragEntity = battleEntity;
+                                dragEntityOriginPos = currDragEntity.gameObject.transform.position;
+                                // var isInArea = TryToGetRayTargetPos(out var hit, new List<string>()
+                                // {
+                                //     GlobalConfig.Ground,
+                                //     GlobalConfig.UnderstudyArea
+                                // });
+                                // if (isInArea)
+                                // {
+                                //     // this.dragEntityOffset = dragEntityOriginPos - hit.point;
+                                // }
+                                // else
+                                // {
+                                //     //?????? 到底在哪呢
+                                // }
+                            }
                         }
                     }
                     else
@@ -195,24 +201,24 @@ namespace Battle_Client
             var isColliderUnderstudy = TryToGetRayTargetPos(out var hit, GlobalConfig.UnderstudyArea);
             if (isColliderUnderstudy)
             {
-                //检测是否扔到了替补位
-                if (currDragEntity != null)
-                {
-                    var position = hit.transform.position;
-                    var midPos = new Vector3(position.x, hit.point.y, position.z);
-                    var pos = midPos;
-                    // currDragEntity.SetPosition(pos);
-                    var index = hit.transform.GetSiblingIndex();
-
-                    //发送信息：改变布阵位置 到替补
-                    Logx.Log(LogxType.Zxy, $"drag : move entity , entity guid : {currDragEntity.guid}"
-                                           + $" isUnderstudyArea : {true}");
-
-                    BattleManager.Instance.MsgSender.Send_OperateHeroByArraying(currDragEntity.guid, pos, index);
-
-                    currDragEntity = null;
-                    return;
-                }
+                // //检测是否扔到了替补位
+                // if (currDragEntity != null)
+                // {
+                //     var position = hit.transform.position;
+                //     var midPos = new Vector3(position.x, hit.point.y, position.z);
+                //     var pos = midPos;
+                //     // currDragEntity.SetPosition(pos);
+                //     var index = hit.transform.GetSiblingIndex();
+                //
+                //     //发送信息：改变布阵位置 到替补
+                //     Logx.Log(LogxType.Zxy, $"drag : move entity , entity guid : {currDragEntity.guid}"
+                //                            + $" isUnderstudyArea : {true}");
+                //
+                //     BattleManager.Instance.MsgSender.Send_OperateHeroByArraying(currDragEntity.guid, pos, index);
+                //
+                //     currDragEntity = null;
+                //     return;
+                // }
             }
             else
             {

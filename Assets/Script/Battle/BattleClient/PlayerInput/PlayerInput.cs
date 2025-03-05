@@ -159,16 +159,16 @@ namespace Battle_Client
             //     }
             // }
 
-            var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
-            if (releaseTargetType == SkillReleaseTargeType.Point)
+            var releaseTargetType = (SkillReleaseTargetType)skillConfig.SkillReleaseTargeType;
+            if (releaseTargetType == SkillReleaseTargetType.Point)
             {
                 this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
             }
-            else if (releaseTargetType == SkillReleaseTargeType.Entity)
+            else if (releaseTargetType == SkillReleaseTargetType.Entity)
             {
                 this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
             }
-            else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
+            else if (releaseTargetType == SkillReleaseTargetType.NoTarget)
             {
                 var arg = new ItemUseArg_Client()
                 {
@@ -224,16 +224,16 @@ namespace Battle_Client
                 }
             }
 
-            var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
-            if (releaseTargetType == SkillReleaseTargeType.Point)
+            var releaseTargetType = (SkillReleaseTargetType)skillConfig.SkillReleaseTargeType;
+            if (releaseTargetType == SkillReleaseTargetType.Point)
             {
                 this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
             }
-            else if (releaseTargetType == SkillReleaseTargeType.Entity)
+            else if (releaseTargetType == SkillReleaseTargetType.Entity)
             {
                 this.skillDirectModule.StartSelect(skillId, localEntity.gameObject);
             }
-            else if (releaseTargetType == SkillReleaseTargeType.NoTarget)
+            else if (releaseTargetType == SkillReleaseTargetType.NoTarget)
             {
                 BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
             }

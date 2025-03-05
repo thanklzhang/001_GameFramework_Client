@@ -17,9 +17,9 @@ namespace Battle_Client
             
             //var skillId = BattleManager.Instance.GetCtrlHeroSkillIdByIndex(index);
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
-            var releaseTargetType = (SkillReleaseTargeType)skillConfig.SkillReleaseTargeType;
+            var releaseTargetType = (SkillReleaseTargetType)skillConfig.SkillReleaseTargeType;
 
-            if (releaseTargetType == SkillReleaseTargeType.Point)
+            if (releaseTargetType == SkillReleaseTargetType.Point)
             {
                 var isColliderGround = TryToGetRayTargetPos(out var hit);
                 //确定选择技能目标
@@ -36,7 +36,7 @@ namespace Battle_Client
                 skillDirectModule.FinishSelect();
                 willUseItemIndex = -1;
             }
-            else if (releaseTargetType == SkillReleaseTargeType.Entity)
+            else if (releaseTargetType == SkillReleaseTargetType.Entity)
             {
                 //-----------------------
 

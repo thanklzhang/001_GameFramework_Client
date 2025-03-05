@@ -46,6 +46,11 @@ namespace Battle
         public int SkillReleaseTargeType => config.SkillReleaseTargeType;
         
         /// <summary>
+        ///释放区域性技能的效果id（作为技能起手关键）
+        /// </summary>
+        public int AreaEffectId => config.AreaEffectId;
+        
+        /// <summary>
         ///技能释放类型 
         /// </summary>
         public int SkillReleaseType => config.SkillReleaseType;
@@ -54,6 +59,11 @@ namespace Battle
         ///是否是被动技能
         /// </summary>
         public int IsPassiveSkill => config.IsPassiveSkill;
+        
+        /// <summary>
+        ///选择实体类型
+        /// </summary>
+        public int SelectEntityType => config.SelectEntityType;
         
         /// <summary>
         ///技能目标类型（选取即将触发效果的单位或点）

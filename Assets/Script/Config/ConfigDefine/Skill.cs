@@ -38,6 +38,11 @@ namespace Config
         private int skillReleaseTargeType; 
         
         /// <summary>
+        ///释放区域性技能的效果id（作为技能起手关键）
+        /// </summary>
+        private int areaEffectId; 
+        
+        /// <summary>
         ///技能释放类型 
         /// </summary>
         private int skillReleaseType; 
@@ -46,6 +51,11 @@ namespace Config
         ///是否是被动技能
         /// </summary>
         private int isPassiveSkill; 
+        
+        /// <summary>
+        ///选择实体类型
+        /// </summary>
+        private int selectEntityType; 
         
         /// <summary>
         ///技能目标类型（选取即将触发效果的单位或点）
@@ -129,9 +139,13 @@ namespace Config
         
         public int SkillReleaseTargeType { get => skillReleaseTargeType; }     
         
+        public int AreaEffectId { get => areaEffectId; }     
+        
         public int SkillReleaseType { get => skillReleaseType; }     
         
         public int IsPassiveSkill { get => isPassiveSkill; }     
+        
+        public int SelectEntityType { get => selectEntityType; }     
         
         public int SkillTargetType { get => skillTargetType; }     
         

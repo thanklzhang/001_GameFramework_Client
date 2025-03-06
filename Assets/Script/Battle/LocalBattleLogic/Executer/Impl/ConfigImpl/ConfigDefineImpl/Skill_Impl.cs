@@ -66,9 +66,9 @@ namespace Battle
         public int SelectEntityType => config.SelectEntityType;
         
         /// <summary>
-        ///技能目标类型（选取即将触发效果的单位或点）
+        ///技能交过目标类型（选取即将触发效果的单位或点）
         /// </summary>
-        public int SkillTargetType => config.SkillTargetType;
+        public int SkillEffectTargetType => config.SkillEffectTargetType;
         
         /// <summary>
         ///触发的效果列表（主动释放产生的效果）

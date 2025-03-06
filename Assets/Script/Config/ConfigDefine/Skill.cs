@@ -58,9 +58,9 @@ namespace Config
         private int selectEntityType; 
         
         /// <summary>
-        ///技能目标类型（选取即将触发效果的单位或点）
+        ///技能交过目标类型（选取即将触发效果的单位或点）
         /// </summary>
-        private int skillTargetType; 
+        private int skillEffectTargetType; 
         
         /// <summary>
         ///触发的效果列表（主动释放产生的效果）
@@ -147,7 +147,7 @@ namespace Config
         
         public int SelectEntityType { get => selectEntityType; }     
         
-        public int SkillTargetType { get => skillTargetType; }     
+        public int SkillEffectTargetType { get => skillEffectTargetType; }     
         
         public List<int> EffectList { get => effectList; }     
         

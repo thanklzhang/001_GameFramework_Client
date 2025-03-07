@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Battle;
 
 namespace Config
 {
@@ -29,5 +30,28 @@ namespace Config
         //     }
         //     return list;
         // }
+
+        //
+        public static int GetKeyAreaEft(int skillId)
+        {
+            var skillConfig = BattleConfigManager.Instance.GetById<ISkill>(skillId);
+            if (skillConfig != null)
+            {
+                if (skillConfig.EffectList.Count > 0)
+                {
+                    for (int i = 0; i < skillConfig.EffectList.Count; i++)
+                    {
+                        var eftId = skillConfig.EffectList[i];
+                        var type = SkillEffectFactory.GetTypeByConfigId(eftId);
+                        if (type == SkillEffectType.AreaEffect)
+                        {
+                            return eftId;
+                        }
+                    }
+                }
+            }
+
+            return -1;
+        }
     }
 }

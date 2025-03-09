@@ -90,12 +90,12 @@ namespace Battle_Client
         {
             if (null == aEntity || null == bEntity)
             {
-                return EntityRelationType.Me;
+                return EntityRelationType.Self;
             }
 
             if (aEntity.guid == bEntity.guid)
             {
-                return EntityRelationType.Me;
+                return EntityRelationType.Self;
             }
             else
             {

@@ -53,12 +53,12 @@ namespace Config
         private int isPassiveSkill; 
         
         /// <summary>
-        ///选择实体类型
+        ///选择筛选实体类型，传给效果列表，可以看成总筛选
         /// </summary>
         private int selectEntityType; 
         
         /// <summary>
-        ///技能交过目标类型（选取即将触发效果的单位或点）
+        ///技能效果目标类型（选取即将触发效果的单位或点）
         /// </summary>
         private int skillEffectTargetType; 
         
@@ -127,6 +127,11 @@ namespace Config
         /// </summary>
         private List<int> skillTrackList; 
         
+        /// <summary>
+        ///技能标签（目前是给 ai 作倾向用的）
+        /// </summary>
+        private List<int> tagList; 
+        
 
         
         public string Name { get => name; }     
@@ -174,6 +179,8 @@ namespace Config
         public int SkillDirectionId { get => skillDirectionId; }     
         
         public List<int> SkillTrackList { get => skillTrackList; }     
+        
+        public List<int> TagList { get => tagList; }     
         
 
     } 

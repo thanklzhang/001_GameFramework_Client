@@ -61,12 +61,12 @@ namespace Battle
         public int IsPassiveSkill => config.IsPassiveSkill;
         
         /// <summary>
-        ///选择实体类型
+        ///选择筛选实体类型，传给效果列表，可以看成总筛选
         /// </summary>
         public int SelectEntityType => config.SelectEntityType;
         
         /// <summary>
-        ///技能交过目标类型（选取即将触发效果的单位或点）
+        ///技能效果目标类型（选取即将触发效果的单位或点）
         /// </summary>
         public int SkillEffectTargetType => config.SkillEffectTargetType;
         
@@ -134,6 +134,11 @@ namespace Battle
         ///技能轨迹 Id 列表
         /// </summary>
         public List<int> SkillTrackList => config.SkillTrackList;
+        
+        /// <summary>
+        ///技能标签（目前是给 ai 作倾向用的）
+        /// </summary>
+        public List<int> TagList => config.TagList;
         
     } 
 }

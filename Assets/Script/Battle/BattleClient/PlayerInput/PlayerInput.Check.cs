@@ -391,7 +391,7 @@ namespace Battle_Client
                 //判断当前鼠标是否检测到是敌人
 
                 var relationType = BattleEntity_Client.GetRelation(localEntity, battleEntity);
-                if (relationType == Battle_Client.EntityRelationType.Enemy)
+                if (relationType == EntityRelationType.Enemy)
                 {
                     OperateViewManager.Instance.cursorModule.SetCursor(CursorType.SelectAttack);
                     OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo,
@@ -401,7 +401,7 @@ namespace Battle_Client
                 else
                 {
                     OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Select);
-                    if (relationType == Battle_Client.EntityRelationType.Me)
+                    if (relationType == EntityRelationType.Self)
                     {
                         OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo,
                             myOutlineColor,
@@ -437,7 +437,7 @@ namespace Battle_Client
                 var localEntity = BattleManager.Instance.GetLocalCtrlHero();
                 var relationType = BattleEntity_Client.GetRelation(localEntity, battleEntity);
 
-                if (relationType == Battle_Client.EntityRelationType.Enemy)
+                if (relationType == EntityRelationType.Enemy)
                 {
                     OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Attack);
                     OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo,
@@ -448,7 +448,7 @@ namespace Battle_Client
                 {
                     OperateViewManager.Instance.cursorModule.SetCursor(CursorType.Normal);
 
-                    if (relationType == Battle_Client.EntityRelationType.Me)
+                    if (relationType == EntityRelationType.Self)
                     {
                         OperateViewManager.Instance.modelOutlineModule.OpenOutline(entityModelRootGo,
                             myOutlineColor,

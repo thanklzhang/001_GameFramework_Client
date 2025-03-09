@@ -27,18 +27,7 @@
         StarLevel = 3,
         StarExp = 4,
     }
-
-    //实体间的关系
-    public enum EntityRelationType
-    {
-        //自己
-        Me = 0,
-        //友军
-        Friend = 1,
-        //敌人
-        Enemy = 2
-    }
-    
+  
     public enum BattleSkillEffectState
     {
         Idle = 0,

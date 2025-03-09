@@ -9,12 +9,12 @@ using GameData;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum EntityRelationType
-{
-    Self = 0,
-    Friend = 1,
-    Enemy = 2
-}
+// public enum EntityRelationType
+// {
+//     Self = 0,
+//     Friend = 1,
+//     Enemy = 2
+// }
 
 public partial class BattleUI : BaseUI
 {

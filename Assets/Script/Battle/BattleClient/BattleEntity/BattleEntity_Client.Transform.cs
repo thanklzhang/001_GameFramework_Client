@@ -16,16 +16,18 @@ namespace Battle_Client
         float rotateSpeed = 540;
         int lastDir = 1;
         public EntityLocationType localtionType;
-        
-        internal void StartMoveByPath(List<Vector3> pathList, float moveSpeed)
+        private bool isForceSkillMove = false;
+
+        internal void StartMoveByPath(List<Vector3> pathList, float moveSpeed, bool isSkillForce)
         {
             if (pathList.Count > 0)
             {
+                isForceSkillMove = isSkillForce;
                 state = BattleEntityState.Move;
 
                 this.movePosList = pathList;
                 // this.attr.moveSpeed = moveSpeed;
-                this.attr.SetAttr(EntityAttrType.MoveSpeed,moveSpeed);
+                this.attr.SetAttr(EntityAttrType.MoveSpeed, moveSpeed);
 
                 var aniScale = this.attr.GetValue(EntityAttrType.MoveSpeed) / normalAnimationMoveSpeed;
 
@@ -42,51 +44,51 @@ namespace Battle_Client
 
         public void UpdateMove(float timeDelta)
         {
-             var moveVector = moveTargetPos - this.gameObject.transform.position;
-                var speed = this.attr.GetValue(EntityAttrType.MoveSpeed);
-                var dir = moveVector.normalized;
-                //var dis = moveVector.magnitude;
+            var moveVector = moveTargetPos - this.gameObject.transform.position;
+            var speed = this.attr.GetValue(EntityAttrType.MoveSpeed);
+            var dir = moveVector.normalized;
+            //var dis = moveVector.magnitude;
 
-                var currPos = this.gameObject.transform.position;
-                var moveDistance = (dir * speed * timeDelta).magnitude;
+            var currPos = this.gameObject.transform.position;
+            var moveDistance = (dir * speed * timeDelta).magnitude;
 
-                var currFramePos = currPos;
-                //预测下一帧位置
-                var moveDelta = dir * speed * timeDelta;
-                var nextFramePos = currPos + moveDelta;
+            var currFramePos = currPos;
+            //预测下一帧位置
+            var moveDelta = dir * speed * timeDelta;
+            var nextFramePos = currPos + moveDelta;
 
-                var dotValue = Vector3.Dot(currFramePos - moveTargetPos, moveTargetPos - nextFramePos);
-                if (dotValue >= 0)
+            var dotValue = Vector3.Dot(currFramePos - moveTargetPos, moveTargetPos - nextFramePos);
+            if (dotValue >= 0)
+            {
+                this.movePosIndex = this.movePosIndex + 1;
+                if (this.movePosIndex >= this.movePosList.Count)
                 {
-                    this.movePosIndex = this.movePosIndex + 1;
-                    if (this.movePosIndex >= this.movePosList.Count)
-                    {
-                        //所有路径走完了
-                        this.FakeStopMove(moveTargetPos);
-                    }
-                    else
-                    {
-                        //前往下一个路径点
-                        this.moveTargetPos = this.movePosList[this.movePosIndex];
-
-                        //设置朝向
-                        SetDirTarget((moveTargetPos - this.gameObject.transform.position).normalized);
-                        // dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
-                    }
-
-                    //this.gameObject.transform.forward = dirTarget;
+                    //所有路径走完了
+                    this.FakeStopMove(moveTargetPos);
                 }
                 else
                 {
-                    moveDelta = dir * (speed * timeDelta);
-                    //Logx.Log("moveTest : battleClient : moveDis : " + moveDelta.x + " " + moveDelta.z);
-                    this.gameObject.transform.position = currPos + moveDelta;
+                    //前往下一个路径点
+                    this.moveTargetPos = this.movePosList[this.movePosIndex];
 
-                    var prePos = this.gameObject.transform.position;
-                    this.gameObject.transform.position = new Vector3(prePos.x, 0, prePos.z);
-
-                    //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
+                    //设置朝向
+                    SetDirTarget((moveTargetPos - this.gameObject.transform.position).normalized);
+                    // dirTarget = (moveTargetPos - this.gameObject.transform.position).normalized;
                 }
+
+                //this.gameObject.transform.forward = dirTarget;
+            }
+            else
+            {
+                moveDelta = dir * (speed * timeDelta);
+                //Logx.Log("moveTest : battleClient : moveDis : " + moveDelta.x + " " + moveDelta.z);
+                this.gameObject.transform.position = currPos + moveDelta;
+
+                var prePos = this.gameObject.transform.position;
+                this.gameObject.transform.position = new Vector3(prePos.x, 0, prePos.z);
+
+                //this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, dirTarget, timeDelta * 15);
+            }
         }
 
         //根据消息来真实的终止移动
@@ -100,6 +102,8 @@ namespace Battle_Client
             {
                 this.SetPosition(endPos);
             }
+
+            // isForceSkillMove = false;
         }
 
         //检查当前点和目标的距离是否需要强制拉回
@@ -143,7 +147,7 @@ namespace Battle_Client
             gameObject.transform.position = pos;
         }
 
-       
+
         public void SetLocationType(EntityLocationType type)
         {
             localtionType = type;
@@ -154,7 +158,7 @@ namespace Battle_Client
             return this.gameObject.transform.position;
         }
 
-        
+
         public void SetTrueDir(float deltaTime)
         {
             float speed = 30;
@@ -163,7 +167,7 @@ namespace Battle_Client
             {
                 //矢量和为 0 的情况
                 var filterDir = Quaternion.Euler(0, 1, 0) * this.gameObject.transform.forward;
-                this.gameObject.transform.forward =  Vector3.Lerp(filterDir, dirTarget, speed * deltaTime);
+                this.gameObject.transform.forward = Vector3.Lerp(filterDir, dirTarget, speed * deltaTime);
             }
             else
             {
@@ -171,6 +175,5 @@ namespace Battle_Client
                     Vector3.Lerp(this.gameObject.transform.forward, dirTarget, speed * deltaTime);
             }
         }
-
     }
 }

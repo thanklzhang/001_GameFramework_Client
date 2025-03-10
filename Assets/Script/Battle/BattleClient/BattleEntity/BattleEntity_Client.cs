@@ -55,7 +55,7 @@ namespace Battle_Client
             SetTrueDir(timeDelta);
 
             //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
-            if (state == BattleEntityState.Move)
+            if (state == BattleEntityState.Move || isForceSkillMove)
             {
                 UpdateMove(timeDelta);
             }

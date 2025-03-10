@@ -25,9 +25,10 @@ namespace Battle_Client
             var targetPos = EndPos;
             var moveSpeed = MoveSpeed;
             var entity = BattleEntityManager.Instance.FindEntity(guid);
+            var isSkillForce = arg.isSkillForce;
             if (entity != null)
             {
-                entity.StartMoveByPath(EndPos, moveSpeed);
+                entity.StartMoveByPath(EndPos, moveSpeed,isSkillForce);
             }
         }
     }
@@ -37,5 +38,6 @@ namespace Battle_Client
         public int Guid;
         public List<UnityEngine.Vector3> EndPos;
         public float MoveSpeed;
+        public bool isSkillForce;
     }
 }

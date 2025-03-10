@@ -151,7 +151,7 @@ namespace Battle_Client
         //    BattleManager.Instance.MsgReceiver.On_EntityStartMove(guid, pos, uDir, finalMoveSpeed);
         //}
 
-        public void NotifyAll_EntityStartMoveByPath(int guid, List<Vector3> pathList, float finalMoveSpeed)
+        public void NotifyAll_EntityStartMoveByPath(int guid, List<Vector3> pathList, float finalMoveSpeed,bool isSkillForce)
         {
             List<UnityEngine.Vector3> unityPosList = new List<UnityEngine.Vector3>();
             foreach (var pos in pathList)
@@ -164,7 +164,8 @@ namespace Battle_Client
             {
                 Guid = guid,
                 EndPos = unityPosList,
-                MoveSpeed = finalMoveSpeed
+                MoveSpeed = finalMoveSpeed,
+                isSkillForce = isSkillForce
             };
             BattleManager.Instance.RecvBattleMsg<EntityStartMoveByPath_RecvMsg>(arg);
 

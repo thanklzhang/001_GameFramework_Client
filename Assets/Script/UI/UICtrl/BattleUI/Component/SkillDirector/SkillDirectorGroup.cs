@@ -33,9 +33,9 @@ public class SkillDirectorGroup
 
     public void Show(GameObject followGo)
     {
-        projectileDirector.Show(followGo);
-        releaserDirector.Show(followGo);
-        targetDirector.Show(followGo);
+        projectileDirector?.Show(followGo);
+        releaserDirector?.Show(followGo);
+        targetDirector?.Show(followGo);
     }
 
     public void Update(float deltaTime)

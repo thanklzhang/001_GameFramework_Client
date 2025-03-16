@@ -36,10 +36,18 @@ public class SkillDirectorModule
         {
             this.skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
 
+            var skillDirId = skillConfig.SkillDirectionId;
+            if (0 == skillDirId)
+            {
+                return;
+            }
+            
             var pDirector = GenNewDirector(SkillDirectorType.DirectorProjectile);
             var rDirector = GenNewDirector(SkillDirectorType.DirectorReleaserTerminal);
             var tDirector = GenNewDirector(SkillDirectorType.DirectorTargetTerminal);
 
+          
+            
             SkillDirectorGroup group = new SkillDirectorGroup();
             group.Init(pDirector, rDirector, tDirector);
 
@@ -47,8 +55,11 @@ public class SkillDirectorModule
             directorGroupDic.Add(skillId, group);
             currDirectorGroup = group;
         }
+        
+     
+        
 
-        currDirectorGroup.Show(originGameObject);
+        currDirectorGroup?.Show(originGameObject);
 
         OperateViewManager.Instance.SetCursor(CursorType.Select);
 
@@ -94,7 +105,7 @@ public class SkillDirectorModule
     {
         selectState = false;
 
-        currDirectorGroup.Hide();
+        currDirectorGroup?.Hide();
 
         OperateViewManager.Instance.SetCursor(CursorType.Normal);
 

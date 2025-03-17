@@ -511,6 +511,15 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<SkillTrackEnd_RecvMsg>(arg);
         }
 
+
+        public void NotifyAll_SyncIsUseReviveCoin(int playerIndex)
+        {
+            var arg = new SyncIsUseReviveCoin_RecvMsg_Arg()
+            {
+                playerIndex = playerIndex
+            };
+            BattleManager.Instance.RecvBattleMsg<SyncIsUseReviveCoin_RecvMsg>(arg);
+        }
         // public void NotifyAll_NotifyOpenBox(BattleBox box)
         // {
         //     BattleManager.Instance.MsgReceiver.On_OpenBox(releaserGuid, skillTrackId);

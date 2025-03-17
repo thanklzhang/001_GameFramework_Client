@@ -95,6 +95,11 @@ namespace Battle_Client
 
             var hero = BattleManager.Instance.GetLocalCtrlHero();
 
+            if (null == hero)
+            {
+                return;
+            }
+
             var arg = new MoveEntity_MsgArg()
             {
                 moveEntityGuid = guid,

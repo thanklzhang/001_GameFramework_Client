@@ -39,6 +39,8 @@ namespace Config
         
 		SelectHeroUI = 15000015,
         
+		BattleReviveUI = 15000016,
+        
 		BattleReplaceSkillUI = 15000501,
         
 		BattleReplaceHeroUI = 15000502,

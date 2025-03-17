@@ -53,6 +53,11 @@ namespace Config
         private int affectType; 
         
         /// <summary>
+        ///是否死亡时候删除
+        /// </summary>
+        private int isDeleteOnDead; 
+        
+        /// <summary>
         ///初始层数
         /// </summary>
         private int initLayerCount; 
@@ -164,6 +169,8 @@ namespace Config
         public int IsCanBeClear { get => isCanBeClear; }     
         
         public int AffectType { get => affectType; }     
+        
+        public int IsDeleteOnDead { get => isDeleteOnDead; }     
         
         public int InitLayerCount { get => initLayerCount; }     
         

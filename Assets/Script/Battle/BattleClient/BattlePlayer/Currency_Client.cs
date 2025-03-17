@@ -8,6 +8,7 @@ namespace Battle_Client
         public int count;
 
         public static int CoinId = 500001;
+        public static int ReviveCoinId = 500005;
     }
 
 }

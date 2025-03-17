@@ -69,6 +69,8 @@ namespace Battle_Client
             //EventDispatcher.AddListener<BattleEntityInfo>(EventIDs.OnCreateBattle, OnCreateEntity);
             EventDispatcher.AddListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
             EventDispatcher.AddListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
+
+            EventDispatcher.AddListener(EventIDs.OnSyncIsUseReviveCoin, OnSyncIsUseReviveCoin);
         }
 
         public void OnEnterBattle()
@@ -176,11 +178,22 @@ namespace Battle_Client
             BattleSkillEffectManager_Client.Instance.OnBattleEnd();
         }
 
+        public void OnSyncIsUseReviveCoin()
+        {
+            var args = new BattleReviveUIArgs()
+            {
+                
+            };
+
+            UIManager.Instance.Open<BattleReviveUI>(args);
+        }
+
         public void RemoveListener()
         {
             //EventDispatcher.RemoveListener<BattleEntityInfo>(EventIDs.OnCreateBattle, OnCreateEntity);
             EventDispatcher.RemoveListener<TrackBean>(EventIDs.OnSkillTrackStart, OnSkillTrackStart);
             EventDispatcher.RemoveListener<int, int>(EventIDs.OnSkillTrackEnd, OnSkillTrackEnd);
+            EventDispatcher.RemoveListener(EventIDs.OnSyncIsUseReviveCoin, OnSyncIsUseReviveCoin);
         }
 
         void OnSkillTrackStart(TrackBean trackBean)

@@ -12,6 +12,7 @@ namespace Battle_Client
             currency = new Currency();
             currency.Init();
         }
+
         public void SetCurrencyData(Dictionary<int, BattleClient_CurrencyItem> serverData)
         {
             currency.SetCurrencyData(ConvertCurrency(serverData));
@@ -23,7 +24,13 @@ namespace Battle_Client
             return currency.GetCoinCount();
         }
 
-        public static Dictionary<int, CurrencyItem> ConvertCurrency(Dictionary<int, BattleClient_CurrencyItem> serverData)
+        public int GetReviveCount()
+        {
+            return currency.GetCurrencyCount(CurrencyItem.ReviveCoinId);
+        }
+
+        public static Dictionary<int, CurrencyItem> ConvertCurrency(
+            Dictionary<int, BattleClient_CurrencyItem> serverData)
         {
             Dictionary<int, CurrencyItem> localItemDic = new Dictionary<int, CurrencyItem>();
             if (serverData != null)
@@ -36,14 +43,12 @@ namespace Battle_Client
                     var localItem = new CurrencyItem();
                     localItem.itemId = serverItemId;
                     localItem.count = serverCurrencyItem.count;
-                
-                    localItemDic.Add(localItem.itemId,localItem);
+
+                    localItemDic.Add(localItem.itemId, localItem);
                 }
             }
 
             return localItemDic;
         }
-      
-
     }
 }

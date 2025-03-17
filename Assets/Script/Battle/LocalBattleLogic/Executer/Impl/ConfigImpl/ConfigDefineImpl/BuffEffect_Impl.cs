@@ -61,6 +61,11 @@ namespace Battle
         public int AffectType => config.AffectType;
         
         /// <summary>
+        ///是否死亡时候删除
+        /// </summary>
+        public int IsDeleteOnDead => config.IsDeleteOnDead;
+        
+        /// <summary>
         ///初始层数
         /// </summary>
         public int InitLayerCount => config.InitLayerCount;

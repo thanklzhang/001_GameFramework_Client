@@ -40,10 +40,14 @@ public class BattleReviveUI : BaseUI
 
     private void OnClickConfirmBtn()
     {
+        var localHeroGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+        BattleManager.Instance.MsgSender.Send_SelectToRevive(localHeroGuid, true);
     }
 
     protected void OnClickGiveUpBtn()
     {
+        var localHeroGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+        BattleManager.Instance.MsgSender.Send_SelectToRevive(localHeroGuid, false);
     }
 
     protected override void OnOpen(UICtrlArgs args)
@@ -53,10 +57,9 @@ public class BattleReviveUI : BaseUI
         var reviveCount = player.GetReviveCount();
 
         this.countText.text = $"x {reviveCount}";
-        
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(countRectTran);
         LayoutRebuilder.ForceRebuildLayoutImmediate(rootRectTran);
-        
     }
 
 

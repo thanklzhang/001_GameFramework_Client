@@ -123,17 +123,32 @@ namespace Battle_Client
             BattleEntityManager.Instance.DestoryEntity(this.guid);
         }
 
-        public void Dead()
+        public void Dead(bool isTrueDead )
         {
             PlayAnimation("die");
-            state = BattleEntityState.Dead;
-
+            // state = BattleEntityState.Dead;
+            if (isTrueDead)
+            {
+                state = BattleEntityState.Dead;
+            }
+            else
+            {
+                state = BattleEntityState.WillDead;
+            }
+            
             deadDisappearCurrTimer = deadDisappearTotalTime;
 
             EventDispatcher.Broadcast(EventIDs.OnEntityDead, this);
 
 
             // CoroutineManager.Instance.StartCoroutine(RemoveSelf());
+        }
+        
+        
+        public void OnRevive()
+        {
+            state = BattleEntityState.Idle;
+            PlayAnimation("idle");
         }
         
         public void Destroy()

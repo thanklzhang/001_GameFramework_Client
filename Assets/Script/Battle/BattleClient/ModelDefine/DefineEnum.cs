@@ -8,15 +8,17 @@
         Running = 2,
         End = 3
     }
-    
+
     //实体状态
     public enum BattleEntityState
     {
-        Idle = 0,
-        Move = 1,
-        ReleasingSkill = 2,
-        Dead = 3,
-        Destroy = 4
+        Null = 0,
+        Idle = 1,
+        Move = 2,
+        ReleasingSkill = 3,
+        WillDead = 4,
+        Dead = 5,
+        Destroy = 6,
     }
 
     //实体状态数据值类型
@@ -27,7 +29,7 @@
         StarLevel = 3,
         StarExp = 4,
     }
-  
+
     public enum BattleSkillEffectState
     {
         Idle = 0,
@@ -71,9 +73,9 @@
         //默认 f
         Skill6 = 106,
         Skill7 = 107,
-        
+
         //打开商店
-        OpenShopUI  = 201,
+        OpenShopUI = 201,
     }
 
 

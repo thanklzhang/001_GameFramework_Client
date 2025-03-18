@@ -171,6 +171,9 @@ namespace Battle_Client
             // this._resultUIPre.Refresh(args);
             // this._resultUIPre.Show();
             //
+
+            UIManager.Instance.Close<BattleReviveUI>();
+
             UIManager.Instance.Open<BattleResultUI>(args);
 
             BattleEntityManager.Instance.OnBattleEnd();
@@ -182,7 +185,6 @@ namespace Battle_Client
         {
             var args = new BattleReviveUIArgs()
             {
-                
             };
 
             UIManager.Instance.Open<BattleReviveUI>(args);

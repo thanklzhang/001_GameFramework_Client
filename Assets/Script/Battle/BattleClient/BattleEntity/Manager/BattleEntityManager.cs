@@ -170,7 +170,7 @@ namespace Battle_Client
             foreach (var item in entityDic)
             {
                 var entity = item.Value;
-                if (entity.state != BattleEntityState.Dead)
+                if (entity.state != BattleEntityState.Dead && entity.state != BattleEntityState.WillDead)
                 {
                     entity.state = BattleEntityState.Idle;
                     entity.PlayAnimation("idle");

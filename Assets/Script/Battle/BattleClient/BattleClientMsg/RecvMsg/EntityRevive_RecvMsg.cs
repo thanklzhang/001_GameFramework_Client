@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Battle;
 using Battle_Client;
 using GameData;
 using NetProto;
@@ -12,23 +11,23 @@ using UnityEngine.UI;
 
 namespace Battle_Client
 {
-    public class EntityDead_RecvMsg : ClientRecvMsg
+    //同步实体的道具栏
+    public class EntityRevive_RecvMsg : ClientRecvMsg
     {
         public override void Handle()
         {
-            var arg = this.msgArg as EntityDead_RecvMsg_Arg;
-            var entityGuid = arg.entityGuid;
-            var entity = BattleEntityManager.Instance.FindEntity(entityGuid);
+            var arg = this.msgArg as EntityRevive_RecvMsg_Arg;
+            var entity = BattleEntityManager.Instance.FindEntity(arg.entityGuid);
             if (entity != null)
             {
-                entity.Dead(arg.isTrueDead);
+                entity.OnRevive();
             }
         }
     }
 
-    public class EntityDead_RecvMsg_Arg : BaseClientRecvMsgArg
+    public class EntityRevive_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int entityGuid;
-        public bool isTrueDead;
+       
     }
 }

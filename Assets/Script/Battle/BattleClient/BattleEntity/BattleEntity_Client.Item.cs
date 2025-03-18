@@ -36,11 +36,11 @@ namespace Battle_Client
             // }
 
             itemBarCellList = new List<ItemBarCellData_Client>();
-            
+
             var config = ConfigManager.Instance.GetById<Config.BattleCommonParam>(1);
             var maxCellCount = config.MaxEntityItemBarCellCount;
             var initCellCount = config.InitEntityItemBarCellUnlockCount;
-            
+
             for (int i = 0; i < maxCellCount; i++)
             {
                 var itemCell = new ItemBarCellData_Client();
@@ -63,12 +63,12 @@ namespace Battle_Client
                 {
                     currCell.itemData = incomeBarCell.itemData;
                     currCell.isUnlock = incomeBarCell.isUnlock;
-                    
+
                     changeList.Add(currCell);
                 }
             }
 
-            EventDispatcher.Broadcast(EventIDs.OnEntityItemsUpdate,this,changeList);
+            EventDispatcher.Broadcast(EventIDs.OnEntityItemsUpdate, this, changeList);
         }
 
         public ItemBarCellData_Client FindItemBarCell(int index)
@@ -76,7 +76,7 @@ namespace Battle_Client
             return this.itemBarCellList.Find(cell => cell.index == index);
         }
 
-        public void UpdateItemBarItem(int index,BattleItemData_Client data,bool isUnlock)
+        public void UpdateItemBarItem(int index, BattleItemData_Client data, bool isUnlock)
         {
             var cell = FindItemBarCell(index);
             if (cell != null)
@@ -84,9 +84,10 @@ namespace Battle_Client
                 cell.itemData = data;
                 cell.isUnlock = isUnlock;
             }
-            
-            EventDispatcher.Broadcast(EventIDs.OnEntityItemInfoUpdate,this,cell);
+
+            EventDispatcher.Broadcast(EventIDs.OnEntityItemInfoUpdate, this, cell);
         }
+
 
         // public BattleItemInfo FindItem(int index)
         // {

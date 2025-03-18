@@ -272,5 +272,17 @@ namespace Battle_Client
             var player = BattleManager.Instance.GetLocalPlayer();
             battle.OnRecvBattleMsg<AskEnterBattleProcess_BattleMsg>(player.playerIndex, arg);
         }
+
+        public void Send_SelectToRevive(int entityGuid,bool isRevive)
+        {
+            var arg = new SelectToRevive_BattleMsg_Arg
+            {
+                entityGuid = entityGuid,
+                isRevive = isRevive
+            };
+            var player = BattleManager.Instance.GetLocalPlayer();
+            battle.OnRecvBattleMsg<SelectToRevive_BattleMsg>(player.playerIndex, arg);
+            
+        }
     }
 }

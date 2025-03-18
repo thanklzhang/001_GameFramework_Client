@@ -38,6 +38,7 @@ namespace Battle_Client
         void Send_SelectReplaceHero(int selectConfigId);
         void Send_MoveItemTo(ItemMoveLocationArg_Client srcItemMoveArg,ItemMoveLocationArg_Client desItemMoveArg);
         void Send_AskEnterBattleProcess();
+        void Send_SelectToRevive(int entityGuid, bool isRevive);
     }
 
     public class ItemMoveLocationArg_Client

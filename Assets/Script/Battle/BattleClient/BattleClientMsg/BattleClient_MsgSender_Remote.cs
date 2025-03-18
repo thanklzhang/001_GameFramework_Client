@@ -94,5 +94,10 @@ namespace Battle_Client
         {
             throw new NotImplementedException();
         }
+
+        public void Send_SelectToRevive(int entityGuid, bool isRevive)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

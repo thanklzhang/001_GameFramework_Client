@@ -132,11 +132,12 @@ namespace Battle_Client
         {
         }
 
-        public void NotifyAll_EntityDead(Battle.BattleEntity battleEntity)
+        public void NotifyAll_EntityDead(Battle.BattleEntity battleEntity,bool isTrueDead)
         {
             var arg = new EntityDead_RecvMsg_Arg()
             {
-                entityGuid = battleEntity.guid
+                entityGuid = battleEntity.guid,
+                isTrueDead = isTrueDead
             };
             BattleManager.Instance.RecvBattleMsg<EntityDead_RecvMsg>(arg);
 
@@ -151,7 +152,8 @@ namespace Battle_Client
         //    BattleManager.Instance.MsgReceiver.On_EntityStartMove(guid, pos, uDir, finalMoveSpeed);
         //}
 
-        public void NotifyAll_EntityStartMoveByPath(int guid, List<Vector3> pathList, float finalMoveSpeed,bool isSkillForce)
+        public void NotifyAll_EntityStartMoveByPath(int guid, List<Vector3> pathList, float finalMoveSpeed,
+            bool isSkillForce)
         {
             List<UnityEngine.Vector3> unityPosList = new List<UnityEngine.Vector3>();
             foreach (var pos in pathList)
@@ -816,6 +818,15 @@ namespace Battle_Client
             }
 
             BattleManager.Instance.RecvBattleMsg<SyncEntityItemBarItem_RecvMsg>(arg);
+        }
+
+        public void Notify_NotifyEntityRevive(int entityGuid)
+        {
+            var arg = new EntityRevive_RecvMsg_Arg()
+            {
+                entityGuid = entityGuid,
+            };
+            BattleManager.Instance.RecvBattleMsg<EntityRevive_RecvMsg>(arg);
         }
 
 

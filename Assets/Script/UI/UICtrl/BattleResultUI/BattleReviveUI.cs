@@ -60,6 +60,7 @@ public class BattleReviveUI : BaseUI
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(countRectTran);
         LayoutRebuilder.ForceRebuildLayoutImmediate(rootRectTran);
+        
     }
 
 

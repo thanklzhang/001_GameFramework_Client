@@ -21,6 +21,12 @@ namespace Battle_Client
             if (entity != null)
             {
                 entity.OnRevive();
+
+                var localPlayerEntityGuid = BattleManager.Instance.GetLocalCtrlHeroGuid();
+                if (localPlayerEntityGuid == arg.entityGuid)
+                {
+                    UIManager.Instance.Close<BattleReviveUI>();
+                }
             }
         }
     }
@@ -28,6 +34,5 @@ namespace Battle_Client
     public class EntityRevive_RecvMsg_Arg : BaseClientRecvMsgArg
     {
         public int entityGuid;
-       
     }
 }

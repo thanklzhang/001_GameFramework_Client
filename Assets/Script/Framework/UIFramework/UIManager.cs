@@ -203,6 +203,11 @@ public class UIManager : Singleton<UIManager>
 
         var findCtrl = FindCtrl<T>();
 
+        if (null == findCtrl)
+        {
+            return;
+        }
+
         //TODO 检查是否是最上层的 uiCtrl ，并且是 fixed 类型
         if (findCtrl.showMode == CtrlShowMode.Float)
         {

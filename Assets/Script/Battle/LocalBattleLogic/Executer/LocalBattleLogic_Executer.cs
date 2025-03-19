@@ -118,7 +118,7 @@ namespace Battle_Client
             {
                 //本地战斗 在服务端结算
                 var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-                battleNet.SendApplyBattleEnd(arg);
+                //battleNet.SendApplyBattleEnd(arg);
             }
             else
             {

@@ -422,6 +422,7 @@ namespace Battle_Client
             }
         }
 
+        //没有任何操作事件 并且 非技能状态
         void CheckNoEventWithoutSkillState()
         {
             GameObject gameObject = null;

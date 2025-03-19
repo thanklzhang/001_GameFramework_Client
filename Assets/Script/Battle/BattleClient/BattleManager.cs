@@ -29,7 +29,7 @@ namespace Battle_Client
         public BattleProcessState processState;
         LocalBattleLogic_Executer localBattleExecuter;
         public IBattleClientMsgSender MsgSender;
-        public IBattleClientMsgReceiver MsgReceiver;
+        // public IBattleClientMsgReceiver MsgReceiver;
         public BattleType battleType;
         private BattleClient_CreateBattleArgs battleClientArgs;
 

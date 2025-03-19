@@ -18,31 +18,31 @@ namespace Battle_Client
         public void Send_PlayerLoadProgress(int progress)
         {
             var netHandle = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-            netHandle.SendPlayerLoadProgress(progress);
+           // netHandle.SendPlayerLoadProgress(progress);
         }
 
         public void Send_BattleReadyFinish()
         {
             var netHandle = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-            netHandle.SendBattleReadyFinish(null);
+            //netHandle.SendBattleReadyFinish(null);
         }
 
         public void Send_ClientPlotEnd()
         {
             var netHandle = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-            netHandle.SendClientPlotEnd();
+            //netHandle.SendClientPlotEnd();
         }
 
         public void Send_MoveEntity(int guid, UnityEngine.Vector3 targetPos)
         {
             var netHandle = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-            netHandle.SendMoveEntity(guid, targetPos);
+            //netHandle.SendMoveEntity(guid, targetPos);
         }
 
         public void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos)
         {
             var netHandle = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
-            netHandle.SendUseSkill(skillId, targetGuid, targetPos);
+            //netHandle.SendUseSkill(skillId, targetGuid, targetPos);
         }
 
         public void Send_UseItem(ItemUseArg_Client itemUseArg)

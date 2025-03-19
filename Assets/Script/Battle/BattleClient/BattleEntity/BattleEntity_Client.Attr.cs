@@ -7,8 +7,6 @@ namespace Battle_Client
     //实体身上的属性值和状态值等
     public partial class BattleEntity_Client
     {
-        
-        
         //attr
         public BattleEntityAttr attr = new BattleEntityAttr();
 
@@ -30,44 +28,6 @@ namespace Battle_Client
                     var aniScale = this.attr.GetValue(EntityAttrType.MoveSpeed) / normalAnimationMoveSpeed;
                     SetAnimationSpeed(aniScale);
                 }
-                
-                
-                // if (type == EntityAttrType.Attack)
-                // {
-                //     this.attr.attack = (int)item.value;
-                // }
-                // else if (type == EntityAttrType.Defence)
-                // {
-                //     this.attr.defence = (int)item.value;
-                // }
-                // else if (type == EntityAttrType.MaxHealth)
-                // {
-                //     this.attr.maxHealth = (int)item.value;
-                // }
-                // else if (type == EntityAttrType.MoveSpeed)
-                // {
-                //     // /1000
-                //     this.attr.moveSpeed = item.value;
-                //
-                //     //ani
-                //     var aniScale = this.attr.moveSpeed / normalAnimationMoveSpeed;
-                //     SetAnimationSpeed(aniScale);
-                // }
-                // else if (type == EntityAttrType.AttackSpeed)
-                // {
-                //     // /1000
-                //     this.attr.attackSpeed = item.value;
-                // }
-                // else if (type == EntityAttrType.AttackRange)
-                // {
-                //     // /1000
-                //     this.attr.attackRange = item.value;
-                // }
-                // else if (type == EntityAttrType.Attack_Permillage)
-                // {
-                //     this.attr.attack_Permillage = item.value;
-                // }
-
                 //Logx.Log("sync entity attr : guid : " + this.guid + " type : " + type.ToString() + " value : " + item.value);
             }
             

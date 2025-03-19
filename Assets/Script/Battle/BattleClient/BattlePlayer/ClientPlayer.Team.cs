@@ -6,6 +6,16 @@ namespace Battle_Client
     //布阵相关
     public partial class ClientPlayer
     {
+        
+        public List<int> teamMemberGuids = new List<int>();
+        public void UpdatePlayerTeamMembersInfo(List<int> entityGuids)
+        {
+            teamMemberGuids = entityGuids;
+            EventDispatcher.Broadcast(EventIDs.OnUpdatePlayerTeamMembersInfo,
+                teamMemberGuids);
+
+        }
+        
         public void OnOperateHero(OperateHeroByArraying_RecvMsg_Arg arg)
         {
           
@@ -22,8 +32,9 @@ namespace Battle_Client
                 {
                     if (toUnderstudyIndex >= 0)
                     {
-                        //设置替补点
-                        UnderstudyManager_Client.Instance.SetLocation(targetEntity, toUnderstudyIndex);
+                        // /
+                        //没有替补了
+                        //UnderstudyManager_Client.Instance.SetLocation(targetEntity, toUnderstudyIndex);
                     }
                     else
                     {
@@ -38,7 +49,8 @@ namespace Battle_Client
             {
                 if (toUnderstudyIndex >= 0)
                 {
-                    UnderstudyManager_Client.Instance.SetLocation(null, toUnderstudyIndex);
+                    //没有替补了
+                    //UnderstudyManager_Client.Instance.SetLocation(null, toUnderstudyIndex);
                 }
             }
 

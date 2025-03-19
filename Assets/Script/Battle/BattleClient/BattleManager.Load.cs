@@ -174,8 +174,8 @@ namespace Battle_Client
         public void OnLoadFinish()
         {
             this.playerInput.InitPlayerInput();
-            var understudyRoot = sceneRoot.Find("UnderstudyArea");
-            UnderstudyManager_Client.Instance.Init(understudyRoot);
+            // var understudyRoot = sceneRoot.Find("UnderstudyArea");
+            // UnderstudyManager_Client.Instance.Init(understudyRoot);
         }
 
         #region 创建战斗

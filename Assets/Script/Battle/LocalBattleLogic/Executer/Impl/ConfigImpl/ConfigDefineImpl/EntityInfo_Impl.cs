@@ -56,7 +56,7 @@ namespace Battle
         public int StarAttrId => config.StarAttrId;
         
         /// <summary>
-        ///技能id列表(这个会换成技能模板)
+        ///技能id列表
         /// </summary>
         public List<int> SkillIds => config.SkillIds;
         

@@ -48,7 +48,7 @@ namespace Config
         private int starAttrId; 
         
         /// <summary>
-        ///技能id列表(这个会换成技能模板)
+        ///技能id列表
         /// </summary>
         private List<int> skillIds; 
         

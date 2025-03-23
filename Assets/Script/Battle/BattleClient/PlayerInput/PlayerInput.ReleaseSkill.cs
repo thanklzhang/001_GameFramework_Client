@@ -98,8 +98,14 @@ namespace Battle_Client
             else
             {
                 //技能
+                Vector3 mousePos = Vector3.zero;
+                if (TryToGetRayTargetPos(out var hit))
+                {
+                    mousePos = hit.point;
+                }
+
                 BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid,
-                    targetPos);
+                    targetPos,mousePos);
             }
         }
     }

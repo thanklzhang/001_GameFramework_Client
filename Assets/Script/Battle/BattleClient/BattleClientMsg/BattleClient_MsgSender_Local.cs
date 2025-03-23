@@ -112,9 +112,11 @@ namespace Battle_Client
         }
 
 
-        public void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos)
+        public void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos,
+            UnityEngine.Vector3 mousePos)
         {
             var pos = new Battle.Vector3(targetPos.x, targetPos.y, targetPos.z);
+            var _mousePos = new Battle.Vector3(mousePos.x, mousePos.y, mousePos.z);
             //battle.PlayerMsgReceiver.On_UseSkill(releaserGuid, skillId, targetGuid, pos);
 
             var hero = BattleManager.Instance.GetLocalCtrlHero();
@@ -125,6 +127,7 @@ namespace Battle_Client
                 skillId = skillId,
                 targetGuid = targetGuid,
                 targetPos = pos,
+                mousePos =  _mousePos
             };
             battle.OnRecvBattleMsg<UseSkill_BattleMsg>(
                 hero.playerIndex, msg);

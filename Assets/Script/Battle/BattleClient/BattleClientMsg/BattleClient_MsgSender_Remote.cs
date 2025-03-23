@@ -39,7 +39,8 @@ namespace Battle_Client
             //netHandle.SendMoveEntity(guid, targetPos);
         }
 
-        public void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos)
+        public void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos
+        ,UnityEngine.Vector3 mousePos)
         {
             var netHandle = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
             //netHandle.SendUseSkill(skillId, targetGuid, targetPos);

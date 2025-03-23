@@ -27,7 +27,8 @@ namespace Battle_Client
         void Send_BattleReadyFinish();
         void Send_ClientPlotEnd();
         void Send_MoveEntity(int guid, UnityEngine.Vector3 targetPos);
-        void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos);
+        void Send_UseSkill(int releaserGuid, int skillId, int targetGuid, UnityEngine.Vector3 targetPos,
+            Vector3 mousePos);
         void Send_UseItem(ItemUseArg_Client itemUseArg);
         void Send_UseSkillItem(ItemUseArg_Client itemUseArg);
         void Send_OpenBox(RewardQuality quality);

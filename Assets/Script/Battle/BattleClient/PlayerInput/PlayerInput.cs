@@ -235,7 +235,14 @@ namespace Battle_Client
             }
             else if (releaseTargetType == SkillReleaseTargetType.NoTarget)
             {
-                BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos);
+                //技能
+                Vector3 mousePos = Vector3.zero;
+                if (TryToGetRayTargetPos(out var hit))
+                {
+                    mousePos = hit.point;
+                }
+                
+                BattleManager.Instance.MsgSender.Send_UseSkill(localEntity.guid, skillId, targetGuid, targetPos,mousePos);
             }
 
             //Logx.Log("use skill : skillId : " + skillId + " targetGuid : " + targetGuid + " targetPos : " + targetPos);

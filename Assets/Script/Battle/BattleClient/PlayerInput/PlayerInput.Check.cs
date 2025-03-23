@@ -30,7 +30,7 @@ namespace Battle_Client
                 return;
             }
 
-            //判断用户键盘输入
+            //判断用户键盘输入(无目标技能也在这里)
             CheckKeyboardEvent(out InputEventType eventType);
 
             //判断用户鼠标输入

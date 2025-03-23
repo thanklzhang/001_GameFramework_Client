@@ -18,6 +18,8 @@ namespace Battle_Client
         public EntityLocationType localtionType;
         private bool isForceSkillMove = false;
 
+        private float forceMoveSpeed;
+
         internal void StartMoveByPath(List<Vector3> pathList, float moveSpeed, bool isSkillForce)
         {
             if (pathList.Count > 0)
@@ -27,7 +29,15 @@ namespace Battle_Client
 
                 this.movePosList = pathList;
                 // this.attr.moveSpeed = moveSpeed;
-                this.attr.SetAttr(EntityAttrType.MoveSpeed, moveSpeed);
+                if (!isForceSkillMove)
+                {
+                    this.attr.SetAttr(EntityAttrType.MoveSpeed, moveSpeed);
+                }
+                else
+                {
+                    forceMoveSpeed = moveSpeed;
+                }
+
 
                 var aniScale = this.attr.GetValue(EntityAttrType.MoveSpeed) / normalAnimationMoveSpeed;
 
@@ -46,6 +56,19 @@ namespace Battle_Client
         {
             var moveVector = moveTargetPos - this.gameObject.transform.position;
             var speed = this.attr.GetValue(EntityAttrType.MoveSpeed);
+           
+
+            if (isForceSkillMove)
+            {
+                speed = forceMoveSpeed;
+            }
+            
+            if (0 == this.playerIndex)
+            {
+                Logx.Log("client : speed : " + speed);
+            }
+
+
             var dir = moveVector.normalized;
             //var dis = moveVector.magnitude;
 
@@ -95,12 +118,19 @@ namespace Battle_Client
         public void StopMove(Vector3 endPos)
         {
             state = BattleEntityState.Idle;
-
+           
+            isForceSkillMove = false;
+            
             PlayAnimation("idle");
 
             if (CheckPosIsForcePullBack(endPos))
             {
                 this.SetPosition(endPos);
+            }
+            
+            if (0 == this.playerIndex)
+            {
+                Logx.Log("client : StopMove : " + endPos);
             }
 
             // isForceSkillMove = false;

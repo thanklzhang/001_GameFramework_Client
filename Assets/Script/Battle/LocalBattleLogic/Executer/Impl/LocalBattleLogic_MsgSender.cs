@@ -261,6 +261,9 @@ namespace Battle_Client
                     effectMoveArg.targetPos.z),
                 TargetGuid = effectMoveArg.targetGuid,
                 moveSpeed = effectMoveArg.moveSpeed,
+                isFlyMaxRange =  effectMoveArg.isFlyMaxRange,
+                dirByFlyMax = new UnityEngine.Vector3(effectMoveArg.dirByFlyMaxRange.x, effectMoveArg.dirByFlyMaxRange.y,
+                    effectMoveArg.dirByFlyMaxRange.z),
             };
             BattleManager.Instance.RecvBattleMsg<SkillEffectStartMove_RecvMsg>(arg);
 

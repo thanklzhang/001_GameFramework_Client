@@ -38,8 +38,10 @@ namespace Battle_Client
             gameObject.transform.position = pos;
         }
 
-
-        internal void StartMove(Vector3 targetPos, int targetGuid, float moveSpeed)
+        private bool isFlyMaxRange;
+        private Vector3 dirByFlyMax;
+        internal void StartMove(Vector3 targetPos, int targetGuid, float moveSpeed, 
+            bool isFlyMaxRange, UnityEngine.Vector3 dirByFlyMax)
         {
             //Logx.Log("skill effect start move : " + this.guid + " will move to : " + targetPos + " by speed : " + moveSpeed);
             state = BattleSkillEffectState.Move;
@@ -47,12 +49,24 @@ namespace Battle_Client
             this.moveTargetPos = targetPos;
             this.moveSpeed = moveSpeed;
             this.targetGuid = targetGuid;
+            this.isFlyMaxRange = isFlyMaxRange;
+            this.dirByFlyMax = dirByFlyMax;
 
-            if (this.targetGuid <= 0)
+            if (isFlyMaxRange)
             {
-                //非跟随
-                initDir = (targetPos - this.gameObject.transform.position).normalized;
+                //按照一个方向一直飞
+                initDir = dirByFlyMax;
             }
+            else
+            {
+                if (this.targetGuid <= 0)
+                {
+                    //非跟随
+                    initDir = (targetPos - this.gameObject.transform.position).normalized;
+                }
+            }
+
+         
         }
 
         public int GetFollowEntityGuid()
@@ -65,27 +79,38 @@ namespace Battle_Client
             var targetPos = moveTargetPos;
 
             var moveVector = Vector3.one;
-            if (targetGuid > 0)
+            
+            if (this.isFlyMaxRange)
             {
-                //跟随
-                var entity = BattleEntityManager.Instance.FindEntity(targetGuid);
-                if (entity != null)
-                {
-                    targetPos = entity.GetPosition();
-                    moveTargetPos = targetPos;
-                }
-                else
-                {
-                    targetPos = moveTargetPos;
-                }
-
-                moveVector = targetPos - this.gameObject.transform.position;
+                moveVector = initDir;
             }
             else
             {
-                //非跟随 一直飞行
-                moveVector = initDir;
+                if (targetGuid > 0)
+                {
+                    //跟随
+                    var entity = BattleEntityManager.Instance.FindEntity(targetGuid);
+                    if (entity != null)
+                    {
+                        targetPos = entity.GetPosition();
+                        moveTargetPos = targetPos;
+                    }
+                    else
+                    {
+                        targetPos = moveTargetPos;
+                    }
+
+                    moveVector = targetPos - this.gameObject.transform.position;
+                }
+                else
+                {
+                    //非跟随 一直飞行
+                    moveVector = initDir;
+                }
             }
+
+         
+         
 
 
             var speed = this.moveSpeed;
@@ -154,8 +179,6 @@ namespace Battle_Client
                             UpdateLinkPos(followPos,
                                 linkTargetNode.position);
                         }
-
-                       
                     }
                 }
             }

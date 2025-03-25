@@ -65,7 +65,7 @@ namespace Battle_Client
             
             if (0 == this.playerIndex)
             {
-                Logx.Log("client : speed : " + speed);
+                //Logx.Log("client : speed : " + speed);
             }
 
 
@@ -130,7 +130,7 @@ namespace Battle_Client
             
             if (0 == this.playerIndex)
             {
-                Logx.Log("client : StopMove : " + endPos);
+                //Logx.Log("client : StopMove : " + endPos);
             }
 
             // isForceSkillMove = false;

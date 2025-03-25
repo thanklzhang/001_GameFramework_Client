@@ -126,26 +126,6 @@ namespace Battle
         public int AttrGroupConfigId => config.AttrGroupConfigId;
         
         /// <summary>
-        ///增加的属性组(,分割)
-        /// </summary>
-        public List<int> AddedAttrGroup2 => config.AddedAttrGroup2;
-        
-        /// <summary>
-        ///增加属性组数值(,|分割 目前只做一个属性之只受一种属性增加)
-        /// </summary>
-        public List<List<int>> AddedValueGroup2 => config.AddedValueGroup2;
-        
-        /// <summary>
-        ///随机值（,|分割 ,如果配了值，那么就代表是随机， 格式：最小值,最大值）
-        /// </summary>
-        public List<List<int>> AddedValueRand2 => config.AddedValueRand2;
-        
-        /// <summary>
-        ///是否是持续性改变类型的属性
-        /// </summary>
-        public List<int> IsAddedAttrGroupContinuous2 => config.IsAddedAttrGroupContinuous2;
-        
-        /// <summary>
         ///结束的时候移除的效果列表
         /// </summary>
         public List<int> EndRemoveEffectList => config.EndRemoveEffectList;

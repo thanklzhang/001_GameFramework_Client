@@ -22,7 +22,8 @@ namespace Battle_Client
             var skillEffect = BattleSkillEffectManager_Client.Instance.FindSkillEffect(guid);
             if (skillEffect != null)
             {
-                skillEffect.StartMove(arg.TargetPos, arg.TargetGuid, arg.moveSpeed);
+                skillEffect.StartMove(arg.TargetPos, arg.TargetGuid, arg.moveSpeed,
+                    arg.isFlyMaxRange,arg.dirByFlyMax);
             }
         }
     }
@@ -33,5 +34,8 @@ namespace Battle_Client
         public UnityEngine.Vector3 TargetPos;
         public int TargetGuid;
         public float moveSpeed;
+
+        public bool isFlyMaxRange;
+        public  UnityEngine.Vector3 dirByFlyMax;
     }
 }

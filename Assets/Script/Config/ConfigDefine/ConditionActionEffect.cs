@@ -45,7 +45,7 @@ namespace Config
         /// <summary>
         ///行为参数
         /// </summary>
-        private string actionParam; 
+        private List<int> actionParamIntList; 
         
 
         
@@ -61,7 +61,7 @@ namespace Config
         
         public int ActionType { get => actionType; }     
         
-        public string ActionParam { get => actionParam; }     
+        public List<int> ActionParamIntList { get => actionParamIntList; }     
         
 
     } 

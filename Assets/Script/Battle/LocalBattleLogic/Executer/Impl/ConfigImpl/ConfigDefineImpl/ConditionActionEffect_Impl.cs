@@ -53,7 +53,7 @@ namespace Battle
         /// <summary>
         ///行为参数
         /// </summary>
-        public string ActionParam => config.ActionParam;
+        public List<int> ActionParamIntList => config.ActionParamIntList;
         
     } 
 }

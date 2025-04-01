@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400072}
   m_Layer: 0
-  m_Name: role_002
+  m_Name: role_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

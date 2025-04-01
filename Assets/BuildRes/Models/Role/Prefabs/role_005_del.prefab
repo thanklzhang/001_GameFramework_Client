@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7493506626897621504}
   m_Layer: 0
-  m_Name: tangyi_battle_003
+  m_Name: role_005_del
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,9 +198,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6659746308035896031}
   - {fileID: 3168083737236451282}
   - {fileID: 8181521183051820204}
-  - {fileID: 6659746308035896031}
   m_Father: {fileID: 7493506626897621504}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -212,6 +212,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2568113490231895375}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fd10ba947a2a3574498ede806d06f855,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.50682247
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd10ba947a2a3574498ede806d06f855,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.50682247
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd10ba947a2a3574498ede806d06f855,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.50682247
+      objectReference: {fileID: 0}
     - target: {fileID: 100104, guid: fd10ba947a2a3574498ede806d06f855, type: 3}
       propertyPath: m_Name
       value: jing_ling_nv_001_ty

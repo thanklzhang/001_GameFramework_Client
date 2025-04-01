@@ -391,15 +391,21 @@ namespace Config
         
 		tangyi_battle_003 = 15011021,
         
-		role_001 = 15011030,
+		role_001 = 15011031,
         
-		role_002 = 15011031,
+		role_002 = 15011032,
         
-		monster_001 = 15011032,
+		role_003 = 15011033,
         
-		monster_002 = 15011033,
+		role_004 = 15011034,
         
-		monster_boss_101 = 15011034,
+		role_005 = 15011035,
+        
+		monster_001 = 15011101,
+        
+		monster_002 = 15011102,
+        
+		monster_boss_101 = 15011103,
         
 		monster1_battle = 15012001,
         

@@ -61,9 +61,9 @@ namespace Battle
         public int IsPassiveSkill => config.IsPassiveSkill;
         
         /// <summary>
-        ///选择筛选实体类型，传给效果列表，可以看成总筛选
+        ///实体按照关系筛选，筛选成功之后才能进入下一阶段，效果列表，可以看成总筛选
         /// </summary>
-        public int SelectEntityType => config.SelectEntityType;
+        public int EntityRelationFilterType => config.EntityRelationFilterType;
         
         /// <summary>
         ///技能效果目标类型（选取即将触发效果的单位）

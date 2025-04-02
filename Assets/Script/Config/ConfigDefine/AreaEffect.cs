@@ -48,9 +48,19 @@ namespace Config
         private List<int> rangeParam; 
         
         /// <summary>
-        ///选择实体类型
+        ///选择实体类型（1级筛选类型）(实体间关系)
         /// </summary>
-        private int selectEntityType; 
+        private int entityRelationFilterType; 
+        
+        /// <summary>
+        ///2级筛选类型（在1级筛选类型选取之后）
+        /// </summary>
+        private int filterEntityType; 
+        
+        /// <summary>
+        ///随机选择数量，大于 0 表示最近进行随机选取
+        /// </summary>
+        private int randSelectCount; 
         
         /// <summary>
         ///触发的效果列表（对每个选取单位）
@@ -83,7 +93,11 @@ namespace Config
         
         public List<int> RangeParam { get => rangeParam; }     
         
-        public int SelectEntityType { get => selectEntityType; }     
+        public int EntityRelationFilterType { get => entityRelationFilterType; }     
+        
+        public int FilterEntityType { get => filterEntityType; }     
+        
+        public int RandSelectCount { get => randSelectCount; }     
         
         public List<int> EffectList { get => effectList; }     
         

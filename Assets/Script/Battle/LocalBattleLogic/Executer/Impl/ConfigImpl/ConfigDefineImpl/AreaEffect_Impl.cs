@@ -56,9 +56,19 @@ namespace Battle
         public List<int> RangeParam => config.RangeParam;
         
         /// <summary>
-        ///选择实体类型
+        ///选择实体类型（1级筛选类型）(实体间关系)
         /// </summary>
-        public int SelectEntityType => config.SelectEntityType;
+        public int EntityRelationFilterType => config.EntityRelationFilterType;
+        
+        /// <summary>
+        ///2级筛选类型（在1级筛选类型选取之后）
+        /// </summary>
+        public int FilterEntityType => config.FilterEntityType;
+        
+        /// <summary>
+        ///随机选择数量，大于 0 表示最近进行随机选取
+        /// </summary>
+        public int RandSelectCount => config.RandSelectCount;
         
         /// <summary>
         ///触发的效果列表（对每个选取单位）

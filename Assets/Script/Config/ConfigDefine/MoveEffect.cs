@@ -48,12 +48,12 @@ namespace Config
         private List<int> startEffectList; 
         
         /// <summary>
-        ///结束的时候触发的效果列表
+        ///到达的时候触发的效果列表（如果被打断则不会触发）
         /// </summary>
-        private List<int> endEffectList; 
+        private List<int> reachEffectList; 
         
         /// <summary>
-        ///结束的时候移除的效果列表
+        ///结束的时候移除的效果列表(无论被打断还是不打断都会触发)
         /// </summary>
         private List<int> endRemoveEffectList; 
         
@@ -83,7 +83,7 @@ namespace Config
         
         public List<int> StartEffectList { get => startEffectList; }     
         
-        public List<int> EndEffectList { get => endEffectList; }     
+        public List<int> ReachEffectList { get => reachEffectList; }     
         
         public List<int> EndRemoveEffectList { get => endRemoveEffectList; }     
         

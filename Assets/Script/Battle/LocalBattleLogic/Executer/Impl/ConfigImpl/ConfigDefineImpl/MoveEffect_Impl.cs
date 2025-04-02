@@ -56,12 +56,12 @@ namespace Battle
         public List<int> StartEffectList => config.StartEffectList;
         
         /// <summary>
-        ///结束的时候触发的效果列表
+        ///到达的时候触发的效果列表（如果被打断则不会触发）
         /// </summary>
-        public List<int> EndEffectList => config.EndEffectList;
+        public List<int> ReachEffectList => config.ReachEffectList;
         
         /// <summary>
-        ///结束的时候移除的效果列表
+        ///结束的时候移除的效果列表(无论被打断还是不打断都会触发)
         /// </summary>
         public List<int> EndRemoveEffectList => config.EndRemoveEffectList;
         

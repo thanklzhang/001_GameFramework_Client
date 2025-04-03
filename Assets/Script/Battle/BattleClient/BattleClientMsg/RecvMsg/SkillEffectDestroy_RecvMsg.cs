@@ -20,7 +20,7 @@ namespace Battle_Client
             var effectGuid = arg.effectGuid;
           
             //移除
-            BattleSkillEffectManager_Client.Instance.DestorySkillEffect(effectGuid);
+            BattleSkillEffectManager_Client.Instance.DestroySkillEffect(effectGuid);
             
             // //如果是 buff 先处理 UI 显示
             // var effect = BattleSkillEffectManager_Client.Instance.FindSkillEffect(effectGuid);

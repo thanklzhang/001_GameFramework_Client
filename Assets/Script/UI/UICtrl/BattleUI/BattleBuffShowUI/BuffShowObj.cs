@@ -148,6 +148,11 @@ public class BuffShowObj
 
     public void Hide()
     {
+        if (isPointEnter)
+        {
+            isPointEnter = false;
+            EventDispatcher.Broadcast<int>(EventIDs.On_UIBuffOption_PointExit, this.uiData.configId);
+        }
         this.gameObject.SetActive(false);
     }
 
@@ -155,11 +160,15 @@ public class BuffShowObj
 
     public void Release()
     {
+       this.Hide();
+       
         if (evetnTrigger != null)
         {
             evetnTrigger.OnPointEnterEvent -= OnPointEnter;
             evetnTrigger.OnPointerExitEvent -= OnPointExit;
         }
+        
+        GameObject.DestroyImmediate(gameObject);
     }
 }
 

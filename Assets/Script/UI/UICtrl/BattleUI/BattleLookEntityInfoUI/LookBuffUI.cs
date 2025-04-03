@@ -19,7 +19,7 @@ public class LookBuffUI
     Transform buffListRoot;
 
     // List<BattleAttrUIData> attrDataList = new List<BattleAttrUIData>();
-    List<BuffEffectInfo_Client> buffDataList = new List<BuffEffectInfo_Client>();
+    // List<BuffEffectInfo_Client> buffDataList = new List<BuffEffectInfo_Client>();
 
 
     // List<BattleAttrUIShowObj> attrShowObjList = new List<BattleAttrUIShowObj>();
@@ -57,11 +57,12 @@ public class LookBuffUI
     }
 
     private BattleEntity_Client entity;
+
     public void RefreshAllUI(BattleEntity_Client entity)
     {
         this.entity = entity;
-        RefreshDataList(entity);
-        RefreshShowList();
+        // RefreshDataList(entity);
+        InitShowList();
     }
     //
     // public void RemoveBuffFromDataList(int guid)
@@ -92,8 +93,67 @@ public class LookBuffUI
 
     public void UpdateBuff(BuffEffectInfo_Client buffInfo)
     {
-        RefreshDataList(this.entity);
-       this.RefreshShowList();
+        //  RefreshDataList(this.entity);
+        // this.RefreshShowList();
+
+        if (buffInfo.isRemove)
+        {
+            var findShowObj = this.buffShowObjList.Find(showObj => showObj.Guid == buffInfo.guid);
+            if (findShowObj != null)
+            {
+                findShowObj.Hide();
+                findShowObj.Release();
+                this.buffShowObjList.Remove(findShowObj);
+            }
+        }
+        else
+        {
+            var findShowObj = this.buffShowObjList.Find(showObj => showObj.Guid == buffInfo.guid);
+            if (null == findShowObj)
+            {
+                var go = GameObject.Instantiate(this.buffListRoot.GetChild(0).gameObject,
+                    this.buffListRoot, false);
+
+                BuffShowObj cell = new BuffShowObj();
+                cell.Init(go);
+                cell.Show();
+                cell.Refresh(buffInfo);
+
+                buffShowObjList.Add(cell);
+            }
+            else
+            {
+                findShowObj.Refresh(buffInfo);
+            }
+        }
+        //
+        //
+        // var findBuff = this.buffDataList.Find(b => b.guid == buffInfo.guid);
+        // if (findBuff != null)
+        // {
+        //     if (buffInfo.isRemove)
+        //     {
+        //         this.buffDataList.Remove(findBuff);
+        //         this.RefreshShowList();
+        //     }
+        //     else
+        //     {
+        //         var findBuffShowObj = this.buffShowObjList.Find(b => b.uiData.guid == buffInfo.guid);
+        //         if (findBuffShowObj != null)
+        //         {
+        //             findBuffShowObj.Refresh(buffInfo);
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     if (buffInfo.isCreate)
+        //     {
+        //         this.buffDataList.Add(buffInfo);
+        //         this.RefreshShowList();
+        //     }
+        // }
+
         // var findBuff = this.buffDataList.Find(b => b.guid == buffInfo.guid);
         // if (findBuff != null)
         // {
@@ -121,48 +181,52 @@ public class LookBuffUI
         // }
     }
 
-    public void RefreshDataList(BattleEntity_Client entity)
-    {
-        
-        buffDataList = entity.GetBuffList();
-        
-        // BattleAttrUIArgs attrUIArgs = new BattleAttrUIArgs();
-        // buffDataList = new List<AttrUIData>();
-
-        // var attr = BattleManager.Instance.GetLocalCtrlHeroAttrs();
-        //buffDataList = BattleSkillEffectManager_Client.Instance.GetBuffListFromEntity(entity);
-        // var attr = entity.attr;
-        // List<EntityAttrType> types = new List<EntityAttrType>()
-        // {
-        //     EntityAttrType.Attack,
-        //     EntityAttrType.Defence,
-        //     EntityAttrType.MaxHealth,
-        //     EntityAttrType.AttackSpeed,
-        //     EntityAttrType.AttackRange,
-        //     EntityAttrType.MoveSpeed,
-        // };
-        //
-        // for (int i = 0; i < types.Count; i++)
-        // {
-        //     var attrType = types[i];
-        //     float value = attr.GetValue(attrType);  
-        //     AttrUIData uiData = new AttrUIData()
-        //     {
-        //          type = attrType,
-        //          value = value
-        //     };
-        //  
-        //     buffDataList.Add(uiData);
-        // }
-    }
+    // public void RefreshDataList(BattleEntity_Client entity)
+    // {
+    //     var buffDataList = entity.GetBuffList();
+    //
+    //     // BattleAttrUIArgs attrUIArgs = new BattleAttrUIArgs();
+    //     // buffDataList = new List<AttrUIData>();
+    //
+    //     // var attr = BattleManager.Instance.GetLocalCtrlHeroAttrs();
+    //     //buffDataList = BattleSkillEffectManager_Client.Instance.GetBuffListFromEntity(entity);
+    //     // var attr = entity.attr;
+    //     // List<EntityAttrType> types = new List<EntityAttrType>()
+    //     // {
+    //     //     EntityAttrType.Attack,
+    //     //     EntityAttrType.Defence,
+    //     //     EntityAttrType.MaxHealth,
+    //     //     EntityAttrType.AttackSpeed,
+    //     //     EntityAttrType.AttackRange,
+    //     //     EntityAttrType.MoveSpeed,
+    //     // };
+    //     //
+    //     // for (int i = 0; i < types.Count; i++)
+    //     // {
+    //     //     var attrType = types[i];
+    //     //     float value = attr.GetValue(attrType);  
+    //     //     AttrUIData uiData = new AttrUIData()
+    //     //     {
+    //     //          type = attrType,
+    //     //          value = value
+    //     //     };
+    //     //  
+    //     //     buffDataList.Add(uiData);
+    //     // }
+    // }
 
     //用这个开始显示
-    public void RefreshShowList()
+    public void InitShowList()
     {
+        // foreach (var showObj in buffShowObjList)
+        // {
+        //     showObj.Hide();
+        //     showObj.Release();
+        // }
         buffShowObjList.Clear();
 
         //buffDataList.Sort((a, b) => { return a.guid.CompareTo(b.guid); });
-
+        var buffDataList = entity.GetBuffList();
         for (int i = 0; i < buffDataList.Count; i++)
         {
             var data = buffDataList[i];
@@ -225,6 +289,6 @@ public class LookBuffUI
         }
 
         buffShowObjList = null;
-        buffDataList = null;
+        // buffDataList = null;
     }
 }

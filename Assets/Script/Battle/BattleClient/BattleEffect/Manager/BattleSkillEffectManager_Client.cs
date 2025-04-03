@@ -183,7 +183,7 @@ namespace Battle_Client
             }
         }
 
-        public void DestorySkillEffect(int guid)
+        public void DestroySkillEffect(int guid)
         {
             if (skillEffectDic.ContainsKey(guid))
             {

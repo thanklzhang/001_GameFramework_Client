@@ -407,6 +407,10 @@ namespace Config
         
 		monster_boss_101 = 15011103,
         
+		monster_201 = 15011104,
+        
+		monster_202 = 15011105,
+        
 		monster1_battle = 15012001,
         
 		daoba_battle_030 = 15013001,

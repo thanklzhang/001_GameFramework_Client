@@ -53,7 +53,7 @@ namespace Config
         private int isPassiveSkill; 
         
         /// <summary>
-        ///实体按照关系筛选，筛选成功之后才能进入下一阶段，效果列表，可以看成总筛选
+        ///实体按照关系筛选
         /// </summary>
         private int entityRelationFilterType; 
         

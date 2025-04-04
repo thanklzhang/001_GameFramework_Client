@@ -58,6 +58,11 @@ namespace Config
         private int filterEntityType; 
         
         /// <summary>
+        ///排除实体类型
+        /// </summary>
+        private int excludeEntityType; 
+        
+        /// <summary>
         ///随机选择数量，大于 0 表示最近进行随机选取
         /// </summary>
         private int randSelectCount; 
@@ -96,6 +101,8 @@ namespace Config
         public int EntityRelationFilterType { get => entityRelationFilterType; }     
         
         public int FilterEntityType { get => filterEntityType; }     
+        
+        public int ExcludeEntityType { get => excludeEntityType; }     
         
         public int RandSelectCount { get => randSelectCount; }     
         

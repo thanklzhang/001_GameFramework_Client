@@ -66,6 +66,11 @@ namespace Battle
         public int FilterEntityType => config.FilterEntityType;
         
         /// <summary>
+        ///排除实体类型
+        /// </summary>
+        public int ExcludeEntityType => config.ExcludeEntityType;
+        
+        /// <summary>
         ///随机选择数量，大于 0 表示最近进行随机选取
         /// </summary>
         public int RandSelectCount => config.RandSelectCount;

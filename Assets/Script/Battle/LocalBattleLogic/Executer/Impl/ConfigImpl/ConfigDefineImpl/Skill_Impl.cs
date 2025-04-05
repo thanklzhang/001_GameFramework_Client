@@ -41,6 +41,11 @@ namespace Battle
         public int IconResId => config.IconResId;
         
         /// <summary>
+        ///技能类别
+        /// </summary>
+        public int SkillCategory => config.SkillCategory;
+        
+        /// <summary>
         ///技能释放目标类型
         /// </summary>
         public int SkillReleaseTargeType => config.SkillReleaseTargeType;
@@ -99,11 +104,6 @@ namespace Battle
         ///技能CD（毫秒）(在释放技能结束后,后摇时间开始前,则开始计时)(普通攻击不计算在这里)
         /// </summary>
         public int CdTime => config.CdTime;
-        
-        /// <summary>
-        ///技能类别
-        /// </summary>
-        public int SkillCategory => config.SkillCategory;
         
         /// <summary>
         ///是否'不能被打断' 0: 能被打断 , 1:不能被打断

@@ -108,14 +108,19 @@ namespace Config
         private int endRedirectType; 
         
         /// <summary>
-        ///结束时转向参数
+        ///结束时转向参数(intList)
         /// </summary>
-        private string endRedirectParam; 
+        private List<int> endRedirectIntListParam; 
         
         /// <summary>
         ///结束时转向之后持续时间
         /// </summary>
         private int endRedirectLastTime; 
+        
+        /// <summary>
+        ///是否结束时转向的时候保留碰撞实体信息
+        /// </summary>
+        private int isEndRedirectReserveCollisionInfo; 
         
         /// <summary>
         ///效果资源id
@@ -162,9 +167,11 @@ namespace Config
         
         public int EndRedirectType { get => endRedirectType; }     
         
-        public string EndRedirectParam { get => endRedirectParam; }     
+        public List<int> EndRedirectIntListParam { get => endRedirectIntListParam; }     
         
         public int EndRedirectLastTime { get => endRedirectLastTime; }     
+        
+        public int IsEndRedirectReserveCollisionInfo { get => isEndRedirectReserveCollisionInfo; }     
         
         public int EffectResId { get => effectResId; }     
         

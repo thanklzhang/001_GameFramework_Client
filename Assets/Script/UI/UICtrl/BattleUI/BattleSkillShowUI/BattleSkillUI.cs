@@ -196,14 +196,13 @@ public class BattleSkillUI
         this.skillDataList = dataList;
     }
 
-    BattleSkillInfo GetLeaderSkill(List<BattleSkillInfo> leaderSkills,PlayerCommandType commanType)
+    BattleSkillInfo GetLeaderSkill(List<BattleSkillInfo> leaderSkills,PlayerCommandType commandType)
     {
-        //队长技能 1
         var player = BattleManager.Instance.GetLocalPlayer();
         var leaderSkill1 = leaderSkills.Find(skill =>
         {
 
-            var commandMode = player.GetInputCommand(commanType);
+            var commandMode = player.GetInputCommand(commandType);
             if (commandMode != null)
             {
                 var skillCM = commandMode as SkillCommandModel;

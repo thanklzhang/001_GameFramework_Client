@@ -171,6 +171,20 @@ namespace Battle_Client
                 return false;
             });
         }
+
+        public List<BattleSkillInfo> FindSkills(SkillCategory category)
+        {
+            return skills.FindAll(skill =>
+            {
+                var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skill.configId);
+                if (skillConfig != null)
+                {
+                    return (SkillCategory)skillConfig.SkillCategory == category;
+                }
+
+                return false;
+            });
+        }
     }
 
 

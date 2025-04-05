@@ -27,8 +27,11 @@ namespace Battle_Client
             var hero = BattleManager.Instance.GetLocalCtrlHero();
             var normalAttackSkill = hero.FindSkill(SkillCategory.NormalAttack);
             var minorSkill = hero.FindSkill(SkillCategory.MinorSkill);
-            var leaderSkill1 = hero.FindSkill(SkillCategory.LeaderSkill);
-            var leaderSkill2 = hero.FindSkill(SkillCategory.LeaderSkill);
+            var leaderSkills = hero.FindSkills(SkillCategory.LeaderSkill);
+
+
+            var leaderSkill1 = leaderSkills.Count > 0 ? leaderSkills[0] : null;
+            var leaderSkill2 = leaderSkills.Count > 1 ? leaderSkills[1] : null;
             var ultimateSkill = hero.FindSkill(SkillCategory.UltimateSkill);
 
             inputMappingDic.Add(PlayerInputType.KeyCode_A,PlayerCommandType.NormalAttack);

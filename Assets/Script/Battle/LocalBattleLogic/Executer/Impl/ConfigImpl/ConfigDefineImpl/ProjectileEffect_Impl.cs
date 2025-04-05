@@ -116,14 +116,19 @@ namespace Battle
         public int EndRedirectType => config.EndRedirectType;
         
         /// <summary>
-        ///结束时转向参数
+        ///结束时转向参数(intList)
         /// </summary>
-        public string EndRedirectParam => config.EndRedirectParam;
+        public List<int> EndRedirectIntListParam => config.EndRedirectIntListParam;
         
         /// <summary>
         ///结束时转向之后持续时间
         /// </summary>
         public int EndRedirectLastTime => config.EndRedirectLastTime;
+        
+        /// <summary>
+        ///是否结束时转向的时候保留碰撞实体信息
+        /// </summary>
+        public int IsEndRedirectReserveCollisionInfo => config.IsEndRedirectReserveCollisionInfo;
         
         /// <summary>
         ///效果资源id

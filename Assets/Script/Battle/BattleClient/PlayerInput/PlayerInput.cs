@@ -204,7 +204,16 @@ namespace Battle_Client
             Vector3 targetPos = Vector3.zero;
 
             // var battleNet = NetHandlerManager.Instance.GetHandler<BattleNetHandler>();
+            if (skillId <= 0)
+            {
+                return;
+            }
+
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
+            if (null == skillConfig)
+            {
+                return;
+            }
 
             var localCtrlHeroGameObject = BattleManager.Instance.GetLocalCtrlHeroGameObject();
             var localInstanceID = localCtrlHeroGameObject.GetInstanceID();

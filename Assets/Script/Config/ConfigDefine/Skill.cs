@@ -33,6 +33,11 @@ namespace Config
         private int iconResId; 
         
         /// <summary>
+        ///技能类别
+        /// </summary>
+        private int skillCategory; 
+        
+        /// <summary>
         ///技能释放目标类型
         /// </summary>
         private int skillReleaseTargeType; 
@@ -93,11 +98,6 @@ namespace Config
         private int cdTime; 
         
         /// <summary>
-        ///技能类别
-        /// </summary>
-        private int skillCategory; 
-        
-        /// <summary>
         ///是否'不能被打断' 0: 能被打断 , 1:不能被打断
         /// </summary>
         private int isNoBreak; 
@@ -142,6 +142,8 @@ namespace Config
         
         public int IconResId { get => iconResId; }     
         
+        public int SkillCategory { get => skillCategory; }     
+        
         public int SkillReleaseTargeType { get => skillReleaseTargeType; }     
         
         public int AreaEffectId { get => areaEffectId; }     
@@ -165,8 +167,6 @@ namespace Config
         public int AfterTime { get => afterTime; }     
         
         public int CdTime { get => cdTime; }     
-        
-        public int SkillCategory { get => skillCategory; }     
         
         public int IsNoBreak { get => isNoBreak; }     
         

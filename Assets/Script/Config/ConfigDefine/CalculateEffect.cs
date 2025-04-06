@@ -23,9 +23,9 @@ namespace Config
         private string describe; 
         
         /// <summary>
-        ///施加效果的目标类型
+        ///计算目标类型
         /// </summary>
-        private int effectTargetType; 
+        private int calculateEffectTargetType; 
         
         /// <summary>
         ///附加伤害组（, | ）
@@ -68,7 +68,7 @@ namespace Config
         
         public string Describe { get => describe; }     
         
-        public int EffectTargetType { get => effectTargetType; }     
+        public int CalculateEffectTargetType { get => calculateEffectTargetType; }     
         
         public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
         

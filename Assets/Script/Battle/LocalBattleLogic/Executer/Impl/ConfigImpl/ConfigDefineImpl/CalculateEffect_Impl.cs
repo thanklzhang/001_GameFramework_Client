@@ -31,9 +31,9 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
-        ///施加效果的目标类型
+        ///计算目标类型
         /// </summary>
-        public int EffectTargetType => config.EffectTargetType;
+        public int CalculateEffectTargetType => config.CalculateEffectTargetType;
         
         /// <summary>
         ///附加伤害组（, | ）

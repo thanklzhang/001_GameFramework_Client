@@ -41,6 +41,11 @@ namespace Battle
         public int MoveTargetPosType => config.MoveTargetPosType;
         
         /// <summary>
+        ///移动过程类型
+        /// </summary>
+        public int MoveProcessType => config.MoveProcessType;
+        
+        /// <summary>
         ///移动终点类型
         /// </summary>
         public int EndPosType => config.EndPosType;

@@ -33,6 +33,11 @@ namespace Config
         private int moveTargetPosType; 
         
         /// <summary>
+        ///移动过程类型
+        /// </summary>
+        private int moveProcessType; 
+        
+        /// <summary>
         ///移动终点类型
         /// </summary>
         private int endPosType; 
@@ -76,6 +81,8 @@ namespace Config
         public int MoveSpeed { get => moveSpeed; }     
         
         public int MoveTargetPosType { get => moveTargetPosType; }     
+        
+        public int MoveProcessType { get => moveProcessType; }     
         
         public int EndPosType { get => endPosType; }     
         

@@ -167,8 +167,8 @@ public class BuffShowObj
             evetnTrigger.OnPointEnterEvent -= OnPointEnter;
             evetnTrigger.OnPointerExitEvent -= OnPointExit;
         }
-        
-        GameObject.DestroyImmediate(gameObject);
+
+       
     }
 }
 

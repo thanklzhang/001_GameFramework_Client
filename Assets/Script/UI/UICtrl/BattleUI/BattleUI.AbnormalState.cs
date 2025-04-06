@@ -36,6 +36,14 @@ public partial class BattleUI : BaseUI
                 ColorUtility.TryParseHtmlString("#00FCFF", out color);
             }
         }
+        else if (abnormalType == EntityAbnormalStateType.AvoidDamage)
+        {
+            if (stateBean.triggerType == AbnormalStateTriggerType.Trigger)
+            {
+                showWord = "躲避伤害";
+                ColorUtility.TryParseHtmlString("#00FCFF", out color);
+            }
+        }
 
         FloatWordBean arg = new FloatWordBean();
         arg.color = color;

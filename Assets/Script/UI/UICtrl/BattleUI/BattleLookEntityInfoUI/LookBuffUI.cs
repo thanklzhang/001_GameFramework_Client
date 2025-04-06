@@ -28,6 +28,8 @@ public class LookBuffUI
 
     public BattleUI BattleUI;
 
+    private GameObject itemTemp;
+
     public void Init(GameObject gameObject, BattleUI battleUIPre)
     {
         this.BattleUI = battleUIPre;
@@ -36,7 +38,8 @@ public class LookBuffUI
 
         //closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
         buffListRoot = this.transform.Find("group");
-
+        itemTemp = this.transform.Find("item").gameObject;
+        itemTemp.SetActive(false);
         // closeBtn.onClick.AddListener(() =>
         // {
         //     this.Close();
@@ -111,7 +114,7 @@ public class LookBuffUI
             var findShowObj = this.buffShowObjList.Find(showObj => showObj.Guid == buffInfo.guid);
             if (null == findShowObj)
             {
-                var go = GameObject.Instantiate(this.buffListRoot.GetChild(0).gameObject,
+                var go = GameObject.Instantiate(itemTemp.gameObject,
                     this.buffListRoot, false);
 
                 BuffShowObj cell = new BuffShowObj();
@@ -126,59 +129,6 @@ public class LookBuffUI
                 findShowObj.Refresh(buffInfo);
             }
         }
-        //
-        //
-        // var findBuff = this.buffDataList.Find(b => b.guid == buffInfo.guid);
-        // if (findBuff != null)
-        // {
-        //     if (buffInfo.isRemove)
-        //     {
-        //         this.buffDataList.Remove(findBuff);
-        //         this.RefreshShowList();
-        //     }
-        //     else
-        //     {
-        //         var findBuffShowObj = this.buffShowObjList.Find(b => b.uiData.guid == buffInfo.guid);
-        //         if (findBuffShowObj != null)
-        //         {
-        //             findBuffShowObj.Refresh(buffInfo);
-        //         }
-        //     }
-        // }
-        // else
-        // {
-        //     if (buffInfo.isCreate)
-        //     {
-        //         this.buffDataList.Add(buffInfo);
-        //         this.RefreshShowList();
-        //     }
-        // }
-
-        // var findBuff = this.buffDataList.Find(b => b.guid == buffInfo.guid);
-        // if (findBuff != null)
-        // {
-        //     if (buffInfo.isRemove)
-        //     {
-        //         this.buffDataList.Remove(findBuff);
-        //         this.RefreshShowList();
-        //     }
-        //     else
-        //     {
-        //         var findBuffShowObj = this.buffShowObjList.Find(b => b.uiData.guid == buffInfo.guid);
-        //         if (findBuffShowObj != null)
-        //         {
-        //             findBuffShowObj.Refresh(buffInfo);
-        //         }
-        //     }
-        // }
-        // else
-        // {
-        //     if (buffInfo.isCreate)
-        //     {
-        //         this.buffDataList.Add(buffInfo);
-        //         this.RefreshShowList();
-        //     }
-        // }
     }
 
     // public void RefreshDataList(BattleEntity_Client entity)
@@ -237,7 +187,7 @@ public class LookBuffUI
             }
             else
             {
-                go = GameObject.Instantiate(this.buffListRoot.GetChild(0).gameObject,
+                go = GameObject.Instantiate(itemTemp.gameObject,
                     this.buffListRoot, false);
             }
 

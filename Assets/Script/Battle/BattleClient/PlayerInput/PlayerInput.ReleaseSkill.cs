@@ -62,13 +62,15 @@ namespace Battle_Client
                     var targetGuid = battleEntity.guid;
 
                     var targetPos = Vector3.right;
-                    //先排除自己
-                    if (localEntity.collider.gameObject.GetInstanceID() !=
-                        battleEntity.collider.gameObject.GetInstanceID())
-                    {
-                        //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
-                        SuccessRelease(targetGuid,targetPos,skillId);
-                    }
+                    // //先排除自己
+                    // if (localEntity.collider.gameObject.GetInstanceID() !=
+                    //     battleEntity.collider.gameObject.GetInstanceID())
+                    // {
+                    //     //battleNet.SendUseSkill(skillId, targetGuid, targetPos);
+                    //     SuccessRelease(targetGuid,targetPos,skillId);
+                    // }
+                    
+                    SuccessRelease(targetGuid,targetPos,skillId);
                 }
 
 

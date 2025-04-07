@@ -84,17 +84,17 @@ public class SkillDirectorModule
         if (type == SkillDirectorType.DirectorProjectile)
         {
             skillDirector = new SkillDirectorProjectile();
-            skillDirector.Init(skillDirConfig.SkillDirectorProjectileType, skillDirConfig.SkillDirectorProjectileParam);
+            skillDirector.Init(skillDirConfig.SkillDirectorProjectileType, skillDirConfig.SkillDirectorProjectileParam,this.skillConfig);
         }
         else if (type == SkillDirectorType.DirectorReleaserTerminal)
         {
             skillDirector = new SkillDirectorTerminal();
-            skillDirector.Init(skillDirConfig.SkillReleaserDirectType, skillDirConfig.SkillReleaserDirectParam);
+            skillDirector.Init(skillDirConfig.SkillReleaserDirectType, skillDirConfig.SkillReleaserDirectParam,this.skillConfig);
         }
         else if (type == SkillDirectorType.DirectorTargetTerminal)
         {
             skillDirector = new SkillDirectorTerminal();
-            skillDirector.Init(skillDirConfig.SkillTargetDirectType, skillDirConfig.SkillTargetDirectParam);
+            skillDirector.Init(skillDirConfig.SkillTargetDirectType, skillDirConfig.SkillTargetDirectParam,this.skillConfig);
 
         }
 

@@ -3,9 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using Battle;
 using UnityEngine;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
 
 public class BaseSkillDirector
 {
@@ -22,9 +23,10 @@ public class BaseSkillDirector
 
     //不考虑是否加载完成中的'是否显示'变量 , 这里应该是 state(show hide release  这样就可以根据是否加载完进行一些操作)
     private bool isShow = false;
-    
-    public void Init(int skillDirectorType, List<int> param)
+    protected Config.Skill skillConfig;
+    public void Init(int skillDirectorType, List<int> param,Config.Skill skillConfig)
     {
+        this.skillConfig = skillConfig;
         this.OnInit(skillDirectorType, param);
     }
 
@@ -124,7 +126,7 @@ public class BaseSkillDirector
         //this.transform.forward = toMouseDir;
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
         isShow = false;
         isEnable = false;

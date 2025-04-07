@@ -57,16 +57,6 @@ namespace Config
         /// </summary>
         private int attrGroupConfigId; 
         
-        /// <summary>
-        ///增加的属性组(,分割)
-        /// </summary>
-        private List<int> addedAttrGroup; 
-        
-        /// <summary>
-        ///增加属性组数值(,|分割 目前只做一个属性之只受一种属性增加)
-        /// </summary>
-        private List<List<int>> addedValueGroup; 
-        
 
         
         public string Name { get => name; }     
@@ -86,10 +76,6 @@ namespace Config
         public int SkillId { get => skillId; }     
         
         public int AttrGroupConfigId { get => attrGroupConfigId; }     
-        
-        public List<int> AddedAttrGroup { get => addedAttrGroup; }     
-        
-        public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
         
 
     } 

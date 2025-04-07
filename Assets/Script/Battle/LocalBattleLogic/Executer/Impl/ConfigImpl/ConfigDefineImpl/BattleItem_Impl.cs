@@ -65,15 +65,5 @@ namespace Battle
         /// </summary>
         public int AttrGroupConfigId => config.AttrGroupConfigId;
         
-        /// <summary>
-        ///增加的属性组(,分割)
-        /// </summary>
-        public List<int> AddedAttrGroup => config.AddedAttrGroup;
-        
-        /// <summary>
-        ///增加属性组数值(,|分割 目前只做一个属性之只受一种属性增加)
-        /// </summary>
-        public List<List<int>> AddedValueGroup => config.AddedValueGroup;
-        
     } 
 }

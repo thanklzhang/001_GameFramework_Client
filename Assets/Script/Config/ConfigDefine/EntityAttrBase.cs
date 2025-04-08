@@ -78,6 +78,11 @@ namespace Config
         private int skillCD; 
         
         /// <summary>
+        ///治疗比率
+        /// </summary>
+        private int treatmentRate; 
+        
+        /// <summary>
         ///生命恢复速度（*1000）每秒
         /// </summary>
         private int healthRecoverSpeed; 
@@ -109,6 +114,8 @@ namespace Config
         public int CritDamage { get => critDamage; }     
         
         public int SkillCD { get => skillCD; }     
+        
+        public int TreatmentRate { get => treatmentRate; }     
         
         public int HealthRecoverSpeed { get => healthRecoverSpeed; }     
         

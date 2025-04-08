@@ -86,6 +86,11 @@ namespace Battle
         public int SkillCD => config.SkillCD;
         
         /// <summary>
+        ///治疗比率
+        /// </summary>
+        public int TreatmentRate => config.TreatmentRate;
+        
+        /// <summary>
         ///生命恢复速度（*1000）每秒
         /// </summary>
         public int HealthRecoverSpeed => config.HealthRecoverSpeed;

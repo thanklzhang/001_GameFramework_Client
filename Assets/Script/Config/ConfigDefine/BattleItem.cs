@@ -18,7 +18,7 @@ namespace Config
         private string name; 
         
         /// <summary>
-        ///介绍
+        ///备注
         /// </summary>
         private string describe; 
         

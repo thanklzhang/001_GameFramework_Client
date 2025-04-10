@@ -26,7 +26,7 @@ namespace Battle
         public string Name => config.Name;
         
         /// <summary>
-        ///介绍
+        ///备注
         /// </summary>
         public string Describe => config.Describe;
         

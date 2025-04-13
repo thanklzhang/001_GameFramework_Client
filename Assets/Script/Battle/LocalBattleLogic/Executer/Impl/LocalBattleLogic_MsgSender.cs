@@ -765,7 +765,7 @@ namespace Battle_Client
             {
                 playerIndex = playerIndex,
                 retCodeType = retCode.type,
-                opSkillId = retCode.intArg1
+                opSkillId = retCode.intArg0
             };
 
             BattleManager.Instance.RecvBattleMsg<ReplaceSkillResult_RecvMsg>(arg);

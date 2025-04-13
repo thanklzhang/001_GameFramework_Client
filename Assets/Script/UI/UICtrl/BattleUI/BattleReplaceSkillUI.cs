@@ -50,6 +50,11 @@ public class ReplaceSkillCell
 
     protected void OnClick()
     {
+        if (this.isOpSkill)
+        {
+            return;
+        }
+        
         this.parentUI.SelectSkill(this.skillId);
     }
 

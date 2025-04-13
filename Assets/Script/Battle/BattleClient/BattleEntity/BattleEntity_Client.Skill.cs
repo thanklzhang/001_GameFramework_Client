@@ -55,9 +55,9 @@ namespace Battle_Client
             var skill = this.FindSkill(arg.skillConfigId);
             if (skill != null)
             {
-                skill?.UpdateInfo(arg);
+               
 
-                if (skill.isDelete)
+                if (arg.isDelete)
                 {
                     this.skills.Remove(skill);
                     if (IsHeroCtrl())
@@ -69,6 +69,8 @@ namespace Battle_Client
                     EventDispatcher.Broadcast(EventIDs.OnSkillRefreshAll);
 
                 }
+                
+                skill?.UpdateInfo(arg);
 
                 //player input remove skill
 

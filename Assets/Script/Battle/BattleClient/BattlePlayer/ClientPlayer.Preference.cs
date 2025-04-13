@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Battle;
+using Config;
 using UnityEngine;
 
 namespace Battle_Client
@@ -34,13 +35,13 @@ namespace Battle_Client
             var leaderSkill2 = leaderSkills.Count > 1 ? leaderSkills[1] : null;
             var ultimateSkill = hero.FindSkill(SkillCategory.UltimateSkill);
 
-            inputMappingDic.Add(PlayerInputType.KeyCode_A,PlayerCommandType.NormalAttack);
-            inputMappingDic.Add(PlayerInputType.KeyCode_Q,PlayerCommandType.Skill_Minor);
-            inputMappingDic.Add(PlayerInputType.KeyCode_W,PlayerCommandType.Skill_Leader_1);
-            inputMappingDic.Add(PlayerInputType.KeyCode_E,PlayerCommandType.Skill_Leader_2);
-            inputMappingDic.Add(PlayerInputType.KeyCode_R,PlayerCommandType.Skill_Ultimate);
-            
-            
+            inputMappingDic.Add(PlayerInputType.KeyCode_A, PlayerCommandType.NormalAttack);
+            inputMappingDic.Add(PlayerInputType.KeyCode_Q, PlayerCommandType.Skill_Minor);
+            inputMappingDic.Add(PlayerInputType.KeyCode_W, PlayerCommandType.Skill_Leader_1);
+            inputMappingDic.Add(PlayerInputType.KeyCode_E, PlayerCommandType.Skill_Leader_2);
+            inputMappingDic.Add(PlayerInputType.KeyCode_R, PlayerCommandType.Skill_Ultimate);
+
+
             AddInputCommand(PlayerCommandType.NormalAttack, new SkillCommandModel
             {
                 commandType = PlayerCommandType.NormalAttack,
@@ -80,6 +81,7 @@ namespace Battle_Client
                 Logx.LogWarning(LogxType.Game, "has exist commanType : " + commanType);
             }
         }
+
         public PlayerCommandType GetCommandByInputType(PlayerInputType inputType)
         {
             if (inputMappingDic.ContainsKey(inputType))
@@ -89,6 +91,7 @@ namespace Battle_Client
 
             return PlayerCommandType.Null;
         }
+
         public PlayerInputCommandModel GetCommandModelByInputType(PlayerInputType inputType)
         {
             var commandType = GetCommandByInputType(inputType);
@@ -100,6 +103,24 @@ namespace Battle_Client
             if (this.inputCommandDic.ContainsKey(commandType))
             {
                 return this.inputCommandDic[commandType];
+            }
+
+            return null;
+        }
+
+        public SkillCommandModel GetCommandModelBySkillId(int skillId)
+        {
+            foreach (var kv in this.inputCommandDic)
+            {
+                var commandModel = kv.Value;
+                if (commandModel is SkillCommandModel)
+                {
+                    var skillCM = commandModel as SkillCommandModel;
+                    if (skillCM.skillConfigId == skillId)
+                    {
+                        return skillCM;
+                    }
+                }
             }
 
             return null;
@@ -124,12 +145,29 @@ namespace Battle_Client
 
         public void TryToAddSkillInput(int skillId)
         {
+            var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skillId);
+            var skillCategory = (SkillCategory)skillConfig.SkillCategory;
             foreach (var kv in this.inputCommandDic)
             {
                 var commandModel = kv.Value;
                 if (commandModel is SkillCommandModel)
                 {
                     var skillCM = commandModel as SkillCommandModel;
+
+                    if (skillCategory == SkillCategory.MinorSkill && 
+                        skillCM.commandType == PlayerCommandType.Skill_Minor)
+                    {
+                        skillCM.skillConfigId = skillId;
+                        return;
+                    }
+                    
+                    if (skillCategory == SkillCategory.UltimateSkill && 
+                        skillCM.commandType == PlayerCommandType.Skill_Ultimate)
+                    {
+                        skillCM.skillConfigId = skillId;
+                        return;
+                    }
+
                     if (skillCM.skillConfigId <= 0)
                     {
                         skillCM.skillConfigId = skillId;

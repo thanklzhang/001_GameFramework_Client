@@ -46,6 +46,12 @@ namespace Battle_Client
             //     Battle_Log.LogZxy("");
             // }
 
+            var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(arg.skillConfigId);
+            if ((SkillCategory)skillConfig.SkillCategory == SkillCategory.MinorSkill)
+            {
+                Logx.Log(arg.skillConfigId + " is minor skill");
+            }
+
             var skill = this.FindSkill(arg.skillConfigId);
             if (skill != null)
             {

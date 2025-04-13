@@ -31,19 +31,19 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
-        ///固定奖励（一定产出）
-        /// </summary>
-        public List<int> FixedRewardList => config.FixedRewardList;
-        
-        /// <summary>
         ///奖励id总列表
         /// </summary>
         public List<int> RewardIdList => config.RewardIdList;
         
         /// <summary>
-        ///权重
+        ///奖励权重
         /// </summary>
         public List<int> RewardWeightList => config.RewardWeightList;
+        
+        /// <summary>
+        ///固定奖励（一定产出）
+        /// </summary>
+        public List<int> FixedRewardList => config.FixedRewardList;
         
     } 
 }

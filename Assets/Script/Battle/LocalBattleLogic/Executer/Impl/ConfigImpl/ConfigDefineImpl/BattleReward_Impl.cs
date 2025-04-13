@@ -46,7 +46,7 @@ namespace Battle
         public List<int> ValueList => config.ValueList;
         
         /// <summary>
-        ///权重
+        ///奖励中数值的权重
         /// </summary>
         public List<int> WeightList => config.WeightList;
         

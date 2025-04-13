@@ -38,7 +38,7 @@ namespace Config
         private List<int> valueList; 
         
         /// <summary>
-        ///权重
+        ///奖励中数值的权重
         /// </summary>
         private List<int> weightList; 
         

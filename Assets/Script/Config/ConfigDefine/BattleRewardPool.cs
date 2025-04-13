@@ -23,19 +23,19 @@ namespace Config
         private string describe; 
         
         /// <summary>
-        ///固定奖励（一定产出）
-        /// </summary>
-        private List<int> fixedRewardList; 
-        
-        /// <summary>
         ///奖励id总列表
         /// </summary>
         private List<int> rewardIdList; 
         
         /// <summary>
-        ///权重
+        ///奖励权重
         /// </summary>
         private List<int> rewardWeightList; 
+        
+        /// <summary>
+        ///固定奖励（一定产出）
+        /// </summary>
+        private List<int> fixedRewardList; 
         
 
         
@@ -43,11 +43,11 @@ namespace Config
         
         public string Describe { get => describe; }     
         
-        public List<int> FixedRewardList { get => fixedRewardList; }     
-        
         public List<int> RewardIdList { get => rewardIdList; }     
         
         public List<int> RewardWeightList { get => rewardWeightList; }     
+        
+        public List<int> FixedRewardList { get => fixedRewardList; }     
         
 
     } 

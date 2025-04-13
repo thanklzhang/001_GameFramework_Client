@@ -23,7 +23,7 @@ public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
     private TextMeshProUGUI expText;
     private TextMeshProUGUI levelText;
     protected UIEventTrigger evetnTrigger;
-    public BattleSkillUIData uiData;
+    public BattleSkillInfo uiData;
 
     float currCDTimer = 0;
 
@@ -68,21 +68,21 @@ public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
         evetnTrigger.OnPointerExitEvent += OnPointExit;
     }
 
-    public void Refresh(BattleSkillUIData data, int index)
+    public void Refresh(BattleSkillInfo data, int index)
     {
         if (null == data)
         {
             return;
         }
 
-        this.uiData = (BattleSkillUIData)data;
+        this.uiData = (BattleSkillInfo)data;
 
-        if (this.uiData.skillId > 0)
+        if (this.uiData.configId > 0)
         {
             normalRoot.gameObject.SetActive(true);
             emptyRoot.gameObject.SetActive(false);
             
-            if (this.uiData.isUnlock)
+            if (this.uiData.configId > 0)
             {
                 lockRoot.gameObject.SetActive(false);
             }
@@ -92,10 +92,27 @@ public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
             }
 
             //技能图标
-            var skillId = this.uiData.skillId;
+            var skillId = this.uiData.configId;
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
             ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
 
+            //冷却显示
+            currCDTimer =  this.uiData.currCDTime;
+
+            if (currCDTimer <= 0)
+            {
+                //可以使用技能了
+                cdRootGo.SetActive(false);
+                canUseMaskGo.SetActive(false);
+            }
+            else
+            {
+                //在 cd 中 ，刷新 cd 时间
+                cdRootGo.SetActive(true);
+                //mask 是代表不能用 并不是只有 cd 这个因素 尽管现在只有 cd
+                canUseMaskGo.SetActive(true);
+            }
+            
             RefreshLevelExpShow();
         }
         else
@@ -108,9 +125,9 @@ public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
 
     public void RefreshLevelExpShow()
     {
-        if (this.uiData.skillId > 0)
+        if (this.uiData.configId > 0)
         {
-            var skillId = this.uiData.skillId;
+            var skillId = this.uiData.configId;
             var skillConfig = Config.ConfigManager.Instance.GetById<Config.Skill>(skillId);
             var currExp = this.uiData.exp;
             var skillUpdateConfig = Config.ConfigManager.Instance.GetById<SkillUpgradeParam>(1);
@@ -180,14 +197,14 @@ public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
 
     internal int GetSkillConfigId()
     {
-        return this.uiData.skillId;
+        return this.uiData.configId;
     }
 
     public void OnPointEnter(PointerEventData e)
     {
         //转换成点在 BattleUI 中的 localPosition
 
-        if (this.uiData.skillId <= 0)
+        if (this.uiData.configId <= 0)
         {
             return;
         }
@@ -201,25 +218,32 @@ public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
         var battleUIRect = this.skillUI.BattleUI.gameObject.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(battleUIRect, screenPos, cameraUI.camera, out uiPos);
 
-        EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, this.uiData.skillId, uiPos);
+        EventDispatcher.Broadcast<int, Vector2>(EventIDs.On_UISkillOption_PointEnter, this.uiData.configId, uiPos);
     }
 
     public void OnPointExit(PointerEventData e)
     {
-        if (this.uiData.skillId <= 0)
+        if (this.uiData.configId <= 0)
         {
             return;
         }
         
-        EventDispatcher.Broadcast<int>(EventIDs.On_UISkillOption_PointExit, this.uiData.skillId);
+        EventDispatcher.Broadcast<int>(EventIDs.On_UISkillOption_PointExit, this.uiData.configId);
     }
 
-
+    public void OnRemove()
+    {
+        this.uiData.configId = 0;
+        this.Refresh(this.uiData, 0);
+    }
+    
     public void Release()
     {
         evetnTrigger.OnPointEnterEvent -= OnPointEnter;
         evetnTrigger.OnPointerExitEvent -= OnPointExit;
     }
+
+  
 }
 
 
@@ -228,12 +252,12 @@ public class BattleSkillUIShowObj// : BaseUIShowObj<BattleSkillUI>
 //     public List<BattleSkillUIData> battleSkillList;
 // }
 
-public class BattleSkillUIData
-{
-    public int skillId;
-    public int iconResId;
-    public float maxCDTime;
-    public int exp;
-    // public int showIndex;
-    public bool isUnlock;
-}
+// public class BattleSkillUIData
+// {
+//     public int skillId;
+//     public int iconResId;
+//     public float maxCDTime;
+//     public int exp;
+//     // public int showIndex;
+//     public bool isUnlock;
+// }

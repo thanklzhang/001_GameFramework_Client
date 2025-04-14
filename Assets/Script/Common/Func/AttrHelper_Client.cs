@@ -67,6 +67,35 @@ public class AttrHelper_Client
                 desStr = "获得一个道具";
             }
         }
+        else if (type == BattleRewardType.Item_Copy)
+        {
+            nameStr = "复制道具";
+            if (isMakeSureReward)
+            {
+                desStr = "复制道具:";
+
+                var itemConfigId = battleReward.intArg1;
+                var attrStr = "";
+                if (itemConfigId > 0)
+                {
+                    var itemConfig = ConfigManager.Instance.GetById<BattleItem>(itemConfigId);
+                    desStr += itemConfig.Name + ":";
+
+                    attrStr = GetAttrContent(itemConfig.AttrGroupConfigId,
+                        battleReward.intListArg1);
+                }
+                else
+                {
+                    attrStr = "随机复制一个道具";
+                }
+
+                desStr += attrStr;
+            }
+            else
+            {
+                desStr = "随机复制一个已有道具";
+            }
+        }
         else if (type == BattleRewardType.TeamMember_Gain)
         {
             nameStr = "获得队友";
@@ -138,19 +167,20 @@ public class AttrHelper_Client
                 if (rewardConfig.ValueList.Count > 1)
                 {
                     //随机
-                    var str = $"{battleReward.intArg1}({rewardConfig.ValueList[0]}~{rewardConfig.ValueList[1]})";
+                    var str =
+                        $"（获得时计算战银加成）{battleReward.intArg1}({rewardConfig.ValueList[0]}~{rewardConfig.ValueList[1]})";
                     desStr += str;
                 }
                 else
                 {
                     //固定
-                    var str = $"{battleReward.intArg1}";
+                    var str = $"（包含战银获得加成）{battleReward.intArg1}";
                     desStr += str;
                 }
             }
             else
             {
-                desStr = "获得一定的战银";
+                desStr = "获得一定的战银（包含战银获得加成）";
             }
         }
         else if (type == BattleRewardType.Currency_Population)
@@ -253,6 +283,7 @@ public class AttrHelper_Client
                     else
                     {
                         //固定千分比属性项
+                        resultValue *= 100.0f;
                         str += $"{resultValue}% {attrInfo.name}";
                     }
                 }

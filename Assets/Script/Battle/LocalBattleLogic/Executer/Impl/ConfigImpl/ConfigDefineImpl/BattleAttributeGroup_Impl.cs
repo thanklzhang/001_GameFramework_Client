@@ -21,12 +21,12 @@ namespace Battle
         public int Id => config.Id;
         
         /// <summary>
-        ///技能名称
+        ///属性加成名称
         /// </summary>
         public string Name => config.Name;
         
         /// <summary>
-        ///buff介绍
+        ///介绍
         /// </summary>
         public string Describe => config.Describe;
         

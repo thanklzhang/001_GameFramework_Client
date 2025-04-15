@@ -13,12 +13,12 @@ namespace Config
     {
         
         /// <summary>
-        ///技能名称
+        ///属性加成名称
         /// </summary>
         private string name; 
         
         /// <summary>
-        ///buff介绍
+        ///介绍
         /// </summary>
         private string describe; 
         

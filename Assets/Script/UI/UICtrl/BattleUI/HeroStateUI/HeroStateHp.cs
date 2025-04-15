@@ -64,23 +64,9 @@ public class HeroStateHp
         entityObj = entity.gameObject;
         maxHp = entity.MaxHealth;
         this.fromEntityGuid = fromEntityGuid;
-            
-        var selfPlayerIndex = BattleManager.Instance.GetLocalPlayer().playerIndex;
-        bool isSelf = selfPlayerIndex == entity.playerIndex;
-        bool isSameTeam = BattleManager.Instance.IsSameTeam(selfPlayerIndex,entity.playerIndex);
-        EntityRelationType relationType = EntityRelationType.Friend;
-        if (isSelf)
-        {
-            relationType = EntityRelationType.Self;
-        }
-        else if (isSameTeam)
-        {
-            relationType = EntityRelationType.Friend;
-        }
-        else
-        {
-            relationType = EntityRelationType.Enemy;
-        }
+
+        var player = BattleManager.Instance.GetLocalPlayer();
+        var relationType = player.GetRelationFromEntity(entity);
         
         this.relationType = relationType;
     }

@@ -110,7 +110,7 @@ public class AttrHelper_Client
                 desStr = "获得一个队友";
             }
         }
-        else if (type == BattleRewardType.TeamMember_RandAttr)
+        else if (type == BattleRewardType.TeamMember_TeammateAddRandAttr)
         {
             nameStr = "增加属性";
             if (isMakeSureReward)
@@ -125,7 +125,7 @@ public class AttrHelper_Client
                 desStr = "增加随机一个队友属性";
             }
         }
-        else if (type == BattleRewardType.TeamMember_AllRandAttr)
+        else if (type == BattleRewardType.TeamMember_AllTeammateAddRandAttr)
         {
             nameStr = "增加属性";
             if (isMakeSureReward)
@@ -139,6 +139,30 @@ public class AttrHelper_Client
             else
             {
                 desStr = "所有队友增加随机属性";
+            }
+        }
+        else if (type == BattleRewardType.TeamMember_RandAddStarExp)
+        {
+            nameStr = "增加星级经验";
+            if (isMakeSureReward)
+            {
+                desStr = $"随机一个英雄增加星级经验：{battleReward.intArg1}";
+            }
+            else
+            {
+                desStr = "随机一个英雄增加星级经验";
+            }
+        }
+        else if (type == BattleRewardType.TeamMember_AllAddStarExp)
+        {
+            nameStr = "增加星级经验";
+            if (isMakeSureReward)
+            {
+                desStr = $"所有英雄增加星级经验：{battleReward.intArg1}";
+            }
+            else
+            {
+                desStr = "所有英雄增加星级经验";
             }
         }
         else if (type == BattleRewardType.Leader_RandAttr)
@@ -247,7 +271,7 @@ public class AttrHelper_Client
             var showAttrType = attrType;
             if (attrType >= EntityAttrType.Attack_Permillage)
             {
-                showAttrType = EntityAttrType.Attack_Permillage - 1000;
+                showAttrType = attrType - 1000;
             }
 
             var attrInfo = AttrInfoHelper.Instance.GetAttrInfo(showAttrType);

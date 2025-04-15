@@ -13,6 +13,7 @@ public class HeroStateShowObj
 
     public HeroStateHp hpPart;
     public HeroStateStar starPart;
+    public HeroStateName namePart;
 
     private GameObject entityObj;
     RectTransform parentTranRect;
@@ -34,6 +35,11 @@ public class HeroStateShowObj
         var starRoot = this.transform.Find("starMain");
         starPart = new HeroStateStar();
         starPart.Init(starRoot.gameObject, entity, this.heroStateUIMgr);
+        
+        //name部分
+        var nameRoot = this.transform.Find("nameMain");
+        namePart = new HeroStateName();
+        namePart.Init(nameRoot.gameObject, entity, this.heroStateUIMgr);
     }
 
     public void Refresh(BattleEntity_Client entity, int fromEntityGuid)
@@ -41,6 +47,7 @@ public class HeroStateShowObj
         entityObj = entity.gameObject;
         hpPart.Refresh(entity, fromEntityGuid);
         starPart.Refresh(entity, fromEntityGuid);
+        namePart.Refresh(entity, fromEntityGuid);
     }
 
     public void Update(float deltaTime)
@@ -49,6 +56,7 @@ public class HeroStateShowObj
 
         hpPart.Update(deltaTime);
         starPart.Update(deltaTime);
+        namePart.Update(deltaTime);
     }
 
     public void UpdatePos()

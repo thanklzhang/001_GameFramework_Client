@@ -59,7 +59,7 @@ public class HeroStateUIMgr
     }
 
 
-    public void RefreshStateShow(BattleEntity_Client entity, int fromEntityGuid)
+    public void RefreshStateShow(BattleEntity_Client entity, int damageFromEntityGuid)
     {
         HeroStateShowObj showObj = null;
         if (stateShowObjDic.ContainsKey(entity.guid))
@@ -77,7 +77,7 @@ public class HeroStateUIMgr
             stateShowObjDic.Add(entity.guid, showObj);
         }
 
-        showObj.Refresh(entity, fromEntityGuid);
+        showObj.Refresh(entity, damageFromEntityGuid);
     }
 
     public void DestoryHpUI(BattleEntity_Client entity)

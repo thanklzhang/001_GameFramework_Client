@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using Battle;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Battle_Client
 {
-    //布阵相关
+    //队伍相关
     public partial class ClientPlayer
     {
         
@@ -55,6 +56,30 @@ namespace Battle_Client
             }
 
            
+        }
+        
+        //本地玩家和目标单位的关系
+        public EntityRelationType GetRelationFromEntity(BattleEntity_Client entity)
+        {
+            
+            var selfPlayerIndex = this.playerIndex;
+            bool isSelf = selfPlayerIndex == entity.playerIndex;
+            bool isSameTeam = BattleManager.Instance.IsSameTeam(selfPlayerIndex,entity.playerIndex);
+            EntityRelationType relationType = EntityRelationType.Friend;
+            if (isSelf)
+            {
+                relationType = EntityRelationType.Self;
+            }
+            else if (isSameTeam)
+            {
+                relationType = EntityRelationType.Friend;
+            }
+            else
+            {
+                relationType = EntityRelationType.Enemy;
+            }
+            
+            return relationType;
         }
     }
 }

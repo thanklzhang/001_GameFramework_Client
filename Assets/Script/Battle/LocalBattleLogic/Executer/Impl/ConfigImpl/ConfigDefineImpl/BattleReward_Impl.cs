@@ -36,6 +36,11 @@ namespace Battle
         public int IconResId => config.IconResId;
         
         /// <summary>
+        ///获得时机类型
+        /// </summary>
+        public int GainTimingType => config.GainTimingType;
+        
+        /// <summary>
         ///类型
         /// </summary>
         public int Type => config.Type;
@@ -49,6 +54,11 @@ namespace Battle
         ///奖励中数值的权重
         /// </summary>
         public List<int> WeightList => config.WeightList;
+        
+        /// <summary>
+        ///最大获得次数
+        /// </summary>
+        public int MaxGainTimesType => config.MaxGainTimesType;
         
         /// <summary>
         ///获得数目

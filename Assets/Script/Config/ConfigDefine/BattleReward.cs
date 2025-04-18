@@ -53,6 +53,11 @@ namespace Config
         private int maxGainTimesType; 
         
         /// <summary>
+        ///奖励效果是否对新生成的队友也生效（目前适用于全员加属性和buff）
+        /// </summary>
+        private int applyToNewTeamMembers; 
+        
+        /// <summary>
         ///获得数目
         /// </summary>
         private int count; 
@@ -79,6 +84,8 @@ namespace Config
         public List<int> WeightList { get => weightList; }     
         
         public int MaxGainTimesType { get => maxGainTimesType; }     
+        
+        public int ApplyToNewTeamMembers { get => applyToNewTeamMembers; }     
         
         public int Count { get => count; }     
         

@@ -61,6 +61,11 @@ namespace Battle
         public int MaxGainTimesType => config.MaxGainTimesType;
         
         /// <summary>
+        ///奖励效果是否对新生成的队友也生效（目前适用于全员加属性和buff）
+        /// </summary>
+        public int ApplyToNewTeamMembers => config.ApplyToNewTeamMembers;
+        
+        /// <summary>
         ///获得数目
         /// </summary>
         public int Count => config.Count;

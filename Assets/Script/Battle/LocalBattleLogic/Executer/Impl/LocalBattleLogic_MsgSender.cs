@@ -132,7 +132,7 @@ namespace Battle_Client
         {
         }
 
-        public void NotifyAll_EntityDead(Battle.BattleEntity battleEntity,bool isTrueDead)
+        public void NotifyAll_EntityDead(Battle.BattleEntity battleEntity, bool isTrueDead)
         {
             var arg = new EntityDead_RecvMsg_Arg()
             {
@@ -261,8 +261,9 @@ namespace Battle_Client
                     effectMoveArg.targetPos.z),
                 TargetGuid = effectMoveArg.targetGuid,
                 moveSpeed = effectMoveArg.moveSpeed,
-                isFlyMaxRange =  effectMoveArg.isFlyMaxRange,
-                dirByFlyMax = new UnityEngine.Vector3(effectMoveArg.dirByFlyMaxRange.x, effectMoveArg.dirByFlyMaxRange.y,
+                isFlyMaxRange = effectMoveArg.isFlyMaxRange,
+                dirByFlyMax = new UnityEngine.Vector3(effectMoveArg.dirByFlyMaxRange.x,
+                    effectMoveArg.dirByFlyMaxRange.y,
                     effectMoveArg.dirByFlyMaxRange.z),
             };
             BattleManager.Instance.RecvBattleMsg<SkillEffectStartMove_RecvMsg>(arg);
@@ -547,10 +548,25 @@ namespace Battle_Client
                 netSelection.battleReward = new BattleReward_Client();
                 netSelection.battleReward.guid = _battleReward.guid;
                 netSelection.battleReward.configId = _battleReward.configId;
-                netSelection.battleReward.intArg1 = _battleReward.intArg1;
-                netSelection.battleReward.intArg2 = _battleReward.intArg2;
-                netSelection.battleReward.intListArg1 = ListTool.CopyList(_battleReward.intListArg1);
-                netSelection.battleReward.intListArg2 = ListTool.CopyList(_battleReward.intListArg2);
+                netSelection.battleReward.effectOptionList = new List<BattleRewardEffectOption_Client>();
+                
+                foreach (var _effect in _battleReward.rewardEffectDTOs)
+                {
+                    var effectOption = new BattleRewardEffectOption_Client();
+                    effectOption.guid = _effect.guid;
+                    effectOption.configId = _effect.configId;
+                    effectOption.intArg1 = _effect.intArg1;
+                    effectOption.intArg2 = _effect.intArg2;
+                    effectOption.intListArg1 = ListTool.CopyList(_effect.intListArg1);
+                    effectOption.intListArg2 = ListTool.CopyList(_effect.intListArg2);
+                    
+                    netSelection.battleReward.effectOptionList.Add(effectOption);
+                }
+
+                //netSelection.battleReward.intArg1 = _battleReward.intArg1;
+                // netSelection.battleReward.intArg2 = _battleReward.intArg2;
+                // netSelection.battleReward.intListArg1 = ListTool.CopyList(_battleReward.intListArg1);
+                // netSelection.battleReward.intListArg2 = ListTool.CopyList(_battleReward.intListArg2);
 
                 netBox.selections.Add(netSelection);
             }
@@ -727,10 +743,11 @@ namespace Battle_Client
             arg.battleReward = new BattleReward_Client();
             arg.battleReward.guid = dto.guid;
             arg.battleReward.configId = dto.configId;
-            arg.battleReward.intArg1 = dto.intArg1;
-            arg.battleReward.intArg2 = dto.intArg2;
-            arg.battleReward.intListArg1 = ListTool.CopyList(dto.intListArg1);
-            arg.battleReward.intListArg2 = ListTool.CopyList(dto.intListArg2);
+            
+            // arg.battleReward.intArg1 = dto.intArg1;
+            // arg.battleReward.intArg2 = dto.intArg2;
+            // arg.battleReward.intListArg1 = ListTool.CopyList(dto.intListArg1);
+            // arg.battleReward.intListArg2 = ListTool.CopyList(dto.intListArg2);
 
             BattleManager.Instance.RecvBattleMsg<SyncPlayerBattleReward_RecvMsg>(arg);
         }

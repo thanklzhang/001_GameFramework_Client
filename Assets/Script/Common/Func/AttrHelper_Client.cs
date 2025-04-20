@@ -25,8 +25,29 @@ public class AttrHelper_Client
     public static void GetBattleRewardContent(BattleReward_Client battleReward, bool isMakeSureReward,
         out string nameStr, out string desStr)
     {
+        string resultNameStr = "";
+        string resultDesStr = "";
+        var options = battleReward.effectOptionList;
+        if (options.Count > 0)
+        {
+            foreach (var option in options)
+            {
+                GetBattleRewardEffectContent(option, isMakeSureReward, out nameStr, out desStr);
+
+                resultNameStr += nameStr + "\n";
+                resultDesStr += desStr + "\n";
+            }
+        }
+
+        nameStr = resultNameStr;
+        desStr = resultDesStr;
+    }
+
+    public static void GetBattleRewardEffectContent(BattleRewardEffectOption_Client battleReward, bool isMakeSureReward,
+        out string nameStr, out string desStr)
+    {
         var configId = battleReward.configId;
-        var rewardConfig = ConfigManager.Instance.GetById<Config.BattleReward>(configId);
+        var rewardConfig = ConfigManager.Instance.GetById<Config.BattleRewardEffectOption>(configId);
 
         var type = (BattleRewardEffectType)rewardConfig.Type;
 

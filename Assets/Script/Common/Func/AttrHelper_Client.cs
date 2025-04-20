@@ -181,6 +181,20 @@ public class AttrHelper_Client
                 desStr = "增加队长随机属性";
             }
         }
+        else if (type == BattleRewardType.Leader_AddBuff)
+        {
+            nameStr = "获得Buff效果";
+            if (isMakeSureReward)
+            {
+                var buffConfigId = battleReward.intArg1;
+                var buffConfig = ConfigManager.Instance.GetById<Config.BuffEffect>(buffConfigId);
+                desStr = $"队长获得Buff效果：{buffConfig.Name}";
+            }
+            else
+            {
+                desStr = "队长获得特殊Buff效果";
+            }
+        }
         else if (type == BattleRewardType.Currency_BattleCoin)
         {
             nameStr = "获得战银";

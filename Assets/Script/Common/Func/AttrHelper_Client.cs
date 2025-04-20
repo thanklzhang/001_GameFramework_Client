@@ -28,12 +28,12 @@ public class AttrHelper_Client
         var configId = battleReward.configId;
         var rewardConfig = ConfigManager.Instance.GetById<Config.BattleReward>(configId);
 
-        var type = (BattleRewardType)rewardConfig.Type;
+        var type = (BattleRewardEffectType)rewardConfig.Type;
 
         nameStr = rewardConfig.Name;
         desStr = rewardConfig.Describe;
         // var intValueList = this.data.intValueList;
-        if (type == BattleRewardType.Skill_Gain)
+        if (type == BattleRewardEffectType.Skill_Gain)
         {
             var skillConfigId = battleReward.intArg1;
             nameStr = "获得技能";
@@ -47,7 +47,7 @@ public class AttrHelper_Client
                 desStr = "获得一个随机技能";
             }
         }
-        else if (type == BattleRewardType.Item_Gain)
+        else if (type == BattleRewardEffectType.Item_Gain)
         {
             nameStr = "获得道具";
             if (isMakeSureReward)
@@ -67,7 +67,7 @@ public class AttrHelper_Client
                 desStr = "获得一个道具";
             }
         }
-        else if (type == BattleRewardType.Item_Copy)
+        else if (type == BattleRewardEffectType.Item_Copy)
         {
             nameStr = "复制道具";
             if (isMakeSureReward)
@@ -96,7 +96,7 @@ public class AttrHelper_Client
                 desStr = "随机复制一个已有道具";
             }
         }
-        else if (type == BattleRewardType.TeamMember_Gain)
+        else if (type == BattleRewardEffectType.TeamMember_Gain)
         {
             nameStr = "获得队友";
             if (isMakeSureReward)
@@ -110,7 +110,7 @@ public class AttrHelper_Client
                 desStr = "获得一个队友";
             }
         }
-        else if (type == BattleRewardType.TeamMember_TeammateAddRandAttr)
+        else if (type == BattleRewardEffectType.TeamMember_TeammateAddRandAttr)
         {
             nameStr = "增加属性";
             if (isMakeSureReward)
@@ -125,7 +125,7 @@ public class AttrHelper_Client
                 desStr = "增加随机一个队友属性";
             }
         }
-        else if (type == BattleRewardType.TeamMember_AllTeammateAddRandAttr)
+        else if (type == BattleRewardEffectType.TeamMember_AllTeammateAddRandAttr)
         {
             nameStr = "增加属性";
             if (isMakeSureReward)
@@ -141,7 +141,7 @@ public class AttrHelper_Client
                 desStr = "所有队友增加随机属性";
             }
         }
-        else if (type == BattleRewardType.TeamMember_RandAddStarExp)
+        else if (type == BattleRewardEffectType.TeamMember_RandAddStarExp)
         {
             nameStr = "增加星级经验";
             if (isMakeSureReward)
@@ -153,7 +153,7 @@ public class AttrHelper_Client
                 desStr = "随机一个英雄增加星级经验";
             }
         }
-        else if (type == BattleRewardType.TeamMember_AllAddStarExp)
+        else if (type == BattleRewardEffectType.TeamMember_AllAddStarExp)
         {
             nameStr = "增加星级经验";
             if (isMakeSureReward)
@@ -165,7 +165,7 @@ public class AttrHelper_Client
                 desStr = "所有英雄增加星级经验";
             }
         }
-        else if (type == BattleRewardType.Leader_RandAttr)
+        else if (type == BattleRewardEffectType.Leader_RandAttr)
         {
             nameStr = "增加属性";
             if (isMakeSureReward)
@@ -181,7 +181,7 @@ public class AttrHelper_Client
                 desStr = "增加队长随机属性";
             }
         }
-        else if (type == BattleRewardType.Leader_AddBuff)
+        else if (type == BattleRewardEffectType.Leader_AddBuff)
         {
             nameStr = "获得Buff效果";
             if (isMakeSureReward)
@@ -195,7 +195,7 @@ public class AttrHelper_Client
                 desStr = "队长获得特殊Buff效果";
             }
         }
-        else if (type == BattleRewardType.Currency_BattleCoin)
+        else if (type == BattleRewardEffectType.Currency_BattleCoin)
         {
             nameStr = "获得战银";
             if (isMakeSureReward)
@@ -221,7 +221,7 @@ public class AttrHelper_Client
                 desStr = "获得一定的战银（包含战银获得加成）";
             }
         }
-        else if (type == BattleRewardType.Currency_Population)
+        else if (type == BattleRewardEffectType.Currency_Population)
         {
             nameStr = "获得人口";
             if (isMakeSureReward)

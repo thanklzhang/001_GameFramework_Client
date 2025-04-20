@@ -36,34 +36,9 @@ namespace Battle
         public int IconResId => config.IconResId;
         
         /// <summary>
-        ///获得时机类型
+        ///奖励效果id列表
         /// </summary>
-        public int GainTimingType => config.GainTimingType;
-        
-        /// <summary>
-        ///类型
-        /// </summary>
-        public int Type => config.Type;
-        
-        /// <summary>
-        ///参数值列表
-        /// </summary>
-        public List<int> ValueList => config.ValueList;
-        
-        /// <summary>
-        ///奖励中数值的权重
-        /// </summary>
-        public List<int> WeightList => config.WeightList;
-        
-        /// <summary>
-        ///最大获得次数
-        /// </summary>
-        public int MaxGainTimesType => config.MaxGainTimesType;
-        
-        /// <summary>
-        ///奖励效果是否对新生成的队友也生效（目前适用于全员加属性和buff）
-        /// </summary>
-        public int ApplyToNewTeamMembers => config.ApplyToNewTeamMembers;
+        public List<int> RewardEffectOptionIds => config.RewardEffectOptionIds;
         
         /// <summary>
         ///获得数目

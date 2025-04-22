@@ -33,7 +33,7 @@ namespace Config
         private int type; 
         
         /// <summary>
-        ///参数值列表
+        ///效果值列表
         /// </summary>
         private List<int> valueList; 
         
@@ -41,6 +41,11 @@ namespace Config
         ///奖励中数值的权重
         /// </summary>
         private List<int> weightList; 
+        
+        /// <summary>
+        ///参数，类型不同意义也不同
+        /// </summary>
+        private List<int> paramIntList; 
         
         /// <summary>
         ///最大获得次数
@@ -65,6 +70,8 @@ namespace Config
         public List<int> ValueList { get => valueList; }     
         
         public List<int> WeightList { get => weightList; }     
+        
+        public List<int> ParamIntList { get => paramIntList; }     
         
         public int MaxGainTimesType { get => maxGainTimesType; }     
         

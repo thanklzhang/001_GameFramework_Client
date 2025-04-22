@@ -41,7 +41,7 @@ namespace Battle
         public int Type => config.Type;
         
         /// <summary>
-        ///参数值列表
+        ///效果值列表
         /// </summary>
         public List<int> ValueList => config.ValueList;
         
@@ -49,6 +49,11 @@ namespace Battle
         ///奖励中数值的权重
         /// </summary>
         public List<int> WeightList => config.WeightList;
+        
+        /// <summary>
+        ///参数，类型不同意义也不同
+        /// </summary>
+        public List<int> ParamIntList => config.ParamIntList;
         
         /// <summary>
         ///最大获得次数

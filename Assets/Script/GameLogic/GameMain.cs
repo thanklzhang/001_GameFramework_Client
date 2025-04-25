@@ -11,6 +11,7 @@ using LitJson;
 using GameData;
 using PlotDesigner.Runtime;
 using Battle_Client;
+using BattleClient.Debug;
 using Config;
 using UnityEditor;
 

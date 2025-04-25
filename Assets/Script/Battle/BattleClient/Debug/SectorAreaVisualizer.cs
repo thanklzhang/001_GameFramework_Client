@@ -12,7 +12,12 @@ namespace BattleClient.Debug
     {
         private static List<SectorVisualData> visualDataList = new List<SectorVisualData>();
         private static bool isEnabled = true;
-        
+
+        public void Init()
+        {
+            
+        }
+
         /// <summary>
         /// 添加一个扇形区域用于可视化
         /// </summary>
@@ -25,7 +30,8 @@ namespace BattleClient.Debug
         public static void AddSectorVisual(UnityEngine.Vector3 center, float radius, float angle, UnityEngine.Vector3 direction, UnityEngine.Color color, float duration = 3.0f)
         {
             if (!isEnabled) return;
-            
+
+            Logx.Log("zxy : AddSectorVisual");
             // 添加可视化数据
             visualDataList.Add(new SectorVisualData
             {

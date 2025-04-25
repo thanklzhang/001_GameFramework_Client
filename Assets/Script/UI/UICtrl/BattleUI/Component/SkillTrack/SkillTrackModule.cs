@@ -17,9 +17,9 @@ public class TrackBean
 
 public enum SkillTrackType
 {
-    Null = 0,
+    Circle = 0,
     Rectangle = 1,
-    Circle = 2
+    Sector = 2
 }
 
 public class SkillTrackModule
@@ -70,6 +70,11 @@ public class SkillTrackModule
         else if (type == SkillTrackType.Circle)
         {
             skillTrack = new CircleSkillTrack();
+            skillTrack.Init(trackBean);
+        }
+        else if (type == SkillTrackType.Sector)
+        {
+            skillTrack = new SectorSkillTrack();
             skillTrack.Init(trackBean);
         }
 

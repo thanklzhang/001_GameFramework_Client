@@ -46,7 +46,7 @@ namespace Battle
         public int DirectType => config.DirectType;
         
         /// <summary>
-        ///偏转角度
+        ///角度
         /// </summary>
         public int Angle => config.Angle;
         

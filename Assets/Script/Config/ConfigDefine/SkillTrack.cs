@@ -38,7 +38,7 @@ namespace Config
         private int directType; 
         
         /// <summary>
-        ///偏转角度
+        ///角度
         /// </summary>
         private int angle; 
         

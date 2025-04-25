@@ -375,6 +375,8 @@ namespace Config
         
 		eft_skill_track_002 = 15008202,
         
+		eft_skill_track_003 = 15008203,
+        
 		battle_scene_001 = 15010001,
         
 		scene_wuxia_002 = 15010002,

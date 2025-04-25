@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6962d9f085ffff541ab74ad352b678db, type: 2}
+  - {fileID: 2100000, guid: 84dd8beffea65a14c86305a73d68805a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 7388047872411395761}
   - component: {fileID: 5025447833248731464}
   m_Layer: 0
-  m_Name: eft_skill_track_002
+  m_Name: eft_skill_track_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5169,7 +5169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 503caf6daa3314b41bc24fb82cf3ad06, type: 2}
+  - {fileID: 2100000, guid: 5758e5d3501156744a39b1f0a4c4baa5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

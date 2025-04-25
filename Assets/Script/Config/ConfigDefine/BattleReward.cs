@@ -42,6 +42,11 @@ namespace Config
         /// </summary>
         private int makeSureRewardOccasion; 
         
+        /// <summary>
+        ///奖励产出上限(0表示无限制)
+        /// </summary>
+        private int maxAcquireCount; 
+        
 
         
         public string Name { get => name; }     
@@ -55,6 +60,8 @@ namespace Config
         public int Count { get => count; }     
         
         public int MakeSureRewardOccasion { get => makeSureRewardOccasion; }     
+        
+        public int MaxAcquireCount { get => maxAcquireCount; }     
         
 
     } 

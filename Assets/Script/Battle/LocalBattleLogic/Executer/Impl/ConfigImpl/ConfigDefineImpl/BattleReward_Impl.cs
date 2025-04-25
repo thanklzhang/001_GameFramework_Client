@@ -50,5 +50,10 @@ namespace Battle
         /// </summary>
         public int MakeSureRewardOccasion => config.MakeSureRewardOccasion;
         
+        /// <summary>
+        ///奖励产出上限(0表示无限制)
+        /// </summary>
+        public int MaxAcquireCount => config.MaxAcquireCount;
+        
     } 
 }

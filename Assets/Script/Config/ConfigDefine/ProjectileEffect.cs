@@ -23,11 +23,6 @@ namespace Config
         private string describe; 
         
         /// <summary>
-        ///施加效果的目标类型
-        /// </summary>
-        private int effectTargetType; 
-        
-        /// <summary>
         ///是否跟随
         /// </summary>
         private int isFollow; 
@@ -36,6 +31,11 @@ namespace Config
         ///投掷物类型
         /// </summary>
         private int projectileType; 
+        
+        /// <summary>
+        ///发射方向
+        /// </summary>
+        private int dirType; 
         
         /// <summary>
         ///持续时间(ms)
@@ -93,9 +93,9 @@ namespace Config
         private List<int> endEffectList; 
         
         /// <summary>
-        ///碰到物体时触发的对应实体类型(待加)
+        ///碰撞实体关系筛选
         /// </summary>
-        private int collisionEffectEntityType; 
+        private int collisionEntityRelationFilterType; 
         
         /// <summary>
         ///结束时转向次数
@@ -133,11 +133,11 @@ namespace Config
         
         public string Describe { get => describe; }     
         
-        public int EffectTargetType { get => effectTargetType; }     
-        
         public int IsFollow { get => isFollow; }     
         
         public int ProjectileType { get => projectileType; }     
+        
+        public int DirType { get => dirType; }     
         
         public int LastTime { get => lastTime; }     
         
@@ -161,7 +161,7 @@ namespace Config
         
         public List<int> EndEffectList { get => endEffectList; }     
         
-        public int CollisionEffectEntityType { get => collisionEffectEntityType; }     
+        public int CollisionEntityRelationFilterType { get => collisionEntityRelationFilterType; }     
         
         public int EndRedirectCount { get => endRedirectCount; }     
         

@@ -51,11 +51,6 @@ namespace Battle
         public int SkillReleaseTargeType => config.SkillReleaseTargeType;
         
         /// <summary>
-        ///释放区域性技能的效果id（作为技能起手关键）
-        /// </summary>
-        public int AreaEffectId => config.AreaEffectId;
-        
-        /// <summary>
         ///技能释放类型 
         /// </summary>
         public int SkillReleaseType => config.SkillReleaseType;

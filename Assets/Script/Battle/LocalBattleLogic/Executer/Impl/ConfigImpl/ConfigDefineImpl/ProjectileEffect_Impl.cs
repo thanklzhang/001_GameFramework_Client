@@ -31,11 +31,6 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
-        ///施加效果的目标类型
-        /// </summary>
-        public int EffectTargetType => config.EffectTargetType;
-        
-        /// <summary>
         ///是否跟随
         /// </summary>
         public int IsFollow => config.IsFollow;
@@ -44,6 +39,11 @@ namespace Battle
         ///投掷物类型
         /// </summary>
         public int ProjectileType => config.ProjectileType;
+        
+        /// <summary>
+        ///发射方向
+        /// </summary>
+        public int DirType => config.DirType;
         
         /// <summary>
         ///持续时间(ms)
@@ -101,9 +101,9 @@ namespace Battle
         public List<int> EndEffectList => config.EndEffectList;
         
         /// <summary>
-        ///碰到物体时触发的对应实体类型(待加)
+        ///碰撞实体关系筛选
         /// </summary>
-        public int CollisionEffectEntityType => config.CollisionEffectEntityType;
+        public int CollisionEntityRelationFilterType => config.CollisionEntityRelationFilterType;
         
         /// <summary>
         ///结束时转向次数

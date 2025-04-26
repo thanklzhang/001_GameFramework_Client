@@ -43,11 +43,6 @@ namespace Config
         private int skillReleaseTargeType; 
         
         /// <summary>
-        ///释放区域性技能的效果id（作为技能起手关键）
-        /// </summary>
-        private int areaEffectId; 
-        
-        /// <summary>
         ///技能释放类型 
         /// </summary>
         private int skillReleaseType; 
@@ -145,8 +140,6 @@ namespace Config
         public int SkillCategory { get => skillCategory; }     
         
         public int SkillReleaseTargeType { get => skillReleaseTargeType; }     
-        
-        public int AreaEffectId { get => areaEffectId; }     
         
         public int SkillReleaseType { get => skillReleaseType; }     
         

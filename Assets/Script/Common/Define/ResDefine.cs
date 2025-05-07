@@ -403,6 +403,8 @@ namespace Config
         
 		role_005 = 15011035,
         
+		role_006 = 15011036,
+        
 		monster_001 = 15011101,
         
 		monster_002 = 15011102,

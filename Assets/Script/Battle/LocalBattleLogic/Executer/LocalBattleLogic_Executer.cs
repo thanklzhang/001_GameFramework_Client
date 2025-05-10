@@ -35,7 +35,7 @@ namespace Battle_Client
             int battleGuid = 0;
             battle.TimeDelta = Time.fixedDeltaTime;
 
-            Battle_Log.RegisterLog(new BattleLog_Impl());
+            BattleLog.RegisterLog(new BattleLog_Impl());
 
             battle.PlayerMsgSender = new LocalBattleLogic_MsgSender();
             //battle.PlayerMsgReceiver = new LocalBattleLogic_MsgReceiver(battle);

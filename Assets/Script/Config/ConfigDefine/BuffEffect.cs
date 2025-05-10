@@ -123,6 +123,11 @@ namespace Config
         private List<int> endRemoveEffectList; 
         
         /// <summary>
+        ///普通攻击附加伤害比值
+        /// </summary>
+        private List<int> normalAttackAddedEffectIds; 
+        
+        /// <summary>
         ///效果资源id
         /// </summary>
         private int effectResId; 
@@ -177,6 +182,8 @@ namespace Config
         public int AttrGroupConfigId { get => attrGroupConfigId; }     
         
         public List<int> EndRemoveEffectList { get => endRemoveEffectList; }     
+        
+        public List<int> NormalAttackAddedEffectIds { get => normalAttackAddedEffectIds; }     
         
         public int EffectResId { get => effectResId; }     
         

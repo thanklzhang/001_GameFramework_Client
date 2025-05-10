@@ -33,6 +33,11 @@ namespace Config
         private List<List<int>> addedValueGroup; 
         
         /// <summary>
+        ///伤害附加的倍数计算效果列表（适用比值）
+        /// </summary>
+        private List<int> addedValueScaleEffectIds; 
+        
+        /// <summary>
         ///最终的效果类型 1 物理伤害 2 法强伤害 
         /// </summary>
         private int finalEffectType; 
@@ -71,6 +76,8 @@ namespace Config
         public int CalculateEffectTargetType { get => calculateEffectTargetType; }     
         
         public List<List<int>> AddedValueGroup { get => addedValueGroup; }     
+        
+        public List<int> AddedValueScaleEffectIds { get => addedValueScaleEffectIds; }     
         
         public int FinalEffectType { get => finalEffectType; }     
         

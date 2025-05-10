@@ -41,6 +41,11 @@ namespace Battle
         public List<List<int>> AddedValueGroup => config.AddedValueGroup;
         
         /// <summary>
+        ///伤害附加的倍数计算效果列表（适用比值）
+        /// </summary>
+        public List<int> AddedValueScaleEffectIds => config.AddedValueScaleEffectIds;
+        
+        /// <summary>
         ///最终的效果类型 1 物理伤害 2 法强伤害 
         /// </summary>
         public int FinalEffectType => config.FinalEffectType;

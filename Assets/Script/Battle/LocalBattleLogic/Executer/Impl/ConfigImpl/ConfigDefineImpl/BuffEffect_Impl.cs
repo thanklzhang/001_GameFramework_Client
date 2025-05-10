@@ -131,6 +131,11 @@ namespace Battle
         public List<int> EndRemoveEffectList => config.EndRemoveEffectList;
         
         /// <summary>
+        ///普通攻击附加伤害比值
+        /// </summary>
+        public List<int> NormalAttackAddedEffectIds => config.NormalAttackAddedEffectIds;
+        
+        /// <summary>
         ///效果资源id
         /// </summary>
         public int EffectResId => config.EffectResId;

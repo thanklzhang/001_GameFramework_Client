@@ -28,6 +28,11 @@ namespace Config
         private int triggerTimeType; 
         
         /// <summary>
+        ///触发参数(intList)
+        /// </summary>
+        private List<int> triggerIntListParam; 
+        
+        /// <summary>
         ///触发参数
         /// </summary>
         private string triggerParam; 
@@ -74,6 +79,8 @@ namespace Config
         public string Describe { get => describe; }     
         
         public int TriggerTimeType { get => triggerTimeType; }     
+        
+        public List<int> TriggerIntListParam { get => triggerIntListParam; }     
         
         public string TriggerParam { get => triggerParam; }     
         

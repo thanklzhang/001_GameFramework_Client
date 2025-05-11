@@ -51,6 +51,11 @@ namespace Battle
         public int FinalEffectType => config.FinalEffectType;
         
         /// <summary>
+        ///伤害时候的效果ids
+        /// </summary>
+        public List<int> AfterDamageEffectIds => config.AfterDamageEffectIds;
+        
+        /// <summary>
         ///效果资源id
         /// </summary>
         public int EffectResId => config.EffectResId;

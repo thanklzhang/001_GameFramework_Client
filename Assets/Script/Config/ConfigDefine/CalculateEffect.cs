@@ -43,6 +43,11 @@ namespace Config
         private int finalEffectType; 
         
         /// <summary>
+        ///伤害时候的效果ids
+        /// </summary>
+        private List<int> afterDamageEffectIds; 
+        
+        /// <summary>
         ///效果资源id
         /// </summary>
         private int effectResId; 
@@ -80,6 +85,8 @@ namespace Config
         public List<int> AddedValueScaleEffectIds { get => addedValueScaleEffectIds; }     
         
         public int FinalEffectType { get => finalEffectType; }     
+        
+        public List<int> AfterDamageEffectIds { get => afterDamageEffectIds; }     
         
         public int EffectResId { get => effectResId; }     
         

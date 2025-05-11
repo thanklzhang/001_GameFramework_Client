@@ -36,6 +36,11 @@ namespace Battle
         public int TriggerTimeType => config.TriggerTimeType;
         
         /// <summary>
+        ///触发参数(intList)
+        /// </summary>
+        public List<int> TriggerIntListParam => config.TriggerIntListParam;
+        
+        /// <summary>
         ///触发参数
         /// </summary>
         public string TriggerParam => config.TriggerParam;

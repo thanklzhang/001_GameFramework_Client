@@ -86,6 +86,11 @@ namespace Battle
         public List<int> SkillLevels => config.SkillLevels;
         
         /// <summary>
+        ///源实体id，某些情况和这个实体算作一个，如 不同等级的召唤兽都算作一个 id
+        /// </summary>
+        public int OriginEntityId => config.OriginEntityId;
+        
+        /// <summary>
         ///AI脚本
         /// </summary>
         public string AiScript => config.AiScript;

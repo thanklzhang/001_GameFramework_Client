@@ -78,6 +78,11 @@ namespace Config
         private List<int> skillLevels; 
         
         /// <summary>
+        ///源实体id，某些情况和这个实体算作一个，如 不同等级的召唤兽都算作一个 id
+        /// </summary>
+        private int originEntityId; 
+        
+        /// <summary>
         ///AI脚本
         /// </summary>
         private string aiScript; 
@@ -124,6 +129,8 @@ namespace Config
         public int Star { get => star; }     
         
         public List<int> SkillLevels { get => skillLevels; }     
+        
+        public int OriginEntityId { get => originEntityId; }     
         
         public string AiScript { get => aiScript; }     
         

@@ -48,6 +48,11 @@ namespace Config
         private int limitTime; 
         
         /// <summary>
+        ///准备阶段获得的奖励
+        /// </summary>
+        private int readyRewardId; 
+        
+        /// <summary>
         ///通过类型
         /// </summary>
         private int passType; 
@@ -72,6 +77,8 @@ namespace Config
         public int ReadyTime { get => readyTime; }     
         
         public int LimitTime { get => limitTime; }     
+        
+        public int ReadyRewardId { get => readyRewardId; }     
         
         public int PassType { get => passType; }     
         

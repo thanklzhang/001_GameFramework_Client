@@ -64,7 +64,7 @@ public class MyBoxItem
         countText.text = "x" + this.data.count;
     }
 
-    void OnClickOpenBtn()
+    public void OnClickOpenBtn()
     {
         var quality = this.data.quality;
         var player = BattleManager.Instance.GetLocalPlayer();

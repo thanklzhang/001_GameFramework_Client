@@ -78,6 +78,14 @@ public partial class BattleBoxMainUI
       coinText.text = coinCount + "战银";
    }
 
+   public void OpenMyBox()
+   {
+      if (myBoxItemList.Count > 0)
+      {
+         myBoxItemList[0].OnClickOpenBtn();;
+      }
+   }
+
    public void ReleaseMyBox()
    {
       

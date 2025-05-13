@@ -56,6 +56,11 @@ namespace Battle
         public int LimitTime => config.LimitTime;
         
         /// <summary>
+        ///准备阶段获得的奖励
+        /// </summary>
+        public int ReadyRewardId => config.ReadyRewardId;
+        
+        /// <summary>
         ///通过类型
         /// </summary>
         public int PassType => config.PassType;

@@ -40,11 +40,12 @@ public class BattleProcessUI
         Boss = 2
     }
 
-
+    public BattleUI battleUI;
     public void Init(GameObject gameObject, BattleUI battleUI)
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
+        this.battleUI = battleUI;
 
         readyStateRoot = this.transform.Find("readyCommingRoot");
         battleStateRoot = this.transform.Find("battleCommingRoot");
@@ -134,6 +135,9 @@ public class BattleProcessUI
         readyTimeRoot.gameObject.SetActive(true);
         battleTimeRoot.gameObject.SetActive(false);
         bossTimeRoot.gameObject.SetActive(false);
+        
+        //到准备阶段自动开宝箱
+        this.battleUI.ShowBoxUI(true);
     }
 
     void OnBattleStateEnter(int surplusTime)

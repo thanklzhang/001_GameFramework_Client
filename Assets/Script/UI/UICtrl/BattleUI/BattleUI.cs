@@ -111,6 +111,15 @@ public partial class BattleUI : BaseUI
 
     public Transform tempRoot;
 
+    public void ShowBoxUI(bool isOpenBox = false)
+    {
+        this.boxMainUI.Show();
+        if (isOpenBox)
+        {
+            this.boxMainUI.OpenMyBox();
+        }
+    }
+
     protected override void OnLoadFinish()
     {
         closeBtn = this.transform.Find("closeBtn").GetComponent<Button>();
@@ -140,10 +149,9 @@ public partial class BattleUI : BaseUI
 
             if (BattleManager.Instance.processState == BattleProcessState.Ready)
             {
-                this.boxMainUI.Show();
+                // this.boxMainUI.Show();
+                ShowBoxUI();
             }
-
-            
         });
         boxFuncBtnCountText = boxFuncBtn.transform.Find("countBg/count").GetComponent<Text>();
 

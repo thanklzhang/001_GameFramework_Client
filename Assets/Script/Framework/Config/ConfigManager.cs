@@ -5,12 +5,15 @@ using LitJson;
 using FixedPointy;
 using System;
 using System.IO;
+
 namespace Config
 {
     public class ConfigManager : Singleton<ConfigManager>
     {
         public Dictionary<Type, IList> typeToListConfigDic = new Dictionary<Type, IList>();
-        public Dictionary<Type, Dictionary<int, Config.BaseConfig>> typeToDicConfigDic = new Dictionary<Type, Dictionary<int, Config.BaseConfig>>();
+
+        public Dictionary<Type, Dictionary<int, Config.BaseConfig>> typeToDicConfigDic =
+            new Dictionary<Type, Dictionary<int, Config.BaseConfig>>();
 
         internal void Init()
         {
@@ -24,7 +27,7 @@ namespace Config
                 //加载完成
                 typeToListConfigDic = dic;
                 typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
-             
+
                 //foreach (var configKV in typeToListConfigDic)
                 //{
                 //    var iDic = new Dictionary<int, Config.BaseTable>();
@@ -47,7 +50,7 @@ namespace Config
 
             typeToDicConfigDic = TypeListToDic(typeToListConfigDic);
 
-          
+
             //foreach (var configKV in typeToListConfigDic)
             //{
             //    var iDic = new Dictionary<int, Config.BaseTable>();
@@ -61,18 +64,27 @@ namespace Config
             //}
         }
 
-     
+
         //type list 转换为 type dic
         public Dictionary<Type, Dictionary<int, Config.BaseConfig>> TypeListToDic(Dictionary<Type, IList> list)
         {
             var dic = new Dictionary<Type, Dictionary<int, Config.BaseConfig>>();
+
+
             foreach (var configKV in list)
             {
                 var iDic = new Dictionary<int, Config.BaseConfig>();
                 foreach (var tableData in configKV.Value)
                 {
                     Config.BaseConfig convertTableData = tableData as Config.BaseConfig;
-                    iDic.Add(convertTableData.Id, convertTableData);
+                    if (!iDic.ContainsKey(convertTableData.Id))
+                    {
+                        iDic.Add(convertTableData.Id, convertTableData);
+                    }
+                    else
+                    {
+                        Logx.LogError($"has duplicate id : " + convertTableData.Id + " type : " + convertTableData.GetType());
+                    }
                 }
 
                 dic.Add(configKV.Key, iDic);
@@ -101,6 +113,7 @@ namespace Config
             {
                 Logx.LogError("Table", "the type is not found : " + type);
             }
+
             return null;
         }
 
@@ -113,8 +126,9 @@ namespace Config
                 Logx.LogError("Table", "the type is not found : " + type);
                 return null;
             }
+
             var data = (typeToListConfigDic[typeof(T)]);
-            return data.Cast<T>().ToList();//Select(d => (T)d).ToList();
+            return data.Cast<T>().ToList(); //Select(d => (T)d).ToList();
         }
 
         public Dictionary<int, T> GetDic<T>() where T : Config.BaseConfig
@@ -123,14 +137,9 @@ namespace Config
             if (typeToDicConfigDic.ContainsKey(type))
             {
                 var configDic = typeToDicConfigDic[type];
-                return configDic.ToDictionary(kv =>
-                {
-                    return kv.Key;
-                }, (kv) =>
-                {
-                    return kv.Value as T;
-                });
+                return configDic.ToDictionary(kv => { return kv.Key; }, (kv) => { return kv.Value as T; });
             }
+
             return null;
         }
 
@@ -140,10 +149,12 @@ namespace Config
             {
                 item.Value.Clear();
             }
+
             foreach (var item in typeToDicConfigDic)
             {
                 item.Value.Clear();
             }
+
             typeToListConfigDic.Clear();
             typeToDicConfigDic.Clear();
         }

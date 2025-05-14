@@ -40,7 +40,7 @@ public class BattlePopulationUI
         this.battleUI = battleUI;
 
         populationText = this.transform.Find("countText").GetComponent<TextMeshProUGUI>();
-        buyBtn = this.transform.Find("buyBtn").GetComponent<Button>();
+        buyBtn = this.transform.Find("addBtn").GetComponent<Button>();
         
         buyBtn.onClick.AddListener(OnBuyBtnClick);
 

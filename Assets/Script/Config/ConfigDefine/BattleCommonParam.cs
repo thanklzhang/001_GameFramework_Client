@@ -37,6 +37,11 @@ namespace Config
         /// </summary>
         private int maxPlayerWarhouseCellCount; 
         
+        /// <summary>
+        ///购买人口消耗的金币（索引代表购买之前的已购买次数）
+        /// </summary>
+        private List<int> buyPopulationCostCoin; 
+        
 
         
         public int InitEntityItemBarCellUnlockCount { get => initEntityItemBarCellUnlockCount; }     
@@ -48,6 +53,8 @@ namespace Config
         public int InitPlayerWarhouseCellUnlockCount { get => initPlayerWarhouseCellUnlockCount; }     
         
         public int MaxPlayerWarhouseCellCount { get => maxPlayerWarhouseCellCount; }     
+        
+        public List<int> BuyPopulationCostCoin { get => buyPopulationCostCoin; }     
         
 
     } 

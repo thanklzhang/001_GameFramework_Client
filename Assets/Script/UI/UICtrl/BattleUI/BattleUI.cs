@@ -83,7 +83,7 @@ public partial class BattleUI : BaseUI
     // //技能书操作UI
     // private BattleSkillOperateUI skillItemOperateUI;
 
-    //宝箱界面
+    //选择奖励界面
     private BattleSelectRewardUI boxUI;
 
     //宝箱主界面

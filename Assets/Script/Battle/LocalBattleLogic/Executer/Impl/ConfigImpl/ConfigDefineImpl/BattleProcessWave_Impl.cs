@@ -56,6 +56,11 @@ namespace Battle
         public int LimitTime => config.LimitTime;
         
         /// <summary>
+        ///准备阶段获得的人口数
+        /// </summary>
+        public int ReadyAddPopulationCount => config.ReadyAddPopulationCount;
+        
+        /// <summary>
         ///准备阶段获得的奖励
         /// </summary>
         public int ReadyRewardId => config.ReadyRewardId;

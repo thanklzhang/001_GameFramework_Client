@@ -40,6 +40,7 @@ namespace Battle_Client
         void Send_MoveItemTo(ItemMoveLocationArg_Client srcItemMoveArg,ItemMoveLocationArg_Client desItemMoveArg);
         void Send_AskEnterBattleProcess();
         void Send_SelectToRevive(int entityGuid, bool isRevive);
+        void Send_BuyPopulation();
     }
 
     public class ItemMoveLocationArg_Client

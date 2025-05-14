@@ -45,5 +45,10 @@ namespace Battle
         /// </summary>
         public int MaxPlayerWarhouseCellCount => config.MaxPlayerWarhouseCellCount;
         
+        /// <summary>
+        ///购买人口消耗的金币（索引代表购买之前的已购买次数）
+        /// </summary>
+        public List<int> BuyPopulationCostCoin => config.BuyPopulationCostCoin;
+        
     } 
 }

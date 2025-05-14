@@ -48,6 +48,11 @@ namespace Config
         private int limitTime; 
         
         /// <summary>
+        ///准备阶段获得的人口数
+        /// </summary>
+        private int readyAddPopulationCount; 
+        
+        /// <summary>
         ///准备阶段获得的奖励
         /// </summary>
         private int readyRewardId; 
@@ -77,6 +82,8 @@ namespace Config
         public int ReadyTime { get => readyTime; }     
         
         public int LimitTime { get => limitTime; }     
+        
+        public int ReadyAddPopulationCount { get => readyAddPopulationCount; }     
         
         public int ReadyRewardId { get => readyRewardId; }     
         

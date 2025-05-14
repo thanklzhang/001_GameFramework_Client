@@ -287,5 +287,15 @@ namespace Battle_Client
             battle.OnRecvBattleMsg<SelectToRevive_BattleMsg>(player.playerIndex, arg);
             
         }
+
+        public void Send_BuyPopulation()
+        {
+            var arg = new BuyPopulation_BattleMsgArg()
+            {
+                buyCount = 1
+            };
+            var player = BattleManager.Instance.GetLocalPlayer();
+            battle.OnRecvBattleMsg<BuyPopulation_BattleMsg>(player.playerIndex, arg);
+        }
     }
 }

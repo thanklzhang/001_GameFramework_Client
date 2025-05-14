@@ -20,6 +20,9 @@ public class BattlePopulationUI
     private int battleConfigId;
 
     TextMeshProUGUI populationText;
+
+    public Button buyBtn;
+    
     // private GameObject bossLimitGo;
     // private RectTransform bossLimitRootRectTran;
     // Text bossLimitTimeText;
@@ -37,6 +40,9 @@ public class BattlePopulationUI
         this.battleUI = battleUI;
 
         populationText = this.transform.Find("countText").GetComponent<TextMeshProUGUI>();
+        buyBtn = this.transform.Find("buyBtn").GetComponent<Button>();
+        
+        buyBtn.onClick.AddListener(OnBuyBtnClick);
 
         EventDispatcher.AddListener<List<int>>(EventIDs.OnUpdatePlayerTeamMembersInfo, OnUpdatePlayerTeamMembersInfo);
         EventDispatcher.AddListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
@@ -60,6 +66,11 @@ public class BattlePopulationUI
         populationText.text = $"{currCount}/{maxCount}";
     }
 
+    public void OnBuyBtnClick()
+    {
+        BattleManager.Instance.MsgSender.Send_BuyPopulation();
+    }
+    
     public void OnUpdatePlayerTeamMembersInfo(List<int> guids)
     {
         this.RefreshAllUI();
@@ -95,5 +106,7 @@ public class BattlePopulationUI
         EventDispatcher.RemoveListener<List<int>>(EventIDs.OnUpdatePlayerTeamMembersInfo,
             OnUpdatePlayerTeamMembersInfo);
         EventDispatcher.RemoveListener(EventIDs.OnUpdateBattleCurrencyInfo, this.OnUpdateBattleCurrencyInfo);
+        
+        buyBtn.onClick.RemoveListener(OnBuyBtnClick);
     }
 }

@@ -100,5 +100,10 @@ namespace Battle_Client
         {
             throw new NotImplementedException();
         }
+
+        public void Send_BuyPopulation()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

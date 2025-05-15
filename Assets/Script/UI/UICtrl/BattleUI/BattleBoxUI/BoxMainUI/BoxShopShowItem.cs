@@ -11,9 +11,9 @@ public class BoxShopShowItem
     public GameObject gameObject;
     public Transform transform;
 
-    public Image icon;
-    public Image iconBg;
-    public Text nameText;
+    // public Image icon;
+    // public Image iconBg;
+    // public Text nameText;
     public Text countText;
 
     public Text costResText;
@@ -25,11 +25,13 @@ public class BoxShopShowItem
     {
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
-        iconBg = this.transform.Find("iconBg").GetComponent<Image>();
-
-        icon = iconBg.transform.Find("icon").GetComponent<Image>();
-        nameText = this.transform.Find("name_text").GetComponent<Text>();
+        // iconBg = this.transform.Find("iconBg").GetComponent<Image>();
+        //
+        // icon = iconBg.transform.Find("icon").GetComponent<Image>();
+        // nameText = this.transform.Find("name_text").GetComponent<Text>();
+        //可购买数量
         countText = this.transform.Find("count_text").GetComponent<Text>();
+        //购买宝箱花费
         costResText = this.transform.Find("costText").GetComponent<Text>();
         buyBtn = this.transform.Find("buyBtn").GetComponent<Button>();
 
@@ -43,19 +45,26 @@ public class BoxShopShowItem
         var config = BattleConfigManager.Instance.
             GetById<IBattleBoxShopItem>(this.data.configId);
         var quality = (RewardQuality)config.Quality;
-        iconBg.color = ColorDefine.GetColorByQuality((RewardQuality)config.Quality);
-        int iconResId = config.IconResId;
-        if (iconResId > 0)
+        //iconBg.color = ColorDefine.GetColorByQuality((RewardQuality)config.Quality);
+        // int iconResId = config.IconResId;
+        // if (iconResId > 0)
+        // {
+        //     ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) =>
+        //     {
+        //         icon.sprite = sprite;
+        //     });
+        // }
+        //
+        // nameText.text = config.Name;
+        var player = BattleManager.Instance.GetLocalPlayer();
+        var myCoin = player.GetCoinCount();
+        countText.text = $"可购买:{this.data.canBuyCount}/{this.data.maxBuyCount}";
+        var myCoinStr = $"<color=#00FF00>{myCoin}</color>";
+        if (myCoin < this.data.costCount)
         {
-            ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) =>
-            {
-                icon.sprite = sprite;
-            });
+            myCoinStr = $"<color=#FF0000>{myCoin}</color>";
         }
-
-        nameText.text = config.Name;
-        countText.text = this.data.canBuyCount + "/" + this.data.maxBuyCount;
-        costResText.text = this.data.costCount + "战银";
+        costResText.text = $"{myCoinStr}/{this.data.costCount}";
 
     }
 

@@ -849,6 +849,12 @@ namespace Battle_Client
             BattleManager.Instance.RecvBattleMsg<EntityRevive_RecvMsg>(arg);
         }
 
+        public void Notify_SyncPlayerBuyInfo(PlayerBuyInfo buyInfo)
+        {
+            var arg = new SyncPlayerBuyInfo_RecvMsg_Arg();
+            arg.buyInfo = buyInfo;
+            BattleManager.Instance.RecvBattleMsg<SyncPlayerBuyInfo_RecvMsg>(arg);
+        }
 
         public void SendMsgToClient(int uid, int cmd, byte[] bytes)
         {

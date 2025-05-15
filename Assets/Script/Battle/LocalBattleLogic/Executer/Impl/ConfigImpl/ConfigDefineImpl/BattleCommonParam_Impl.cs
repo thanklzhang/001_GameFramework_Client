@@ -21,6 +21,21 @@ namespace Battle
         public int Id => config.Id;
         
         /// <summary>
+        ///初始金币
+        /// </summary>
+        public int InitCoin => config.InitCoin;
+        
+        /// <summary>
+        ///初始人口
+        /// </summary>
+        public int InitPopulation => config.InitPopulation;
+        
+        /// <summary>
+        ///初始复活币
+        /// </summary>
+        public int InitReviveCoin => config.InitReviveCoin;
+        
+        /// <summary>
         ///实体初始解锁实体装备栏数目
         /// </summary>
         public int InitEntityItemBarCellUnlockCount => config.InitEntityItemBarCellUnlockCount;

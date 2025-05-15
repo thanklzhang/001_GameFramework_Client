@@ -68,6 +68,7 @@ public enum EventIDs
     OnUpdateWarehouseItemData = 101220, //仓库的道具数据刷新
     OnUpdatePlayerTeamMembersInfo = 101225, //玩家的队伍发生改变
     OnSyncIsUseReviveCoin = 101226,//同步玩家是否是用复活币
+    OnUpdatePlayerBuyInfo = 101227,
 
     OnSkillTips = 101250, //技能提示
     OnItemTips = 101251, //道具提示

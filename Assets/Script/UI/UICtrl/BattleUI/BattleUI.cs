@@ -116,6 +116,7 @@ public partial class BattleUI : BaseUI
         this.boxMainUI.Show();
         if (isOpenBox)
         {
+            this.boxMainUI.Hide();
             this.boxMainUI.OpenMyBox();
         }
     }

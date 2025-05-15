@@ -13,6 +13,21 @@ namespace Config
     {
         
         /// <summary>
+        ///初始金币
+        /// </summary>
+        private int initCoin; 
+        
+        /// <summary>
+        ///初始人口
+        /// </summary>
+        private int initPopulation; 
+        
+        /// <summary>
+        ///初始复活币
+        /// </summary>
+        private int initReviveCoin; 
+        
+        /// <summary>
         ///实体初始解锁实体装备栏数目
         /// </summary>
         private int initEntityItemBarCellUnlockCount; 
@@ -43,6 +58,12 @@ namespace Config
         private List<int> buyPopulationCostCoin; 
         
 
+        
+        public int InitCoin { get => initCoin; }     
+        
+        public int InitPopulation { get => initPopulation; }     
+        
+        public int InitReviveCoin { get => initReviveCoin; }     
         
         public int InitEntityItemBarCellUnlockCount { get => initEntityItemBarCellUnlockCount; }     
         

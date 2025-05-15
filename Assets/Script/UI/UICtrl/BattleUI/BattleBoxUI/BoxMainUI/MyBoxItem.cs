@@ -13,7 +13,7 @@ public class MyBoxItem
 
     public Image icon;
     public Image iconBg;
-    public Text nameText;
+    // public Text nameText;
     public Text countText;
 
     public Button openBtn;
@@ -27,7 +27,7 @@ public class MyBoxItem
         iconBg = this.transform.Find("iconBg").GetComponent<Image>();
 
         icon = iconBg.transform.Find("icon").GetComponent<Image>();
-        nameText = this.transform.Find("name_text").GetComponent<Text>();
+        // nameText = this.transform.Find("name_text").GetComponent<Text>();
         countText = this.transform.Find("count_text").GetComponent<Text>();
         openBtn = this.transform.Find("openBtn").GetComponent<Button>();
 
@@ -60,7 +60,7 @@ public class MyBoxItem
             ResourceManager.Instance.GetObject<Sprite>(iconResId, (sprite) => { icon.sprite = sprite; });
         }
 
-        nameText.text = config.Name;
+        // nameText.text = config.Name;
         countText.text = "x" + this.data.count;
     }
 

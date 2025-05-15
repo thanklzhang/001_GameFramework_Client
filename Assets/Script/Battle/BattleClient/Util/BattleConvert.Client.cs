@@ -108,5 +108,12 @@ namespace Battle_Client
             opLoc.entityGuid = moveArg.entityGuid;
             return opLoc;
         }
+        
+        public static PlayerBuyInfo_Client ConvertTo(PlayerBuyInfo battlePlayerInitArg)
+        { 
+            var playerBuyInfo = new PlayerBuyInfo_Client();
+            playerBuyInfo.hasBuyPopulation = battlePlayerInitArg.hasBuyPopulationCount;
+            return playerBuyInfo;
+        }
     }
 }

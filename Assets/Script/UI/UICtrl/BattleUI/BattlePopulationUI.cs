@@ -68,6 +68,22 @@ public class BattlePopulationUI
 
     public void OnBuyBtnClick()
     {
+        //判断金币是否够
+        var player = BattleManager.Instance.GetLocalPlayer();
+        var paramConfig = BattleConfigManager.Instance.GetById<IBattleCommonParam>(1);
+        var currBuyPopulation = player.buyInfo.hasBuyPopulation;
+        var cost = 0;
+        if (currBuyPopulation < paramConfig.BuyPopulationCostCoin.Count)
+        {
+            cost = paramConfig.BuyPopulationCostCoin[currBuyPopulation];
+        }
+
+        if (player.currency.GetCurrencyCount(BattleCurrency.CoinId) < cost)
+        {
+            Tips.ShowSkillTipText("金币不足");
+            return;
+        }
+        
         BattleManager.Instance.MsgSender.Send_BuyPopulation();
     }
     

@@ -68,7 +68,7 @@ namespace Battle
         /// <summary>
         ///等级
         /// </summary>
-        public int Level => config.Level;
+        public int Level_pre => config.Level_pre;
         
         /// <summary>
         ///品质
@@ -78,12 +78,12 @@ namespace Battle
         /// <summary>
         ///星级
         /// </summary>
-        public int Star => config.Star;
+        public int Star_pre => config.Star_pre;
         
         /// <summary>
         ///技能等级
         /// </summary>
-        public List<int> SkillLevels => config.SkillLevels;
+        public List<int> SkillLevels_pre => config.SkillLevels_pre;
         
         /// <summary>
         ///源实体id，某些情况和这个实体算作一个，如 不同等级的召唤兽都算作一个 id

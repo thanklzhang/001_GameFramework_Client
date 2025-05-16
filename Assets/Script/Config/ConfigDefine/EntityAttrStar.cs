@@ -43,11 +43,6 @@ namespace Config
         private int health; 
         
         /// <summary>
-        ///魔法值
-        /// </summary>
-        private int magic; 
-        
-        /// <summary>
         ///攻击速度(*1000) 1 秒中攻击次数
         /// </summary>
         private int attackSpeed; 
@@ -87,6 +82,11 @@ namespace Config
         /// </summary>
         private int skillCD; 
         
+        /// <summary>
+        ///魔法值
+        /// </summary>
+        private int magic; 
+        
 
         
         public int TemplateId { get => templateId; }     
@@ -100,8 +100,6 @@ namespace Config
         public int Defence { get => defence; }     
         
         public int Health { get => health; }     
-        
-        public int Magic { get => magic; }     
         
         public int AttackSpeed { get => attackSpeed; }     
         
@@ -118,6 +116,8 @@ namespace Config
         public int CritDamage { get => critDamage; }     
         
         public int SkillCD { get => skillCD; }     
+        
+        public int Magic { get => magic; }     
         
 
     } 

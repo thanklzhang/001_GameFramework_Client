@@ -51,11 +51,6 @@ namespace Battle
         public int Health => config.Health;
         
         /// <summary>
-        ///魔法值
-        /// </summary>
-        public int Magic => config.Magic;
-        
-        /// <summary>
         ///攻击速度(*1000) 1 秒中攻击次数
         /// </summary>
         public int AttackSpeed => config.AttackSpeed;
@@ -94,6 +89,11 @@ namespace Battle
         ///技能冷却
         /// </summary>
         public int SkillCD => config.SkillCD;
+        
+        /// <summary>
+        ///魔法值
+        /// </summary>
+        public int Magic => config.Magic;
         
     } 
 }

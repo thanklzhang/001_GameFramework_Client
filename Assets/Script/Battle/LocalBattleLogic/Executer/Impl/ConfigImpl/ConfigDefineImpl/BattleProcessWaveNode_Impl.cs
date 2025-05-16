@@ -26,6 +26,11 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
+        ///介绍2
+        /// </summary>
+        public string Describe2 => config.Describe2;
+        
+        /// <summary>
         ///波次索引
         /// </summary>
         public int Index => config.Index;
@@ -51,9 +56,9 @@ namespace Battle
         public int TriggerCount => config.TriggerCount;
         
         /// <summary>
-        ///实体id
+        ///实体实例id
         /// </summary>
-        public int EntityConfigId => config.EntityConfigId;
+        public int EntityInstanceId => config.EntityInstanceId;
         
         /// <summary>
         ///实体个数

@@ -18,6 +18,11 @@ namespace Config
         private string describe; 
         
         /// <summary>
+        ///介绍2
+        /// </summary>
+        private string describe2; 
+        
+        /// <summary>
         ///波次索引
         /// </summary>
         private int index; 
@@ -43,9 +48,9 @@ namespace Config
         private int triggerCount; 
         
         /// <summary>
-        ///实体id
+        ///实体实例id
         /// </summary>
-        private int entityConfigId; 
+        private int entityInstanceId; 
         
         /// <summary>
         ///实体个数
@@ -61,6 +66,8 @@ namespace Config
         
         public string Describe { get => describe; }     
         
+        public string Describe2 { get => describe2; }     
+        
         public int Index { get => index; }     
         
         public int IsEndNode { get => isEndNode; }     
@@ -71,7 +78,7 @@ namespace Config
         
         public int TriggerCount { get => triggerCount; }     
         
-        public int EntityConfigId { get => entityConfigId; }     
+        public int EntityInstanceId { get => entityInstanceId; }     
         
         public int EntityCount { get => entityCount; }     
         

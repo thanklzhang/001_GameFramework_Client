@@ -60,7 +60,7 @@ namespace Config
         /// <summary>
         ///等级
         /// </summary>
-        private int level; 
+        private int level_pre; 
         
         /// <summary>
         ///品质
@@ -70,12 +70,12 @@ namespace Config
         /// <summary>
         ///星级
         /// </summary>
-        private int star; 
+        private int star_pre; 
         
         /// <summary>
         ///技能等级
         /// </summary>
-        private List<int> skillLevels; 
+        private List<int> skillLevels_pre; 
         
         /// <summary>
         ///源实体id，某些情况和这个实体算作一个，如 不同等级的召唤兽都算作一个 id
@@ -122,13 +122,13 @@ namespace Config
         
         public int UltimateSkillId { get => ultimateSkillId; }     
         
-        public int Level { get => level; }     
+        public int Level_pre { get => level_pre; }     
         
         public int Quality { get => quality; }     
         
-        public int Star { get => star; }     
+        public int Star_pre { get => star_pre; }     
         
-        public List<int> SkillLevels { get => skillLevels; }     
+        public List<int> SkillLevels_pre { get => skillLevels_pre; }     
         
         public int OriginEntityId { get => originEntityId; }     
         

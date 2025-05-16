@@ -45,7 +45,7 @@ namespace Config
         /// <summary>
         ///玩家控制实体初始位置(|分割玩家 ,分割坐标轴)(长度作为玩家数最大数目)
         /// </summary>
-        private List<List<int>> initPos; 
+        private List<List<int>> initPos_pre; 
         
         /// <summary>
         ///boss限时击杀时间(*1000 微妙)
@@ -81,7 +81,7 @@ namespace Config
         
         public List<List<int>> ForceUseHeroList { get => forceUseHeroList; }     
         
-        public List<List<int>> InitPos { get => initPos; }     
+        public List<List<int>> InitPos_pre { get => initPos_pre; }     
         
         public int BossLimitTime { get => bossLimitTime; }     
         

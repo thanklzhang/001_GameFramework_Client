@@ -53,7 +53,7 @@ namespace Battle
         /// <summary>
         ///玩家控制实体初始位置(|分割玩家 ,分割坐标轴)(长度作为玩家数最大数目)
         /// </summary>
-        public List<List<int>> InitPos => config.InitPos;
+        public List<List<int>> InitPos_pre => config.InitPos_pre;
         
         /// <summary>
         ///boss限时击杀时间(*1000 微妙)

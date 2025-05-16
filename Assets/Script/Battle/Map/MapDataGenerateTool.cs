@@ -12,7 +12,9 @@ public class MapDataGenerateTool : MonoBehaviour
     public List<List<PathNode>> mapNodes;
 
     public Transform collisionRoot;
-    public Transform customPosRoot;
+    // public Transform customPosRoot;
+    public Transform enemyInitPosRoot;
+    
     public Transform playerInitPosRoot;
     public int maxMapX = 100;
     public int maxMapZ = 100;
@@ -182,47 +184,45 @@ public class MapDataGenerateTool : MonoBehaviour
 
         mapData.mapList = list;
         
-        //自定义点集合
-        List<Transform> customPosList = customPosRoot.GetComponentsInChildrenExceptSelf<Transform>().ToList();
-        List<float[]>_customPosList = new List<float[]>();
-        for (int i = 0; i < customPosList.Count; i++)
-        {
-            var pos = customPosList[i];
-            float[] p = new float[2];
-            p[0] = pos.position.x - 0.5f;
-            p[1] = pos.position.z - 0.5f;
-            
-            _customPosList.Add(p);
-        }
-        
-        mapData.posList = _customPosList;
-        
-        //玩家初始位置集合
-        List<Transform> playerInitPosList = playerInitPosRoot.GetComponentsInChildrenExceptSelf<Transform>().ToList();
-        List<float[]>_playerInitPosList = new List<float[]>();
-        for (int i = 0; i < playerInitPosList.Count; i++)
-        {
-            var pos = playerInitPosList[i];
-            float[] p = new float[2];
-            p[0] = pos.position.x - 0.5f;
-            p[1] = pos.position.z - 0.5f;
-            
-            _playerInitPosList.Add(p);
-        }
+        // //自定义点集合
+        // List<Transform> customPosList = enemyInitPosRoot.GetComponentsInChildrenExceptSelf<Transform>().ToList();
+        // List<float[]>_customPosList = new List<float[]>();
+        // for (int i = 0; i < customPosList.Count; i++)
+        // {
+        //     var pos = customPosList[i];
+        //     float[] p = new float[2];
+        //     p[0] = pos.position.x - 0.5f;
+        //     p[1] = pos.position.z - 0.5f;
+        //     
+        //     _customPosList.Add(p);
+        // }
+        //
+        // mapData.posList = _customPosList;
 
-        mapData.playerInitPosList = _playerInitPosList;
+        mapData.enemyInitPosList = ParsePosList(enemyInitPosRoot);
+       
         
-        
+        // //玩家初始位置集合
+        // List<Transform> playerInitPosList = playerInitPosRoot.GetComponentsInChildrenExceptSelf<Transform>().ToList();
+        // List<float[]>_playerInitPosList = new List<float[]>();
+        // for (int i = 0; i < playerInitPosList.Count; i++)
+        // {
+        //     var pos = playerInitPosList[i];
+        //     float[] p = new float[2];
+        //     p[0] = pos.position.x - 0.5f;
+        //     p[1] = pos.position.z - 0.5f;
+        //     
+        //     _playerInitPosList.Add(p);
+        // }
+        // mapData.playerInitPosList = _playerInitPosList;
 
-        // var json = LitJson.JsonMapper.ToJson(list);
+        mapData.playerInitPosList = ParsePosList(playerInitPosRoot);
         
+       
         var json = LitJson.JsonMapper.ToJson(mapData);
 
-
-        //var scrPath = Const.buildPath + "/" + "BattleMap/map_info_temp.json";
         var desName = GlobalConfig.buildPath + @"\Battle\BattleMap\map_info_temp";
-        //Debug.Log("desName : " + desName);
-        //var desPath = Const.buildPath + "/" + "BattleTriggerConfig/new_trigger.json";
+      
         var currDesName = desName;
         for (int i = 0; i < 10000; i++)
         {
@@ -238,7 +238,6 @@ public class MapDataGenerateTool : MonoBehaviour
 
         var resultDesPath = currDesName + ".json";
 
-
         JsonTool.SaveJson(resultDesPath, json);
 
 #if UNITY_EDITOR
@@ -250,31 +249,35 @@ public class MapDataGenerateTool : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             mapNodes.Add(new List<PathNode>());
-
             var count = list[i].Count;
             string str = "";
             for (int j = 0; j < count; j++)
             {
-                //var newJ = count - j - 1;
-                //str += " " + list[newJ][i];
-
                 mapNodes[i].Add(new PathNode()
                 {
                     nodeType = (PathNodeType)list[i][j],
                     x = i,
                     y = j
                 });
-                ;
-
-                //Debug.Log("jjjj : " + jjjj + " " + " i : " + i);
-
-                //str += " " + list[j][i];
             }
-
-            //Debug.Log(str);
+        }
+        Debug.Log("GenCollisionInfo");
+    }
+    
+    public List<float[]> ParsePosList(Transform posRoot)
+    {
+        List<Transform> posTranList = posRoot.GetComponentsInChildrenExceptSelf<Transform>().ToList();
+        List<float[]>_customPosList = new List<float[]>();
+        for (int i = 0; i < posTranList.Count; i++)
+        {
+            var pos = posTranList[i];
+            float[] p = new float[2];
+            p[0] = pos.position.x - 0.5f;
+            p[1] = pos.position.z - 0.5f;
+            
+            _customPosList.Add(p);
         }
 
-
-        Debug.Log("GenCollisionInfo");
+        return _customPosList;
     }
 }

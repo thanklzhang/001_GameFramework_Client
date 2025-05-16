@@ -65,11 +65,11 @@ namespace Battle_Client
             Logx.Log(LogxType.Game, "StartLoad_PureLocal : load map config finish");
 
             //获得申请战斗参数
-            var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid);
+            var applyArg = ApplyBattleUtil.MakePureLocalApplyBattleArg(battleConfigId, (int)uid,mapSaveData);
 
             MapInitArg mapInitData = new MapInitArg();
             mapInitData.mapList = mapSaveData.mapList;
-            mapInitData.posList = VectorConvert.ToVector3(mapSaveData.posList);
+            mapInitData.enemyInitPosList = VectorConvert.ToVector3(mapSaveData.enemyInitPosList);
             mapInitData.playerInitPosList = VectorConvert.ToVector3(mapSaveData.playerInitPosList);
 
             //设置本地战斗逻辑

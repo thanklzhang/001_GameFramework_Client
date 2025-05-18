@@ -80,13 +80,13 @@ namespace Battle_Client
             this.localBattleExecuter?.OnEnterBattle();
         }
 
-        public void OnEnterProcessState(BattleProcessState state, int timeMS)
+        public void OnEnterProcessState(BattleProcessState state,int waveIndex, int timeMS)
         {
             this.processState = state;
 
             if (state == BattleProcessState.Ready)
             {
-                EventDispatcher.Broadcast<int>(EventIDs.OnProcessReadyStateEnter, timeMS);
+                EventDispatcher.Broadcast<int,int>(EventIDs.OnProcessReadyStateEnter, waveIndex,timeMS);
             }
             else if (state == BattleProcessState.Battle)
             {

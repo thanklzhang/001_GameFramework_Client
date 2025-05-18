@@ -24,7 +24,7 @@ namespace Battle_Client
             //     player.SetBoxShopItemsData(arg.boxDic);
             // }
 
-            BattleManager.Instance.OnEnterProcessState(arg.state,arg.surplusTimeMS);
+            BattleManager.Instance.OnEnterProcessState(arg.state,arg.waveIndex,arg.surplusTimeMS);
         }
     }
 
@@ -32,5 +32,6 @@ namespace Battle_Client
     {
         public BattleProcessState state;
         public int surplusTimeMS;
+        public int waveIndex;
     }
 }

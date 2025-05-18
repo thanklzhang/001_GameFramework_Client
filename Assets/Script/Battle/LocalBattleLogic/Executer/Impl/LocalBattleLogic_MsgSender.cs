@@ -611,12 +611,13 @@ namespace Battle_Client
             throw new System.NotImplementedException();
         }
 
-        public void NotifyAll_EnterProcessState(BattleProcessState state, int surplusTimeMS)
+        public void NotifyAll_EnterProcessState(BattleProcessState state, int waveIndex,int surplusTimeMS)
         {
             var arg = new ProcessEnterState_RecvMsg_Arg()
             {
                 state = state,
-                surplusTimeMS = surplusTimeMS
+                surplusTimeMS = surplusTimeMS,
+                waveIndex = waveIndex
             };
 
             BattleManager.Instance.RecvBattleMsg<ProcessEnterState_RecvMsg>(arg);

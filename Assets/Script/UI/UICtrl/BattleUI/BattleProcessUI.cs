@@ -63,7 +63,7 @@ public class BattleProcessUI
         battleAni = battleStateRoot.GetComponentInChildren<Animator>();
         bossAni = bossStateRoot.GetComponentInChildren<Animator>();
 
-        EventDispatcher.AddListener<int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
+        EventDispatcher.AddListener<int,int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
         EventDispatcher.AddListener<int>(EventIDs.OnProcessBattleStateEnter, OnBattleStateEnter);
         EventDispatcher.AddListener<int>(EventIDs.OnProcessBossStateEnter, OnBossStateEnter);
 
@@ -119,7 +119,7 @@ public class BattleProcessUI
         }
     }
 
-    void OnReadyStateEnter(int surplusTime)
+    void OnReadyStateEnter(int waveIndex,int surplusTime)
     {
         processState = BattleProcessState.Ready;
 
@@ -192,7 +192,7 @@ public class BattleProcessUI
 
     public void Release()
     {
-        EventDispatcher.RemoveListener<int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
+        EventDispatcher.RemoveListener<int,int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.OnProcessBattleStateEnter, OnBossStateEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.OnProcessBossStateEnter, OnBossStateEnter);
     }

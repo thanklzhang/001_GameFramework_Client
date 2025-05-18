@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Battle_Client;
 using Config;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,11 +20,12 @@ public class BattleStageInfoUI
 
     private int battleConfigId;
 
-    Text stageNameText;
+    TextMeshProUGUI stageNameText;
+
     // private GameObject bossLimitGo;
     // private RectTransform bossLimitRootRectTran;
     // Text bossLimitTimeText;
-
+    private TextMeshProUGUI stageProgressText;
 
     // //runtime
     // private float currTimer;
@@ -32,11 +35,12 @@ public class BattleStageInfoUI
         this.gameObject = gameObject;
         this.transform = this.gameObject.transform;
 
-        stageNameText = this.transform.Find("stageName").GetComponent<Text>();
+        stageNameText = this.transform.Find("stageName").GetComponent<TextMeshProUGUI>();
+        stageProgressText = this.transform.Find("stageProgress").GetComponent<TextMeshProUGUI>();
         // bossLimitGo = this.transform.Find("stageTimeRoot").gameObject;
         // bossLimitRootRectTran = bossLimitGo.transform.GetComponent<RectTransform>();
         // bossLimitTimeText = bossLimitGo.transform.Find("stageTime").GetComponent<Text>();
-       
+        EventDispatcher.AddListener<int, int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
     }
 
     public void Show()
@@ -46,14 +50,11 @@ public class BattleStageInfoUI
 
     public void RefreshAllUI()
     {
-
         var battleTableId = BattleManager.Instance.battleConfigId;
         BattleStageInfoUIArgs args = new BattleStageInfoUIArgs();
         args.battleConfigId = battleTableId;
-        
+
         this.Refresh(args);
-
-
     }
 
     public void Refresh(UICtrlArgs args)
@@ -81,13 +82,16 @@ public class BattleStageInfoUI
 
         stageNameText.text = battleConfig.Name;
 
+        var curr = 1;
+        var max = GetMaxWave();
+        stageProgressText.text = $"{curr}/{max}";
+
         // if (isHasBossCountdown)
         // {
         //     RefreshBossLimitTimeShow();
         // }
         //
         // this.bossLimitGo.SetActive(isHasBossCountdown);
-        
     }
 
     // void RefreshBossLimitTimeShow()
@@ -115,6 +119,18 @@ public class BattleStageInfoUI
         // }
     }
 
+    void OnReadyStateEnter(int waveIndex, int surplusTime)
+    {
+        var curr = waveIndex + 1;
+        var max = GetMaxWave();
+        stageProgressText.text = $"{curr}/{max}";
+    }
+
+    int GetMaxWave()
+    {
+        return BattleTool_Client.GetMaxWave(this.battleConfigId);
+    }
+
     public void Hide()
     {
         this.gameObject.SetActive(false);
@@ -128,5 +144,6 @@ public class BattleStageInfoUI
 
     public void Release()
     {
+        EventDispatcher.RemoveListener<int, int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
     }
 }

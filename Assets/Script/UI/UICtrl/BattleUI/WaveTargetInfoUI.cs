@@ -43,7 +43,7 @@ public class WaveTargetInfoUI
         contentText = showRoot.transform.Find("content").GetComponent<TextMeshProUGUI>();
 
 
-        EventDispatcher.AddListener<int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
+        EventDispatcher.AddListener<int,int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
         EventDispatcher.AddListener<int>(EventIDs.OnProcessBattleStateEnter, OnBattleStateEnter);
         EventDispatcher.AddListener<int>(EventIDs.OnProcessBossStateEnter, OnBossStateEnter);
 
@@ -58,7 +58,7 @@ public class WaveTargetInfoUI
         contentText.text = $"{currKillCount}/{maxKillCount}";
     }
 
-    public void OnReadyStateEnter(int time)
+    public void OnReadyStateEnter(int waveIndex,int time)
     {
         showRoot.gameObject.SetActive(false);
     }
@@ -126,7 +126,7 @@ public class WaveTargetInfoUI
 
     public void Release()
     {
-        EventDispatcher.RemoveListener<int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
+        EventDispatcher.RemoveListener<int,int>(EventIDs.OnProcessReadyStateEnter, OnReadyStateEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.OnProcessBattleStateEnter, OnBattleStateEnter);
         EventDispatcher.RemoveListener<int>(EventIDs.OnProcessBossStateEnter, OnBossStateEnter);
 

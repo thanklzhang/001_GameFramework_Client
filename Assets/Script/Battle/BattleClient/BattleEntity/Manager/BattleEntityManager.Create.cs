@@ -35,6 +35,7 @@ namespace Battle_Client
             entity.SetPlayerIndex(msgEntity.playerIndex);
             entity.SetPosition(msgEntity.position);
             entity.SetLocationType(msgEntity.localType);
+            entity.SetLevel(msgEntity.level);
 
             //填充技能
             List<BattleSkillInfo> skills = new List<BattleSkillInfo>();

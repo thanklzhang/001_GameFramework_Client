@@ -194,6 +194,11 @@ namespace Battle_Client
             localtionType = type;
         }
 
+        public void SetLevel(int level)
+        {
+            this.level = level;
+        }
+
         internal Vector3 GetPosition()
         {
             return this.gameObject.transform.position;

@@ -16,10 +16,10 @@ public class ReplaceHeroCell
 
     // private Transform bgTran;
     // private Image icon;
-    // private TextMeshProUGUI nameText;
+    private TextMeshProUGUI nameText;
     // private TextMeshProUGUI levelText;
     private GameObject selectFlagGo;
-    // private Button clickBtn;
+    private Button clickBtn;
 
     public int entityConfigId;
 
@@ -42,7 +42,7 @@ public class ReplaceHeroCell
         heroAvatar.Init(heroAvatarRoot.gameObject);
         // bgTran = transform.Find("bg");
         //
-        // nameText = bgTran.Find("name").GetComponent<TextMeshProUGUI>();
+         nameText = transform.Find("name").GetComponent<TextMeshProUGUI>();
         // levelText = bgTran.Find("level").GetComponent<TextMeshProUGUI>();
         // icon = bgTran.Find("icon").GetComponent<Image>();
         selectFlagGo = transform.Find("selectFlag").gameObject;
@@ -51,6 +51,12 @@ public class ReplaceHeroCell
         //
         // clickBtn.onClick.RemoveAllListeners();
         // clickBtn.onClick.AddListener(OnClick);
+        
+        heroAvatar.RemoveClickListener();
+        heroAvatar.AddClickListener((a) =>
+        {
+            OnClick();
+        });
     }
 
     protected void OnClick()
@@ -74,8 +80,8 @@ public class ReplaceHeroCell
             star = starLevel
         });
 
-        // var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skillConfigId);
-        // this.nameText.text = skillConfig.Name;
+        var skillConfig = ConfigManager.Instance.GetById<Config.EntityInfo>(skillConfigId);
+        this.nameText.text = skillConfig.Name;
         // this.levelText.text = "等级 " + skillConfig.Level;
         // ResourceManager.Instance.GetObject<Sprite>(skillConfig.IconResId, (sprite) => { this.icon.sprite = sprite; });
     }
@@ -180,17 +186,41 @@ public class BattleReplaceHeroUI : BaseUI
         // leaderSkills.Add(leaderSkill2);
 
         //目前拥有的英雄
-        for (int i = 0; i < replaceHeroRoot.childCount; i++)
-        {
-            var child = replaceHeroRoot.GetChild(i);
-            var skillShowObj = new ReplaceHeroCell();
-            var entityData = entityList[i];
-            //理论上不会有空的时候 因为都要替换技能了。。。
 
-            skillShowObj.Init(child.gameObject, this, false);
-            skillShowObj.Refresh(entityData.configId, entityData.level, entityData.starLv);
-            replaceHeroShowObjList.Add(skillShowObj);
+        for (int i = 0; i < entityList.Count; i++)
+        {
+            var entity = entityList[i];
+            GameObject go = null;
+            if (i < replaceHeroRoot.childCount)
+            {
+                var child = replaceHeroRoot.GetChild(i);
+                go = child.gameObject;
+            }
+            else
+            {
+                var child = GameObject.Instantiate(replaceHeroRoot.GetChild(0).gameObject,
+                    replaceHeroRoot, false);
+                go = child.gameObject;
+            }
+            var heroShowObj = new ReplaceHeroCell();
+            heroShowObj.Init(go, this, false);
+            heroShowObj.Refresh(entity.configId, entity.level, entity.starLv);
+
+            replaceHeroShowObjList.Add(heroShowObj);
         }
+        
+        
+        // for (int i = 0; i < replaceHeroRoot.childCount; i++)
+        // {
+        //     var child = replaceHeroRoot.GetChild(i);
+        //     var skillShowObj = new ReplaceHeroCell();
+        //     var entityData = entityList[i];
+        //     //理论上不会有空的时候 因为都要替换技能了。。。
+        //
+        //     skillShowObj.Init(child.gameObject, this, false);
+        //     skillShowObj.Refresh(entityData.configId, entityData.level, entityData.starLv);
+        //     replaceHeroShowObjList.Add(skillShowObj);
+        // }
 
         SelectHero(replaceHeroShowObjList[0].entityConfigId);
 

@@ -434,6 +434,7 @@ public partial class BattleUI : BaseUI
         this.coinText.text = coinCount + " 战银";
 
         this.boxMainUI.RefreshMyBoxUI();
+        this.boxMainUI.RefreshShopUI();
 
         this.populationUI.RefreshAllUI();
     }

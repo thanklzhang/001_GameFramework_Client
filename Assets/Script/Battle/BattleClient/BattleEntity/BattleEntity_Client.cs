@@ -167,6 +167,7 @@ namespace Battle_Client
         
         public void Destroy()
         {
+            this.State = BattleEntityState.Destroy;
             if (isFinishLoad)
             {
                 ResourceManager.Instance.ReturnObject(path, model);

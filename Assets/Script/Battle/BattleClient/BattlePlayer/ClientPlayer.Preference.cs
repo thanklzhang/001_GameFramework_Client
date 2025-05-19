@@ -147,34 +147,83 @@ namespace Battle_Client
         {
             var skillConfig = ConfigManager.Instance.GetById<Config.Skill>(skillId);
             var skillCategory = (SkillCategory)skillConfig.SkillCategory;
-            foreach (var kv in this.inputCommandDic)
+
+            if (skillCategory == SkillCategory.MinorSkill)
             {
-                var commandModel = kv.Value;
-                if (commandModel is SkillCommandModel)
+                var cm = inputCommandDic[PlayerCommandType.Skill_Minor];
+                if (cm is SkillCommandModel)
                 {
-                    var skillCM = commandModel as SkillCommandModel;
-
-                    if (skillCategory == SkillCategory.MinorSkill && 
-                        skillCM.commandType == PlayerCommandType.Skill_Minor)
+                    (cm as SkillCommandModel).skillConfigId = skillId;
+                }
+            }
+            else if(skillCategory == SkillCategory.UltimateSkill)
+            {
+                var cm = inputCommandDic[PlayerCommandType.Skill_Ultimate];
+                if (cm is SkillCommandModel)
+                {
+                    (cm as SkillCommandModel).skillConfigId = skillId;
+                }
+            }
+            else if(skillCategory == SkillCategory.LeaderSkill)
+            {
+                bool isHasSet = false;
+                var cm = inputCommandDic[PlayerCommandType.Skill_Leader_1];
+                if (cm is SkillCommandModel)
+                {
+                    var skillCM = (cm as SkillCommandModel);
+                    var isEmpty = skillCM.skillConfigId <= 0;
+                    if (isEmpty)
                     {
                         skillCM.skillConfigId = skillId;
-                        return;
+                        isHasSet = true;
                     }
-                    
-                    if (skillCategory == SkillCategory.UltimateSkill && 
-                        skillCM.commandType == PlayerCommandType.Skill_Ultimate)
-                    {
-                        skillCM.skillConfigId = skillId;
-                        return;
-                    }
+                }
 
-                    if (skillCM.skillConfigId <= 0)
+                if (!isHasSet)
+                {
+                    cm = inputCommandDic[PlayerCommandType.Skill_Leader_2];
+                    if (cm is SkillCommandModel)
                     {
-                        skillCM.skillConfigId = skillId;
-                        break;
+                        var skillCM = (cm as SkillCommandModel);
+                        var isEmpty = skillCM.skillConfigId <= 0;
+                        if (isEmpty)
+                        {
+                            skillCM.skillConfigId = skillId;
+                        }
                     }
                 }
             }
+
+            
+            
+            // foreach (var kv in this.inputCommandDic)
+            // {
+            //     var commandModel = kv.Value;
+            //     if (commandModel is SkillCommandModel)
+            //     {
+            //         var skillCM = commandModel as SkillCommandModel;
+            //
+            //         if (skillCategory == SkillCategory.MinorSkill && 
+            //             skillCM.commandType == PlayerCommandType.Skill_Minor)
+            //         {
+            //             skillCM.skillConfigId = skillId;
+            //             return;
+            //         }
+            //         
+            //         if (skillCategory == SkillCategory.UltimateSkill && 
+            //             skillCM.commandType == PlayerCommandType.Skill_Ultimate)
+            //         {
+            //             skillCM.skillConfigId = skillId;
+            //             return;
+            //         }
+            //
+            //         if (skillCM.skillConfigId <= 0)
+            //         {
+            //             skillCM.skillConfigId = skillId;
+            //             break;
+            //         }
+            //     }
+            // }
         }
 
         // public bool TryToAddInputCommand(PlayerInputType inputType, PlayerInputCommandModel model)

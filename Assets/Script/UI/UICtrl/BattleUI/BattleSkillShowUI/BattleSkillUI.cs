@@ -48,10 +48,10 @@ public class BattleSkillUI
         EventDispatcher.AddListener<string>(EventIDs.OnSkillTips, OnSkillTips);
         EventDispatcher.AddListener(EventIDs.OnSkillRefreshAll, OnSkillRefreshAll);
 
-        InitShoList();
+        InitShowList();
     }
 
-    public void InitShoList()
+    public void InitShowList()
     {
         var temp = skillListRoot.GetChild(0).gameObject;
         temp.gameObject.SetActive(false);

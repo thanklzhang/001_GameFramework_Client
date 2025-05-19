@@ -140,7 +140,7 @@ namespace Battle_Client
                 var entity = item.Value;
                 entity.Update(timeDelta);
 
-                if (entity.state == BattleEntityState.Destroy)
+                if (entity.State == BattleEntityState.Destroy)
                 {
                     willDeleteList.Add(entity);
                 }
@@ -170,9 +170,9 @@ namespace Battle_Client
             foreach (var item in entityDic)
             {
                 var entity = item.Value;
-                if (entity.state != BattleEntityState.Dead && entity.state != BattleEntityState.WillDead)
+                if (entity.State != BattleEntityState.Dead && entity.State != BattleEntityState.WillDead)
                 {
-                    entity.state = BattleEntityState.Idle;
+                    entity.State = BattleEntityState.Idle;
                     entity.PlayAnimation("idle");
                 }
             }

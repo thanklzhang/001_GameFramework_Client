@@ -25,7 +25,7 @@ namespace Battle_Client
             if (pathList.Count > 0)
             {
                 isForceSkillMove = isSkillForce;
-                state = BattleEntityState.Move;
+                State = BattleEntityState.Move;
 
                 this.movePosList = pathList;
                 // this.attr.moveSpeed = moveSpeed;
@@ -56,13 +56,13 @@ namespace Battle_Client
         {
             var moveVector = moveTargetPos - this.gameObject.transform.position;
             var speed = this.attr.GetValue(EntityAttrType.MoveSpeed);
-           
+
 
             if (isForceSkillMove)
             {
                 speed = forceMoveSpeed;
             }
-            
+
             if (0 == this.playerIndex)
             {
                 //Logx.Log("client : speed : " + speed);
@@ -117,17 +117,23 @@ namespace Battle_Client
         //根据消息来真实的终止移动
         public void StopMove(Vector3 endPos)
         {
-            state = BattleEntityState.Idle;
+            if (State != BattleEntityState.Dead)
+            {
+                State = BattleEntityState.Idle;
+                PlayAnimation("idle");
+            }
+
            
+
             isForceSkillMove = false;
-            
-            PlayAnimation("idle");
+
+           
 
             if (CheckPosIsForcePullBack(endPos))
             {
                 this.SetPosition(endPos);
             }
-            
+
             if (0 == this.playerIndex)
             {
                 //Logx.Log("client : StopMove : " + endPos);
@@ -151,11 +157,16 @@ namespace Battle_Client
 
         public void FakeStopMove(Vector3 endPos)
         {
-            state = BattleEntityState.Idle;
+            if (State != BattleEntityState.Dead)
+            {
+                State = BattleEntityState.Idle;
+                PlayAnimation("idle");
+            }
+
 
             //Logx.Log("moveTest : battleClient : fake reach : " + endPos.x + " " + endPos.y);
 
-            PlayAnimation("idle");
+            
 
             this.SetPosition(endPos);
         }

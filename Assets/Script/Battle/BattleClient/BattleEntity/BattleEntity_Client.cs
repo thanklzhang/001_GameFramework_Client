@@ -16,9 +16,22 @@ namespace Battle_Client
         public float CurrHealth;
         public int Team => BattleManager.Instance.GetTeamByPlayerIndex(this.playerIndex);
         public float MaxHealth => attr.GetValue(EntityAttrType.MaxHealth);
-        
-        public BattleEntityState state = BattleEntityState.Idle;
-        
+
+        private BattleEntityState state = BattleEntityState.Idle;
+
+        public BattleEntityState State
+        {
+            get => state;
+            set
+            {
+                var pre = state;
+                state = value;
+
+                
+               // Logx.Log($"entity client : {this.guid} state change : {pre} -> {value}");
+            }
+        }
+
         public GameObject gameObject;
         public Collider collider;
         
@@ -55,7 +68,7 @@ namespace Battle_Client
             SetTrueDir(timeDelta);
 
             //Battle._Battle_Log.Log("zxy path test : dir : " + this.gameObject.transform.forward.x + "," + this.gameObject.transform.forward.z + " -> " + dirTarget);
-            if (state == BattleEntityState.Move || isForceSkillMove)
+            if (State == BattleEntityState.Move || isForceSkillMove)
             {
                 UpdateMove(timeDelta);
             }
@@ -67,12 +80,13 @@ namespace Battle_Client
                 triggerNames.Clear();
             }
 
-            if (this.state == BattleEntityState.Dead)
+            if (this.State == BattleEntityState.Dead)
             {
                 deadDisappearCurrTimer -= timeDelta;
                 if (deadDisappearCurrTimer <= 0)
                 {
-                    this.state = BattleEntityState.Destroy;
+                    this.State = BattleEntityState.Destroy;
+
 
                     //这里应该是设置成标志 然后删除
                     // BattleEntityManager.Instance.DestoryEntity(this.guid);
@@ -129,11 +143,11 @@ namespace Battle_Client
             // state = BattleEntityState.Dead;
             if (isTrueDead)
             {
-                state = BattleEntityState.Dead;
+                State = BattleEntityState.Dead;
             }
             else
             {
-                state = BattleEntityState.WillDead;
+                State = BattleEntityState.WillDead;
             }
             
             deadDisappearCurrTimer = deadDisappearTotalTime;
@@ -147,13 +161,12 @@ namespace Battle_Client
         
         public void OnRevive()
         {
-            state = BattleEntityState.Idle;
+            State = BattleEntityState.Idle;
             PlayAnimation("idle");
         }
         
         public void Destroy()
         {
-            this.state = BattleEntityState.Destroy;
             if (isFinishLoad)
             {
                 ResourceManager.Instance.ReturnObject(path, model);

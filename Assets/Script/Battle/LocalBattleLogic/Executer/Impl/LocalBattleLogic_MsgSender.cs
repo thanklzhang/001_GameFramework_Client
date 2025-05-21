@@ -744,6 +744,19 @@ namespace Battle_Client
             arg.battleReward = new BattleReward_Client();
             arg.battleReward.guid = dto.guid;
             arg.battleReward.configId = dto.configId;
+
+            arg.battleReward.effectOptionList = new List<BattleRewardEffectOption_Client>();
+            foreach (var effectOption in dto.rewardEffectDTOs)
+            { 
+                var effectOption_client = new BattleRewardEffectOption_Client();
+                effectOption_client.guid = effectOption.guid;
+                effectOption_client.configId = effectOption.configId;
+                effectOption_client.intArg1 = effectOption.intArg1;
+                effectOption_client.intArg2 = effectOption.intArg2;
+                effectOption_client.intListArg1 = ListTool.CopyList(effectOption.intListArg1);
+                effectOption_client.intListArg2 = ListTool.CopyList(effectOption.intListArg2);
+                arg.battleReward.effectOptionList.Add(effectOption_client);
+            }
             
             // arg.battleReward.intArg1 = dto.intArg1;
             // arg.battleReward.intArg2 = dto.intArg2;

@@ -21,6 +21,14 @@ namespace Battle_Client
                 this.battleRewardList.Add(battleReward);
 
                 EventDispatcher.Broadcast(EventIDs.OnUpdateBattleReward);
+                
+                //弹出一行字显示增加奖励的结果
+                var nameStr = "";
+                var desStr = "";
+                AttrHelper_Client.GetBattleRewardContent(battleReward,true,out nameStr,
+                    out desStr);
+
+                Logx.Log($"{nameStr} , {desStr}");
             }
 
            

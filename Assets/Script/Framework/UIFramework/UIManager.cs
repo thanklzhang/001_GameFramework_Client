@@ -290,6 +290,8 @@ public class UIManager : Singleton<UIManager>
                 ctrl.Update(deltaTime);
             }
         }
+        
+        GlobalUIMgr.Instance.Update(deltaTime);
     }
 
     public void LateUpdate(float deltaTime)

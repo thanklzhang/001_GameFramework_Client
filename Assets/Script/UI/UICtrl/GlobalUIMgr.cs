@@ -21,6 +21,7 @@ public class GlobalUIMgr : Singleton<GlobalUIMgr>
     {
         yield return LoadUIReq<TitleBarUI>();
         yield return LoadUIReq<LoadingUICtrl>();
+        yield return LoadUIReq<CommonTipsUI>();
     }
 
     public IEnumerator LoadUIReq<T>() where T : BaseUI , new ()
@@ -73,6 +74,17 @@ public class GlobalUIMgr : Singleton<GlobalUIMgr>
         var ctrl = Get<T>();
         ctrl?.Open(args);
         ctrl?.Active();
+    }
+
+    public void Update(float deltaTime)
+    {
+        foreach (var ctrl in ctrlDic.Values)
+        {
+            if (ctrl.state == CtrlState.Active)
+            {
+                ctrl.Update(deltaTime);
+            }
+        }
     }
 
     public void Close<T>()where T : BaseUI

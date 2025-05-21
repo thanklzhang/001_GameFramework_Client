@@ -27,8 +27,16 @@ namespace Battle_Client
                 var desStr = "";
                 AttrHelper_Client.GetBattleRewardContent(battleReward,true,out nameStr,
                     out desStr);
-
-                Logx.Log($"{nameStr} , {desStr}");
+                
+                // var tipsStr = $"{nameStr} , {desStr}";
+                
+                var tipsStr = $"{desStr}";
+                
+                
+               UIManager.Instance.Open<CommonTipsUI>(new TipsUIArgs()
+                {
+                    tipStr = tipsStr
+                });
             }
 
            

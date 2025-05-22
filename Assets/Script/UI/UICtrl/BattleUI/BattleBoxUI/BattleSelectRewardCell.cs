@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Battle;
 using Battle_Client;
 using Config;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,8 +18,8 @@ public class BattleSelectRewardCell
     public Transform transform;
 
     public Image icon;
-    public Text nameText;
-    public Text describeText;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI describeText;
     public Button selectBtn;
 
     public int index = -1;
@@ -34,8 +35,8 @@ public class BattleSelectRewardCell
         this.transform = this.gameObject.transform;
 
         icon = transform.Find("iconBg/icon").GetComponent<Image>();
-        nameText = transform.Find("name_text").GetComponent<Text>();
-        describeText = transform.Find("content_text").GetComponent<Text>();
+        nameText = transform.Find("name_text").GetComponent<TextMeshProUGUI>();
+        describeText = transform.Find("content_text").GetComponent<TextMeshProUGUI>();
         selectBtn = transform.Find("selectBtn").GetComponent<Button>();
 
         selectBtn.onClick.RemoveAllListeners();

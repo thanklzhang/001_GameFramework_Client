@@ -23,6 +23,11 @@ namespace Config
         private string describe; 
         
         /// <summary>
+        ///战斗相关介绍
+        /// </summary>
+        private string describe2; 
+        
+        /// <summary>
         ///类型(0 npc单位实例 , 1 英雄模板)
         /// </summary>
         private int type; 
@@ -107,6 +112,8 @@ namespace Config
         public string Name { get => name; }     
         
         public string Describe { get => describe; }     
+        
+        public string Describe2 { get => describe2; }     
         
         public int Type { get => type; }     
         

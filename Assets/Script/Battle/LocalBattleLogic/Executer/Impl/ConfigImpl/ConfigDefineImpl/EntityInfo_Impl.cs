@@ -31,6 +31,11 @@ namespace Battle
         public string Describe => config.Describe;
         
         /// <summary>
+        ///战斗相关介绍
+        /// </summary>
+        public string Describe2 => config.Describe2;
+        
+        /// <summary>
         ///类型(0 npc单位实例 , 1 英雄模板)
         /// </summary>
         public int Type => config.Type;

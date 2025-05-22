@@ -70,7 +70,7 @@ public class BattleSelectRewardCell
         var nameStr = "";
         var desStr = "";
         var isMaskSureReward = 1 == rewardConfig.MakeSureRewardOccasion;
-        AttrHelper_Client.GetBattleRewardContent(this.data.battleReward,isMaskSureReward,
+        AttrHelper_Client.GetBattleRewardContent(this.data.battleReward,isMaskSureReward,false,
             out nameStr,
             out desStr);
         

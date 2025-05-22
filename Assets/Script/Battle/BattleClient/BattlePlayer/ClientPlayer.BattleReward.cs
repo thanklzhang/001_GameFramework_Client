@@ -25,7 +25,7 @@ namespace Battle_Client
                 //弹出一行字显示增加奖励的结果
                 var nameStr = "";
                 var desStr = "";
-                AttrHelper_Client.GetBattleRewardContent(battleReward,true,out nameStr,
+                AttrHelper_Client.GetBattleRewardContent(battleReward,true,true,out nameStr,
                     out desStr);
                 
                 // var tipsStr = $"{nameStr} , {desStr}";

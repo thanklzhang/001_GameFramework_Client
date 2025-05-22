@@ -68,9 +68,9 @@ public class BattleRewardCell
     {
         var nameStr = "";
         var desStr = "";
-        AttrHelper_Client.GetBattleRewardContent(this.data,true,out nameStr,
+        AttrHelper_Client.GetBattleRewardContent(this.data, true, false, out nameStr,
             out desStr);
-      
+
         nameText.text = nameStr;
         describeText.text = desStr;
     }
